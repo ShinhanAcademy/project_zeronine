@@ -12,7 +12,7 @@
 
 <h2>
 	나는 승광~~ㅎㅎ
-	나는 예나ㅎㅎ
+	나는 예나ㅎ
 </h2>
 <P>  
 	The time on the server is ${serverTime}. I am Yongsu 
