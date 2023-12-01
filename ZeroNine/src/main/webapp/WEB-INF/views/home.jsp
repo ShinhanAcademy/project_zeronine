@@ -11,15 +11,13 @@
 <h1>
 	Hello world!  
 </h1>
-<<<<<<< HEAD
-<<<<<<< HEAD
 <h2>메롱</h2>
 <P>  The time on the server is ${serverTime}. I am Yongsu </P>
-=======
+
 
 <h2>
 	나는 승광~~ㅎㅎ
-=======
+
 </h2>
 <h2>
 	나는 승광입니다~~ㅎㅎ
@@ -27,16 +25,11 @@
 	나는 쩡요입니다.
 	다시--
 	나는 주영입니다~~~
->>>>>>> f59e0994808bc008d84d4499f901698e70aa69de
+
 </h2>
 <P>  
 	The time on the server is ${serverTime}. I am Yongsu 
 </P>
 
-
-<<<<<<< HEAD
->>>>>>> c627047a59400bc0e11078c85c9033e6697b4882
-=======
->>>>>>> f59e0994808bc008d84d4499f901698e70aa69de
 </body>
 </html>
