@@ -7,7 +7,7 @@
 <body>
     <div id="zeronine_wrap">    
 		<%@include file="../common/header.jsp" %>
-        <div id="zn_container">
+        <div id="zn_container" class="zero_container">
             <section class="main_visual_wrap">
                 <div class="inner zn_center">
                     <ul>

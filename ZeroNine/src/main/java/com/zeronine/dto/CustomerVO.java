@@ -1,7 +1,6 @@
 package com.zeronine.dto;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;

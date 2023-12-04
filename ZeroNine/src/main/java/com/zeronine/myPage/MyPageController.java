@@ -1,6 +1,5 @@
 package com.zeronine.myPage;
 
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.CustomerService;
@@ -17,7 +15,7 @@ import com.zeronine.myapp.HomeController;
 
 @Controller
 @RequestMapping("/myPage")
-public class myPageController {
+public class MyPageController {
 	
 	@Autowired
 	CustomerService cService;
