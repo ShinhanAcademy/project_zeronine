@@ -7,12 +7,12 @@
 <body>
     <div id="zeronine_wrap">  
 		<%@include file="../common/header.jsp" %>
-        <div id="zn_container">
+        <div id="zn_container" class="zero_container">
             <section class="main_visual_wrap">
                 <div class="inner zn_center">
                     <ul>
                         <li style="width: 1440px;">
-                            <img src="../images/mainvisual_1.png" alt="main visual" style="width: 100%;">
+                            <img src="${path}/images/main/mainvisual_1.png" alt="main visual" style="width: 100%;">
                         </li>
                     </ul>
                 </div>
