@@ -9,7 +9,7 @@
 	<div id="boardList">
 		<div class="fast">
 			<span> 슝슝 </span> <span> 즉배 </span>
-		<a class = "fastbutton" href="${path}/board/boardFast.jsp">
+		<a class = "fastbutton" href="${path}/board/boardFast.do">
 				<img src="${path}/images/board/arrow.png">
 			</a>
 		</div>
