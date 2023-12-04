@@ -117,24 +117,25 @@ img {
 <title>BoardMain</title>
 </head>
 <body>
+<h1> ${path} </h1>
 	<div id="boardList">
 
 		<div class="fast">
 			<span> 슝슝 </span> <span> 즉배 </span>
 		<a class = "fastbutton" href="#">
-				<img src="${path}/static/images/arrow.png">
+				<img src="${path}/images/board/arrow.png">
 			</a>
 		</div>
 		<div class="free">
 			<span> 알뜰 </span> <span> 무배 </span>
 			<a class = "freebutton" href="#">
-				<img src="${path}/static/images/arrow.png">
+				<img src="${path}/images/board/arrow.png">
 			</a>
 		</div>
 		<div class="one">
 			<span> 1:1 </span> <span> 직거래 </span>
 			<a class = "onebutton" href="#">
-				<img src="${path}/static/images/arrow.png">
+				<img src="${path}/images/board/arrow.png">
 			</a>
 		</div>
 	</div>
