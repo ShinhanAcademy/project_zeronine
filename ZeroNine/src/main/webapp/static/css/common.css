@@ -193,13 +193,13 @@ header.trp.active .bot .member .icon_btn .cart span{background-color: #fff;color
     background-position: center center;
 }
 .footer_wrap .social_wrap li:nth-child(1) a {
-    background-image: url(../images/ico_facebook.png);
+    background-image: url(../images/common/ico_facebook.png);
 }
 .footer_wrap .social_wrap li:nth-child(2) a {
-    background-image: url(../images/ico_twitter.png);
+    background-image: url(../images/common/ico_twitter.png);
 }
 .footer_wrap .social_wrap li:nth-child(3) a {
-    background-image: url(../images/ico_insta.png);
+    background-image: url(../images/common/ico_insta.png);
 }
 .footer_wrap .cs_unit {
     display: flex;
