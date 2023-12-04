@@ -5,7 +5,7 @@
 <title>ZeroNine</title>
 </head>
 <body>
-    <div id="zeronine_wrap">    
+    <div id="zeronine_wrap">  
 		<%@include file="../common/header.jsp" %>
         <div id="zn_container" class="zero_container">
             <section class="main_visual_wrap">
