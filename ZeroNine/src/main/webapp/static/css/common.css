@@ -113,8 +113,8 @@ header.trp.active .bot .member .icon_btn .wish{background-image: url(../images/w
 header.trp.active .bot .member .icon_btn .cart{background-image: url(../images/cart-icon-wh.svg);}
 header.trp.active .bot .member .icon_btn .cart span{background-color: #fff;color: #444;}
 
-/*zn_container*/
-#zn_container {
+/* zero_container */
+.zero_container {
     padding-top: 160px;
 }
 
