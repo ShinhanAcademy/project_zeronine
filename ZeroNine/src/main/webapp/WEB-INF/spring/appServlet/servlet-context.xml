@@ -21,7 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.zeronine.myapp" />
+	<context:component-scan base-package="com.zeronine.myapp,com.zeronine.myPage" />
 	
 	
 	
