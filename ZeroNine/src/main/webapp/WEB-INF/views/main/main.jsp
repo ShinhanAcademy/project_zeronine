@@ -12,7 +12,7 @@
                 <div class="inner zn_center">
                     <ul>
                         <li style="width: 1440px;">
-                            <img src="../images/mainvisual_1.png" alt="main visual" style="width: 100%;">
+                            <img src="${path}/images/main/mainvisual_1.png" alt="main visual" style="width: 100%;">
                         </li>
                     </ul>
                 </div>
