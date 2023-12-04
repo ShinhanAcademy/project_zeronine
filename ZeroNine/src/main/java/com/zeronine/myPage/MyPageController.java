@@ -26,7 +26,7 @@ public class MyPageController {
 	public void myPage(Model model) {
 		model.addAttribute("clist", cService.selectAll());	
 		CustomerVO cust = cService.selectByName("방용수");
-		logger.info("정보:" + cust.toString());
+		logger.info("고객정보:" + cust.toString());
 	}
 
 }
