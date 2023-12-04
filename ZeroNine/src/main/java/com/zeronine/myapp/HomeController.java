@@ -19,9 +19,7 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("BoardMain �떎�뻾");
@@ -34,5 +32,7 @@ public class HomeController {
 		
 		return "boardMain";
 	}
+	
+
 	
 }
