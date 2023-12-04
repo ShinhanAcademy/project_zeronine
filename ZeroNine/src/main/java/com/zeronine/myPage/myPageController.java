@@ -23,5 +23,11 @@ public class myPageController {
 
 		
 	}
+	@RequestMapping(value = "/sangpum", method = RequestMethod.GET)
+	public void sangpumPage(Locale locale, Model model) {
+
+
+		
+	}
 
 }
