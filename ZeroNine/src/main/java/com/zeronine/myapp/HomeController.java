@@ -22,7 +22,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("BoardMain ï¿½ë–Žï¿½ë»¾");
+		logger.info("BoardMain ½ÇÇà");
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
@@ -30,7 +30,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "boardMain";
+		return "board/boardMain";
 	}
 	
 
