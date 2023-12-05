@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter@Setter
 public class SubscriptionVO {
-	private String couponCount;
-	private Integer subscriptionType;
+	private String subscriptionType;
+	private Integer couponCount;
 }
