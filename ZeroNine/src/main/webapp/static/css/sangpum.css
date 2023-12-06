@@ -92,11 +92,22 @@ display: flex;
 	margin-left: 25px;
 	color: #8E8E8E;
 	font-size: 18px;
+	font-weight: 700;
+	line-height: 1em;
+	text-decoration: none;
+	margin-bottom: 10px;
+	font-family: lato;
+}
+.product_container .menufont_name {
+		margin-left: 25px;
+	color: #8E8E8E;
+	font-size: 16px;
 	font-weight: 400;
 	line-height: 1em;
 	text-decoration: none;
 	margin-bottom: 10px;
-}
+	font-family: lato;
+	}
 .product_container .menu_sub {
 	display: flex;
     flex-direction: column;
