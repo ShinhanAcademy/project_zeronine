@@ -10,9 +10,10 @@
 	<div class="zero_conatainer product_container" style="padding: 160px 0 0;">
 		<div class="body-part" id="targetDiv">
 			<div class="body-left">
-				<img class="logo2" src="${path}/images/sangpumpage/banner.png">
+				<img class="logo2"  src="${path}/images/sangpumpage/banner.png">
 				<div class="dist98"></div>
 				<div class="menu_bar">
+				
 					<div class="category">
 						<div class="img_wrap">
 							<img src="${path}/images/sangpumpage/fluent_basket.png">
@@ -82,5 +83,13 @@
 		
 
 	<%@include file="../common/footer.jsp"%>
+		<script>
+	var path = "${path}";
+	
+	</script>
+	<script src="${path}/js/product/productlist.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	$("#join_btn").click(f_join);		
+	</script>
 </body>
 </html>
