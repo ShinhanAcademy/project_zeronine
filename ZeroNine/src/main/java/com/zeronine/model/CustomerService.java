@@ -7,17 +7,29 @@ import org.springframework.stereotype.Service;
 
 import com.zeronine.dto.CustomerVO;
 
-@Service
+@Service("customerService")
 public class CustomerService {
 
 	@Autowired
-	CustomerDAOMybatis dao;
+	CustomerDAOMybatis customerDAO;
 	
 	public List<CustomerVO> selectAll(){
-		return dao.selectAll();
+		return customerDAO.selectAll();
 	}
 	
 	public CustomerVO selectByName(String customerName) {
-		return dao.selectByName(customerName);
+		return customerDAO.selectByName(customerName);
+	}
+
+	public int emailCheck(String email) {
+		return customerDAO.emailCheck(email);
+	}
+
+	public int phoneCheck(String phone) {
+		return customerDAO.phoneCheck(phone);
+	}
+
+	public int joinMembership(CustomerVO customer) {
+		return customerDAO.joinMembership(customer);
 	}
 }
