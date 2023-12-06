@@ -3,12 +3,9 @@ package com.zeronine.subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.zeronine.dto.CustomerVO;
-import com.zeronine.myapp.HomeController;
 
 @Controller
 @RequestMapping("/subscription")
@@ -18,6 +15,13 @@ public class SubscriptionController {
 	
 	@GetMapping("/subscriptionBuy.do")
 	public void SubscriptionMenu() {
+		
+	}
+	
+	@GetMapping("/subscriptionBanner.do")
+	public void SubscriptionBuying(String subscriptionType) {
+		
+		logger.info("구독타입: "+subscriptionType);
 		
 	}
 
