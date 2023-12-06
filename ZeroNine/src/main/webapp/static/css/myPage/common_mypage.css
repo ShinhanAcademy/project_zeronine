@@ -59,7 +59,7 @@ html, body {
 }
 .mypage_detail_wrap {
     width: calc(100% - 240px);
-    padding: 0 50px;          
+    padding: 0 20px 0 50px;    
 }
 .mypage_detail_wrap .my_info_wrap {
     position: relative;
