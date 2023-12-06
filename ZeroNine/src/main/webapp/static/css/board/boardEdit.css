@@ -3,6 +3,61 @@
 html, body {
 	height: 100%;
 }
+
+/* 드롭다운 css */
+#edit {
+	font-family: Lato;
+}
+
+.edit_content {
+	padding: 50px 40px 50px 40px;
+	display: flex;
+	justify-content: center;
+}
+
+.content {
+	width: 480px;
+	height: 892px;
+	border-right: 1px solid #C4C4C4;
+}
+
+.info_title, .write_title {
+	font-weight: bold;
+	font-size: 30px;
+	margin-bottom: 44px;
+	font-size: 30px;
+}
+
+form {
+	width: 200px;
+	height: 80px;
+}
+
+label, .title, .context {
+	font-weight: bold;
+	display: block;
+	width: 100%;
+	margin-right: 122px;
+	margin-bottom: 10px;
+	font-size: 20px;
+	display: block;
+}
+
+#board_type {
+	font-family: Lato;
+	display: block;
+	width: 200px;
+	height: 48px;
+	font-size: 18px;
+	border-radius: 4px;
+	padding-right: 10px;
+	border-radius: 4px;
+}
+
+#board_type option:nth-child(1) {
+	color: #C4C4C4;
+}
+
 /* board edit */
 #edit {
 	display: flex;
@@ -17,67 +72,6 @@ html, body {
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 15px;
 	border: 1px #C4C4C4 solid;
-}
-
-/* dropdown */
-#edit {
-	font-family: Lato;
-}
-
-.dropdown_lb {
-	font-size: 18px;
-	font-family: Lato;
-	margin: 10px;
-	font-weight: bold;
-	color: rgb(50, 50, 50);
-}
-
-.dropdown {
-	position: relative;
-	display: inline-block;
-}
-
-.dropbtn {
-	display: block;
-	border: 2px solid rgb(94, 94, 94);
-	border-radius: 4px;
-	font-weight: 400;
-	color: rgb(124, 124, 124);
-	padding: 12px;
-	width: 240px;
-	text-align: left;
-	cursor: pointer;
-	font-size: 12px;
-	position: relative;
-}
-
-.dropdown_default {
-	font-weight: 400;
-	background-color: #fcfcfc;
-	min-width: 240px;
-	border-radius: 8px;
-	height: 160px;
-	font-family: Lato;
-}
-
-.dropdown-content div {
-	display: block;
-	text-decoration: none;
-	color: rgb(37, 37, 37);
-	font-size: 12px;
-	padding: 12px 20px;
-}
-
-.dropdown-content div:hover {
-	background-color: rgb(226, 226, 226);
-}
-
-.dropdown-content.show {
-	display: block;
-}
-
-.dropdown_btn img{
-	margin-left: 120px;
 }
 
 /* complete edit */
@@ -128,4 +122,176 @@ html, body {
 	gap: 10px;
 	display: flex;
 	justify-content: center;
+}
+
+/* due_date */
+.due_date {
+	margin-top: 45px;
+	width: 370px;
+}
+
+.due_date ul .cart_ann ul {
+	margin-bottom: 20px;
+}
+
+.due_date li:nth-child(1), .cart_ann li:nth-child(1) {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.due_date li:nth-child(2) {
+	margin-bottom: 5px;
+}
+
+.due_date span, .cart_ann li:nth-child(2) {
+	display: block;
+	font-size: 15px;
+}
+
+.due_date li span:nth-child(2) {
+	padding-left: 10px;
+	color: gray;
+}
+
+.date_input {
+	display: flex;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+.date_input input {
+	border: 1px solid gray;
+	border-radius: 6px;
+	font-family: Lato;
+	font-size: 13px;
+	width: 47px;
+	height: 44px;
+	text-align: center;
+}
+
+input::placeholder {
+	text-align: center;
+	color: #C4C4C4;
+}
+
+.date {
+	margin-right: 5px;
+}
+
+#cart {
+	margin-top: 45px;
+}
+
+.cart_list {
+	overflow: auto;
+	width: 285px;
+}
+
+.cart_list {
+	margin-top: 20px;
+}
+
+.cart_pro_name {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.cart_list p {
+	margin-left: 10px;
+	font-size: 15px;
+}
+
+.count {
+	display: flex;
+	justify-content: flex-end;
+	width: 84px;
+	border: 1px solid black;
+	border-radius: 6px;
+	margin-left: 190px;
+	margin-top: 5px;
+	align-items: center;
+}
+
+.count input {
+	text-align: center;
+	font-size: 15px;
+	width: 40px;
+	font-family: Lato;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.count button {
+	width: 22px;
+	height: 22px;
+}
+
+.cart_img img {
+	width: 80px;
+	height: 80px;
+	margin-left: 10px;
+}
+
+.cart_info {
+	display: flex;
+	align-items: center;
+}
+
+/* write_content */
+.write_content {
+	width: 820px;
+	padding-left: 40px;
+}
+
+.main_text textarea {
+	border: 1px solid #C4C4C4;
+	border-radius: 6px;
+	width: 100%;
+	padding: 10px;
+	font-size: 15px;
+	font-family: Lato;
+}
+
+.input_context {
+	word-spacing:
+}
+
+.main_text textarea::placeholder {
+	font-family: Lato;
+	text-align: left;
+}
+
+.context {
+	margin-top: 45px;
+}
+
+.context_input {
+	height: 530px;
+}
+
+.title_input {
+	height: 45px;
+}
+
+/* done button */
+.done {
+	margin-top: 30px;
+	margin-left: 660px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #737300;
+	border-radius: 15px;
+	width: 120px;
+	height: 50px;
+}
+
+.done_btn{
+	color: white;
+	font-family: Jua;
+	font-size: 20px;
 }
