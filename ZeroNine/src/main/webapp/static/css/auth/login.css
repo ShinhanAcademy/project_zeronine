@@ -9,7 +9,8 @@
 }
 
 .login_container {
-	padding: 30px; width : 400px;
+	padding: 30px;
+	width: 400px;
 	height: 415px;
 	border-radius: 16px;
 	border: 1px solid #B7B7B7;
@@ -27,18 +28,20 @@
 
 .login-bottom {
 	display: flex;
-    margin-left : 3px;
-    align-items: center;
+	margin-left: 3px;
+	align-items: center;
 }
-.nklogin-bottom{
+
+.nklogin-bottom {
 	color: #555;
-font-family: Lato;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 14px;
-margin-left: 5px;
+	font-family: "Lato";
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 14px;
+	margin-left: 5px;
 }
+
 .login-middle {
 	height: 16px;
 	display: flex;
@@ -61,7 +64,8 @@ margin-left: 5px;
 }
 
 .loginbtn {
-	margin-top: 20px; width : 340px;
+	margin-top: 20px;
+	width: 340px;
 	height: 56px;
 	border-radius: 15px;
 	background: #0083E6;
@@ -98,9 +102,10 @@ margin-left: 5px;
 	border: 1px solid #F7E409;
 	background: #F7E409;
 }
-.naverimg{
+
+.naverimg {
 	height: 23px;
-    width: 23px;
+	width: 23px;
 }
 
 .login_container input {

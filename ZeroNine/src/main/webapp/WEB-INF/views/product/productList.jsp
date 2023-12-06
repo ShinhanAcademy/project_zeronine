@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../common/head.jsp"%>
-<title>sangpum</title>
+<title>상품목록</title>
 <link rel="stylesheet" href="${path}/css/sangpum.css" />
 </head>
 <body>
@@ -54,72 +55,16 @@
 				<div class="content"></div>
 				<div class="menulistpart">
 				<div class="menulist">
+					<c:forEach items="${plist}" var="product">
 					<div class="menu_sub">
 					<div class="menu_image">
 						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
 					</div>
-					<span class="menufont">브랜드</span>
-					<span class="menufont">이름</span>
-					<span class="menufont_price">1500원</span>
+					<span class="menufont">${product.brand}</span>
+					<span class="menufont_name">${product.pName}</span>
+					<span class="menufont_price">${product.price}</span>
 					</div>
-					<div class="menu_sub">
-					<div class="menu_image">
-						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
-					</div>
-					<span class="menufont">브랜드</span>
-					<span class="menufont">이름</span>
-					<span class="menufont_price">1500원</span>
-					</div>
-					<div class="menu_sub">
-					<div class="menu_image">
-						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
-					</div>
-					<span class="menufont">브랜드</span>
-					<span class="menufont">이름</span>
-					<span class="menufont_price">1500원</span>
-					</div>
-					<div class="menu_sub">
-					<div class="menu_image">
-						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
-					</div>
-					<span class="menufont">브랜드</span>
-					<span class="menufont">이름</span>
-					<span class="menufont_price">1500원</span>
-					</div>
-					<div class="menu_sub">
-					<div class="menu_image">
-						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
-					</div>
-					<span class="menufont">브랜드</span>
-					<span class="menufont">이름</span>
-					<span class="menufont_price">1500원</span>
-					</div>
-					<div class="menu_sub">
-					<div class="menu_image">
-						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
-					</div>
-					<span class="menufont">브랜드</span>
-					<span class="menufont">이름</span>
-					<span class="menufont_price">1500원</span>
-					</div>
-						<div class="menu_sub">
-					<div class="menu_image">
-						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
-					</div>
-					<span class="menufont">브랜드</span>
-					<span class="menufont">이름</span>
-					<span class="menufont_price">1500원</span>
-					</div>
-						<div class="menu_sub">
-					<div class="menu_image">
-						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
-					</div>
-					<span class="menufont">브랜드</span>
-					<span class="menufont">이름</span>
-					<span class="menufont_price">1500원</span>
-					</div>
-					</div>
-
+					</c:forEach>
 
 				</div>
 				</div>
@@ -131,7 +76,7 @@
 				</button>
 				<div class="dist49"></div>
 				</div>
-				
+			</div>
 
 		</div>
 		
