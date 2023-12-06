@@ -43,7 +43,7 @@
 }
 
 .join_container div:nth-of-type(1) {
-	margin-top: 25px;
+	margin-top: 50px;
 }
 
 .join_container div:nth-of-type(6) input:nth-of-type(2) {
@@ -140,5 +140,39 @@ input[type="checkbox"] {
 	display: flex;
 	margin-left: 61px;
 	margin-bottom: 25px;
+}
+
+.agree_tot input {
+	margin-right: 5px;
+	margin-top: 3px;
+}
+
+.agree_part input {
+	margin-left: 70px;
+	margin-right: 5px;
+	width: 15px;
+	height: 15px;
+	width: 15px;
+}
+
+.agree_part p {
+	display: inline-block;
+	color: #999;
+	font-family: "Lato";
+	font-size: 16px;
+	font-style: normal;
+}
+
+
+#join_btn {
+	width: 160px;
+	height: 50px;
+	border-radius: 15px;
+	background: #0083E6;
+	color: #FFF;
+	font-size: 22px;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px auto;
 }
