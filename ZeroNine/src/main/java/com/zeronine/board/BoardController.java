@@ -29,11 +29,11 @@ public class BoardController {
 	}
 
 	//board_edit
-	@RequestMapping("/boardEdit.do")
+	@RequestMapping("/boardedit.do")
 	public String editBoard() {
 		return "board/boardEdit";
 	}
-	@RequestMapping("/completeEdit.do")
+	@RequestMapping("/completeedit.do")
 	public String compliteEdit() {
 		return "board/completeEdit";
 	}

@@ -48,7 +48,7 @@
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px;"
-						href="${path}/board/boardEdit.do">글쓰기</a>
+						href="${path}/board/boardedit.do">글쓰기</a>
 					</span>
 				</div>
 			</div>
