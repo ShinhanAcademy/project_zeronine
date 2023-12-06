@@ -29,7 +29,7 @@ public class MyPageController {
 		logger.info("°í°´Á¤º¸:" + cust.toString());
 	}
 	
-	@RequestMapping("/myPage.do")
+	@RequestMapping("/chatList.do")
 	public String fastBoard() {
 		return "myPage/chatList";
 	}

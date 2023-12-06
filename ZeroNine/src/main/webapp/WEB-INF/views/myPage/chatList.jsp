@@ -47,7 +47,7 @@
 	                    <div class="profile">
 	                        <div>
 	                            <div class="img_wrap">
-	                                <img src="../images/mypage/img_mypage_profile.png" alt="profile image" />
+	                                <img src="${path}/images/mypage/img_mypage_profile.png" alt="profile image" />
 	                            </div>
 	                            홍길동 님
 	                        </div>
@@ -55,13 +55,13 @@
 	                    <ul class="subscription_list">
 	                        <li>
 	                            <div class="img_wrap">
-	                                <img src="../images/mypage/img_bag_small.png" alt="subscription image">
+	                                <img src="${path}/images/mypage/img_bag_small.png" alt="subscription image">
 	                            </div>
 	                            슝슝 무한 배송 구독중
 	                        </li>
 	                        <li>
 	                            <div class="img_wrap">
-	                                <img src="../images/mypage/img_trash_small.png" alt="subscription image">
+	                                <img src="${path}/images/mypage/img_trash_small.png" alt="subscription image">
 	                            </div>
 	                            쓰레기 수거 구독중
 	                        </li>
@@ -104,7 +104,7 @@
 	                        <div class="chat_inner">
 	                            <div class="chat_room">
 	                                <div class="profile img_wrap">
-	                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
 	                                </div>
 	                                <div class="info">
 	                                    <div class="user_info">
@@ -121,7 +121,7 @@
 	                            </div>
 	                            <div class="chat_room">
 	                                <div class="profile img_wrap">
-	                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
 	                                </div>
 	                                <div class="info">
 	                                    <div class="user_info">
@@ -138,7 +138,7 @@
 	                            </div>
 	                            <div class="chat_room">
 	                                <div class="profile img_wrap">
-	                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
 	                                </div>
 	                                <div class="info">
 	                                    <div class="user_info">
@@ -155,7 +155,7 @@
 	                            </div>
 	                            <div class="chat_room">
 	                                <div class="profile img_wrap">
-	                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
 	                                </div>
 	                                <div class="info">
 	                                    <div class="user_info">
@@ -172,7 +172,7 @@
 	                            </div>
 	                            <div class="chat_room">
 	                                <div class="profile img_wrap">
-	                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
 	                                </div>
 	                                <div class="info">
 	                                    <div class="user_info">
