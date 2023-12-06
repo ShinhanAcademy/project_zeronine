@@ -28,5 +28,10 @@ public class MyPageController {
 		CustomerVO cust = cService.selectByName("방용수");
 		logger.info("고객정보:" + cust.toString());
 	}
+	
+	@RequestMapping("/chatList.do")
+	public String fastBoard() {
+		return "myPage/chatList";
+	}
 
 }
