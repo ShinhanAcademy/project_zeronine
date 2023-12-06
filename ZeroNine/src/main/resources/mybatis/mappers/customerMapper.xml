@@ -9,4 +9,15 @@
   <select id="selectByName" resultType="customerVo" parameterType="String">
   	select * from customer where "customerName" = #{customerName}
   </select>
+  <select id="emailCheck" resultType="int" parameterType="String">
+  	select count(email) from customer where "email" = #{email}
+  </select>
+  <select id="phoneCheck" resultType="int" parameterType="String">
+  	select count("phoneNumber") from customer where "phoneNumber" = #{phone}
+  </select>
+  <insert id="joinMembership" parameterType="customerVo">
+  	INSERT INTO public.customer
+	("customerPassword", email, "phoneNumber", "customerName", address, birthday)
+	VALUES (#{customerPassword},#{email},#{phoneNumber},#{customerName},#{address},#{birthday})
+  </insert>
 </mapper>

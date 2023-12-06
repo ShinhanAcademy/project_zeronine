@@ -29,4 +29,19 @@ public class CustomerDAOMybatis {
 		return cust;
 	}
 
+	public int emailCheck(String email) {
+		int cnt = sqlSession.selectOne(NAMESPACE + "emailCheck", email);
+		return cnt;
+	}
+
+	public int phoneCheck(String phone) {
+		int cnt = sqlSession.selectOne(NAMESPACE + "phoneCheck", phone);
+		return cnt;
+	}
+
+	public int joinMembership(CustomerVO customer) {
+		int cnt = sqlSession.insert(NAMESPACE + "joinMembership",customer);
+		return cnt;
+	}
+
 }
