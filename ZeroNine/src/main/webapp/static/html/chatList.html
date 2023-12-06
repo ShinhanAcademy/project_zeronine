@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/common_mypage.css">
+    <link rel="stylesheet" href="../css/mypage_chat.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/common.js"></script>
+    <title>MyPage</title>
+</head>
+<body>
+<header id="zn_header">
+    <div class="inner in_1170">
+        <div class="head_in">
+            <div class="top">
+                <h1 class="logo">
+                    <a href="javascript:void(0)"></a>
+                </h1>
+                <div class="member">
+                    <ul>
+                        <!--- 로그인 전-->
+                        <li>
+                            <a href="javascript:void(0)">로그인</a>
+                        </li>
+                        <li>
+                            <em></em>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">회원가입</a>
+                        </li>
+                            
+                        <li>
+                            <em></em>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">고객센터</a>
+                            <div class="drop_menu">
+                                <p>
+                                    <a href="javascript:void(0)">공지사항</a>
+                                </p>
+                                <p>
+                                    <a href="javascript:void(0)">자주하는 문의</a>
+                                </p>
+                                <p>
+                                    <a href="javascript:void(0)">1:1 문의</a>
+                                </p>
+                                <p>
+                                    <a href="javascript:void(0)">제안하기</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bot">
+                <div class="menu">
+                    <ul>
+                        <li class="category">
+                            <a href="javascript:void(0)">카테고리</a> 
+                            <div class="ctg_box" style="display: none;">
+                                <ul class="depth1">
+                                    <li class="ctg1">
+                                        <a href="javascript:void(0)"><span class="bold">정기배송</span></a>
+                                    </li>
+                                    <li class="ctg2">
+                                        <a href="javascript:void(0)"><span class="bold">그린샵</span></a>
+                                    </li>
+                                    <li class="ctg3">
+                                        <a href="javascript:void(0)"><span class="bold">에코딜</span></a>
+                                    </li>
+                                    <li class="ctg4">
+                                        <a href="javascript:void(0)"><span class="bold">베스트</span></a>
+                                    </li>
+                                    <li class="ctg5">
+                                        <a href="javascript:void(0)"><span class="bold">MD추천</span></a>
+                                    </li>
+                                    <!--
+                                    <li class="ctg6">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=20"><span>생수·음료</span></a>
+                                        <ul class="depth2" style="top:170px;">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2010">생수 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2020">커피 ㆍ차 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2021">탄산ㆍ스포츠음료 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2022">우유 ㆍ두유 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2023">숙취 ㆍ건강음료 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2024">어린이음료 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2025">주스ㆍ과즙음료 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2026">음료선물세트 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2027">무ㆍ비알콜음료 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2028">기타 음료 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=2031">세일중 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    <li class="ctg7">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=31"><span>식품</span></a>
+                                        <ul class="depth2">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3110">냉장ㆍ냉동ㆍ간편요리 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3111">과자ㆍ초코릿 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3112">소스ㆍ드레싱 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3113">건강ㆍ다이어트 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3114">가공식품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3115">비건식품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3116">커피ㆍ원두ㆍ차 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3117">수입식품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3118">선물세트 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3119">유제품ㆍ아이스크림 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3120">조미료ㆍ오일 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3121">기타 식품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3122">쌀ㆍ잡곡 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3123">과일 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    <li class="ctg8">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=33"><span>생활용품</span></a>
+                                        <ul class="depth2">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3310">화장지ㆍ물티슈 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3311">여성용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3312">세탁세제ㆍ용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3313">청소용품ㆍ주방세제 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3314">탈취ㆍ방향 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3315">건강ㆍ의료용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3316">수납ㆍ정리 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3317">일회용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3318">자동차 용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3319">사무용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3320">홈데코 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3321">생활잡화 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    <li class="ctg9">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=32"><span>뷰티</span></a>
+                                        <ul class="depth2" style="top:240px;">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3210">스킨케어 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3211">클렌징ㆍ필링 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3212">더마코스메틱 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3213">메이크업 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3214">향수 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3215">핸드ㆍ네일 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3216">뷰티소품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3217">헤어 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3218">바디 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3219">선물세트ㆍ키트 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3220">비건 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    <li class="ctg10">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=35"><span>주방</span></a>
+                                        <ul class="depth2" style="top:210px;">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3510">주방가전 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3511">냄비ㆍ프라이팬 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3512">주방조리도구 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3513">그릇ㆍ홈세트 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3514">수저ㆍ커트러리 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3515">컵ㆍ텀플러ㆍ와인용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3516">주방수납ㆍ정리 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3517">밀폐저장ㆍ도시락 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3518">주방잡화 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3519">기타 주방 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    <li class="ctg11">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=34"><span>욕실</span></a>
+                                        <ul class="depth2" style="top:220px;">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3410">욕실수납ㆍ정리 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3411">목욕ㆍ샤워용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3412">수건ㆍ타월 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3413">욕실용품ㆍ잡화 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3414">기타 욕실 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    <li class="ctg12">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=36"><span>패션·잡화</span></a>
+                                        <ul class="depth2" style="top:410px;">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3610">여성의류 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3611">남성의류 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3612">남녀공용의류 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3613">패션잡화 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    <li class="ctg13">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=37"><span>유아동</span></a>
+                                        <ul class="depth2" style="top:330px;">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3710">유아동 패션 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3711">유아동 침구 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3712">유아동 식품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3713">유아동 용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3714">욕실용품/스킨케어 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3715">위생/건강/세제 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    <li class="ctg14">
+                                        <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=38"><span>반려동물</span></a>
+                                        <ul class="depth2" style="top:440px;">
+                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3810">강아지 사료 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3811">강아지 간식 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3812">강아지 영양제 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3813">강아지 용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3814">고양이 사료 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3815">고양이 간식 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3816">고양이 영양제 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3817">고양이 용품 </a>
+                                            </li>
+                                                        
+                                            <li>
+                                                <a href="https://imecomall.co.kr/v2/shop/list.php?ca_id=3818">기타 반려동물 </a>
+                                            </li>
+        </ul>
+
+                                    </li>
+                                    -->
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" class="en_font">i’m eco</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">제로웨이스트</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">이벤트</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="member">
+                    <ul>
+                        <li>
+                            <!-- <form action="https://imecomall.co.kr/v2/shop/search.php" method="get"> -->
+                            <div class="search_area">                                        
+                                <!-- <input type="hidden" name="sfl" value="it_name">
+                                <input type="hidden" name="sop" value="and"> -->
+                                <input type="text" name="q" placeholder="즐거운 에코케어">
+                                <button type="submit"></button>                                        
+                            </div>
+                            <!-- </form> -->
+                        </li>
+                        <li class="icon_btn">
+                            <button type="button" class="wish"></button>
+                        </li>
+                        <!--
+                        <li class="icon_btn">
+                            <button class="my"></button>
+                        </li>
+                        -->
+                        <li class="icon_btn">
+                            <button type="button" class="my"></button>
+                        </li>
+                        <li class="icon_btn">
+                            <button type="button" class="cart"></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- zero_container -->
+<div class="zero_container zn_center">
+    <!-- mypage_container -->
+    <div class="mypage_container">
+        <!-- zero_sbn -->
+        <div class="zero_sbn">
+            <div class="title">마이 제로나인</div>
+            <div class="snb_wrap">
+                <div class="sub_tit">MY SHOPPING</div>
+                <ul>
+                    <li><a href="#">나의 지갑</a></li>
+                    <li><a href="#">배송 조회</a></li>
+                    <li><a href="#">주문 내역</a></li>
+                    <li><a href="#">취소 / 반품 / 교환 / 환불 내역</a></li>
+                    <li><a href="#">장바구니</a></li>
+                    <li><a href="#">찜한 상품</a></li>
+                </ul>
+                <div class="sub_tit">MY ACTIVITIES</div>
+                <ul>
+                    <li><a href="#">내가 쓴 게시글</a></li>
+                    <li><a href="#">내가 참여한 게시글</a></li>
+                    <li class="on"><a href="#">채팅 목록</a></li>
+                </ul>
+                <div class="sub_tit">MY INFOMATION</div>
+                <ul>
+                    <li><a href="#">개인 정보</a></li>
+                    <li><a href="#">구독 정보</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- //zero_sbn -->
+        <!-- mypage_detail_wrap -->
+        <div class="mypage_detail_wrap">
+            <!-- my_info_wrap -->
+            <div class="my_info_wrap">
+                <!-- info_left -->
+                <div class="info_left">
+                    <div class="profile">
+                        <div>
+                            <div class="img_wrap">
+                                <img src="../images/mypage/img_mypage_profile.png" alt="profile image" />
+                            </div>
+                            홍길동 님
+                        </div>
+                    </div>
+                    <ul class="subscription_list">
+                        <li>
+                            <div class="img_wrap">
+                                <img src="../images/mypage/img_bag_small.png" alt="subscription image">
+                            </div>
+                            슝슝 무한 배송 구독중
+                        </li>
+                        <li>
+                            <div class="img_wrap">
+                                <img src="../images/mypage/img_trash_small.png" alt="subscription image">
+                            </div>
+                            쓰레기 수거 구독중
+                        </li>
+                    </ul>
+                </div>
+                <!-- //info_left -->
+                <!-- info_right -->
+                <div class="info_right">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>지구 지킴이 횟수</th>
+                                <td>36회</td>
+                            </tr>
+                            <tr>
+                                <th>My Point</th>
+                                <td>
+                                    4,280
+                                    <button class="btn_orange_small">충전하기</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>회수 쿠폰</th>
+                                <td>36회</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- //info_right -->
+            </div>
+            <!-- //my_info_wrap -->
+            <!-- contents_wrap -->
+            <div class="contents_wrap">
+                <div class="con_tit has_line">채팅 목록</div>
+                <!-- contents -->
+                <div class="contents">
+                    <!-- chat_list -->
+                    <div class="chat_list">
+                        <!-- chat_inner -->
+                        <div class="chat_inner">
+                            <div class="chat_room">
+                                <div class="profile img_wrap">
+                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+                                </div>
+                                <div class="info">
+                                    <div class="user_info">
+                                        <div class="name">콩순이</div>
+                                        <span>파리바게뜨 서교점</span>
+                                    </div>
+                                    <div class="message">
+                                        안녕하세요~!! <br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
+                                    </div>
+                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
+                                </div>
+                                <div class="read_status">1</div>
+                            </div>
+                            <div class="chat_room">
+                                <div class="profile img_wrap">
+                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+                                </div>
+                                <div class="info">
+                                    <div class="user_info">
+                                        <div class="name">콩순이</div>
+                                        <span>파리바게뜨 서교점</span>
+                                    </div>
+                                    <div class="message">
+                                        안녕하세요~!! <br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
+                                    </div>
+                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
+                                </div>
+                                <div class="read_status">1</div>
+                            </div>
+                            <div class="chat_room">
+                                <div class="profile img_wrap">
+                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+                                </div>
+                                <div class="info">
+                                    <div class="user_info">
+                                        <div class="name">콩순이</div>
+                                        <span>파리바게뜨 서교점</span>
+                                    </div>
+                                    <div class="message">
+                                        안녕하세요~!! <br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
+                                    </div>
+                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
+                                </div>
+                                <div class="read_status">1</div>
+                            </div>
+                            <div class="chat_room">
+                                <div class="profile img_wrap">
+                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+                                </div>
+                                <div class="info">
+                                    <div class="user_info">
+                                        <div class="name">콩순이</div>
+                                        <span>파리바게뜨 서교점</span>
+                                    </div>
+                                    <div class="message">
+                                        안녕하세요~!! <br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
+                                    </div>
+                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
+                                </div>
+                                <div class="read_status">1</div>
+                            </div>
+                            <div class="chat_room">
+                                <div class="profile img_wrap">
+                                    <img src="../images/mypage/img_chat_profile.png" alt="profile image" />
+                                </div>
+                                <div class="info">
+                                    <div class="user_info">
+                                        <div class="name">콩순이</div>
+                                        <span>파리바게뜨 서교점</span>
+                                    </div>
+                                    <div class="message">
+                                        안녕하세요~!! <br>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
+                                    </div>
+                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
+                                </div>
+                                <div class="read_status">1</div>
+                            </div>
+                        </div>
+                        <!-- //chat_inner -->
+                    </div>
+                    <!-- //chat_list -->
+                </div>
+                <!-- //contents -->
+            </div>
+            <!-- //contents_wrap -->
+        </div>
+        <!-- //mypage_detail_wrap -->
+    </div>
+    <!-- //mypage_container -->
+</div>
+<!-- //zero_container -->
+<footer id="zn_footer" class="footer_wrap">
+    <div class="inner zn_center">
+        <div class="intro_unit">
+            <a href="#" class="logo">
+                <img src="../images/ico_logo_footer.png" alt="logo">
+            </a>
+            <div class="abt_zn">
+                <span>since 2023</span>
+                <span>ⓒ 2023. ZeroNine co.<br>All rights reserved</span>
+                <ul class="social_wrap">
+                    <li><a href="#">facebook</a></li>
+                    <li><a href="#">twitter</a></li>
+                    <li><a href="#">instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cs_unit">
+            <div class="cs_info">
+                <div class="tit">Company</div>
+                <ul>
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                    <li>
+                        <a href="#">Blog</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="cs_info">
+                <div class="tit">Support</div>
+                <ul>
+                    <li>
+                        <a href="#">1:1 문의 게시판</a>
+                    </li>
+                    <li>
+                        <a href="#">고객센터</a>
+                    </li>
+                    <li>
+                        <a href="#">소비자 정책</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="contact_unit">
+            <div>
+                <span>고객센터</span>
+                <span>1688-2302</span>
+            </div>
+            <p>평일 10:00 ~ 18:00 <span>(점심시간 12:00 ~ 13:00)</span><br><br>마케팅 제휴 문의 : zeronine@shinhansw.com</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
