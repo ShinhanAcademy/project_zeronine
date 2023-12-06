@@ -76,7 +76,7 @@ html, body {
     display: table;
     table-layout: fixed;
 }
-.info_left .mypage_detail_wrap .profile {
+.mypage_detail_wrap .info_left .profile {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
