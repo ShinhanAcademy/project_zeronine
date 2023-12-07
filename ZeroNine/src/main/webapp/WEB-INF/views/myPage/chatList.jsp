@@ -45,12 +45,10 @@
 	                <!-- info_left -->
 	                <div class="info_left">
 	                    <div class="profile">
-	                        <div>
-	                            <div class="img_wrap">
-	                                <img src="${path}/images/mypage/img_mypage_profile.png" alt="profile image" />
-	                            </div>
-	                            홍길동 님
-	                        </div>
+                            <div class="img_wrap">
+                                <img src="${path}/images/mypage/img_mypage_profile.png" alt="profile image" />
+                            </div>
+                            홍길동 님
 	                    </div>
 	                    <ul class="subscription_list">
 	                        <li>
@@ -65,6 +63,7 @@
 	                            </div>
 	                            쓰레기 수거 구독중
 	                        </li>
+	                        <li>현재 구독 중인 구독권이 없습니다.</li>
 	                    </ul>
 	                </div>
 	                <!-- //info_left -->
@@ -98,8 +97,9 @@
 	                <div class="con_tit has_line">채팅 목록</div>
 	                <!-- contents -->
 	                <div class="contents">
+	                
 	                    <!-- chat_list -->
-	                    <div class="chat_list">
+	                    <%-- <div class="chat_list">
 	                        <!-- chat_inner -->
 	                        <div class="chat_inner">
 	                            <div class="chat_room">
@@ -189,7 +189,31 @@
 	                            </div>
 	                        </div>
 	                        <!-- //chat_inner -->
+	                    </div> --%>
+	                    <div class="chat_list">
+	                    	<table>
+	                    		<thead>
+	                    			<tr>
+	                    				<th>
+	                    					<input type="check-box" />
+	                    				</th>
+	                    				<th>상대방 이름</th>
+	                    				<th>게시글 제목</th>
+	                    				<th>게시일</th>
+	                    				<th>마감 기한</th>
+	                    				<th>읽은 상태</th>
+	                    			</tr>
+	                    		</thead>
+	                    		<tbody>
+	                    			<tr>
+	                    				<td></td>
+	                    			</tr>
+	                    		</tbody>
+	                    	</table>
 	                    </div>
+	                    <div class="tbl_head">
+	                    
+                    	</div>
 	                    <!-- //chat_list -->
 	                </div>
 	                <!-- //contents -->
