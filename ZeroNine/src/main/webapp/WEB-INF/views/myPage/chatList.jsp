@@ -18,7 +18,6 @@
 	                <div class="sub_tit">MY SHOPPING</div>
 	                <ul>
 	                    <li><a href="#">나의 지갑</a></li>
-	                    <li><a href="#">배송 조회</a></li>
 	                    <li><a href="#">주문 내역</a></li>
 	                    <li><a href="#">취소 / 반품 / 교환 / 환불 내역</a></li>
 	                    <li><a href="#">장바구니</a></li>
@@ -29,6 +28,7 @@
 	                    <li><a href="#">내가 쓴 게시글</a></li>
 	                    <li><a href="#">내가 참여한 게시글</a></li>
 	                    <li class="on"><a href="#">채팅 목록</a></li>
+	                    <li><a href="#">찜한 게시글</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
@@ -94,10 +94,9 @@
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
-	                <div class="con_tit has_line">채팅 목록</div>
+	                <div class="con_tit">채팅 목록</div> <%-- has_line --%>
 	                <!-- contents -->
 	                <div class="contents">
-	                
 	                    <!-- chat_list -->
 	                    <%-- <div class="chat_list">
 	                        <!-- chat_inner -->
@@ -190,14 +189,36 @@
 	                        </div>
 	                        <!-- //chat_inner -->
 	                    </div> --%>
-	                    <div class="chat_list">
-	                    	<table>
+	                    <div class="tbl_top_wrap">
+	                    	<div class="total_count">
+								총 <span>2</span>건
+	                    	</div>
+	                    	<div class="btn_wrap">
+	                    		<button class="btn_more">채팅방으로 가기 ></button>
+	                    	</div>
+                    	</div>
+	                    <div class="tbl_wrap">
+	                    	<table class="tbl_chat_wrap">
+							  <colgroup>  	
+							    <col width="10%" />
+							    <col width="15%" />
+							    <col width="35%" />
+							    <col width="10%" />
+							    <col width="18%" />
+							    <col width="12%" />
+							    <!-- 
+							    <col />
+							    <col span="2" class="batman" />
+							    <col span="2" class="flash" />
+							    -->
+							  </colgroup>
 	                    		<thead>
 	                    			<tr>
-	                    				<th>
-	                    					<input type="check-box" />
+	                    				<th class="check_all txt_left">	                    					
+    										<input type="checkbox" />
+    										전체선택
 	                    				</th>
-	                    				<th>상대방 이름</th>
+	                    				<th>이름</th>
 	                    				<th>게시글 제목</th>
 	                    				<th>게시일</th>
 	                    				<th>마감 기한</th>
@@ -206,13 +227,32 @@
 	                    		</thead>
 	                    		<tbody>
 	                    			<tr>
-	                    				<td></td>
+	                    				<td class="check_item">
+											<input type="checkbox" />	                    					
+	                    				</td>
+	                    				<td>또라몽</td>
+	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
+	                    				<td>23.12.07</td>
+	                    				<td>23.12.08 20:00까지</td>
+	                    				<td class="read_status"><span>status</span>읽음</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td class="check_item">
+											<input type="checkbox" checked />	                    					
+	                    				</td>
+	                    				<td>또라몽</td>
+	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
+	                    				<td>23.12.07</td>
+	                    				<td>23.12.08 20:00까지</td>
+	                    				<td class="read_status new"><span>status</span>읽지 않음</td>
 	                    			</tr>
 	                    		</tbody>
 	                    	</table>
 	                    </div>
-	                    <div class="tbl_head">
-	                    
+	                    <div class="tbl_bottom_wrap">
+	                    	<div class="btn_wrap">
+	                    		<button class="btn_del">삭제하기</button>
+	                    	</div>
                     	</div>
 	                    <!-- //chat_list -->
 	                </div>

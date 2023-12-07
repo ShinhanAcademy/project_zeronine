@@ -30,7 +30,7 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/chatList.do")
-	public String fastBoard() {
+	public String chatList() {
 		return "myPage/chatList";
 	}
 
