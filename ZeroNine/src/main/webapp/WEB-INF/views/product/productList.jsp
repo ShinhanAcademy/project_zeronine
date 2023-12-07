@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
-<link rel="stylesheet" href="${path}/css/sangpum.css" />
+<link rel="stylesheet" href="${path}/css/product/sangpum.css" />
 
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
 	<div class="zero_conatainer product_container" style="padding: 160px 0 0;">
-		<div class="body-part" id="targetDiv">
+		<div class="body-part" >
 			<div class="body-left">
 				<img class="logo2"  src="${path}/images/sangpumpage/banner.png">
 				<div class="dist98"></div>
@@ -53,17 +54,18 @@
 				<div class="dist30"></div>
 				</div>
 				<div class="melong">
-				<select name ="ptype" class="selectBox">
-                   						<option value="0" selected>🛒전체🛒</option>
-                   						<option value="1">❤️찜순❤️</option>
-                   						<option value="2">🚛주문량순🚛</option>
-                   						<option value="3">💲낮은가격순💲</option>
-                   						<option value="4">💰높은가격순💰</option>
+				<select name ="ptype" class="selectBox" onchange="chanb()">
+                   						<option value="0" selected>전체</option>
+                   						<option value="1">찜순</option>
+                   						<option value="2">주문량순</option>
+                   						<option value="3">낮은가격순</option>
+                   						<option value="4">높은가격순</option>
                    					</select>
                                 <div class="search_area">                                        
-                   					
-                                    <input type="text" name="q" placeholder="상품명, 제조사 검색">
-                                    <button type="submit"></button>                                        
+                   					<form class="search_form">
+                                    <input type="text" name="q" id="q" placeholder="상품명, 제조사 검색">
+                                    <button type="button" name="searchbtn" id="searchbtn"><img src="${path}/images/sangpumpage/search.png"></button>                                        
+                               </form>
                                </div>
                              </div>
 				<div class="content"></div>
@@ -85,7 +87,8 @@
 					</div>
 					<span class="menufont">${product.brand}</span>
 					<span class="menufont_name">${product.pName}</span>
-					<span class="menufont_price">${product.price}원</span>
+					<span class="menufont_price">
+					<fmt:formatNumber value="${product.price}" maxFractionDigits="3"></fmt:formatNumber> 원</span>
 					</div>
 					</c:forEach>
 
@@ -109,6 +112,7 @@
 	var path = "${path}";
 	
 	
+
 	
 	</script>
 	<script src="../js/product/productlist.js"></script>
