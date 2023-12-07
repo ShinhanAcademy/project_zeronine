@@ -7,9 +7,8 @@
 
 <title>FastBoard</title>
 <link rel="stylesheet" href="${path}/css/board/boardList.css" />
+<script src="../js/like.js"></script>
 </head>
-
-
 <body>
 	<div class="banner zn_center">
 
@@ -35,6 +34,7 @@
 		<div class="section zn_center">
 			<div style="width: 1440px">
 				<div class="filter">
+					<!-- select option 으로 변경 -->
 					<span> <img class="filter_img"
 						src="${path}/images/board/filter.png">
 					</span> <span style="font-size: 20px;"> 최신순 </span>
@@ -70,20 +70,19 @@
 					</div>
 					<div class="pro_detail">
 						<ul>
-							<li><img class="user" src="${path}/images/board/user.png"> <span>
-									1명 모집 </span></li>
-							<li><img class="card" src="${path}/images/board/card.png"> <span>
-									16,640원 </span></li>
-							<li><img class="clock" src="${path}/images/board/clock.png"> <span>
-									23.11.30 23:59까지 </span></li>
+							<li><img class="user" src="${path}/images/board/user.png">
+								<span> 1명 모집 </span></li>
+							<li><img class="card" src="${path}/images/board/card.png">
+								<span> 16,640원 </span></li>
+							<li><img class="clock" src="${path}/images/board/clock.png">
+								<span> 23.11.30 23:59까지 </span></li>
 						</ul>
 					</div>
 					<ul>
 						<li class="detail_view">
-							<button type="button">
-								<img src="${path}/images/board/heart.png"
-									onclick="location.href='${path}/images/board/redheart.png'">
+							<button class="like" type="button">
 								<!-- js class로 바꿔끼우기 -->
+								<img class="like" src="${path}/images/board/heart.png">
 							</button> <a class="fast_detail_btn" href="${path}/images/board/user.png">보기</a>
 						</li>
 					</ul>
@@ -94,6 +93,7 @@
 		</div>
 	</div>
 
+	
 
 	<%@include file="../common/footer.jsp"%>
 </body>
