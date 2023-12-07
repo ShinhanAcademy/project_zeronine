@@ -15,9 +15,25 @@
 	FROM public.product where "pCategoryId" != #{pCategoryId}
   </select>
   <select id="selectBymanyLiked" resultType="productVo">
-  select *
-	from "product" pd join (select "productId", count("productId") prcount  
-						from "likedProduct" group by "productId") l on  l."productId" = "pd"."productId" 
-						order by prcount desc, "pd"."price" asc
+select pd."pName", pd."brand", pd."price", prcount
+from
+product pd left join
+(select "productId", count("productId") prcount from "likedProduct" group by "productId") ld
+on pd."productId" = ld."productId" order by prcount desc NULLS LAST, pd.price asc
   </select>
+  <select id="selectByDelivery" resultType="productVo">
+  select "pd"."pName", "pd"."brand", "pd"."price"
+from (select "productId", count("productId") prcount  
+						from "deliveryProduct" group by "productId" ) l full outer join "product" pd  on  l."productId" = "pd"."productId" 
+						order by prcount desc NULLS LAST, "pd"."price" asc ;
+</select>
+<select id="selectBypriceAsc" resultType="productVo">
+select * from product order by price asc;
+</select>
+<select id="selectBypriceDesc" resultType="productVo">
+select * from product order by price desc;
+</select>
+<select id="selectByPnameBrand" parameterType="String" resultType="productVo">
+select * from product where "pName" like #{q} or "brand" like #{q}
+</select>
 </mapper>
