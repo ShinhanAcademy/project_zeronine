@@ -25,13 +25,18 @@ public class MyPageController {
 	@GetMapping("/myWallet.do")
 	public void myPage(Model model) {
 		model.addAttribute("clist", cService.selectAll());	
-		CustomerVO cust = cService.selectByName("¹æ¿ë¼ö");
-		logger.info("°í°´Á¤º¸:" + cust.toString());
+		CustomerVO cust = cService.selectByName("ï¿½ï¿½ï¿½ï¿½");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + cust.toString());
 	}
 	
 	@RequestMapping("/chatList.do")
 	public String chatList() {
 		return "myPage/chatList";
+	}
+	
+	@RequestMapping("/validatePassword.do")
+	public String validatePassword() {
+		return "myPage/myInfo";
 	}
 
 }
