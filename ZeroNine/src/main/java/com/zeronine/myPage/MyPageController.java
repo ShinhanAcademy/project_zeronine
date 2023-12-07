@@ -30,8 +30,7 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/chatList.do")
-	public String chatList() {
-		return "myPage/chatList";
+	public void chatList() {
 	}
 	
 	@RequestMapping("/validatePassword.do")

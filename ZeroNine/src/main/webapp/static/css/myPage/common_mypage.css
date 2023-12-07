@@ -227,3 +227,62 @@ contents
 	color: #747774;
 	font-size: 14px;
 }
+.info_font{
+	color: #555;
+    font-family: lato;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+}
+
+.prompt_msg{
+	color: #000;
+    font-family: Lato;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: inline-block; width: 95%; text-align: center;
+}
+
+.check_pw {
+	color: #000;
+	font-family: Jua;
+	font-size: 22px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	display: inline-block; width: 95%; text-align: center;
+}
+
+.pw_input {
+	width: 340px;
+	height: 54px;
+	border-radius: 15px;
+	border: 1px solid #CCC;
+	background: #FFF;
+	font-size: 16px;
+	font-family: "Lato";
+	margin-bottom: 10px;
+	display: inline-block; width: 25%; text-align: center;
+	margin-left: 10px;
+    margin-right: 10px;
+}
+
+.pw_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.container_left {
+	color: #555;
+
+	font-family: Lato;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 22px; /* 122.222% */
+}
