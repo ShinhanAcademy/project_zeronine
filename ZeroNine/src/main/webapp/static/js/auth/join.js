@@ -88,6 +88,8 @@ function f_join(){
 						if(result>0){
 							alert("회원가입에 성공하셨습니다.");
 							location.href = path + "/auth/login.do";
+						}else{
+							alert("회원가입을 다시 시도해주세요.");
 						}
 					},
 					error : function() {

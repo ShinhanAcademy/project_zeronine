@@ -20,4 +20,10 @@
 	("customerPassword", email, "phoneNumber", "customerName", address, birthday)
 	VALUES (#{customerPassword},#{email},#{phoneNumber},#{customerName},#{address},#{birthday})
   </insert>
+  <select id="login" resultType="int" parameterType="java.util.HashMap">
+  	SELECT count(email)	FROM customer where email = #{email} and "customerPassword" = #{pwd}
+  </select>
+  <select id="findEmail" resultType="String" parameterType="java.util.HashMap">
+  	SELECT email FROM public.customer where "customerName" = #{name} and "phoneNumber" = #{phone}
+  </select>
 </mapper>

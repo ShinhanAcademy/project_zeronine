@@ -17,23 +17,25 @@
 				</div>
 				<div class="login-middle">
 					<img src="${path}/images/login/idcheckbox.png"> <span
-						class="idcheckboxfont">아이디 저장</span> <span class="idpwdfont">아이디
-						찾기</span><span class="idpwdfont">|</span><span class="idpwdfont">비밀번호
-						찾기</span>
+						class="idcheckboxfont">아이디 저장</span> <a href="${path}/auth/findId.do" class="idpwdfont">아이디
+						찾기</a><span class="idpwdfont">|</span><a href="${path}/auth/findPwd.do" class="idpwdfont">비밀번호
+						찾기</a>
 				</div>
 				<div class="loginormember">
-					<button class="loginbtn">로그인</button>
-					<button class="memberbtn">회원가입</button>
+					<button class="loginbtn" type="button" id="login_btn">로그인</button>
+					<button class="memberbtn" type="button" id="join_btn">회원가입</button>
 				</div>
 				<div class="login-bottom">
 					<div class="naverimg">
 						<img src="${path}/images/login/loginnaverimg.png">
 					</div>
 					<span class="nklogin-bottom">네이버 간편로그인</span>
+					
 					<div class="kakaoimg">
 						<img src="${path}/images/login/loginkakakoimg.png">
 					</div>
 					<span class="nklogin-bottom">카카오 간편로그인</span>
+					
 				</div>
 			</div>
 		</form>
@@ -41,5 +43,9 @@
 
 
 	<%@include file="../common/footer.jsp"%>
+	<script>
+	var path = "${path}";
+	</script>
+	<script src="${path}/js/auth/login.js" type="text/javascript"></script>
 </body>
 </html>

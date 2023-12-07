@@ -17,10 +17,10 @@
 	            <div class="snb_wrap">
 	                <div class="sub_tit">MY SHOPPING</div>
 	                <ul>
-	                    <li class="on"><a href="${path}/myPage/myWallet.do">나의 지갑</a></li>
+	                    <li><a href="${path}/myPage/myWallet.do">나의 지갑</a></li>
 	                    <li><a href="${path}/myPage/orderHistory.do">주문 내역</a></li>
 	                    <li><a href="${path}/myPage/orderCancelHistory.do">취소 / 반품 / 교환 / 환불 내역</a></li>
-	                    <li><a href="${path}/myPage/myCart.do">장바구니</a></li>
+	                    <li class="on"><a href="${path}/myPage/myCart.do">장바구니</a></li>
 	                    <li><a href="${path}/myPage/likeProduct.do">찜한 상품</a></li>
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
@@ -94,7 +94,7 @@
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
-	                <div class="con_tit">나의 지갑</div>
+	                <div class="con_tit">장바구니</div>
 	                <!-- contents -->
 	                <div class="contents">
 						<div class="validate_wrap">

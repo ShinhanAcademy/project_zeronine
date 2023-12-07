@@ -58,6 +58,7 @@
 	background: #FFF;
 	font-size: 16px;
 	font-family: "Lato";
+	padding-left: 10px;
 }
 
 .join_address {
@@ -73,7 +74,6 @@ input::placeholder {
 	font-family: "Lato";
 	font-size: 16px;
 	font-style: normal;
-	padding-left: 10px;
 }
 
 .double_check_btn {

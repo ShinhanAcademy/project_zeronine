@@ -16,7 +16,7 @@ html, body {
 }
 .mypage_container {
     display: flex;
-    padding: 90px 30px;
+    padding: 64px 30px 90px;
 }
 .mypage_container .zero_sbn {
     width: 240px;
@@ -59,7 +59,7 @@ html, body {
 }
 .mypage_detail_wrap {
     width: calc(100% - 240px);
-    padding: 0 20px 0 50px;    
+    padding: 31px 20px 0 50px;    
 }
 .mypage_detail_wrap .my_info_wrap {
     position: relative;
@@ -73,15 +73,12 @@ html, body {
     width: 50%;
 }
 .mypage_detail_wrap .my_info_wrap .info_left {
-    display: table;
-    table-layout: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
 }
 .mypage_detail_wrap .info_left .profile {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-.mypage_detail_wrap .profile > div {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -143,15 +140,90 @@ html, body {
     margin-left: 10px;
 }
 .mypage_container .contents_wrap {
-    margin-top: 50px;
+    margin-top: 60px;
 }
 .mypage_container .contents_wrap .con_tit {
     color: #555;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     font-size: 20px;
     line-height: 1;
 }
 .mypage_container .contents_wrap .con_tit.has_line {
     border-bottom: 1px solid #525252;
     margin-bottom: 30px;
+}
+
+
+/*
+contents
+*/
+.contents .tbl_top_wrap {
+	display: flex;
+	padding-top: 10px;
+	margin-bottom: 10px;
+	font-family: "Lato";
+	font-size: 14px;
+}
+.contents .tbl_top_wrap .total_count span {
+	color: #FF5C00;
+	font-weight: bold;
+}
+.contents .tbl_top_wrap .btn_wrap {
+	margin-left: auto;
+}
+.contents .tbl_top_wrap .btn_wrap .btn_more {
+	font-family: "Lato";
+	font-size: 12px;
+    font-weight: 600;
+}
+.contents .tbl_wrap table {
+	width: 100%;
+    table-layout: fixed;
+}
+.contents .tbl_wrap table th,
+.contents .tbl_wrap table td {
+	text-align: center;
+	font-size: 16px;
+	color: #555;
+	border-bottom: 1px solid #B7B7B7;
+    padding: 13px 15px;
+	line-height: 1.2;
+}
+.contents .tbl_wrap table th.txt_left,
+.contents .tbl_wrap table td.txt_left {
+    text-align: left;
+}
+.contents .tbl_wrap table th.txt_right,
+.contents .tbl_wrap table td.txt_right {
+    text-align: right;
+}
+.contents .tbl_wrap table thead th {
+	border-top: 1px solid #525252;
+	background: #f0f0f0;
+}
+.contents .tbl_wrap table tbody tr {
+	cursor: pointer;
+}
+.contents .tbl_wrap table tbody td {
+	border-right: 1px solid #B7B7B7;
+}
+.contents .tbl_wrap table tbody td:last-child {
+	border-right: none;
+} 
+.contents .tbl_bottom_wrap {
+	display: flex;
+    justify-content: flex-end;
+	margin-top: 20px;
+}
+.contents .tbl_bottom_wrap .btn_wrap {
+	display: flex;
+	gap: 15px;
+}
+.contents .tbl_bottom_wrap .btn_wrap button {
+	border: 1px solid #B7B7B7;
+	border-radius: 10px;
+    padding: 10px 13px;
+	line-height: 1;
+	color: #747774;
+	font-size: 14px;
 }
