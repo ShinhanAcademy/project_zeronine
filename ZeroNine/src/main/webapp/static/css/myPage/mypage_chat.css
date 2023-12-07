@@ -1,6 +1,6 @@
 
 /* mypage_chatlist */
-.chat_list {
+/* .chat_list {
     background-color: #f5f5f5;
     width: 640px;
     margin: 0 auto;
@@ -8,7 +8,7 @@
     border-radius: 10px;
     max-height: 613px;
     overflow-y: auto;
-}
+} */
 .chat_list .chat_room {
     display: flex;
     align-items: center;

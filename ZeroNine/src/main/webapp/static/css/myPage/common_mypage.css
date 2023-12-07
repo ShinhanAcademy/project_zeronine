@@ -73,15 +73,12 @@ html, body {
     width: 50%;
 }
 .mypage_detail_wrap .my_info_wrap .info_left {
-    display: table;
-    table-layout: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
 }
 .mypage_detail_wrap .info_left .profile {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-.mypage_detail_wrap .profile > div {
     display: flex;
     align-items: center;
     gap: 15px;

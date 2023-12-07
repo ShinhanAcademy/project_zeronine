@@ -6,7 +6,7 @@
 intro_wrap
 */
 .intro_wrap {
-    margin: 80px 0 42px;
+   	margin: 100px 0;
     color: #4d4d4d;
 }
 .intro_wrap .title {
@@ -375,4 +375,35 @@ sub_visual_wrap
 .advertisement_wrap .img_warp img {
     display: block;
     width: 100%;
+}
+
+
+
+
+#zeronine_wrap .bx-wrapper {
+	margin: 0;
+	box-shadow: none;
+	border: none;
+}
+#zeronine_wrap .bx-wrapper .bx-pager {
+	bottom: 20px;
+	left: 0;
+	padding: 0;
+}
+#zeronine_wrap .bx-wrapper .bx-pager.bx-default-pager a {
+    background: #fff;
+}
+#zeronine_wrap .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background: #0083E6;
+}
+#zeronine_wrap .bx-wrapper .bx-controls-direction a {
+	z-index:99;
+}
+#zeronine_wrap .bx-wrapper .bx-next {
+    right: 35px;
+    background: url("../images/main/ico_arrow_right.png") center center no-repeat;
+}
+#zeronine_wrap .bx-wrapper .bx-prev {
+	left: 35px;
+    background: url("../images/main/ico_arrow_left.png") center center no-repeat;
 }
