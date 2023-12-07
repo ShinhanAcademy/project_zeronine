@@ -93,4 +93,10 @@ public class MyPageController {
 		return "myPage/myInfo";
 	}
 
+	// subscriptionInfo(구독 정보)
+	@RequestMapping("/subscriptionInfo.do")
+	public String subscriptionInfo() {
+		return "myPage/subscriptionInfo";
+	}
+
 }
