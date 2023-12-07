@@ -135,7 +135,7 @@
 		                    						<ul class="detail">
 		                    							<li>구매 일자 : 2023-11-14</li>
 		                    							<li>구매 번호 : 202311140000001</li>
-		                    							<li>[스타벅스] SS 크리스마스 골드빔 아티스틱 콜드컵 473m</li>
+		                    							<li class="product_name">[스타벅스] SS 크리스마스 골드빔 아티스틱 콜드컵 473m [스타벅스] SS 크리스마스 골드빔 아티스틱 콜드컵 473m [스타벅스] SS 크리스마스 골드빔 아티스틱 콜드컵 473m</li>
 		                    						</ul>
 		                    					</div>
 		                    				</td>
@@ -144,11 +144,11 @@
 		                    				<td class="order_status">
 												배송중
 												<div>
-													<button class="btn_check">배송조회</button>
+													<button class="btn_orange_underline">배송조회</button>
 												</div>
 											</td>
 		                    				<td class="purchase_decision">
-		                    					<button>반품 신청</button>	
+		                    					<button class="btn_blue">반품 신청</button>	
 											</td>
 		                    			</tr>
 		                    			<tr>
@@ -160,7 +160,7 @@
 		                    						<ul class="detail">
 		                    							<li>구매 일자 : 2023-11-16</li>
 		                    							<li>구매 번호 : 202311160000001</li>
-		                    							<li>아이앤어스 3챔버 고농축 캡슐세제 실속형 50개입</li>
+		                    							<li class="product_name">아이앤어스 3챔버 고농축 캡슐세제 실속형 50개입</li>
 		                    						</ul>
 		                    					</div>
 		                    				</td>
@@ -168,7 +168,7 @@
 		                    				<td>무료</td>
 		                    				<td class="order_status">결제완료</td>
 		                    				<td class="purchase_decision">
-		                    					<button>주문 취소</button>	
+		                    					<button class="btn_blue">주문 취소</button>	
 											</td>
 		                    			</tr>
 		                    		</tbody>
@@ -220,7 +220,7 @@
 		                    						<ul class="detail">
 		                    							<li>구매 일자 : 2023-11-15</li>
 		                    							<li>구매 번호 : 202311150000001</li>
-		                    							<li>노브랜드 국산콩두부300g*2입</li>
+		                    							<li class="product_name">노브랜드 국산콩두부300g*2입</li>
 		                    						</ul>
 		                    					</div>
 		                    				</td>
@@ -231,7 +231,7 @@
 		                    				<td>무료</td>
 		                    				<td class="order_status">공구 참여중</td>
 		                    				<td class="purchase_decision">
-		                    					<button>공구 취소</button>	
+		                    					<button class="btn_blue">공구 취소</button>	
 											</td>
 		                    			</tr>
 		                    			<tr>
@@ -243,7 +243,7 @@
 		                    						<ul class="detail">
 		                    							<li>구매 일자 : 2023-11-15</li>
 		                    							<li>구매 번호 : 202311150000001</li>
-		                    							<li>노브랜드 국산콩두부300g*2입</li>
+		                    							<li class="product_name">노브랜드 국산콩두부300g*2입</li>
 		                    						</ul>
 		                    					</div>
 		                    				</td>
@@ -254,7 +254,7 @@
 		                    				<td>무료</td>
 		                    				<td class="order_status">공구 진행중</td>
 		                    				<td class="purchase_decision">
-		                    					<button>공구 취소</button>	
+		                    					<button class="btn_blue">공구 취소</button>	
 											</td>
 		                    			</tr>
 		                    		</tbody>
@@ -311,7 +311,7 @@
 		                    				<td>무료</td>
 		                    				<td class="order_status">신청 완료</td>
 		                    				<td class="purchase_decision">
-		                    					<button>회수 취소</button>	
+		                    					<button class="btn_blue">회수 취소</button>	
 											</td>
 		                    			</tr>
 		                    		</tbody>
