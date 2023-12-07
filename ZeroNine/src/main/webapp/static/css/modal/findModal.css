@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+#modal_wrap {
+	position: fixed; /* Stay in place */
+	z-index: 9999; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+	display: block;
+}
+
+#modal_body {
+	width: 500px;
+	height: 250px;
+	padding: 55px 30px;
+	margin-left: 32%;
+	margin-top: 315px;
+	border: 1px solid #777;
+	background-color: #fff;
+	border-radius: 15px;
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+#modal_wrap p {
+	text-align: center;
+	font-size: 25px;
+}
+
+#modal_btn {
+	width: 340px;
+	height: 65px;
+	background: #0083E6;
+}

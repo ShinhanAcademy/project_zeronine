@@ -120,6 +120,7 @@
 	font-size: 16px;
 	font-family: "Lato";
 	margin-bottom: 10px;
+	padding-left: 10px;
 }
 
 input::placeholder {
@@ -127,7 +128,6 @@ input::placeholder {
 	font-family: "Lato";
 	font-size: 16px;
 	font-style: normal;
-	padding-left: 10px;
 }
 
 .form_group {
