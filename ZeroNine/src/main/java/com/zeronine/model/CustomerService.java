@@ -36,4 +36,8 @@ public class CustomerService {
 	public int login(String email, String pwd) {
 		return customerDAO.login(email,pwd);
 	}
+
+	public String findEmail(String name, String phone) {
+		return customerDAO.findEmail(name,phone);
+	}
 }
