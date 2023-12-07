@@ -9,7 +9,7 @@
     max-height: 613px;
     overflow-y: auto;
 } */
-.chat_list .chat_room {
+/* .chat_list .chat_room {
     display: flex;
     align-items: center;
     padding: 30px;
@@ -82,4 +82,31 @@
     font-weight: bold;
     background-color: #FF5C00;
     margin-left: 20px;
+} */
+
+
+/*
+tbl_chat_wrap
+*/
+.tbl_chat_wrap tbody td.read_status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+.tbl_chat_wrap tbody td.read_status span {
+    display: inline-block;
+	text-indent: -9999px;
+	margin-right: 7px;
+	width: 10px;
+	height: 10px;
+	background: #d7d7d7;
+	border-radius: 50%;
+	line-height: 16px;
+}
+.tbl_chat_wrap tbody td.read_status.new span {
+	background: #FF5C00;
+}
+
+
+
+
