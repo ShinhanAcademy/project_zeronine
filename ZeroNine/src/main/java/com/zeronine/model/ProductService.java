@@ -18,4 +18,15 @@ public class ProductService {
 	public List<ProductVO> selectAll() {
 		return productDAO.selectAll();
 		}
+
+	public List<ProductVO> selectBypCategoryId(Integer pCategoryId) {
+		return productDAO.selectBypCategoryId( pCategoryId);
+	}
+	public List<ProductVO> selectBypCategoryIdall(Integer pCategoryId) {
+		return productDAO.selectBypCategoryIdall( pCategoryId);
+		
+	}
+	public List<ProductVO> selectBymanyLiked() {
+		return productDAO.selectBymanyLiked();
+	}
 }
