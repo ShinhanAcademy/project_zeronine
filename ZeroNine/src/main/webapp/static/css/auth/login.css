@@ -5,7 +5,6 @@
 	font-size: 40px;
 	justify-content: center;
 	margin-top: 93px;
-	justify-content: center;
 }
 
 .login_container {
@@ -40,6 +39,10 @@
 	font-weight: 400;
 	line-height: 14px;
 	margin-left: 5px;
+}
+
+.login-bottom span:nth-of-type(1){
+	margin-right: 49px;
 }
 
 .login-middle {
