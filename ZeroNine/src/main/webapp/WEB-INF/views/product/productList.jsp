@@ -4,6 +4,7 @@
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
 <link rel="stylesheet" href="${path}/css/sangpum.css" />
+
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -16,25 +17,33 @@
 				
 					<div class="category">
 						<div class="img_wrap">
+						<button class="fluent_basket">
 							<img src="${path}/images/sangpumpage/fluent_basket.png">
+						</button>
 						</div>
 						<p>채소류</p>
 					</div>
 					<div class="category">
 						<div class="img_wrap">
+						<button class="lotion">
 							<img src="${path}/images/sangpumpage/lotion.png">
+							</button>
 						</div>
 						<p>생필품류</p>
 					</div>
 					<div class="category">
 						<div class="img_wrap">
+						<button class="food_navi">
 							<img src="${path}/images/sangpumpage/food_navi.png">
+							</button>
 						</div>
 						<p>음식류</p>
 					</div>
 					<div class="category">
 						<div class="img_wrap">
+						<button class="raphael_cart">
 							<img src="${path}/images/sangpumpage/raphael_cart.png">
+							</button>
 						</div>
 						<p>전체</p>
 					</div>
@@ -44,26 +53,39 @@
 				<div class="dist30"></div>
 				</div>
 				<div class="melong">
-			
-                                <!-- <form action="https://imecomall.co.kr/v2/shop/search.php" method="get"> -->
+				<select name ="ptype" class="selectBox">
+                   						<option value="0" selected>🛒전체🛒</option>
+                   						<option value="1">❤️찜순❤️</option>
+                   						<option value="2">🚛주문량순🚛</option>
+                   						<option value="3">💲낮은가격순💲</option>
+                   						<option value="4">💰높은가격순💰</option>
+                   					</select>
                                 <div class="search_area">                                        
-                                    <!-- <input type="hidden" name="sfl" value="it_name">
-                                    <input type="hidden" name="sop" value="and"> -->
+                   					
                                     <input type="text" name="q" placeholder="상품명, 제조사 검색">
                                     <button type="submit"></button>                                        
                                </div>
                              </div>
 				<div class="content"></div>
 				<div class="menulistpart">
-				<div class="menulist">
+				
+				
+				<div class="menulist" id="here">
+				
 					<c:forEach items="${plist}" var="product">
 					<div class="menu_sub">
 					<div class="menu_image">
 						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
+						<div class="menu_gocart">
+						<button class="like" type="button">
+						<img class="menu_heart" src="${path}/images/board/heart.png">
+						</button>
+						<img src="${path}/images/sangpumpage/gocart.png">
+					</div>
 					</div>
 					<span class="menufont">${product.brand}</span>
 					<span class="menufont_name">${product.pName}</span>
-					<span class="menufont_price">${product.price}</span>
+					<span class="menufont_price">${product.price}원</span>
 					</div>
 					</c:forEach>
 
@@ -86,10 +108,9 @@
 		<script>
 	var path = "${path}";
 	
+	
+	
 	</script>
-	<script src="${path}/js/product/productlist.js" type="text/javascript"></script>
-	<script type="text/javascript">
-	$("#join_btn").click(f_join);		
-	</script>
+	<script src="../js/product/productlist.js"></script>
 </body>
 </html>

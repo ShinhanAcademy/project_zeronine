@@ -24,4 +24,23 @@ public class ProductDAOMybatis {
 		logger.info("selectAll:{}건", productList.size());
 		return productList;
 	}
+
+
+	public List<ProductVO> selectBypCategoryId(Integer pCategoryId) {
+		List<ProductVO> productList = sqlSession.selectList(namespace + "selectBypCategoryId",pCategoryId);
+		logger.info("selectBypCategoryId:{}건", productList.size());
+		return productList;
+	}
+
+
+	public List<ProductVO> selectBypCategoryIdall(Integer pCategoryId) {
+		List<ProductVO> productList = sqlSession.selectList(namespace + "selectBypCategoryIdall",pCategoryId);
+		logger.info("selectBypCategoryIdall:{}건", productList.size());
+		return productList;
+	}
+	public List<ProductVO> selectBymanyLiked() {
+		List<ProductVO> productList = sqlSession.selectList(namespace + "selectBymanyLiked");
+		logger.info("selectBymanyLiked:{}건", productList.size());
+		return productList;
+	}
 }
