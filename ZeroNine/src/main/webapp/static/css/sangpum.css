@@ -137,6 +137,16 @@ display: flex;
 	width: 1px;
 	height: 5px;
 }
+.menu_sub .menu_heart{
+	width:27px;
+	margin-left: 5px;
+}
+.menu_sub .menu_gocart{
+	width: 35px;
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .product_container .menupng {
 /*
     height: 170px;
@@ -253,11 +263,18 @@ display: flex;
     transition: 0.3s;
 }
 .product_container .melong{
+   margin-left:15%;
     margin-bottom: 30px;
-    padding-right: 17%;
-	width: 100%;
+    padding-right: 24%;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.product_container .selectBox{
+	    width: 111px;
+    font-size: 13px;
+    text-align: center;
 }
 .product_container .menulistpart{
 	display: flex;

@@ -9,54 +9,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" />
 <title>ZeroNine</title>
-<style>
-#zeronine_wrap .bx-wrapper {
-	margin: 0;
-	box-shadow: none;
-}
-#zeronine_wrap .bx-wrapper .bx-pager {
-	bottom: 20px;
-	left: 0;
-	padding: 0;
-}
-#zeronine_wrap .bx-wrapper .bx-pager.bx-default-pager a {
-    background: #fff;
-}
-#zeronine_wrap .bx-wrapper .bx-pager.bx-default-pager a.active {
-    background: #0083E6;
-}
-#zeronine_wrap .bx-wrapper .bx-controls-direction a {
-	z-index:99;
-}
-
-
-#zeronine_wrap .bx-wrapper .bx-next {
-	background: none;
-}
-#zeronine_wrap .bx-wrapper .bx-prev {
-	background: none;
-}
-#zeronine_wrap .bx-wrapper .bx-controls-direction a::after {
-	content: "";
-	position: absolute;
-	top: 0;
-	left:0;
-	width: 100%;
-	height: 100%;
-    box-sizing: border-box;
-	background: transparent;
-	border-top: 5px solid #fff;
-	border-left: 5px solid #fff;
-}
-#zeronine_wrap .bx-wrapper .bx-next {
-    right: 35px;
-    transform: rotate(135deg);
-}
-#zeronine_wrap .bx-wrapper .bx-prev {
-	left: 35px;
-    transform: rotate(-45deg);
-}
-</style>
 </head>
 <body>
     <div id="zeronine_wrap">  
