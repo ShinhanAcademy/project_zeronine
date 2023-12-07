@@ -8,6 +8,7 @@
 <title>FreeDeliveryBoard</title>
 <link rel="stylesheet" href="${path}/css/board/boardList.css" />
 <script src="${path}/js/chart.js"></script>
+<script src="../js/like.js"></script>
 </head>
 
 
@@ -55,9 +56,9 @@
 					<div class="pro_info">
 						<ul>
 							<li class="rate_info">
-							<div class="pie-chart">
-								<span class="rate">80%</span>
-							</div>
+								<div class="pie-chart">
+									<span class="rate">80%</span>
+								</div>
 							</li>
 							<%-- <img class="rate_img"
 								src="${path}/images/board/rate.png">
@@ -74,22 +75,21 @@
 						</div>
 						<div class="pro_detail">
 							<ul>
-								<li><img class="graph" src="${path}/images/board/graph.png"> <span>
-										73% </span></li>
-								<li><img class="card" src="${path}/images/board/card.png"> <span>
-										16,640원 남음 </span></li>
-								<li><img class="clock" src="${path}/images/board/clock.png"> <span>
-										23.11.30 23:59까지 </span></li>
+								<li><img class="graph" src="${path}/images/board/graph.png">
+									<span> 73% </span></li>
+								<li><img class="card" src="${path}/images/board/card.png">
+									<span> 16,640원 남음 </span></li>
+								<li><img class="clock" src="${path}/images/board/clock.png">
+									<span> 23.11.30 23:59까지 </span></li>
 
 							</ul>
 						</div>
 						<ul>
 							<li class="detail_view">
-								<button type="button">
-									<!-- js class로 바꿔끼우기 -->
-									<img src="${path}/images/board/heart.png"
-										onclick="location.href='${path}/images/board/redheart.png'">
-								</button> <a class="free_detail_btn" href="~~~참여하기 페이지로 이동~~~">참여하기</a>
+								<button class="like" type="button">
+									<img class="like" src="${path}/images/board/heart.png">
+								</button> 
+								<a class="free_detail_btn" href="~~~참여하기 페이지로 이동~~~">참여하기</a>
 							</li>
 						</ul>
 					</div>
