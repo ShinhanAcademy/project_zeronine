@@ -9,13 +9,8 @@
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-	<div class="bodypart">
-	<span>홈</span> > <span>밀키트</span> > <span>탕국찌개</span>  
-	
-	
-	
-	
-	
+	<div class="zero_container bodypart">
+		<span>홈</span> > <span>밀키트</span> > <span>탕국찌개</span>  
 	
 	
 	
@@ -27,20 +22,10 @@
 	
 	
 	</div>
-		
-
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	<%@include file="../common/footer.jsp"%>
-		<script>
+	<script>
 	var path = "${path}";
 	
 

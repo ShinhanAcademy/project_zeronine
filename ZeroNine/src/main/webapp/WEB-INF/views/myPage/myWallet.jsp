@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
+<link rel="stylesheet" href="${path}/css/myPage/my_wallet.css">
 <title>MyPage</title>
 </head>
 <body>
@@ -94,14 +94,232 @@
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
-	                <div class="con_tit">나의 지갑</div>
+	                <div class="con_tit">진행 중인 주문</div>
 	                <!-- contents -->
 	                <div class="contents">
-						<div class="validate_wrap">
-							<h1> 나는 승광 !!</h1>
-							
+	                	<%-- wallet_wrap --%>
+						<div class="wallet_wrap">
+	                		<%-- tbl_top_wrap --%>
+		                    <div class="tbl_top_wrap">
+		                    	<div class="total_count">
+									총 <span>2</span>건
+		                    	</div>
+		                    	<div class="btn_wrap">
+		                    		<button class="btn_more">더보기 &gt;</button>
+		                    	</div>
+	                    	</div>
+	                		<%-- //tbl_top_wrap --%>
+	                    	<%-- tbl_wrap --%>
+		                    <div class="tbl_wrap">
+		                    	<table class="tbl_wallet_wrap">
+								  <colgroup>  	
+								    <col width="52%" />
+								    <col span="4" width="12%" />
+								  </colgroup>
+		                    		<thead>
+		                    			<tr>
+		                    				<th>상품 정보</th>
+		                    				<th>상품 금액</th>
+		                    				<th>배송비</th>
+		                    				<th>주문 상태</th>
+		                    				<th>확인 / 취소</th>
+		                    			</tr>
+		                    		</thead>
+		                    		<tbody>
+		                    			<tr>
+		                    				<td class="product_info">
+		                    					<div>
+		                    						<div class="img_wrap">
+		                    							<img src="${path}/images/mypage/img_product_01.png" alt="product image" />
+		                    						</div>
+		                    						<ul class="detail">
+		                    							<li>구매 일자 : 2023-11-14</li>
+		                    							<li>구매 번호 : 202311140000001</li>
+		                    							<li>[스타벅스] SS 크리스마스 골드빔 아티스틱 콜드컵 473m</li>
+		                    						</ul>
+		                    					</div>
+		                    				</td>
+		                    				<td>32,300원</td>
+		                    				<td>무료</td>
+		                    				<td class="order_status">
+												배송중
+												<div>
+													<button class="btn_check">배송조회</button>
+												</div>
+											</td>
+		                    				<td class="purchase_decision">
+		                    					<button>반품 신청</button>	
+											</td>
+		                    			</tr>
+		                    			<tr>
+		                    				<td class="product_info">
+		                    					<div>
+		                    						<div class="img_wrap">
+		                    							<img src="${path}/images/mypage/img_product_02.png" alt="product image" />
+		                    						</div>
+		                    						<ul class="detail">
+		                    							<li>구매 일자 : 2023-11-16</li>
+		                    							<li>구매 번호 : 202311160000001</li>
+		                    							<li>아이앤어스 3챔버 고농축 캡슐세제 실속형 50개입</li>
+		                    						</ul>
+		                    					</div>
+		                    				</td>
+		                    				<td>32,300원</td>
+		                    				<td>무료</td>
+		                    				<td class="order_status">결제완료</td>
+		                    				<td class="purchase_decision">
+		                    					<button>주문 취소</button>	
+											</td>
+		                    			</tr>
+		                    		</tbody>
+		                    	</table>
+		                    </div>
+	                    	<%-- //tbl_wrap --%>
 						</div>
-						<!--  -->
+	                	<%-- //wallet_wrap --%>
+	                </div>
+	                <!-- //contents -->
+	                <div class="con_tit">진행 중인 공구</div>
+	                <!-- contents -->
+	                <div class="contents">
+	                	<%-- wallet_wrap --%>
+						<div class="wallet_wrap">
+	                		<%-- tbl_top_wrap --%>
+		                    <div class="tbl_top_wrap">
+		                    	<div class="total_count">
+									총 <span>2</span>건
+		                    	</div>
+		                    	<div class="btn_wrap">
+		                    		<button class="btn_more">더보기 &gt;</button>
+		                    	</div>
+	                    	</div>
+	                		<%-- //tbl_top_wrap --%>
+	                    	<%-- tbl_wrap --%>
+		                    <div class="tbl_wrap">
+		                    	<table class="tbl_wallet_wrap">
+								  <colgroup>  	
+								    <col width="52%" />
+								    <col span="4" width="12%" />
+								  </colgroup>
+		                    		<thead>
+		                    			<tr>
+		                    				<th>상품 정보</th>
+		                    				<th>상품 금액</th>
+		                    				<th>배송비</th>
+		                    				<th>주문 상태</th>
+		                    				<th>확인 / 취소</th>
+		                    			</tr>
+		                    		</thead>
+		                    		<tbody>
+		                    			<tr>
+		                    				<td class="product_info">
+		                    					<div>
+		                    						<div class="img_wrap">
+		                    							<img src="${path}/images/mypage/img_product_03.png" alt="product image" />
+		                    						</div>
+		                    						<ul class="detail">
+		                    							<li>구매 일자 : 2023-11-15</li>
+		                    							<li>구매 번호 : 202311150000001</li>
+		                    							<li>노브랜드 국산콩두부300g*2입</li>
+		                    						</ul>
+		                    					</div>
+		                    				</td>
+		                    				<td>
+		                    					1,640원<br>
+		                    					&#40;3,280원 &#47; 2&#41;		                    					
+		                    				</td>
+		                    				<td>무료</td>
+		                    				<td class="order_status">공구 참여중</td>
+		                    				<td class="purchase_decision">
+		                    					<button>공구 취소</button>	
+											</td>
+		                    			</tr>
+		                    			<tr>
+		                    				<td class="product_info">
+		                    					<div>
+		                    						<div class="img_wrap">
+		                    							<img src="${path}/images/mypage/img_product_03.png" alt="product image" />
+		                    						</div>
+		                    						<ul class="detail">
+		                    							<li>구매 일자 : 2023-11-15</li>
+		                    							<li>구매 번호 : 202311150000001</li>
+		                    							<li>노브랜드 국산콩두부300g*2입</li>
+		                    						</ul>
+		                    					</div>
+		                    				</td>
+		                    				<td>
+		                    					1,640원<br>
+		                    					&#40;3,280원 &#47; 2&#41;		                    					
+		                    				</td>
+		                    				<td>무료</td>
+		                    				<td class="order_status">공구 진행중</td>
+		                    				<td class="purchase_decision">
+		                    					<button>공구 취소</button>	
+											</td>
+		                    			</tr>
+		                    		</tbody>
+		                    	</table>
+		                    </div>
+	                    	<%-- //tbl_wrap --%>
+						</div>
+	                	<%-- //wallet_wrap --%>
+	                </div>
+	                <!-- //contents -->
+	                <div class="con_tit">진행 중인 에코케어</div>
+	                <!-- contents -->
+	                <div class="contents">
+	                	<%-- wallet_wrap --%>
+						<div class="wallet_wrap">
+	                		<%-- tbl_top_wrap --%>
+		                    <div class="tbl_top_wrap">
+		                    	<div class="total_count">
+									총 <span>1</span>건
+		                    	</div>
+		                    	<div class="btn_wrap">
+		                    		<button class="btn_more">더보기 &gt;</button>
+		                    	</div>
+	                    	</div>
+	                		<%-- //tbl_top_wrap --%>
+	                    	<%-- tbl_wrap --%>
+		                    <div class="tbl_wrap">
+		                    	<table class="tbl_wallet_wrap">
+								  <colgroup>  	
+								    <col width="55%" />
+								    <col span="3" width="15%" />
+								  </colgroup>
+		                    		<thead>
+		                    			<tr>
+		                    				<th>분리수거 정보</th>
+		                    				<th>배송비</th>
+		                    				<th>회수 상태</th>
+		                    				<th>확인 / 취소</th>
+		                    			</tr>
+		                    		</thead>
+		                    		<tbody>
+		                    			<tr>
+		                    				<td class="product_info">
+		                    					<div>
+		                    						<div class="img_wrap">
+		                    							<img src="${path}/images/mypage/img_ecocare_01.png" alt="ecocare image" />
+		                    						</div>
+		                    						<ul class="detail">
+		                    							<li>신청 일자 : 2023-11-16</li>
+		                    							<li>일반쓰레기 수거 요청건</li>
+		                    						</ul>
+		                    					</div>
+		                    				</td>
+		                    				<td>무료</td>
+		                    				<td class="order_status">신청 완료</td>
+		                    				<td class="purchase_decision">
+		                    					<button>회수 취소</button>	
+											</td>
+		                    			</tr>
+		                    		</tbody>
+		                    	</table>
+		                    </div>
+	                    	<%-- //tbl_wrap --%>
+						</div>
+	                	<%-- //wallet_wrap --%>
 	                </div>
 	                <!-- //contents -->
 	            </div>

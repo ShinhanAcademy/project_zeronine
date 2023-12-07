@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
+<link rel="stylesheet" href="${path}/css/myPage/chat_list.css">
 <script src="${path}/js/myPage/commonMypage.js" defer></script>
 <title>MyPage</title>
 </head>
@@ -190,72 +190,71 @@
 	                        </div>
 	                        <!-- //chat_inner -->
 	                    </div> --%>
-	                    <div class="tbl_top_wrap">
-	                    	<div class="total_count">
-								총 <span>2</span>건
-	                    	</div>
-	                    	<div class="btn_wrap">
-	                    		<button class="btn_more">채팅방으로 가기 ></button>
-	                    	</div>
-                    	</div>
-	                    <div class="tbl_wrap">
-	                    	<table class="tbl_chat_wrap">
-							  <colgroup>  	
-							    <col width="10%" />
-							    <col width="15%" />
-							    <col width="35%" />
-							    <col width="10%" />
-							    <col width="18%" />
-							    <col width="12%" />
-							    <!-- 
-							    <col />
-							    <col span="2" class="batman" />
-							    <col span="2" class="flash" />
-							    -->
-							  </colgroup>
-	                    		<thead>
-	                    			<tr>
-	                    				<th class="check_all txt_left">	                    					
-    										<input type="checkbox" />
-    										전체선택
-	                    				</th>
-	                    				<th>이름</th>
-	                    				<th>게시글 제목</th>
-	                    				<th>게시일</th>
-	                    				<th>마감 기한</th>
-	                    				<th>읽은 상태</th>
-	                    			</tr>
-	                    		</thead>
-	                    		<tbody>
-	                    			<tr>
-	                    				<td class="check_item">
-											<input type="checkbox" />	                    					
-	                    				</td>
-	                    				<td>또라몽</td>
-	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-	                    				<td>23.12.07</td>
-	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status"><span>status</span>읽음</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td class="check_item">
-											<input type="checkbox" checked />	                    					
-	                    				</td>
-	                    				<td>또라몽</td>
-	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-	                    				<td>23.12.07</td>
-	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status new"><span>status</span>읽지 않음</td>
-	                    			</tr>
-	                    		</tbody>
-	                    	</table>
-	                    </div>
-	                    <div class="tbl_bottom_wrap">
-	                    	<div class="btn_wrap">
-	                    		<button class="btn_del">삭제하기</button>
-	                    	</div>
-                    	</div>
 	                    <!-- //chat_list -->
+	                    <!-- chatlist_wrap  -->
+	                    <div class="chatlist_wrap">
+		                    <div class="tbl_top_wrap">
+		                    	<div class="total_count">
+									총 <span>2</span>건
+		                    	</div>
+		                    	<div class="btn_wrap">
+		                    		<button class="btn_more">채팅방으로 가기 &gt;</button>
+		                    	</div>
+	                    	</div>
+		                    <div class="tbl_wrap">
+		                    	<table class="tbl_chat_wrap">
+								  <colgroup>  	
+								    <col width="10%" />
+								    <col width="15%" />
+								    <col width="35%" />
+								    <col width="10%" />
+								    <col width="18%" />
+								    <col width="12%" />
+								  </colgroup>
+		                    		<thead>
+		                    			<tr>
+		                    				<th class="check_all txt_left">	                    					
+	    										<input type="checkbox" />
+	    										전체선택
+		                    				</th>
+		                    				<th>이름</th>
+		                    				<th>게시글 제목</th>
+		                    				<th>게시일</th>
+		                    				<th>마감 기한</th>
+		                    				<th>읽은 상태</th>
+		                    			</tr>
+		                    		</thead>
+		                    		<tbody>
+		                    			<tr>
+		                    				<td class="check_item">
+												<input type="checkbox" />	                    					
+		                    				</td>
+		                    				<td>또라몽</td>
+		                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
+		                    				<td>23.12.07</td>
+		                    				<td>23.12.08 20:00까지</td>
+		                    				<td class="read_status"><span>status</span>읽음</td>
+		                    			</tr>
+		                    			<tr>
+		                    				<td class="check_item">
+												<input type="checkbox" checked />	                    					
+		                    				</td>
+		                    				<td>또라몽</td>
+		                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
+		                    				<td>23.12.07</td>
+		                    				<td>23.12.08 20:00까지</td>
+		                    				<td class="read_status new"><span>status</span>읽지 않음</td>
+		                    			</tr>
+		                    		</tbody>
+		                    	</table>
+		                    </div>
+		                    <div class="tbl_bottom_wrap">
+		                    	<div class="btn_wrap">
+		                    		<button class="btn_del">삭제하기</button>
+		                    	</div>
+	                    	</div>
+	                    </div>
+	                    <!-- //chatlist_wrap  -->
 	                </div>
 	                <!-- //contents -->
 	            </div>

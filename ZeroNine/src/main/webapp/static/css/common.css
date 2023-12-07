@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 
 /* @import "font.css"; */
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
@@ -10,6 +10,9 @@
 @import "reset.css";
 
 /*** COMMON ***********************/
+html, body {
+	height: 100%;
+}
 .zn_center {
     width: 1440px;
     margin: 0 auto;
@@ -120,6 +123,7 @@ header.trp.active .bot .member .icon_btn .cart span{background-color: #fff;color
 /* zero_container */
 .zero_container {
     padding-top: 160px;
+    min-height: calc( 100% - 388px );
 }
 
 
