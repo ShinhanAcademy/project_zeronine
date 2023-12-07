@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
-<link rel="stylesheet" href="${path}/css/product/sangpum.css" />
+<link rel="stylesheet" href="${path}/css/product/product.css" />
 
 </head>
 <body>

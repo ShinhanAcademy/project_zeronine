@@ -137,11 +137,7 @@
 }
 
 .product_container .menupng {
-	/*
-    height: 170px;
-    border-radius: 10px;
-    width: 170px;
-*/
+
 	height: 100%;
 	transition: .5s;
 }
@@ -288,10 +284,7 @@
 }
 
 .product_container .menu_image {
-	/*
-	height: 240px;
-    flex-direction: column;
- */
+
 	display: flex;
 	justify-content: center;
 	height: 200px;
@@ -301,7 +294,6 @@
 	border-radius: 10px;
 	padding: 15px 0;
 }
-
 .product_container .menufont_price {
 	margin-left: 25px;
 	color: #000000;
