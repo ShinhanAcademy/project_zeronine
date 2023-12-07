@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:forEach items="${plist}" var="product">
 		<div class="menu_sub">
 					<div class="menu_image">
@@ -15,7 +16,9 @@
 					</div>
 					<span class="menufont">${product.brand}</span>
 					<span class="menufont_name">${product.pName}</span>
-					<span class="menufont_price">${product.price}</span>
+					<span class="menufont_price">
+					  <fmt:formatNumber value="${product.price}" maxFractionDigits="3"></fmt:formatNumber>
+					원</span>
 		</div>
 
 </c:forEach>

@@ -1,3 +1,6 @@
+
+
+
 $("#find_btn").click(function(){
 	
 	var obj = {
@@ -6,11 +9,15 @@ $("#find_btn").click(function(){
 	};
 	
 	$.ajax({
-		url : path + "",
+		url : path + "/auth/findId.do",
 		data : obj,
 		type : "POST",
-		success : function(result){},
-		error : function(){}
+		success : function(response){
+			$('#modal').html(response);
+		},
+		error : function(){
+			alert("에러입니다.");
+		}
 	});
 
 })

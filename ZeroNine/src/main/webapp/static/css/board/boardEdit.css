@@ -43,15 +43,17 @@ label, .title, .context {
 	display: block;
 }
 
-#board_type {
+#board_type, #time_setting {
 	font-family: Lato;
 	display: block;
 	width: 200px;
 	height: 48px;
 	font-size: 18px;
-	border-radius: 4px;
 	padding-right: 10px;
 	border-radius: 4px;
+	border: 1px solid #c4c4c4;
+	text-align: left
+	
 }
 
 #board_type option:nth-child(1) {
@@ -96,18 +98,22 @@ label, .title, .context {
 	justify-content: center;
 }
 
-.com li:nth-child(1) {
+.com .title {
 	text-align: center;
 	font-size: 40px;
 	font-family: Jua;
 	font-weight: 400;
 	line-height: 16px;
-	word-wrap: break-word;
 }
 
-.com li:nth-child(2) {
+.com .title {
 	display: flex;
 	justify-content: center;
+}
+
+.btn{
+	display: flex;
+    justify-content: center;
 }
 
 .com button {
@@ -130,26 +136,26 @@ label, .title, .context {
 	width: 370px;
 }
 
-.due_date ul .cart_ann ul {
+.due_date ul .cart_ann ul, .location_ann ul {
 	margin-bottom: 20px;
 }
 
-.due_date li:nth-child(1), .cart_ann li:nth-child(1) {
+.due_date_title, .cart_ann_title, .location_ann_title, .pic_title{
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 10px;
 }
 
-.due_date li:nth-child(2) {
+.due_date_cf {
 	margin-bottom: 5px;
 }
 
-.due_date span, .cart_ann li:nth-child(2) {
+.due_date span, .cart_ann_cf, .location_ann_cf, .location_input, .pic_cf{
 	display: block;
 	font-size: 15px;
 }
 
-.due_date li span:nth-child(2) {
+.due_date_ex {
 	padding-left: 10px;
 	color: gray;
 }
@@ -161,7 +167,7 @@ label, .title, .context {
 }
 
 .date_input input {
-	border: 1px solid gray;
+	border: 1px solid #c4c4c4;
 	border-radius: 6px;
 	font-family: Lato;
 	font-size: 13px;
@@ -179,7 +185,7 @@ input::placeholder {
 	margin-right: 5px;
 }
 
-#cart {
+#cart, #location {
 	margin-top: 45px;
 }
 
@@ -236,7 +242,7 @@ input::placeholder {
 	margin-left: 10px;
 }
 
-.cart_info {
+.cart_info .add_info{
 	display: flex;
 	align-items: center;
 }
@@ -294,4 +300,57 @@ input::placeholder {
 	color: white;
 	font-family: Jua;
 	font-size: 20px;
+}
+
+/* one to one board edit*/
+
+.location_input{
+	padding: 10px;
+	border-radius: 6px;
+	border : 1px solid #c4c4c4;
+	display: block;
+	font-family: Lato;
+	text-align: left;
+	background-color: white;
+	margin-bottom: 10px;
+	width: 440px;
+}
+.location_input1{
+	padding: 10px;
+	border-radius: 6px;
+	border : 1px solid #c4c4c4;
+	font-family: Lato;
+	font-size: 15px;
+	text-align: left;
+	background-color: white;
+	margin-bottom: 10px;
+	margin-right: 20px;
+	width: 220px;
+}
+
+.location_info button{
+	padding: 10px;
+	border : 1px solid #737300;
+	font-family: Lato;
+	font-size: 15px;
+	color: #737300;
+	border-radius: 6px;
+	text-align: center;
+	margin-bottom: 10px;
+	
+}
+
+.location_input::placeholder, .location_input1::placeholder{
+	text-align: left;
+}
+
+.location_img{
+	border: 1px solid black;
+	width: 440px;
+	height: 230px;
+	
+}
+/* file upload */
+.upload_btn{
+	margin-bottom: 20px;
 }

@@ -22,20 +22,80 @@ public class MyPageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+
+	// MY_SHOPPING
+	// orderHistory(³ªÀÇ Áö°©)
 	@GetMapping("/myWallet.do")
-	public void myPage(Model model) {
+	public String myWallet(Model model) {
 		model.addAttribute("clist", cService.selectAll());	
-		CustomerVO cust = cService.selectByName("ï¿½ï¿½ï¿½ï¿½");
-		logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + cust.toString());
+		/*
+		 * CustomerVO cust = cService.selectByName("ï¿½ï¿½ï¿½ï¿½"); logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" +
+		 * cust.toString());
+		 */
+		return "myPage/myWallet";
 	}
 	
+	// orderHistory(ÁÖ¹® ³»¿ª)
+	@RequestMapping("/orderHistory.do")
+	public String orderHistory() {
+		return "myPage/orderHistory";
+	}
+	
+	// orderCancelHistory(Ãë¼Ò/¹ÝÇ°/±³È¯/È¯ºÒ ³»¿ª)
+	@RequestMapping("/orderCancelHistory.do")
+	public String orderCancelHistory() {
+		return "myPage/orderCancelHistory";
+	}
+	
+	// myCart(Àå¹Ù±¸´Ï)
+	@RequestMapping("/myCart.do")
+	public String myCart() {
+		return "myPage/myCart";
+	}
+
+	// likeList(ÂòÇÑ »óÇ°)
+	@RequestMapping("/likeProduct.do")
+	public String likeProduct() {
+		return "myPage/likeProduct";
+	}
+		
+
+	// MY_ACTIVITIES
+	// Board(³»°¡ ¾´ °Ô½Ã±Û)
+	@RequestMapping("/createdBoard.do")
+	public String createdBoard() {
+		return "myPage/createdBoard";
+	}
+	
+	// chatList(³»°¡ Âü¿©ÇÑ °Ô½Ã±Û)
+	@RequestMapping("/participatedBoard.do")
+	public String participatedBoard() {
+		return "myPage/participatedBoard";
+	}
+
+	// chatList(Ã¤ÆÃ ¸ñ·Ï)
 	@RequestMapping("/chatList.do")
 	public void chatList() {
 	}
+
+	// likeBoard(ÂòÇÑ °Ô½Ã±Û)
+	@RequestMapping("/likeBoard.do")
+	public String likeBoard() {
+		return "myPage/likeBoard";
+	}
 	
+	
+	// MY_INFOMATION
+	// personal_info(°³ÀÎ Á¤º¸) - vaildate_password(ºñ¹Ð¹øÈ£ È®ÀÎ)
 	@RequestMapping("/validatePassword.do")
 	public String validatePassword() {
 		return "myPage/myInfo";
+	}
+
+	// subscriptionInfo(±¸µ¶ Á¤º¸)
+	@RequestMapping("/subscriptionInfo.do")
+	public String subscriptionInfo() {
+		return "myPage/subscriptionInfo";
 	}
 
 }

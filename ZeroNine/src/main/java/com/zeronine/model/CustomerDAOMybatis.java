@@ -53,4 +53,12 @@ public class CustomerDAOMybatis {
 		return cnt;
 	}
 
+	public String findEmail(String name, String phone) {
+		HashMap<String,String> info = new HashMap<>();
+		info.put("name", name);
+		info.put("phone", phone);
+		String email = sqlSession.selectOne(NAMESPACE + "findEmail", info);
+		return email;
+	}
+
 }
