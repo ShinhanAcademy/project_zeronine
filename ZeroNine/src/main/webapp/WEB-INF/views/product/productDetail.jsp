@@ -9,7 +9,24 @@
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-	<div></div>
+	<div class="bodypart">
+	<span>홈</span> > <span>밀키트</span> > <span>탕국찌개</span>  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
 		
 
 	
