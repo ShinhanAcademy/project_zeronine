@@ -22,14 +22,19 @@ public class MyPageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@GetMapping("/myWallet.do")
-	public void myPage(Model model) {
-		model.addAttribute("clist", cService.selectAll());	
-		CustomerVO cust = cService.selectByName("ï¿½ï¿½ï¿½ï¿½");
-		logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" + cust.toString());
-	}
 
 	// MY_SHOPPING
+	// orderHistory(³ªÀÇ Áö°©)
+	@GetMapping("/myWallet.do")
+	public String myWallet(Model model) {
+		model.addAttribute("clist", cService.selectAll());	
+		/*
+		 * CustomerVO cust = cService.selectByName("ï¿½ï¿½ï¿½ï¿½"); logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" +
+		 * cust.toString());
+		 */
+		return "myPage/myWallet";
+	}
+	
 	// orderHistory(ÁÖ¹® ³»¿ª)
 	@RequestMapping("/orderHistory.do")
 	public String orderHistory() {
@@ -50,8 +55,8 @@ public class MyPageController {
 
 	// likeList(ÂòÇÑ »óÇ°)
 	@RequestMapping("/likeProduct.do")
-	public String likeList() {
-		return "myPage/likeList";
+	public String likeProduct() {
+		return "myPage/likeProduct";
 	}
 		
 
