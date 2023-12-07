@@ -75,8 +75,7 @@ public class MyPageController {
 
 	// chatList(채팅 목록)
 	@RequestMapping("/chatList.do")
-	public String chatList() {
-		return "myPage/chatList";
+	public void chatList() {
 	}
 
 	// likeBoard(찜한 게시글)
