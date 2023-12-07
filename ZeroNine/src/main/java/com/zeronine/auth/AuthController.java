@@ -1,5 +1,9 @@
 package com.zeronine.auth;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zeronine.dto.CustomerVO;
@@ -51,6 +54,30 @@ public class AuthController {
 	public void login() {
 		
 	}
+	
+	@PostMapping(value = "/login.do", consumes="application/json")
+	@ResponseBody
+	public int login_P(@RequestBody Map<String,String> map, HttpSession session) {
+		String email = map.get("email");
+		String pwd = map.get("password");
+		
+		session.setAttribute("email", email);
+		
+		int cnt = customerService.login(email,pwd);
+		return cnt;
+	}
+	
+	@GetMapping("/findId.do")
+	public void findId() {
+		
+	}
+	
+	@GetMapping("/findPwd.do")
+	public void findPwd() {
+		
+	}
+	
+	
 	
 
 }

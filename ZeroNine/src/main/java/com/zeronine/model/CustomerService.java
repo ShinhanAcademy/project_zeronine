@@ -32,4 +32,8 @@ public class CustomerService {
 	public int joinMembership(CustomerVO customer) {
 		return customerDAO.joinMembership(customer);
 	}
+
+	public int login(String email, String pwd) {
+		return customerDAO.login(email,pwd);
+	}
 }

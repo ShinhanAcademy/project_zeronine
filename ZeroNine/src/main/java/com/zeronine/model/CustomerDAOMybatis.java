@@ -1,5 +1,6 @@
 package com.zeronine.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -41,6 +42,14 @@ public class CustomerDAOMybatis {
 
 	public int joinMembership(CustomerVO customer) {
 		int cnt = sqlSession.insert(NAMESPACE + "joinMembership",customer);
+		return cnt;
+	}
+
+	public int login(String email, String pwd) {
+		HashMap<String,String> info = new HashMap<>();
+		info.put("email", email);
+		info.put("pwd", pwd);
+		int cnt = sqlSession.selectOne(NAMESPACE + "login", info);
 		return cnt;
 	}
 
