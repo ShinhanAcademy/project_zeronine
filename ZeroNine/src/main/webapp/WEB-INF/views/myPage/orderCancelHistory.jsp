@@ -18,8 +18,8 @@
 	                <div class="sub_tit">MY SHOPPING</div>
 	                <ul>
 	                    <li><a href="${path}/myPage/myWallet.do">나의 지갑</a></li>
-	                    <li class="on"><a href="${path}/myPage/orderHistory.do">주문 내역</a></li>
-	                    <li><a href="${path}/myPage/orderCancelHistory.do">취소 / 반품 내역</a></li>
+	                    <li><a href="${path}/myPage/orderHistory.do">주문 내역</a></li>
+	                    <li class="on"><a href="${path}/myPage/orderCancelHistory.do">취소 / 반품 내역</a></li>
 	                    <li><a href="${path}/myPage/myCart.do">장바구니</a></li>
 	                    <li><a href="${path}/myPage/likeProduct.do">찜한 상품</a></li>
 	                </ul>
@@ -94,7 +94,7 @@
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
-	                <div class="con_tit">주문 내역</div> <%-- has_line --%>
+	                <div class="con_tit">취소 / 반품 내역</div> <%-- has_line --%>
 	                <!-- contents -->
 	                <div class="contents">
 	                	<!-- orderhistory_wrap  -->
@@ -116,7 +116,7 @@
 								  </colgroup>
 		                    		<thead>
 		                    			<tr>
-		                    				<th>주문 일자</th>
+		                    				<th>취소 일자</th>
 		                    				<th>상품 정보</th>
 		                    				<th>수량</th>
 		                    				<th>주문금액</th>
@@ -127,7 +127,6 @@
 		                    			<tr>
 		                    				<td rowspan="3">
 		                    					2023.11.14
-												<span class="order_num color_blue">202311150000001</span>
 		                    				</td>
 		                    				<td class="product_info">
 												<div class="img_wrap">
@@ -141,10 +140,8 @@
 		                    				<td>3</td>
 		                    				<td class="price color_red ">66,000원</td>
 		                    				<td rowspan="3" class="order_status">
-												배송완료
-												<div>
-													<button class="btn_blue">배송조회</button>
-												</div>
+												취소 처리중
+												<div class="refund_tip">카드 취소 최대 2영업일 소요</div>
 											</td>
 		                    			</tr>
 		                    			<tr>
@@ -176,7 +173,6 @@
 		                    			<tr>
 		                    				<td>
 		                    					2023.11.14
-												<span class="order_num color_blue">202311150000001</span>
 		                    				</td>
 		                    				<td class="product_info">
 												<div class="img_wrap">
@@ -190,10 +186,8 @@
 		                    				<td>3</td>
 		                    				<td class="price color_red ">66,000원</td>
 		                    				<td class="order_status">
-												배송완료
-												<div>
-													<button class="btn_blue">배송조회</button>
-												</div>
+												취소 완료
+												<div class="refund_tip">카드 취소 최대 2영업일 소요</div>
 											</td>
 		                    			</tr>
 		                    		</tbody>

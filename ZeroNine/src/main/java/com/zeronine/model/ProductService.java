@@ -29,4 +29,20 @@ public class ProductService {
 	public List<ProductVO> selectBymanyLiked() {
 		return productDAO.selectBymanyLiked();
 	}
+	public List<ProductVO> selectByDelivery() {
+		return productDAO.selectByDelivery();
+	}
+	public List<ProductVO> selectBypriceAsc() {
+		return productDAO.selectBypriceAsc();
+	}
+	public List<ProductVO> selectBypriceDesc() {
+		return productDAO.selectBypriceDesc();
+	}
+
+	public List<ProductVO> selectByPnameBrand(String q) {
+	
+		return productDAO.selectByPnameBrand(q);
+	}
+	
+	
 }

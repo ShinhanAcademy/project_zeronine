@@ -16,22 +16,34 @@ public class BoardController {
 	//board_list
 	@RequestMapping("/fastboard.do")
 	public String fastBoard() {
-		return "board/fast_board";
+		return "board/fastBoard";
 	}
 	@RequestMapping("/freedeliveryboard.do")
 	public String freeBoard() {
-		return "board/free_delivery_board";
+		return "board/freeDeliveryBoard";
 	}
 
 	@RequestMapping("/onetooneboard.do")
 	public String onetooneBoard() {
-		return "board/one_to_one_board";
+		return "board/oneTooneBoard";
 	}
 
 	//board_edit
 	@RequestMapping("/boardedit.do")
 	public String editBoard() {
 		return "board/boardEdit";
+	}
+	@RequestMapping("/fboardedit.do")
+	public String editFBoard() {
+		return "board/fastEdit";
+	}
+	@RequestMapping("/fdboardedit.do")
+	public String editFDBoard() {
+		return "board/freeDeliveryEdit";
+	}
+	@RequestMapping("/oboardedit.do")
+	public String editOBoard() {
+		return "board/onTooneEdit";
 	}
 	@RequestMapping("/completeedit.do")
 	public String compliteEdit() {
