@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.CustomerService;
 import com.zeronine.myapp.HomeController;
 
@@ -27,7 +26,7 @@ public class MyPageController {
 	// orderHistory(³ªÀÇ Áö°©)
 	@GetMapping("/myWallet.do")
 	public String myWallet(Model model) {
-		model.addAttribute("clist", cService.selectAll());	
+		//model.addAttribute("clist", cService.selectAll());	
 		/*
 		 * CustomerVO cust = cService.selectByName("ï¿½ï¿½ï¿½ï¿½"); logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:" +
 		 * cust.toString());

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
+<link rel="stylesheet" href="${path}/css/myPage/order_history.css">
 <title>MyPage</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 	                <ul>
 	                    <li><a href="${path}/myPage/myWallet.do">나의 지갑</a></li>
 	                    <li><a href="${path}/myPage/orderHistory.do">주문 내역</a></li>
-	                    <li class="on"><a href="${path}/myPage/orderCancelHistory.do">취소 / 반품 / 교환 / 환불 내역</a></li>
+	                    <li class="on"><a href="${path}/myPage/orderCancelHistory.do">취소 / 반품 내역</a></li>
 	                    <li><a href="${path}/myPage/myCart.do">장바구니</a></li>
 	                    <li><a href="${path}/myPage/likeProduct.do">찜한 상품</a></li>
 	                </ul>
@@ -33,7 +33,7 @@
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
 	                    <li><a href="${path}/myPage/validatePassword.do">개인 정보</a></li>
-	                    <li><a href="#">구독 정보</a></li>
+	                    <li><a href="${path}/myPage/subscriptionInfo.do">구독 정보</a></li>
 	                </ul>
 	            </div>
 	        </div>
@@ -97,72 +97,105 @@
 	                <div class="con_tit">취소 / 반품 내역</div> <%-- has_line --%>
 	                <!-- contents -->
 	                <div class="contents">
-	                    <div class="tbl_wrap">
+	                	<!-- orderhistory_wrap  -->
+	                	<div id="orderhistory_wrap" class="order_history_wrap">
 		                    <div class="tbl_top_wrap">
 		                    	<div class="total_count">
 									총 <span>2</span>건
 		                    	</div>
-		                    	<div class="btn_wrap">
-		                    		<button class="btn_more">채팅방으로 가기 ></button>
-		                    	</div>
 	                    	</div>
-	                    	<table class="tbl_chat_wrap">
-							  <colgroup>  	
-							    <col width="10%" />
-							    <col width="15%" />
-							    <col width="35%" />
-							    <col width="10%" />
-							    <col width="18%" />
-							    <col width="12%" />
-							    <!-- 
-							    <col />
-							    <col span="2" class="batman" />
-							    <col span="2" class="flash" />
-							    -->
-							  </colgroup>
-	                    		<thead>
-	                    			<tr>
-	                    				<th class="check_all txt_left">	                    					
-    										<input type="checkbox" />
-    										전체선택
-	                    				</th>
-	                    				<th>이름</th>
-	                    				<th>게시글 제목</th>
-	                    				<th>게시일</th>
-	                    				<th>마감 기한</th>
-	                    				<th>읽은 상태</th>
-	                    			</tr>
-	                    		</thead>
-	                    		<tbody>
-	                    			<tr>
-	                    				<td class="check_item">
-											<input type="checkbox" />	                    					
-	                    				</td>
-	                    				<td>또라몽</td>
-	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-	                    				<td>23.12.07</td>
-	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status"><span>status</span>읽음</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td class="check_item">
-											<input type="checkbox" checked />	                    					
-	                    				</td>
-	                    				<td>또라몽</td>
-	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-	                    				<td>23.12.07</td>
-	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status new"><span>status</span>읽지 않음</td>
-	                    			</tr>
-	                    		</tbody>
-	                    	</table>
-		                    <div class="tbl_bottom_wrap">
-		                    	<div class="btn_wrap">
-		                    		<button class="btn_del">삭제하기</button>
-		                    	</div>
-	                    	</div>
-	                    </div>
-	                    <!-- //chat_list -->
+	                		<!-- tbl_wrap -->
+		                	<div class="tbl_wrap">
+		                    	<table class="tbl_orderlist_wrap">
+								  <colgroup>
+								    <col width="22%" />
+								    <col width="40%" />
+								    <col width="8%" />
+								    <col width="15%" />
+								    <col width="15%" />
+								  </colgroup>
+		                    		<thead>
+		                    			<tr>
+		                    				<th>취소 일자</th>
+		                    				<th>상품 정보</th>
+		                    				<th>수량</th>
+		                    				<th>주문금액</th>
+		                    				<th>상태</th>
+		                    			</tr>
+		                    		</thead>
+		                    		<tbody>
+		                    			<tr>
+		                    				<td rowspan="3">
+		                    					2023.11.14
+		                    				</td>
+		                    				<td class="product_info">
+												<div class="img_wrap">
+													<img src="${path}/images/mypage/img_product_04.png" alt="product image" />
+												</div>
+												<div class="detail">
+													<div class="brand_name">에스쁘아</div>
+													<div class="product_name">[증량기획] 에스쁘아 원터 스플래쉬 선크림 세라마이드 60ml+20ml 세트</div>
+												</div>
+											</td>
+		                    				<td>3</td>
+		                    				<td class="price color_red ">66,000원</td>
+		                    				<td rowspan="3" class="order_status">
+												취소 처리중
+												<div class="refund_tip">카드 취소 최대 2영업일 소요</div>
+											</td>
+		                    			</tr>
+		                    			<tr>
+		                    				<td class="product_info">
+												<div class="img_wrap">
+													<img src="${path}/images/mypage/img_product_05.png" alt="product image" />
+												</div>
+												<div class="detail">
+													<div class="brand_name">유시몰</div>
+													<div class="product_name">[11/27 하루특가]유시몰 화이트닝 미백치약 106g+20g (가글 9ml 추가</div>
+												</div>
+											</td>
+		                    				<td>3</td>
+		                    				<td class="price color_red ">66,000원</td>
+		                    			</tr>
+		                    			<tr>
+		                    				<td class="product_info">
+												<div class="img_wrap">
+													<img src="${path}/images/mypage/img_product_06.png" alt="product image" />
+												</div>
+												<div class="detail">
+													<div class="brand_name">라보에이치</div>
+													<div class="product_name">라보에이치 두피강화샴푸 탈모증상완화 333ml기획 (+112ml 증정)</div>
+												</div>
+											</td>
+		                    				<td>3</td>
+		                    				<td class="price color_red ">66,000원</td>
+		                    			</tr>
+		                    			<tr>
+		                    				<td>
+		                    					2023.11.14
+		                    				</td>
+		                    				<td class="product_info">
+												<div class="img_wrap">
+													<img src="${path}/images/mypage/img_product_07.png" alt="product image" />
+												</div>
+												<div class="detail">
+													<div class="brand_name">에스쁘아</div>
+													<div class="product_name">[한정기획/베스트립증정]에스쁘아 비벨벳 커버쿠션 뉴클래스 미니립 2종[한정기획/베스트립증정]에스쁘아 비벨벳 커버쿠션 뉴클래스 미니립 2종</div>
+												</div>
+											</td>
+		                    				<td>3</td>
+		                    				<td class="price color_red ">66,000원</td>
+		                    				<td class="order_status">
+												취소 완료
+												<div class="refund_tip">카드 취소 최대 2영업일 소요</div>
+											</td>
+		                    			</tr>
+		                    		</tbody>
+		                    	</table>
+		                    </div>
+	                		<!-- tbl_wrap -->
+	                	</div>
+	                	<!-- //orderhistory_wrap  -->
 	                </div>
 	                <!-- //contents -->
 	            </div>

@@ -29,7 +29,7 @@
    text-overflow: ellipsis;
    overflow: hidden;
    word-break: break-word;
-   max-height: 3.6em;
+   max-height: 2.6em;
     
 }
 .wallet_wrap .order_status > div {
