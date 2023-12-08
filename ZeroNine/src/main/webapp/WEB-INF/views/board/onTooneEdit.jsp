@@ -69,7 +69,8 @@
 			<li class="pic_cf">* 최대 1장</li>
 		</ul>
 		<button class="upload_btn" onclick="upload()"><img src="${path}/images/board/upload.png"> </button>
-			<input class="upload_file" type="file" hidden="hidden">
+			<!-- 이미지 들어오는 부분  -->
+			<input class="upload_file" type="file" hidden="hidden"> 
 		<ul>
 			<li class="title">제목</li>
 			<li><textarea class="title_input" placeholder="제목을 입력하세요."></textarea></li>
