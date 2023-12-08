@@ -1,6 +1,8 @@
 package com.zeronine.myPage;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +64,11 @@ public class MyPageController {
 	// MY_ACTIVITIES
 	// Board(���� �� �Խñ�)
 	@RequestMapping("/createdBoard.do")
-	public String createdBoard() {
-		return "myPage/createdBoard";
+	public void createdBoard(HttpSession session) {
+		String email = (String)session.getAttribute("email");
+		
+		
+		
 	}
 	
 	// chatList(���� ������ �Խñ�)
