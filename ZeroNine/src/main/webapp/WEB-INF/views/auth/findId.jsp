@@ -9,7 +9,7 @@
 <body>
 	<div class="find_wrap zero_container">
 		<h1>아이디 찾기</h1>
-		<form id="findIdForm">
+		<form id="findIdForm" onsubmit="return false;">
 			<div class="find_container zn_center">
 				<div class="form_group">
 					<label>이름</label> <input type="text" name="name" id="name"

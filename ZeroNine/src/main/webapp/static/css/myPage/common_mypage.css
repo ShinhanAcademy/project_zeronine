@@ -2,13 +2,13 @@
 
 /* mypage_common */
 .color_red {
-	color: #FF2828;
+	color: #FF2828 !important;
 }
 .color_orange {
-	color: #FF5C00;
+	color: #FF5C00 !important;
 }
 .color_blue {
-	color: #0083E6;
+	color: #0083E6 !important;
 }
 .btn_orange_small {
     border: 1px solid #FF5C00;

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.CustomerService;
+import com.zeronine.model.MailSendService;
 
 @Controller
 @RequestMapping("/auth")
@@ -24,6 +25,8 @@ public class AuthController {
 
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	MailSendService mailService;
 
 	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
@@ -37,61 +40,92 @@ public class AuthController {
 		int cnt = customerService.emailCheck(email);
 		return cnt;
 	}
-	
+
 	@PostMapping("/confirmPhone.do")
 	public @ResponseBody int ConfirmPhone(String phone) {
 		int cnt = customerService.phoneCheck(phone);
 		return cnt;
 	}
 
-	@PostMapping(value = "/joinMembership.do", consumes="application/json")
+	@PostMapping(value = "/joinMembership.do", consumes = "application/json")
 	@ResponseBody
-	public int JoinMembership_P(@RequestBody CustomerVO customer ) {	
+	public int JoinMembership_P(@RequestBody CustomerVO customer) {
 		int cnt = customerService.joinMembership(customer);
 		return cnt;
 	}
-	
+
 	@GetMapping("/login.do")
 	public void login() {
-		
+
 	}
-	
-	@PostMapping(value = "/login.do", consumes="application/json")
+
+	@PostMapping(value = "/login.do", consumes = "application/json")
 	@ResponseBody
-	public int login_P(@RequestBody Map<String,String> map, HttpSession session) {
+	public int login_P(@RequestBody Map<String, String> map, HttpSession session) {
 		String email = map.get("email");
 		String pwd = map.get("password");
-		
+
 		session.setAttribute("email", email);
-		
-		int cnt = customerService.login(email,pwd);
+
+		int cnt = customerService.login(email, pwd);
 		return cnt;
 	}
-	
+
 	@GetMapping("/findId.do")
 	public void findId() {
-		
+
 	}
-	
+
 	@PostMapping("/findId.do")
 	public String findId_P(String name, String phone, Model model) {
-		String email = customerService.findEmail(name,phone);
-		model.addAttribute("name",name);
-		model.addAttribute("email",email);
+		String email = customerService.findEmail(name, phone);
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
 		return "auth/findIdModal";
 	}
-	
+
 	@GetMapping("/findPwd.do")
 	public void findPwd() {
-		
+
+	}
+
+	@PostMapping("/findPwdCf.do")
+	public void findPwdCf_P(String pwd, String name, String email, Model model) {
+		model.addAttribute("pwd", pwd);
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
+		String authKey = mailService.sendAuthMail(email);
+		model.addAttribute("authKey", authKey);
+		logger.info(authKey);
+	}
+
+	@GetMapping("/findPwdCf.do")
+	public String findPwdCf(String name, String email, Model model) {
+
+		String pwd = customerService.findPwd(name, email);
+
+		if (pwd == null) {
+			model.addAttribute("pwd", null);
+			return "auth/findPwdModal";
+		} else {
+			model.addAttribute("name", name);
+			model.addAttribute("email", email);
+			model.addAttribute("pwd", pwd);
+			return "auth/findPwdCf";
+		}
+
 	}
 	
 	@PostMapping("/findPwd.do")
-	public void findPwd_P(String name, String email, Model model) {
-		
+	public String findPwd_P(String authKey, String inputAuthKey, String pwd, String name, Model model) {
+		if (authKey.equals(inputAuthKey)) {
+			model.addAttribute("pwd",pwd);
+			model.addAttribute("name",name);
+		}else {
+			model.addAttribute("pwd",null);
+		}
+		return "auth/findPwdModal_fin";
 	}
-	
-	
 	
 
 }

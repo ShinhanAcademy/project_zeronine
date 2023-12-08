@@ -40,4 +40,8 @@ public class CustomerService {
 	public String findEmail(String name, String phone) {
 		return customerDAO.findEmail(name,phone);
 	}
+
+	public String findPwd(String name, String email) {
+		return customerDAO.findPwd(name,email);
+	}
 }
