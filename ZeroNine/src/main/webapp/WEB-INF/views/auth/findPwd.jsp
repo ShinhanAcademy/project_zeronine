@@ -9,14 +9,14 @@
 <body>
 	<div class="find_wrap zero_container">
 		<h1>비밀번호 찾기</h1>
-		<form id="findIdForm">
+		<form id="findPwdForm" onsubmit="return false;">
 			<div class="find_container zn_center">
 				<div class="form_group">
 					<label>이름</label> <input type="text" name="name" id="name"
 						placeholder="이름을 입력하세요."> <label>이메일</label> <input
 						type="email" name="email" id="email" 
 						placeholder="이메일을 입력하세요.">
-					<button type="button" id="find_btn">인증메일 받기</button>
+					<button type="button" id="getCf_btn">인증번호 받기</button>
 				</div>
 			</div>
 		</form>
