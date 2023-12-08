@@ -102,65 +102,49 @@
 		                    	<div class="total_count">
 									총 <span>2</span>건
 		                    	</div>
-		                    	<div class="btn_wrap">
-		                    		<button class="btn_more">채팅방으로 가기 ></button>
-		                    	</div>
+		                    	
 	                    	</div>
 	                    	<table class="tbl_chat_wrap">
 							  <colgroup>  	
-							    <col width="10%" />
-							    <col width="15%" />
-							    <col width="35%" />
-							    <col width="10%" />
-							    <col width="18%" />
-							    <col width="12%" />
-							    <!-- 
-							    <col />
-							    <col span="2" class="batman" />
-							    <col span="2" class="flash" />
-							    -->
+							    <col width="8%" />
+							    <col width="40%" />
+							    <col span="3" />
 							  </colgroup>
 	                    		<thead>
 	                    			<tr>
-	                    				<th class="check_all txt_left">	                    					
-    										<input type="checkbox" />
-    										전체선택
-	                    				</th>
-	                    				<th>이름</th>
-	                    				<th>게시글 제목</th>
-	                    				<th>게시일</th>
-	                    				<th>마감 기한</th>
-	                    				<th>읽은 상태</th>
+	                    				
+	                    				<th>NO</th>
+	                    				<th>제로나인 구독권</th>
+	                    				<th>구독 날짜</th>
+	                    				<th>남은 쿠폰 개수</th>
+	                    				<th>다음 결제 안내</th>
 	                    			</tr>
 	                    		</thead>
 	                    		<tbody>
 	                    			<tr>
-	                    				<td class="check_item">
-											<input type="checkbox" />	                    					
-	                    				</td>
-	                    				<td>또라몽</td>
-	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-	                    				<td>23.12.07</td>
-	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status"><span>status</span>읽음</td>
+	                    				<td>1</td>
+	                    				<td>무료배송+에코케어 구독권</td>
+	                    				<td>2023.11.24</td>
+	                    				<td>15</td>
+	                    				<td>2023.12.24</td>
 	                    			</tr>
 	                    			<tr>
-	                    				<td class="check_item">
-											<input type="checkbox" checked />	                    					
-	                    				</td>
-	                    				<td>또라몽</td>
-	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-	                    				<td>23.12.07</td>
-	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status new"><span>status</span>읽지 않음</td>
+	                    				<td>2</td>
+	                    				<td>무료 배송 구독권</td>
+	                    				<td>2023.11.25</td>
+	                    				<td>-</td>
+	                    				<td> </td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>3</td>
+	                    				<td>에코케어 5회</td>
+	                    				<td>2023.11.26</td>
+	                    				<td>5</td>
+	                    				<td> </td>
 	                    			</tr>
 	                    		</tbody>
 	                    	</table>
-		                    <div class="tbl_bottom_wrap">
-		                    	<div class="btn_wrap">
-		                    		<button class="btn_del">삭제하기</button>
-		                    	</div>
-	                    	</div>
+		                    
 	                    </div>
 	                    <!-- //chat_list -->
 	                </div>

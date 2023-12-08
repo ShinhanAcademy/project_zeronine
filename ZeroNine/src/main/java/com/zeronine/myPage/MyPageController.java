@@ -24,7 +24,7 @@ public class MyPageController {
 	
 
 	// MY_SHOPPING
-	// orderHistory(³ªÀÇ Áö°©)
+	// orderHistory(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 	@GetMapping("/myWallet.do")
 	public String myWallet(Model model) {
 		model.addAttribute("clist", cService.selectAll());	
@@ -35,25 +35,25 @@ public class MyPageController {
 		return "myPage/myWallet";
 	}
 	
-	// orderHistory(ÁÖ¹® ³»¿ª)
+	// orderHistory(ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½)
 	@RequestMapping("/orderHistory.do")
 	public String orderHistory() {
 		return "myPage/orderHistory";
 	}
 	
-	// orderCancelHistory(Ãë¼Ò/¹ÝÇ°/±³È¯/È¯ºÒ ³»¿ª)
+	// orderCancelHistory(ï¿½ï¿½ï¿½/ï¿½ï¿½Ç°/ï¿½ï¿½È¯/È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 	@RequestMapping("/orderCancelHistory.do")
 	public String orderCancelHistory() {
 		return "myPage/orderCancelHistory";
 	}
 	
-	// myCart(Àå¹Ù±¸´Ï)
+	// myCart(ï¿½ï¿½Ù±ï¿½ï¿½ï¿½)
 	@RequestMapping("/myCart.do")
 	public String myCart() {
 		return "myPage/myCart";
 	}
 
-	// likeList(ÂòÇÑ »óÇ°)
+	// likeList(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°)
 	@RequestMapping("/likeProduct.do")
 	public String likeProduct() {
 		return "myPage/likeProduct";
@@ -61,24 +61,24 @@ public class MyPageController {
 		
 
 	// MY_ACTIVITIES
-	// Board(³»°¡ ¾´ °Ô½Ã±Û)
+	// Board(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô½Ã±ï¿½)
 	@RequestMapping("/createdBoard.do")
 	public String createdBoard() {
 		return "myPage/createdBoard";
 	}
 	
-	// chatList(³»°¡ Âü¿©ÇÑ °Ô½Ã±Û)
+	// chatList(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½)
 	@RequestMapping("/participatedBoard.do")
 	public String participatedBoard() {
 		return "myPage/participatedBoard";
 	}
 
-	// chatList(Ã¤ÆÃ ¸ñ·Ï)
+	// chatList(Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½)
 	@RequestMapping("/chatList.do")
 	public void chatList() {
 	}
 
-	// likeBoard(ÂòÇÑ °Ô½Ã±Û)
+	// likeBoard(ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½)
 	@RequestMapping("/likeBoard.do")
 	public String likeBoard() {
 		return "myPage/likeBoard";
@@ -86,16 +86,24 @@ public class MyPageController {
 	
 	
 	// MY_INFOMATION
-	// personal_info(°³ÀÎ Á¤º¸) - vaildate_password(ºñ¹Ð¹øÈ£ È®ÀÎ)
+	// personal_info(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) - vaildate_password(ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½)
 	@RequestMapping("/validatePassword.do")
 	public String validatePassword() {
 		return "myPage/myInfo";
 	}
 
-	// subscriptionInfo(±¸µ¶ Á¤º¸)
+	// subscriptionInfo(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 	@RequestMapping("/subscriptionInfo.do")
 	public String subscriptionInfo() {
 		return "myPage/subscriptionInfo";
 	}
+	
+	@RequestMapping("/checkPw.do")
+	public void checkPw() {
+		
+	}
+	
+	@RequestMapping("/updateInfo.do") 
+	public void updateInfo() {}
 
 }
