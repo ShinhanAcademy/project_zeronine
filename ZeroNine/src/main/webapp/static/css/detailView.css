@@ -16,7 +16,7 @@
 
 #detail_modal_body {
 	width: 1100px;
-	height: 45%;
+	height: 450px;
 	padding: 30px 10px 10px 30px;
 	border: 1px solid #777;
 	background-color: #fff;
@@ -101,6 +101,9 @@
 	flex-direction: row;
 	justify-content: flex-end;
 	margin: 0px 20px 30px 0px;
+	width: 20px;
+	height: 20px;
+	margin-left: 1010px;
 }
 
 .join_btn {
@@ -119,10 +122,9 @@
 
 .join_btn_div {
 	display: flex;
-	padding-top: 40px;
-	padding-right: 20px;
+	padding-top: 40px; padding-right : 20px;
 	justify-content: flex-end;
-	
+	padding-right: 20px;
 }
 
 p.title {
@@ -135,7 +137,8 @@ p.content {
 }
 
 .detail_img {
-	border-radius: 15px; width : 250px;
+	border-radius: 15px;
+	width: 250px;
 	height: 250px;
 	width: 250px;
 }
