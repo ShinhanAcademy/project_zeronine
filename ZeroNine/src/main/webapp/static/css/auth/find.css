@@ -33,7 +33,6 @@ input::placeholder {
 	font-family: "Lato";
 	font-size: 16px;
 	font-style: normal;
-	
 }
 
 button {
@@ -63,4 +62,29 @@ input {
 	font-family: Lato;
 	font-size: 16px;
 	font-style: normal;
+}
+
+#pwd_container {
+	height: 456px;
+}
+
+#cfNum {
+	width: 244px;
+	margin-right: 10px;
+}
+
+#cf_label {
+	display: block;
+}
+
+#cf_btn {
+	margin-bottom: 20px;
+	margin-top: 0;
+	width: 80px;
+	height: 54px;
+	border-radius: 15px;
+	border: 1px solid #0083E6;
+	color: #0083E6;
+	font-size: 18px;
+	background: #FFF;
 }

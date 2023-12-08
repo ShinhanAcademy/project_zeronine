@@ -26,4 +26,7 @@
   <select id="findEmail" resultType="String" parameterType="java.util.HashMap">
   	SELECT email FROM public.customer where "customerName" = #{name} and "phoneNumber" = #{phone}
   </select>
+  <select id="findPwd" resultType="String" parameterType="java.util.HashMap">
+  	SELECT "customerPassword" FROM public.customer where email=#{email} and "customerName"=#{name}
+  </select>
 </mapper>
