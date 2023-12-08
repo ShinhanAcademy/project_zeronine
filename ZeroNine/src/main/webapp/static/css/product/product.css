@@ -137,7 +137,6 @@
 }
 
 .product_container .menupng {
-
 	height: 100%;
 	transition: .5s;
 }
@@ -229,8 +228,8 @@
 
 .product_container .search_area button {
 	display: flex;
-    justify-content: center;
-    align-items: center;
+	justify-content: center;
+	align-items: center;
 	border: none;
 	width: 50px;
 	height: 39px;
@@ -245,6 +244,16 @@
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
+}
+
+.product_container .melong .melong_hop {
+	display: flex; 
+	align-items: center;
+}
+
+.product_container .melong .melong_hop img {
+	width: 30px;
+	height: 30px;
 }
 
 .product_container .selectBox {
@@ -284,7 +293,6 @@
 }
 
 .product_container .menu_image {
-
 	display: flex;
 	justify-content: center;
 	height: 200px;
@@ -294,6 +302,7 @@
 	border-radius: 10px;
 	padding: 15px 0;
 }
+
 .product_container .menufont_price {
 	margin-left: 25px;
 	color: #000000;
