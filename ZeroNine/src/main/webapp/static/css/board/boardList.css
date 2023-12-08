@@ -103,7 +103,7 @@ div.pro_detail {
 	align-items: center;
 }
 
-#detail_btn{
+.detail_btn{
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -116,7 +116,7 @@ div.pro_detail {
 	border: 1px solid;
 }
 
-.fast_detail_btn{
+#fast_detail_btn{
 	background-color: #0083E6;
 }
 
@@ -136,7 +136,7 @@ div.pro_detail {
 	grid-template-columns: repeat(3, 1fr);
 }
 
-.free_detail_btn {
+#free_detail_btn {
 	background-color: #00A991;
 }
 
@@ -188,7 +188,7 @@ span.rate {
 }
 
 /* one_to_one_board */
-.one_detail_btn {
+#one_detail_btn {
 	background-color: #F4B242;
 }
 
