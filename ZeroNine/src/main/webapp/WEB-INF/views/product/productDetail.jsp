@@ -130,7 +130,14 @@
 			</div>
 
 			<div class="detail_bottom_right">
-				<div id="sidebox">내용 입력</div>
+				<div id="sidebox">
+				<span class="">옛날 사골곰탕</span>
+				<div class="sub_amoutpm">
+							<button class="minus">-</button>
+							<span class="sub_text">1</span>
+							<button class="plus">+</button>
+						</div>
+				</div>
 
 
 			</div>
@@ -148,9 +155,15 @@
 	<script>
 		var path = "${path}";
 		var currentPosition = parseInt($("#sidebox").css("top"));
-		$(window).scroll(function()
-		{       var position = $(window).scrollTop();
-		       $("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000);
+
+		$(window).scroll(function() {
+			var position = $(window).scrollTop();
+			if(position > 1200) {
+				$("#sidebox").stop().animate({"top":position+currentPosition-1200+"px"},500);  
+			} else {
+				$("#sidebox").css("top", currentPosition + "px"); 
+			}
+				
 		 });
 	</script>
 </body>

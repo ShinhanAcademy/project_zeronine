@@ -171,7 +171,7 @@
 	align-items: center;
 }
 
-.detail_bodypart .detail_right .sub_amount .sub_amoutpm {
+.detail_bodypart .sub_amoutpm {
 	display: flex;
 	align-items: center;
 	position: relative;
@@ -183,7 +183,7 @@
 	line-height: 40px;
 }
 
-.detail_bodypart .detail_right .sub_amount button {
+.detail_bodypart button {
 	position: absolute;
 	top: 1px;
 	font-size: 40px;
@@ -191,17 +191,17 @@
 	line-height: 38px;
 }
 
-.detail_bodypart .detail_right .sub_amount button.minus {
+.detail_bodypart button.minus {
 	left: 10px;
 	top: 5px;
 }
 
-.detail_bodypart .detail_right .sub_amount button.plus {
+.detail_bodypart button.plus {
 	right: 10px;
 	top: 5px;
 }
 
-.detail_bodypart .detail_right .sub_amount .sub_text {
+.detail_bodypart .sub_text {
 	color: #000;
 	text-align: center;
 	font-family: Lato;
@@ -410,13 +410,13 @@
 	width: 326px;
 	height: 2012px;
 }
-#sidebox { 
-background-color:#F0F0F0; 
-position:absolute; 
-width:120px; 
-top:1733px; 
-right:420px; 
-padding: 3px 10px 
+
+#sidebox {
+	background-color: #F0F0F0;
+	position: absolute;
+	width: 270px; height : 120px;
+	top: 1650px;
+	right: 420px;
+	padding: 3px 10px;
+	height: 120px;
 }
-
-
