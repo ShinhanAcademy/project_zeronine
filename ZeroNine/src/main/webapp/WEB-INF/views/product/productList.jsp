@@ -54,6 +54,8 @@
 				<div class="dist30"></div>
 				</div>
 				<div class="melong">
+				<div class="melong_hop">
+				<img class="menupng" src="${path}/images/board/filter.png">
 				<select name ="ptype" class="selectBox" onchange="chanb()">
                    						<option value="0" selected>전체</option>
                    						<option value="1">찜순</option>
@@ -61,6 +63,7 @@
                    						<option value="3">낮은가격순</option>
                    						<option value="4">높은가격순</option>
                    					</select>
+                   					</div>
                                 <div class="search_area">                                        
                    					<form class="search_form">
                                     <input type="text" name="q" id="q" placeholder="상품명, 제조사 검색">
