@@ -20,7 +20,7 @@ public class BoardController {
 	}
 	@RequestMapping("/freedeliveryboard.do")
 	public String freeBoard() {
-		return "board/freeDeliveryBard";
+		return "board/freeDeliveryBoard";
 	}
 
 	@RequestMapping("/onetooneboard.do")

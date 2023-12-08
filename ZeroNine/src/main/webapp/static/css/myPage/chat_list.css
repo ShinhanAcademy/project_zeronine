@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 /* mypage_chatlist */
 /* .chat_list {
@@ -88,6 +89,9 @@
 /*
 chatlist_wrap
 */
+.chatlist_wrap .tbl_chat_wrap tbody tr {
+    cursor: pointer;
+}
 .chatlist_wrap .tbl_chat_wrap td.read_status {
     display: flex;
     align-items: center;

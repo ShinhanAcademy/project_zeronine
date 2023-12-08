@@ -61,4 +61,12 @@ public class CustomerDAOMybatis {
 		return email;
 	}
 
+	public String findPwd(String name, String email) {
+		HashMap<String,String> info = new HashMap<>();
+		info.put("name", name);
+		info.put("email", email);
+		String pwd = sqlSession.selectOne(NAMESPACE + "findPwd", info);
+		return pwd;
+	}
+
 }
