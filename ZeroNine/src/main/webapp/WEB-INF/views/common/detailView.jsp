@@ -12,7 +12,7 @@
 
 		<div id="detail_modal_body">
 			<div class="detail_body">
-				<button class="close_btn">
+				<button class="close_btn" onclick="close_btn()">
 					<img src="${path}/images/common/close.png">
 				</button>
 				<div class="detail_chn_area">

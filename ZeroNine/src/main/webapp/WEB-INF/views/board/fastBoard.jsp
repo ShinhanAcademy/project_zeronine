@@ -86,7 +86,7 @@
 							<button class="like" type="button">
 								<img class="like" src="${path}/images/board/heart.png">
 							</button>
-							<button class="fast_detail_btn" id="detail_btn" >보기</button>
+							<button id="fast_detail_btn" class="detail_btn"  onclick="f_btn()">보기</button>
 						</li>
 					</ul>
 				</div>

@@ -87,7 +87,7 @@
 							<button class="like" type="button">
 								<img class="like" src="${path}/images/board/heart.png">
 							</button>
-							<button class="one_detail_btn" id="detail_btn" onclick="location.href='modal.jsp'">보기</button>
+							<button id="one_detail_btn" class="detail_btn" onclick="o_btn()">보기</button>
 						</li>
 					</ul>
 				</div>
@@ -99,6 +99,11 @@
 
 
 	<%@include file="../common/footer.jsp"%>
+	<%@include file="../common/detailView.jsp"%>
+	<script src="../js/detailView.js"></script>
+	<script>
+		$("#detail_modal_wrap").hide();
+	</script>
 </body>
 </html>
 

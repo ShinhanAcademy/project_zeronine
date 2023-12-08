@@ -34,13 +34,13 @@
 			<div class="section zn_center">
 				<div style="width: 1440px">
 					<div id="filter">
-					<span> <img class="filter_img"
-						src="${path}/images/board/filter.png">
-					</span> <select name="board_type" class="filter" onchange="boardType()">
-						<option value="recent">최신순</option>
-						<option value="imminent">임박순</option>
-					</select>
-				</div>
+						<span> <img class="filter_img"
+							src="${path}/images/board/filter.png">
+						</span> <select name="board_type" class="filter" onchange="boardType()">
+							<option value="recent">최신순</option>
+							<option value="imminent">임박순</option>
+						</select>
+					</div>
 
 					<div class="edit">
 						<span> <img class="edit_img"
@@ -88,8 +88,8 @@
 							<li class="detail_view">
 								<button class="like" type="button">
 									<img class="like" src="${path}/images/board/heart.png">
-								</button> 
-								<button class="free_detail_btn" id="detail_btn" onclick="location.href='modal.jsp'">보기</button>
+								</button>
+								<button id="free_detail_btn" class="detail_btn" onclick="fd_btn()">보기</button>
 							</li>
 						</ul>
 					</div>
@@ -102,6 +102,11 @@
 
 
 	<%@include file="../common/footer.jsp"%>
+	<%@include file="../common/detailView.jsp"%>
+	<script src="../js/detailView.js"></script>
+	<script>
+		$("#detail_modal_wrap").hide();
+	</script>
 </body>
 </html>
 
