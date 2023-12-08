@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
+<link rel="stylesheet" href="${path}/css/myPage/createdBoard.css">
 <title>MyPage</title>
 </head>
 <body>
@@ -130,7 +132,7 @@
 	                    				<th>게시글 제목</th>
 	                    				<th>게시일</th>
 	                    				<th>마감 기한</th>
-	                    				<th>읽은 상태</th>
+	                    				<th>더보기</th>
 	                    			</tr>
 	                    		</thead>
 	                    		<tbody>
@@ -142,7 +144,12 @@
 	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
 	                    				<td>23.12.07</td>
 	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status"><span>status</span>읽음</td>
+	                    				<td class="read_status">
+	                    				<select class="select_status" name="status">
+	                    					<option value="detail_opt">상세보기</option>
+	                    					<option value="update_opt">수정하기</option>
+	                    				</select>
+	                    				</td>
 	                    			</tr>
 	                    			<tr>
 	                    				<td class="check_item">
@@ -152,7 +159,12 @@
 	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
 	                    				<td>23.12.07</td>
 	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status new"><span>status</span>읽지 않음</td>
+	                    				<td class="read_status">
+	                    				<select class="select_status" name="status">
+	                    					<option value="detail_opt">상세보기</option>
+	                    					<option value="update_opt">수정하기</option>
+	                    				</select>
+	                    				</td>
 	                    			</tr>
 	                    		</tbody>
 	                    	</table>
