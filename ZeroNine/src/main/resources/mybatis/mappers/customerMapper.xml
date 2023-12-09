@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.zeronine.customer">
+  <select id="selectAll" resultType="customerVo">
+  	select * from customer
+  </select>
+  <select id="selectByName" resultType="customerVo" parameterType="String">
+  	select * from customer where "customerName" = #{customerName}
+  </select>
+  <select id="emailCheck" resultType="int" parameterType="String">
+  	select count(email) from customer where "email" = #{email}
+  </select>
+  <select id="phoneCheck" resultType="int" parameterType="String">
+  	select count("phoneNumber") from customer where "phoneNumber" = #{phone}
+  </select>
+  <insert id="joinMembership" parameterType="customerVo">
+  	INSERT INTO public.customer
+	("customerPassword", email, "phoneNumber", "customerName", address, birthday)
+	VALUES (#{customerPassword},#{email},#{phoneNumber},#{customerName},#{address},#{birthday})
+  </insert>
+  <select id="login" resultType="int" parameterType="java.util.HashMap">
+  	SELECT count(email)	FROM customer where email = #{email} and "customerPassword" = #{pwd}
+  </select>
+  <select id="findEmail" resultType="String" parameterType="java.util.HashMap">
+  	SELECT email FROM public.customer where "customerName" = #{name} and "phoneNumber" = #{phone}
+  </select>
+  <select id="findPwd" resultType="String" parameterType="java.util.HashMap">
+  	SELECT "customerPassword" FROM public.customer where email=#{email} and "customerName"=#{name}
+  </select>
+</mapper>

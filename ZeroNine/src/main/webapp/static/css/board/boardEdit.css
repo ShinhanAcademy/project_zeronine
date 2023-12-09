@@ -1,0 +1,356 @@
+@charset "UTF-8";
+
+html, body {
+	height: 100%;
+}
+
+/* 드롭다운 css */
+#edit {
+	font-family: Lato;
+}
+
+.edit_content {
+	padding: 50px 40px 50px 40px;
+	display: flex;
+	justify-content: center;
+}
+
+.content {
+	width: 480px;
+	height: 892px;
+	border-right: 1px solid #C4C4C4;
+}
+
+.info_title, .write_title {
+	font-weight: bold;
+	font-size: 30px;
+	margin-bottom: 44px;
+	font-size: 30px;
+}
+
+form {
+	width: 200px;
+	height: 80px;
+}
+
+label, .title, .context {
+	font-weight: bold;
+	display: block;
+	width: 100%;
+	margin-right: 122px;
+	margin-bottom: 10px;
+	font-size: 20px;
+	display: block;
+}
+
+#board_type, #time_setting {
+	font-family: Lato;
+	display: block;
+	width: 200px;
+	height: 48px;
+	font-size: 18px;
+	padding-right: 10px;
+	border-radius: 4px;
+	border: 1px solid #c4c4c4;
+	text-align: left
+	
+}
+
+#board_type option:nth-child(1) {
+	color: #C4C4C4;
+}
+
+/* board edit */
+#edit {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+	min-height: 100dvh;
+}
+
+.edit_content {
+	width: 1381px;
+	height: 992px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 15px;
+	border: 1px #C4C4C4 solid;
+}
+
+/* complete edit */
+.com {
+	margin-top: 50px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	min-height: 100dvh;
+}
+
+.com div {
+	width: 700px;
+	height: 372px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 15px;
+	border: 1px #C4C4C4 solid;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.com .title {
+	text-align: center;
+	font-size: 40px;
+	font-family: Jua;
+	font-weight: 400;
+	line-height: 16px;
+}
+
+.com .title {
+	display: flex;
+	justify-content: center;
+}
+
+.btn{
+	display: flex;
+    justify-content: center;
+}
+
+.com button {
+	margin-top: 50px;
+	width: 200px;;
+	height: 60px;
+	background: #737300;
+	color: white;
+	font-size: 25px;
+	border-radius: 15px;
+	align-items: center;
+	gap: 10px;
+	display: flex;
+	justify-content: center;
+}
+
+/* due_date */
+.due_date {
+	margin-top: 45px;
+	width: 370px;
+}
+
+.due_date ul .cart_ann ul, .location_ann ul {
+	margin-bottom: 20px;
+}
+
+.due_date_title, .cart_ann_title, .location_ann_title, .pic_title{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.due_date_cf {
+	margin-bottom: 5px;
+}
+
+.due_date span, .cart_ann_cf, .location_ann_cf, .location_input, .pic_cf{
+	display: block;
+	font-size: 15px;
+}
+
+.due_date_ex {
+	padding-left: 10px;
+	color: gray;
+}
+
+.date_input {
+	display: flex;
+	font-size: 15px;
+	margin-top: 10px;
+}
+
+.date_input input {
+	border: 1px solid #c4c4c4;
+	border-radius: 6px;
+	font-family: Lato;
+	font-size: 13px;
+	width: 47px;
+	height: 44px;
+	text-align: center;
+}
+
+input::placeholder {
+	text-align: center;
+	color: #C4C4C4;
+}
+
+.date {
+	margin-right: 5px;
+}
+
+#cart, #location {
+	margin-top: 45px;
+}
+
+.cart_list {
+	overflow: auto;
+	width: 285px;
+}
+
+.cart_list {
+	margin-top: 20px;
+}
+
+.cart_pro_name {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.cart_list p {
+	margin-left: 10px;
+	font-size: 15px;
+}
+
+.count {
+	display: flex;
+	justify-content: flex-end;
+	width: 84px;
+	border: 1px solid black;
+	border-radius: 6px;
+	margin-left: 190px;
+	margin-top: 5px;
+	align-items: center;
+}
+
+.count input {
+	text-align: center;
+	font-size: 15px;
+	width: 40px;
+	font-family: Lato;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.count button {
+	width: 22px;
+	height: 22px;
+}
+
+.cart_img img {
+	width: 80px;
+	height: 80px;
+	margin-left: 10px;
+}
+
+.cart_info .add_info{
+	display: flex;
+	align-items: center;
+}
+
+/* write_content */
+.write_content {
+	width: 820px;
+	padding-left: 40px;
+}
+
+.main_text textarea {
+	border: 1px solid #C4C4C4;
+	border-radius: 6px;
+	width: 100%;
+	padding: 10px;
+	font-size: 15px;
+	font-family: Lato;
+}
+
+.input_context {
+	word-spacing:
+}
+
+.main_text textarea::placeholder {
+	font-family: Lato;
+	text-align: left;
+}
+
+.context {
+	margin-top: 45px;
+}
+
+.context_input {
+	height: 530px;
+}
+
+.title_input {
+	height: 45px;
+}
+
+/* done button */
+.done {
+	margin-top: 30px;
+	margin-left: 660px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #737300;
+	border-radius: 15px;
+	width: 120px;
+	height: 50px;
+}
+
+.done_btn{
+	color: white;
+	font-family: Jua;
+	font-size: 20px;
+}
+
+/* one to one board edit*/
+
+.location_input{
+	padding: 10px;
+	border-radius: 6px;
+	border : 1px solid #c4c4c4;
+	display: block;
+	font-family: Lato;
+	text-align: left;
+	background-color: white;
+	margin-bottom: 10px;
+	width: 440px;
+}
+.location_input1{
+	padding: 10px;
+	border-radius: 6px;
+	border : 1px solid #c4c4c4;
+	font-family: Lato;
+	font-size: 15px;
+	text-align: left;
+	background-color: white;
+	margin-bottom: 10px;
+	margin-right: 20px;
+	width: 220px;
+}
+
+.location_info button{
+	padding: 10px;
+	border : 1px solid #737300;
+	font-family: Lato;
+	font-size: 15px;
+	color: #737300;
+	border-radius: 6px;
+	text-align: center;
+	margin-bottom: 10px;
+	
+}
+
+.location_input::placeholder, .location_input1::placeholder{
+	text-align: left;
+}
+
+.location_img{
+	border: 1px solid black;
+	width: 440px;
+	height: 230px;
+	
+}
+/* file upload */
+.upload_btn{
+	margin-bottom: 20px;
+}
