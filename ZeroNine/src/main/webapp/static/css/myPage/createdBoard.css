@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.select_status{
+	width: 100px;
+    border-radius: 15px;
+    height: 30px;
+    font-size: 14px;
+    text-align: center;
+	
+}
