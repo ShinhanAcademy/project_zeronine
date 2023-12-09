@@ -1,6 +1,8 @@
 package com.zeronine.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class BoardVO {
 	private String boardId;
@@ -42,7 +44,10 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Timestamp getUploadTime() {
+	public String getUploadTime() {
+		LocalDate localDate = uploadTime.toLocalDateTime().toLocalDate();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String uploadTime = localDate.format(formatter);
 		return uploadTime;
 	}
 	public void setUploadTime(Timestamp uploadTime) {
@@ -60,6 +65,8 @@ public class BoardVO {
 	public void setPostingMinutes(Integer postingMinutes) {
 		this.postingMinutes = postingMinutes;
 	}
+	
+	
 }
 
 

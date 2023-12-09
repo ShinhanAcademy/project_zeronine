@@ -44,4 +44,8 @@ public class CustomerService {
 	public String findPwd(String name, String email) {
 		return customerDAO.findPwd(name,email);
 	}
+
+	public String getCustomerId(String email, String pwd) {
+		return customerDAO.getCustomerId(email,pwd);
+	}
 }

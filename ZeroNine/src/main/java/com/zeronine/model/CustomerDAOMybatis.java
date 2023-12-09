@@ -69,4 +69,12 @@ public class CustomerDAOMybatis {
 		return pwd;
 	}
 
+	public String getCustomerId(String email, String pwd) {
+		HashMap<String,String> info = new HashMap<>();
+		info.put("email", email);
+		info.put("pwd", pwd);
+		String customerId = sqlSession.selectOne(NAMESPACE + "getCustomerId", info);
+		return customerId;
+	}
+
 }
