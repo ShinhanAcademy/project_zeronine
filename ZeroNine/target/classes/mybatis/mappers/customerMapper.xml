@@ -23,10 +23,14 @@
   <select id="login" resultType="int" parameterType="java.util.HashMap">
   	SELECT count(email)	FROM customer where email = #{email} and "customerPassword" = #{pwd}
   </select>
+  <select id="getCustomerId" resultType="String" parameterType="java.util.HashMap">
+  	SELECT "customerId"	FROM customer where email = #{email} and "customerPassword" = #{pwd}
+  </select>
   <select id="findEmail" resultType="String" parameterType="java.util.HashMap">
   	SELECT email FROM public.customer where "customerName" = #{name} and "phoneNumber" = #{phone}
   </select>
   <select id="findPwd" resultType="String" parameterType="java.util.HashMap">
   	SELECT "customerPassword" FROM public.customer where email=#{email} and "customerName"=#{name}
   </select>
+  
 </mapper>
