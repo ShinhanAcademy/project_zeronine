@@ -1,6 +1,7 @@
 package com.zeronine.myPage;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -115,14 +116,20 @@ public class MyPageController {
 	// personal_info(占쏙옙占쏙옙 占쏙옙占쏙옙) - vaildate_password(占쏙옙橘占싫� 확占쏙옙)
 	@PostMapping(value = "/validatePw.do", consumes = "application/json")
 	@ResponseBody
-	public int validatePassword(@RequestBody Map<String, String> map, Model model) {
+	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
 		String email = map.get("email");
 		String password = map.get("password");
 		
-		int isValid = cService.login(email, password);
 		
+		boolean isValid = cService.login(email, password) > 0;
 		
-		return isValid;	
+		if(!isValid) {
+			CustomerVO invalidCustomer = new CustomerVO();
+			invalidCustomer.setCustomerName("invalid");
+			return invalidCustomer;
+		}
+		
+		return cService.selectByEmail(email);	
 	}
 	
 	@RequestMapping("/myInfo.do")
