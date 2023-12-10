@@ -45,7 +45,15 @@ public class CustomerService {
 		return customerDAO.findPwd(name,email);
 	}
 
+	public CustomerVO selectById(String customerId) {
+		return customerDAO.selectById(customerId);
+	}
+	
+	public CustomerVO selectByEmail(String email) {
+		return customerDAO.selectByEmail(email);
+
 	public String getCustomerId(String email, String pwd) {
 		return customerDAO.getCustomerId(email,pwd);
+
 	}
 }
