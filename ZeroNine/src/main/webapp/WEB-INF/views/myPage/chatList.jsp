@@ -250,7 +250,7 @@
 		                    </div>
 		                    <div class="tbl_bottom_wrap">
 		                    	<div class="btn_wrap">
-		                    		<button class="btn_del">삭제하기</button>
+		                    		<button class="btn_del">채팅방 나가기</button>
 		                    	</div>
 	                    	</div>
 	                    </div>

@@ -65,9 +65,14 @@ public class AuthController {
 		String email = map.get("email");
 		String pwd = map.get("password");
 
-		session.setAttribute("email", email);
-
 		int cnt = customerService.login(email, pwd);
+		
+		if(cnt>0) {
+			String customerId = customerService.getCustomerId(email,pwd);
+			session.setAttribute("customerId", customerId);
+			session.setAttribute("email", email);
+		}
+		
 		return cnt;
 	}
 
