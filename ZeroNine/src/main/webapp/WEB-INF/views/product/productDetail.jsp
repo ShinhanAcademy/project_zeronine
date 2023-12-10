@@ -46,7 +46,7 @@
 					</div>
 					<div class="sub_amount">
 						<span class="subtitle_middle">수량선택</span>
-						<div class="sub_amoutpm">
+						<div class="sub_amountpm">
 							<button class="minus">-</button>
 							<span class="sub_text">1</span>
 							<button class="plus">+</button>
@@ -131,12 +131,15 @@
 
 			<div class="detail_bottom_right">
 				<div id="sidebox">
-				<span class="">옛날 사골곰탕</span>
-				<div class="sub_amoutpm">
+					<span class="subtitle1">옛날 사골곰탕</span>
+					<div class="sidebox_right">
+						<div class="sub_amountpm">
 							<button class="minus">-</button>
 							<span class="sub_text">1</span>
 							<button class="plus">+</button>
 						</div>
+						<span class="subtitle">2,400원</span>
+					</div>
 				</div>
 
 
@@ -158,13 +161,15 @@
 
 		$(window).scroll(function() {
 			var position = $(window).scrollTop();
-			if(position > 1200) {
-				$("#sidebox").stop().animate({"top":position+currentPosition-1200+"px"},500);  
+			if (position > 1600) {
+				$("#sidebox").stop().animate({
+					"top" : position + currentPosition - 1200 + "px"
+				}, 500);
 			} else {
-				$("#sidebox").css("top", currentPosition + "px"); 
+				$("#sidebox").css("top", currentPosition + "px");
 			}
-				
-		 });
+
+		});
 	</script>
 </body>
 </html>
