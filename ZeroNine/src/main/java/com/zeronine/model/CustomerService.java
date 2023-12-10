@@ -51,7 +51,8 @@ public class CustomerService {
 	
 	public CustomerVO selectByEmail(String email) {
 		return customerDAO.selectByEmail(email);
-
+	}
+	
 	public String getCustomerId(String email, String pwd) {
 		return customerDAO.getCustomerId(email,pwd);
 

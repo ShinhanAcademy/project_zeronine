@@ -2,6 +2,7 @@ package com.zeronine.myPage;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,10 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zeronine.dto.BoardVO;
+import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
 import com.zeronine.myapp.HomeController;
@@ -108,9 +113,26 @@ public class MyPageController {
 	
 	// MY_INFOMATION
 	// personal_info(占쏙옙占쏙옙 占쏙옙占쏙옙) - vaildate_password(占쏙옙橘占싫� 확占쏙옙)
-	@RequestMapping("/validatePassword.do")
-	public String validatePassword() {
-		return "myPage/myInfo";
+	@PostMapping(value = "/validatePw.do", consumes = "application/json")
+	@ResponseBody
+	public int validatePassword(@RequestBody Map<String, String> map, Model model) {
+		String email = map.get("email");
+		String password = map.get("password");
+		
+		int isValid = cService.login(email, password);
+		
+		
+		return isValid;	
+	}
+	
+	@RequestMapping("/myInfo.do")
+	public void myInfo(HttpSession session, Model model) {
+		String email = (String)session.getAttribute("email");
+		
+		CustomerVO customerVo = cService.selectByEmail(email);
+		logger.info(customerVo.toString());
+		model.addAttribute("customerVo", customerVo);
+		model.addAttribute("birthdayFormmated", customerVo.getBirthday().toString().substring(0, 10));
 	}
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
