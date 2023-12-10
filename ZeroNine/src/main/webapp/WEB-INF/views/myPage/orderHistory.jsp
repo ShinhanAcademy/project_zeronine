@@ -237,7 +237,7 @@
 	    <!-- //mypage_container -->
 	</div>
 	<!-- //zero_container -->
-	<%@include file="../common/footer.jsp" %>
 	<%@include file="deliveryTracking.jsp" %>
+	<%@include file="../common/footer.jsp" %>
 </body>
 </html>
