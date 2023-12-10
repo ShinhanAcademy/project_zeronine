@@ -5,6 +5,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="${path}/css/main.css">
+<link rel="stylesheet" href="${path}/css/detailView.css" />
+<script defer src="../js/detailView.js"></script>
+<script></script>
 <title>ZeroNine</title>
 </head>
 <body>
@@ -73,17 +76,17 @@
 		        <div class="board_unit immediate_delivery">
 		            <div class="title">슝슝 즉배</div>
 		            <ul class="card_list">
-		                <li>
+		                <li onclick="f_btn()">
 		                    <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
 		                    <p>CJ제일제당 스팸 싱글 마일드 80g*3</p>
 		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
 		                </li>
-		                <li>
+		                <li onclick="f_btn()">
 		                    <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
 		                    <p>CJ제일제당 스팸 싱글 마일드 80g*3</p>
 		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
 		                </li>
-		                <li>
+		                <li onclick="f_btn()">
 		                    <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
 		                    <p>CJ제일제당 스팸 싱글 마일드 80g*3</p>
 		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
@@ -93,7 +96,7 @@
 		        <div class="board_unit saving_delivery">
 		            <div class="title">알뜰 무배</div>
 		            <ul class="card_list">
-		                <li>
+		                <li onclick="fd_btn()">
 		                    <div class="saving_target">
 		                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
 		                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
@@ -102,7 +105,7 @@
 		                        <img src="${path}/images/main/img_progress01.png" alt="progress">
 		                    </div>
 		                </li>
-		                <li>
+		                <li onclick="fd_btn()">
 		                    <div class="saving_target">
 		                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
 		                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
@@ -111,7 +114,7 @@
 		                        <img src="${path}/images/main/img_progress01.png" alt="progress">
 		                    </div>
 		                </li>
-		                <li>
+		                <li onclick="fd_btn()">
 		                    <div class="saving_target">
 		                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
 		                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
@@ -125,7 +128,7 @@
 		        <div class="board_unit direct_deal">
 		            <div class="title">1:1 직거래</div>
 		            <ul class="card_list">
-		                <li>
+		                <li onclick="o_btn()">
 		                    <div class="img_wrap img_user">
 		                        <img src="${path}/images/main/img_user.png" alt="user">
 		                    </div>
@@ -138,7 +141,7 @@
 		                    </ul>
 		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
 		                </li>
-		                <li>
+		                <li onclick="o_btn()">
 		                    <div class="img_wrap img_user">
 		                        <img src="${path}/images/main/img_user.png" alt="user">
 		                    </div>
@@ -151,7 +154,7 @@
 		                    </ul>
 		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
 		                </li>
-		                <li>
+		                <li onclick="o_btn()">
 		                    <div class="img_wrap img_user">
 		                        <img src="${path}/images/main/img_user.png" alt="user">
 		                    </div>
@@ -290,6 +293,7 @@
 		        </div>
 		    </section>
 		</div>
+		<%@include file="../common/detailView.jsp"%>
 		<%@include file="../common/footer.jsp" %>
     </div>
 </body>
