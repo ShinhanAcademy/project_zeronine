@@ -38,4 +38,5 @@
   <select id="selectByEmail" resultType="customerVo" parameterType="String">
   	select * from customer where "email" = #{email}
   </select>
+
 </mapper>

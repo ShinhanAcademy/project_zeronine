@@ -78,7 +78,8 @@ public class CustomerDAOMybatis {
 	public CustomerVO selectByEmail(String email) {
 		CustomerVO cust = sqlSession.selectOne(NAMESPACE + "selectByEmail", email);
 		return cust;
-
+	}
+	
 	public String getCustomerId(String email, String pwd) {
 		HashMap<String,String> info = new HashMap<>();
 		info.put("email", email);
