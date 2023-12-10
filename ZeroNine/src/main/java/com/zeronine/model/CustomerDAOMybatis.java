@@ -69,4 +69,14 @@ public class CustomerDAOMybatis {
 		return pwd;
 	}
 
+	public CustomerVO selectById(String customerId) {
+		CustomerVO cust = sqlSession.selectOne(NAMESPACE + "selectById", customerId);
+		return cust;
+	}
+	
+	public CustomerVO selectByEmail(String email) {
+		CustomerVO cust = sqlSession.selectOne(NAMESPACE + "selectByEmail", email);
+		return cust;
+	}
+
 }

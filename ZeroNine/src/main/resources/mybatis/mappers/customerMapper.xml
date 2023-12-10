@@ -29,4 +29,10 @@
   <select id="findPwd" resultType="String" parameterType="java.util.HashMap">
   	SELECT "customerPassword" FROM public.customer where email=#{email} and "customerName"=#{name}
   </select>
+  <select id="selectById" resultType="customerVo" parameterType="String">
+  	select * from customer where "customerId" = #{customerId}
+  </select>
+  <select id="selectByEmail" resultType="customerVo" parameterType="String">
+  	select * from customer where "email" = #{email}
+  </select>
 </mapper>

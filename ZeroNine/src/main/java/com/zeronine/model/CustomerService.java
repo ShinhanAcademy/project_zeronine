@@ -44,4 +44,12 @@ public class CustomerService {
 	public String findPwd(String name, String email) {
 		return customerDAO.findPwd(name,email);
 	}
+	
+	public CustomerVO selectById(String customerId) {
+		return customerDAO.selectById(customerId);
+	}
+	
+	public CustomerVO selectByEmail(String email) {
+		return customerDAO.selectByEmail(email);
+	}
 }
