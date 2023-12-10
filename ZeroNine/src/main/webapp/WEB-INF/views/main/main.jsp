@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
 <script src="${path}/js/jslib/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="${path}/css/main.css">
-<link rel="stylesheet" href="${path}/css/detailView.css" />
-<script defer src="../js/detailView.js"></script>
-<script></script>
+<link rel="stylesheet" href="/css/csslib/jquery.bxslider.min.css">
+<link href="${path}/css/main.css" rel="stylesheet" />
+<link href="${path}/css/detailView.css" rel="stylesheet" />
+<script src="/js/jslib/jquery.bxslider.min.js"></script>
+<script defer src="${path}/js/main/main.js"></script>
+<script defer src="${path}/js/detailView.js"></script>
 <title>ZeroNine</title>
 </head>
 <body>
@@ -34,17 +34,6 @@
 					    </li>
 					</ul>
 		        </div>
-		        
-  <script>
-  $(document).ready(function(){
-	  $('.bxslider').bxSlider({
-		    auto: true,
-		    autoHover: true,
-		    controls: true,
-		    speed: 500
-	  });
-	});
-  </script>
 		    </section>
 		    <section class="intro_wrap">
 		        <div class="title">똑똑한 소비의 3가지 방법</div>
