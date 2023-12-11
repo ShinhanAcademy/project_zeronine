@@ -4,17 +4,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.board">
 
+	<!-- <select id="selectAll" resultType="boardVO"> select * from public.board 
+		order by "uploadTime" desc; </select> <select id="selectEnd" resultType="boardVO"> 
+		select * from board order by "postingMinutes" asc; </select> -->
 
+	<select id="selectfastBoardList" resultType="map">
+		select * from public."board" as b
+			join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+			join public."product" as p on (p."productId" = sp."productId")
+			join public."productMainImage" as pi on (p."productId" = pi."productId")
+	</select>
 
-
-  <select id="selectAll" resultType="boardVO">
-  	select * from public.board
-		order by "uploadTime" desc; 
-  </select>
-  
-  <select id="selectEnd" resultType="boardVO">
-  	select * from board
-		order by "postingMinutes" asc;
-  </select>
-  
 </mapper>
