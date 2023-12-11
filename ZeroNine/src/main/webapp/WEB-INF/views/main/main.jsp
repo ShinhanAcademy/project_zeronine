@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
 <script src="${path}/js/jslib/chart.js"></script>
-<link rel="stylesheet" href="/css/csslib/jquery.bxslider.min.css">
-<link href="${path}/css/main.css" rel="stylesheet" />
+<link href="${path}/css/csslib/jquery.bxslider.min.css" rel="stylesheet">
+<link href="${path}/css/main/main.css" rel="stylesheet" />
 <link href="${path}/css/detailView.css" rel="stylesheet" />
-<script src="/js/jslib/jquery.bxslider.min.js"></script>
+<script src="${path}/js/jslib/jquery.bxslider.min.js"></script>
 <script defer src="${path}/js/main/main.js"></script>
 <script defer src="${path}/js/detailView.js"></script>
 <title>ZeroNine</title>

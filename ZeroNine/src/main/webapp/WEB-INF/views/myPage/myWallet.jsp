@@ -8,6 +8,9 @@
 <body>
 	<%@include file="../common/header.jsp" %>
 	<!-- zero_container -->
+	<div>
+		${clist}
+	</div>
 	<div class="zero_container zn_center">
 	    <!-- mypage_container -->
 	    <div class="mypage_container">
