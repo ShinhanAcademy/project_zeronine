@@ -13,7 +13,7 @@
     <!-- css lib -->
     <link rel="stylesheet" href="/css/csslib/datepicker.min.css">
     
-    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/common/common.css">
     
     <!-- js lib -->
     <script src="/js/jslib/jquery-3.7.1.min.js"></script>

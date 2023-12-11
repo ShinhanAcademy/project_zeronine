@@ -103,9 +103,9 @@
 		                <div class="search_wrap">
 		                	<div class="period">
 		                		<span>구매 기간</span>
-		                		<button class="on" period="1">1개월</button>
-		                		<button period="3">3개월</button>
-		                		<button period="6">6개월</button>
+		                		<button class="on" data-period="1">1개월</button>
+		                		<button data-period="3">3개월</button>
+		                		<button data-period="6">6개월</button>
 		                		<div class="calendar">
 			                		<input type="text"
 									    data-range="true"
@@ -122,8 +122,8 @@
 		                	</div>
 		                </div>
 	                	<!-- //search_wrap -->
-	                	<!-- orderhistory_wrap  -->
-	                	<div id="orderhistory_wrap" class="order_history_wrap">
+	                	<!-- order_history_wrap -->
+	                	<div class="order_history_wrap">
 		                    <div class="tbl_top_wrap">
 		                    	<div class="total_count">
 									총 <span>2</span>건
@@ -226,7 +226,7 @@
 		                    </div>
 	                		<!-- tbl_wrap -->
 	                	</div>
-	                	<!-- //orderhistory_wrap  -->
+	                	<!-- //order_history_wrap  -->
 	                </div>
 	                <!-- //contents -->
 	            </div>
