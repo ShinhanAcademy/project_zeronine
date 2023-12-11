@@ -3,6 +3,7 @@
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/order_history.css">
+<script defer src="/js/myPage/myShopping.js"></script>
 <title>MyPage</title>
 </head>
 <body>
@@ -94,9 +95,32 @@
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
-	                <div class="con_tit">취소 / 반품 내역</div> <%-- has_line --%>
+	                <div class="con_tit has_line">취소 / 반품 내역</div> <%-- has_line --%>
 	                <!-- contents -->
 	                <div class="contents">
+	                	<!-- search_wrap -->
+		                <div class="search_wrap">
+		                	<div class="period">
+		                		<span>구매 기간</span>
+		                		<button class="on" period="1">1개월</button>
+		                		<button period="3">3개월</button>
+		                		<button period="6">6개월</button>
+		                		<div class="calendar">
+			                		<input type="text"
+									    data-range="true"
+									    data-multiple-dates-separator=" - "
+	    								data-language="ko"
+										id="datepicker"
+									/>
+		                		</div>
+		                	</div>
+		                	<div class="search_word">
+		                		<span>검색어</span>
+		                		<input type="text" placeholder="검색어를 입력하세요." />
+		                		<button class="btn_search">검색</button>
+		                	</div>
+		                </div>
+	                	<!-- //search_wrap -->
 	                	<!-- orderhistory_wrap  -->
 	                	<div id="orderhistory_wrap" class="order_history_wrap">
 		                    <div class="tbl_top_wrap">

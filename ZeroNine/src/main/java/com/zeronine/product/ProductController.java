@@ -98,4 +98,8 @@ public class ProductController {
 	@GetMapping("/productDetail.do")
 	public void productDetail() {}
 	
+	@GetMapping("/productOrder.do")
+	public void productOrder() {}
+
+
 }

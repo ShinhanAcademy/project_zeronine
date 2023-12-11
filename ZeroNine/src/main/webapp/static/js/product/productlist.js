@@ -12,6 +12,7 @@ $(".fluent_basket").click(function () {
 				});
 });
 $(".lotion").click(function () {
+
 			var obj = {	"pCategoryId" : 2};
 			
 			$.ajax({
@@ -71,6 +72,7 @@ function chanb() {
     var selectedValue = $('select[name="ptype"]').val();
     // Check if the selected value is 1
     if (selectedValue === "1") {
+    
         // Perform your AJAX request
         $.ajax({
             type: 'GET',
