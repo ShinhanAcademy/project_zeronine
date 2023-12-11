@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
-<link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/order_history.css">
+<link rel="stylesheet" href="/css/myPage/common_mypage.css">
+<link rel="stylesheet" href="/css/myPage/order_history.css">
+<link rel="stylesheet" href="/css/myPage/delivery_tracking.css">
+<script defer src="/js/myPage/myShopping.js"></script>
 <title>MyPage</title>
 </head>
 <body>
@@ -94,9 +96,32 @@
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
-	                <div class="con_tit">주문 내역</div> <%-- has_line --%>
+	                <div class="con_tit has_line">주문 내역</div>
 	                <!-- contents -->
 	                <div class="contents">
+	                	<!-- search_wrap -->
+		                <div class="search_wrap">
+		                	<div class="period">
+		                		<span>구매 기간</span>
+		                		<button class="on" period="1">1개월</button>
+		                		<button period="3">3개월</button>
+		                		<button period="6">6개월</button>
+		                		<div class="calendar">
+			                		<input type="text"
+									    data-range="true"
+									    data-multiple-dates-separator=" - "
+	    								data-language="ko"
+										id="datepicker"
+									/>
+		                		</div>
+		                	</div>
+		                	<div class="search_word">
+		                		<span>검색어</span>
+		                		<input type="text" placeholder="검색어를 입력하세요." />
+		                		<button class="btn_search">검색</button>
+		                	</div>
+		                </div>
+	                	<!-- //search_wrap -->
 	                	<!-- orderhistory_wrap  -->
 	                	<div id="orderhistory_wrap" class="order_history_wrap">
 		                    <div class="tbl_top_wrap">
@@ -127,7 +152,7 @@
 		                    			<tr>
 		                    				<td rowspan="3">
 		                    					2023.11.14
-												<span class="order_num color_blue">202311150000001</span>
+												<div class="order_num color_blue">202311150000001</div>
 		                    				</td>
 		                    				<td class="product_info">
 												<div class="img_wrap">
@@ -143,7 +168,7 @@
 		                    				<td rowspan="3" class="order_status">
 												배송완료
 												<div>
-													<button class="btn_blue">배송조회</button>
+													<button class="btn_blue btn_delivery_check">배송조회</button>
 												</div>
 											</td>
 		                    			</tr>
@@ -176,7 +201,7 @@
 		                    			<tr>
 		                    				<td>
 		                    					2023.11.14
-												<span class="order_num color_blue">202311150000001</span>
+												<div class="order_num color_blue">202311150000001</div>
 		                    				</td>
 		                    				<td class="product_info">
 												<div class="img_wrap">
@@ -192,7 +217,7 @@
 		                    				<td class="order_status">
 												배송완료
 												<div>
-													<button class="btn_blue">배송조회</button>
+													<button class="btn_blue btn_delivery_check">배송조회</button>
 												</div>
 											</td>
 		                    			</tr>
@@ -212,6 +237,7 @@
 	    <!-- //mypage_container -->
 	</div>
 	<!-- //zero_container -->
+	<%@include file="deliveryTracking.jsp" %>
 	<%@include file="../common/footer.jsp" %>
 </body>
 </html>

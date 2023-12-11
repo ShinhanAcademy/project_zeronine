@@ -21,6 +21,19 @@ html, body {
 	display: block;
 	width: 100%;
 }
+.calendar {
+	width: 220px;
+}
+.calendar input {
+	width: 100%;
+	padding: 0 39px 0 15px;
+	background-image: url("../images/common/ico_calendar.png");
+	background-repeat: no-repeat;
+    background-position: 186px center;
+	background-size: 24px 24px;
+	
+}
+
 
 /* HEADER */
 header{position: fixed;left: 0;top: 0;width: 100%;box-shadow: 0px 2px 7px rgba(147, 147, 147, 0.1);background-color: #fff;min-width: 1200px;padding: 0 20px;z-index: 100;transition: 0.3s;}
