@@ -7,18 +7,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="${path}/images/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="${path}/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
     
     <!-- css lib -->
-    <link rel="stylesheet" href="${path}/css/csslib/datepicker.min.css">
+    <link rel="stylesheet" href="/css/csslib/datepicker.min.css">
     
-    <link rel="stylesheet" href="${path}/css/common.css">
+    <link rel="stylesheet" href="/css/common/common.css">
     
     <!-- js lib -->
-    <script src="${path}/js/jslib/jquery-3.7.1.min.js"></script>
-  	<script src="${path}/js/jslib/datepicker.min.js"></script>
-    <script src="${path}/js/jslib/i18n/datepicker.ko.js"></script>
+    <script src="/js/jslib/jquery-3.7.1.min.js"></script>
+  	<script src="/js/jslib/datepicker.min.js"></script>
+    <script src="/js/jslib/i18n/datepicker.ko.js"></script>
     
-    <script defer src="${path}/js/common.js"></script>
+    <script defer src="/js/common.js"></script>
     

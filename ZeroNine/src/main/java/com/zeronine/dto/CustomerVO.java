@@ -15,6 +15,7 @@ public class CustomerVO {
 	private String phoneNumber;
 	private String customerName;
 	private String address;
+	private String addressDetail;
 	private Integer point;
 	private Timestamp birthday;
 

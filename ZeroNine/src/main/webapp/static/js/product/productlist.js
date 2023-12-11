@@ -51,10 +51,8 @@ $(".raphael_cart").click(function () {
 					}
 				});
 })
-
-$("#searchbtn").click(function() {
-
-	var obj = { "q" : $("#q").val() };
+function search() {
+var obj = { "q" : $("#q").val() };
 
 	$.ajax({
             type: 'GET',
@@ -66,6 +64,16 @@ $("#searchbtn").click(function() {
               alert("에러입니다.");
             }
         });
+}
+$("#q").keypress(function(event){
+	if(event.which===13){
+	event.preventDefault();
+	search();
+	}
+});
+$("#searchbtn").click(function() {
+
+	search();
 })
 
 function chanb() {

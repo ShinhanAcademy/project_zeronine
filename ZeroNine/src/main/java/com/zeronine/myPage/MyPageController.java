@@ -1,10 +1,7 @@
 package com.zeronine.myPage;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zeronine.dto.BoardVO;
 import com.zeronine.dto.CustomerVO;
@@ -38,11 +32,15 @@ public class MyPageController {
 	// orderHistory(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@GetMapping("/myWallet.do")
 	public String myWallet(Model model) {
-		//model.addAttribute("clist", cService.selectAll());	
+		model.addAttribute("clist", cService.selectAll());
+		
+		System.out.println("clist" + model.getAttribute("clist"));
+		
 		/*
 		 * CustomerVO cust = cService.selectByName("占쏙옙占쏙옙"); logger.info("占쏙옙占쏙옙占쏙옙:" +
 		 * cust.toString());
 		 */
+		
 		return "myPage/myWallet";
 	}
 	
@@ -69,34 +67,27 @@ public class MyPageController {
 	public String likeProduct() {
 		return "myPage/likeProduct";
 	}
-	
-	// MY_ACTIVITIES 
-	// Board(占쏙옙占쏙옙 占쏙옙 占쌉시깍옙)
+		
 	@GetMapping("/createdBoard.do")
 	public void createdBoard(Model model) {
 		//String customerId = (String)session.getAttribute("customerId"); 
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77"; 
+		List<BoardVO> blist = boardService.myWriteBlist(customerId); 
 		
-	
-		
-		
-		/*
-		 * List<BoardVO> blist = boardService.myWriteBlist(customerId); List<String>
-		 * remainTime = boardService.getRemainTime(customerId);
-		 * 
-		 * model.addAttribute("blist",blist);
-		 * model.addAttribute("blistCount",blist.size());
-		 * model.addAttribute("remainTime",remainTime);
-		 */
+		model.addAttribute("blist",blist);
+		model.addAttribute("blistCount",blist.size());
 	}
 	
-	@GetMapping("/subPage/createdBoardDetail.do")
-	public void createdBoardDetail(String boardId, Model model) {
-		model.addAttribute("boardId",boardId);
-	}
-	
-	
-	
+	/*
+	 * // MY_ACTIVITIES // Board(占쏙옙占쏙옙 占쏙옙 占쌉시깍옙)
+	 * 
+	 * @GetMapping("/createdBoardBlist.do")
+	 * 
+	 * @ResponseBody public List<BoardVO> createdBoardBlist(HttpSession session) {
+	 * //String email = (String)session.getAttribute("email"); String email =
+	 * "yongsu9630@gmail.com"; List<BoardVO> blist =
+	 * boardService.myWriteBlist(email); return blist; }
+	 */
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
 	@RequestMapping("/participatedBoard.do")
@@ -118,32 +109,9 @@ public class MyPageController {
 	
 	// MY_INFOMATION
 	// personal_info(占쏙옙占쏙옙 占쏙옙占쏙옙) - vaildate_password(占쏙옙橘占싫� 확占쏙옙)
-	@PostMapping(value = "/validatePw.do", consumes = "application/json")
-	@ResponseBody
-	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
-		String email = map.get("email");
-		String password = map.get("password");
-		
-		
-		boolean isValid = cService.login(email, password) > 0;
-		
-		if(!isValid) {
-			CustomerVO invalidCustomer = new CustomerVO();
-			invalidCustomer.setCustomerName("invalid");
-			return invalidCustomer;
-		}
-		
-		return cService.selectByEmail(email);	
-	}
-	
-	@RequestMapping("/myInfo.do")
-	public void myInfo(HttpSession session, Model model) {
-		String email = (String)session.getAttribute("email");
-		
-		CustomerVO customerVo = cService.selectByEmail(email);
-		logger.info(customerVo.toString());
-		model.addAttribute("customerVo", customerVo);
-		model.addAttribute("birthdayFormmated", customerVo.getBirthday().toString().substring(0, 10));
+	@RequestMapping("/validatePassword.do")
+	public String validatePassword() {
+		return "myPage/myInfo";
 	}
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
