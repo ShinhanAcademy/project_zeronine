@@ -9,7 +9,7 @@
 
 
 </head>
-
+<!-- boardType 저장해서 페이지 뿌리기 >> 나중에 include만 존재해야 함   -->
 <body>
 	<div class="zero_container" style="padding-top: 180px;">
 		<div class="banner zn_center">
@@ -108,6 +108,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 
@@ -152,6 +153,8 @@
 				}
 			});
 		}
+		
+		
 	</script>
 
 

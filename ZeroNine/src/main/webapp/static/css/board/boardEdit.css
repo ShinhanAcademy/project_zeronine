@@ -65,6 +65,7 @@ label, .title, .context {
 	display: flex;
 	justify-content: center;
 	margin-top: 30px;
+	margin-bottom: 30px;
 	min-height: 100dvh;
 }
 
@@ -182,7 +183,14 @@ input::placeholder {
 }
 
 .date {
-	margin-right: 5px;
+	margin-right: 10px;
+	border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    font-family: Lato;
+    font-size: 15px;
+    width: 90px;
+    height: 44px;
+    text-align: center;
 }
 
 #cart, #location {
@@ -352,5 +360,23 @@ input::placeholder {
 }
 /* file upload */
 .upload_btn{
-	margin-bottom: 20px;
+	margin: 0px 20px 20px 20px;
+}
+
+.upload{
+	display: flex;
+	flex-direction: row;
+}
+
+.delete_btn{
+	width: 15px;
+	height: 15px;
+	margin-left: 10px;
+}
+
+.preview{
+	width: 70px;
+	height: 70px;
+	border-radius: 16px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
