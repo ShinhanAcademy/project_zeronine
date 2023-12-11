@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 public class BoardVO {
 	private String boardId;
 	private String authorId;
