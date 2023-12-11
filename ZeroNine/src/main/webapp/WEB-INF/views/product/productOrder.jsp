@@ -118,6 +118,7 @@
 			<button type="button" class=
 			"useptbtn" name="useptbtn" id="useptbtn">모두사용</button>
 			
+			
 			</dd>
 			</dl>
 			
