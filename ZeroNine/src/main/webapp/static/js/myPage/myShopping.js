@@ -1,4 +1,7 @@
-/*	my page -orderHistory */
+/*
+	my page -orderHistory 
+*/
+
 let currentDate = new Date();
 
 // Calendar(air-datepicker.js)
@@ -14,11 +17,11 @@ $(".search_wrap .period button").click(function(){
 	$(".mypage_container #datepicker").data("datepicker").clear();
 	$(".search_wrap .period button").removeClass("on");
 	$(this).addClass("on");
-	if($(this).attr("period") == "1") {
+	if($(this).attr("data-period") == "1") {
 		$(".mypage_container #datepicker").data('datepicker').selectDate(new Date(currentDate.setMonth(currentDate.getMonth() - 1)));
-	} else if($(this).attr("period") == "3") {
+	} else if($(this).attr("data-period") == "3") {
 		$(".mypage_container #datepicker").data('datepicker').selectDate(new Date(currentDate.setMonth(currentDate.getMonth() - 3)));
-	} else if($(this).attr("period") == "6") {
+	} else if($(this).attr("data-period") == "6") {
 		$(".mypage_container #datepicker").data('datepicker').selectDate(new Date(currentDate.setMonth(currentDate.getMonth() - 6)));
 	}
 	$(".mypage_container #datepicker").data("datepicker").selectDate(new Date());
