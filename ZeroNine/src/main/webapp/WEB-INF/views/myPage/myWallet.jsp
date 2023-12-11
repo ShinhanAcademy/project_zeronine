@@ -3,14 +3,13 @@
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/my_wallet.css">
+<link rel="stylesheet" href="/css/myPage/delivery_tracking.css">
+<script defer src="/js/myPage/myShopping.js"></script>
 <title>MyPage</title>
 </head>
 <body>
 	<%@include file="../common/header.jsp" %>
 	<!-- zero_container -->
-	<div>
-		${clist}
-	</div>
 	<div class="zero_container zn_center">
 	    <!-- mypage_container -->
 	    <div class="mypage_container">
@@ -147,7 +146,7 @@
 		                    				<td class="order_status">
 												배송중
 												<div>
-													<button class="btn_orange_underline">배송조회</button>
+													<button class="btn_orange_underline btn_delivery_check">배송조회</button>
 												</div>
 											</td>
 		                    				<td class="purchase_decision">
@@ -333,6 +332,7 @@
 	    <!-- //mypage_container -->
 	</div>
 	<!-- //zero_container -->
+	<%@include file="deliveryTracking.jsp" %>
 	<%@include file="../common/footer.jsp" %>
 </body>
 </html>
