@@ -13,11 +13,6 @@
 <body>
 
 	<div class="banner zn_center">
-
-
-
-
-
 		<div style="width: 1440px">
 			<img src="${path}/images/board/banner1.png" style="width: 100%">
 		</div>
@@ -73,10 +68,10 @@
 					</div>
 					<div class="pro_detail">
 						<ul>
-							<li><img class="user" src="${path}/images/board/user.png">
-								<span> 1명 모집 </span></li>
+							<li><img class="user" src="${path}/images/board/box.png">
+								<span> 1개 남음 </span></li>
 							<li><img class="card" src="${path}/images/board/card.png">
-								<span> 16,640원 </span></li>
+								<span>16,640원 </span> <span style="color:gray;">(개당)</span></li>
 							<li><img class="clock" src="${path}/images/board/clock.png">
 								<span> 23.11.30 23:59까지 </span></li>
 						</ul>
