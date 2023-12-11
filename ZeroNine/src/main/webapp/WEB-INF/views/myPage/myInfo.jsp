@@ -3,7 +3,7 @@
 <%@include file="../common/head.jsp"%>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %> 
-
+<link rel="stylesheet" href="${path}/css/modal/findModal.css">
 
 
 <title>MyPage</title>
@@ -123,6 +123,7 @@
 
 					<!--  -->
 				</div>
+				<div id="modal"></div>
 				<!-- //contents -->
 			</div>
 			<!-- //contents_wrap -->

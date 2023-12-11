@@ -16,10 +16,33 @@ document.getElementById("pw_check_btn").onclick = function() {
 				success : function(result){
 					console.log("result->", result);
 					if(result.customerName == "invalid") {
-						alert("비밀번호가 틀렸습니다. 다시 입력하세요.");
+						alert("틀린 비번");
+						
+						$('#modal').html(`
+							<div id="modal_wrap">
+									<div id="modal_body">
+										<p>비밀번호가 틀렸습니다.</p>		
+										<p>다시 입력해주세요.</p>	
+										<button id="modal_btn" style="
+										    font-size: 25px;
+										    border-radius: 15px;
+										">확인</button>	
+									</div>
+										
+							</div>
+							
+							<script>
+							var path = "${path}";
+							
+							$("#modal_btn").click(function(){
+								location.href = path + "/myPage/myInfo.do";
+							})
+							</script>
+						`);
+						//alert("비밀번호가 틀렸습니다. 다시 입력하세요.");
 					}
 					else {
-						alert("good");
+						//alert("good");
 						
 						var epochTime = result.birthday; // 주어진 Epoch 시간
 						const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
@@ -112,5 +135,22 @@ document.getElementById("pw_check_btn").onclick = function() {
 			
 			`;
 			 
+		}
+		
+		
+		function getModal() {
+			return 
+			`
+				<div id="modal_wrap">
+	
+						<div id="modal_body">
+							<p>비밀번호가 틀렸습니다.</p>		
+							<p>다시 입력해주세요.</p>	
+							<button id="modal_btn_pwd">확인</button>	
+						</div>
+							
+				</div>
+			`
+		
 		}
 		
