@@ -12,18 +12,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zeronine.dto.BoardVO;
-import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
+import com.zeronine.model.DeliveryService;
+import com.zeronine.model.ProductService;
 
 @Controller
 @RequestMapping("/myPage")
 public class MyPageController {
 	
 	@Autowired
-	CustomerService cService;
+	DeliveryService deliveryService;
 	@Autowired
 	BoardService_yn boardService;
+	@Autowired
+	ProductService productService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
@@ -31,23 +34,14 @@ public class MyPageController {
 	// MY_SHOPPING
 	// orderHistory(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@GetMapping("/myWallet.do")
-	public String myWallet(Model model) {
-		model.addAttribute("clist", cService.selectAll());
-		
-		System.out.println("clist" + model.getAttribute("clist"));
-		
-		/*
-		 * CustomerVO cust = cService.selectByName("占쏙옙占쏙옙"); logger.info("占쏙옙占쏙옙占쏙옙:" +
-		 * cust.toString());
-		 */
-		
-		return "myPage/myWallet";
+	public void myWallet() {
 	}
 	
 	// orderHistory(占쌍뱄옙 占쏙옙占쏙옙)
 	@RequestMapping("/orderHistory.do")
-	public String orderHistory() {
-		return "myPage/orderHistory";
+	public void orderHistory(Model model) {
+		model.addAttribute("deliveryList", deliveryService.selectAll());
+		model.addAttribute("plist", productService.selectAll());
 	}
 	
 	// orderCancelHistory(占쏙옙占�/占쏙옙품/占쏙옙환/환占쏙옙 占쏙옙占쏙옙)
