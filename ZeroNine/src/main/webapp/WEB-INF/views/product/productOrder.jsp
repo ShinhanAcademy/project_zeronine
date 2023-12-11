@@ -110,13 +110,15 @@
 			</div>
 			<div class="p_wb">
 			<div class="p_b">
-			
-			
 			<div class="p_info">
 			<dl>
 			<dt>포인트 적용</dt>
-			<dd><input type="text" value="0" name="p_poing" id="p_point" class="p_input"></dd>
+			<dd><input type="text" value="0" name="p_poing" id="p_point" class="p_input">
+			<p class="useable_point">사용가능한 적립금 <strong>1500원</strong></p> 
+			<button type="button" class=
+			"useptbtn" name="useptbtn" id="useptbtn">모두사용</button>
 			
+			</dd>
 			</dl>
 			
 			</div>
