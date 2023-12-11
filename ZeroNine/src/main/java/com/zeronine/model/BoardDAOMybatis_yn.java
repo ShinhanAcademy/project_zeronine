@@ -23,5 +23,11 @@ public class BoardDAOMybatis_yn {
 		return blist;
 	}
 
+	public List<String> getRemainTime(String customerId) {
+		List<String> remainTime = sqlSession.selectList(NAMESPACE + "getRemainTime",customerId);
+		return remainTime;
+	}
+
+	
 
 }

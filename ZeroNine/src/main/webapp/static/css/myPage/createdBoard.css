@@ -1,10 +1,17 @@
 @charset "UTF-8";
 
-.select_status{
-	width: 100px;
-    border-radius: 15px;
-    height: 30px;
-    font-size: 14px;
-    text-align: center;
-	
+.boardDetail {
+	width: 80px;
+	border-radius: 15px;
+	height: 30px;
+	font-size: 14px;
+	text-align: center;
+	border-radius: 15px;
+	color: #0083E6;
+	border: 1px solid #0083E6;
+	background: #FFF;
+}
+
+.delivery_kind{
+	margin-left: 10px;
 }
