@@ -1,7 +1,6 @@
 package com.zeronine.myPage;
 
-
-import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +21,6 @@ import com.zeronine.dto.BoardVO;
 import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
-import com.zeronine.myapp.HomeController;
 
 @Controller
 @RequestMapping("/myPage")
@@ -72,27 +69,34 @@ public class MyPageController {
 	public String likeProduct() {
 		return "myPage/likeProduct";
 	}
-		
+	
+	// MY_ACTIVITIES 
+	// Board(占쏙옙占쏙옙 占쏙옙 占쌉시깍옙)
 	@GetMapping("/createdBoard.do")
 	public void createdBoard(Model model) {
 		//String customerId = (String)session.getAttribute("customerId"); 
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77"; 
-		List<BoardVO> blist = boardService.myWriteBlist(customerId); 
 		
-		model.addAttribute("blist",blist);
-		model.addAttribute("blistCount",blist.size());
+	
+		
+		
+		/*
+		 * List<BoardVO> blist = boardService.myWriteBlist(customerId); List<String>
+		 * remainTime = boardService.getRemainTime(customerId);
+		 * 
+		 * model.addAttribute("blist",blist);
+		 * model.addAttribute("blistCount",blist.size());
+		 * model.addAttribute("remainTime",remainTime);
+		 */
 	}
 	
-	/*
-	 * // MY_ACTIVITIES // Board(占쏙옙占쏙옙 占쏙옙 占쌉시깍옙)
-	 * 
-	 * @GetMapping("/createdBoardBlist.do")
-	 * 
-	 * @ResponseBody public List<BoardVO> createdBoardBlist(HttpSession session) {
-	 * //String email = (String)session.getAttribute("email"); String email =
-	 * "yongsu9630@gmail.com"; List<BoardVO> blist =
-	 * boardService.myWriteBlist(email); return blist; }
-	 */
+	@GetMapping("/subPage/createdBoardDetail.do")
+	public void createdBoardDetail(String boardId, Model model) {
+		model.addAttribute("boardId",boardId);
+	}
+	
+	
+	
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
 	@RequestMapping("/participatedBoard.do")

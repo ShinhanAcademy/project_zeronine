@@ -17,4 +17,9 @@ public class BoardService_yn {
 		return boardDAO.myWriteBlist(customerId);
 	}
 
+	public List<String> getRemainTime(String customerId) {
+		return boardDAO.getRemainTime(customerId);
+	}
+
+
 }
