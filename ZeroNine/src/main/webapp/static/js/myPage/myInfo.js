@@ -108,7 +108,8 @@ document.getElementById("pw_check_btn").onclick = function() {
 							<div class="form_group">
 								<label>주소</label> <input type="text" id="address"
 									name="address" class="update_address" >
-								<button type="button" class="address_search_btn">
+								<button type="button" class="address_search_btn"
+								onclick="sample6_execDaumPostcode()">
 									<img src="${path}/images/auth/search.png">우편 번호 검색
 								</button>
 							</div>
