@@ -1,6 +1,7 @@
 package com.zeronine.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -18,16 +19,35 @@ public class BoardDAOMybatis_yn {
 	Logger logger = LoggerFactory.getLogger(BoardDAOMybatis_yn.class);
 	final static String NAMESPACE = "net.zeronine.board.";
 	
-	public List<BoardVO> myWriteBlist(String customerId) {
-		List<BoardVO> blist = sqlSession.selectList(NAMESPACE + "myWriteBlist",customerId);
-		return blist;
+	public List<Map<String,Object>> myWriteBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myWriteBlist",customerId);
+		return info;
 	}
 
-	public List<String> getRemainTime(String customerId) {
-		List<String> remainTime = sqlSession.selectList(NAMESPACE + "getRemainTime",customerId);
-		return remainTime;
+	public Map<String, Object> boardDetail(String boardId) {
+		Map<String,Object> info = sqlSession.selectOne(NAMESPACE + "boardDetail",boardId);
+		return info;
 	}
 
+	public int boardpCount(String boardId) {
+		int count = sqlSession.selectOne(NAMESPACE + "boardpCount", boardId);
+		return count;
+	}
+
+	public int numOfParticipant(String boardId) {
+		int participant = sqlSession.selectOne(NAMESPACE + "numOfParticipant", boardId);
+		return participant;
+	}
+
+	public List<Map<String, Object>> myWriteFreeBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myWriteFreeBlist",customerId);
+		return info;
+	}
+
+	public Map<String, Object> freeBoardDetail(String boardId) {
+		Map<String,Object> info = sqlSession.selectOne(NAMESPACE + "freeBoardDetail",boardId);
+		return info;
+	}
 	
 
 }
