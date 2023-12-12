@@ -2,6 +2,7 @@ package com.zeronine.model;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -87,6 +88,10 @@ public class CustomerDAOMybatis {
 		String customerId = sqlSession.selectOne(NAMESPACE + "getCustomerId", info);
 		return customerId;
 
+	}
+	
+	public boolean updateCustomerInfo(Map<String, String> infos) {
+		return sqlSession.update(NAMESPACE + "updateCustomerInfo", infos) == 1;
 	}
 
 }

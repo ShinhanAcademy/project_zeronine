@@ -8,6 +8,48 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <title>MyPage</title>
+<script>
+		function updateCustomerInfo() {
+			alert("updateCustomerInfo()!!!!");
+			var path = "${path}";
+			
+			var email = $("#email").val();
+			var password = $("#password").val();
+			var phoneNumber = $("#phone").val();
+			var address = $("#address").val();
+			var addressDetail = $("#address_detail").val();
+			var birthday = $("#date").val();
+			
+			
+			var obj = {
+					"email" : email,
+					"password": password,
+					"phoneNumber" : password,
+					"address" : address,
+					"addressDetail" : addressDetail,
+					"birthday" : birthday
+			}
+			
+			$.ajax({
+				url : path + "/myPage/updateCustomerInfo.do",
+				data: JSON.stringify(obj),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				type: "POST",
+				success : function(result) {
+					if(result == true) {
+						alert("수정이 완료되었습니다.");			
+					}
+					else {
+						("수정 실패했습니다.");
+					}
+				},
+				error : function() {
+					alert("에러가 발생했습니다.");
+				}
+			})
+		}
+	</script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -143,6 +185,8 @@
 	<script src="${path}/js/myPage/myInfo.js" type="text/javascript">
 	</script>
 	
+	
+	
 	<script>
 	    function sample6_execDaumPostcode() {
 	        new daum.Postcode({
@@ -200,16 +244,18 @@
 		  	var password_check = document.getElementById("password_check");
 		  	if(password.value != password_check.value) { // 만일 두 인풋 필드값이 같지 않을 경우
 		    // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
-		    password_check.setCustomValidity("비밀번호가 일치하지 않습니다."); 
-		  } 
-		  else { // 만일 두 인풋 필드값이 같을 경우
+		    	password_check.setCustomValidity("비밀번호가 일치하지 않습니다."); 
+		  	} 
+		  	else { // 만일 두 인풋 필드값이 같을 경우
 		    // 오류가 없으면 메시지를 빈 문자열로 설정해야한다. 오류 메시지가 비어 있지 않은 한 양식은 유효성 검사를 통과하지 않고 제출되지 않는다.
 		    // 따라서 빈값을 주어 update_btn 처리되게 한다
-		    password_check.setCustomValidity(''); 
-		  }
+		  	  password_check.setCustomValidity(''); 
+		  	}
 		}
 
 	</script>
+	
+
 	
 </body>
 </html>
