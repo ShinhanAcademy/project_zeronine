@@ -90,7 +90,8 @@ function makeUpdateForm(result) {
 					<div class="form_group">
 						<label>새 비밀번호</label> <input type="password" name="password"
 							id="password" placeholder="새 비밀번호를 입력하세요."
-							onkeyup ="validatePassword()"
+							onchange ="validatePassword()"
+							required
 						>
 					</div>
 					<div class="form_group">
@@ -98,9 +99,11 @@ function makeUpdateForm(result) {
 						<input type="password"
 							name="password_check" id="password_check"
 							placeholder="새 비밀번호를 다시 입력하세요."
-							onkeyup="validatePassword()"	
+							onchange="validatePassword()"
+							required	
 						>
 					</div>
+					
 					<div class="form_group">
 						<label>휴대폰 번호</label> <input type="tel" id="phone" name="phone"
 							pattern="[0-9]{11}" placeholder="(-)를 제외하고 휴대폰 번호를 입력하세요."
@@ -130,8 +133,9 @@ function makeUpdateForm(result) {
 							value="${result.birthdayFormmated}"
 							required>
 					</div>
+					
 				</div>
-				<button type="button" id="update_btn">수정하기</button>
+				<button type="button" id="update_btn" onclick="updateCustomerInfo()">수정하기</button>
 			</form>
 
 		</div>
@@ -139,32 +143,10 @@ function makeUpdateForm(result) {
 
 		<!--  -->
 	</div>
-	
 	`;
 		
 }
 
-document.getElementById("update_btn").onclick = function() {
-	var obj = {}
 
-	$.ajax(
-		{
-			url : path + "" + "",
-			data : JSON.stringify(obj),
-			contentType: "application/json; charset=utf-8",
-			dataType: "json",
-			type: "POST",
-			success: function(result) {
-				alert("ㅇㅇ");
-			},
-			error : function() {
-				alert("ㄴㄴ");
-			}
-
-		}
-	);
-
-}
-		
 
 		
