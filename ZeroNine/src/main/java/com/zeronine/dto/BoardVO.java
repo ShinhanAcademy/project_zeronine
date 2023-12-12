@@ -53,10 +53,8 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getUploadTime() {
-		LocalDate localDate = uploadTime.toLocalDateTime().toLocalDate();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		String uploadTime = localDate.format(formatter);
+	
+	public Timestamp getUploadTime() {
 		return uploadTime;
 	}
 	public void setUploadTime(Timestamp uploadTime) {

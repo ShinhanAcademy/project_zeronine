@@ -105,14 +105,17 @@
 					<!-- contents -->
 					<div class="contents">
 						<div class="tbl_wrap">
+						
+						<div id="hereContents">
 							<div class="tbl_top_wrap">
 								<div class="total_count">
-									총 <span>${blistCount}</span>건
+								
+									총 <span>${count}</span>건
 								</div>
 								<div class="delivery_kind">
-								<span id="fast_delivery">즉배</span>
+								<span class="btn_deli on" id="fastDelivery">즉배</span>
 								<span>|</span>
-								<span id="free_delivery">무배</span>
+								<span class="btn_deli" id="freeDelivery">무배</span>
 								</div>
 								<div class="btn_wrap">
 									<button class="btn_more">채팅방으로 가기 ></button>
@@ -122,10 +125,9 @@
 							<table class="tbl_chat_wrap">
 							
 								<colgroup>
-									<col width="10%" />
-									<col width="15%" />
+									<col width="20%" />
 									<col width="35%" />
-									<col width="10%" />
+									<col width="15%" />
 									<col width="18%" />
 									<col width="12%" />
 									<!-- 
@@ -136,8 +138,6 @@
 								</colgroup>
 								<thead>
 									<tr>
-										<th class="check_all txt_left"><input type="checkbox" />
-											전체선택</th>
 										<th>상품</th>
 										<th>게시글 제목</th>
 										<th>게시일</th>
@@ -146,13 +146,12 @@
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach items="${blist}" var="board" varStatus="status">
+								<c:forEach items="${info}" var="board">
 								<tr>
-										<td class="check_item"><input type="checkbox" /></td>
-										<td>또라몽</td>
+										<td><img class="product_image" src="${board.imagePath}"></td>
 											<td>${board.title}</td>
 											<td>${board.uploadTime}</td>
-											<td>${remainTime[status.index]}</td>
+											<td>${board.remainTime}</td>
 											<td class="read_status">
 										<input id="hiddenBoardId" type="hidden" value="${board.boardId}">
 										<button class="boardDetail">상세보기</button>	
@@ -161,12 +160,8 @@
 									</c:forEach>
 								</tbody>	
 							</table>
-							
-							<div class="tbl_bottom_wrap">
-								<div class="btn_wrap">
-									<button class="btn_del">삭제하기</button>
-								</div>
 							</div>
+							
 						</div>
 						<!-- //chat_list -->
 					</div>

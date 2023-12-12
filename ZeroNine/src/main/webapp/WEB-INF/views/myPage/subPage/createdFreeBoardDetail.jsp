@@ -9,7 +9,7 @@
 				<img src="${path}/images/common/close.png">
 			</button>
 			<div class="detail_chn_area">
-				<img class="detail_img" src=${info.imagePath}>
+				빈칸
 				<div class="detail_pro_detail">
 					<p class="title">${info.title}</p>
 					<hr>
