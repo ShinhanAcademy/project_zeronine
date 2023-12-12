@@ -9,9 +9,6 @@
 </head>
 <body>
 	<%@include file="../common/header.jsp" %>
-	<div>
-		${deliveryList}
-	</div>
 	<!-- zero_container -->
 	<div class="zero_container zn_center">
 	    <!-- mypage_container -->
@@ -152,7 +149,7 @@
 		                    			</tr>
 		                    		</thead>
 		                    		<tbody>
-										<c:forEach items="${deliveryList}" var="item">
+										<%-- <c:forEach items="${deliveryList}" var="item">
 											<tr>
 			                    				<td>
 			                    					${item.purchaseDateTime}
@@ -176,7 +173,7 @@
 													</div>
 												</td>
 			                    			</tr>
-										</c:forEach>
+										</c:forEach> --%>
 		                    			<tr>
 		                    				<td rowspan="3">
 		                    					2023.11.14
