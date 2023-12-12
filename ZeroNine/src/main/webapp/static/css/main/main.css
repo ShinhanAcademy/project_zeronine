@@ -1,7 +1,9 @@
 @charset "utf-8";
-@charset "utf-8";
 
-/****** main *********************/
+/****************
+	  MAIN
+****************/
+
 /*
 intro_wrap
 */
@@ -377,9 +379,6 @@ sub_visual_wrap
     width: 100%;
 }
 
-
-
-
 #zeronine_wrap .bx-wrapper {
 	margin: 0;
 	box-shadow: none;
@@ -401,9 +400,9 @@ sub_visual_wrap
 }
 #zeronine_wrap .bx-wrapper .bx-next {
     right: 35px;
-    background: url("../images/main/ico_arrow_right.png") center center no-repeat;
+    background: url("../../images/main/ico_arrow_right.png") center center no-repeat;
 }
 #zeronine_wrap .bx-wrapper .bx-prev {
 	left: 35px;
-    background: url("../images/main/ico_arrow_left.png") center center no-repeat;
+    background: url("../../images/main/ico_arrow_left.png") center center no-repeat;
 }

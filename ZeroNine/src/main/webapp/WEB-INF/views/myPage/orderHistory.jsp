@@ -149,6 +149,31 @@
 		                    			</tr>
 		                    		</thead>
 		                    		<tbody>
+										<%-- <c:forEach items="${deliveryList}" var="item">
+											<tr>
+			                    				<td>
+			                    					${item.purchaseDateTime}
+													<div class="order_num color_blue">${item.deliveryId}</div>
+			                    				</td>
+			                    				<td class="product_info">
+													<div class="img_wrap">
+														<img src="${path}/images/mypage/img_product_07.png" alt="product image" />
+													</div>
+													<div class="detail">
+														<div class="brand_name">에스쁘아</div>
+														<div class="product_name">[한정기획/베스트립증정]에스쁘아 비벨벳 커버쿠션 뉴클래스 미니립 2종[한정기획/베스트립증정]에스쁘아 비벨벳 커버쿠션 뉴클래스 미니립 2종</div>
+													</div>
+												</td>
+			                    				<td>3</td>
+			                    				<td class="price color_red ">66,000원</td>
+			                    				<td class="order_status">
+													배송완료
+													<div>
+														<button class="btn_blue btn_delivery_check">배송조회</button>
+													</div>
+												</td>
+			                    			</tr>
+										</c:forEach> --%>
 		                    			<tr>
 		                    				<td rowspan="3">
 		                    					2023.11.14

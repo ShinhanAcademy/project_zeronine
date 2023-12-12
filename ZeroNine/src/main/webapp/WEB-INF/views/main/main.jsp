@@ -18,19 +18,29 @@
 		        <div class="inner zn_center">
 			        <ul class="bxslider">
 					    <li>
-							<img src="${path}/images/main/mainvisual_01.png" alt="main visual">
+					    	<a href="${path}/main/introZeroNine.do">
+								<img src="${path}/images/main/mainvisual_01.png" alt="main visual">
+							</a>
 					    </li>
 					    <li>
-							<img src="${path}/images/main/mainvisual_02.png" alt="main visual">
+					    	<a href="${path}/main/introZeroNine.do">
+								<img src="${path}/images/main/mainvisual_02.png" alt="main visual">
+							</a>
 					    </li>
 					    <li>
-							<img src="${path}/images/main/mainvisual_03.png" alt="main visual">
+					    	<a href="${path}/main/introZeroNine.do">
+								<img src="${path}/images/main/mainvisual_03.png" alt="main visual">
+							</a>
 					    </li>
 					    <li>
-							<img src="${path}/images/main/mainvisual_04.png" alt="main visual">
+					    	<a href="${path}/main/introZeroNine.do">
+								<img src="${path}/images/main/mainvisual_04.png" alt="main visual">
+							</a>
 					    </li>
 					    <li>
-							<img src="${path}/images/main/mainvisual_05.png" alt="main visual">
+					    	<a href="${path}/main/introZeroNine.do">
+								<img src="${path}/images/main/mainvisual_05.png" alt="main visual">
+							</a>
 					    </li>
 					</ul>
 		        </div>

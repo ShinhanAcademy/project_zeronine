@@ -2,9 +2,12 @@ $(function(){
 	$(document).ready(function(){
 		$('.bxslider').bxSlider({
 			auto: true,
-			autoHover: true,
+			//autoHover: true,
+			mode:'fade',
 			controls: true,
-			speed: 500
+			touchEnabled : (navigator.maxTouchPoints > 0),
+    		//touchEnabled : false,
+			speed: 300
 		});
 	});
 	

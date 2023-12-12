@@ -21,7 +21,12 @@ public class BoardDAOMybatis_jy {
 		List<Map<String, Object>> info =  sqlSession.selectList(namespace+"selectfastBoardList");
 		System.out.println(info);
 		return info;
-		
+	}
+	
+	public Map<String, Object> selectDetailView(String boardId){
+		Map<String, Object> detail = sqlSession.selectOne(namespace+"selectDetailView", boardId);
+		System.out.println(detail);
+		return detail;
 	}
 	
 	

@@ -1,6 +1,10 @@
 @charset "UTF-8";
 
-/* mypage_common */
+/*******************************************
+	mypage_common(공통)
+*******************************************/
+
+/* common */
 .color_red {
 	color: #FF2828 !important;
 }
@@ -38,6 +42,8 @@
 	color: #FF5C00;
 	border-bottom: 1px solid #FF5C00;
 }
+
+/* mypage_container */
 .mypage_container {
     display: flex;
     padding: 64px 30px 150px;
@@ -177,9 +183,7 @@
     margin-bottom: 20px;
 }
 
-/*
-contents
-*/
+/* contents */
 .mypage_container .contents + .con_tit {
 	margin-top: 70px;
 }
