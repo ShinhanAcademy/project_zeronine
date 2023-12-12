@@ -14,7 +14,16 @@ public class BoardService_jy {
 	
 	public List<Map<String, Object>> selectfastBoardList() {
 		List<Map<String, Object>> infoList = boardDAO_jy.selectfastBoardList();
+		System.out.println(infoList);
 		return infoList;
 	}
+	
+	public Map<String, Object> selectDetailView(String boardId) {
+		Map<String, Object> detail = boardDAO_jy.selectDetailView(boardId);
+		System.out.println("이것은 디테일 정보" + detail);
+		return detail;
+	}
+	
+
 
 }

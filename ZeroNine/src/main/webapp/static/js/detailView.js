@@ -1,7 +1,27 @@
 //fast_board
+$(".detail_btn").on("click",
+
 function f_btn(){
-	$("#detail_modal_wrap").css("display","flex");
-}
+	var board_id = $(this).val();
+	console.log(board_id);
+
+	
+	
+	$.ajax({
+		type : "post",
+		url : "/board/boardDetail.do",
+		data: {boardId : board_id},
+		success: function(response){
+	
+			$("#modal").html(response);
+			$("#detail_modal_wrap").css("display","flex");
+			
+		},
+		error: function(error) {
+		alert("해당 글은 더 이상 존재하지 않습니다.");
+		}
+	});
+});
 
 //free_delivery
 function fd_btn(){
