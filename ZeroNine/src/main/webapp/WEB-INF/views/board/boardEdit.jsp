@@ -20,7 +20,7 @@
 
 		<div id="edit">
 			<div class="edit_content">
-				<div class="content">
+				<%-- <div class="content">
 					<div class="info_title">게시글 작성</div>
 					<label>게시판 유형</label> <select name="board_type" id="board_type"
 						onchange="boardType()">
@@ -105,8 +105,8 @@
 					<div class="done">
 						<button class="done_btn" onclick="editCom()">작성완료</button>
 					</div>
-				</div>
-			</div>
+				</div>--%>
+			</div> 
 		</div>
 
 	</div>
@@ -139,7 +139,7 @@
 				$.ajax({
 					url : '/board/oboardedit.do',
 					success : function(responseData) {
-						$(".edit_content").html(responseData)
+						$(".edit_content").html(responseData);
 					}
 				});
 			}

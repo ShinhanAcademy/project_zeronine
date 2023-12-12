@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.zeronine.model.BoardDAOMybatis_jy;
 import com.zeronine.model.BoardService_jy;
-import com.zeronine.model.ProductDAOMybatis;
-import com.zeronine.model.ProductService;
 
 @Controller
 @RequestMapping("/board")
@@ -70,13 +68,19 @@ public class BoardController {
 		return "board/completeEdit";
 	}
 	
-	@Autowired
-	BoardDAOMybatis_jy dao;
+	@RequestMapping("/boardDetail.do")
+	public String boardDetail(@RequestParam("boardId") String board_id ,Model model) {		
+		Map<String, Object> detail = boardService.selectDetailView(board_id);
+		model.addAttribute("detail", detail);
+		
+		logger.info("이건은 보드 아이디 : {}", board_id);
+		logger.info("이것은 디테일 정보: {}", detail);
+		
+		return "common/detailView";
+	}
 	
-	/*
-	 * @RequestMapping("/completeedit2.do") public String compliteEdit2() {
-	 * dao.function(); return "board/completeEdit"; }
-	 */
+	
+
 	
 }
  

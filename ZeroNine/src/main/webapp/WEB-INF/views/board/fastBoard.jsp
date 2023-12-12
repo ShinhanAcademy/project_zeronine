@@ -18,7 +18,7 @@
 			<img src="${path}/images/board/banner1.png" style="width: 100%">
 		</div>
 
-		<!-- 데이터 연결해서 loop 도는지 확인하기 -->
+	
 		<div class="search">
 			<ul>
 				<li>
@@ -47,7 +47,7 @@
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px;"
-						href="${path}/board/boardedit.do">글쓰기</a>
+						href="${path}/board/boardedit.do" data-value="fast_board">글쓰기</a>
 					</span>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 					<div class="pro_info">
 						<ul>
 							<li><img class="pro_img"
-								src='${info["imagePath"]}'></li>
+								src="${info.imagePath}"></li>
 						</ul>
 
 
@@ -72,9 +72,9 @@
 						<div class="pro_detail">
 							<ul>
 								<li><img class="user" src="${path}/images/board/box.png">
-									<span> ${info.pCount - info.pickCount} 남음 </span></li>
+									<span> ${info.pCount - info.totalpickCount} 남음 </span></li>
 								<li><img class="card" src="${path}/images/board/card.png">
-									<span><fmt:formatNumber value="${info.price/(info.pCount - info.pickCount)}" type="number"/>원 </span> <span style="color: gray;">(개당)</span></li>
+									<span><fmt:formatNumber value="${(info.price/info.pCount)-((info.price/info.pCount)%10)}" type="number"/>원 </span> <span style="color: gray;">(개당)</span></li>
 								<li><img class="clock" src="${path}/images/board/clock.png">
 									<fmt:parseDate value="${info.finishTime}" var="parsedDate" pattern="yyyy-MM-dd HH:mm"/>
 									<span><fmt:formatDate value="${parsedDate}" pattern="YY년 MM월 dd일 HH:mm" /> 까지 </span></li>
@@ -85,8 +85,7 @@
 								<button class="like" type="button">
 									<img class="like" src="${path}/images/board/heart.png">
 								</button>
-								<button id="fast_detail_btn" class="detail_btn"
-									onclick="f_btn()">보기</button>
+								<button id="fast_detail_btn" class="detail_btn" value="${info.boardId}" >보기</button>
 							</li>
 						</ul>
 					</div>
@@ -94,17 +93,14 @@
 				</div>
 			</c:forEach>
 		</div>
+		<div id="modal"></div>
 		</div>
 	</div>
 
 
 	<%@include file="../common/footer.jsp"%>
-	<%@include file="../common/detailView.jsp"%>
 	<script src="../js/detailView.js"></script>
-	<script>
-		$("#detail_modal_wrap").hide();
-	</script>
-
+	
 </body>
 </html>
 
