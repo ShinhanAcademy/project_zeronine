@@ -1,11 +1,18 @@
 package com.zeronine.dto;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class DeliveryVO {
 	private String deliveryId;
 	private String customerId;
