@@ -11,6 +11,9 @@
 	<%@include file="../common/header.jsp" %>
 	<!-- zero_container -->
 	<div class="zero_container zn_center">
+	<div>
+	${orderHistoryAll}
+	</div>
 	    <!-- mypage_container -->
 	    <div class="mypage_container">
 	        <!-- zero_sbn -->
