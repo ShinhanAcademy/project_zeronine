@@ -48,11 +48,15 @@ public class MyPageController {
 	public void myWallet() {
 	}
 	
+
 	// orderHistory(占쌍뱄옙 占쏙옙占쏙옙)
 	@RequestMapping("/orderHistory.do")
-	public void orderHistory(Model model) {
-		model.addAttribute("deliveryList", deliveryService.selectAll());
-		model.addAttribute("plist", productService.selectAll());
+	public void orderHistory(Model model, HttpSession session) {
+		String customerId = (String) session.getAttribute("customerId");
+		System.out.println("ID = " + customerId);
+
+		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));
+		System.out.println("너는 무엇이냐" + deliveryService.orderHistoryAll(customerId));
 	}
 	
 	// orderCancelHistory(占쏙옙占�/占쏙옙품/占쏙옙환/환占쏙옙 占쏙옙占쏙옙)
