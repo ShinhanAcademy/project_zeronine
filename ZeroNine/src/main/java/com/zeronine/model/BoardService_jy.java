@@ -12,10 +12,10 @@ public class BoardService_jy {
 	@Autowired
 	BoardDAOMybatis_jy boardDAO_jy;
 	
-	public List<Map<String, Object>> selectfastBoardList() {
-		List<Map<String, Object>> infoList = boardDAO_jy.selectfastBoardList();
-		System.out.println(infoList);
-		return infoList;
+	public List<Map<String, Object>> selectFastBoardList() {
+		List<Map<String, Object>> infoFList = boardDAO_jy.selectFastBoardList();
+		System.out.println(infoFList);
+		return infoFList;
 	}
 	
 	public Map<String, Object> selectDetailView(String boardId) {
@@ -24,6 +24,10 @@ public class BoardService_jy {
 		return detail;
 	}
 	
+	public List<Map<String, Object>> selectOneBoardList(){
+		List<Map<String, Object>> infoOne = boardDAO_jy.selecOneBoardList();
+		return infoOne;
+	}
 
 
 }
