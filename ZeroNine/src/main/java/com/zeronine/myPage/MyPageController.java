@@ -129,10 +129,10 @@ public class MyPageController {
 	public void createdFreeBoardDetail(String boardId, Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);
 		int pCount = boardService.boardpCount(boardId);
-		int participant = boardService.numOfParticipant(boardId);
+		//int participant = boardService.numOfParticipant(boardId);
 		model.addAttribute("info", info);
 		model.addAttribute("pCount", pCount);
-		model.addAttribute("participant", participant);
+		//model.addAttribute("participant", participant);
 	}
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
