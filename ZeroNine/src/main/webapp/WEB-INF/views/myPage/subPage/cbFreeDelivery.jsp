@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="tbl_top_wrap">
 	<div class="total_count">
 
@@ -40,7 +41,12 @@
 	<tbody>
 		<c:forEach items="${info}" var="board">
 			<tr>
-				<td>${board.total}</td>
+				<td>
+					<div class="pie-chart">
+						<span class="rate"><fmt:formatNumber type="percent"
+								maxIntegerDigits="3" value="${board.total/50000}" /></span>
+					</div>
+				</td>
 				<td>${board.title}</td>
 				<td>${board.uploadTime}</td>
 				<td>${board.remainTime}</td>

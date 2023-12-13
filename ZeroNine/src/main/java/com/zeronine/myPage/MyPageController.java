@@ -41,14 +41,14 @@ public class MyPageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
-
-	// MY_SHOPPING
+	/* ****************************
+			MY_SHOPPING
+	 ****************************** */
 	// orderHistory(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@GetMapping("/myWallet.do")
 	public void myWallet() {
 	}
 	
-
 	// orderHistory(占쌍뱄옙 占쏙옙占쏙옙)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory(Model model, HttpSession session) {
@@ -76,7 +76,17 @@ public class MyPageController {
 	public String likeProduct() {
 		return "myPage/likeProduct";
 	}
-		
+	
+
+	/* ****************************
+			MY_ACTIVITIES
+	 ****************************** */
+
+	// chatList(채占쏙옙 占쏙옙占�)
+	@RequestMapping("/ecoCare.do")
+	public void ecoCare() {
+	}
+	
 	@GetMapping("/createdBoard.do")
 	public void createdBoard(Model model) {
 		// String customerId = (String)session.getAttribute("customerId");
@@ -119,10 +129,10 @@ public class MyPageController {
 	public void createdFreeBoardDetail(String boardId, Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);
 		int pCount = boardService.boardpCount(boardId);
-		int participant = boardService.numOfParticipant(boardId);
+		//int participant = boardService.numOfParticipant(boardId);
 		model.addAttribute("info", info);
 		model.addAttribute("pCount", pCount);
-		model.addAttribute("participant", participant);
+		//model.addAttribute("participant", participant);
 	}
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
@@ -131,10 +141,6 @@ public class MyPageController {
 		return "myPage/participatedBoard";
 	}
 
-	// chatList(채占쏙옙 占쏙옙占�)
-	@RequestMapping("/chatList.do")
-	public void chatList() {
-	}
 
 	// likeBoard(占쏙옙占쏙옙 占쌉시깍옙)
 	@RequestMapping("/likeBoard.do")
@@ -142,14 +148,19 @@ public class MyPageController {
 		return "myPage/likeBoard";
 	}
 	
+	// chatList(채占쏙옙 占쏙옙占�)
+	@RequestMapping("/chatList.do")
+	public void chatList() {
+	}
 	
-	// MY_INFOMATION
+	/* ****************************
+			MY_INFOMATION
+	 ****************************** */
 	@PostMapping(value = "/validatePw.do", consumes = "application/json")
 	@ResponseBody
 	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
 		String email = map.get("email");
 		String password = map.get("password");
-
 
 		boolean isValid = cService.login(email, password) > 0;
 

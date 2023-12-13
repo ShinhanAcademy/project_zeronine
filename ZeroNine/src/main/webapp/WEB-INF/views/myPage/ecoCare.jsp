@@ -26,11 +26,11 @@
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
 	                <ul>
-   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
+   	                    <li class="on"><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
 	                    <li><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
 	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
 	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
-	                    <li class="on"><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
+	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
@@ -96,7 +96,7 @@
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
-	                <div class="con_tit">채팅 목록</div> <%-- has_line --%>
+	                <div class="con_tit">나의 에코케어</div> <%-- has_line --%>
 	                <!-- contents -->
 	                <div class="contents">
 	                    <!-- chat_list -->
