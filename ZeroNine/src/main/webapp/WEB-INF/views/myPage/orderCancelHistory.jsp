@@ -26,10 +26,11 @@
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
 	                <ul>
+   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
 	                    <li><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
 	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
-	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
+	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
