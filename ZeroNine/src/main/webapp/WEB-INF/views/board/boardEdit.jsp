@@ -20,14 +20,14 @@
 
 		<div id="edit">
 			<div class="edit_content">
-				<%-- <div class="content">
+				 <div class="content">
 					<div class="info_title">게시글 작성</div>
 					<label>게시판 유형</label> <select name="board_type" id="board_type"
 						onchange="boardType()">
 						<option disabled="disabled">==게시판 선택==</option>
-						<option value="fast_board">슝슝 즉배</option>
-						<option value="free_delivery_board">알뜰 무배</option>
-						<option value="one_to_one_board">1:1 직거래</option>
+						<option class="board_name" value="${boardType}"></option>
+						<!-- <option value="free_delivery_board">알뜰 무배</option>
+						<option value="one_to_one_board">1:1 직거래</option> -->
 					</select>
 					<div class="due_date">
 						<ul>
@@ -105,7 +105,7 @@
 					<div class="done">
 						<button class="done_btn" onclick="editCom()">작성완료</button>
 					</div>
-				</div>--%>
+				</div>
 			</div> 
 		</div>
 
@@ -115,29 +115,31 @@
 
 
 	<script>
-		function boardType() {
-			var boardtype = document.getElementById("board_type");
-			var value = boardtype.options[boardtype.selectedIndex].value;
+	window.onload =	
+	function boardType() {
+			var boardtype = $(".board_name").val();
+			/* var value = boardtype.value; */
 
-			console.log(value);
+			console.log(boardtype);
 
-			if (value == "fast_board") {
+			if (boardtype == "fastBoard") {
 				$.ajax({
-					url : '/board/fboardedit.do',
+					url : '/board/fastBoard.do',
+					success : function(responseData) {
+						$(".edit_content").html(responseData)
+						$(".board_name").text("슝슝 즉배")
+					}
+				});
+			} else if (boardtype == "freeDeliveryBoard") {
+				$.ajax({
+					url : '/board/freeDeliveryBoard.do',
 					success : function(responseData) {
 						$(".edit_content").html(responseData)
 					}
 				});
-			} else if (value == "free_delivery_board") {
+			} else if (boardtype == "oneTooneBoard") {
 				$.ajax({
-					url : '/board/fdboardedit.do',
-					success : function(responseData) {
-						$(".edit_content").html(responseData)
-					}
-				});
-			} else if (value == "one_to_one_board") {
-				$.ajax({
-					url : '/board/oboardedit.do',
+					url : '/board/oneTooneBoard.do',
 					success : function(responseData) {
 						$(".edit_content").html(responseData);
 					}
@@ -145,6 +147,7 @@
 			}
 			;
 		};
+	
 		function editCom() {
 			$.ajax({
 				url : '/board/completeedit.do',

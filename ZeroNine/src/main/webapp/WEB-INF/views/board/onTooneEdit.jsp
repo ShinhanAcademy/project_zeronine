@@ -6,9 +6,9 @@
 	<label>게시판 유형</label> <select name="board_type" id="board_type"
 		onchange="boardType()">
 		<option disabled="disabled">==게시판 선택==</option>
-		<option value="fast_board">슝슝 즉배</option>
-		<option value="free_delivery_board">알뜰 무배</option>
-		<option value="one_to_one_board" selected="selected">1:1 직거래</option>
+		<option value="fastBoard">슝슝 즉배</option>
+		<option value="freeDeliveryBoard">알뜰 무배</option>
+		<option value="oneTooneBoard" selected="selected">1:1 직거래</option>
 
 	</select>
 

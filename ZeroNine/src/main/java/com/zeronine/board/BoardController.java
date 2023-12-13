@@ -48,18 +48,20 @@ public class BoardController {
 
 	//board_edit
 	@RequestMapping("/boardedit.do")
-	public String editBoard() {
+	public String editBoard(@RequestParam(value="boardType") String boardType, Model model) {
+		logger.info("보드 타입 :{}   ", boardType);
+		model.addAttribute("boardType", boardType);
 		return "board/boardEdit";
 	}
-	@RequestMapping("/fboardedit.do")
+	@RequestMapping("/fastBoard.do")
 	public String editFBoard() {
 		return "board/fastEdit";
 	}
-	@RequestMapping("/fdboardedit.do")
+	@RequestMapping("/freeDeliveryBoard.do")
 	public String editFDBoard() {
 		return "board/freeDeliveryEdit";
 	}
-	@RequestMapping("/oboardedit.do")
+	@RequestMapping("/oneTooneBoard.do")
 	public String editOBoard() {
 		return "board/onTooneEdit";
 	}
