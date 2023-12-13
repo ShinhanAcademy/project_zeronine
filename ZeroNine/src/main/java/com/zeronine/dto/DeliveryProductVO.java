@@ -1,7 +1,5 @@
 package com.zeronine.dto;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +10,12 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeliveryVO {
+public class DeliveryProductVO {
 	private String deliveryId;
-	private String customerId;
-	private Timestamp purchaseDateTime;
-	private String address;
-	private String deliveryStatus;
-	private Timestamp deliveryTime;
-	private boolean isRefundable;
+	private String productId;
+	private Integer pickCount;
+	private String deliveryProductId;
+	private Integer productCount;
 }
 
 

@@ -3,7 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.delivery">
-	<select id="selectAll" resultType="deliveryVO">
-  		select * from delivery
+
+	<select id="orderHistoryAll" parameterType="String"
+		resultType="map">
+		select 
+			delivery."purchaseDateTime",
+			delivery."deliveryStatus",
+			"deliveryProduct"."productCount",
+			product."productId",
+			product.brand,
+			product."pName",
+			product.price,
+			"productMainImage"."imagePath"
+		from delivery join "deliveryProduct" on delivery."deliveryId" = "deliveryProduct"."deliveryId"
+					  join product on "deliveryProduct"."productId" = product."productId"
+					  join "productMainImage" on "deliveryProduct"."productId" = "productMainImage"."productId"
+		where delivery."customerId" = cast(#{customerId} as UUID)
 	</select>
+
 </mapper>
