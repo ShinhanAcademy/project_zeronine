@@ -26,16 +26,19 @@
 					<button class="memberbtn" type="button" id="join_btn">회원가입</button>
 				</div>
 				<div class="login-bottom">
-					<div class="naverimg" onclick="window.location.href='/auth/naverLogin.do'" style="cursor:pointer;">
-					    <img src="${path}/images/login/loginnaverimg.png">
-					</div>
-					<span class="nklogin-bottom">네이버 간편로그인</span>
+					<button class="naver_login" onclick="location.href='/auth/naverLogin.do'">
+						<div class="naverimg"  style="cursor:pointer;">
+					    	<img src="${path}/images/login/loginnaverimg.png">
+						</div>
+						<span class="nklogin-bottom" >네이버 간편로그인</span>
+					</button>
 				
-					<div class="kakaoimg">
-						<img src="${path}/images/login/loginkakakoimg.png">
-					</div>
-					<span class="nklogin-bottom">카카오 간편로그인</span>
-					
+					<button class="kakao_login" onclick="location.href='#'">
+						<div class="kakaoimg">
+							<img src="${path}/images/login/loginkakakoimg.png">
+						</div>
+						<span class="nklogin-bottom">카카오 간편로그인</span>
+					</button>
 				</div>
 			</div>
 		</form>

@@ -17,16 +17,21 @@ public class BoardDAOMybatis_jy {
 	Logger logger= LoggerFactory.getLogger(BoardDAOMybatis_jy.class);
 	final static String namespace = "net.zeronine.board.";
 	
-	public List<Map<String, Object>> selectfastBoardList(){
-		List<Map<String, Object>> info =  sqlSession.selectList(namespace+"selectfastBoardList");
-		System.out.println(info);
-		return info;
+	public List<Map<String, Object>> selectFastBoardList(){
+		List<Map<String, Object>> infoFb =  sqlSession.selectList(namespace+"selectFastBoardList");
+		System.out.println(infoFb);
+		return infoFb;
 	}
 	
 	public Map<String, Object> selectDetailView(String boardId){
 		Map<String, Object> detail = sqlSession.selectOne(namespace+"selectDetailView", boardId);
 		System.out.println(detail);
 		return detail;
+	}
+	
+	public List<Map<String, Object>> selecOneBoardList() {
+		List<Map<String, Object>> infoOne = sqlSession.selectList(namespace+"selectOneBoardList");
+		return infoOne;
 	}
 	
 	

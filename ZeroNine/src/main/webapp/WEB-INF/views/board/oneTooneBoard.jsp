@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@include file="../common/head.jsp"%>
 <%@include file="../common/header.jsp"%>
@@ -15,16 +17,11 @@
 <body>
 	<div class="banner zn_center">
 
-
-
-
-
 		<div style="width: 1440px">
 			<img src="${path}/images/board/banner3.png"
 				style="width: 100%; padding-top: 80px;">
 		</div>
 
-		<!-- 데이터 연결해서 loop 도는지 확인하기 -->
 		<div class="search">
 			<ul>
 				<li>
@@ -57,29 +54,28 @@
 			</div>
 		</div>
 		<div id="allList">
+		<c:forEach items="${infoOne}" var="oneInfo">
 			<div id="list">
 				<div class="pro_info">
 					<ul>
 						<li><img class="pro_img"
-							src="${path}/images/board/product2.png"></li>
+							src="${oneInfo.oBoardImageId}"></li>
 					</ul>
 
 
 					<div class="pro_name">
 						<ul>
-							<li>마녀공장</li>
-							<li>[1+1] 판테토인 에센스 토너 200ml</li>
+							<li>${oneInfo.oTitle}</li>
 						</ul>
 					</div>
 					<div class="pro_detail">
 						<ul>
-							<li><img class="user" src="${path}/images/board/user.png">
-								<span> 1명 모집 </span></li>
 							<li><img class="clock" src="${path}/images/board/clock.png">
-								<span> 23:59까지 </span></li>
+								<fmt:parseDate value="${oneInfo.finishtime}" var="parseDate" pattern="HHmm" />
+								<span><fmt:formatDate value="${parseDate}" pattern="HH시 mm분"/> 까지</span></li>
 							<li><img class="map_marker"
 								src="${path}/images/board/map_marker.png"> <span>
-									GS25 홍대 동교동점 </span></li>
+									여기에 주소 뿌리기 </span></li>
 						</ul>
 					</div>
 					<ul>
@@ -93,7 +89,7 @@
 				</div>
 
 			</div>
-
+			</c:forEach>
 		</div>
 	</div>
 

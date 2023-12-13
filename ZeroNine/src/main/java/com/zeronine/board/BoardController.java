@@ -29,10 +29,10 @@ public class BoardController {
 	//board_list
 	@RequestMapping("/fastboard.do")
 	public String fastBoard(Model model) {		
-		List<Map<String, Object>> info = boardService.selectfastBoardList();
-		model.addAttribute("info", info);
+		List<Map<String, Object>> infoFb = boardService.selectFastBoardList();
+		model.addAttribute("infoFb", infoFb);
 		
-		logger.info("controller 정보: {}", info);
+		logger.info("controller 정보: {}", infoFb);
 		
 		return "board/fastBoard";
 	}
@@ -42,7 +42,10 @@ public class BoardController {
 	}
 
 	@RequestMapping("/onetooneboard.do")
-	public String onetooneBoard() {
+	public String onetooneBoard(Model model) {
+		List<Map<String, Object>> infoOne = boardService.selectOneBoardList();
+		logger.info("controller infoOne 정보: {}", infoOne);
+		model.addAttribute("infoOne", infoOne);
 		return "board/oneTooneBoard";
 	}
 
