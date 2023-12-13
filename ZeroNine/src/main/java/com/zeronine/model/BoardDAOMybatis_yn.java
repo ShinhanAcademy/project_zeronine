@@ -48,6 +48,11 @@ public class BoardDAOMybatis_yn {
 		Map<String,Object> info = sqlSession.selectOne(NAMESPACE + "freeBoardDetail",boardId);
 		return info;
 	}
+
+	public int numOfFreeParticipant(String boardId) {
+		int participant = sqlSession.selectOne(NAMESPACE + "numOfFreeParticipant", boardId);
+		return participant;
+	}
 	
 
 }

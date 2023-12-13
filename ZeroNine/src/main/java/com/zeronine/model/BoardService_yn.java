@@ -37,4 +37,8 @@ public class BoardService_yn {
 		return boardDAO.freeBoardDetail(boardId);
 	}
 
+	public int numOfFreeParticipant(String boardId) {
+		return boardDAO.numOfFreeParticipant(boardId);
+	}
+
 }

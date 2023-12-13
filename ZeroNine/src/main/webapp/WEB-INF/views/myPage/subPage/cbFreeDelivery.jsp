@@ -5,7 +5,7 @@
 <div class="tbl_top_wrap">
 	<div class="total_count">
 
-		총 <span>${count}</span>건
+		총 <span id="count">${count}</span>건
 	</div>
 	<div class="delivery_kind">
 		<span class="btn_deli" id="fastDelivery">즉배</span> <span>|</span> <span
@@ -15,6 +15,7 @@
 		<button class="btn_more">채팅방으로 가기 ></button>
 	</div>
 </div>
+ 
 <table class="tbl_chat_wrap">
 
 	<colgroup>
@@ -39,17 +40,21 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${info}" var="board">
+	    
+		<c:forEach items="${info}" var="board" varStatus="status">
 			<tr>
 				<td>
-					<div class="pie-chart">
-						<span class="rate"><fmt:formatNumber type="percent"
+					<div class="tbl_chart">
+						<div class="pie-chart" value="${board.total/50000*100}"> 
+							<span class="rate">
+							<fmt:formatNumber type="percent"
 								maxIntegerDigits="3" value="${board.total/50000}" /></span>
+						</div>
 					</div>
 				</td>
-				<td>${board.title}</td>
-				<td>${board.uploadTime}</td>
-				<td>${board.remainTime}</td>
+				<td class="td_font">${board.title}</td>
+				<td class="td_font">${board.uploadTime}</td>
+				<td class="td_font">${board.remainTime}</td>
 				<td class="read_status"><input id="hiddenBoardId" type="hidden"
 					value="${board.boardId}">
 					<button class="freeBoardDetail">상세보기</button></td>
@@ -57,4 +62,9 @@
 		</c:forEach>
 	</tbody>
 </table>
+<script>
+
+
+
+</script>
 <script src="${path}/js/myPage/createdBoard.js" type="text/javascript"></script>

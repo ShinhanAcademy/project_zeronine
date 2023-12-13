@@ -28,3 +28,31 @@
 .delivery_kind .btn_deli.on {
 	color: #00A1E6;	
 }
+.tbl_chart {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pie-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.rate {
+    background: #fff;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    line-height: 100px;
+    font-size: 20px;
+}
+

@@ -91,7 +91,7 @@ p.content {
     gap: 10px;
     margin-top: 30px;
 }
-.update_btn {
+.update_btn, .freeUpdate_btn{
 	font-size: 25px;
 	color: white;
 	border-radius: 15px;
@@ -100,7 +100,7 @@ p.content {
 	border: 1px solid;
 	background-color: #0083E6;
 }
-.delete_btn {
+.delete_btn, .freeDelete_btn{
 	font-size: 25px;
 	border-radius: 15px;
 	width: 116px;
@@ -113,4 +113,34 @@ p.content {
 	width: 340px;
 	height: 340px;
 	border-radius: 15px;
+}
+
+#t_chart {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+}
+#chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+#ra {
+    background: #fff;
+    display: flex;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    line-height: 100px;
+    font-size: 40px;
+    font-family: Jua;
 }
