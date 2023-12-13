@@ -52,7 +52,9 @@ public class MyPageController {
 	// orderHistory(占쌍뱄옙 占쏙옙占쏙옙)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory(Model model, HttpSession session) {
-		String customerId = (String) session.getAttribute("customerId");
+		//String customerId = (String) session.getAttribute("customerId");
+//		String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
+		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		System.out.println("ID = " + customerId);
 
 		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));

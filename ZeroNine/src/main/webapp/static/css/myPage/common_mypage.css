@@ -183,6 +183,77 @@
     margin-bottom: 20px;
 }
 
+/* search_wrap */
+.contents .search_wrap {
+	font-family: "Lato";
+	font-size: 14px;
+	font-weight: 600;
+}
+.contents .search_wrap span {
+	display: inline-block;
+	margin-right: 10px;
+}
+.contents .search_wrap button {
+	height: 38px;
+	margin-right: 5px;
+	padding: 0 15px;
+	border: 1px solid #999;
+	border-radius: 10px;
+	font-family: "Lato";
+	font-size: 14px;
+	font-family: "Lato";
+	border-radius: 10px;
+	border: 1px solid #999;
+	padding: 0 15px;
+	border: 1px solid #999;
+	border-radius: 10px;
+	font-family: "Lato";
+	font-size: 12px;
+	font-weight: 600;
+}
+.contents .search_wrap input {
+	height: 38px;
+	border: 1px solid #E0E0E0;
+	border-radius: 10px;
+    color: #555;
+    font-family: "Lato";
+	font-size: 14px;
+	background-color: #FBFBFB;
+}
+.contents .search_wrap input+button {
+	margin-left: 5px;
+}
+.contents .search_wrap > div {
+	display: flex;
+    align-items: center;
+    justify-content: flex-end;
+	
+}
+.contents .search_wrap .period button.on {
+	background: #999;
+	color: #fff;
+}
+.contents .search_wrap .calendar {
+	width: 220px;
+}
+.contents .search_wrap .search_word {
+	margin: 13px 0 20px;
+}
+.contents .search_wrap .search_word input {
+	width: 300px;
+    padding: 0 15px;
+}
+.contents .search_wrap .search_word .btn_search {
+	margin-right: 0; 
+	padding-left: 35px;
+	border: 1px solid #0083E6;
+	color: #0083E6;
+	background-image: url("../../images/mypage/ico_search_blue.png");
+	background-repeat: no-repeat;
+	background-position: 15px center;
+	background-size: 16px 16px;
+}
+
 /* contents */
 .mypage_container .contents + .con_tit {
 	margin-top: 70px;
@@ -239,7 +310,6 @@
 .contents .tbl_wrap table .product_info {
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	text-align: left;
 	padding: 30px;
 }
@@ -258,6 +328,9 @@
     justify-content: flex-end;
 	margin-top: 20px;
 }
+.contents .pagination + .tbl_bottom_wrap {
+	margin-top: 5px;
+} 
 .contents .tbl_bottom_wrap .btn_wrap {
 	display: flex;
 	gap: 15px;
