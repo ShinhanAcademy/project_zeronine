@@ -19,16 +19,18 @@
 			var address = $("#address").val();
 			var addressDetail = $("#address_detail").val();
 			var birthday = $("#date").val();
-			
+			console.log("birthday @ AJAX call", birthday);
 			
 			var obj = {
 					"email" : email,
 					"password": password,
-					"phoneNumber" : password,
+					"phoneNumber" : phoneNumber,
 					"address" : address,
 					"addressDetail" : addressDetail,
-					"birthday" : birthday
+					"birthday" : birthday + ""
 			}
+			
+			console.log(obj.birthday);
 			
 			$.ajax({
 				url : path + "/myPage/updateCustomerInfo.do",
@@ -238,12 +240,12 @@
 	</script>
 	
 	<script>
-		
 		function validatePassword(){
 			var password = document.getElementById("password");
 		  	var password_check = document.getElementById("password_check");
 		  	if(password.value != password_check.value) { // 만일 두 인풋 필드값이 같지 않을 경우
 		    // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
+		    	alert("비밀번호 확인 불일치");
 		    	password_check.setCustomValidity("비밀번호가 일치하지 않습니다."); 
 		  	} 
 		  	else { // 만일 두 인풋 필드값이 같을 경우
@@ -252,9 +254,13 @@
 		  	  password_check.setCustomValidity(''); 
 		  	}
 		}
-
 	</script>
 	
+	<script>
+		document
+		.getElementById("update_btn")
+		.addEventListener("click", function(event){event.preventDefault();};)
+	</script>
 
 	
 </body>

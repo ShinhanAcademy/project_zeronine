@@ -32,7 +32,7 @@ public class BoardController {
 		List<Map<String, Object>> info = boardService.selectfastBoardList();
 		model.addAttribute("info", info);
 		
-		logger.info("정보: {}", info);
+		logger.info("controller 정보: {}", info);
 		
 		return "board/fastBoard";
 	}
@@ -48,23 +48,28 @@ public class BoardController {
 
 	//board_edit
 	@RequestMapping("/boardedit.do")
-	public String editBoard() {
+	public String editBoard(@RequestParam(name="boardType") String boardType, Model model) {
+		logger.info("controller 보드 타입 :{}   ", boardType);
+		model.addAttribute("boardType", boardType);
 		return "board/boardEdit";
 	}
-	@RequestMapping("/fboardedit.do")
+	@RequestMapping("/fastEdit.do")
 	public String editFBoard() {
 		return "board/fastEdit";
 	}
-	@RequestMapping("/fdboardedit.do")
+	@RequestMapping("/freeDeliveryEdit.do")
 	public String editFDBoard() {
 		return "board/freeDeliveryEdit";
 	}
-	@RequestMapping("/oboardedit.do")
+	@RequestMapping("/oneTooneEdit.do")
 	public String editOBoard() {
 		return "board/onTooneEdit";
 	}
 	@RequestMapping("/completeedit.do")
-	public String compliteEdit() {
+	public String compliteEdit(@RequestParam("send_bt_to_com")String boardListType, Model model ) {
+		String lower_boardListType = boardListType.toLowerCase();
+		model.addAttribute("boardListType", lower_boardListType);
+		System.out.println("나는 controller의 sysout :: edit를 완료하면 value가 오는지 보고싶어" + boardListType);
 		return "board/completeEdit";
 	}
 	
@@ -73,8 +78,8 @@ public class BoardController {
 		Map<String, Object> detail = boardService.selectDetailView(board_id);
 		model.addAttribute("detail", detail);
 		
-		logger.info("이건은 보드 아이디 : {}", board_id);
-		logger.info("이것은 디테일 정보: {}", detail);
+		logger.info("controller 보드 아이디 : {}", board_id);
+		logger.info("controller 디테일 정보: {}", detail);
 		
 		return "common/detailView";
 	}

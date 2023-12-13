@@ -26,11 +26,11 @@
 					<button class="memberbtn" type="button" id="join_btn">회원가입</button>
 				</div>
 				<div class="login-bottom">
-					<div class="naverimg">
-						<img src="${path}/images/login/loginnaverimg.png">
+					<div class="naverimg" onclick="window.location.href='/auth/naverLogin.do'" style="cursor:pointer;">
+					    <img src="${path}/images/login/loginnaverimg.png">
 					</div>
 					<span class="nklogin-bottom">네이버 간편로그인</span>
-					
+				
 					<div class="kakaoimg">
 						<img src="${path}/images/login/loginkakakoimg.png">
 					</div>

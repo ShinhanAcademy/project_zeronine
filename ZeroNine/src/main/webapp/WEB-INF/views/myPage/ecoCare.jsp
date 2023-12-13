@@ -96,7 +96,7 @@
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
-	                <div class="con_tit">채팅 목록</div> <%-- has_line --%>
+	                <div class="con_tit">나의 에코케어</div> <%-- has_line --%>
 	                <!-- contents -->
 	                <div class="contents">
 	                    <!-- chat_list -->

@@ -1,10 +1,8 @@
 //fast_board
 $(".detail_btn").on("click",
-
 function f_btn(){
 	var board_id = $(this).val();
 	console.log(board_id);
-
 	
 	
 	$.ajax({
