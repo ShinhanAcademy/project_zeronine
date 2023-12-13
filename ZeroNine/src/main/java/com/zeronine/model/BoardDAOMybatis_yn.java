@@ -53,6 +53,16 @@ public class BoardDAOMybatis_yn {
 		int participant = sqlSession.selectOne(NAMESPACE + "numOfFreeParticipant", boardId);
 		return participant;
 	}
+
+	public List<Map<String, Object>> myParticipatedBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myParticipatedBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> myParticipatedFreeBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myParticipatedFreeBlist",customerId);
+		return info;
+	}
 	
 
 }

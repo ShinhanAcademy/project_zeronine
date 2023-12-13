@@ -25,9 +25,9 @@
 							<span><fmt:formatNumber type="percent"
 								maxIntegerDigits="3" value="${info.total/50000}" /></span></li>
 						<li><img class="card" src="${path}/images/board/card.png">
-							<span><fmt:formatNumber type="number" value="${50000-info.total}" /></span></li>
+							<span><fmt:formatNumber type="number" value="${50000-info.total}" />원 남음</span></li>
 						<li><img class="clock" src="${path}/images/board/clock.png">
-							<span>${info.finishTime}</span></li>
+							<span>${info.finishTime}까지</span></li>
 					</ul>
 					<hr>
 					<p class="content">${info.boardContent}</p>
