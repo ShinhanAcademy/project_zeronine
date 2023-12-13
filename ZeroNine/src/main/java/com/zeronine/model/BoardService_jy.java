@@ -20,7 +20,7 @@ public class BoardService_jy {
 	
 	public Map<String, Object> selectDetailView(String boardId) {
 		Map<String, Object> detail = boardDAO_jy.selectDetailView(boardId);
-		System.out.println("이것은 디테일 정보" + detail);
+		System.out.println("servie 디테일 정보" + detail);
 		return detail;
 	}
 	
