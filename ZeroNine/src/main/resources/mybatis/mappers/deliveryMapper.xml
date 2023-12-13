@@ -5,7 +5,7 @@
 <mapper namespace="net.zeronine.delivery">
 
 	<!-- order history -->
-	<select id="orderHistoryAll" parameterType="String"
+<!-- 	<select id="orderHistoryAll" parameterType="String"
 		resultType="map">
 		select 
 			delivery."purchaseDateTime",
@@ -20,6 +20,29 @@
 					  join product on "deliveryProduct"."productId" = product."productId"
 					  join "productMainImage" on "deliveryProduct"."productId" = "productMainImage"."productId"
 		where delivery."customerId" = cast(#{customerId} as UUID)
+	</select> -->
+	<select id="orderHistoryAll" parameterType="String"
+		resultType="map">
+		select 
+			delivery."purchaseDateTime",
+			delivery."deliveryId",
+			delivery."customerId",
+			delivery."deliveryStatus",
+			"deliveryProduct"."productCount",
+			product."productId",
+			product.brand,
+			product."pName",
+			product.price,
+			"productMainImage"."imagePath",
+		ROW_NUMBER()OVER(ORDER BY delivery."deliveryId" DESC) AS ROW_NUM,
+		COUNT(*) OVER(PARTITION BY delivery."deliveryId") AS PARTCNT
+		from delivery join "deliveryProduct" on delivery."deliveryId" = "deliveryProduct"."deliveryId"
+				  join product on "deliveryProduct"."productId" = product."productId"
+				  join "productMainImage" on "deliveryProduct"."productId" = "productMainImage"."productId"
+				  join customer on delivery."customerId" = customer."customerId"
+		where delivery."customerId" = cast(#{customerId} as UUID)
+		AND delivery."purchaseDateTime" BETWEEN '2023-12-01' and '2023-12-13'
+		order by delivery."purchaseDateTime" DESC
 	</select>
 
 </mapper>

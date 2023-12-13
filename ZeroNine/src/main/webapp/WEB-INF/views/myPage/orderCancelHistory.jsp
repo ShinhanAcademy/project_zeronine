@@ -3,7 +3,8 @@
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/order_history.css">
-<script defer src="/js/myPage/myShopping.js"></script>
+<script defer src="/js/myPage/commonMypage.js"></script>
+<script defer src="/js/myPage/orderHistory.js"></script>
 <title>MyPage</title>
 </head>
 <body>

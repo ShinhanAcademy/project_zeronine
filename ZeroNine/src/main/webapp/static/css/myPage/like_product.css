@@ -1,33 +1,25 @@
 @charset "UTF-8";
 
-.contents .search_wrap .search_word {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
+/* search_wrap */
 .contents .search_wrap .search_word {
 	position: relative;
 }
-.contents .search_wrap input {
-	width: 300px;
-	height: 38px;
-	padding-left: 15px;
+#like_contents_wrap .contents .search_wrap input {
 	padding-right: 50px;
-    border: 1px solid #E0E0E0;
-    border-radius: 10px;
-    color: #555;
-    font-family: "Lato";
-    font-size: 14px;
-    background-color: #FBFBFB;
 }	
-.contents .search_wrap .btn_search {
+#like_contents_wrap .contents .search_wrap .btn_search {
 	position: absolute;
 	top: 0;
 	right: 0;
 	width: 50px;
 	height: 38px;
 	background: url("../../images/mypage/ico_search.png") no-repeat center / 17px 20px;
+	margin: 0;
+    padding-left: 0;
+    border: none;
 }
+
+/* like_product_wrap */
 .contents .like_product_wrap {
     display: flex;
     flex-wrap: wrap;
@@ -100,26 +92,3 @@
 .contents .like_item .price {
 	font-weight: bold;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

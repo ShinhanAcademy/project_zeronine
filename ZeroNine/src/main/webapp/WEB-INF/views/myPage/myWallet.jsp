@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/my_wallet.css">
 <link rel="stylesheet" href="/css/myPage/delivery_tracking.css">
-<script defer src="/js/myPage/myShopping.js"></script>
+<script defer src="/js/myPage/commonMypage.js"></script>
+<script defer src="/js/myPage/myWallet.js"></script>
 <title>MyPage</title>
 </head>
 <body>

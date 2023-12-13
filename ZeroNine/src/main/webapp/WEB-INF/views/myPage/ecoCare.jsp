@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/chat_list.css">
-<script src="${path}/js/myPage/commonMypage.js" defer></script>
+<link rel="stylesheet" href="${path}/css/myPage/ecocare.css">
+<script defer src="${path}/js/myPage/commonMypage.js"></script>
+<script defer src="/js/myPage/ecoCare.js"></script>
 <title>MyPage</title>
 </head>
 <body>
@@ -95,169 +96,111 @@
 	            </div>
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
-	            <div class="contents_wrap">
-	                <div class="con_tit">나의 에코케어</div> <%-- has_line --%>
-	                <!-- contents -->
-	                <div class="contents">
-	                    <!-- chat_list -->
-	                    <%-- <div class="chat_list">
-	                        <!-- chat_inner -->
-	                        <div class="chat_inner">
-	                            <div class="chat_room">
-	                                <div class="profile img_wrap">
-	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
-	                                </div>
-	                                <div class="info">
-	                                    <div class="user_info">
-	                                        <div class="name">콩순이</div>
-	                                        <span>파리바게뜨 서교점</span>
-	                                    </div>
-	                                    <div class="message">
-	                                        안녕하세요~!! <br>
-	                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
-	                                    </div>
-	                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
-	                                </div>
-	                                <div class="read_status">1</div>
-	                            </div>
-	                            <div class="chat_room">
-	                                <div class="profile img_wrap">
-	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
-	                                </div>
-	                                <div class="info">
-	                                    <div class="user_info">
-	                                        <div class="name">콩순이</div>
-	                                        <span>파리바게뜨 서교점</span>
-	                                    </div>
-	                                    <div class="message">
-	                                        안녕하세요~!! <br>
-	                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
-	                                    </div>
-	                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
-	                                </div>
-	                                <div class="read_status">1</div>
-	                            </div>
-	                            <div class="chat_room">
-	                                <div class="profile img_wrap">
-	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
-	                                </div>
-	                                <div class="info">
-	                                    <div class="user_info">
-	                                        <div class="name">콩순이</div>
-	                                        <span>파리바게뜨 서교점</span>
-	                                    </div>
-	                                    <div class="message">
-	                                        안녕하세요~!! <br>
-	                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
-	                                    </div>
-	                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
-	                                </div>
-	                                <div class="read_status">1</div>
-	                            </div>
-	                            <div class="chat_room">
-	                                <div class="profile img_wrap">
-	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
-	                                </div>
-	                                <div class="info">
-	                                    <div class="user_info">
-	                                        <div class="name">콩순이</div>
-	                                        <span>파리바게뜨 서교점</span>
-	                                    </div>
-	                                    <div class="message">
-	                                        안녕하세요~!! <br>
-	                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
-	                                    </div>
-	                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
-	                                </div>
-	                                <div class="read_status">1</div>
-	                            </div>
-	                            <div class="chat_room">
-	                                <div class="profile img_wrap">
-	                                    <img src="${path}/images/mypage/img_chat_profile.png" alt="profile image" />
-	                                </div>
-	                                <div class="info">
-	                                    <div class="user_info">
-	                                        <div class="name">콩순이</div>
-	                                        <span>파리바게뜨 서교점</span>
-	                                    </div>
-	                                    <div class="message">
-	                                        안녕하세요~!! <br>
-	                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis, lorem condimentum ullamcorper dictum, nulla enim malesuada mi, vel luctus felis eros id risus. Pellentesque porttitor luctus risus id facilisis. Vivamus pharetra at sapien ut lacinia. Nulla vel ultrices nisl, vel hendrerit elit. Donec congue velit in velit hendrerit blandit. Nulla vehicula lorem ut ante pharetra ultrices ac a lorem. Proin ut felis eget risus fermentum tempor vel eget quam. Nam lobortis nulla quis felis sodales fermentum et imperdiet arcu. Vivamus rhoncus ac lorem a vehicula. Praesent leo lorem, ornare dictum magna quis, malesuada commodo orci. Fusce metus neque, vulputate eu malesuada nec, iaculis vel nisl. Nunc feugiat ut ligula eu lacinia. Etiam in eros tellus.
-	                                    </div>
-	                                    <div class="deadline">D-6 (11/29 23:59까지)</div>
-	                                </div>
-	                                <div class="read_status">1</div>
-	                            </div>
-	                        </div>
-	                        <!-- //chat_inner -->
-	                    </div> --%>
-	                    <!-- //chat_list -->
-	                    <!-- chatlist_wrap  -->
-	                    <div class="chatlist_wrap">
-		                    <div class="tbl_top_wrap">
-		                    	<div class="total_count">
-									총 <span>2</span>건
-		                    	</div>
-		                    	<div class="btn_wrap">
-		                    		<button class="btn_more">채팅방으로 가기 &gt;</button>
-		                    	</div>
-	                    	</div>
-		                    <div class="tbl_wrap">
-		                    	<table class="tbl_chat_wrap">
-								  <colgroup>  	
-								    <col width="10%" />
-								    <col width="15%" />
-								    <col width="35%" />
-								    <col width="10%" />
-								    <col width="18%" />
-								    <col width="12%" />
-								  </colgroup>
-		                    		<thead>
-		                    			<tr>
-		                    				<th class="check_all txt_left">	                    					
-	    										<input type="checkbox" />
-	    										전체선택
-		                    				</th>
-		                    				<th>이름</th>
-		                    				<th>게시글 제목</th>
-		                    				<th>게시일</th>
-		                    				<th>마감 기한</th>
-		                    				<th>읽은 상태</th>
-		                    			</tr>
-		                    		</thead>
-		                    		<tbody>
-		                    			<tr>
-		                    				<td class="check_item">
-												<input type="checkbox" />	                    					
-		                    				</td>
-		                    				<td>또라몽</td>
-		                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-		                    				<td>23.12.07</td>
-		                    				<td>23.12.08 20:00까지</td>
-		                    				<td class="read_status"><span>status</span>읽음</td>
-		                    			</tr>
-		                    			<tr>
-		                    				<td class="check_item">
-												<input type="checkbox" checked />	                    					
-		                    				</td>
-		                    				<td>또라몽</td>
-		                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-		                    				<td>23.12.07</td>
-		                    				<td>23.12.08 20:00까지</td>
-		                    				<td class="read_status new"><span>status</span>읽지 않음</td>
-		                    			</tr>
-		                    		</tbody>
-		                    	</table>
-		                    </div>
-		                    <div class="tbl_bottom_wrap">
-		                    	<div class="btn_wrap">
-		                    		<button class="btn_del">채팅방 나가기</button>
-		                    	</div>
-	                    	</div>
-	                    </div>
-	                    <!-- //chatlist_wrap  -->
+	            <div id="myeco_wrap" class="contents_wrap">
+	                <div class="con_tit">나의 에코케어</div>
+                	<%-- dashboard_wrap --%>
+	                <div class="contents dashboard_wrap">
+						
 	                </div>
-	                <!-- //contents -->
+                	<%-- //dashboard_wrap --%>
+	                <div class="con_tit">회수 신청</div>
+               		<%-- pickup_request_wrap --%>
+	                <div class="contents pickup_request_wrap">
+	                	
+	                </div>
+                	<%-- //pickup_request_wrap --%>
+	                <div class="con_tit">회수 내역</div>
+                	<%-- pickup_history_wrap --%>
+	                <div class="contents pickup_history_wrap">
+                    	<div class="search_wrap">
+		                	<div class="period">
+		                		<span>기간</span>
+		                		<button class="on" data-period="1">1개월</button>
+		                		<button data-period="3">3개월</button>
+		                		<button data-period="6">6개월</button>
+		                		<div class="calendar">
+			                		<input type="text" data-range="true" data-multiple-dates-separator=" - " data-language="ko" id="datepicker">
+		                		</div>
+		                	</div>
+		                </div>
+	                    <div class="tbl_top_wrap">
+	                    	<div class="total_count">
+								총 <span>2</span>건
+	                    	</div>
+                    	</div>
+	                    <div class="tbl_wrap">
+	                    	<table class="tbl_chat_wrap">
+							  <colgroup>  	
+							    <col width="66%" />
+							    <col span="2" />
+							  </colgroup>
+	                    		<thead>
+	                    			<tr>
+	                    				<th>과거 회수 내역</th>
+	                    				<th>승인 여부</th>
+	                    				<th>회수 처리 결과</th>
+	                    			</tr>
+	                    		</thead>
+	                    		<tbody>
+	                    			<tr>
+	                    				<td>일반쓰레기 수거 요청건</td>
+	                    				<td>완료</td>
+	                    				<td>
+	                    					<button class="btn_blue">상세 보기</button>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>일반쓰레기 수거 요청건</td>
+	                    				<td>완료</td>
+	                    				<td>
+	                    					<button class="btn_blue">상세 보기</button>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>일반쓰레기 수거 요청건</td>
+	                    				<td>완료</td>
+	                    				<td>
+	                    					<button class="btn_blue">상세 보기</button>
+	                    				</td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>일반쓰레기 수거 요청건</td>
+	                    				<td>완료</td>
+	                    				<td>
+	                    					<button class="btn_blue">상세 보기</button>
+	                    				</td>
+	                    			</tr>
+	                    		</tbody>
+	                    	</table>
+	                    </div>
+                		<!-- pagination -->
+						<%-- <c:if test="${booklist.size() != 0}"> --%>
+						    <div class=pagination>
+						        <div class="pageLeft">
+						            <button class="btnFirst">첫페이지</button>
+						            <button class="btnPrev">이전페이지</button>
+						        </div>
+						        <ul class="pagingWrap">
+						            <li><a href="">1</a></li>
+						            <li><a href="">2</a></li>
+						            <li><a href="">3</a></li>
+						            <li><a href="">4</a></li>
+						            <li><a href="">5</a></li>
+						            <li><a href="">6</a></li>
+						            <li><a href="">7</a></li>
+						            <li><a href="">8</a></li>
+						            <li><a href="">9</a></li>
+						            <li><a href="">10</a></li>
+						        </ul>
+						        <div class="pageRight">
+						            <button class="btnNext">다음페이지</button>
+						            <button class="btnLast">마지막페이지</button>
+						        </div>
+						    </div>
+						<%-- </c:if> --%>
+                		<!-- //pagination -->
+	                </div>
+                	<%-- //pickup_history_wrap --%>
 	            </div>
 	            <!-- //contents_wrap -->
 	        </div>

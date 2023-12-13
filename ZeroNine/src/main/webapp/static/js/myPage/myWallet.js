@@ -1,7 +1,8 @@
 /***************************
     ZERO NINE
-    -- COMMON
+	-- MyPage / myWallet
 ****************************/
 $(function(){
-
+	deliveryModal();
 });
+
