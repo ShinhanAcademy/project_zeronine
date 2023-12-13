@@ -56,8 +56,8 @@
 		SET "customerPassword"= #{password},
 		"phoneNumber"= #{phoneNumber},
 		address=#{address},
-		"addressDetail"=#{addressDetail}
-		<!-- ,birthday=#{birthday} -->
+		"addressDetail"=#{addressDetail},
+		birthday=#{birthday}::TIMESTAMP WITHOUT TIME ZONE
 		WHERE email=#{email};
 	</update>
 </mapper>

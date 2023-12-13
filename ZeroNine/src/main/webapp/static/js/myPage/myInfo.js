@@ -115,7 +115,7 @@ function makeUpdateForm(result) {
 					<div class="form_group">
 						<label>주소</label> <input disabled type="text" id="address"
 							name="address" class="update_address" 
-							value="${result.address}">
+							value="${result.address}" required>
 							
 						<button type="button" class="address_search_btn"
 						onclick="sample6_execDaumPostcode()">
