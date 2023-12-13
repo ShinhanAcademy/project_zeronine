@@ -148,9 +148,9 @@
 								<c:forEach items="${info}" var="board">
 								<tr>
 										<td><img class="product_image" src="${board.imagePath}"></td>
-											<td>${board.title}</td>
-											<td>${board.uploadTime}</td>
-											<td>${board.remainTime}</td>
+											<td class="td_font_title">${board.title}</td>
+											<td class="td_font_upload">${board.uploadTime}</td>
+											<td class="td_font_remain">${board.remainTime}</td>
 											<td class="read_status">
 										<input id="hiddenBoardId" type="hidden" value="${board.boardId}">
 										<button class="boardDetail">상세보기</button>	

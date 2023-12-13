@@ -67,4 +67,4 @@
 
 
 </script>
-<script src="${path}/js/myPage/createdBoard.js" type="text/javascript"></script>
+<script src="${path}/js/myPage/participatedBoard.js" type="text/javascript"></script>

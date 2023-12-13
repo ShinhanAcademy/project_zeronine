@@ -37,4 +37,16 @@ public class BoardService_yn {
 		return boardDAO.freeBoardDetail(boardId);
 	}
 
+	public int numOfFreeParticipant(String boardId) {
+		return boardDAO.numOfFreeParticipant(boardId);
+	}
+
+	public List<Map<String, Object>> myParticipatedBlist(String customerId) {
+		return boardDAO.myParticipatedBlist(customerId);
+	}
+
+	public List<Map<String, Object>> myParticipatedFreeBlist(String customerId) {
+		return boardDAO.myParticipatedFreeBlist(customerId);
+	}
+
 }
