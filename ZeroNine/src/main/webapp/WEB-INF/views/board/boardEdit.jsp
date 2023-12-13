@@ -20,144 +20,80 @@
 
 		<div id="edit">
 			<div class="edit_content">
-				 <div class="content">
+				<div class="content">
 					<div class="info_title">게시글 작성</div>
-					<label>게시판 유형</label> <select name="board_type" id="board_type"
-						onchange="boardType()">
+					<label>게시판 유형</label> <select name="board_type" id="be_board_type"
+						onchange="selectBoardEdit()">
 						<option disabled="disabled">==게시판 선택==</option>
-						<option class="board_name" value="${boardType}"></option>
-						<!-- <option value="free_delivery_board">알뜰 무배</option>
-						<option value="one_to_one_board">1:1 직거래</option> -->
-					</select>
-					<div class="due_date">
-						<ul>
-							<li class="due_date_title">날짜 및 시간</li>
-							<li class="due_date_cf"><span> * 날짜는 최대 7일 후까시 설정
-									가능합니다.</span> <span class="due_date_ex">(ex.1월 1일 작성 → 1월 7일까지
-									설정 가능)</span></li>
-							<li class="due_date_cf"><span> * 시간은 24시간제로 입력해주세요.</span> <span
-								class="due_date_ex">(ex.오후 3시 → 15:00)</span></li>
-						</ul>
-
-						<div class="date_input">
-							<div class="date">
-								<input type="number" placeholder="01"> 월 <input
-									type="number" placeholder="01"> 일
-							</div>
-							<div class="time">
-								<input type="number" placeholder="15"> : <input
-									type="number" placeholder="00"> 까지
-							</div>
-						</div>
-					</div>
-
-					<div id="cart">
-						<div class="cart_ann">
-							<ul>
-								<li class="cart_ann_title">공구 상품 및 수량</li>
-								<li class="cart_ann_cf">* 상품과 수량을 선택해주세요.</li>
-							</ul>
-						</div>
-						<div class="cart_info">
-							<div class="cart_list">
-								<ul>
-									<li class="cart_pro_name"><input type="checkbox">
-										<p>
-											오랄비 <br> 칫솔 벨벳 초미세모 초소형헤드 3개입
-										</p></li>
-									<li>
-										<div class="count">
-											<button>
-												<img src="${path}/images/board/minus.png">
-											</button>
-											<input type="text" readonly="readonly" value="1">
-											<button>
-												<img src="${path}/images/board/plus.png">
-											</button>
-										</div>
-										<hr>
-									</li>
-								</ul>
-								<div class="cart_img">
-									<img src="${path}/images/board/product2.png">
-								</div>
-							</div>
-
-						</div>
-					</div>
+						<option value="fastBoard">슝슝 즉배</option>
+						<option value="freeDeliveryBoard"
+							${boardType =='freeDeliveryBoard' ?"selected":""}>알뜰 무배</option>
+						<option value="oneTooneBoard"
+							${boardType =='oneTooneBoard' ?"selected":""}>1:1 직거래</option>
+					</select> <input type="hidden" name="boardType" id="boardType"
+						value="${boardType}" />
 				</div>
 
-				<div class="write_content">
+				<div id="edit_change_area"></div>
 
-					<div class="write_title">본문 작성</div>
-
-					<div class="main_text">
-						<ul>
-							<li class="title">제목</li>
-							<li><textarea class="title_input" placeholder="제목을 입력하세요."></textarea></li>
-							<li class="context">내용</li>
-							<li><textarea class="context_input" placeholder="내용을 입력하세요."></textarea></li>
-						</ul>
-					</div>
-
-
-
-					<div class="done">
-						<button class="done_btn" onclick="editCom()">작성완료</button>
-					</div>
+				<div class="done">
+					<button class="done_btn" onclick="editCom()">작성완료</button>
 				</div>
-			</div> 
+			</div>
+
 		</div>
-
 	</div>
 
 
 
-
 	<script>
-	window.onload =	
-	function boardType() {
-			var boardtype = $(".board_name").val();
+		$(function() {
+			selectBoardEdit();
+		});
+		
+	
+		
+		function selectBoardEdit() {
 			/* var value = boardtype.value; */
+			var board_type = $("#be_board_type").val();
+			console.log(board_type);
 
-			console.log(boardtype);
-
-			if (boardtype == "fastBoard") {
+			if (board_type == "fastBoard") {
 				$.ajax({
-					url : '/board/fastBoard.do',
+					url : '/board/fastEdit.do',
 					success : function(responseData) {
-						$(".edit_content").html(responseData)
-						$(".board_name").text("슝슝 즉배")
+						console.log(responseData);
+						$("#edit_change_area").html(responseData)
 					}
 				});
-			} else if (boardtype == "freeDeliveryBoard") {
+			} else if (board_type == "freeDeliveryBoard") {
 				$.ajax({
-					url : '/board/freeDeliveryBoard.do',
+					url : '/board/freeDeliveryEdit.do',
 					success : function(responseData) {
-						$(".edit_content").html(responseData)
+						$("#edit_change_area").html(responseData)
 					}
 				});
-			} else if (boardtype == "oneTooneBoard") {
+			} else if (board_type == "oneTooneBoard") {
 				$.ajax({
-					url : '/board/oneTooneBoard.do',
+					url : '/board/oneTooneEdit.do',
 					success : function(responseData) {
-						$(".edit_content").html(responseData);
+						$("#edit_change_area").html(responseData);
 					}
 				});
 			}
-			;
-		};
-	
+
+		}
+
 		function editCom() {
+			var send_bt_to_com = $("#be_board_type").val();
 			$.ajax({
 				url : '/board/completeedit.do',
+				data: {"send_bt_to_com" : send_bt_to_com},
 				success : function(responseData) {
 					$("#edit").html(responseData);
 				}
 			});
 		}
-		
-		
 	</script>
 
 

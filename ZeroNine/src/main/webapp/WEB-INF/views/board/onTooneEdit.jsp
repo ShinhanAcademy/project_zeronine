@@ -3,14 +3,6 @@
 <div class="content">
 	<div class="info_title">게시글 작성</div>
 
-	<label>게시판 유형</label> <select name="board_type" id="board_type"
-		onchange="boardType()">
-		<option disabled="disabled">==게시판 선택==</option>
-		<option value="fastBoard">슝슝 즉배</option>
-		<option value="freeDeliveryBoard">알뜰 무배</option>
-		<option value="oneTooneBoard" selected="selected">1:1 직거래</option>
-
-	</select>
 
 	<div class="due_date">
 		<ul>
@@ -59,7 +51,7 @@
 
 </div>
 
-<div class="write_content">
+<div class="write_content" style="padding-bottom: 0px">
 
 	<div class="write_title">본문 작성</div>
 
@@ -73,35 +65,29 @@
 				<img src="${path}/images/board/upload.png">
 			</button>
 
-			<img class="preview" src="#">
-			<a class="delete_btn" onclick="previewDelete()" style="cursor: pointer">
-			<img class="delete_btn" src="/images/common/close.png"></a>
+			<img class="preview" src="#"> <a class="delete_btn"
+				onclick="previewDelete()" style="cursor: pointer"> <img
+				class="delete_btn" src="/images/common/close.png"></a>
 		</div>
 		<input class="upload_file" type="file" hidden="hidden">
 		<ul>
 			<li class="title">제목</li>
 			<li><textarea class="title_input" placeholder="제목을 입력하세요."></textarea></li>
-			<li class="context">내용</li>
+			<li id="one_context" class="context">내용</li>
 			<li><textarea class="context_input" placeholder="내용을 입력하세요."></textarea>
 			</li>
 		</ul>
 	</div>
 
-
-
-	<div class="done">
-
-		<button class="done_btn" onclick="editCom()">작성완료</button>
-	</div>
 </div>
 
 <script>
-//파일 업로드 btn
+	//파일 업로드 btn
 	function upload() {
 		$(".upload_file").click()
 	};
 
-//미리보기 및 삭제
+	//미리보기 및 삭제
 	$(".preview").hide();
 	$(".delete_btn").hide();
 
@@ -125,31 +111,28 @@
 				}
 			}
 		}
-		
-		if(isValidImg){
+
+		if (isValidImg) {
 			var imgURL = URL.createObjectURL(file);
 			preview.src = imgURL;
 			$(".preview").show();
 			$(".delete_btn").show();
-		}else{
+		} else {
 			alert("이미지 파일 형식(.jpg, .jpeg, .png)만 업로드 가능합니다.");
-			preview.src ="#";
-			 $(".upload_file").val("");
+			preview.src = "#";
+			$(".upload_file").val("");
 		}
 	}
 
-
-	function previewDelete(){
+	function previewDelete() {
 		$(".preview").hide();
 		$(".delete_btn").hide();
 		$(".upload_file").val("");
 	}
-	
-	
-	document.querySelector("#time_setting").addEventListener("change",function(){
-			var selectedValue = this.value;
-			console.log(selectedValue);
-		})	
 
-	
+	document.querySelector("#time_setting").addEventListener("change",
+			function() {
+				var selectedValue = this.value;
+				console.log(selectedValue);
+			})
 </script>
