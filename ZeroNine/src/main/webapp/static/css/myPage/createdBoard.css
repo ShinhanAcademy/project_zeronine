@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.boardDetail {
+.boardDetail, .freeBoardDetail{
 	width: 80px;
 	border-radius: 15px;
 	height: 30px;
@@ -12,6 +12,19 @@
 	background: #FFF;
 }
 
-.delivery_kind{
+.delivery_kind {
 	margin-left: 10px;
+}
+
+.product_image {
+	width: 130px;
+	height: 130px;
+	border-radius: 15px;
+}
+
+.delivery_kind .btn_deli {
+	cursor: pointer;
+}
+.delivery_kind .btn_deli.on {
+	color: #00A1E6;	
 }

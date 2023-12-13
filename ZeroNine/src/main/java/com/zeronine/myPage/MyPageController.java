@@ -75,24 +75,51 @@ public class MyPageController {
 		
 	@GetMapping("/createdBoard.do")
 	public void createdBoard(Model model) {
-		//String customerId = (String)session.getAttribute("customerId"); 
-		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77"; 
-		List<BoardVO> blist = boardService.myWriteBlist(customerId); 
-		
-		model.addAttribute("blist",blist);
-		model.addAttribute("blistCount",blist.size());
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+
+	}
+	@GetMapping("/subPage/createdBoardDetail.do")
+	public void createdBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.boardDetail(boardId);
+		int pCount = boardService.boardpCount(boardId);
+		int participant = boardService.numOfParticipant(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("pCount", pCount);
+		model.addAttribute("participant", participant);
 	}
 	
-	/*
-	 * // MY_ACTIVITIES // Board(占쏙옙占쏙옙 占쏙옙 占쌉시깍옙)
-	 * 
-	 * @GetMapping("/createdBoardBlist.do")
-	 * 
-	 * @ResponseBody public List<BoardVO> createdBoardBlist(HttpSession session) {
-	 * //String email = (String)session.getAttribute("email"); String email =
-	 * "yongsu9630@gmail.com"; List<BoardVO> blist =
-	 * boardService.myWriteBlist(email); return blist; }
-	 */
+	@GetMapping("/subPage/cbFastDelivery.do")
+	public void cbFastDelivery(Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+
+	}
+
+	@GetMapping("/subPage/cbFreeDelivery.do")
+	public void cbFreeDelivery(Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.myWriteFreeBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+	
+	@GetMapping("/subPage/createdFreeBoardDetail.do")
+	public void createdFreeBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.freeBoardDetail(boardId);
+		int pCount = boardService.boardpCount(boardId);
+		int participant = boardService.numOfParticipant(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("pCount", pCount);
+		model.addAttribute("participant", participant);
+	}
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
 	@RequestMapping("/participatedBoard.do")
