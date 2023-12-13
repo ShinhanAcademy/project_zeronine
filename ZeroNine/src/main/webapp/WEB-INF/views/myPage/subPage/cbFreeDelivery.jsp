@@ -40,7 +40,7 @@
 	<tbody>
 		<c:forEach items="${info}" var="board">
 			<tr>
-				<td>${board.total}</td>
+				<td>${board.total/50000*100}</td>
 				<td>${board.title}</td>
 				<td>${board.uploadTime}</td>
 				<td>${board.remainTime}</td>
