@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> <%-- jstl lib --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- date format lib --%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <%-- functions lib --%>
 <c:set var="path" scope="application" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
@@ -18,4 +19,7 @@
     <script src="${path}/js/jslib/i18n/datepicker.ko.js"></script>
     <link rel="stylesheet" href="${path}/css/common/common.css">
     <script defer src="${path}/js/common/common.js"></script>
+    <script>
+    	let contextPath = "${path}";
+	</script>
     

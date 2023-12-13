@@ -1,6 +1,6 @@
 /***************************
     ZERO NINE
-	-- MyPage / orderHistory
+	-- MyPage COMMON
 ****************************/
 
 function usingDatePicker(){
