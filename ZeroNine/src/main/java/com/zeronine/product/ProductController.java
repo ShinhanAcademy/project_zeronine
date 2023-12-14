@@ -2,7 +2,7 @@ package com.zeronine.product;
 
 
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -88,7 +88,7 @@ public class ProductController {
 		
 		//List<ProductVO> productList = productService.selectAll();
 		int total = productService.countProduct();
-		System.out.println("시발좀되라"+nowPage);
+
 		model.addAttribute("plist", productService.selectAll16os(Integer.parseInt(nowPage)-1));
 		
 		vo = new PagingVO(total, Integer.parseInt(nowPage));
@@ -203,13 +203,20 @@ public class ProductController {
 	}
 
 	@GetMapping("/productDetail.do")
-	public void productDetail() {
-
+	public String productDetail(String productId,Model model) {
+		ProductVO product =productService.selectByProductId(productId);
+		System.out.println(product);
+		model.addAttribute("plist",productService.selectByProductId(productId));
+		model.addAttribute("deliverylist4",productService.selectDetailDelivery4());
+		return "product/productDetail";
 	}
-
+	
 	@GetMapping("/productOrder.do")
 	public void productOrder() {
 
 	}
+	@GetMapping("/productOrderSuccess.do")
+	public void productOrderSuccess() {
 
+	}
 }
