@@ -6,8 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zeronine.dto.DeliveryVO;
-
 @Service("deliveryService")
 public class DeliveryService {
 
@@ -18,8 +16,8 @@ public class DeliveryService {
 	 * public List<DeliveryVO> selectAll(){ return deliveryDAO.selectAll(); }
 	 */
 	
-	public List<Map<String, Object>> orderHistoryAll(String customerId) {
-		return deliveryDAO.orderHistoryAll(customerId);
+	public List<Map<String, Object>> orderHistoryAll(String customerId, String searchWord, String startDate, String endDate) {
+		return deliveryDAO.orderHistoryAll(customerId, searchWord, startDate, endDate);
 	}
 
 	/*
