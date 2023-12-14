@@ -125,6 +125,7 @@ public class MyPageController {
 		
 		if(!isValid) {
 			CustomerVO invalidCustomer = new CustomerVO();
+			
 			invalidCustomer.setCustomerName("invalid");
 			return invalidCustomer;
 		}

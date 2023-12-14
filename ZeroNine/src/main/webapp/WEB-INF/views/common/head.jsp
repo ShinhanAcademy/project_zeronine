@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="/css/common.css">
     
     <!-- js lib -->
-    <script src="/js/jslib/jquery-3.7.1.min.js"></script>
-  	<script src="/js/jslib/datepicker.min.js"></script>
-    <script src="/js/jslib/i18n/datepicker.ko.js"></script>
+    <script src="${path}/js/jslib/jquery-3.7.1.min.js"></script>
+  	<script src="${path}/js/jslib/datepicker.min.js"></script>
+    <script src="${path}/js/jslib/i18n/datepicker.ko.js"></script>
     
     <script defer src="/js/common.js"></script>
     
