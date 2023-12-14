@@ -32,7 +32,7 @@ public class BoardController {
 		List<Map<String, Object>> infoFb = boardService.selectFastBoardList();
 		model.addAttribute("infoFb", infoFb);
 		
-		logger.info("controller Á¤º¸: {}", infoFb);
+		logger.info("controller fastì •ë³´: {}", infoFb);
 		
 		return "board/fastBoard";
 	}
@@ -44,7 +44,7 @@ public class BoardController {
 	@RequestMapping("/onetooneboard.do")
 	public String onetooneBoard(Model model) {
 		List<Map<String, Object>> infoOne = boardService.selectOneBoardList();
-		logger.info("controller infoOne Á¤º¸: {}", infoOne);
+		logger.info("controller infoOne ì •ë³´: {}", infoOne);
 		model.addAttribute("infoOne", infoOne);
 		return "board/oneTooneBoard";
 	}
@@ -52,7 +52,7 @@ public class BoardController {
 	//board_edit
 	@RequestMapping("/boardedit.do")
 	public String editBoard(@RequestParam(name="boardType") String boardType, Model model) {
-		logger.info("controller º¸µå Å¸ÀÔ :{}   ", boardType);
+		logger.info("controller ë³´ë“œ íƒ€ì… ì •ë³´ :{}   ", boardType);
 		model.addAttribute("boardType", boardType);
 		return "board/boardEdit";
 	}
@@ -72,19 +72,42 @@ public class BoardController {
 	public String compliteEdit(@RequestParam("send_bt_to_com")String boardListType, Model model ) {
 		String lower_boardListType = boardListType.toLowerCase();
 		model.addAttribute("boardListType", lower_boardListType);
-		System.out.println("³ª´Â controllerÀÇ sysout :: edit¸¦ ¿Ï·áÇÏ¸é value°¡ ¿À´ÂÁö º¸°í½Í¾î" + boardListType);
+		System.out.println("controllerì—ì„œ ê²Œì‹œê¸€ ì‘ì„± í›„ ë„˜ì–´ê°€ëŠ” ë³´ë“œ íƒ€ì… ì•Œê³ ì‹¶ì–´~~" + boardListType);
 		return "board/completeEdit";
 	}
 	
-	@RequestMapping("/boardDetail.do")
-	public String boardDetail(@RequestParam("boardId") String board_id ,Model model) {		
-		Map<String, Object> detail = boardService.selectDetailView(board_id);
+	@RequestMapping("/fastboardDetail.do")
+	public String fastboardDetail(@RequestParam("boardId") String board_id ,Model model) {		
+		Map<String, Object> detail = boardService.selectFastDetail(board_id);
 		model.addAttribute("detail", detail);
 		
-		logger.info("controller º¸µå ¾ÆÀÌµğ : {}", board_id);
-		logger.info("controller µğÅ×ÀÏ Á¤º¸: {}", detail);
+		logger.info("controller fast ë””í…Œì¼ ì•„ì´ë”” : {}", board_id);
+		logger.info("controller fast ë””í…Œì¼ ë‚´ìš©: {}", detail);
 		
-		return "common/detailView";
+		return "board/fastDetailView";
+	}
+	
+	/*
+	 * @RequestMapping("/freeboardDetail.do") public String
+	 * freeboardDetail(@RequestParam("boardId") String board_id ,Model model) {
+	 * Map<String, Object> detail = boardService.selectFreeDetail(board_id);
+	 * model.addAttribute("detail", detail);
+	 * 
+	 * logger.info("controller free ë””í…Œì¼ ì•„ì´ë”” : {}", board_id);
+	 * logger.info("controller free ë””í…Œì¼ ë‚´ìš©: {}", detail);
+	 * 
+	 * return "board/freeDetailView"; }
+	 */
+	
+	@RequestMapping("/oneboardDetail.do")
+	public String oneboardDetail(@RequestParam("boardId") String board_id ,Model model) {		
+		Map<String, Object> detail = boardService.selectOneDetail(board_id);
+		model.addAttribute("detail", detail);
+		
+		logger.info("controller one ë””í…Œì¼ ì•„ì´ë”” : {}", board_id);
+		logger.info("controller one ë””í…Œì¼ ë‚´ìš©: {}", detail);
+		
+		return "board/oneDetailView";
 	}
 	
 	
