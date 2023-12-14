@@ -63,6 +63,16 @@ public class BoardDAOMybatis_yn {
 		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myParticipatedFreeBlist",customerId);
 		return info;
 	}
+
+	public List<Map<String, Object>> likeBoardBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "likeBoardBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> likeBoardFreeBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "likeBoardFreeBlist",customerId);
+		return info;
+	}
 	
 
 }

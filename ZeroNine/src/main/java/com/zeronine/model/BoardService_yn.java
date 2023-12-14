@@ -49,4 +49,12 @@ public class BoardService_yn {
 		return boardDAO.myParticipatedFreeBlist(customerId);
 	}
 
+	public List<Map<String, Object>> likeBoardBlist(String customerId) {
+		return boardDAO.likeBoardBlist(customerId);
+	}
+
+	public List<Map<String, Object>> likeBoardFreeBlist(String customerId) {
+		return boardDAO.likeBoardFreeBlist(customerId);
+	}
+
 }

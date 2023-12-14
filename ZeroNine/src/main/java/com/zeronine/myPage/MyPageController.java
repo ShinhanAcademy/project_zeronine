@@ -181,10 +181,48 @@ public class MyPageController {
 
 
 	// likeBoard(占쏙옙占쏙옙 占쌉시깍옙)
-	@RequestMapping("/likeBoard.do")
-	public String likeBoard() {
-		return "myPage/likeBoard";
+	@GetMapping("/likeBoard.do")
+	public void likeBoard(Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.likeBoardBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
 	}
+	
+	@GetMapping("/subPage/likeBoardDetail.do")
+	public void likeBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.boardDetail(boardId);
+		int pCount = boardService.boardpCount(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("pCount", pCount);
+	}
+	
+	@GetMapping("/subPage/likeFreeBoardDetail.do")
+	public void likeFreeBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.freeBoardDetail(boardId);
+		model.addAttribute("info", info);
+	}
+	
+	@GetMapping("/subPage/lbFreeDelivery.do")
+	public void lbFreeDelivery(Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.likeBoardFreeBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+	
+	@GetMapping("/subPage/lbFastDelivery.do")
+	public void lbFastDelivery(Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.likeBoardBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+	
+	
 	
 	// chatList(채占쏙옙 占쏙옙占�)
 	@RequestMapping("/chatList.do")

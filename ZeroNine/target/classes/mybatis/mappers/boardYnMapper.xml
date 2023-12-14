@@ -3,8 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.board">
-	<select id="myWriteBlist" resultType="map"
-		parameterType="String">
+	<select id="myWriteBlist" resultType="map" parameterType="String">
 		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
 		to_char(b."finishTime"-NOW(),'dd일 HH시 mi분 ss초') as 	"remainTime", b."boardId"
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
@@ -106,4 +105,34 @@
 		and b."authorId" != cast(#{customerId} as UUID)
 		ORDER BY "uploadTime"
 	</select>
+	<select id="likeBoardBlist" resultType="map" parameterType="String">
+		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
+		to_char(b."finishTime"-NOW(),'dd일 HH시 mi분 ss초') as 	"remainTime", b."boardId"
+		from "likedBoard" lb left join board b on (lb."boardId"=b."boardId")
+		left join "selectProduct" sp on (b."boardId"=sp."boardId")
+		left join product p on (sp."productId"=p."productId")
+		left join "productMainImage" pi on (p."productId"=pi."productId")
+		where lb."customerId" = cast(#{customerId} as UUID)
+		and b."finishTime">NOW()
+		and b."bCategoryType" = 'fast_board'
+		order by "uploadTime"
+	</select>
+	<select id="likeBoardFreeBlist" resultType="map" parameterType="String">
+		SELECT DISTINCT b.title, TO_CHAR(b."uploadTime",'yyyy-mm-dd') AS "uploadTime",
+		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH시 mi분 ss초') AS "remainTime",
+		b."boardId",b."bCategoryType",
+		(SELECT
+		SUM(p.price * bc."purchaseCount")
+		FROM "boardCart" bc
+		LEFT JOIN product
+		p ON bc."productId" = p."productId"
+		WHERE bc."boardId" = b."boardId")
+		AS total
+		from "likedBoard" lb left join board b on (lb."boardId"=b."boardId")
+		where lb."customerId" ='490ef92a-d77f-432f-8bfb-2828eee6db77'
+		and b."finishTime">NOW()
+		and b."bCategoryType" = 'free_delivery_board'
+		ORDER BY "uploadTime"
+	</select>
+	
 </mapper>
