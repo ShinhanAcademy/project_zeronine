@@ -24,12 +24,17 @@ public class BoardService_jy {
 		return detail;
 	}
 	
-	
+	//oneBoard
 	public List<Map<String, Object>> selectOneBoardList(){
 		List<Map<String, Object>> infoOne = boardDAO_jy.selecOneBoardList();
 		return infoOne;
 	}
 
+	public List<Map<String, Object>> selectOneBoardEnd(){
+		List<Map<String, Object>> endInfoOne = boardDAO_jy.selectOneBoardEnd();
+		return endInfoOne;
+	}
+	
 	public Map<String, Object> selectOneDetail(String boardId) {
 		Map<String, Object> detail = boardDAO_jy.selectOneDetail(boardId);
 		System.out.println("servie 에서 확인하는 one디테일" + detail);

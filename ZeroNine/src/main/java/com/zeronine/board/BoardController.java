@@ -48,6 +48,16 @@ public class BoardController {
 		model.addAttribute("infoOne", infoOne);
 		return "board/oneTooneBoard";
 	}
+	
+	//filter 적용
+	@RequestMapping("/onetooneboardEnd.do")
+	public String onetooneboardEnd(Model model) {
+		List<Map<String, Object>> endInfoOne = boardService.selectOneBoardEnd();
+		logger.info("controller infoOne 정보: {}", endInfoOne);
+		model.addAttribute("infoOneEnd", endInfoOne);
+		return "board/oneTooneBoard";
+	}
+	
 
 	//board_edit
 	@RequestMapping("/boardedit.do")
@@ -76,6 +86,7 @@ public class BoardController {
 		return "board/completeEdit";
 	}
 	
+	//디테일
 	@RequestMapping("/fastboardDetail.do")
 	public String fastboardDetail(@RequestParam("boardId") String board_id ,Model model) {		
 		Map<String, Object> detail = boardService.selectFastDetail(board_id);
