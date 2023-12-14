@@ -24,7 +24,7 @@ $(".freeBoardDetail").click(function(){
 	var obj = {"boardId" : boardId};
 	
 		$.ajax({
-					url : path + "/myPage/subPage/createdFreeBoardDetail.do",
+					url : path + "/myPage/subPage/participatedFreeBoardDetail.do",
 					data : obj,
 					type : "GET",
 					success : function(result) {
@@ -40,7 +40,7 @@ $(".freeBoardDetail").click(function(){
 
 $("#freeDelivery").click(function(){
 	$.ajax({
-					url : path + "/myPage/subPage/cbFreeDelivery.do",
+					url : path + "/myPage/subPage/pbFreeDelivery.do",
 					type : "GET",
 					success : function(result) {
 						$("#hereContents").html(result);
@@ -59,7 +59,7 @@ $("#freeDelivery").click(function(){
 
 $("#fastDelivery").click(function(){
 	$.ajax({
-					url : path + "/myPage/subPage/cbFastDelivery.do",
+					url : path + "/myPage/subPage/pbFastDelivery.do",
 					type : "GET",
 					success : function(result) {
 						$("#hereContents").html(result);
@@ -77,7 +77,7 @@ $(".boardDetail").click(function(){
 	var obj = {"boardId" : boardId};
 	
 		$.ajax({
-					url : path + "/myPage/subPage/createdBoardDetail.do",
+					url : path + "/myPage/subPage/participatedBoardDetail.do",
 					data : obj,
 					type : "GET",
 					success : function(result) {

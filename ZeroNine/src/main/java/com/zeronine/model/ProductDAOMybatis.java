@@ -72,4 +72,30 @@ public class ProductDAOMybatis {
 		logger.info("selectByPnameBrand:{}°Ç", productList.size());
 		return productList;
 	}
+
+
+	public List<ProductVO> selectAll16os(Integer pcount) {
+		 int pCount = pcount*4;
+		System.out.println(pCount);
+		 List<ProductVO> productList = sqlSession.selectList(namespace + "selectAll16os",pCount);
+		logger.info("selectAll16os:{}°Ç", productList.size());
+		return productList;
+	}
+	public List<ProductVO> selectAll16() {
+		List<ProductVO> productList = sqlSession.selectList(namespace + "selectAll16");
+		logger.info("selectAll16:{}°Ç", productList.size());
+		return productList;
+	}
+
+
+	public int countProduct() {
+		
+		//int productcount = sqlSession.selectOne(namespace + "countProduct");
+		//sqlSession.selectOne(namespace + "countProduct").
+		sqlSession.selectOne(namespace + "countProduct");
+		//System.out.println("countProduct ==>" + );
+		//logger.info("");
+		//return productcount;
+		return sqlSession.selectOne(namespace + "countProduct");
+	}
 }

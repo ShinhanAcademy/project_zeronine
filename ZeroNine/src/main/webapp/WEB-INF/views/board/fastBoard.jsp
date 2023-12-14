@@ -54,29 +54,29 @@
 		</div>
 		<div class="List">
 		<div id="allList">
-			<c:forEach items="${info}" var="info">
+			<c:forEach items="${infoFb}" var="fastInfo">
 				<div id="list">
 					<div class="pro_info">
 						<ul>
 							<li><img class="pro_img"
-								src="${info.imagePath}"></li>
+								src="${fastInfo.imagePath}"></li>
 						</ul>
 
 
 						<div class="pro_name">
 							<ul>
-								<li>${info.brand}</li>
-								<li>${info.pName}</li>
+								<li>${fastInfo.brand}</li>
+								<li>${fastInfo.pName}</li>
 							</ul>
 						</div>
 						<div class="pro_detail">
 							<ul>
 								<li><img class="user" src="${path}/images/board/box.png">
-									<span> ${info.pCount - info.totalpickCount} 남음 </span></li>
+									<span> ${fastInfo.pCount - fastInfo.totalpickCount} 남음 </span></li>
 								<li><img class="card" src="${path}/images/board/card.png">
-									<span><fmt:formatNumber value="${(info.price/info.pCount)-((info.price/info.pCount)%10)}" type="number"/>원 </span> <span style="color: gray;">(개당)</span></li>
+									<span><fmt:formatNumber value="${(fastInfo.price/fastInfo.pCount)-((fastInfo.price/fastInfo.pCount)%10)}" type="number"/>원 </span> <span style="color: gray;">(개당)</span></li>
 								<li><img class="clock" src="${path}/images/board/clock.png">
-									<fmt:parseDate value="${info.finishTime}" var="parsedDate" pattern="yyyy-MM-dd HH:mm"/>
+									<fmt:parseDate value="${fastInfo.finishTime}" var="parsedDate" pattern="yyyy-MM-dd HH:mm"/>
 									<span><fmt:formatDate value="${parsedDate}" pattern="YY년 MM월 dd일 HH:mm" /> 까지 </span></li>
 							</ul>
 						</div>
@@ -85,7 +85,7 @@
 								<button class="like" type="button">
 									<img class="like" src="${path}/images/board/heart.png">
 								</button>
-								<button id="fast_detail_btn" class="detail_btn" value="${info.boardId}" >보기</button>
+								<button id="fast_detail_btn" class="detail_btn" value="${fastInfo.boardId}" >보기</button>
 							</li>
 						</ul>
 					</div>

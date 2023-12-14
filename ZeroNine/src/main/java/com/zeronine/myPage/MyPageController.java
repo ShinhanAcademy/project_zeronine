@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zeronine.dto.BoardVO;
 import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
@@ -40,44 +40,59 @@ public class MyPageController {
 	CustomerService cService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
-	
+
 	/* ****************************
 			MY_SHOPPING
 	 ****************************** */
-	// orderHistory(占쏙옙占쏙옙 占쏙옙占쏙옙)
+	// orderHistory(나의 지갑)
 	@GetMapping("/myWallet.do")
 	public void myWallet() {
 	}
 	
-	// orderHistory(占쌍뱄옙 占쏙옙占쏙옙)
+	// orderHistory(주문 내역)
 	@RequestMapping("/orderHistory.do")
-	public void orderHistory(Model model, HttpSession session) {
-		String customerId = (String) session.getAttribute("customerId");
+	public void orderHistory() {
+		//String customerId = (String) session.getAttribute("customerId");
+//		String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
+		//String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
+//		System.out.println("ID = " + customerId);
+//
+//		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));
+//		System.out.println("너는 무엇이냐" + deliveryService.orderHistoryAll(customerId));
+	}
+
+	@RequestMapping("/subPage/orderHistoryDetail.do")
+	public void orderHistoryDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate,
+			Model model, HttpSession session) {
+		//String customerId = (String) session.getAttribute("customerId");
+		//String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
+		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		System.out.println("ID = " + customerId);
 
-		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));
-		System.out.println("너는 무엇이냐" + deliveryService.orderHistoryAll(customerId));
+		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId, searchWord, startDate, endDate));
 	}
 	
-	// orderCancelHistory(占쏙옙占�/占쏙옙품/占쏙옙환/환占쏙옙 占쏙옙占쏙옙)
+	// orderCancelHistory(취소 / 반품 내역)
 	@RequestMapping("/orderCancelHistory.do")
 	public String orderCancelHistory() {
 		return "myPage/orderCancelHistory";
 	}
 	
-	// myCart(占쏙옙袂占쏙옙占�)
+	// myCart(장바구니)
 	@RequestMapping("/myCart.do")
 	public String myCart() {
 		return "myPage/myCart";
 	}
 
-	// likeList(占쏙옙占쏙옙 占쏙옙품)
+	// likeProduct(찜한 상품)
 	@RequestMapping("/likeProduct.do")
 	public String likeProduct() {
 		return "myPage/likeProduct";
 	}
 	
-
+	
 	/* ****************************
 			MY_ACTIVITIES
 	 ****************************** */
@@ -128,17 +143,53 @@ public class MyPageController {
 	@GetMapping("/subPage/createdFreeBoardDetail.do")
 	public void createdFreeBoardDetail(String boardId, Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);
-		int pCount = boardService.boardpCount(boardId);
-		//int participant = boardService.numOfParticipant(boardId);
+		int participant = boardService.numOfFreeParticipant(boardId);
 		model.addAttribute("info", info);
-		model.addAttribute("pCount", pCount);
-		//model.addAttribute("participant", participant);
+		model.addAttribute("participant", participant);
 	}
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
-	@RequestMapping("/participatedBoard.do")
-	public String participatedBoard() {
-		return "myPage/participatedBoard";
+	@GetMapping("/participatedBoard.do")
+	public void participatedBoard(Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+	
+	@GetMapping("/subPage/participatedBoardDetail.do")
+	public void participatedBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.boardDetail(boardId);
+		int pCount = boardService.boardpCount(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("pCount", pCount);
+	}
+	
+	@GetMapping("/subPage/pbFreeDelivery.do")
+	public void pbFreeDelivery(Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+	
+	@GetMapping("/subPage/pbFastDelivery.do")
+	public void pbFastDelivery(Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+
+	
+	
+	@GetMapping("/subPage/participatedFreeBoardDetail.do")
+	public void participatedFreeBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.freeBoardDetail(boardId);
+		model.addAttribute("info", info);
 	}
 
 
@@ -166,6 +217,7 @@ public class MyPageController {
 
 		if(!isValid) {
 			CustomerVO invalidCustomer = new CustomerVO();
+			
 			invalidCustomer.setCustomerName("invalid");
 			return invalidCustomer;
 		}

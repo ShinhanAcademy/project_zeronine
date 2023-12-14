@@ -1,7 +1,9 @@
 /***************************
     ZERO NINE
-    -- COMMON
+	-- MyPage / orderHistory
+	-- MyPage / orderCancelHistory
 ****************************/
 $(function(){
-
+	usingDatePicker();
 });
+

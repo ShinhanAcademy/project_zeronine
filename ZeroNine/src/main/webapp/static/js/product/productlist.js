@@ -1,3 +1,5 @@
+	
+	 
 $(".fluent_basket").click(function () {
 			var obj = {	"pCategoryId" : 1};
 			
@@ -71,6 +73,7 @@ $("#q").keypress(function(event){
 	search();
 	}
 });
+
 $("#searchbtn").click(function() {
 
 	search();
@@ -152,12 +155,3 @@ $('#here').html(response);
 } 
 
 
-$(".like").click(function (){
-
-            var currentImagePath = $(this).find("img.menu_heart").attr("src");
-            var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
-                path+"/images/board/red_heart.png" :
-                path+"/images/board/heart.png";
-
-            $(this).find("img.menu_heart").attr("src", newImagePath);
-});
