@@ -98,11 +98,11 @@
 
 			</div>
 		</div>
+		<div id="modal"></div>
 	</div>
 
 
 	<%@include file="../common/footer.jsp"%>
-	<%@include file="../common/detailView.jsp"%>
 	<script src="../js/detailView.js"></script>
 	<script>
 		$("#detail_modal_wrap").hide();

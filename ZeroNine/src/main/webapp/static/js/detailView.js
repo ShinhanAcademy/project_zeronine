@@ -7,7 +7,7 @@ function f_btn(){
 	
 	$.ajax({
 		type : "post",
-		url : "/board/boardDetail.do",
+		url : "/board/fastboardDetail.do",
 		data: {boardId : board_id},
 		success: function(response){
 	
@@ -27,9 +27,27 @@ function fd_btn(){
 }
 
 //one_to_one_board
-function o_btn() {
-	$("#detail_modal_wrap").css("display","flex");
-}
+$(".detail_btn").on("click",
+function o_btn(){
+	var board_id = $(this).val();
+	console.log(board_id);
+
+	$.ajax({
+		type : "post",
+		url : "/board/oneboardDetail.do",
+		data: {boardId : board_id},
+		success: function(response){
+		
+		console.log(response);
+			$("#modal").html(response);
+			$("#detail_modal_wrap").css("display","flex");
+			
+		},
+		error: function(error) {
+		alert("해당 글은 더 이상 존재하지 않습니다.");
+		}
+	});
+});
 
 //close
 function close_btn(){

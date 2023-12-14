@@ -142,6 +142,7 @@ div.pro_detail {
 }
 
 .pro_detail li {
+	width : 250px;
 	padding: 3px;
 	display: flex;
 	align-items: center;

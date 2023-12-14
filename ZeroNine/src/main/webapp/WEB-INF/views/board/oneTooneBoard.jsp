@@ -59,7 +59,7 @@
 				<div class="pro_info">
 					<ul>
 						<li><img class="pro_img"
-							src="${oneInfo.oBoardImageId}"></li>
+							src="${oneInfo.oBoardImagePath}"></li>
 					</ul>
 
 
@@ -75,7 +75,7 @@
 								<span><fmt:formatDate value="${parseDate}" pattern="HH시 mm분"/> 까지</span></li>
 							<li><img class="map_marker"
 								src="${path}/images/board/map_marker.png"> <span>
-									여기에 주소 뿌리기 </span></li>
+									${oneInfo.address} ${oneInfo.addressDetail} </span></li>
 						</ul>
 					</div>
 					<ul>
@@ -83,7 +83,7 @@
 							<button class="like" type="button">
 								<img class="like" src="${path}/images/board/heart.png">
 							</button>
-							<button id="one_detail_btn" class="detail_btn" onclick="o_btn()">보기</button>
+							<button id="one_detail_btn" class="detail_btn" value="${oneInfo.oBoardId}">보기</button>
 						</li>
 					</ul>
 				</div>
@@ -91,11 +91,11 @@
 			</div>
 			</c:forEach>
 		</div>
+		<div id="modal"></div>
 	</div>
 
 
 	<%@include file="../common/footer.jsp"%>
-	<%@include file="../common/detailView.jsp"%>
 	<script src="../js/detailView.js"></script>
 	<script>
 		$("#detail_modal_wrap").hide();

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <div class="content">
-	<div class="info_title">게시글 작성</div>
 
 
 	<div class="due_date">
@@ -38,7 +38,7 @@
 		<div class="location_info">
 			<input class="location_input1" type="text" placeholder="우편주소"
 				disabled="disabled">
-			<button onclick="location.href='#'">주소 검색</button>
+			<button onclick="convertadd()">주소 검색</button>
 			<input class="location_input" type="text" placeholder="도로명 주소"
 				disabled="disabled"> <input class="location_input"
 				type="text" placeholder="상세주소">
@@ -82,6 +82,24 @@
 </div>
 
 <script>
+	//도로명 주소 -> 좌표 변환 api
+	function convertadd() {
+		
+				$.ajax({
+					url : "https://dapi.kakao.com/v2/local/search/address.json?query=전북 삼성동 100",
+					type : "GET",
+					headers : {
+						"Authorization" : "KakaoAK 	541a67b3c7684c9057ee9e734dd5ee5a"
+					},
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(e) {
+						console.log(e);
+					}
+
+				})
+	}
 	//파일 업로드 btn
 	function upload() {
 		$(".upload_file").click()
