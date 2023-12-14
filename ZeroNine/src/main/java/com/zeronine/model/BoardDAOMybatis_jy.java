@@ -29,11 +29,17 @@ public class BoardDAOMybatis_jy {
 		return detail;
 	}
 	
-	
+	//oneBoard
 	public List<Map<String, Object>> selecOneBoardList() {
 		List<Map<String, Object>> infoOne = sqlSession.selectList(namespace+"selectOneBoardList");
 		return infoOne;
 	}
+	
+	public List<Map<String, Object>> selectOneBoardEnd() {
+		List<Map<String, Object>> endInfoOne = sqlSession.selectList(namespace+"selectOneBoardEnd");
+		return endInfoOne;
+	}
+	
 	
 	public Map<String, Object> selectOneDetail(String boardId){
 		Map<String, Object> detail = sqlSession.selectOne(namespace+"selectOneDetail", boardId);

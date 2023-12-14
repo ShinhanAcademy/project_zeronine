@@ -38,7 +38,7 @@
 					<span> <img class="filter_img"
 						src="${path}/images/board/filter.png">
 					</span> <select name="board_type" class="filter" onchange="boardType()">
-						<option value="desc">최신순</option>
+						<option value="recent">최신순</option>
 						<option value="imminent">임박순</option>
 					</select>
 				</div>
