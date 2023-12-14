@@ -49,4 +49,36 @@ public class BoardService_yn {
 		return boardDAO.myParticipatedFreeBlist(customerId);
 	}
 
+	public List<Map<String, Object>> likeBoardBlist(String customerId) {
+		return boardDAO.likeBoardBlist(customerId);
+	}
+
+	public List<Map<String, Object>> likeBoardFreeBlist(String customerId) {
+		return boardDAO.likeBoardFreeBlist(customerId);
+	}
+
+	public List<String> likeBidList(String customerId) {
+		return boardDAO.likeBidList(customerId);
+	}
+
+	public int deleteLikedBoard(String customerId, String boardId) {
+		return boardDAO.deleteLikedBoard(customerId,boardId);
+	}
+
+	public int insertLikedBoard(String customerId, String boardId) {
+		return boardDAO.insertLikedBoard(customerId,boardId);
+	}
+
+	public List<String> likeFreeBidList(String customerId) {
+		return boardDAO.likeFreeBidList(customerId);
+	}
+
+	public List<Map<String, Object>> chatBlist(String customerId) {
+		return boardDAO.chatBlist(customerId);
+	}
+
+	public Map<String, Object> boardDetailEdit(String boardId) {
+		return boardDAO.boardDetailEdit(boardId);
+	}
+
 }

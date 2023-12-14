@@ -10,3 +10,8 @@ if(participant>1){
 	$(".freeDelete_btn").hide();
 }
 
+$(".update_btn").click(function(){
+	location.href = path + "/myPage/subPage/cbFastboardEdit.do?boardId=" + boardId + "&participant=" + participant;
+});
+
+

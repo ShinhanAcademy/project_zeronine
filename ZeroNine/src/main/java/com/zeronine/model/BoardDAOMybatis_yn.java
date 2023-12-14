@@ -1,5 +1,6 @@
 package com.zeronine.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +64,53 @@ public class BoardDAOMybatis_yn {
 		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myParticipatedFreeBlist",customerId);
 		return info;
 	}
+
+	public List<Map<String, Object>> likeBoardBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "likeBoardBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> likeBoardFreeBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "likeBoardFreeBlist",customerId);
+		return info;
+	}
+
+	public List<String> likeBidList(String customerId) {
+		List<String> likedbid = sqlSession.selectList(NAMESPACE + "likeBidList", customerId);
+		return likedbid;
+	}
+
+	public int deleteLikedBoard(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		int result = sqlSession.delete(NAMESPACE + "deleteLikedBoard", map);
+		return result;
+	}
+
+	public int insertLikedBoard(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		int result = sqlSession.insert(NAMESPACE + "insertLikedBoard", map);
+		return result;
+	}
+
+	public List<String> likeFreeBidList(String customerId) {
+		List<String> likedbid = sqlSession.selectList(NAMESPACE + "likeFreeBidList", customerId);
+		return likedbid;
+	}
+
+	public List<Map<String, Object>> chatBlist(String customerId) {
+		List<Map<String, Object>> info = sqlSession.selectList(NAMESPACE + "chatBlist", customerId);
+		return info;
+	}
+
+	public Map<String, Object> boardDetailEdit(String boardId) {
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "boardDetailEdit", boardId);
+		return info;
+	}
+
 	
 
 }

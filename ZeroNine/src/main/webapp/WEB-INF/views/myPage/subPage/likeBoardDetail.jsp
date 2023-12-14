@@ -27,17 +27,13 @@
 					<p class="content">${info.boardContent}</p>
 				</div>
 			</div>
-		<div class="update_btn_div">
-				<button class="delete_btn">삭제하기</button>
-				<button class="update_btn">수정하기</button>
+			<div class="participate_btn_div">
+				<button class="participate_btn">참여하기</button>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
 	var path = "${path}";
-	var participant = "${participant}";
-	var boardId = "${info.boardId}";
-	
 </script>
 <script src="${path}/js/myPage/cBdetailView.js" type="text/javascript"></script>
