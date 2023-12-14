@@ -364,8 +364,9 @@ input::placeholder {
 	text-align: left;
 }
 
-.location_img{
-	border: 1px solid black;
+#map{
+	border: 1px solid #c4c4c4;
+	border-radius:6px;
 	width: 440px;
 	height: 230px;
 	

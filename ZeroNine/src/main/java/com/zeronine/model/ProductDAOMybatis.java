@@ -99,3 +99,7 @@ public class ProductDAOMybatis {
 		return sqlSession.selectOne(namespace + "countProduct");
 	}
 }
+
+
+
+

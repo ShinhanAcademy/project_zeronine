@@ -125,7 +125,7 @@
 		                </div>
 	                	<!-- //search_wrap -->
 	                	<!-- order_history_wrap -->
-	                	<div class="order_history_wrap">
+	                	<div id="order_history_wrapper" class="order_history_wrap">
 	                	</div>
 	                	<!-- //order_history_wrap  -->
 	                </div>
@@ -140,13 +140,6 @@
 	<!-- //zero_container -->
 	<%@include file="deliveryTracking.jsp" %>
 	<%@include file="../common/footer.jsp" %>
-	 <script>
-       	$(".btn_search").on("click", function(){
-        	console.log("???????vallll", $("#datepicker").val());
-        	console.log("222222222222", $(".mypage_container #datepicker").data("datepicker").selectedDates[0]);
-       	});
-       	
- </script>
 </body>
 </html>
 		               

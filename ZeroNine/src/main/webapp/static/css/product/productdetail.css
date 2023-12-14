@@ -210,8 +210,9 @@
 	font-weight: 400;
 	line-height: 40px;
 }
-
 .detail_bodypart .detail_right .total_part {
+	}
+.detail_bodypart .detail_right .total_part .total_part_top {
 	margin-top: 32px;
 }
 
@@ -254,6 +255,7 @@
 	font-weight: 400;
 	line-height: 16px;
 	margin-right: 30px;
+	position: relative;
 }
 
 .detail_bodypart .detail_right .total_button .detail_order {
@@ -269,6 +271,7 @@
 	font-style: normal;
 	font-weight: 400;
 	line-height: 17px;
+	position: relative;
 }
 
 .detail_bodypart .detail_middle2 .forzero {
@@ -406,18 +409,6 @@
 	height: 2012px;
 }
 
-#sidebox {
-	background-color: #F0F0F0;
-	position: absolute;
-	width: 270px;
-	height: 120px;
-	top: 1557px;
-	right: 165px;
-	padding: 10px 20px;
-	height: 120px;
-	border-radius: 22px;
-}
-
 .detail_bodypart .detail_bottom_right .sub_amountpm {
 	display: flex;
 	align-items: center;
@@ -434,11 +425,20 @@
 .detail_bodypart .detail_bottom_right .subtitle1 {
 	color: #000;
 	font-family: Lato;
-	font-size: 14px;
+	font-size: 17px;
 	font-style: normal;
-	font-weight: 400;
-	line-height: 16px;
-	padding-left: 10px;
+}
+
+#sidebox {
+	margin: 10px;
+	background: #FAFAFA;
+	height: 109px;
+	display: flex;
+	justify-content: center;
+	padding: 5px;
+	flex-direction: column;
+	align-items: center;
+	
 }
 
 .detail_bodypart .detail_bottom_right .subtitle {

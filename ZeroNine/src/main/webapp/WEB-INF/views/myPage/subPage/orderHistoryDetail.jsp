@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> <%-- jstl lib --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- date format lib --%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <%-- functions lib --%>
-<c:set var="cpath" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <div class="tbl_top_wrap">
 	<div class="total_count">
-		총 <span>2</span>건
+		총 <span>${orderHistoryAll.size()}</span>건
 	</div>
 </div>
 <!-- tbl_wrap -->

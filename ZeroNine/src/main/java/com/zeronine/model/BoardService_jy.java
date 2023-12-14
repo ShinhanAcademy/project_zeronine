@@ -18,16 +18,26 @@ public class BoardService_jy {
 		return infoFList;
 	}
 	
-	public Map<String, Object> selectDetailView(String boardId) {
-		Map<String, Object> detail = boardDAO_jy.selectDetailView(boardId);
-		System.out.println("servie µğÅ×ÀÏ Á¤º¸" + detail);
+	public Map<String, Object> selectFastDetail(String boardId) {
+		Map<String, Object> detail = boardDAO_jy.selectFastDetail(boardId);
+		System.out.println("servie ì—ì„œ í™•ì¸í•˜ëŠ” fastë””í…Œì¼" + detail);
 		return detail;
 	}
 	
+	//oneBoard
 	public List<Map<String, Object>> selectOneBoardList(){
 		List<Map<String, Object>> infoOne = boardDAO_jy.selecOneBoardList();
 		return infoOne;
 	}
 
-
+	public List<Map<String, Object>> selectOneBoardEnd(){
+		List<Map<String, Object>> endInfoOne = boardDAO_jy.selectOneBoardEnd();
+		return endInfoOne;
+	}
+	
+	public Map<String, Object> selectOneDetail(String boardId) {
+		Map<String, Object> detail = boardDAO_jy.selectOneDetail(boardId);
+		System.out.println("servie ì—ì„œ í™•ì¸í•˜ëŠ” oneë””í…Œì¼" + detail);
+		return detail;
+	}
 }

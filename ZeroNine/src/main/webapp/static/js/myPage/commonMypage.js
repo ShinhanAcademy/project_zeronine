@@ -30,6 +30,13 @@ function usingDatePicker(){
 	});
 }
 
+function convertTime(date) {
+  date = new Date(date);
+  let offset = date.getTimezoneOffset() * 60000; //ms단위라 60000곱해줌
+  let dateOffset = new Date(date.getTime() - offset);
+  return dateOffset.toISOString();
+}
+
 function deliveryModal() {
 	// delivery modal
 	$(".btn_delivery_check").on("click", function(){
@@ -71,3 +78,61 @@ function closeModal() {
 	//스크롤 제어 해제
 	$('.delivery_modal_wrap').off('scroll touchmove mousewheel');
 }
+
+//엔터 Trigger
+document.querySelector(".search_word input").addEventListener("keyup", function(e) {
+    if (e.keyCode === 13) {
+        document.querySelector(".btn_search").click();
+    }
+});
+
+//orderHistory
+//Ajax
+function callOrderHistory() {
+	let startDate = $(".mypage_container #datepicker").data("datepicker").selectedDates[0];
+	let endDate = $(".mypage_container #datepicker").data("datepicker").selectedDates[1];
+
+	var paramObj = {};
+
+	paramObj.searchWord = $(".search_word input").val();
+	paramObj.startDate = convertTime(startDate).split("T")[0];
+	paramObj.endDate = convertTime(endDate).split("T")[0];
+	
+	$.ajax({
+		url: contextPath + "/myPage/subPage/orderHistoryDetail.do",
+		data: paramObj,
+		success: function(resData) {
+			$("#order_history_wrapper").html(resData);
+		},
+		error:function() {
+		}
+	});
+}
+
+//orderCancelHistory
+//Ajax
+function callOrderCancelHistory() {
+	let startDate = $(".mypage_container #datepicker").data("datepicker").selectedDates[0];
+	let endDate = $(".mypage_container #datepicker").data("datepicker").selectedDates[1];
+
+	var paramObj = {};
+
+	paramObj.searchWord = $(".search_word input").val();
+	paramObj.startDate = convertTime(startDate).split("T")[0];
+	paramObj.endDate = convertTime(endDate).split("T")[0];
+	console.log("paramObj", paramObj);
+	
+	$.ajax({
+		url: contextPath + "/myPage/subPage/orderCancelHistoryDetail.do",
+		data: paramObj,
+		success: function(resData) {
+			console.log("orderHistoryCancelDetail 성공 !!");
+			$("#cancel_history_wrapper").html(resData);
+		},
+		error:function() {
+			console.log("orderHistoryCancelDetail ajax 오류");
+		}
+	});
+}
+
+
