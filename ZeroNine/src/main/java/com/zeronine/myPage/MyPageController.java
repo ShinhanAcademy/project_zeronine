@@ -54,13 +54,15 @@ public class MyPageController {
 	// orderHistory(주문 내역)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory() {
-		//String customerId = (String) session.getAttribute("customerId");
-//		String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
-		//String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
-//		System.out.println("ID = " + customerId);
-//
-//		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));
-//		System.out.println("너는 무엇이냐" + deliveryService.orderHistoryAll(customerId));
+		/*
+			String customerId = (String) session.getAttribute("customerId");
+			String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
+			String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
+			System.out.println("ID = " + customerId);
+	
+			model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));
+			System.out.println("너는 무엇이냐" + deliveryService.orderHistoryAll(customerId));
+		*/
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")
@@ -68,8 +70,10 @@ public class MyPageController {
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
-		//String customerId = (String) session.getAttribute("customerId");
-		//String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
+		/*
+			String customerId = (String) session.getAttribute("customerId");
+			String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
+		*/
 		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		System.out.println("ID = " + customerId);
 
@@ -78,8 +82,19 @@ public class MyPageController {
 	
 	// orderCancelHistory(취소 / 반품 내역)
 	@RequestMapping("/orderCancelHistory.do")
-	public String orderCancelHistory() {
-		return "myPage/orderCancelHistory";
+	public void orderCancelHistory() {
+	}
+
+	@RequestMapping("/subPage/orderCancelHistoryDetail.do")
+	public void orderCancelHistoryDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate,
+			Model model, HttpSession session) {
+//		String customerId = (String) session.getAttribute("customerId");
+		String customerId = "7cb70b46-d6c2-462d-b785-dc27e1e7d045";
+		System.out.println("ID = " + customerId);
+		
+		model.addAttribute("orderCancelHistoryAll", deliveryService.orderCancelHistoryAll(customerId, searchWord, startDate, endDate));
 	}
 	
 	// myCart(장바구니)
@@ -152,9 +167,9 @@ public class MyPageController {
 	@GetMapping("/subPage/createdFreeBoardDetail.do")
 	public void createdFreeBoardDetail(String boardId, Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);
-		int participant = boardService.numOfFreeParticipant(boardId);
+		//int participant = boardService.numOfFreeParticipant(boardId);
 		model.addAttribute("info", info);
-		model.addAttribute("participant", participant);
+		//model.addAttribute("participant", participant);
 	}
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
@@ -162,9 +177,9 @@ public class MyPageController {
 	public void participatedBoard(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
-		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
+		//List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+//		model.addAttribute("info", info);
+//		model.addAttribute("count", info.size());
 	}
 	
 	@GetMapping("/subPage/participatedBoardDetail.do")
@@ -179,18 +194,18 @@ public class MyPageController {
 	public void pbFreeDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
-		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
+//		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
+//		model.addAttribute("info", info);
+//		model.addAttribute("count", info.size());
 	}
 	
 	@GetMapping("/subPage/pbFastDelivery.do")
 	public void pbFastDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
-		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
+//		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+//		model.addAttribute("info", info);
+//		model.addAttribute("count", info.size());
 	}
 
 	

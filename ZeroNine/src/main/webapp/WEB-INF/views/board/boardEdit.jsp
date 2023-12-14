@@ -7,9 +7,11 @@
 
 <title>BoardEdit</title>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8f8319ad3e87a23d9e09852a09ba8028&libraries=services,clusterer,drawing"></script>
+
 
 </head>
-<!-- boardType 저장해서 페이지 뿌리기 >> 나중에 include만 존재해야 함   -->
 <body>
 	<div class="zero_container" style="padding-top: 180px;">
 		<div class="banner zn_center">

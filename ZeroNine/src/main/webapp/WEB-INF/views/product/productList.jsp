@@ -87,7 +87,7 @@
 					<c:forEach items="${plist}" var="product" varStatus="status">
 						<div class="menu_sub">
 							<div class="menu_image">
-								<img class="menupng" onclick="menuimgDetail('${product.productId}')"
+								<img class="menupng" onclick="location.href='${Path }/product/productDetail.do?productId=${product.productId}'"
 									src="${path}/images/sangpumpage/ohddugi.png">
 
 								<div class="menu_gocart">
@@ -169,7 +169,8 @@
 	</script>
 
 	<script>
-
+	
+	
 	function pcountchange(currentpage,perpage){
 		console.log(currentpage);
 		var obj = {

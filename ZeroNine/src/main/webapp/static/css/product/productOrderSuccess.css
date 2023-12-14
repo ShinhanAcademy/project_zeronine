@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.order_success_part {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	text-align: left;
+	flex-direction: column;
+}
+
+.order_success_part .os_part {
+	padding: 100px 0;
+}
+
+.order_success_part .os_part .os_part_text {
+	display: flex;
+	justify-content: center;
+}
+
+.order_success_part .os_part .os_part_text .os_t {
+	color: #5D5D5D;
+	text-align: center;
+	font-family: Jua;
+	font-size: 60px;
+	font-style: normal;
+	font-weight: 400;
+}
+
+.order_success_part .os_part .os_info {
+	width: 950px;
+	margin: 30px auto;
+}
+.order_success_part .os_part .os_info .os_info_t {
+	color: #000;
+	text-align: center;
+	font-family: Jura;
+	font-size: 35px;
+	font-style: normal;
+	font-weight: 500;
+}
