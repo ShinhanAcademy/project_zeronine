@@ -7,8 +7,11 @@
 		</li>
 		<li class="btn">
 			<button type="button"
-				onclick="location.href='${path}/board/fastboard.do'">게시글 목록</button>
+				onclick="location.href='${path}/board/${boardListType}.do'">게시글 목록</button>
 		</li>
 	</ul>
 </div>
 
+<script>
+	
+</script>

@@ -3,7 +3,8 @@
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/order_history.css">
-<script defer src="/js/myPage/myShopping.js"></script>
+<script defer src="/js/myPage/commonMypage.js"></script>
+<script defer src="/js/myPage/orderHistory.js"></script>
 <title>MyPage</title>
 </head>
 <body>
@@ -26,10 +27,11 @@
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
 	                <ul>
+   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
 	                    <li><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
 	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
-	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
+	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
@@ -102,9 +104,9 @@
 		                <div class="search_wrap">
 		                	<div class="period">
 		                		<span>구매 기간</span>
-		                		<button class="on" period="1">1개월</button>
-		                		<button period="3">3개월</button>
-		                		<button period="6">6개월</button>
+		                		<button class="on" data-period="1">1개월</button>
+		                		<button data-period="3">3개월</button>
+		                		<button data-period="6">6개월</button>
 		                		<div class="calendar">
 			                		<input type="text"
 									    data-range="true"
@@ -122,7 +124,7 @@
 		                </div>
 	                	<!-- //search_wrap -->
 	                	<!-- orderhistory_wrap  -->
-	                	<div id="orderhistory_wrap" class="order_history_wrap">
+	                	<div class="order_history_wrap">
 		                    <div class="tbl_top_wrap">
 		                    	<div class="total_count">
 									총 <span>2</span>건

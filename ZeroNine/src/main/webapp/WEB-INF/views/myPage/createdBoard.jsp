@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
 <link rel="stylesheet" href="${path}/css/myPage/createdBoard.css">
+<link rel="stylesheet" href="${path}/css/myPage/cBdetailView.css" />
 <title>MyPage</title>
 </head>
 <body>
@@ -27,14 +28,13 @@
 						<li><a href="${path}/myPage/likeProduct.do">찜한 상품</a></li>
 					</ul>
 					<div class="sub_tit">MY ACTIVITIES</div>
-					<ul>
-						<li class="on"><a href="${path}/myPage/createdBoard.do">내가
-								쓴 게시글</a></li>
-						<li><a href="${path}/myPage/participatedBoard.do">내가 참여한
-								게시글</a></li>
-						<li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
-						<li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
-					</ul>
+	                <ul>
+   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
+	                    <li class="on"><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
+	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
+	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
+	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
+	                </ul>
 					<div class="sub_tit">MY INFOMATION</div>
 					<ul>
 						<li><a href="${path}/myPage/validatePassword.do">개인 정보</a></li>
@@ -104,22 +104,29 @@
 					<!-- contents -->
 					<div class="contents">
 						<div class="tbl_wrap">
+						
+						<div id="hereContents">
 							<div class="tbl_top_wrap">
 								<div class="total_count">
-									총 <span>${blistCount}</span>건
+								
+									총 <span>${count}</span>건
+								</div>
+								<div class="delivery_kind">
+								<span class="btn_deli on" id="fastDelivery">즉배</span>
+								<span>|</span>
+								<span class="btn_deli" id="freeDelivery">무배</span>
 								</div>
 								<div class="btn_wrap">
 									<button class="btn_more">채팅방으로 가기 ></button>
 								</div>
 							</div>
-							<c:forEach items="${blist}" var="board">
+							
 							<table class="tbl_chat_wrap">
 							
 								<colgroup>
-									<col width="10%" />
-									<col width="15%" />
+									<col width="20%" />
 									<col width="35%" />
-									<col width="10%" />
+									<col width="15%" />
 									<col width="18%" />
 									<col width="12%" />
 									<!-- 
@@ -130,9 +137,7 @@
 								</colgroup>
 								<thead>
 									<tr>
-										<th class="check_all txt_left"><input type="checkbox" />
-											전체선택</th>
-										<th>이름</th>
+										<th>상품</th>
 										<th>게시글 제목</th>
 										<th>게시일</th>
 										<th>마감 기한</th>
@@ -140,26 +145,22 @@
 									</tr>
 								</thead>
 								<tbody>
+								<c:forEach items="${info}" var="board">
 								<tr>
-										<td class="check_item"><input type="checkbox" /></td>
-										<td>또라몽</td>
-											<td>${board.title}</td>
-											<td>${board.uploadTime}</td>
-											<td>${board.postingMinutes}</td>
-											<td class="read_status"><select class="select_status"
-												name="status">
-													<option value="detail_opt">상세보기</option>
-													<option value="update_opt">수정하기</option>
-											</select></td>
+										<td><img class="product_image" src="${board.imagePath}"></td>
+											<td class="td_font_title">${board.title}</td>
+											<td class="td_font_upload">${board.uploadTime}</td>
+											<td class="td_font_remain">${board.remainTime}</td>
+											<td class="read_status">
+										<input id="hiddenBoardId" type="hidden" value="${board.boardId}">
+										<button class="boardDetail">상세보기</button>	
+										</td>
 									</tr>
+									</c:forEach>
 								</tbody>	
 							</table>
-							</c:forEach>
-							<div class="tbl_bottom_wrap">
-								<div class="btn_wrap">
-									<button class="btn_del">삭제하기</button>
-								</div>
 							</div>
+							
 						</div>
 						<!-- //chat_list -->
 					</div>
@@ -172,6 +173,11 @@
 		<!-- //mypage_container -->
 	</div>
 	<!-- //zero_container -->
+	<div id="here"></div>
 	<%@include file="../common/footer.jsp"%>
+	<script>
+	var path = "${path}";
+	</script>
+	<script src="${path}/js/myPage/createdBoard.js" type="text/javascript"></script>
 </body>
 </html>

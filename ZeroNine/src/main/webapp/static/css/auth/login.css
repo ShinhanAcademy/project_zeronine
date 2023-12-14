@@ -31,6 +31,11 @@
 	align-items: center;
 }
 
+.naver_login, .kakao_login{
+	display: flex;
+	align-items: center;
+}
+
 .nklogin-bottom {
 	color: #555;
 	font-family: "Lato";
@@ -39,6 +44,7 @@
 	font-weight: 400;
 	line-height: 14px;
 	margin-left: 5px;
+	width: 120px;
 }
 
 .login-bottom span:nth-of-type(1){

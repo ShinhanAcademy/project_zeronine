@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,23 +18,24 @@
 				</button>
 				<div class="detail_chn_area">
 					<img class="detail_img"
-						src="https://zeronine.s3.ap-northeast-2.amazonaws.com/test.jpg">
+						src="${detail.imagePath}">
 
 					<div class="detail_pro_detail">
-						<p class="title">토너 같이 사실 분~~~~~</p>
+						<p class="title"> ${detail.title} </p>
 						<hr>
 						<ul>
 							<li><img class="cart" src="${path}/images/common/cart.png">
-								<span> 마녀공장 [1+1] 판테토인 에센스 토너 200ml </span></li>
-							<li><img class="user" src="${path}/images/board/user.png">
-								<span> 1명 모집 </span></li>
+								<span> ${detail.brand}   /   ${detail.pName}</span></li>
+							<li><img class="box" src="${path}/images/board/box.png">
+								<span> ${detail.pCount - detail.totalpickCount} 남음 </span></li>
 							<li><img class="card" src="${path}/images/board/card.png">
-								<span> 16,640원 </span></li>
+								<span> <fmt:formatNumber value="${detail.price/(detail.pCount - detail.pickCount)}" type="number"/>원  </span></li>
 							<li><img class="clock" src="${path}/images/board/clock.png">
-								<span> 23.11.30 23:59까지 </span></li>
+								 <fmt:parseDate value="${detail.finishTime}" var="parsedDate" pattern="yyyy-MM-dd HH:mm"/> 
+									<span> <fmt:formatDate value="${parsedDate}" pattern="YY년 MM월 dd일 HH:mm" /> 까지 </span></li>
 						</ul>
 						<hr>
-						<p class="content">저는 하나만 필요합니당 같이 사실 분 찾아요!!!</p>
+						<p class="content"> ${detail.boardContent} </p>
 					</div>
 				</div>
 				<div class="join_btn_div">

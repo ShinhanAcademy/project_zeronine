@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
+<link rel="stylesheet" href="${path}/css/myPage/like_product.css">
 <title>MyPage</title>
 </head>
 <body>
@@ -25,10 +25,11 @@
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
 	                <ul>
+   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
 	                    <li><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
 	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
-	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
+	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
@@ -93,76 +94,175 @@
 	            </div>
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
-	            <div class="contents_wrap">
-	                <div class="con_tit">찜한 상품</div> <%-- has_line --%>
+	            <div id="like_contents_wrap" class="contents_wrap">
+	                <div class="con_tit has_line">찜한 상품</div>
 	                <!-- contents -->
 	                <div class="contents">
-	                    <div class="tbl_wrap">
-		                    <div class="tbl_top_wrap">
-		                    	<div class="total_count">
-									총 <span>2</span>건
-		                    	</div>
-		                    	<div class="btn_wrap">
-		                    		<button class="btn_more">채팅방으로 가기 ></button>
-		                    	</div>
-	                    	</div>
-	                    	<table class="tbl_chat_wrap">
-							  <colgroup>  	
-							    <col width="10%" />
-							    <col width="15%" />
-							    <col width="35%" />
-							    <col width="10%" />
-							    <col width="18%" />
-							    <col width="12%" />
-							    <!-- 
-							    <col />
-							    <col span="2" class="batman" />
-							    <col span="2" class="flash" />
-							    -->
-							  </colgroup>
-	                    		<thead>
-	                    			<tr>
-	                    				<th class="check_all txt_left">	                    					
-    										<input type="checkbox" />
-    										전체선택
-	                    				</th>
-	                    				<th>이름</th>
-	                    				<th>게시글 제목</th>
-	                    				<th>게시일</th>
-	                    				<th>마감 기한</th>
-	                    				<th>읽은 상태</th>
-	                    			</tr>
-	                    		</thead>
-	                    		<tbody>
-	                    			<tr>
-	                    				<td class="check_item">
-											<input type="checkbox" />	                    					
-	                    				</td>
-	                    				<td>또라몽</td>
-	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-	                    				<td>23.12.07</td>
-	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status"><span>status</span>읽음</td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td class="check_item">
-											<input type="checkbox" checked />	                    					
-	                    				</td>
-	                    				<td>또라몽</td>
-	                    				<td>초코에몽 1+1인데 같이 사실 분~~??</td>
-	                    				<td>23.12.07</td>
-	                    				<td>23.12.08 20:00까지</td>
-	                    				<td class="read_status new"><span>status</span>읽지 않음</td>
-	                    			</tr>
-	                    		</tbody>
-	                    	</table>
-		                    <div class="tbl_bottom_wrap">
-		                    	<div class="btn_wrap">
-		                    		<button class="btn_del">삭제하기</button>
-		                    	</div>
-	                    	</div>
-	                    </div>
-	                    <!-- //chat_list -->
+	                	<!-- search_wrap -->
+	                	<div class="search_wrap">
+		                	<div class="search_word">
+		                		<input type="text" placeholder="상품명, 브랜드명을 입력하세요.">
+		                		<button class="btn_search"></button>
+		                	</div>
+		                </div>
+	                	<!-- //search_wrap -->
+	                	<!-- like_product_wrap -->
+	                	<div class="like_product_wrap">
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_08.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_01.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_01.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_02.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_02.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_02.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_08.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_08.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                		<div class="like_item">
+	                			<div class="item_inner">
+		                			<div class="img_wrap">
+		                				<a href="javascript:void(0)">
+			                				<img src="${path}/images/mypage/img_product_08.png" alt="product image" />
+		                				</a>
+		                				<button class="btn_like">like</button>
+		                			</div>
+		                			<div>
+		                				<div class="product_brand">엑스투</div>
+		                				<div class="product_name">
+			                				<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon Grape</a>
+		                				</div>
+		                				<div class="price">200,000원</div>
+		                			</div>
+	                			</div>
+	                		</div>
+	                	</div>
+	                	<!-- //like_product_wrap -->
 	                </div>
 	                <!-- //contents -->
 	            </div>

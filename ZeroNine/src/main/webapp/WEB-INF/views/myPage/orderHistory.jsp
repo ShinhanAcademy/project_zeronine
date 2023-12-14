@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="/css/myPage/order_history.css">
 <link rel="stylesheet" href="/css/myPage/delivery_tracking.css">
-<script defer src="/js/myPage/myShopping.js"></script>
+<script defer src="/js/myPage/commonMypage.js"></script>
+<script defer src="/js/myPage/orderHistory.js"></script>
 <title>MyPage</title>
 </head>
 <body>
@@ -27,10 +28,11 @@
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
 	                <ul>
+   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
 	                    <li><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
 	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
-	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
+	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
@@ -103,9 +105,9 @@
 		                <div class="search_wrap">
 		                	<div class="period">
 		                		<span>구매 기간</span>
-		                		<button class="on" period="1">1개월</button>
-		                		<button period="3">3개월</button>
-		                		<button period="6">6개월</button>
+		                		<button class="on" data-period="1">1개월</button>
+		                		<button data-period="3">3개월</button>
+		                		<button data-period="6">6개월</button>
 		                		<div class="calendar">
 			                		<input type="text"
 									    data-range="true"
@@ -121,9 +123,16 @@
 		                		<button class="btn_search">검색</button>
 		                	</div>
 		                </div>
+		                <script>
+		                	$(".btn_search").on("click", function(){
+			                	console.log("???????vallll", $("#datepicker").val());
+			                	console.log("222222222222", $(".mypage_container #datepicker").data("datepicker").selectedDates[0]);
+			                	console.log("33333333", new Date($(".mypage_container #datepicker").data("datepicker").selectedDates[0].toISOString().split("T")[0]);
+		                	})
+		                </script>
 	                	<!-- //search_wrap -->
-	                	<!-- orderhistory_wrap  -->
-	                	<div id="orderhistory_wrap" class="order_history_wrap">
+	                	<!-- order_history_wrap -->
+	                	<div class="order_history_wrap">
 		                    <div class="tbl_top_wrap">
 		                    	<div class="total_count">
 									총 <span>2</span>건
@@ -149,84 +158,87 @@
 		                    			</tr>
 		                    		</thead>
 		                    		<tbody>
-		                    			<tr>
-		                    				<td rowspan="3">
-		                    					2023.11.14
-												<div class="order_num color_blue">202311150000001</div>
-		                    				</td>
-		                    				<td class="product_info">
-												<div class="img_wrap">
-													<img src="${path}/images/mypage/img_product_04.png" alt="product image" />
-												</div>
-												<div class="detail">
-													<div class="brand_name">에스쁘아</div>
-													<div class="product_name">[증량기획] 에스쁘아 원터 스플래쉬 선크림 세라마이드 60ml+20ml 세트</div>
-												</div>
-											</td>
-		                    				<td>3</td>
-		                    				<td class="price color_red ">66,000원</td>
-		                    				<td rowspan="3" class="order_status">
-												배송완료
-												<div>
-													<button class="btn_blue btn_delivery_check">배송조회</button>
-												</div>
-											</td>
-		                    			</tr>
-		                    			<tr>
-		                    				<td class="product_info">
-												<div class="img_wrap">
-													<img src="${path}/images/mypage/img_product_05.png" alt="product image" />
-												</div>
-												<div class="detail">
-													<div class="brand_name">유시몰</div>
-													<div class="product_name">[11/27 하루특가]유시몰 화이트닝 미백치약 106g+20g (가글 9ml 추가</div>
-												</div>
-											</td>
-		                    				<td>3</td>
-		                    				<td class="price color_red ">66,000원</td>
-		                    			</tr>
-		                    			<tr>
-		                    				<td class="product_info">
-												<div class="img_wrap">
-													<img src="${path}/images/mypage/img_product_06.png" alt="product image" />
-												</div>
-												<div class="detail">
-													<div class="brand_name">라보에이치</div>
-													<div class="product_name">라보에이치 두피강화샴푸 탈모증상완화 333ml기획 (+112ml 증정)</div>
-												</div>
-											</td>
-		                    				<td>3</td>
-		                    				<td class="price color_red ">66,000원</td>
-		                    			</tr>
-		                    			<tr>
-		                    				<td>
-		                    					2023.11.14
-												<div class="order_num color_blue">202311150000001</div>
-		                    				</td>
-		                    				<td class="product_info">
-												<div class="img_wrap">
-													<img src="${path}/images/mypage/img_product_07.png" alt="product image" />
-												</div>
-												<div class="detail">
-													<div class="brand_name">에스쁘아</div>
-													<div class="product_name">[한정기획/베스트립증정]에스쁘아 비벨벳 커버쿠션 뉴클래스 미니립 2종[한정기획/베스트립증정]에스쁘아 비벨벳 커버쿠션 뉴클래스 미니립 2종</div>
-												</div>
-											</td>
-		                    				<td>3</td>
-		                    				<td class="price color_red ">66,000원</td>
-		                    				<td class="order_status">
-												배송완료
-												<div>
-													<button class="btn_blue btn_delivery_check">배송조회</button>
-												</div>
-											</td>
-		                    			</tr>
+										<c:forEach items="${orderHistoryAll}" var="orderlist" varStatus="i">
+											<c:if test="${orderlist.deliveryId eq prev_row}">
+												<c:set var="check_row" value="${check_row + 1}" />
+											</c:if>
+											<c:if test="${orderlist.deliveryId ne prev_row}">
+												<c:set var="check_row" value="0" />
+											</c:if>
+												<tr>
+													 <c:if test="${check_row == 0}">
+														<td rowspan="<c:out value='${orderlist.partcnt}' />">
+															<fmt:formatDate value="${orderlist.purchaseDateTime}" pattern="yyyy.MM.dd"/>
+															<div class="order_num color_blue">202311150000001</div>
+														</td>
+													</c:if>
+				                    				<td class="product_info">
+														<div class="img_wrap">
+															<img src="${orderlist.imagePath}" alt="product image" />
+														</div>
+														<div class="detail">
+															<div class="brand_name">${orderlist.brand}</div>
+															<div class="product_name">${orderlist.pName}</div>
+														</div>
+													</td>
+				                    				<td>${orderlist.productCount}</td>
+				                    				<td class="price color_red ">${orderlist.price} 원</td>
+				                    				<c:if test="${check_row == 0}">
+														<td class="order_status" rowspan="<c:out value='${orderlist.partcnt}' />">
+															<c:choose>
+            													<c:when test="${orderlist.deliveryStatus eq 'ready'}"> 
+																	배송준비중
+																</c:when>
+            													<c:when test="${orderlist.deliveryStatus eq 'process'}"> 
+																	배송중
+																</c:when>
+            													<c:when test="${orderlist.deliveryStatus eq 'complete'}"> 
+																	배송완료
+																	<div>
+																		<button class="btn_blue btn_delivery_check">배송조회</button>
+																	</div>
+																</c:when>
+													            <c:otherwise>
+													                저는 모두 해당이 안됩니다.
+													            </c:otherwise>
+															</c:choose>
+														</td>
+													</c:if>
+				                    			</tr>
+        									<c:set var="prev_row"><c:out value="${orderlist.deliveryId}" /></c:set>
+										</c:forEach>
 		                    		</tbody>
 		                    	</table>
 		                    </div>
-	                		<!-- tbl_wrap -->
+	                		<!-- //tbl_wrap -->
+	                		<!-- pagination -->
+							<%-- <c:if test="${booklist.size() != 0}"> --%>
+							    <div class=pagination>
+							        <div class="pageLeft">
+							            <button class="btnFirst">첫페이지</button>
+							            <button class="btnPrev">이전페이지</button>
+							        </div>
+							        <ul class="pagingWrap">
+							            <li><a href="">1</a></li>
+							            <li><a href="">2</a></li>
+							            <li><a href="">3</a></li>
+							            <li><a href="">4</a></li>
+							            <li><a href="">5</a></li>
+							            <li><a href="">6</a></li>
+							            <li><a href="">7</a></li>
+							            <li><a href="">8</a></li>
+							            <li><a href="">9</a></li>
+							            <li><a href="">10</a></li>
+							        </ul>
+							        <div class="pageRight">
+							            <button class="btnNext">다음페이지</button>
+							            <button class="btnLast">마지막페이지</button>
+							        </div>
+							    </div>
+							<%-- </c:if> --%>
+	                		<!-- //pagination -->
 	                	</div>
-	                	<!-- //orderhistory_wrap  -->
+	                	<!-- //order_history_wrap  -->
 	                </div>
 	                <!-- //contents -->
 	            </div>

@@ -4,17 +4,34 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.board">
 
+	<!-- <select id="selectAll" resultType="boardVO"> select * from public.board 
+		order by "uploadTime" desc; </select> <select id="selectEnd" resultType="boardVO"> 
+		select * from board order by "postingMinutes" asc; </select> -->
 
+	<select id="selectFastBoardList" resultType="map">
+		select b."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", sum(sp."pickCount") as "totalpickCount", pi."imagePath"
+			from public."board" as b
+			join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+			join public."product" as p on (p."productId" = sp."productId")
+			join public."productMainImage" as pi on (p."productId" = pi."productId")
+			group by b."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", pi."imagePath"
+			order by b."uploadTime" desc;
+	</select>
 
-
-  <select id="selectAll" resultType="boardVO">
-  	select * from public.board
-		order by "uploadTime" desc; 
-  </select>
-  
-  <select id="selectEnd" resultType="boardVO">
-  	select * from board
-		order by "postingMinutes" asc;
-  </select>
-  
+	<select id="selectDetailView" resultType="map">
+			select b."boardId",b."title", b."boardContent", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", sum(sp."pickCount") as "totalpickCount", pi."imagePath"
+			from public."board" as b
+			join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+			join public."product" as p on (p."productId" = sp."productId")
+			join public."productMainImage" as pi on (p."productId" = pi."productId")
+			where b."boardId"= cast(#{boardId} as UUID)
+			group by b."boardId",b."title", b."boardContent", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", pi."imagePath"
+	</select>
+	
+	<select id="selectOneBoardList" resultType="map">
+	select *, (ob."oUploadTime" + (ob."oPostingMinutes" || 'minutes')::interval) as finishTime
+		from public."oneToOneBoard" as ob
+		join public."oBoardImage" as obi on ob."oBoardId" = obi."oBoardId"
+	</select>
+	
 </mapper>
