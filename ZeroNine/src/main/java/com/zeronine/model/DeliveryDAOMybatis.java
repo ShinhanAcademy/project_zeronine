@@ -1,5 +1,6 @@
 package com.zeronine.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,11 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.zeronine.dto.DeliveryProductVO;
-import com.zeronine.dto.DeliveryVO;
-import com.zeronine.dto.ProductMainImageVO;
-import com.zeronine.dto.ProductVO;
 
 @Repository("deliveryDAO")
 public class DeliveryDAOMybatis {
@@ -33,9 +29,17 @@ public class DeliveryDAOMybatis {
 	 * }
 	 */
 	
-	public List<Map<String, Object>> orderHistoryAll(String customerId) {
-		List<Map<String, Object>> result = sqlSession.selectList(NAMESPACE + "orderHistoryAll", customerId);
-		return result;
+	public List<Map<String, Object>> orderHistoryAll(String customerId, String searchWord, String startDate, String endDate) {
+		//List<Map<String, Object>> result = sqlSession.selectList(NAMESPACE + "orderHistoryAll", customerId);
+		Map<String, Object> mapData = new HashMap<>();
+		mapData.put("customerId", customerId);
+		mapData.put("searchWord", searchWord);
+		mapData.put("startDate", startDate);
+		mapData.put("endDate", endDate);
+		List<Map<String, Object>> orderHistoryList = sqlSession.selectList(NAMESPACE + "orderHistoryAll", mapData);
+		logger.info("조회조건:{}...결과:{}건", mapData, orderHistoryList.size());
+
+		return orderHistoryList;
 	}
 	 
 	/*
