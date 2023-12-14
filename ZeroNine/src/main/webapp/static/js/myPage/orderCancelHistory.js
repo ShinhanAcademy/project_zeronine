@@ -6,9 +6,10 @@
 $(function(){
 	usingDatePicker();	//datePicker
 	deliveryModal();	//modal
-	callOrderHistory();	//orderHistory Ajax
+	callOrderCancelHistory();	//orderHistory Ajax
 });
 
 $(".search_wrap .btn_search").on("click", function(){
-	callOrderHistory();
+	callOrderCancelHistory();
 });
+
