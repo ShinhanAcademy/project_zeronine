@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="tbl_top_wrap">
 	<div class="total_count">
 
@@ -51,6 +52,22 @@
 								maxIntegerDigits="3" value="${board.total/50000}" /></span>
 						</div>
 					</div>
+					
+					<button class="btn_like" id="like${status.index}" onclick="handleLikeButtonClick(${status.index},'${board.boardId}')">
+												
+												<c:if test="${fn:contains(likedbid, board.boardId)}">
+													<img class="board_heart"   
+														src="${path}/images/board/red_heart.png">
+												</c:if>
+												<c:if
+													test="${not(fn:contains(likedbid, board.boardId))}">
+													<img class="board_heart"   
+														src="${path}/images/board/heart.png">
+												</c:if>
+												
+												
+												</button>
+					
 				</td>
 				<td class="td_font_title">${board.title}</td>
 				<td class="td_font_upload">${board.uploadTime}</td>
@@ -63,8 +80,56 @@
 	</tbody>
 </table>
 <script>
+var path = "${path}";
 
+var str = "${likedbid}";
+var likedbidArr = [] ; 
+likedbidArr = str.split(/,|\[|\]| /);
+console.log(likedbidArr);
 
+function handleLikeButtonClick(index, boardId) {
+	
+	var likeButtonId = "like" + index;
 
+	//클래스가 heart liked => AJAX DELTE 호출
+    var isRedHeart = likedbidArr.indexOf(boardId);
+	
+	console.log(isRedHeart);
+	if(isRedHeart>=0) {
+		$.ajax({
+			url : path + "/myPage/subPage/deleteLikedBoard.do",
+			type: "GET",
+			data : {"boardId" :boardId},
+			success : function(){
+				likedbidArr = likedbidArr.filter((element) => element !== boardId);
+			},
+			error : function(){
+				alert("에러입니다.");
+			}
+			});
+			 
+		}else{
+
+		 $.ajax({
+				url : "/myPage/subPage/insertLikedBoard.do",
+				type: "GET",
+				data : {"boardId" :boardId},
+				success : function(){
+						likedbidArr.push(boardId);
+				},
+				error : function(){
+					alert("에러입니다.");
+				}
+				});
+		}
+			};
+$(".btn_like").click(function (){
+
+	var currentImagePath = $(this).find("img.board_heart").attr("src");
+	var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+	    path+"/images/board/red_heart.png" :
+	    path+"/images/board/heart.png";
+	$(this).find("img.board_heart").attr("src", newImagePath);
+	});
 </script>
 <script src="${path}/js/myPage/likeBoard.js" type="text/javascript"></script>

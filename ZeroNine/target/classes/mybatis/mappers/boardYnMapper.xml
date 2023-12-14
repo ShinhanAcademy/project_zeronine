@@ -15,12 +15,22 @@
 	</select>
 	<select id="boardDetail" resultType="map" parameterType="String">
 		select distinct p."pName",pi."imagePath", b.title, p.price/p."pCount" as price, 
-		to_char(b."finishTime",'yyyy-mm-dd HH:mi:ss') as "finishTime", b."boardContent"
+		to_char(b."finishTime",'yyyy-mm-dd HH:mi:ss') as "finishTime", b."boardContent", b."boardId"
 		from board b left join "selectProduct" sp on (b."boardId"=sp."boardId")
 		left join product p on (sp."productId"=p."productId")
 		left join "productMainImage" pi on (p."productId"=pi."productId")
 		WHERE b."boardId" = cast(#{boardId} as UUID)
 	</select>
+	
+	<select id="boardDetailEdit" resultType="map" parameterType="String">
+		select distinct p.brand, p."pName",pi."imagePath", b.title, to_char(b."finishTime"-NOW(),'dd') as "day", to_char(b."finishTime"-NOW(),'HH') as "hour",
+		to_char(b."finishTime"-NOW(),'mi') as "minute", b."boardContent", b."boardId", sp."pickCount"
+		from board b left join "selectProduct" sp on (b."boardId"=sp."boardId")
+		left join product p on (sp."productId"=p."productId")
+		left join "productMainImage" pi on (p."productId"=pi."productId")
+		WHERE b."boardId" = cast(#{boardId} as UUID)
+	</select>
+	
 	<select id="boardpCount" resultType="int" parameterType="String">
 		SELECT DISTINCT p."pCount" - COALESCE(sq."pickCount", 0) AS count
 		FROM "selectProduct" sp
@@ -129,10 +139,36 @@
 		WHERE bc."boardId" = b."boardId")
 		AS total
 		from "likedBoard" lb left join board b on (lb."boardId"=b."boardId")
-		where lb."customerId" ='490ef92a-d77f-432f-8bfb-2828eee6db77'
+		where lb."customerId" = cast(#{customerId} as UUID)
 		and b."finishTime">NOW()
 		and b."bCategoryType" = 'free_delivery_board'
 		ORDER BY "uploadTime"
 	</select>
+	<select id="likeBidList" resultType="String" parameterType="String">
+		select lb."boardId"
+		from "likedBoard" lb left join board b on (lb."boardId"=b."boardId")
+		where lb."customerId" = cast(#{customerId} as UUID)
+		and b."finishTime">NOW()
+		and b."bCategoryType" = 'fast_board'
+	</select>
+	<delete id="deleteLikedBoard" parameterType="map">
+		delete from "likedBoard"
+		where "customerId" = cast(#{customerId} as UUID)
+		and "boardId" = cast(#{boardId} as UUID)
+	</delete>
+	<insert id="insertLikedBoard" parameterType="map">
+		INSERT INTO "likedBoard"("customerId", "boardId")
+		VALUES (cast(#{customerId} as UUID), cast(#{boardId} as UUID))
+	</insert>
+	<select id="likeFreeBidList" resultType="String" parameterType="String">
+		select lb."boardId"
+		from "likedBoard" lb left join board b on (lb."boardId"=b."boardId")
+		where lb."customerId" = cast(#{customerId} as UUID)
+		and b."finishTime">NOW()
+		and b."bCategoryType" = 'free_delivery_board'
+	</select>
 	
+	<select id="chatBlist" resultType="map" parameterType="String">
+		
+	</select>
 </mapper>

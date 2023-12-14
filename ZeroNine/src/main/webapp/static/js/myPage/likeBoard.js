@@ -1,3 +1,5 @@
+
+
 function draw(max, classname, colorname){
 	   var i=1;
 	    var func1 = setInterval(function(){
