@@ -1,6 +1,8 @@
 package com.zeronine.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -108,6 +110,15 @@ public class ProductDAOMybatis {
 
 	public List<ProductVO> selectDetailDelivery4() {
 		List<ProductVO> productList = sqlSession.selectList(namespace + "selectDetailDelivery4");
+		return productList;
+	}
+
+
+	public List<ProductVO> pcategoryPageCount(int pCount, Integer pCategoryId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pCategoryId", pCategoryId);
+		map.put("pCount", pCount);
+		List<ProductVO> productList = sqlSession.selectList(namespace + "pcategoryPageCount", map);
 		return productList;
 	}
 	

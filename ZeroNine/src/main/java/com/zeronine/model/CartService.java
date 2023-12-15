@@ -15,7 +15,17 @@ public class CartService {
 	public int goProductCart(String custid, String productId) {
 		return cartDAO.goProductCart(custid, productId);
 	}
+	
 	public List<String> cartCheckPid(String custId) {
 		return  cartDAO.cartCheckPid(custId);
+	}
+	public int plusProductCart(String custid, String productId) {
+		// TODO Auto-generated method stub
+		return cartDAO.plusProductCart(custid, productId);
+	}
+
+	public int goProductDCart(String custid, String productId, int pcount) {
+		// TODO Auto-generated method stub
+		return cartDAO.goProductDCart(custid, productId,pcount);
 	}
 }

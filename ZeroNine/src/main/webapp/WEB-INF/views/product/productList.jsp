@@ -167,28 +167,76 @@
 	<%@include file="../common/footer.jsp"%>
 	<script>
 		var path = "${path}";
+	    var cartcheck = "${cartcheckpid}";
+
+	    // Remove square brackets and split into an array
+	    cartcheck = cartcheck.replace(/\[|\]/g, ''); // Remove square brackets
+	    var cartcheckArray = cartcheck.split(',').map(function(item) {
+	        return item.trim(); // Remove extra spaces
+	    });
+		
+	    const productInCart = [];
+	    // Check if cartcheckArray is an array
+	    if (Array.isArray(cartcheckArray)) {
+	        // It's an array, you can use forEach
+	        console.log("Cart Items: ", cartcheckArray);
+			
+	        // If it's an array of strings, you can directly use it
+	        cartcheckArray.forEach(function(productId) {
+	            console.log("Product ID: ", productId);
+	            // You can perform other operations with productId
+	        });
+	    } else {
+	        console.error("Parsed cartcheckArray is not an array. Check the structure of the data.");
+	    }
 	</script>
 
 	<script>
 	 function handlegoCartButtonClick(index, productId) {
-	      
+	     console.log(productId);
+		 function isproductinCart(productId){
+	    	  return cartcheckArray.some(function(item){
+	    		  return item == productId;
+	    	  })
+	      }
+		 //console.log(isproductinCart(productId));
+		 	console.log(productInCart);
+		 	console.log(productInCart.includes(productId));
 	        var likeButtonId = "gocart" + index;
 	        var custid = "${customerid}";
-	    console.log(likeButtonId);
 	    console.log(custid);
 	    console.log(productId);
-		console.log("${cartcheckpid}");
+		console.log(cartcheck);
+		if(productInCart.includes(productId)==false){
 				$.ajax({
 					url : "/product/goProductCart.do",
 					type: "POST",
 					data : {"custid" :custid,"productId" :productId},
 					success : function(){
 						alert("잘담겼다!");
+						
+						if(!productInCart.includes(productId)) {
+							productInCart.push(productId);
+						}
+						cartcheckArray.filter((element) => element !== productId);
 					},
 					error : function(){
 						alert("에러입니다.");
 					}
 					}); 
+		}else{
+			$.ajax({
+				url : "/product/plusProductCart.do",
+				type: "POST",
+				data : {"custid" :custid,"productId" :productId},
+				success : function(){
+					alert("또담겼다!");
+				},
+				error : function(){
+					alert("에러입니다.");
+				}
+				}); 
+		}
 					 
 				
 	 };

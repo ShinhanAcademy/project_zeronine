@@ -32,5 +32,18 @@ public class CartDAOMybatis {
 		return prodid;
 		
 	}
+	public int plusProductCart(String custid, String productId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("custid", custid);
+		map.put("productId", productId);
+		return sqlSession.update(NAMESPACE + "plusProductCart", map);
+	}
+	public int goProductDCart(String custid, String productId, int pcount) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("custid", custid);
+		map.put("productId", productId);
+		map.put("pcount", pcount);
+		return sqlSession.insert(NAMESPACE + "goProductDCart", map);
+	}
 
 }

@@ -49,6 +49,7 @@
 						<span class="sub_explain">동일 배송유형 상품 50,000이상 구매시 무료</span>
 					</div>
 					<div class="sub_amount">
+					
 						<span class="subtitle_middle">수량선택</span>
 						<div class="sub_amountpm">
 							<button class="minus" onclick="decrement()">-</button>
@@ -66,7 +67,8 @@
 							원</span>
 					</div>
 					<div class="total_button">
-						<button class="detail_cart">장바구니</button>
+						<button   type="button" class="detail_cart" id="manygocart" onclick="manygocart">장바구니</button>
+						
 						<button class="detail_order">바로구매</button>
 					</div>
 				</div>
@@ -140,9 +142,11 @@
 	<script>
 		var path = "${path}";
 		var sidebox = $("#sidebox");
-
+		 var custid = "${customerid}";
+		 var productid ="${plist.productId}";
+		 console.log(productid);
 		var currentPosition = parseInt($("#sidebox").css("top"));
-
+		
 		$(window).scroll(function() {
 			var position = $(window).scrollTop();
 			if (position > 1600) {
@@ -182,7 +186,37 @@
 			document.getElementById('total_price').innerText = total
 					.toLocaleString()
 					+ ' 원'; // Assuming you want to display price with two decimal places
+			console.log(total);
+			console.log(quantityValue);
+			 return {
+			        total: total,
+			        quantityValue: quantityValue
+			    };
 		}
+		$("#manygocart").click(function () {
+			 var productid ="${plist.productId}";
+			 console.log(custid);
+			 console.log(productid);
+			var result = updateQuantityAndTotal();
+		    var total = result.total;
+		    var quantityValue = result.quantityValue;
+		  
+			var obj = {
+				"productid" :productid,
+				"pcount": quantityValue};
+			
+			$.ajax({
+					url : path + "/product/goProductDCart.do",
+					data : obj,
+					type : "POST",
+					success : function(){
+						alert("성공!");
+					},
+					error : function() {
+						alert("에러입니다.");
+					}
+				}); 
+})
 	</script>
 
 </body>
