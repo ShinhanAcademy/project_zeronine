@@ -54,15 +54,6 @@ public class MyPageController {
 	// orderHistory(주문 내역)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory() {
-		/*
-			String customerId = (String) session.getAttribute("customerId");
-			String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
-			String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
-			System.out.println("ID = " + customerId);
-	
-			model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));
-			System.out.println("너는 무엇이냐" + deliveryService.orderHistoryAll(customerId));
-		*/
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")
@@ -72,7 +63,6 @@ public class MyPageController {
 			Model model, HttpSession session) {
 		/*
 			String customerId = (String) session.getAttribute("customerId");
-			String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
 		*/
 		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		System.out.println("ID = " + customerId);
@@ -99,15 +89,21 @@ public class MyPageController {
 	
 	// myCart(장바구니)
 	@RequestMapping("/myCart.do")
-	public String myCart() {
-		return "myPage/myCart";
+	public void myCart() {
+	}
+	
+	@RequestMapping("/subPage/myCartDetail.do")
+	public void myCartDetail() {
 	}
 
 	// likeProduct(찜한 상품)
 	@RequestMapping("/likeProduct.do")
-	public String likeProduct() {
-		return "myPage/likeProduct";
+	public void likeProduct() {
 	}
+	@RequestMapping("/subPage/likeProductDetail.do")
+	public void likeProductDetail() {
+	}
+	
 	
 	
 	/* ****************************
