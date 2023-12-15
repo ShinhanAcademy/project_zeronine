@@ -13,6 +13,7 @@ function f_btn(){
 	
 			$("#modal").html(response);
 			$("#detail_modal_wrap").css("display","flex");
+			esc_btn();
 			
 		},
 		error: function(error) {
@@ -41,13 +42,25 @@ function o_btn(){
 		console.log(response);
 			$("#modal").html(response);
 			$("#detail_modal_wrap").css("display","flex");
-			
+			esc_btn();
 		},
 		error: function(error) {
 		alert("해당 글은 더 이상 존재하지 않습니다.");
 		}
 	});
 });
+
+
+//esc function
+function esc_btn(){
+	$(document).keydown(function(event){
+		if(event.keyCode == 27){
+		$("#detail_modal_wrap").hide();
+		}
+	})
+}
+
+
 
 //close
 function close_btn(){

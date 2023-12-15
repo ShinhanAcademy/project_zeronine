@@ -32,8 +32,15 @@
 	select *, (ob."oUploadTime" + (ob."oPostingMinutes" || 'minutes')::interval) as finishTime
 		from public."oneToOneBoard" as ob
 		join public."oBoardImage" as obi on ob."oBoardId" = obi."oBoardId"
-		order by ob."oUploadTime" desc;
+		order by "oUploadTime" desc;
 	</select>
+	
+	<!-- <select id="selectOneBoardEnd" resultType="map">
+	select *, (ob."oUploadTime" + (ob."oPostingMinutes" || 'minutes')::interval) as finishTime
+		from public."oneToOneBoard" as ob
+		join public."oBoardImage" as obi on ob."oBoardId" = obi."oBoardId"
+		order by finishtime asc;
+	</select> -->
 	
 	<select id="selectOneDetail" resultType="map">
 	select *, (ob."oUploadTime" + (ob."oPostingMinutes" || 'minutes')::interval) as finishTime
@@ -41,12 +48,6 @@
 		join public."oBoardImage" as obi on ob."oBoardId" = obi."oBoardId"
 		where ob."oBoardId"=cast(#{boardId} as UUID)
 	</select>
-	
-	<select id="selectOneBoardEnd" resultType="map">
-	select *, (ob."oUploadTime" + (ob."oPostingMinutes" || 'minutes')::interval) as finishTime
-		from public."oneToOneBoard" as ob
-		join public."oBoardImage" as obi on ob."oBoardId" = obi."oBoardId"
-		order by #{aa} asc;
-	</select>
+
 	
 </mapper>
