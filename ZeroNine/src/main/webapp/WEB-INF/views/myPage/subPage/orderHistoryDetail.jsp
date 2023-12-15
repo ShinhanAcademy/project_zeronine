@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- date format lib --%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <%-- functions lib --%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<script defer src="/js/myPage/orderHistoryDetail.js"></script>
 <div class="tbl_top_wrap">
 	<div class="total_count">
 		총 <span>${orderHistoryAll.size()}</span>건
@@ -46,7 +47,14 @@
 					</c:if>
 					<td class="product_info">
 						<div class="img_wrap">
-							<img src="${orderlist.imagePath}" alt="product image" />
+						<c:choose>
+							<c:when test="${not empty orderlist.imagePath}"> 
+								<img src="${orderlist.imagePath}" alt="product image" />
+							</c:when>
+							<c:otherwise>
+								<img src="${path}/images/common/img_preparing.png" alt="product image" />
+							</c:otherwise>
+						</c:choose>
 						</div>
 						<div class="detail">
 							<div class="brand_name">${orderlist.brand}</div>
@@ -54,7 +62,9 @@
 						</div>
 					</td>
 					<td>${orderlist.productCount}</td>
-					<td class="price color_red ">${orderlist.price * orderlist.productCount}원</td>
+					<td class="price color_red ">
+						<fmt:formatNumber pattern="#,##0" value="${orderlist.price * orderlist.productCount}"/>원
+					</td>
 					<c:if test="${check_row == 0}">
 						<td class="order_status"
 							rowspan="<c:out value='${orderlist.partcnt}' />">
@@ -88,7 +98,7 @@
 
 <!-- //tbl_wrap -->
 <!-- pagination -->
-<%-- <c:if test="${booklist.size() != 0}"> --%>
+<c:if test="${orderHistoryAll.size() != 0}">
 <div class=pagination>
 	<div class="pageLeft">
 		<button class="btnFirst">첫페이지</button>
@@ -111,5 +121,7 @@
 		<button class="btnLast">마지막페이지</button>
 	</div>
 </div>
-<%-- </c:if> --%>
+</c:if>
 <!-- //pagination -->
+
+

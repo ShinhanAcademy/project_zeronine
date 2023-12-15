@@ -10,11 +10,23 @@
 		UUID), CAST(#{productId} AS UUID), 1);
 </insert>
 <select id="cartCheckPid" parameterType="String" 
-resultType="CartVo">
+resultType="String">
 SELECT  "productId"
 	FROM cart
 	where "customerId" = CAST(#{custid} AS
 		UUID);
 </select>
+	<update id="plusProductCart" parameterType="CartVo"> 
 	
+		UPDATE cart
+SET "productCount" = "productCount" + 1
+WHERE "customerId" = CAST(#{custid} AS UUID)
+  AND "productId" = CAST(#{productId} AS UUID)
+</update>
+	<insert id="goProductDCart" parameterType="map"> 
+	INSERT INTO cart(
+	"customerId", "productId", "productCount")
+		VALUES (CAST(#{custid} AS
+		UUID), CAST(#{productId} AS UUID), #{pcount});
+</insert>
 </mapper>

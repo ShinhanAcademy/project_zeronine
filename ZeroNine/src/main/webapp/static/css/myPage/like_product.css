@@ -20,13 +20,13 @@
 }
 
 /* like_product_wrap */
-.contents .like_product_wrap {
+.contents .like_product_wrap .product_list {
     display: flex;
     flex-wrap: wrap;
 	margin-top: 20px;
     font-family: "Lato";
 }
-.contents .like_product_wrap .like_item {
+.contents .like_product_wrap .product_list .like_item {
 	width: calc(100% / 4);
 	padding: 40px 20px;
 	font-size: 14px;

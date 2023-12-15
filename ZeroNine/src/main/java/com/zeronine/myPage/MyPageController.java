@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
-import com.zeronine.model.DeliveryService;
+import com.zeronine.model.MyPageService;
 import com.zeronine.model.ProductService;
 
 @Controller
@@ -33,7 +33,7 @@ import com.zeronine.model.ProductService;
 public class MyPageController {
 	
 	@Autowired
-	DeliveryService deliveryService;
+	MyPageService deliveryService;
 	@Autowired
 	BoardService_yn boardService;
 	@Autowired
@@ -54,15 +54,6 @@ public class MyPageController {
 	// orderHistory(주문 내역)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory() {
-		/*
-			String customerId = (String) session.getAttribute("customerId");
-			String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
-			String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
-			System.out.println("ID = " + customerId);
-	
-			model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));
-			System.out.println("너는 무엇이냐" + deliveryService.orderHistoryAll(customerId));
-		*/
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")
@@ -72,7 +63,6 @@ public class MyPageController {
 			Model model, HttpSession session) {
 		/*
 			String customerId = (String) session.getAttribute("customerId");
-			String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
 		*/
 		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		System.out.println("ID = " + customerId);
@@ -99,15 +89,35 @@ public class MyPageController {
 	
 	// myCart(장바구니)
 	@RequestMapping("/myCart.do")
-	public String myCart() {
-		return "myPage/myCart";
+	public void myCart() {
+	}
+	
+	@RequestMapping("/subPage/myCartDetail.do")
+	public void myCartDetail(Model model, HttpSession session) {
+//		String customerId = (String) session.getAttribute("customerId");
+		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		//System.out.println("ID = " + customerId);
+		
+		model.addAttribute("myCart", deliveryService.myCart(customerId));
 	}
 
 	// likeProduct(찜한 상품)
 	@RequestMapping("/likeProduct.do")
-	public String likeProduct() {
-		return "myPage/likeProduct";
+	public void likeProduct() {
 	}
+	@RequestMapping("/subPage/likeProductDetail.do")
+	public void likeProductDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate,
+			Model model, HttpSession session) {
+
+//		String customerId = (String) session.getAttribute("customerId");
+		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		//System.out.println("ID = " + customerId);
+		
+		model.addAttribute("likeProduct", deliveryService.likeProduct(customerId, searchWord));
+	}
+	
 	
 	
 	/* ****************************
