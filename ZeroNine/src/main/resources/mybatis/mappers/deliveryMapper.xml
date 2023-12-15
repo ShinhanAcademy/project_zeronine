@@ -50,12 +50,44 @@
 					 join "productMainImage" on product."productId" = "productMainImage"."productId"
 					 join refund on delivery."deliveryId" = refund."deliveryId"
 		where delivery."customerId" = cast(#{customerId} as UUID)
-					AND (refund."refundRequestTime" >= to_timestamp(#{startDate}, 'YYYY-MM-DD 00:00:00.00') 
-					AND refund."refundRequestTime" &lt;= to_timestamp(#{endDate}, 'YYYY-MM-DD HH24:MI:SS.MS'))
-				 	<if test="searchWord != ''">
-						AND (product.brand LIKE #{searchWord} OR
-							 product."pName" LIKE #{searchWord})
-				 	</if>
-		order by refund."refundRequestTime" DESC;
+			AND (refund."refundRequestTime" >= to_timestamp(#{startDate}, 'YYYY-MM-DD 00:00:00.00') 
+			AND refund."refundRequestTime" &lt;= to_timestamp(#{endDate}, 'YYYY-MM-DD HH24:MI:SS.MS'))
+		 	<if test="searchWord != ''">
+				AND (product.brand LIKE #{searchWord} OR
+					 product."pName" LIKE #{searchWord})
+		 	</if>
+		order by refund."refundRequestTime" DESC
+	</select>
+	
+	<!-- my cart -->
+	<select id="myCart" parameterType="String" resultType="map">
+		select
+			product."productId",
+			product.brand,
+			product."pName",
+			product.price,
+			"productMainImage"."imagePath",
+			cart."productCount"
+		from customer join cart on customer."customerId" = cart."customerId"
+					  join product on cart."productId" = product."productId"
+					  join "productMainImage" on product."productId" = "productMainImage"."productId"
+		where customer."customerId" = cast(#{customerId} as UUID)
+	</select>
+	
+	<!-- like product -->
+	<select id="likeProduct" parameterType="String" resultType="map">
+		select 
+			"productMainImage"."imagePath",
+			product.brand,
+			product."pName",
+			product.price
+		from customer join "likedProduct" on customer."customerId" = "likedProduct"."customerId"
+					  join 	product on "likedProduct"."productId" = "product"."productId"
+					  left outer join "productMainImage" on "productMainImage"."productId" = "product"."productId"
+		where customer."customerId" = cast(#{customerId} as UUID)
+			<if test="searchWord != ''">
+				AND (product.brand LIKE #{searchWord} OR
+					 product."pName" LIKE #{searchWord})
+		 	</if>
 	</select>
 </mapper>

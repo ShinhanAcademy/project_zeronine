@@ -1,12 +1,12 @@
 /***************************
     ZERO NINE
-	-- MyPage / likeProduct
+	-- MyPage / myCart
 ****************************/
 $(function(){
-	likeProduct();	//likeProduct Ajax
+	myCartList();	//likeProduct Ajax
 });
 
 $(".search_wrap .btn_search").on("click", function(){
-	likeProduct();
+	myCartList();
 });
 

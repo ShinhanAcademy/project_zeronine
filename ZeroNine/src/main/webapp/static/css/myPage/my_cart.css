@@ -31,6 +31,11 @@
     font-weight: bold;
     font-size: 16px;
 }
+.my_cart_wrap .product_info .img_wrap {
+    width: 130px;
+    height: 130px;
+    border: 1px solid #ebebeb;
+}
 .my_cart_wrap .product_count select {
     width: 57px;
     height: 28px;
@@ -156,10 +161,6 @@
 	color: #fff;
 	background: #0083E6;
 }
-
-
-
-
 
 
 
