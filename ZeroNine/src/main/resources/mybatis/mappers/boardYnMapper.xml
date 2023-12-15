@@ -5,7 +5,7 @@
 <mapper namespace="net.zeronine.board">
 	<select id="myWriteBlist" resultType="map" parameterType="String">
 		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
-		to_char(b."finishTime"-NOW(),'dd일 HH시 mi분 ss초') as 	"remainTime", b."boardId"
+		to_char(b."finishTime"-NOW(),'dd일 HH24시 mi분 ss초') as 	"remainTime", b."boardId"
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
 		left join public."product" as p on (p."productId" = sp."productId")
 		left join public."productMainImage" as pi on (p."productId" = pi."productId")
@@ -15,7 +15,7 @@
 	</select>
 	<select id="boardDetail" resultType="map" parameterType="String">
 		select distinct p."pName",pi."imagePath", b.title, p.price/p."pCount" as price, 
-		to_char(b."finishTime",'yyyy-mm-dd HH:mi:ss') as "finishTime", b."boardContent", b."boardId"
+		to_char(b."finishTime",'yyyy-mm-dd HH24:mi:ss') as "finishTime", b."boardContent", b."boardId"
 		from board b left join "selectProduct" sp on (b."boardId"=sp."boardId")
 		left join product p on (sp."productId"=p."productId")
 		left join "productMainImage" pi on (p."productId"=pi."productId")
@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id="boardDetailEdit" resultType="map" parameterType="String">
-		select distinct p.brand, p."pName",pi."imagePath", b.title, to_char(b."finishTime"-NOW(),'dd') as "day", to_char(b."finishTime"-NOW(),'HH') as "hour",
+		select distinct p.brand, p."pName",pi."imagePath", b.title, to_char(b."finishTime"-NOW(),'dd') as "day", to_char(b."finishTime"-NOW(),'HH24') as "hour",
 		to_char(b."finishTime"-NOW(),'mi') as "minute", b."boardContent", b."boardId", sp."pickCount"
 		from board b left join "selectProduct" sp on (b."boardId"=sp."boardId")
 		left join product p on (sp."productId"=p."productId")
@@ -53,7 +53,7 @@
 	</select>
 	<select id="myWriteFreeBlist" resultType="map" parameterType="String">
 		SELECT DISTINCT b.title, TO_CHAR(b."uploadTime",'yyyy-mm-dd') AS "uploadTime",
-		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH시 mi분 ss초') AS "remainTime",
+		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime",
 		b."boardId",b."bCategoryType",
 		(SELECT
 		SUM(p.price * bc."purchaseCount")
@@ -70,8 +70,8 @@
 		ORDER BY "uploadTime"
 	</select>
 	<select id="freeBoardDetail" resultType="map" parameterType="String">
-		select distinct b.title, b."boardContent",
-		to_char(b."finishTime",'yyyy-mm-dd HH:mi:ss') as "finishTime",
+		select distinct b.title, b."boardContent", b."boardId",
+		to_char(b."finishTime",'yyyy-mm-dd HH24:mi:ss') as "finishTime",
 		(SELECT SUM(p.price * bc."purchaseCount")
 		FROM "boardCart" bc
 		LEFT JOIN product p ON bc."productId" = p."productId"
@@ -87,7 +87,7 @@
 	</select>
 	<select id="myParticipatedBlist" resultType="map" parameterType="String">
 		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
-		to_char(b."finishTime"-NOW(),'dd일 HH시 mi분 ss초') as 	"remainTime", b."boardId"
+		to_char(b."finishTime"-NOW(),'dd일 HH24시 mi분 ss초') as 	"remainTime", b."boardId"
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
 		left join public."product" as p on (p."productId" = sp."productId")
 		left join public."productMainImage" as pi on (p."productId" = pi."productId")
@@ -98,7 +98,7 @@
 	</select>
 	<select id="myParticipatedFreeBlist" resultType="map" parameterType="String">
 		SELECT DISTINCT b.title, TO_CHAR(b."uploadTime",'yyyy-mm-dd') AS "uploadTime",
-		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH시 mi분 ss초') AS "remainTime",
+		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime",
 		b."boardId",b."bCategoryType",
 		(SELECT
 		SUM(p.price * bc."purchaseCount")
@@ -117,7 +117,7 @@
 	</select>
 	<select id="likeBoardBlist" resultType="map" parameterType="String">
 		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
-		to_char(b."finishTime"-NOW(),'dd일 HH시 mi분 ss초') as 	"remainTime", b."boardId"
+		to_char(b."finishTime"-NOW(),'dd일 HH24시 mi분 ss초') as 	"remainTime", b."boardId"
 		from "likedBoard" lb left join board b on (lb."boardId"=b."boardId")
 		left join "selectProduct" sp on (b."boardId"=sp."boardId")
 		left join product p on (sp."productId"=p."productId")
@@ -129,7 +129,7 @@
 	</select>
 	<select id="likeBoardFreeBlist" resultType="map" parameterType="String">
 		SELECT DISTINCT b.title, TO_CHAR(b."uploadTime",'yyyy-mm-dd') AS "uploadTime",
-		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH시 mi분 ss초') AS "remainTime",
+		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime",
 		b."boardId",b."bCategoryType",
 		(SELECT
 		SUM(p.price * bc."purchaseCount")
@@ -167,6 +167,16 @@
 		and b."finishTime">NOW()
 		and b."bCategoryType" = 'free_delivery_board'
 	</select>
+	<update id="completeEdit" parameterType="map">
+		UPDATE public.board
+		SET title=#{title}, "boardContent"=#{context}, "updateTime"=NOW()
+		WHERE "boardId"=cast(#{boardId} as UUID);
+	</update>
+	<update id="completeEditTime" parameterType="map">
+		UPDATE public.board
+		SET title=#{title}, "boardContent"=#{context}, "postingMinutes"=#{remainTime}, "updateTime"=NOW()
+		WHERE "boardId"=cast(#{boardId} as UUID);
+	</update>
 	
 	<select id="chatBlist" resultType="map" parameterType="String">
 		

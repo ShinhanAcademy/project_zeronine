@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
 <link rel="stylesheet" href="${path}/css/myPage/likeBoard.css">
 <link rel="stylesheet" href="${path}/css/myPage/lBdetailView.css" />
 <title>MyPage</title>
@@ -195,7 +194,6 @@
 			var str = "${likedbid}";
 			var likedbidArr = [] ; 
 			likedbidArr = str.split(/,|\[|\]| /);
-			console.log(likedbidArr);
 			
 			function handleLikeButtonClick(index, boardId) {
 				
@@ -204,7 +202,6 @@
 		    	//클래스가 heart liked => AJAX DELTE 호출
 		        var isRedHeart = likedbidArr.indexOf(boardId);
 		    	
-				console.log(isRedHeart);
 				if(isRedHeart>=0) {
 					$.ajax({
 						url : path + "/myPage/subPage/deleteLikedBoard.do",

@@ -155,6 +155,26 @@ public class MyPageController {
 		model.addAttribute("participant", participant);		
 	}
 	
+	@PostMapping(value="/subPage/completeEdit.do", consumes="application/json")
+	public void completeEdit(@RequestBody Map<String,Object> info, Model model) {
+		int participant = Integer.parseInt((String)info.get("participant"));
+		String boardId = (String)info.get("boardId");
+		String title = (String)info.get("title");
+		String context = (String)info.get("context");
+		int result;
+		if(participant>1) {
+			result = boardService.completeEdit(title,context,boardId);
+		}else {
+			int remainTime = Integer.parseInt((String)info.get("day")) + (Integer.parseInt((String)info.get("hour")))*60 + Integer.parseInt((String)info.get("minute"));
+			result = boardService.completeEditTime(title,context,remainTime,boardId);
+		}
+		if(result>0) {
+			model.addAttribute("message","게시물이 정상적으로 수정되었습니다.");
+		}else {
+			model.addAttribute("message","게시물을 다시 수정해주세요.");
+		}
+	}
+	
 	@GetMapping("/subPage/cbFastDelivery.do")
 	public void cbFastDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
@@ -177,19 +197,22 @@ public class MyPageController {
 	@GetMapping("/subPage/createdFreeBoardDetail.do")
 	public void createdFreeBoardDetail(String boardId, Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);
-		//int participant = boardService.numOfFreeParticipant(boardId);
+		int participant = boardService.numOfFreeParticipant(boardId);
 		model.addAttribute("info", info);
-		//model.addAttribute("participant", participant);
+		model.addAttribute("participant", participant);
 	}
+	
+	
+	
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
 	@GetMapping("/participatedBoard.do")
 	public void participatedBoard(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		//List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
-//		model.addAttribute("info", info);
-//		model.addAttribute("count", info.size());
+		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
 	}
 	
 	@GetMapping("/subPage/participatedBoardDetail.do")
@@ -204,18 +227,18 @@ public class MyPageController {
 	public void pbFreeDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-//		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
-//		model.addAttribute("info", info);
-//		model.addAttribute("count", info.size());
+		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
 	}
 	
 	@GetMapping("/subPage/pbFastDelivery.do")
 	public void pbFastDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-//		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
-//		model.addAttribute("info", info);
-//		model.addAttribute("count", info.size());
+		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
 	}
 
 	

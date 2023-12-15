@@ -111,6 +111,25 @@ public class BoardDAOMybatis_yn {
 		return info;
 	}
 
+	public int completeEdit(String title, String context, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("context", context);
+		map.put("boardId", boardId);
+		int result = sqlSession.update(NAMESPACE + "completeEdit", map);
+		return result;
+	}
+
+	public int completeEditTime(String title, String context, int remainTime, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("context", context);
+		map.put("remainTime", remainTime);
+		map.put("boardId", boardId);
+		int result = sqlSession.update(NAMESPACE + "completeEditTime", map);
+		return result;
+	}
+
 	
 
 }
