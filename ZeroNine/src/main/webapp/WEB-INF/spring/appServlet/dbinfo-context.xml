@@ -7,8 +7,12 @@
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location"
-			value="/WEB-INF/spring/appServlet/postgreInfo.properties" />
+		<property name="locations">
+		  <list>
+		    <value>/WEB-INF/spring/appServlet/postgreInfo.properties</value>
+		    <value>/WEB-INF/spring/appServlet/awsAuth.properties</value>
+		  </list>
+		</property>
 		<property name="fileEncoding" value="UTF-8" />
 	</bean>
 
@@ -32,11 +36,6 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-
-	<!-- <bean id="dataSource" p:driverClassName="org.postgresql.Driver" p:url="jdbc:postgresql://zeronine.postgres.database.azure.com:5432/zeronine" 
-		p:username="postgres" p:password="tiger12345!" class="org.springframework.jdbc.datasource.DriverManagerDataSource" 
-		/> -->
-
 
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
