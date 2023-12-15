@@ -20,25 +20,30 @@
 			<div class="os_info">
 				<span class="os_info_t">주문정보</span>
 				<div class="order_detail">
-					<div>
-						<div>주문번호</div>
-						<div>20231123202304019</div>
+					<div class="od_part">
+						<div class="od_subtitle">주문번호</div>
+						<div class="ob_subtext">20231123202304019</div>
+					</div >
+					<div class="jul"></div>
+					<div class="od_part">
+						<div class="od_subtitle">상품명</div>
+						<div class="ob_subtext">20231123202304019</div>
 					</div>
-					<div>
-						<div>주문번호</div>
-						<div>20231123202304019</div>
+					<div class="jul"></div>
+					<div class="od_part">
+						<div class="od_subtitle">결제금액</div>
+						<div class="ob_subtext">20231123202304019</div>
 					</div>
-					<div>
-						<div>주문번호</div>
-						<div>20231123202304019</div>
-					</div>
-					<div>
-						<div>주문번호</div>
-						<div>20231123202304019</div>
+					<div class="jul"></div>
+					<div class="od_part">
+						<div class="od_subtitle">적립금</div>
+						<div class="ob_subtext">20231123202304019</div>
 					</div>
 				</div>
 			</div>
-			<button>주문내역 바로가기</button>
+			<div class="orderlist-go">
+			<button class="orderlist-btn">주문내역 바로가기</button>
+			</div>
 		</div>
 	</div>
 	<%@include file="../common/footer.jsp"%>
