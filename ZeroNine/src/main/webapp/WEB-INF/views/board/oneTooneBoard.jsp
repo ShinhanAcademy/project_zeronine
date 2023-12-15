@@ -122,31 +122,28 @@
 		$.ajax({
 			url: "${path}/board/onetooneboard.do",
 			type : "get",
-			success : function(responseData){
-				 if(type_of_filter == 'imminent'){
-					 
-					 infoOne_json.sort(
-								function(a, b) {
-										return new Date(a.finishtime) - new Date(b.finishtime)
-										}
-								 console.log(infoOne_json)}
-								
-						)else{
-					
+			success : function(responseData) {
+				if(type_of_filter == 'imminent') {//임박순
 					infoOne_json.sort(
-							function(a, b) {
-									return new Date(b.oUploadTime) - new Date(a.oUploadTime)
-									}
+						function(a, b) {
+							return new Date(a.finishtime) - new Date(b.finishtime);
+						}
+								
+					)
+					console.log(infoOne_json);
+				} else { //최신순 (default)
+					infoOne_json.sort(
+						function(a, b) {
+							return new Date(b.oUploadTime) - new Date(a.oUploadTime)
+						}
 							
-					) console.log(infoOne_json)
-				 }
-			}		
-						
-				
-				 var output = '';
+					) 
+					console.log(infoOne_json);
+				}
+					
+				var output = '';
 
                 $.each(infoOne_json, function (index, item) {
-                  
                     var str = item.finishtime.substr(2,17);
                     output += `
                     	<div id="list">
@@ -184,69 +181,12 @@
     				</div>
                     `;
                 });
-                $("#allList").html(output);	 
-	
-				} 	else { 
-					
-
-                $.each(infoOne_json, function (index, item) {
-                	infoOne_json.sort(
-							function(a, b) {
-									return new Date(b.oUploadTime) - new Date(a.oUploadTime)
-									}
-							
-					)
-					
-					 console.log(infoOne_json)
-					 
-					 
-					var default_list = ''; 
-                	default_list += `
-                    	<div id="list">
-    					<div class="pro_info">
-    						<ul>
-    							<li><img class="pro_img" src="\${item.oBoardImagePath}"></li>
-    						</ul>
-
-
-    						<div class="pro_name">
-    							<ul>
-    								<li>\${item.oTitle}</li>
-    							</ul>
-    						</div>
-    						<div class="pro_detail">
-    							<ul>
-    								<li><img class="clock" src="${path}/images/board/clock.png">
-    									<span> \${item.finishtime} 까지</span></li>
-    								<li><img class="map_marker"
-    									src="${path}/images/board/map_marker.png"> <span>
-    										\${item.address} \${item.addressDetail} </span></li>
-    							</ul>
-    						</div>
-    						<ul>
-    							<li class="detail_view">
-    								<button class="like" type="button">
-    									<img class="like" src="${path}/images/board/heart.png">
-    								</button>
-    								<button id="one_detail_btn" class="detail_btn"
-    									value="\${item.oBoardId}">보기</button>
-    							</li>
-    						</ul>
-    					</div>
-
-    				</div>
-                    `;
-                });
-					
-				$("#allList").html(default_list);
-				}
+				
+                $("#allList").html(output);
 			}
 				
-		}
-			)
+		})
 	}
-	
-		
 	</script>
 </body>
 </html>
