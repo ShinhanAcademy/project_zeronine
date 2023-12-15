@@ -93,7 +93,12 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/subPage/myCartDetail.do")
-	public void myCartDetail() {
+	public void myCartDetail(Model model, HttpSession session) {
+//		String customerId = (String) session.getAttribute("customerId");
+		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		//System.out.println("ID = " + customerId);
+		
+		model.addAttribute("myCart", deliveryService.myCart(customerId));
 	}
 
 	// likeProduct(찜한 상품)
@@ -101,7 +106,16 @@ public class MyPageController {
 	public void likeProduct() {
 	}
 	@RequestMapping("/subPage/likeProductDetail.do")
-	public void likeProductDetail() {
+	public void likeProductDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate,
+			Model model, HttpSession session) {
+
+//		String customerId = (String) session.getAttribute("customerId");
+		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		//System.out.println("ID = " + customerId);
+		
+		model.addAttribute("likeProduct", deliveryService.likeProduct(customerId, searchWord));
 	}
 	
 	

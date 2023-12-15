@@ -6,7 +6,26 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!-- product_list -->
 <div class="product_list">
-	<div class="like_item">
+	<c:forEach items="${likeProduct}" var="item">
+		<div class="like_item">
+			<div class="item_inner">
+				<div class="img_wrap">
+					<a href="javascript:void(0)"> <img
+						src="${item.imagePath}" alt="product image" />
+					</a>
+					<button class="btn_like">like</button>
+				</div>
+				<div>
+					<div class="product_brand">${item.brand}</div>
+					<div class="product_name">
+						<a href="javascript:void(0)">${item.pName}</a>
+					</div>
+					<div class="price">${item.price} 원</div>
+				</div>
+			</div>
+		</div>
+	</c:forEach>
+	<%-- <div class="like_item">
 		<div class="item_inner">
 			<div class="img_wrap">
 				<a href="javascript:void(0)"> <img
@@ -176,7 +195,7 @@
 				<div class="price">200,000원</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 
 </div>
 <!-- //product_list -->

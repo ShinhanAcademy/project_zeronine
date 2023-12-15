@@ -3,8 +3,11 @@ package com.zeronine.model;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 @Service("deliveryService")
 public class DeliveryService {
@@ -26,6 +29,15 @@ public class DeliveryService {
 		return deliveryDAO.orderCancelHistoryAll(customerId, searchWord, startDate, endDate);
 	}
 
+	/* like product */
+	public List<Map<String, Object>> myCart(String customerId) {
+		return deliveryDAO.myCart(customerId);		
+	}
+	
+	/* like product */
+	public List<Map<String, Object>> likeProduct(String customerId, String searchWord) {
+		return deliveryDAO.likeProduct(customerId, searchWord);		
+	}
 	
 	/*
 	public Map<String, Object> orderHistoryAll(String customerId){
