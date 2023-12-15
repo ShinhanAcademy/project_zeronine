@@ -81,4 +81,14 @@ public class BoardService_yn {
 		return boardDAO.boardDetailEdit(boardId);
 	}
 
+	public int completeEdit(String title, String context, String boardId) {
+		return boardDAO.completeEdit(title,context,boardId);
+	}
+
+	public int completeEditTime(String title, String context, int remainTime, String boardId) {
+		return boardDAO.completeEditTime(title,context,remainTime,boardId);
+	}
+	
+	
+
 }
