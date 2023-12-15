@@ -46,8 +46,14 @@
 					</c:if>
 					<td class="product_info">
 						<div class="img_wrap">
-							<img src="${cancellist.imagePath}"
-								alt="product image" />
+						<c:choose>
+							<c:when test="${not empty cancellist.imagePath}"> 
+								<img src="${cancellist.imagePath}" alt="product image" />
+							</c:when>
+							<c:otherwise>
+								<img src="${path}/images/mypage/img_preparing.png" alt="product image" />
+							</c:otherwise>
+						</c:choose>
 						</div>
 						<div class="detail">
 							<div class="brand_name">${cancellist.brand}</div>
@@ -55,7 +61,9 @@
 						</div>
 					</td>
 					<td>${cancellist.productCount}</td>
-					<td class="price color_red">${cancellist.price * cancellist.productCount}원</td>
+					<td class="price color_red">
+						<fmt:formatNumber pattern="#,##0" value="${cancellist.price * cancellist.productCount}"/>원
+					</td>
 					<c:if test="${check_row == 0}">
 						<td class="order_status"
 							rowspan="<c:out value='${cancellist.partcnt}' />">
@@ -157,7 +165,7 @@
 </div>
 <!-- tbl_wrap -->
 <!-- pagination -->
-<%-- <c:if test="${booklist.size() != 0}"> --%>
+<c:if test="${orderCancelHistoryAll.size() != 0}">
 <div class=pagination>
 	<div class="pageLeft">
 		<button class="btnFirst">첫페이지</button>
@@ -180,5 +188,5 @@
 		<button class="btnLast">마지막페이지</button>
 	</div>
 </div>
-<%-- </c:if> --%>
+</c:if>
 <!-- //pagination -->

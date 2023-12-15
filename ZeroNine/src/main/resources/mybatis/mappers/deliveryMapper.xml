@@ -20,7 +20,7 @@
 			COUNT(*) OVER(PARTITION BY delivery."deliveryId") AS PARTCNT
 		from delivery join "deliveryProduct" on delivery."deliveryId" = "deliveryProduct"."deliveryId"
 				  join product on "deliveryProduct"."productId" = product."productId"
-				  join "productMainImage" on "deliveryProduct"."productId" = "productMainImage"."productId"
+				  left outer join "productMainImage" on "deliveryProduct"."productId" = "productMainImage"."productId"
 				  join customer on delivery."customerId" = customer."customerId"
 		where delivery."customerId" = cast(#{customerId} as UUID)
 			AND (delivery."purchaseDateTime" >= to_timestamp(#{startDate}, 'YYYY-MM-DD 00:00:00.00') 
@@ -47,7 +47,7 @@
 			COUNT(*) OVER(PARTITION BY delivery."deliveryId") AS PARTCNT
 		from delivery  join "deliveryProduct" on delivery."deliveryId" = "deliveryProduct"."deliveryId"
 				     join product on "deliveryProduct"."productId" =product."productId"
-					 join "productMainImage" on product."productId" = "productMainImage"."productId"
+					 left outer join "productMainImage" on product."productId" = "productMainImage"."productId"
 					 join refund on delivery."deliveryId" = refund."deliveryId"
 		where delivery."customerId" = cast(#{customerId} as UUID)
 			AND (refund."refundRequestTime" >= to_timestamp(#{startDate}, 'YYYY-MM-DD 00:00:00.00') 
@@ -70,7 +70,7 @@
 			cart."productCount"
 		from customer join cart on customer."customerId" = cart."customerId"
 					  join product on cart."productId" = product."productId"
-					  join "productMainImage" on product."productId" = "productMainImage"."productId"
+					  left outer join "productMainImage" on product."productId" = "productMainImage"."productId"
 		where customer."customerId" = cast(#{customerId} as UUID)
 	</select>
 	

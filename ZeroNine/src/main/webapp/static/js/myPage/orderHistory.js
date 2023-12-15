@@ -4,7 +4,6 @@
 ****************************/
 $(function(){
 	usingDatePicker();	//datePicker
-	deliveryModal();	//modal
 	callOrderHistory();	//orderHistory Ajax
 });
 
