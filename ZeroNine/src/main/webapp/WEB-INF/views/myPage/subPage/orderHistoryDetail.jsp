@@ -52,7 +52,7 @@
 								<img src="${orderlist.imagePath}" alt="product image" />
 							</c:when>
 							<c:otherwise>
-								<img src="${path}/images/mypage/img_preparing.png" alt="product image" />
+								<img src="${path}/images/common/img_preparing.png" alt="product image" />
 							</c:otherwise>
 						</c:choose>
 						</div>
