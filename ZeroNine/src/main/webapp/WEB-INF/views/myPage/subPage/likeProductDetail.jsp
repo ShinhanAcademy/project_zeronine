@@ -10,8 +10,15 @@
 		<div class="like_item">
 			<div class="item_inner">
 				<div class="img_wrap">
-					<a href="javascript:void(0)"> <img
-						src="${item.imagePath}" alt="product image" />
+					<a href="javascript:void(0)">
+						<c:choose>
+							<c:when test="${not empty item.imagePath}"> 
+								<img src="${item.imagePath}" alt="product image" />
+							</c:when>
+							<c:otherwise>
+								<img src="${path}/images/common/img_preparing.png" alt="product image" />
+							</c:otherwise>
+						</c:choose>
 					</a>
 					<button class="btn_like">like</button>
 				</div>
@@ -200,7 +207,7 @@
 </div>
 <!-- //product_list -->
 <!-- pagination -->
-<%-- <c:if test="${booklist.size() != 0}"> --%>
+<c:if test="${likeProduct.size() != 0}">
 <div class=pagination>
 	<div class="pageLeft">
 		<button class="btnFirst">첫페이지</button>
@@ -223,5 +230,5 @@
 		<button class="btnLast">마지막페이지</button>
 	</div>
 </div>
-<%-- </c:if> --%>
+</c:if>
 <!-- //pagination -->

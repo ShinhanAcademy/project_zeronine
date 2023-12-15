@@ -41,7 +41,15 @@
 							<td class="check_item"><input type="checkbox" /></td>
 							<td class="product_info">
 								<div class="img_wrap">
-									<img src="${cartItem.imagePath}" alt="product image" />
+								
+									<c:choose>
+										<c:when test="${not empty cartItem.imagePath}"> 
+											<img src="${cartItem.imagePath}" alt="product image" />
+										</c:when>
+										<c:otherwise>
+											<img src="${path}/images/common/img_preparing.png" alt="product image" />
+										</c:otherwise>
+									</c:choose>
 								</div>
 								<div class="detail">
 									<div class="brand_name">${cartItem.brand}</div>
@@ -55,7 +63,9 @@
 									</c:forEach>
 								</select>
 							</td>
-							<td class="price">${cartItem.price}</td>
+							<td class="price">
+								<fmt:formatNumber pattern="#,##0" value="${cartItem.price}"/>원
+							</td>
 							<td class="purchase_selection">
 								<button class="btn_buy btn_blue">바로구매</button>
 								<button class="btn_addlike btn_default">쇼킹찜</button>
