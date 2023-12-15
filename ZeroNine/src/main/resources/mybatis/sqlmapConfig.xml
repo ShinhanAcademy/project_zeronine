@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="logImpl" value="LOG4J" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.zeronine.dto.CustomerVO" alias="customerVo" />	
+		<typeAlias type="com.zeronine.dto.BoardCartVO" alias="boardCartVo" />	
+		<typeAlias type="com.zeronine.dto.BoardVO" alias="boardVo" />	
+		<typeAlias type="com.zeronine.dto.CartVO" alias="cartVo" />	
+		<typeAlias type="com.zeronine.dto.CategoryVO" alias="categoryVo" />	
+		<typeAlias type="com.zeronine.dto.ChatVO" alias="chatVo" />	
+		<typeAlias type="com.zeronine.dto.CustomerFreeDeliveryVO" alias="customerFreeDeliveryVo" />	
+		<typeAlias type="com.zeronine.dto.CustomerPickCouponVO" alias="customerPickCouponVo" />	
+		<typeAlias type="com.zeronine.dto.DeliveryVO" alias="deliveryVo" />	
+		<typeAlias type="com.zeronine.dto.LikedBoardVO" alias="likedBoardVo" />	
+		<typeAlias type="com.zeronine.dto.LikedProductVO" alias="likedProductVo" />	
+		<typeAlias type="com.zeronine.dto.MessageVO" alias="messageVo" />	
+		<typeAlias type="com.zeronine.dto.OBoardImageVO" alias="oBoardImageVo" />	
+		<typeAlias type="com.zeronine.dto.OnetooneboardVO" alias="onetooneboardVo" />	
+		<typeAlias type="com.zeronine.dto.PickupVO" alias="pickupVo" />	
+		<typeAlias type="com.zeronine.dto.ProductAdditionalImageVO" alias="productAdditionalImageVo" />	
+		<typeAlias type="com.zeronine.dto.ProductMainImageVO" alias="productMainImageVo" />	
+		<typeAlias type="com.zeronine.dto.ProductVO" alias="productVo" />	
+		<typeAlias type="com.zeronine.dto.SelectProductVO" alias="selectProductVo" />	
+		<typeAlias type="com.zeronine.dto.SubscriptionVO" alias="subscriptionVo" />	
+	</typeAliases>
+</configuration>

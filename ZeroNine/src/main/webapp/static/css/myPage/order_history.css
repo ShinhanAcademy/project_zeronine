@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+/*******************************************
+	mypage_orderHistory(주문내역)
+	mypage_orderCancelHistory(취소/반품 내역) 
+*******************************************/
+.contents .tbl_wrap table.tbl_orderlist_wrap tbody td.price {
+	border-right: 1px solid #B7B7B7;
+}
+.contents .order_history_wrap .tbl_wrap td {
+	padding: 30px 15px;
+}
+.order_history_wrap .product_info .img_wrap {
+	width: 130px;
+	height: 130px;
+    border: 1px solid #ebebeb;
+}
+.order_history_wrap .order_num {
+	margin-top: 5px;
+}
+.order_history_wrap .order_status>div {
+	margin-top: 10px;
+}
+.order_history_wrap .order_status .refund_tip {
+	color: #999;
+	font-size: 11px;
+}
+.mypage_container .melong_melong {
+	margin-top:20px;
+	display: flex;
+    justify-content: flex-end;
+}
+.mypage_container .melong_melong button {
+	width: 110px;
+	height: 38px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	border: 1px solid #444;
+	background: #FFF;
+}
