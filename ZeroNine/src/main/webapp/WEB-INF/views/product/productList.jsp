@@ -111,8 +111,9 @@
 												</c:if>
 											</button>
 										</div>
-
-										<button class="gocart" type="button">
+										
+										<button class="gocart" id="gocart${status.index}"type="button"
+										onclick="handlegoCartButtonClick(${status.index}, '${product.productId}')">
 											<img class="gocart"
 												src="${path}/images/sangpumpage/gocart.png">
 										</button>
@@ -169,7 +170,28 @@
 	</script>
 
 	<script>
-	
+	 function handlegoCartButtonClick(index, productId) {
+	      
+	        var likeButtonId = "gocart" + index;
+	        var custid = "${customerid}";
+	    console.log(likeButtonId);
+	    console.log(custid);
+	    console.log(productId);
+		console.log("${cartcheckpid}");
+				$.ajax({
+					url : "/product/goProductCart.do",
+					type: "POST",
+					data : {"custid" :custid,"productId" :productId},
+					success : function(){
+						alert("잘담겼다!");
+					},
+					error : function(){
+						alert("에러입니다.");
+					}
+					}); 
+					 
+				
+	 };
 	
 	function pcountchange(currentpage,perpage){
 		console.log(currentpage);

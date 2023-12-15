@@ -55,8 +55,12 @@ public class ProductService {
 		System.out.println("CountProduct cnt ==>"+cnt);
 		return cnt;
 	}
-
-	
+	public ProductVO selectByProductId(String productId) {
+		return productDAO.selectByProductId(productId);
+	}
+	public List<ProductVO> selectDetailDelivery4(){
+		return productDAO.selectDetailDelivery4();
+	}
 	
 }
 

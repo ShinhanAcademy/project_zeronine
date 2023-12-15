@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zeronine.dto.PagingVO;
 import com.zeronine.dto.ProductVO;
+import com.zeronine.model.CartService;
 import com.zeronine.model.LikedProductService;
 import com.zeronine.model.ProductService;
 
@@ -36,7 +37,28 @@ public class ProductController {
 		  @Autowired 
 		  LikedProductService likedproductservice;
 		  
+		  @Autowired 
+		  CartService cartservice;
 		  
+		  @PostMapping("/goProductCart.do") 
+		  public ResponseEntity<String> goProductCart(String custid, String productId
+				 , HttpSession session, Model model) { 
+				
+				model.addAttribute("customerId", custid);
+		      model.addAttribute("productId", productId);
+		      int result =0;
+		      
+		   
+		    	  result = cartservice.goProductCart(custid, productId);
+		
+		      
+
+		      if (result > 0) {
+		          return ResponseEntity.ok("Data saved successfully. You can customize this message.");
+		      } else {
+		          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
+		      }
+		  }
 		  @PostMapping("/productLike.do") 
 		  public ResponseEntity<String> productLike(String custid, String productId, Model model, PagingVO paging) { 
 			  model.addAttribute("customerId", custid);
@@ -98,11 +120,12 @@ public class ProductController {
 		
 		  if(customerid != null) {
 			  model.addAttribute("likedcid",likedproductservice.selectByCidlist(customerid));
-		}
+			  model.addAttribute("cartcheckpid",cartservice.cartCheckPid(customerid));
+		  }
 		 
 	}
 	@GetMapping("/productPageCount.do")
-	// @ResponseBody //body¿¡¼­ ÀúÀåÇØ¼­ ¹Þ´Â´Ù.
+	// @ResponseBody //bodyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ´Â´ï¿½.
 	public String productPageCount(/* Integer value, */Model model, PagingVO vo,
 			@RequestParam(value = "nowPage", required = false) String nowPage,
 			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
@@ -134,7 +157,7 @@ public class ProductController {
 		return "/product/catagory";
 	}
 	@GetMapping("/productCategory.do")
-	// @ResponseBody //body¿¡¼­ ÀúÀåÇØ¼­ ¹Þ´Â´Ù.
+	// @ResponseBody //bodyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ´Â´ï¿½.
 	public String productvegetable(Integer pCategoryId, Model model) {
 		List<ProductVO> plist = productService.selectBypCategoryId(pCategoryId);
 		model.addAttribute("plist", plist);
@@ -142,7 +165,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/productCategoryall.do")
-	// @ResponseBody //body¿¡¼­ ÀúÀåÇØ¼­ ¹Þ´Â´Ù.
+	// @ResponseBody //bodyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ´Â´ï¿½.
 	public String productvegetableall(Integer pCategoryId, Model model) {
 		List<ProductVO> plist = productService.selectBypCategoryIdall(pCategoryId);
 		model.addAttribute("plist", plist);
@@ -150,7 +173,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/selectBymanyLiked.do")
-	// @ResponseBody //body¿¡¼­ ÀúÀåÇØ¼­ ¹Þ´Â´Ù.
+	// @ResponseBody //bodyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ´Â´ï¿½.
 	public String selectBymanyLiked(Model model) {
 		List<ProductVO> plist = productService.selectBymanyLiked();
 		model.addAttribute("plist", plist);
@@ -159,7 +182,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/selectByAll.do")
-	// @ResponseBody //body¿¡¼­ ÀúÀåÇØ¼­ ¹Þ´Â´Ù.
+	// @ResponseBody //bodyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ´Â´ï¿½.
 	public String selectByAll(Model model) {
 		List<ProductVO> plist = productService.selectAll();
 		model.addAttribute("plist", plist);
@@ -168,7 +191,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/selectByDelivery.do")
-	// @ResponseBody //body¿¡¼­ ÀúÀåÇØ¼­ ¹Þ´Â´Ù.
+	// @ResponseBody //bodyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ´Â´ï¿½.
 	public String selectByDelivery(Model model) {
 		List<ProductVO> plist = productService.selectByDelivery();
 		model.addAttribute("plist", plist);
@@ -177,7 +200,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/selectBypriceAsc.do")
-	// @ResponseBody //body¿¡¼­ ÀúÀåÇØ¼­ ¹Þ´Â´Ù.
+	// @ResponseBody //bodyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ´Â´ï¿½.
 	public String selectBypriceAsc(Model model) {
 		List<ProductVO> plist = productService.selectBypriceAsc();
 		model.addAttribute("plist", plist);
@@ -186,7 +209,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/selectBypriceDesc.do")
-	// @ResponseBody //body¿¡¼­ ÀúÀåÇØ¼­ ¹Þ´Â´Ù.
+	// @ResponseBody //bodyï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Þ´Â´ï¿½.
 	public String selectBypriceDesc(Model model) {
 		List<ProductVO> plist = productService.selectBypriceDesc();
 		model.addAttribute("plist", plist);

@@ -81,7 +81,7 @@
 	<select id="selectByCidlist" parameterType="String"
 		resultType="String">
 		select "productId" from "likedProduct" where "customerId" =
-		CAST(#{customerid} AS UUID)
+		CAST(#{custid} AS UUID)
 	</select>
 
 	<select id="selectAll16os" parameterType="int"
