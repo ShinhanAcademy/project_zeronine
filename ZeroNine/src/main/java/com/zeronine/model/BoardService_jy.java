@@ -12,6 +12,7 @@ public class BoardService_jy {
 	@Autowired
 	BoardDAOMybatis_jy boardDAO_jy;
 	
+	//fast
 	public List<Map<String, Object>> selectFastBoardList() {
 		List<Map<String, Object>> infoFList = boardDAO_jy.selectFastBoardList();
 		System.out.println(infoFList);
@@ -28,11 +29,6 @@ public class BoardService_jy {
 	public List<Map<String, Object>> selectOneBoardList(){
 		List<Map<String, Object>> infoOne = boardDAO_jy.selecOneBoardList();
 		return infoOne;
-	}
-
-	public List<Map<String, Object>> selectOneBoardEnd(){
-		List<Map<String, Object>> endInfoOne = boardDAO_jy.selectOneBoardEnd();
-		return endInfoOne;
 	}
 	
 	public Map<String, Object> selectOneDetail(String boardId) {

@@ -10,12 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("deliveryDAO")
-public class DeliveryDAOMybatis {
+@Repository("myPageDAO")
+public class MyPageDAOMybatis {
 	@Autowired
 	SqlSession sqlSession;
 	Logger logger = LoggerFactory.getLogger(ProductDAOMybatis.class);
-	final static String NAMESPACE="net.zeronine.delivery.";
+	final static String NAMESPACE="net.zeronine.mypage.";
 
 	public String addPersentage(String str) {
 		return "%"+str+"%";
@@ -35,7 +35,7 @@ public class DeliveryDAOMybatis {
 		mapData.put("endDate", endDateFormat(endDate));
 		
 		List<Map<String, Object>> orderHistoryList = sqlSession.selectList(NAMESPACE + "orderHistoryAll", mapData);
-//		logger.info("조회조건:{}...결과:{}건", mapData, orderHistoryList.size());
+//		logger.info("orderHistoryAll조회조건:{}...결과:{}건", mapData, orderHistoryList.size());
 
 		return orderHistoryList;
 	}
@@ -51,9 +51,34 @@ public class DeliveryDAOMybatis {
 		
 //		logger.info("endDate format{}", endDateFormat(endDate));
 		List<Map<String, Object>> orderCancelHistoryList = sqlSession.selectList(NAMESPACE + "orderCancelHistoryAll", mapData);
-		logger.info("조회조건:{}...결과:{}건", mapData, orderCancelHistoryList.size());
+		//logger.info("orderCancelHistoryAll조회조건:{}...결과:{}건", mapData, orderCancelHistoryList.size());
 
 		return orderCancelHistoryList;
+	}
+
+	/* myCart */
+	public List<Map<String, Object>> myCart(String customerId) {
+		Map<String, Object> mapData = new HashMap<>();
+		mapData.put("customerId", customerId);
+		
+//		logger.info("endDate format{}", endDateFormat(endDate));
+		List<Map<String, Object>> myCartList = sqlSession.selectList(NAMESPACE + "myCart", mapData);
+		logger.info("myCart조회조건:{}...결과:{}건", mapData, myCartList.size());
+
+		return myCartList;
+	}
+	
+	/* likeProduct */
+	public List<Map<String, Object>> likeProduct(String customerId, String searchWord) {
+		Map<String, Object> mapData = new HashMap<>();
+		mapData.put("customerId", customerId);
+		mapData.put("searchWord", addPersentage(searchWord));
+		
+//		logger.info("endDate format{}", endDateFormat(endDate));
+		List<Map<String, Object>> likeProductList = sqlSession.selectList(NAMESPACE + "likeProduct", mapData);
+//		logger.info("likeProduct조회조건:{}...결과:{}건", mapData, likeProductList.size());
+
+		return likeProductList;
 	}
 	
 	/*

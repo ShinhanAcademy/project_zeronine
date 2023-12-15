@@ -135,4 +135,40 @@ function callOrderCancelHistory() {
 	});
 }
 
+//likeProduct
+//Ajax
+function likeProduct() {
+	var paramObj = {};
+
+	paramObj.searchWord = $(".search_word input").val();
+	console.log("paramObj", paramObj);
+	
+	$.ajax({
+		url: contextPath + "/myPage/subPage/likeProductDetail.do",
+		data: paramObj,
+		success: function(resData) {
+			console.log("likeProduct 성공 !!");
+			$("#like_product_wrapper").html(resData);
+		},
+		error:function() {
+			console.log("likeProduct ajax 오류");
+		}
+	});
+}
+
+//myCartList
+//Ajax
+function myCartList() {
+	$.ajax({
+		url: contextPath + "/myPage/subPage/myCartDetail.do",
+		success: function(resData) {
+			console.log("myCartList 성공 !!");
+			$("#my_cart_wrapper").html(resData);
+		},
+		error:function() {
+			console.log("myCartList ajax 오류");
+		}
+	});
+}
+
 

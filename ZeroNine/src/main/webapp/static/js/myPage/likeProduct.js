@@ -1,12 +1,12 @@
 /***************************
     ZERO NINE
-	-- MyPage / orderHistory
+	-- MyPage / likeProduct
 ****************************/
 $(function(){
-	usingDatePicker();	//datePicker
-	callOrderHistory();	//orderHistory Ajax
+	likeProduct();	//likeProduct Ajax
 });
 
 $(".search_wrap .btn_search").on("click", function(){
-	callOrderHistory();
+	likeProduct();
 });
+

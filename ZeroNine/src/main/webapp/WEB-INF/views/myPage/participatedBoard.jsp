@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
 <link rel="stylesheet" href="${path}/css/myPage/participatedBoard.css">
 <link rel="stylesheet" href="${path}/css/myPage/pBdetailView.css" />
 <title>MyPage</title>

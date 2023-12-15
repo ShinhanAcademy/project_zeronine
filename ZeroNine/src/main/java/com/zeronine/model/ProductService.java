@@ -55,8 +55,16 @@ public class ProductService {
 		System.out.println("CountProduct cnt ==>"+cnt);
 		return cnt;
 	}
-
-	
+	public ProductVO selectByProductId(String productId) {
+		return productDAO.selectByProductId(productId);
+	}
+	public List<ProductVO> selectDetailDelivery4(){
+		return productDAO.selectDetailDelivery4();
+	}
+	public List<ProductVO> pcategoryPageCount(int pCount, Integer pCategoryId) {
+		// TODO Auto-generated method stub
+		return productDAO.pcategoryPageCount(pCount,pCategoryId);
+	}
 	
 }
 

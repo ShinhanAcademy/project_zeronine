@@ -11,7 +11,7 @@
 		resultType="productVo">
 		SELECT *
 		FROM public.product where "pCategoryId" =
-		#{pCategoryId}
+		#{pCategoryId} limit 4 offset #{pcount}
 	</select>
 	<select id="selectBypCategoryIdall" parameterType="Integer"
 		resultType="productVo">
@@ -81,7 +81,7 @@
 	<select id="selectByCidlist" parameterType="String"
 		resultType="String">
 		select "productId" from "likedProduct" where "customerId" =
-		CAST(#{customerid} AS UUID)
+		CAST(#{custid} AS UUID)
 	</select>
 
 	<select id="selectAll16os" parameterType="int"

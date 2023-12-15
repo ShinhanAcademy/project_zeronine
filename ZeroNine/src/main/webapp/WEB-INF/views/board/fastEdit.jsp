@@ -19,11 +19,11 @@
 				<select class="date">
 					<option value="1440">1일</option>
 					<option value="2880">2일</option>
-					<option value="5760">3일</option>
-					<option value="11520">4일</option>
-					<option value="23040">5일</option>
-					<option value="46080">6일</option>
-					<option value="92160">7일</option>
+					<option value="4320">3일</option>
+					<option value="5760">4일</option>
+					<option value="7200">5일</option>
+					<option value="8640">6일</option>
+					<option value="10080">7일</option>
 				</select>
 			</div>
 			<div class="time">
