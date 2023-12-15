@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
-import com.zeronine.model.DeliveryService;
+import com.zeronine.model.MyPageService;
 import com.zeronine.model.ProductService;
 
 @Controller
@@ -33,7 +33,7 @@ import com.zeronine.model.ProductService;
 public class MyPageController {
 	
 	@Autowired
-	DeliveryService deliveryService;
+	MyPageService deliveryService;
 	@Autowired
 	BoardService_yn boardService;
 	@Autowired

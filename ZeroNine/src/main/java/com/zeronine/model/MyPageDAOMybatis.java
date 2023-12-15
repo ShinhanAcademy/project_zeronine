@@ -10,12 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("deliveryDAO")
-public class DeliveryDAOMybatis {
+@Repository("myPageDAO")
+public class MyPageDAOMybatis {
 	@Autowired
 	SqlSession sqlSession;
 	Logger logger = LoggerFactory.getLogger(ProductDAOMybatis.class);
-	final static String NAMESPACE="net.zeronine.delivery.";
+	final static String NAMESPACE="net.zeronine.mypage.";
 
 	public String addPersentage(String str) {
 		return "%"+str+"%";
