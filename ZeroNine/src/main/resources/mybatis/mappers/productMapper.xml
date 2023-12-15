@@ -11,7 +11,7 @@
 		resultType="productVo">
 		SELECT *
 		FROM public.product where "pCategoryId" =
-		#{pCategoryId}
+		#{pCategoryId} limit 4 offset #{pcount}
 	</select>
 	<select id="selectBypCategoryIdall" parameterType="Integer"
 		resultType="productVo">

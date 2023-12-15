@@ -1,54 +1,108 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<c:forEach items="${plist}" var="product">
-		<div class="menu_sub">
-					<div class="menu_image">
-						<img class="menupng" src="${path}/images/sangpumpage/ohddugi.png">
-						<div class="menu_gocart">
-									<div class="heart_liked">
-											<button class="like" id="like${status.index}" type="button"
-												value="${product.productId}"
-												onclick="handleLikeButtonClick(${status.index}, '${product.productId}')">
+<c:forEach items="${plist}" var="product" varStatus="status">
+	<div class="menu_sub">
+		<div class="menu_image">
+			<img class="menupng"
+				onclick="location.href='${Path }/product/productDetail.do?productId=${product.productId}'"
+				src="${path}/images/sangpumpage/ohddugi.png">
+
+			<div class="menu_gocart">
+
+				<c:if test="${customerid != null}">
+					<div class="heart_liked">
+						<button class="like" id="like${status.index}" type="button"
+							value="${product.productId}"
+							onclick="handleLikeButtonClick(${status.index}, '${product.productId}')">
 
 
 
-												<c:if test="${fn:contains(likedcid, product.productId)}">
-													<img class="menu_heart"
-														src="${path}/images/board/red_heart.png">
-												</c:if>
-												<c:if
-													test="${not(fn:contains(likedcid, product.productId))}">
-													<img class="menu_heart"
-														src="${path}/images/board/heart.png">
-												</c:if>
-											</button>
-										</div>
-
-										<button class="gocart" type="button">
-											<img class="gocart"
-												src="${path}/images/sangpumpage/gocart.png">
-										</button>
+							<c:if test="${fn:contains(likedcid, product.productId)}">
+								<img class="menu_heart" src="${path}/images/board/red_heart.png">
+							</c:if>
+							<c:if test="${not(fn:contains(likedcid, product.productId))}">
+								<img class="menu_heart" src="${path}/images/board/heart.png">
+							</c:if>
+						</button>
 					</div>
-					</div>
-					<span class="menufont">${product.brand}</span>
-					<span class="menufont_name">${product.pName}</span>
-					<span class="menufont_price">
-					  <fmt:formatNumber value="${product.price}" maxFractionDigits="3"></fmt:formatNumber>
-					원</span>
+
+					<button class="gocart" id="gocart${status.index}" type="button"
+						onclick="handlegoCartButtonClick(${status.index}, '${product.productId}')">
+						<img class="gocart" src="${path}/images/sangpumpage/gocart.png">
+					</button>
+				</c:if>
+			</div>
+			<div class="index">${status.index}</div>
 		</div>
-
+		<span class="menufont">${product.brand}</span> <span
+			class="menufont_name">${product.pName}</span> <span
+			class="menufont_price"> <fmt:formatNumber
+				value="${product.price}" maxFractionDigits="3"></fmt:formatNumber> 원
+		</span>
+	</div>
 </c:forEach>
-	<script>
+<script>
 		var path = "${path}";
+		var custid = "${customerid}";
+	    console.log(custid);
 	</script>
 
-	<script>
-
+<script>
+var custid = "${customerid}";
+console.log(custid);
+	 function handlegoCartButtonClick(index, productId) {
+	     console.log(productId);
+		 function isproductinCart(productId){
+	    	  return cartcheckArray.some(function(item){
+	    		  return item == productId;
+	    	  })
+	      }
+		 //console.log(isproductinCart(productId));
+		 	console.log(productInCart);
+		 	console.log(productInCart.includes(productId));
+	        var likeButtonId = "gocart" + index;
+	    
+	    console.log(productId);
+		console.log(cartcheck);
+		if(productInCart.includes(productId)==false){
+				$.ajax({
+					url : "/product/goProductCart.do",
+					type: "POST",
+					data : {"custid" :custid,"productId" :productId},
+					success : function(){
+						alert("잘담겼다!");
+						
+						if(!productInCart.includes(productId)) {
+							productInCart.push(productId);
+						}
+						cartcheckArray.filter((element) => element !== productId);
+					},
+					error : function(){
+						alert("에러입니다.");
+					}
+					}); 
+		}else{
+			$.ajax({
+				url : "/product/plusProductCart.do",
+				type: "POST",
+				data : {"custid" :custid,"productId" :productId},
+				success : function(){
+					alert("또담겼다!");
+				},
+				error : function(){
+					alert("에러입니다.");
+				}
+				}); 
+		}
+					 
+				
+	 };
+	
 	function pcountchange(currentpage,perpage){
 		console.log(currentpage);
 		var obj = {
@@ -143,4 +197,3 @@
 		
 	</script>
 
-					
