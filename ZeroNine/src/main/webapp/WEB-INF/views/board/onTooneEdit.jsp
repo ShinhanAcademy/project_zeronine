@@ -69,7 +69,9 @@
 				onclick="previewDelete()" style="cursor: pointer"> <img
 				class="delete_btn" src="/images/common/close.png"></a>
 		</div>
-		<input class="upload_file" type="file" hidden="hidden">
+		<form id="oBoardForm" hidden="hidden" enctype="multipart/form-data">
+			<input class="upload_file" type="file" hidden="hidden" id="imgFile">
+		</form>
 		<ul>
 			<li class="title">제목</li>
 			<li><textarea class="title_input" placeholder="제목을 입력하세요."></textarea></li>

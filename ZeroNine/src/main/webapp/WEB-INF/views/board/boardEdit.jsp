@@ -88,13 +88,47 @@
 
 		function editCom() {
 			var send_bt_to_com = $("#be_board_type").val();
-			$.ajax({
-				url : '/board/completeedit.do',
-				data: {"send_bt_to_com" : send_bt_to_com},
-				success : function(responseData) {
-					$("#edit").html(responseData);
-				}
-			});
+			console.log("editCom() => send_bt_to_com :", send_bt_to_com);
+			
+			
+			//1:1거래라면 이미지도 함께 전송이 되어야 한다.
+			if(send_bt_to_com=="oneTooneBoard") {
+				console.log("oneTooneBoard에 해당하는 AJAX를 실행할것이다.");
+				//var formData = new FormData();
+				//console.log("imgFile=>" + $("#imgFile"));      // Log the jQuery selection
+				//console.log("imgFile[0]=>" + $("#imgFile")[0]);    // Log the first element in the selection
+				//formData.append("imgFile", $("#imgFile")[0].files[0]);
+				var form = $('#imgFile')[0].files[0];
+				var formData = new FormData();
+				
+				
+				formData.append("imgFile", form);
+				
+				
+				$.ajax({
+					url : "/board/completeeditO.do",
+					type : "POST",
+					enctype: 'multipart/form-data',
+					cache : false,
+					contentType: false,
+					processData: false,
+					data: formData,
+					success : function(responseData) {
+						$("#edit").html(responseData);
+					}
+				});	
+			}
+			else {
+				$.ajax({
+					url : '/board/completeedit.do',
+					data: {"send_bt_to_com" : send_bt_to_com},
+					success : function(responseData) {
+						$("#edit").html(responseData);
+					}
+				});	
+			}
+			
+			
 		}
 	</script>
 
@@ -102,4 +136,3 @@
 	<%@include file="../common/footer.jsp"%>
 </body>
 </html>
-
