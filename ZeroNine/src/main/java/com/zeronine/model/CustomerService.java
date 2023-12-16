@@ -1,6 +1,7 @@
 package com.zeronine.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,22 @@ public class CustomerService {
 
 	public String findPwd(String name, String email) {
 		return customerDAO.findPwd(name,email);
+	}
+
+	public CustomerVO selectById(String customerId) {
+		return customerDAO.selectById(customerId);
+	}
+	
+	public CustomerVO selectByEmail(String email) {
+		return customerDAO.selectByEmail(email);
+	}
+	
+	public String getCustomerId(String email, String pwd) {
+		return customerDAO.getCustomerId(email,pwd);
+
+	}
+	
+	public boolean updateCustomerInfo(Map<String, String> infos) {
+		return customerDAO.updateCustomerInfo(infos);
 	}
 }

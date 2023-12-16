@@ -15,6 +15,12 @@ public class ProductService {
 	@Autowired
 	ProductDAOMybatis productDAO;
 	
+	public List<ProductVO> selectAll16os(Integer pCount) {
+		return productDAO.selectAll16os(pCount);
+		}
+	public List<ProductVO> selectAll16() {
+		return productDAO.selectAll16();
+		}
 	public List<ProductVO> selectAll() {
 		return productDAO.selectAll();
 		}
@@ -43,6 +49,24 @@ public class ProductService {
 	
 		return productDAO.selectByPnameBrand(q);
 	}
-	
+	public int countProduct() {
+		// TODO Auto-generated method stub
+		Integer cnt = productDAO.countProduct();
+		System.out.println("CountProduct cnt ==>"+cnt);
+		return cnt;
+	}
+	public ProductVO selectByProductId(String productId) {
+		return productDAO.selectByProductId(productId);
+	}
+	public List<ProductVO> selectDetailDelivery4(){
+		return productDAO.selectDetailDelivery4();
+	}
+	public List<ProductVO> pcategoryPageCount(int pCount, Integer pCategoryId) {
+		// TODO Auto-generated method stub
+		return productDAO.pcategoryPageCount(pCount,pCategoryId);
+	}
 	
 }
+
+
+

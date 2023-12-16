@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
+<link rel="stylesheet" href="${path}/css/myPage/my_cart.css">
+<script defer src="/js/myPage/commonMypage.js"></script>
+<script defer src="/js/myPage/myCart.js"></script>
 <title>MyPage</title>
 </head>
 <body>
@@ -25,10 +27,11 @@
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
 	                <ul>
+   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
 	                    <li><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
 	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
-	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
+	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
@@ -93,17 +96,7 @@
 	            </div>
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
-	            <div class="contents_wrap">
-	                <div class="con_tit">장바구니</div>
-	                <!-- contents -->
-	                <div class="contents">
-						<div class="validate_wrap">
-							<h1> 나는 승광 !!</h1>
-							
-						</div>
-						<!--  -->
-	                </div>
-	                <!-- //contents -->
+	            <div id="my_cart_wrapper" class="contents_wrap">
 	            </div>
 	            <!-- //contents_wrap -->
 	        </div>

@@ -18,8 +18,8 @@ public class MainController_yn {
 	
 	@GetMapping("/main.do")
 	public void main(HttpSession session) {
-		String email = (String)session.getAttribute("email");
-		logger.info(email);
+		String customerId = (String)session.getAttribute("customerId");
+		logger.info(customerId);
 	}
 
 }

@@ -10,5 +10,8 @@ public class MainController {
 	@RequestMapping("/main.do")
 	public void main() {
 	}
+	@RequestMapping("/introZeroNine.do")
+	public void introZeroNine() {
+	}
 
 }

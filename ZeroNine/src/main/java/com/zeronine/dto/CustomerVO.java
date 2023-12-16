@@ -8,6 +8,7 @@ import lombok.ToString;
 
 @Getter@Setter
 @ToString
+
 public class CustomerVO {
 	private String customerId;
 	private String customerPassword;
@@ -15,7 +16,7 @@ public class CustomerVO {
 	private String phoneNumber;
 	private String customerName;
 	private String address;
+	private String addressDetail;
 	private Integer point;
 	private Timestamp birthday;
-
 }

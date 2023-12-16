@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../common/head.jsp"%>
 <%@include file="../common/header.jsp"%>
 
@@ -13,16 +14,11 @@
 <body>
 
 	<div class="banner zn_center">
-
-
-
-
-
 		<div style="width: 1440px">
 			<img src="${path}/images/board/banner1.png" style="width: 100%">
 		</div>
 
-		<!-- 데이터 연결해서 loop 도는지 확인하기 -->
+	
 		<div class="search">
 			<ul>
 				<li>
@@ -51,57 +47,60 @@
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px;"
-						href="${path}/board/boardedit.do">글쓰기</a>
+						href="${path}/board/boardedit.do?boardType=fastBoard" data-value="fastBoard">글쓰기</a>
 					</span>
 				</div>
 			</div>
 		</div>
+		<div class="List">
 		<div id="allList">
-			<div id="list">
-				<div class="pro_info">
-					<ul>
-						<li><img class="pro_img"
-							src="${path}/images/board/product2.png"></li>
-					</ul>
+			<c:forEach items="${infoFb}" var="fastInfo">
+				<div id="list">
+					<div class="pro_info">
+						<ul>
+							<li><img class="pro_img"
+								src="${fastInfo.imagePath}"></li>
+						</ul>
 
 
-					<div class="pro_name">
+						<div class="pro_name">
+							<ul>
+								<li>${fastInfo.brand}</li>
+								<li>${fastInfo.pName}</li>
+							</ul>
+						</div>
+						<div class="pro_detail">
+							<ul>
+								<li><img class="user" src="${path}/images/board/box.png">
+									<span> ${fastInfo.pCount - fastInfo.totalpickCount} 남음 </span></li>
+								<li><img class="card" src="${path}/images/board/card.png">
+									<span><fmt:formatNumber value="${(fastInfo.price/fastInfo.pCount)-((fastInfo.price/fastInfo.pCount)%10)}" type="number"/>원 </span> <span style="color: gray;">(개당)</span></li>
+								<li><img class="clock" src="${path}/images/board/clock.png">
+									<fmt:parseDate value="${fastInfo.finishTime}" var="parsedDate" pattern="yyyy-MM-dd HH:mm"/>
+									<span><fmt:formatDate value="${parsedDate}" pattern="YY년 MM월 dd일 HH:mm" /> 까지 </span></li>
+							</ul>
+						</div>
 						<ul>
-							<li>마녀공장</li>
-							<li>[1+1] 판테토인 에센스 토너 200ml</li>
+							<li class="detail_view">
+								<button class="like" type="button">
+									<img class="like" src="${path}/images/board/heart.png">
+								</button>
+								<button id="fast_detail_btn" class="detail_btn" value="${fastInfo.boardId}" >보기</button>
+							</li>
 						</ul>
 					</div>
-					<div class="pro_detail">
-						<ul>
-							<li><img class="user" src="${path}/images/board/user.png">
-								<span> 1명 모집 </span></li>
-							<li><img class="card" src="${path}/images/board/card.png">
-								<span> 16,640원 </span></li>
-							<li><img class="clock" src="${path}/images/board/clock.png">
-								<span> 23.11.30 23:59까지 </span></li>
-						</ul>
-					</div>
-					<ul>
-						<li class="detail_view">
-							<button class="like" type="button">
-								<img class="like" src="${path}/images/board/heart.png">
-							</button>
-							<button id="fast_detail_btn" class="detail_btn"  onclick="f_btn()">보기</button>
-						</li>
-					</ul>
+
 				</div>
-
-			</div>
-
+			</c:forEach>
+		</div>
+		<div id="modal"></div>
 		</div>
 	</div>
 
 
-<%@include file="../common/footer.jsp"%>
-<%@include file="../common/detailView.jsp"%>
-<script src="../js/detailView.js"></script>
-<script>$("#detail_modal_wrap").hide();</script>
-
+	<%@include file="../common/footer.jsp"%>
+	<script src="../js/detailView.js"></script>
+	
 </body>
 </html>
 

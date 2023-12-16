@@ -1,3 +1,5 @@
+	
+	 
 $(".fluent_basket").click(function () {
 			var obj = {	"pCategoryId" : 1};
 			
@@ -51,10 +53,8 @@ $(".raphael_cart").click(function () {
 					}
 				});
 })
-
-$("#searchbtn").click(function() {
-
-	var obj = { "q" : $("#q").val() };
+function search() {
+var obj = { "q" : $("#q").val() };
 
 	$.ajax({
             type: 'GET',
@@ -66,6 +66,17 @@ $("#searchbtn").click(function() {
               alert("에러입니다.");
             }
         });
+}
+$("#q").keypress(function(event){
+	if(event.which===13){
+	event.preventDefault();
+	search();
+	}
+});
+
+$("#searchbtn").click(function() {
+
+	search();
 })
 
 function chanb() {
@@ -144,12 +155,3 @@ $('#here').html(response);
 } 
 
 
-$(".like").click(function (){
-
-            var currentImagePath = $(this).find("img.menu_heart").attr("src");
-            var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
-                path+"/images/board/red_heart.png" :
-                path+"/images/board/heart.png";
-
-            $(this).find("img.menu_heart").attr("src", newImagePath);
-});

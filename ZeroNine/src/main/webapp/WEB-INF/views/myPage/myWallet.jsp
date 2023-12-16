@@ -3,6 +3,9 @@
 <%@include file="../common/head.jsp" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/my_wallet.css">
+<link rel="stylesheet" href="/css/myPage/delivery_tracking.css">
+<script defer src="/js/myPage/commonMypage.js"></script>
+<script defer src="/js/myPage/myWallet.js"></script>
 <title>MyPage</title>
 </head>
 <body>
@@ -25,10 +28,11 @@
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
 	                <ul>
+   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
 	                    <li><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
 	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
-	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
+	                    <li><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
@@ -144,7 +148,7 @@
 		                    				<td class="order_status">
 												배송중
 												<div>
-													<button class="btn_orange_underline">배송조회</button>
+													<button class="btn_orange_underline btn_delivery_check">배송조회</button>
 												</div>
 											</td>
 		                    				<td class="purchase_decision">
@@ -330,6 +334,7 @@
 	    <!-- //mypage_container -->
 	</div>
 	<!-- //zero_container -->
+	<%@include file="deliveryTracking.jsp" %>
 	<%@include file="../common/footer.jsp" %>
 </body>
 </html>

@@ -26,10 +26,11 @@
 	                </ul>
 	                <div class="sub_tit">MY ACTIVITIES</div>
 	                <ul>
+   	                    <li><a href="${path}/myPage/ecoCare.do">나의 에코케어</a></li>
 	                    <li><a href="${path}/myPage/createdBoard.do">내가 쓴 게시글</a></li>
 	                    <li><a href="${path}/myPage/participatedBoard.do">내가 참여한 게시글</a></li>
-	                    <li class="on"><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                    <li><a href="${path}/myPage/likeBoard.do">찜한 게시글</a></li>
+	                    <li class="on"><a href="${path}/myPage/chatList.do">채팅 목록</a></li>
 	                </ul>
 	                <div class="sub_tit">MY INFOMATION</div>
 	                <ul>
@@ -248,9 +249,35 @@
 		                    		</tbody>
 		                    	</table>
 		                    </div>
+	                		<!-- pagination -->
+							<%-- <c:if test="${booklist.size() != 0}"> --%>
+							    <div class=pagination>
+							        <div class="pageLeft">
+							            <button class="btnFirst">첫페이지</button>
+							            <button class="btnPrev">이전페이지</button>
+							        </div>
+							        <ul class="pagingWrap">
+							            <li><a href="">1</a></li>
+							            <li><a href="">2</a></li>
+							            <li><a href="">3</a></li>
+							            <li><a href="">4</a></li>
+							            <li><a href="">5</a></li>
+							            <li><a href="">6</a></li>
+							            <li><a href="">7</a></li>
+							            <li><a href="">8</a></li>
+							            <li><a href="">9</a></li>
+							            <li><a href="">10</a></li>
+							        </ul>
+							        <div class="pageRight">
+							            <button class="btnNext">다음페이지</button>
+							            <button class="btnLast">마지막페이지</button>
+							        </div>
+							    </div>
+							<%-- </c:if> --%>
+	                		<!-- //pagination -->
 		                    <div class="tbl_bottom_wrap">
 		                    	<div class="btn_wrap">
-		                    		<button class="btn_del">삭제하기</button>
+		                    		<button class="btn_del">채팅방 나가기</button>
 		                    	</div>
 	                    	</div>
 	                    </div>

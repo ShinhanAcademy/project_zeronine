@@ -11,20 +11,20 @@ html, body {
 
 .edit_content {
 	padding: 50px 40px 50px 40px;
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 }
 
 .content {
 	width: 480px;
-	height: 892px;
-	border-right: 1px solid #C4C4C4;
+	/* height: 892px; */
+	/* border-right: 1px solid #C4C4C4; */
 }
 
 .info_title, .write_title {
 	font-weight: bold;
 	font-size: 30px;
-	margin-bottom: 44px;
+	margin-bottom: 30px;
 	font-size: 30px;
 }
 
@@ -43,7 +43,7 @@ label, .title, .context {
 	display: block;
 }
 
-#board_type, #time_setting {
+#board_type, #be_board_type, #time_setting {
 	font-family: Lato;
 	display: block;
 	width: 200px;
@@ -65,6 +65,7 @@ label, .title, .context {
 	display: flex;
 	justify-content: center;
 	margin-top: 30px;
+	margin-bottom: 30px;
 	min-height: 100dvh;
 }
 
@@ -74,6 +75,11 @@ label, .title, .context {
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 15px;
 	border: 1px #C4C4C4 solid;
+}
+
+#edit_change_area{
+	display: flex;
+	
 }
 
 /* complete edit */
@@ -182,7 +188,14 @@ input::placeholder {
 }
 
 .date {
-	margin-right: 5px;
+	margin-right: 10px;
+	border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    font-family: Lato;
+    font-size: 15px;
+    width: 90px;
+    height: 44px;
+    text-align: center;
 }
 
 #cart, #location {
@@ -250,7 +263,11 @@ input::placeholder {
 /* write_content */
 .write_content {
 	width: 820px;
+	height : 856px;
+	margin-top: -153px;
 	padding-left: 40px;
+	border-left: 1px solid #c4c4c4;
+	padding-bottom: 45px;
 }
 
 .main_text textarea {
@@ -275,6 +292,10 @@ input::placeholder {
 	margin-top: 45px;
 }
 
+#one_context{
+	margin-top: 20px;
+}
+
 .context_input {
 	height: 530px;
 }
@@ -285,8 +306,7 @@ input::placeholder {
 
 /* done button */
 .done {
-	margin-top: 30px;
-	margin-left: 660px;
+	margin-left: 1180px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -344,13 +364,32 @@ input::placeholder {
 	text-align: left;
 }
 
-.location_img{
-	border: 1px solid black;
+#map{
+	border: 1px solid #c4c4c4;
+	border-radius:6px;
 	width: 440px;
 	height: 230px;
 	
 }
 /* file upload */
 .upload_btn{
-	margin-bottom: 20px;
+	margin: 0px 10px 10px 10px;
+}
+
+.upload{
+	display: flex;
+	flex-direction: row;
+}
+
+.delete_btn{
+	width: 15px;
+	height: 15px;
+	margin-left: 10px;
+}
+
+.preview{
+	width: 70px;
+	height: 70px;
+	border-radius: 16px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

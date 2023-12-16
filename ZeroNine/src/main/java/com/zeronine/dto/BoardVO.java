@@ -1,6 +1,10 @@
 package com.zeronine.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class BoardVO {
 	private String boardId;
@@ -11,7 +15,14 @@ public class BoardVO {
 	private Timestamp uploadTime;
 	private Timestamp updateTime;
 	private Integer postingMinutes;
+	private Timestamp finishTime;
 	
+	public Timestamp getFinishTime() {
+		return finishTime;
+	}
+	public void setFinishTime(Timestamp finishTime) {
+		this.finishTime = finishTime;
+	}
 	public String getBoardId() {
 		return boardId;
 	}
@@ -42,6 +53,7 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
 	public Timestamp getUploadTime() {
 		return uploadTime;
 	}
@@ -60,6 +72,8 @@ public class BoardVO {
 	public void setPostingMinutes(Integer postingMinutes) {
 		this.postingMinutes = postingMinutes;
 	}
+	
+	
 }
 
 
