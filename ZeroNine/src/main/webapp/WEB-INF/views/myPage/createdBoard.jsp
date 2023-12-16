@@ -115,9 +115,7 @@
 								<span>|</span>
 								<span class="btn_deli" id="freeDelivery">무배</span>
 								</div>
-								<div class="btn_wrap">
-									<button class="btn_more">채팅방으로 가기 ></button>
-								</div>
+								
 							</div>
 							
 							<table class="tbl_chat_wrap">
@@ -128,11 +126,7 @@
 									<col width="15%" />
 									<col width="18%" />
 									<col width="12%" />
-									<!-- 
-							    <col />
-							    <col span="2" class="batman" />
-							    <col span="2" class="flash" />
-							    -->
+									
 								</colgroup>
 								<thead>
 									<tr>

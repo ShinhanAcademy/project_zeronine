@@ -92,11 +92,14 @@ chatlist_wrap
 .chatlist_wrap .tbl_chat_wrap tbody tr {
     cursor: pointer;
 }
+
+/*
 .chatlist_wrap .tbl_chat_wrap td.read_status {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+*/
 .chatlist_wrap .tbl_chat_wrap td.read_status span {
     display: inline-block;
 	text-indent: -9999px;
@@ -109,6 +112,45 @@ chatlist_wrap
 }
 .chatlist_wrap .tbl_chat_wrap td.read_status.new span {
 	background: #FF5C00;
+}
+
+.boardDetail{
+	width: 80px;
+	border-radius: 15px;
+	height: 30px;
+	font-size: 14px;
+	text-align: center;
+	border-radius: 15px;
+	color: #0083E6;
+	border: 1px solid #0083E6;
+	background: #FFF;
+}
+
+
+.product_image {
+	width: 130px;
+	height: 130px;
+	border-radius: 15px;
+}
+
+.tbl_chart {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.td_font_title{
+	font-size: 22px!important;
+}
+
+.td_font_upload{
+	font-size: 16px!important;
+	font-family: "inter"!important;
+}
+
+.td_font_remain{
+	font-size: 16px!important;
+	font-family: "inter"!important;
 }
 
 

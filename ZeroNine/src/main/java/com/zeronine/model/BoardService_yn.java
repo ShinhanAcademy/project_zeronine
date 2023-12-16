@@ -88,6 +88,14 @@ public class BoardService_yn {
 	public int completeEditTime(String title, String context, int remainTime, String boardId) {
 		return boardDAO.completeEditTime(title,context,remainTime,boardId);
 	}
+
+	public int deleteBoard(String boardId) {
+		return boardDAO.deleteBoard(boardId);
+	}
+
+	public Map<String, Object> chatListDetail(String boardId) {
+		return boardDAO.chatListDetail(boardId);
+	}
 	
 	
 
