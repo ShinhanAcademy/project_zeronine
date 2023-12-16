@@ -130,6 +130,16 @@ public class BoardDAOMybatis_yn {
 		return result;
 	}
 
+	public int deleteBoard(String boardId) {
+		int result = sqlSession.delete(NAMESPACE + "deleteBoard", boardId);
+		return result;
+	}
+
+	public Map<String, Object> chatListDetail(String boardId) {
+		Map<String,Object> info = sqlSession.selectOne(NAMESPACE + "chatListDetail",boardId);
+		return info;
+	}
+
 	
 
 }

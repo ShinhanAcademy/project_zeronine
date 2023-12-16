@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
 import com.zeronine.model.MyPageService;
@@ -175,6 +173,25 @@ public class MyPageController {
 		}
 	}
 	
+	@PostMapping("/subPage/isDeleteBoard.do")
+	public void isDeleteBoard(String boardId,Model model) {
+		model.addAttribute("boardId", boardId);
+	}
+	
+	@PostMapping("/subPage/deleteBoard.do")
+	@ResponseBody
+	public int deleteBoard(String boardId,Model model) {
+		int result = boardService.deleteBoard(boardId);
+		return result;
+	}
+	
+	@GetMapping("/subPage/cbFreeboardEdit.do")
+	public void cbFreeboardEdit(String boardId, int participant, Model model) {
+		//Map<String, Object> info = boardService.boardDetailEdit(boardId);
+		//model.addAttribute("info", info);
+		model.addAttribute("participant", participant);		
+	}
+	
 	@GetMapping("/subPage/cbFastDelivery.do")
 	public void cbFastDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
@@ -201,9 +218,6 @@ public class MyPageController {
 		model.addAttribute("info", info);
 		model.addAttribute("participant", participant);
 	}
-	
-	
-	
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
 	@GetMapping("/participatedBoard.do")
@@ -322,9 +336,7 @@ public class MyPageController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("찜 실패");
 		}
 	}
-	
-	
-	
+
 	// chatList(채占쏙옙 占쏙옙占�)
 	@GetMapping("/chatList.do")
 	public void chatList(Model model, HttpSession session) {
@@ -335,9 +347,19 @@ public class MyPageController {
 		model.addAttribute("count", info.size());
 	}
 	
+	@GetMapping("/subPage/chatListDetail.do")
+	public void chatListDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.chatListDetail(boardId);
+		model.addAttribute("info", info);
+	}
+	
+	
+	
 	/* ****************************
 			MY_INFOMATION
 	 ****************************** */
+	
+	/*
 	@PostMapping(value = "/validatePw.do", consumes = "application/json")
 	@ResponseBody
 	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
@@ -365,6 +387,7 @@ public class MyPageController {
 		model.addAttribute("birthdayFormmated", customerVo.getBirthday().toString().substring(0, 10));
 	
 	}
+	*/
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@RequestMapping("/subscriptionInfo.do")

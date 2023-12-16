@@ -21,6 +21,7 @@ public class S3Upload {
     //@Value("${cloud.aws.s3.bucket}")
     private String bucket = "zeronine";
 
+    /*
     private final AmazonS3 amazonS3;
 
     public String upload(MultipartFile multipartFile) throws IOException {
@@ -38,7 +39,7 @@ public class S3Upload {
 
         return amazonS3.getUrl(bucket, s3FileName).toString();
     }
-    
+   
     public String upload(MultipartFile multipartFile, String uuid, String extension) throws AmazonServiceException, SdkClientException, IOException {
     	ObjectMetadata objMeta = new ObjectMetadata();
     	try {
@@ -55,4 +56,6 @@ public class S3Upload {
     	amazonS3.putObject(bucket, s3FileName, multipartFile.getInputStream(), objMeta);
         return amazonS3.getUrl(bucket, s3FileName).toString();
     }
+    
+    */
 }

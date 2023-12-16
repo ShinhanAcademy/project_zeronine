@@ -177,8 +177,23 @@
 		SET title=#{title}, "boardContent"=#{context}, "postingMinutes"=#{remainTime}, "updateTime"=NOW()
 		WHERE "boardId"=cast(#{boardId} as UUID);
 	</update>
+	<delete id="deleteBoard" parameterType="String">
+		DELETE FROM public."board" WHERE "boardId"=cast(#{boardId} as UUID);
+	</delete>
 	
 	<select id="chatBlist" resultType="map" parameterType="String">
-		
+		SELECT ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
+		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
+		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
+		left join public."oBoardImage" obi on (c."oBoardId"=obi."oBoardId")
+		where ob."oAuthorId"=cast(#{customerId} as UUID) or c."customerId"=cast(#{customerId} as UUID)
+		and ob."finishTime">NOW()
+	</select>
+	<select id="chatListDetail" resultType="map" parameterType="String">
+		SELECT ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",
+		to_char(ob."finishTime",'yyyy-mm-dd HH24:mi:ss') as "finishTime"
+		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
+		left join public."oBoardImage" obi on (c."oBoardId"=obi."oBoardId")
+		where ob."oBoardId"=cast(#{boardId} as UUID)
 	</select>
 </mapper>
