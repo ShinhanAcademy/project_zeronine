@@ -113,11 +113,9 @@
 									</div>
 									<div class="delivery_kind">
 										<span class="btn_deli on" id="fastDelivery">즉배</span> <span>|</span>
-										<span class="btn_deli" id="freeDelivery">무배</span>
+										<span class="btn_deli" id="freeDelivery">무배</span>	
 									</div>
-									<div class="btn_wrap">
-										<button class="btn_more">채팅방으로 가기 ></button>
-									</div>
+									
 								</div>
 								<table class="tbl_chat_wrap">
 									<colgroup>

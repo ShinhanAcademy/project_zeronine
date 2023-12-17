@@ -33,7 +33,10 @@
 			</div>
 		</div>
 	</div>
+	<div id="delete_here"></div>
 </div>
+
+
 <script>
 	var path = "${path}";
 	var participant = "${participant}";

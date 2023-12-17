@@ -50,8 +50,24 @@ public class BoardController {
 	@RequestMapping("/fastboard.do")
 	public String fastBoard(Model model) {
 		List<Map<String, Object>> infoFb = boardService.selectFastBoardList();
-		model.addAttribute("infoFb", infoFb);
-		logger.info("controller fast정보: {}", infoFb);
+		
+		JSONArray jsonarray = new JSONArray();
+
+		for (Map<String, Object> map : infoFb) {
+			JSONObject json = new JSONObject();
+
+			for (Map.Entry<String, Object> entry : map.entrySet()) {
+				String key = (String) entry.getKey();
+				// Object value = (Object)entry.getValue();
+				String value = entry.getValue().toString();
+				json.put(key, value);
+			}
+			jsonarray.add(json);
+		}
+
+		
+		model.addAttribute("infoFb", jsonarray);
+		logger.info("controller fast정보: {}", jsonarray);
 
 		return "board/fastBoard";
 	}
@@ -84,7 +100,6 @@ public class BoardController {
 		return "board/oneTooneBoard";
 	}
 
-	// filter 적용
 
 	// board_edit
 	@RequestMapping("/boardedit.do")
