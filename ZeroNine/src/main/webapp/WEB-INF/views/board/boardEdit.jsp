@@ -58,6 +58,7 @@
 		function selectBoardEdit() {
 			/* var value = boardtype.value; */
 			var board_type = $("#be_board_type").val();
+			
 			console.log(board_type);
 
 			if (board_type == "fastBoard") {
@@ -88,13 +89,57 @@
 
 		function editCom() {
 			var send_bt_to_com = $("#be_board_type").val();
-			$.ajax({
-				url : '/board/completeedit.do',
-				data: {"send_bt_to_com" : send_bt_to_com},
-				success : function(responseData) {
-					$("#edit").html(responseData);
-				}
-			});
+			console.log("editCom() => send_bt_to_com :", send_bt_to_com);
+			
+			//1:1거래라면 이미지도 함께 전송이 되어야 한다.
+			if(send_bt_to_com=="oneTooneBoard") {
+				console.log("oneTooneBoard에 해당하는 AJAX를 실행할것이다.");
+		
+				var send_bt_to_com = $("#be_board_type").val();
+
+				var form = $('#imgFile')[0].files[0];
+				var formData = new FormData();
+				
+				var board_type = $("#be_board_type").val();
+				var postingMinutes = $("#time_setting").val();
+				var address = $("#address").val();
+				var addressDetail = $("#address_detail").val();
+				var title = $(".title_input").val();
+				var content = $(".context_input").val();
+				
+
+				formData.append("imgFile", form);
+				formData.append("board_type", board_type);
+				formData.append("postingMinutes", postingMinutes);
+				formData.append("address", address);
+				formData.append("addressDetail", addressDetail);
+				formData.append("title", title);
+				formData.append("content", content);
+				
+				$.ajax({
+					url : "/board/completeeditO.do",
+					type : "POST",
+					enctype: 'multipart/form-data',
+					cache : false,
+					contentType: false,
+					processData: false,
+					data: formData,
+					success : function(responseData) {
+						$("#edit").html(responseData);
+					}
+				});	
+			}
+			else {
+				$.ajax({
+					url : '/board/completeedit.do',
+					data: {"send_bt_to_com" : send_bt_to_com},
+					success : function(responseData) {
+						$("#edit").html(responseData);
+					}
+				});	
+			}
+			
+			
 		}
 	</script>
 
@@ -102,4 +147,3 @@
 	<%@include file="../common/footer.jsp"%>
 </body>
 </html>
-
