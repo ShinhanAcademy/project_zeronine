@@ -5,6 +5,23 @@
 <%@include file="../common/head.jsp"%>
 <%@include file="../common/header.jsp"%>
 
+<style>
+.donecss{
+	border: 1px solid black;
+	border-radius: 15px;
+	width: 418px;
+	margin: 10px 27px 30px 10px;
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: nowrap;
+	align-content: center;
+	flex-direction: column;
+	align-items: center;
+	background-color: rgb(0,0,0,0.5);
+	color : white;
+	font-family: Jua;
+}
+</style>
 
 <title>FastBoard</title>
 <link rel="stylesheet" href="${path}/css/board/boardList.css" />
@@ -40,15 +57,15 @@
 						<option value="imminent">임박순</option>
 					</select>
 				</div>
-
-
-
+				<!-- 아이디 확인용 hidden  -->
+				<div id=email data-email="{email}" hidden="hidden"> ${email}</div> 
+				
 				<div class="edit">
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px;"
-						href="${path}/board/boardedit.do?boardType=fastBoard"
-						data-value="fastBoard">글쓰기</a>
+						<%-- href="${path}/board/boardedit.do?boardType=fastBoard" --%>
+						data-value="fastBoard" onclick="writeBoard()">글쓰기</a>
 					</span>
 				</div>
 			</div>
@@ -62,6 +79,22 @@
 
 	<%@include file="../common/footer.jsp"%>
 	<script src="../js/detailView.js"></script>
+	
+	<script type="text/javascript">
+	function writeBoard(){
+		var id = '${email}';
+		if(id==""){
+			alert("로그인 후 작성 가능합니다.");
+			location.href="${path}/board/boardedit.do?boardType=fastBoard";
+			/* location.href="${path}/auth/login.do"; */
+		} else{
+			location.href="${path}/board/boardedit.do?boardType=fastBoard";
+		}
+	}
+	
+	
+	</script>
+	
 
 	<script>
 	
@@ -69,6 +102,7 @@
 	var infoFb_json;
 	var output ="";
 	$(filterType)
+	
 	
 	
 	function filterType() {
@@ -102,12 +136,32 @@
 	    }
 	    
 	    function each(){
+	    	var fail_info = '${fail}';
+	    	var fail_info_array = JSON.parse(fail_info);
+	    	var failId_array = [];
+	    	for(var i =0 ; i<fail_info_array.length ; i ++){
+	    	var failId = fail_info_array[i].boardId;
+	    		failId_array.push(failId)
+	    		
+	    		}
+	    	console.log(failId_array);
+	    		
+	    	
+	    	
+	    	
+	    	
 	    	 $.each(infoFb_json, function (index, item) {
 		            var str = item.finishTime.substr(2, 2)+"년 "+item.finishTime.substr(5, 2)+"월 "+item.finishTime.substr(8, 2)+"일 "+
 		            			item.finishTime.substr(11, 2)+"시 "+item.finishTime.substr(14, 2)+"분";
-		            var perprice = (item.price / item.pCount)-((item.price / item.pCount)%10)
+		            var perprice = (item.price / item.pCount)-((item.price / item.pCount)%10);
+		            console.log(item.boardId) //잘 나옴
+		            console.log(fail_info.boardId) //안나옴 -> 원인 찾아야
+		            var failId = false;
+		            if(item.boardId == fail_info.boardId){
+		            	failId = true;
+		            }
 		                   output += `
-		                	   <div id="list">
+		                	   <div id="list" \${failId ? "class=donecss" : ""}>
 		   					<div class="pro_info">
 		   						<ul>
 		   							<li><img class="pro_img"
@@ -250,6 +304,8 @@
 	}
 	
 	</script>
+	
+	
 
 </body>
 </html>

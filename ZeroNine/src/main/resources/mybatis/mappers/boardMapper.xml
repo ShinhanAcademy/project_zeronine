@@ -41,6 +41,13 @@
 		join public."oBoardImage" as obi on ob."oBoardId" = obi."oBoardId"
 		where ob."oBoardId"=cast(#{boardId} as UUID)
 	</select>
-
+	
+	<select id="selectDealFailBoard" resultType="dealFailRefundVo">
+	select * from public."dealFailRefund"
+	</select>
+	
+	<select id="selectDealSuccessBoard" resultType="dealSuccessBoardVo">
+	SELECT * FROM public."dealSuccessBoard"
+	</select>
 	
 </mapper>

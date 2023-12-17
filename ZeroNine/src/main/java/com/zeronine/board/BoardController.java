@@ -3,6 +3,9 @@ package com.zeronine.board;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -13,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.zeronine.dto.DealFailRefundVO;
+import com.zeronine.dto.DealSuccessBoardVO;
 import com.zeronine.model.BoardService_jy;
 
 @Controller
@@ -30,11 +35,12 @@ public class BoardController {
 
 	// board_list
 	@RequestMapping("/fastboard.do")
-	public String fastBoard(Model model) {
+	public String fastBoard(HttpServletRequest request, Model model) {
 		List<Map<String, Object>> infoFb = boardService.selectFastBoardList();
+		List<DealFailRefundVO> fail = boardService.selectDealFailBoard();
+		List<DealSuccessBoardVO> success = boardService.selectDealSuccessBoard();
 		
 		JSONArray jsonarray = new JSONArray();
-
 		for (Map<String, Object> map : infoFb) {
 			JSONObject json = new JSONObject();
 
@@ -46,10 +52,38 @@ public class BoardController {
 			}
 			jsonarray.add(json);
 		}
-
 		
+		JSONArray failjson = new JSONArray();
+		for(DealFailRefundVO fdeal : fail) {
+			JSONObject fjson = new JSONObject();
+			fjson.put("boardId", fdeal.getBoardId());
+			
+			failjson.add(fjson);
+		}
+		
+		logger.info("확인 : {}", failjson);
+		
+		
+		JSONArray successjson = new JSONArray();
+		for(DealSuccessBoardVO sdeal : success) {
+			JSONObject sjson = new JSONObject();
+			sjson.put("boardId", sdeal.getBoardId());
+			
+			successjson.add(sjson);
+			
+		}
+		
+		HttpSession session = request.getSession();
+		String email = (String)session.getAttribute("email");
+		model.addAttribute("email", email);
+		model.addAttribute("fail",failjson);
+		model.addAttribute("success", successjson);
 		model.addAttribute("infoFb", jsonarray);
-		logger.info("controller fast정보: {}", jsonarray);
+		
+		
+		logger.info("controller fast정보: {}", infoFb);
+		logger.info("controller 의 fail 정보 : {}", fail);
+		logger.info("controller 의 success 정보 : {}", success);
 
 		return "board/fastBoard";
 	}
@@ -94,6 +128,7 @@ public class BoardController {
 	@RequestMapping("/fastEdit.do")
 	public String editFBoard() {
 		return "board/fastEdit";
+		
 	}
 
 	@RequestMapping("/freeDeliveryEdit.do")

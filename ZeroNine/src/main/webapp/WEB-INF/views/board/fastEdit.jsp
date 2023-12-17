@@ -51,11 +51,11 @@
 					<li>
 						<div class="count">
 							<button>
-								<img src="${path}/images/board/minus.png">
+								<img src="${path}/images/board/minus.png" class="minus" onclick="minus()" >
 							</button>
-							<input type="text" readonly="readonly" value="1">
+							<input type="text" readonly="readonly" value="1" class="num">
 							<button>
-								<img src="${path}/images/board/plus.png">
+								<img src="${path}/images/board/plus.png" class="plus" onclick="add()">
 							</button>
 						</div>
 						<hr>
@@ -89,4 +89,19 @@
 		var selectedValue = this.value;
 		console.log(selectedValue);
 	})
+	
+	function add(){
+		var num = Number($(".num").val());
+		num += 1;
+		$(".num").val(num);
+	}
+	
+	function minus(){
+		var num = Number($(".num").val());
+		if(num>=1){
+		num -= 1;
+		}
+		$(".num").val(num);
+		console.log(num)
+	}
 </script>
