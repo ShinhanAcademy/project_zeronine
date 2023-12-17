@@ -187,8 +187,8 @@ public class MyPageController {
 	
 	@GetMapping("/subPage/cbFreeboardEdit.do")
 	public void cbFreeboardEdit(String boardId, int participant, Model model) {
-		//Map<String, Object> info = boardService.boardDetailEdit(boardId);
-		//model.addAttribute("info", info);
+		Map<String, Object> info = boardService.freeBoardDetailEdit(boardId);
+		model.addAttribute("info", info);
 		model.addAttribute("participant", participant);		
 	}
 	
@@ -350,10 +350,34 @@ public class MyPageController {
 	@GetMapping("/subPage/chatListDetail.do")
 	public void chatListDetail(String boardId, Model model) {
 		Map<String, Object> info = boardService.chatListDetail(boardId);
+		int participant = boardService.numOfChatParticipant(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("participant", participant);
+	}
+	
+	@GetMapping("/subPage/participantChatList.do")
+	public void participantChatList(Model model, HttpSession session) {
+		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.participantChatList(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+	
+	@GetMapping("/subPage/participantBoardDetail.do")
+	public void participantBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.chatListDetail(boardId);
 		model.addAttribute("info", info);
 	}
 	
-	
+	@GetMapping("/subPage/authorChatList.do")
+	public void authorChatList(Model model, HttpSession session) {
+		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.chatBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
 	
 	/* ****************************
 			MY_INFOMATION

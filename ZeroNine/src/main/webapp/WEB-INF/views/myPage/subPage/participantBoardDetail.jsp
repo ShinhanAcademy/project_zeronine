@@ -25,8 +25,6 @@
 				</div>
 			</div>
 			<div class="join_btn_div">
-				<button class="delete_btn">삭제하기</button>
-				<button class="update_btn">수정하기</button>
 				<button class="join_btn">채팅하기</button>
 			</div>
 		</div>
@@ -34,6 +32,5 @@
 </div>
 <script>
 	var path = "${path}";
-	var participant = "${participant}";
 </script>
 <script src="${path}/js/myPage/chatDetailView.js" type="text/javascript"></script>
