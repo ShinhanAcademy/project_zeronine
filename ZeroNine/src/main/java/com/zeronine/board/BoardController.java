@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.json.simple.JSONArray;
@@ -28,6 +30,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.amazonaws.util.IOUtils;
 import com.zeronine.model.BoardService_jy;
+import com.zeronine.model.BoardService_sg;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,6 +40,10 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 	@Autowired
 	BoardService_jy boardService;
+	
+	@Autowired
+	BoardService_sg boardServiceSg;
+	
 	Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final S3Upload s3Upload;
 	
@@ -125,7 +132,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/completeeditO.do")
-	public String completeeditO(MultipartHttpServletRequest mRequest, Model model ) throws IOException {
+	public String completeeditO(MultipartHttpServletRequest mRequest, Model model, HttpSession session) throws IOException {
 		//String lower_boardListType = boardListType.toLowerCase();
 		//model.addAttribute("boardListType", lower_boardListType);
 		model.addAttribute("boardListType", "onetooneboard");
@@ -151,14 +158,39 @@ public class BoardController {
 	        String uuidStr = UUID.randomUUID().toString();
 	        String s3ImageURL;
 	        MultipartFile imgFile = mRequest.getFile("imgFile");
+	        String boardType = mRequest.getParameter("board_type");
+	        String postingMinutes = mRequest.getParameter("postingMinutes");
+	        String address = mRequest.getParameter("address");
+	        String addressDetail = mRequest.getParameter("addressDetail");
+	        String title = mRequest.getParameter("title");
+	        String content = mRequest.getParameter("content");
+	        
+	        logger.info(boardType + "  " +postingMinutes + "  " +address + "  " +addressDetail + "  " +title + "  " +content);
+	        //int postingMinutes =
 	        if(imgFile != null) {
-	        	s3ImageURL = s3Upload.upload(imgFile, uuidStr, "png");
+	        	String originalFileName = imgFile.getOriginalFilename();
+	        	String imgExtension = getImgExtension(originalFileName);
+	        	s3ImageURL = s3Upload.upload(imgFile, uuidStr, imgExtension);
+	        	logger.info("oboard 이미지가 다음 경로에 저장됨 : " +  s3ImageURL);
 	        }
 	        else {
-	        	logger.info("imgFile is NULL 널이다!!!!!!허걱");
+	        	logger.info("imgFile is NULL");
+	        	//이미지를 넣지 않은 경우에는 그냥 Default이미지를 넣는다.
+	        	s3ImageURL = "https://zeronine.s3.ap-northeast-2.amazonaws.com/image/oboard/9ac7444b-f92a-4137-928b-d4d32c753133.jfif";
 	        }
 	        
+	        String oBoardId = uuidStr;
+	        //String oAuthorId = (String)session.getAttribute("customerId"); //세션에서 가지고 와야 함.
+	        String oAuthorId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+	        String oTitle = title;
+	        String oContent = content;
+	        String oPostingMinutes = postingMinutes;
+	        //String address = address;
+	        //String addressDetail =addressDetail;
+	        logger.info("작성자 ID ==>", oAuthorId);
 	        
+	        
+	        boardServiceSg.writeOBoard(oBoardId, oAuthorId, oTitle, oContent, oPostingMinutes, s3ImageURL, address, addressDetail);
 	        /*
 	         UUID는 oBoardId가 됨, s3ImageURL은 해당 oBoard의 이미지 링크
 	         oBoard 생성할 때 uuid가 uuidStr로 외부에서 주입된 값으로 지정되어 INSERT 해야함
@@ -169,6 +201,13 @@ public class BoardController {
 		return "board/completeEdit";
 	}
 	
+	private String getImgExtension(String filename) {
+		if (filename == null || filename.lastIndexOf(".") == -1) {
+	        return null;
+	    }
+	    return filename.substring(filename.lastIndexOf("."));
+	}
+
 	@RequestMapping("/completeedit.do")
 	//@PostMapping("/completeedit.do")
 	public String compliteEdit(@RequestParam("send_bt_to_com")String boardListType, Model model ) throws IOException {

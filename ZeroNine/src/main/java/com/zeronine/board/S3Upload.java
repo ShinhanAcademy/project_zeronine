@@ -21,24 +21,26 @@ public class S3Upload {
     //@Value("${cloud.aws.s3.bucket}")
     private String bucket = "zeronine";
 
-    /*
+    
     private final AmazonS3 amazonS3;
 
-    public String upload(MultipartFile multipartFile) throws IOException {
-    	//multipartFile.get
-        String fileName = multipartFile.getName();
-        System.out.println("MULTIPART FILE.getName() fileName ==>" + fileName);
-        String dotExtension = fileName.substring(fileName.lastIndexOf(".")+1); //.png .jpeg 등등
-        ObjectMetadata objMeta = new ObjectMetadata();
-        
-        //String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
-        String s3FileName = UUID.randomUUID().toString() + dotExtension;
-        objMeta.setContentLength(multipartFile.getInputStream().available());
-
-        amazonS3.putObject(bucket, s3FileName, multipartFile.getInputStream(), objMeta);
-
-        return amazonS3.getUrl(bucket, s3FileName).toString();
-    }
+	/*
+	 * public String upload(MultipartFile multipartFile) throws IOException {
+	 * //multipartFile.get String fileName = multipartFile.getName();
+	 * System.out.println("MULTIPART FILE.getName() fileName ==>" + fileName);
+	 * String dotExtension = fileName.substring(fileName.lastIndexOf(".")+1); //.png
+	 * .jpeg 등등 ObjectMetadata objMeta = new ObjectMetadata();
+	 * 
+	 * //String s3FileName = UUID.randomUUID() + "-" +
+	 * multipartFile.getOriginalFilename(); String s3FileName =
+	 * UUID.randomUUID().toString() + dotExtension;
+	 * objMeta.setContentLength(multipartFile.getInputStream().available());
+	 * 
+	 * amazonS3.putObject(bucket, s3FileName, multipartFile.getInputStream(),
+	 * objMeta); String imgUrl = amazonS3.getUrl(bucket, s3FileName).toString();
+	 * 
+	 * return imgUrl; }
+	 */
    
     public String upload(MultipartFile multipartFile, String uuid, String extension) throws AmazonServiceException, SdkClientException, IOException {
     	ObjectMetadata objMeta = new ObjectMetadata();
@@ -52,10 +54,10 @@ public class S3Upload {
     	
     	objMeta.setContentType(multipartFile.getContentType());
     	
-    	String s3FileName = uuid + '.' + extension;
+    	String s3FileName = "image/oboard/" + uuid + extension;
     	amazonS3.putObject(bucket, s3FileName, multipartFile.getInputStream(), objMeta);
         return amazonS3.getUrl(bucket, s3FileName).toString();
     }
     
-    */
+    
 }
