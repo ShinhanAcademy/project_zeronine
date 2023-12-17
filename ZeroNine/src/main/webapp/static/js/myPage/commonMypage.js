@@ -68,14 +68,23 @@ function deliveryModal() {
 	$(".delivery_modal_wrap .btn_close").on("click", function(){
 		closeModal();
 	});
-		
-	// $(document).mouseup(function (e){
-	// 	console.log("eeeeevent",e);
-	// 	console.log("?????", $(".delivery_modal_wrap .contents").has(e.target).length);
-	// 	if($(".delivery_modal_wrap .contents").has(e.target).length == 0){
-	// 		//closeModal();
-	// 	};
-	// });
+	
+	/*	
+	$(document).mouseup(function (e){
+		e.stopPropagation();
+		console.log("eeeeevent",e);
+		let dimmed = $(".delivery_modal_wrap .modal_contents");
+		console.log("?????", $(".delivery_modal_wrap .modal_contents").has(e.target).length);
+		if(dimmed.has(e.target).length == 0){
+		//	closeModal();
+		};
+	});
+	*/
+	
+    $(".delivery_modal_wrap .dimmed").click(function(){
+		closeModal();
+    });
+    
 	
 	// ESC key 이벤트
 	$(document).keydown(function(e){
@@ -119,9 +128,11 @@ function callOrderHistory() {
 		url: contextPath + "/myPage/subPage/orderHistoryDetail.do",
 		data: paramObj,
 		success: function(resData) {
+			console.log("OrderHistory 성공 !!");
 			$("#order_history_wrapper").html(resData);
 		},
 		error:function() {
+			console.log("OrderHistory ajax 오류");
 		}
 	});
 }

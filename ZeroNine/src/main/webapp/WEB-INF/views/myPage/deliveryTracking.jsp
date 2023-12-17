@@ -3,7 +3,7 @@
 <div class="delivery_modal_wrap">
 	<div class="dimmed">
 	</div>
-		<div class="contents">
+		<div class="modal_contents">
 			<button class="btn_close">close</button>
 			<div class="title has_line">배송 조회</div>
 			<div class="delivery_status">
