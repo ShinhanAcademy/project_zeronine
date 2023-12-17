@@ -41,6 +41,5 @@
 	var path = "${path}";
 	var participant = "${participant}";
 	var boardId = "${info.boardId}";
-	
 </script>
 <script src="${path}/js/myPage/cBdetailView.js" type="text/javascript"></script>

@@ -102,10 +102,18 @@
 	                <div class="contents">
 	                    <div class="chatlist_wrap">
 	                    
+	                    <div id="hereContents">
 		                    <div class="tbl_top_wrap">
 		                    	<div class="total_count">
 									총 <span>${count}</span>건
 		                    	</div>
+		                    	
+		                    	<div class="chat_kind">
+								<span class="btn_deli on" id="author_chat">작성자</span>
+								<span>|</span>
+								<span class="btn_deli" id="participant_chat">참여자</span>
+								</div>
+		                    	
 		                    	<div class="btn_wrap">
 		                    		<button class="btn_more">채팅방으로 가기 &gt;</button>
 		                    	</div>
@@ -143,6 +151,7 @@
 		                    			</c:forEach>
 		                    		</tbody>
 		                    	</table>
+		                    	</div>
 		                    </div>
 	          
 							
