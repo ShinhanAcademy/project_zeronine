@@ -237,6 +237,9 @@ header.trp.active .bot .member .icon_btn .cart span{background-color: #fff;color
 .footer_wrap .cs_info a {
     font-weight: 600;
 }
+.footer_wrap .cs_info a:hover {
+	border-bottom: 1px solid #fff;	
+}
 .footer_wrap .contact_unit div {
     margin-top: 42px;
     margin-bottom: 40px;

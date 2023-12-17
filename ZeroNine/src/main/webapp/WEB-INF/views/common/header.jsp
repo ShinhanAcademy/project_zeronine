@@ -5,7 +5,7 @@
             <div class="head_in">
                 <div class="top">
                     <h1 class="logo">
-                        <a href="${path}/main/main.do"></a>
+                        <a href="${path}/main.do"></a>
                     </h1>
                     <div class="member">
                         <ul>

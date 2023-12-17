@@ -3,7 +3,7 @@
 <footer id="zn_footer" class="footer_wrap">
     <div class="inner zn_center">
         <div class="intro_unit">
-            <a href="${path}/main/main.do" class="logo">
+            <a href="${path}/main.do" class="logo">
                 <img src="${path}/images/common/ico_logo_footer.png" alt="logo">
             </a>
             <div class="abt_zn">
