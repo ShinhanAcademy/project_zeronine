@@ -2,6 +2,20 @@
     ZERO NINE
 	-- MyPage COMMON
 ****************************/
+$(function(){
+	
+	//SNB
+	$(".snb_wrap li").each(function() {
+		let href = $(this).find('a').attr('href');
+		if (href == window.location.pathname) {
+			$(this).addClass("on"); return false;
+		}
+		if (href.indexOf(window.location.pathname) > -1 ){
+			$(this).addClass("on"); return false;
+		}
+	});
+	
+});
 
 function usingDatePicker(){
 	let currentDate = new Date();
@@ -80,11 +94,14 @@ function closeModal() {
 }
 
 //엔터 Trigger
-document.querySelector(".search_word input").addEventListener("keyup", function(e) {
-    if (e.keyCode === 13) {
-        document.querySelector(".btn_search").click();
-    }
-});
+const inputWord = document.querySelector(".search_word input");
+if (inputWord) {
+	inputWord.addEventListener("keyup", function(e) {
+		if (e.keyCode === 13) {
+			document.querySelector(".btn_search").click();
+		};
+	});
+}
 
 //orderHistory
 //Ajax
