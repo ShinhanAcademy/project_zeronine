@@ -105,7 +105,7 @@
 	                    <div id="hereContents">
 		                    <div class="tbl_top_wrap">
 		                    	<div class="total_count">
-									총 <span>${count}</span>건
+									총 <span>${count}</span>건 &nbsp[진행중]
 		                    	</div>
 		                    	
 		                    	<div class="chat_kind">
@@ -146,6 +146,48 @@
 		                    				<td class="read_status">
 		                    				<input id="hiddenBoardId" type="hidden" value="${board.oBoardId}">
 											<button class="boardDetail">상세보기</button>	
+		                    				</td>
+		                    			</tr>
+		                    			</c:forEach>
+		                    		</tbody>
+		                    	</table>
+		                    	<br><br>
+		                    	<div class="tbl_top_wrap">
+		                    	<div class="total_count">
+									총 <span>${successCount}</span>건 &nbsp[완료]
+		                    	</div>
+		                    	
+	                    	</div>
+		                    <div class="tbl_wrap">
+		                    	<table class="tbl_chat_wrap">
+								  <colgroup>  	
+								    <col width="20%" />
+									<col width="35%" />
+									<col width="15%" />
+									<col width="18%" />
+									<col width="12%" />
+								  </colgroup>
+		                    		<thead>
+		                    			<tr>
+		                    				<th>상품</th>
+		                    				<th>게시글 제목</th>
+		                    				<th>게시일</th>
+		                    				<th>마감 기한</th>
+		                    				<th>더보기</th>
+		                    			</tr>
+		                    		</thead>
+		                    		<tbody>
+		                    			<c:forEach items="${successInfo}" var="board">
+		                    			<tr>
+		                    				<td><img class="product_image" src="${board.oBoardImagePath}"></td>
+		                    				<td class="td_font_title">${board.oTitle}</td>
+		                    				<td class="td_font_upload">${board.uploadTime}</td>
+		                    				<td class="td_font_remain">${board.remainTime}</td>
+		                    				<td class="read_status">
+		                    				<input id="hiddenBoardId" type="hidden" value="${board.oBoardId}">
+											<button class="boardDetail">상세보기</button>	
+											<input id="hiddenIsSuccess" type="hidden" value="success">
+											<p id="isSuccess">공구 성공</p>
 		                    				</td>
 		                    			</tr>
 		                    			</c:forEach>

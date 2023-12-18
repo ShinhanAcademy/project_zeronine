@@ -114,7 +114,7 @@ chatlist_wrap
 	background: #FF5C00;
 }
 
-.boardDetail, .participantBoardDetail{
+.boardDetail, .participantChatDetail{
 	width: 80px;
 	border-radius: 15px;
 	height: 30px;
@@ -162,4 +162,9 @@ chatlist_wrap
 
 .chat_kind {
 	margin-left: 10px;
+}
+
+#isSuccess{
+	margin-top: 5px;
+    color: #0083E6;
 }

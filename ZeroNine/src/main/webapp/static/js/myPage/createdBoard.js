@@ -1,3 +1,4 @@
+
 function draw(max, classname, colorname){
 	   var i=1;
 	    var func1 = setInterval(function(){
@@ -20,8 +21,12 @@ function draw(max, classname, colorname){
 $(".freeBoardDetail").click(function(){
 
 	var boardId = $(this).closest('tr').find('#hiddenBoardId').val();
+	var isSuccess = $(this).closest('tr').find('#hiddenIsSuccess').val();
 
-	var obj = {"boardId" : boardId};
+	var obj = {
+				"boardId" : boardId,
+				"isSuccess" : isSuccess
+				};
 	
 		$.ajax({
 					url : path + "/myPage/subPage/createdFreeBoardDetail.do",
@@ -73,8 +78,12 @@ $("#fastDelivery").click(function(){
 $(".boardDetail").click(function(){
 
 	var boardId = $(this).closest('tr').find('#hiddenBoardId').val();
+	var isSuccess = $(this).closest('tr').find('#hiddenIsSuccess').val();
 
-	var obj = {"boardId" : boardId};
+	var obj = {
+				"boardId" : boardId,
+				"isSuccess" : isSuccess	
+			  };
 	
 		$.ajax({
 					url : path + "/myPage/subPage/createdBoardDetail.do",

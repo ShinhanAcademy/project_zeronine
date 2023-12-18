@@ -33,11 +33,15 @@
 					<p class="content">${info.boardContent}</p>
 				</div>
 			</div>
-
+			<div class="update_btn_div">
+				<button class="participated_freeUpdate_btn">수정하기</button>
+			</div>
 		</div>
 	</div>
 </div>
 <script>
 	var path = "${path}";
+	var isSuccess = "${isSuccess}";
+	var boardId = "${info.boardId}";
 </script>
 <script src="${path}/js/myPage/cBdetailView.js" type="text/javascript"></script>

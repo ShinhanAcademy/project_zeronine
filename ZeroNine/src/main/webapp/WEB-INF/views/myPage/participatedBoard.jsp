@@ -106,7 +106,7 @@
 							<div class="tbl_top_wrap">
 								<div class="total_count">
 								
-									총 <span>${count}</span>건
+									총 <span>${count}</span>건 &nbsp[진행중]
 								</div>
 								<div class="delivery_kind">
 								<span class="btn_deli on" id="fastDelivery">즉배</span>
@@ -149,6 +149,54 @@
 											<td class="read_status">
 										<input id="hiddenBoardId" type="hidden" value="${board.boardId}">
 										<button class="boardDetail">상세보기</button>	
+										</td>
+									</tr>
+									</c:forEach>
+								</tbody>	
+							</table>
+							<br><br>
+							<div class="tbl_top_wrap">
+								<div class="total_count">
+									총 <span>${successCount}</span>건 &nbsp[완료]
+								
+								</div>
+								
+							</div>
+							
+							<table class="tbl_chat_wrap">
+							
+								<colgroup>
+									<col width="20%" />
+									<col width="35%" />
+									<col width="15%" />
+									<col width="18%" />
+									<col width="12%" />
+									<!-- 
+							    <col />
+							    <col span="2" class="batman" />
+							    <col span="2" class="flash" />
+							    -->
+								</colgroup>
+								<thead>
+									<tr>
+										<th>상품</th>
+										<th>게시글 제목</th>
+										<th>게시일</th>
+										<th>마감 기한</th>
+										<th>더보기</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach items="${successInfo}" var="board">
+								<tr>
+										<td><img class="product_image" src="${board.imagePath}"></td>
+											<td class="td_font_title">${board.title}</td>
+											<td class="td_font_upload">${board.uploadTime}</td>
+											<td class="td_font_remain">${board.remainTime}</td>
+											<td class="read_status">
+										<input id="hiddenBoardId" type="hidden" value="${board.boardId}">
+										<button class="boardDetail">상세보기</button>	
+										<p id="isSuccess">공구 성공</p>
 										</td>
 									</tr>
 									</c:forEach>
