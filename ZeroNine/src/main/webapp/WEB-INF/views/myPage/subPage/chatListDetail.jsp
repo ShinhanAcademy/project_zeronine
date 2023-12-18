@@ -34,6 +34,7 @@
 </div>
 <script>
 	var path = "${path}";
-	var participant = "${participant}";
+	var boardId = "${info.oBoardId}";
+	var isSuccess = "${isSuccess}";
 </script>
 <script src="${path}/js/myPage/chatDetailView.js" type="text/javascript"></script>

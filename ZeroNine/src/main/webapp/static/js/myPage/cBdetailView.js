@@ -2,12 +2,17 @@ $("#close_btn").click(function(){
 	$("#detail_modal_wrap").hide();
 });
 
-if(participant>1){
+if(isSuccess=="success"){
+	$(".update_btn").hide();
+	$(".freeUpdate_btn").hide();
 	$(".delete_btn").hide();
-}
-
-if(participant>1){
 	$(".freeDelete_btn").hide();
+	$(".participated_freeUpdate_btn").hide();
+}else{
+	if(participant>1){
+	$(".delete_btn").hide();
+	$(".freeDelete_btn").hide();
+	}
 }
 
 $(".update_btn").click(function(){
@@ -51,4 +56,8 @@ $(".freeDelete_btn").click(function(){
 							alert("에러입니다.");
 						}
 					});
+});
+
+$(".participated_freeUpdate_btn").click(function(){
+	location.href = path + "/myPage/subPage/pbFreeboardEdit.do?boardId=" + boardId;
 });

@@ -32,5 +32,6 @@
 </div>
 <script>
 	var path = "${path}";
+	var isSuccess = "${isSuccess}";
 </script>
 <script src="${path}/js/myPage/chatDetailView.js" type="text/javascript"></script>
