@@ -16,5 +16,17 @@ public class BoardService_sg {
 		return boardDAO_sg.writeOBoard(boardId, authorId, title, content, postingMinutes, imgURL, address, addressDetail);
 	}
 	
+	public int writeFastBoard(String authorId, String title, String content, String postingMinutes, String productId, int pickCount) {
+			return boardDAO_sg.writeFastBoard(authorId, title, content, postingMinutes, productId, pickCount);
+		
+	}
+
+	public int writeFreeBoard(String authorId, String title, String content, String postingMinutes,
+			Map<String, Integer> products) {
+		return boardDAO_sg.writeFreeBoard(authorId, title, content, postingMinutes, products);
+		
+	}
+		
+	
 	
 }
