@@ -17,6 +17,8 @@
 		<typeAlias type="com.zeronine.dto.CustomerFreeDeliveryVO" alias="customerFreeDeliveryVo" />	
 		<typeAlias type="com.zeronine.dto.CustomerPickCouponVO" alias="customerPickCouponVo" />	
 		<typeAlias type="com.zeronine.dto.DeliveryVO" alias="deliveryVo" />	
+		<typeAlias type="com.zeronine.dto.DealFailRefundVO" alias="dealFailRefundVO" />	
+		<typeAlias type="com.zeronine.dto.DealSuccessBoardVO" alias="dealSuccessBoardVO" />	
 		<typeAlias type="com.zeronine.dto.LikedBoardVO" alias="likedBoardVo" />	
 		<typeAlias type="com.zeronine.dto.LikedProductVO" alias="likedProductVo" />	
 		<typeAlias type="com.zeronine.dto.MessageVO" alias="messageVo" />	
