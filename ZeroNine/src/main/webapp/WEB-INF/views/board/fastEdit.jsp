@@ -19,11 +19,11 @@
 				<select class="date">
 					<option value="1440">1일</option>
 					<option value="2880">2일</option>
-					<option value="5760">3일</option>
-					<option value="11520">4일</option>
-					<option value="23040">5일</option>
-					<option value="46080">6일</option>
-					<option value="92160">7일</option>
+					<option value="4320">3일</option>
+					<option value="5760">4일</option>
+					<option value="7200">5일</option>
+					<option value="8640">6일</option>
+					<option value="10080">7일</option>
 				</select>
 			</div>
 			<div class="time">
@@ -51,11 +51,11 @@
 					<li>
 						<div class="count">
 							<button>
-								<img src="${path}/images/board/minus.png">
+								<img src="${path}/images/board/minus.png" class="minus" onclick="minus()" >
 							</button>
-							<input type="text" readonly="readonly" value="1">
+							<input type="text" readonly="readonly" value="1" class="num">
 							<button>
-								<img src="${path}/images/board/plus.png">
+								<img src="${path}/images/board/plus.png" class="plus" onclick="add()">
 							</button>
 						</div>
 						<hr>
@@ -89,4 +89,19 @@
 		var selectedValue = this.value;
 		console.log(selectedValue);
 	})
+	
+	function add(){
+		var num = Number($(".num").val());
+		num += 1;
+		$(".num").val(num);
+	}
+	
+	function minus(){
+		var num = Number($(".num").val());
+		if(num>=1){
+		num -= 1;
+		}
+		$(".num").val(num);
+		console.log(num)
+	}
 </script>

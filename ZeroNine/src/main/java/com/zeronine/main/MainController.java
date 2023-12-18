@@ -1,5 +1,9 @@
 package com.zeronine.main;
 
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -7,11 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/main")
 public class MainController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	
 	@RequestMapping("/main.do")
-	public void main() {
+	public void main(HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		logger.info(customerId);
 	}
-	@RequestMapping("/introZeroNine.do")
-	public void introZeroNine() {
-	}
+	
+	/*
+	 * @RequestMapping("main/introZeroNine.do") public void introZeroNine() { }
+	 */
 
 }

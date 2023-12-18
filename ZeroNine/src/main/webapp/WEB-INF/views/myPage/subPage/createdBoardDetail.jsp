@@ -33,9 +33,13 @@
 			</div>
 		</div>
 	</div>
+	<div id="delete_here"></div>
 </div>
+
+
 <script>
 	var path = "${path}";
 	var participant = "${participant}";
+	var boardId = "${info.boardId}";
 </script>
 <script src="${path}/js/myPage/cBdetailView.js" type="text/javascript"></script>

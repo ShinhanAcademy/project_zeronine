@@ -11,7 +11,3 @@
 		</li>
 	</ul>
 </div>
-
-<script>
-	
-</script>

@@ -1,11 +1,9 @@
 /***************************
     ZERO NINE
 	-- MyPage / orderHistory
-	-- MyPage / orderCancelHistory
 ****************************/
 $(function(){
 	usingDatePicker();	//datePicker
-	deliveryModal();	//modal
 	callOrderHistory();	//orderHistory Ajax
 });
 

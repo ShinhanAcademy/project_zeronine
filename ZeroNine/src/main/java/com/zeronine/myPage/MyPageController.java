@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
-import com.zeronine.model.DeliveryService;
+import com.zeronine.model.MyPageService;
 import com.zeronine.model.ProductService;
 
 @Controller
@@ -31,7 +31,7 @@ import com.zeronine.model.ProductService;
 public class MyPageController {
 	
 	@Autowired
-	DeliveryService deliveryService;
+	MyPageService deliveryService;
 	@Autowired
 	BoardService_yn boardService;
 	@Autowired
@@ -52,15 +52,6 @@ public class MyPageController {
 	// orderHistory(주문 내역)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory() {
-		/*
-			String customerId = (String) session.getAttribute("customerId");
-			String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
-			String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
-			System.out.println("ID = " + customerId);
-	
-			model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId));
-			System.out.println("너는 무엇이냐" + deliveryService.orderHistoryAll(customerId));
-		*/
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")
@@ -70,7 +61,6 @@ public class MyPageController {
 			Model model, HttpSession session) {
 		/*
 			String customerId = (String) session.getAttribute("customerId");
-			String customerId = "1248e04d-c268-4c90-85bc-fd014f7ddee6"; //박자바
 		*/
 		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		System.out.println("ID = " + customerId);
@@ -97,15 +87,35 @@ public class MyPageController {
 	
 	// myCart(장바구니)
 	@RequestMapping("/myCart.do")
-	public String myCart() {
-		return "myPage/myCart";
+	public void myCart() {
+	}
+	
+	@RequestMapping("/subPage/myCartDetail.do")
+	public void myCartDetail(Model model, HttpSession session) {
+//		String customerId = (String) session.getAttribute("customerId");
+		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		//System.out.println("ID = " + customerId);
+		
+		model.addAttribute("myCart", deliveryService.myCart(customerId));
 	}
 
 	// likeProduct(찜한 상품)
 	@RequestMapping("/likeProduct.do")
-	public String likeProduct() {
-		return "myPage/likeProduct";
+	public void likeProduct() {
 	}
+	@RequestMapping("/subPage/likeProductDetail.do")
+	public void likeProductDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate,
+			Model model, HttpSession session) {
+
+//		String customerId = (String) session.getAttribute("customerId");
+		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		//System.out.println("ID = " + customerId);
+		
+		model.addAttribute("likeProduct", deliveryService.likeProduct(customerId, searchWord));
+	}
+	
 	
 	
 	/* ****************************
@@ -118,7 +128,7 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/createdBoard.do")
-	public void createdBoard(Model model) {
+	public void createdBoard(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
@@ -136,8 +146,54 @@ public class MyPageController {
 		model.addAttribute("participant", participant);
 	}
 	
+	@GetMapping("/subPage/cbFastboardEdit.do")
+	public void cbFastboardEdit(String boardId, int participant, Model model) {
+		Map<String, Object> info = boardService.boardDetailEdit(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("participant", participant);		
+	}
+	
+	@PostMapping(value="/subPage/completeEdit.do", consumes="application/json")
+	public void completeEdit(@RequestBody Map<String,Object> info, Model model) {
+		int participant = Integer.parseInt((String)info.get("participant"));
+		String boardId = (String)info.get("boardId");
+		String title = (String)info.get("title");
+		String context = (String)info.get("context");
+		int result;
+		if(participant>1) {
+			result = boardService.completeEdit(title,context,boardId);
+		}else {
+			int remainTime = Integer.parseInt((String)info.get("day")) + (Integer.parseInt((String)info.get("hour")))*60 + Integer.parseInt((String)info.get("minute"));
+			result = boardService.completeEditTime(title,context,remainTime,boardId);
+		}
+		if(result>0) {
+			model.addAttribute("message","게시물이 정상적으로 수정되었습니다.");
+		}else {
+			model.addAttribute("message","게시물을 다시 수정해주세요.");
+		}
+	}
+	
+	@PostMapping("/subPage/isDeleteBoard.do")
+	public void isDeleteBoard(String boardId,Model model) {
+		model.addAttribute("boardId", boardId);
+	}
+	
+	@PostMapping("/subPage/deleteBoard.do")
+	@ResponseBody
+	public int deleteBoard(String boardId,Model model) {
+		int result = boardService.deleteBoard(boardId);
+		return result;
+	}
+	
+	@GetMapping("/subPage/cbFreeboardEdit.do")
+	public void cbFreeboardEdit(String boardId, int participant, Model model) {
+		Map<String, Object> info = boardService.freeBoardDetailEdit(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("participant", participant);		
+	}
+	
 	@GetMapping("/subPage/cbFastDelivery.do")
-	public void cbFastDelivery(Model model) {
+	public void cbFastDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
@@ -147,7 +203,7 @@ public class MyPageController {
 	}
 
 	@GetMapping("/subPage/cbFreeDelivery.do")
-	public void cbFreeDelivery(Model model) {
+	public void cbFreeDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myWriteFreeBlist(customerId);
@@ -158,19 +214,19 @@ public class MyPageController {
 	@GetMapping("/subPage/createdFreeBoardDetail.do")
 	public void createdFreeBoardDetail(String boardId, Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);
-		//int participant = boardService.numOfFreeParticipant(boardId);
+		int participant = boardService.numOfFreeParticipant(boardId);
 		model.addAttribute("info", info);
-		//model.addAttribute("participant", participant);
+		model.addAttribute("participant", participant);
 	}
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
 	@GetMapping("/participatedBoard.do")
-	public void participatedBoard(Model model) {
+	public void participatedBoard(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		//List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
-//		model.addAttribute("info", info);
-//		model.addAttribute("count", info.size());
+		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
 	}
 	
 	@GetMapping("/subPage/participatedBoardDetail.do")
@@ -182,21 +238,21 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/subPage/pbFreeDelivery.do")
-	public void pbFreeDelivery(Model model) {
+	public void pbFreeDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-//		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
-//		model.addAttribute("info", info);
-//		model.addAttribute("count", info.size());
+		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
 	}
 	
 	@GetMapping("/subPage/pbFastDelivery.do")
-	public void pbFastDelivery(Model model) {
+	public void pbFastDelivery(Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-//		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
-//		model.addAttribute("info", info);
-//		model.addAttribute("count", info.size());
+		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
 	}
 
 	
@@ -209,19 +265,125 @@ public class MyPageController {
 
 
 	// likeBoard(占쏙옙占쏙옙 占쌉시깍옙)
-	@RequestMapping("/likeBoard.do")
-	public String likeBoard() {
-		return "myPage/likeBoard";
+	@GetMapping("/likeBoard.do")
+	public void likeBoard(Model model, HttpSession session) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.likeBoardBlist(customerId);
+		List<String> likedbid = boardService.likeBidList(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+		model.addAttribute("likedbid",likedbid);
 	}
 	
+	@GetMapping("/subPage/likeBoardDetail.do")
+	public void likeBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.boardDetail(boardId);
+		int pCount = boardService.boardpCount(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("pCount", pCount);
+	}
+	
+	@GetMapping("/subPage/likeFreeBoardDetail.do")
+	public void likeFreeBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.freeBoardDetail(boardId);
+		model.addAttribute("info", info);
+	}
+	
+	@GetMapping("/subPage/lbFreeDelivery.do")
+	public void lbFreeDelivery(Model model, HttpSession session) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.likeBoardFreeBlist(customerId);
+		List<String> likedbid = boardService.likeFreeBidList(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+		model.addAttribute("likedbid", likedbid);
+	}
+	
+	@GetMapping("/subPage/lbFastDelivery.do")
+	public void lbFastDelivery(Model model, HttpSession session) {
+		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.likeBoardBlist(customerId);
+		List<String> likedbid = boardService.likeBidList(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+		model.addAttribute("likedbid", likedbid);
+	}
+	
+	@GetMapping("/subPage/deleteLikedBoard.do")
+	public ResponseEntity<String> deleteLikedBoard(String boardId, HttpSession session) {
+		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		int result = boardService.deleteLikedBoard(customerId,boardId);
+		if (result>0) {
+			return ResponseEntity.ok("찜 제거성공");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("찜 제거실패");
+		}
+		
+	}
+	
+	@GetMapping("/subPage/insertLikedBoard.do")
+	public ResponseEntity<String> insertLikedBoard(String boardId, HttpSession session) {
+		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		int result = boardService.insertLikedBoard(customerId,boardId);
+		if (result>0) {
+			return ResponseEntity.ok("찜 성공");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("찜 실패");
+		}
+	}
+
 	// chatList(채占쏙옙 占쏙옙占�)
-	@RequestMapping("/chatList.do")
-	public void chatList() {
+	@GetMapping("/chatList.do")
+	public void chatList(Model model, HttpSession session) {
+		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.chatBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+	
+	@GetMapping("/subPage/chatListDetail.do")
+	public void chatListDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.chatListDetail(boardId);
+		int participant = boardService.numOfChatParticipant(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("participant", participant);
+	}
+	
+	@GetMapping("/subPage/participantChatList.do")
+	public void participantChatList(Model model, HttpSession session) {
+		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.participantChatList(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
+	}
+	
+	@GetMapping("/subPage/participantBoardDetail.do")
+	public void participantBoardDetail(String boardId, Model model) {
+		Map<String, Object> info = boardService.chatListDetail(boardId);
+		model.addAttribute("info", info);
+	}
+	
+	@GetMapping("/subPage/authorChatList.do")
+	public void authorChatList(Model model, HttpSession session) {
+		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.chatBlist(customerId);
+		model.addAttribute("info", info);
+		model.addAttribute("count", info.size());
 	}
 	
 	/* ****************************
 			MY_INFOMATION
 	 ****************************** */
+	
+	/*
 	@PostMapping(value = "/validatePw.do", consumes = "application/json")
 	@ResponseBody
 	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
@@ -249,6 +411,7 @@ public class MyPageController {
 		model.addAttribute("birthdayFormmated", customerVo.getBirthday().toString().substring(0, 10));
 	
 	}
+	*/
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@RequestMapping("/subscriptionInfo.do")

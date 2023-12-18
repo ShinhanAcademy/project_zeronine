@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <header id="zn_header">
-        <div class="inner in_1170">
+        <div class="zn_center">
             <div class="head_in">
                 <div class="top">
                     <h1 class="logo">
-                        <a href="${path}/main/main.do"></a>
+                        <a href="${path}/main.do"></a>
                     </h1>
                     <div class="member">
                         <ul>

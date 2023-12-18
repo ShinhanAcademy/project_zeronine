@@ -10,11 +10,10 @@ $("#getCf_btn").click(function(){
 		data : obj,
 		type : "GET",
 		success : function(response){	
-		console.log(response.substr(32,2));
 			if(response.substr(30,3)==="yes"){
 				$('#findPwdForm').html(response);
 			}
-			if(response.substr(32,2)==="no"){
+			if(response.substr(34,2)==="no"){
 				$('#modal').html(response);
 			}
 				

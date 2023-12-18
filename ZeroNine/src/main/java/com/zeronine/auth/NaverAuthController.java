@@ -108,7 +108,7 @@ public class NaverAuthController {
 		//logger.info(response);
 		JSONObject response = (JSONObject)jsonObj.get("response");
 		String email = (String)response.get("email");
-		logger.info(email);
+		logger.info("이멜---->"+email);
 		
 		CustomerVO customerVo = null; 
 		customerVo = customerService.selectByEmail(email);
@@ -116,11 +116,14 @@ public class NaverAuthController {
 		
 		if(customerVo == null) {
 			//네이버로 가입 하지 않은 상태
+			logger.info("customerVo is null");
 			return "/auth/login";
 		}
 		
 		
-		session.setAttribute("customerId", customerVo.getCustomerId());
+		String customerId = customerVo.getCustomerId();
+		logger.info("네이버 로그인", customerId);
+		session.setAttribute("customerId", customerId);
 		session.setAttribute("email", customerVo.getEmail());
 		
 		return "/main/main";

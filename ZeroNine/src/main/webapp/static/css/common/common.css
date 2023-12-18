@@ -31,7 +31,7 @@ html, body {
 
 
 /* HEADER */
-header{position: fixed;left: 0;top: 0;width: 100%;box-shadow: 0px 2px 7px rgba(147, 147, 147, 0.1);background-color: #fff;min-width: 1200px;padding: 0 20px;z-index: 100;transition: 0.3s;}
+header{position: fixed;left: 0;top: 0;width: 100%;box-shadow: 0px 2px 7px rgba(147, 147, 147, 0.1);background-color: #fff;min-width: 1200px;z-index: 100;transition: 0.3s;}
 header .head_in{padding: 40px 0 17px;transition: 0.3s;}
 header .top{display: flex;align-items: center;justify-content: space-between;margin-bottom: 25px;}
 header .top .logo a{display: block;background: url(../../images/ecomall/logo.svg) no-repeat center;background-size: contain;width: 128px;height: 36px;}
@@ -236,6 +236,9 @@ header.trp.active .bot .member .icon_btn .cart span{background-color: #fff;color
 }
 .footer_wrap .cs_info a {
     font-weight: 600;
+}
+.footer_wrap .cs_info a:hover {
+	border-bottom: 1px solid #fff;	
 }
 .footer_wrap .contact_unit div {
     margin-top: 42px;
