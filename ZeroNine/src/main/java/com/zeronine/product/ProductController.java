@@ -21,6 +21,9 @@ import com.zeronine.dto.PagingVO;
 import com.zeronine.dto.ProductVO;
 import com.zeronine.model.CartService;
 import com.zeronine.model.CustomerService;
+import com.zeronine.model.DeliveryProductDAOMybatis_ys;
+import com.zeronine.model.DeliveryProductService_ys;
+import com.zeronine.model.DeliveryService_ys;
 import com.zeronine.model.LikedProductService;
 import com.zeronine.model.ProductService;
 
@@ -40,6 +43,12 @@ public class ProductController {
 	
 	@Autowired
 	CustomerService customerservice;
+	
+	@Autowired
+	DeliveryService_ys deliveryservice_ys;
+	
+	@Autowired
+	DeliveryProductService_ys deliveryproductservice_ys;
 
 	@PostMapping("/goProductCart.do")
 	public ResponseEntity<String> goProductCart(String custid, String productId, HttpSession session, Model model) {
@@ -313,7 +322,7 @@ public class ProductController {
 	String custid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
 		result = cartservice.beforeproductOrder(custid,productid,pcount);
 		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
-		model.addAttribute("productid",productid);
+		
 		
 		if (result > 0) {
 			logger.info("Data Saved Successfully");
@@ -339,13 +348,21 @@ public class ProductController {
 		return "product/productOrder";
 	}
 	@PostMapping("/Orderdelivery.do")
-	public String Orderdelivery(String productid,  Model model, HttpSession session) {
+	public String Orderdelivery(String productId,String address,String addressdetail,Model model, HttpSession session) {
+		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		session.setAttribute("customerid", customerid);
+		customerid = (String) session.getAttribute("customerid");
 		String deliveryId = UUID.randomUUID().toString();
-		
-		return "productOrderSuccess.do";
+		model.addAttribute("productId",productId);
+		int deliveryfirst = deliveryservice_ys.PersonGoDelivery(deliveryId, customerid,address,addressdetail);
+		int deliverysecond =deliveryproductservice_ys.PersonGoDeliveryProduct(deliveryId, customerid, productId);
+		return "product/productOrderSuccess";
 	}
 	@GetMapping("/productOrderSuccess.do")
-	public void productOrderSuccess() {
-
+	public void productOrderSuccess(Model model) {
+		String productid = (String)model.getAttribute("productId");
+		
+		logger.info("707" + productid);
+		
 	}
 }

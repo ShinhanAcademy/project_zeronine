@@ -5,8 +5,15 @@
 <mapper namespace="net.zeronine.personorder">
 <insert id="PersonGoDelivery" parameterType="map"> 
 INSERT INTO delivery(
-	"deliveryId", "customerId", address,"isRefundable","addressDetail")
-	VALUES (?, ?, ?,true,?);
+	"deliveryId", "customerId", address,"addressDetail","isRefundable")
+	VALUES ( CAST(#{deliveryId} AS UUID), CAST(#{custid} AS UUID), #{address},#{addressdetail},true);
 </insert>
 
+<insert id="PersonGoDeliveryProduct" parameterType="map">
+INSERT INTO "deliveryProduct"("deliveryId", "productId", "pickCount", "productCount")
+VALUES (CAST(#{deliveryId} AS UUID),CAST(#{productId} AS UUID) , 
+        (SELECT "pickCount" FROM "product" WHERE "productId" = CAST(#{productId} AS UUID),
+        (SELECT "productCount" FROM "cart" WHERE "customerId" = CAST(#{custid} AS UUID AND "productId" = CAST(#{productId} AS UUID)
+)
+</insert>
 </mapper>

@@ -37,7 +37,7 @@ UPDATE cart
 </update>
 <select id="orderOneCart" 
 resultType="map">
-SELECT product."pName", cart."productCount", product."price"
+SELECT product."productId",product."pName", cart."productCount", product."price"
 FROM (select "productId", "productCount" from cart where "customerId" = CAST(#{custid} AS UUID)	and "productId" = CAST(#{productId} AS UUID)
  ) cart JOIN product ON cart."productId" = product."productId";
 </select>

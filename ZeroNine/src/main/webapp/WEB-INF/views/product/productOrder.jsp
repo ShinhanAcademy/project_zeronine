@@ -93,7 +93,8 @@
 							<div class="delpinfo">
 								<dl>
 									<dt id="order_name">${custlist.customerName}</dt>
-									<dd id="order_address">${custlist.address }</dd>
+									<dd id="order_address">${custlist.address }<br>
+														${custlist.addressDetail}</dd>
 								</dl>
 								<div class="delpPhone">
 									<span id="order_phone">${custlist.phoneNumber }</span>
@@ -193,14 +194,12 @@ $(".agreebtn").click(function (){
      
      $(this).find("img.purchaseAgree").attr("src", newImagePath);
      var isCheckboxImage = currentImagePath === path + "/images/sangpumpage/fillcheckbox.png";
-     console.log(isCheckboxImage);
      document.getElementById("gobtn").disabled = isCheckboxImage;
 	
 })
 var itemPriceText = document.getElementById("itemPrice").innerText;
 var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText.replace(/[^\d.]/g, ''));
 document.getElementById("itemprice2").innerText = itemPriceText;
-var itemdeliText = document.getElementById("itemprice_deli").innerText 
 
 if(itemPriceValue<50000){
 	document.getElementById("itemprice_deli").innerText = 3000;
@@ -225,24 +224,32 @@ var formattedValue = new Intl.NumberFormat('ko-KR', {
   }).format(totalpriceValue);
 document.getElementById("itemprice_deli").innerText = deliformattedValue+"원";
 document.getElementById("totalprice_text").innerText = formattedValue+"원";
+
+
+var adderessdetail = "${custlist.addressDetail}";
+var address = "${custlist.address}";
 var obj = {
-		
-}
+		"address" :address,
+		"addressdetail":adderessdetail,
+		"productId":"${orderonecart[0].productId}"
+};
+
 $(".gobtn").click(function() {
-	location.href = "${path}/product/productOrderSuccess.do
 
 	$.ajax({
 		url : path + "/product/Orderdelivery.do",
 		data : obj,
-		type : "GET",
+		type : "Post",
 		success : function() {
-			alert("나이수!");
-		}
+			location.href = "${path}/product/productOrderSuccess.do";
+		},
 		error : function() {
 			alert("에러입니다.");
 		}
 	});
 })
+
+
 </script>
 </body>
 </html>
