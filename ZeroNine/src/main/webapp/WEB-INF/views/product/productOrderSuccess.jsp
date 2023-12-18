@@ -34,11 +34,7 @@
 						<div class="od_subtitle">결제금액</div>
 						<div class="ob_subtext">20231123202304019</div>
 					</div>
-					<div class="jul"></div>
-					<div class="od_part">
-						<div class="od_subtitle">적립금</div>
-						<div class="ob_subtext">20231123202304019</div>
-					</div>
+				
 				</div>
 			</div>
 			<div class="orderlist-go">

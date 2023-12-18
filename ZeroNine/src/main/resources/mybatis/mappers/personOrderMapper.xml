@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.zeronine.personorder">
+<insert id="PersonGoDelivery" parameterType="map"> 
+INSERT INTO delivery(
+	"deliveryId", "customerId", address,"addressDetail","isRefundable")
+	VALUES ( CAST(#{deliveryId} AS UUID), CAST(#{custid} AS UUID), #{address},#{addressdetail},true);
+</insert>
+
+<insert id="PersonGoDeliveryProduct" parameterType="map">
+INSERT INTO "deliveryProduct"("deliveryId", "productId", "pickCount", "productCount")
+VALUES (CAST(#{deliveryId} AS UUID),CAST(#{productId} AS UUID) , 
+        (SELECT "pickCount" FROM "product" WHERE "productId" = CAST(#{productId} AS UUID),
+        (SELECT "productCount" FROM "cart" WHERE "customerId" = CAST(#{custid} AS UUID AND "productId" = CAST(#{productId} AS UUID)
+)
+</insert>
+</mapper>
