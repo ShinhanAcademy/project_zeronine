@@ -20,11 +20,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>
-			/WEB-INF/spring/appServlet/servlet-context.xml
-			/WEB-INF/spring/appServlet/dbinfo-context.xml			
-			/WEB-INF/spring/appServlet/email-context.xml			
-			</param-value>
+			<param-value>/WEB-INF/spring/appServlet/*.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -37,5 +33,8 @@
 	<session-config>
 		<session-timeout>60</session-timeout>	
 	</session-config>
-
+	
+	<welcome-file-list>
+	  <welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

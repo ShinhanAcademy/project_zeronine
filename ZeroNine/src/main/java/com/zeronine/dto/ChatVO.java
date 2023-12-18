@@ -1,34 +1,18 @@
 package com.zeronine.dto;
 
+import lombok.Data;
 
+@Data
 public class ChatVO {
+	private String boardId;
 	private String chatId;
-	private String oAuthorId;
+	private String oTitle;
+	private String customerName;
+	private String address;
+	private String finishTime;
+	private String day;
+	private String sendTime;
+	private String path;
+	private String messageContent;
 	private String customerId;
-	private String oBoardId;
-	
-	public String getChatId() {
-		return chatId;
-	}
-	public void setChatId(String chatId) {
-		this.chatId = chatId;
-	}
-	public String getoAuthorId() {
-		return oAuthorId;
-	}
-	public void setoAuthorId(String oAuthorId) {
-		this.oAuthorId = oAuthorId;
-	}
-	public String getCustomerId() {
-		return customerId;
-	}
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
-	}
-	public String getoBoardId() {
-		return oBoardId;
-	}
-	public void setoBoardId(String oBoardId) {
-		this.oBoardId = oBoardId;
-	}
 }
