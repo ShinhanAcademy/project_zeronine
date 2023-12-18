@@ -46,7 +46,7 @@
 						<span> <img class="edit_img"
 							src="${path}/images/board/edit.png">
 						</span> <span class="edit_btn"> <a style="font-size: 25px;"
-						href="${path}/board/boardedit.do?boardType=freeDeliveryBoard" data-value="freeDeliveryBoard">글쓰기</a>
+						 data-value="freeDeliveryBoard" onclick="writeBoard()">글쓰기</a>
 						</span>
 					</div>
 				</div>
@@ -105,7 +105,15 @@
 	<%@include file="../common/footer.jsp"%>
 	<script src="../js/detailView.js"></script>
 	<script>
-		$("#detail_modal_wrap").hide();
+	function writeBoard(){
+		var id = '${email}';
+		if(id==""){
+			alert("로그인 후 작성 가능합니다.");
+			location.href="${path}/auth/login.do";
+		} else{
+			location.href="${path}/board/boardedit.do?boardType=freeDeliveryBoard";
+		}
+	}
 	</script>
 </body>
 </html>

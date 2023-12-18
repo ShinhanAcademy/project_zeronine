@@ -1,6 +1,7 @@
 package com.zeronine.product;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.zeronine.dto.PagingVO;
 import com.zeronine.dto.ProductVO;
 import com.zeronine.model.CartService;
+import com.zeronine.model.CustomerService;
+import com.zeronine.model.DeliveryProductDAOMybatis_ys;
+import com.zeronine.model.DeliveryProductService_ys;
+import com.zeronine.model.DeliveryService_ys;
 import com.zeronine.model.LikedProductService;
 import com.zeronine.model.ProductService;
 
@@ -35,6 +40,15 @@ public class ProductController {
 
 	@Autowired
 	CartService cartservice;
+	
+	@Autowired
+	CustomerService customerservice;
+	
+	@Autowired
+	DeliveryService_ys deliveryservice_ys;
+	
+	@Autowired
+	DeliveryProductService_ys deliveryproductservice_ys;
 
 	@PostMapping("/goProductCart.do")
 	public ResponseEntity<String> goProductCart(String custid, String productId, HttpSession session, Model model) {
@@ -274,10 +288,14 @@ public class ProductController {
 	}
 
 	@GetMapping("/productDetail.do")
-	public String productDetail(String productId, Model model) {
+	public String productDetail(String productId, Model model, HttpSession session) {
 		ProductVO product = productService.selectByProductId(productId);
+		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		session.setAttribute("customerid", customerid);
+		customerid = (String) session.getAttribute("customerid");
 		System.out.println(product);
 		model.addAttribute("plist", productService.selectByProductId(productId));
+		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(customerid));
 		model.addAttribute("deliverylist4", productService.selectDetailDelivery4());
 		return "product/productDetail";
 	}
@@ -285,8 +303,26 @@ public class ProductController {
 	public ResponseEntity<String> goProductDCart(String productid,int pcount, HttpSession session, Model model) {
 	int result =0;
 	//String custid = (String)session.getAttribute("customerId");
-	String custid = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+	String custid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
 		result = cartservice.goProductDCart(custid, productid,pcount);
+		model.addAttribute("productid",productid);
+		if (result > 0) {
+			logger.info("Data Saved Successfully");
+			return ResponseEntity.ok("Data saved successfully. You can customize this message.");
+		} else {
+			logger.info("Data Save Failed");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
+		}
+	
+	}
+	@PostMapping("/beforeproductOrder.do")
+	public ResponseEntity<String> beforeproductOrder(String productid,int pcount, HttpSession session, Model model) {
+	int result = 0;
+	//String custid = (String)session.getAttribute("customerId");
+	String custid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		result = cartservice.beforeproductOrder(custid,productid,pcount);
+		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
+		
 		
 		if (result > 0) {
 			logger.info("Data Saved Successfully");
@@ -297,14 +333,36 @@ public class ProductController {
 		}
 	
 	}
-
+	
 	@GetMapping("/productOrder.do")
-	public void productOrder() {
+	public String productOrder(String productid,  Model model, HttpSession session) {
+		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		session.setAttribute("customerid", customerid);
+		customerid = (String) session.getAttribute("customerid");
+		List<String> order = cartservice.orderOneCart(customerid, productid);
+		
+		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(customerid));
+		model.addAttribute("orderonecart", order);
 
+		model.addAttribute("custlist",customerservice.selectById(customerid));
+		return "product/productOrder";
 	}
-
+	@PostMapping("/Orderdelivery.do")
+	public String Orderdelivery(String productId,String address,String addressdetail,Model model, HttpSession session) {
+		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		session.setAttribute("customerid", customerid);
+		customerid = (String) session.getAttribute("customerid");
+		String deliveryId = UUID.randomUUID().toString();
+		model.addAttribute("productId",productId);
+		int deliveryfirst = deliveryservice_ys.PersonGoDelivery(deliveryId, customerid,address,addressdetail);
+		int deliverysecond =deliveryproductservice_ys.PersonGoDeliveryProduct(deliveryId, customerid, productId);
+		return "product/productOrderSuccess";
+	}
 	@GetMapping("/productOrderSuccess.do")
-	public void productOrderSuccess() {
-
+	public void productOrderSuccess(Model model) {
+		String productid = (String)model.getAttribute("productId");
+		
+		logger.info("707" + productid);
+		
 	}
 }

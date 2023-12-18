@@ -27,8 +27,8 @@
 				</select>
 			</div>
 			<div class="time">
-				<input type="number" placeholder="3"> 시간 <input
-					type="number" placeholder="00"> 분 까지
+				<input type="number" placeholder="3" id="wait_hour"> 시간 <input
+					type="number" placeholder="00" id="wait_minute"> 분 까지
 			</div>
 		</div>
 	</div>
@@ -51,11 +51,11 @@
 					<li>
 						<div class="count">
 							<button>
-								<img src="${path}/images/board/minus.png">
+								<img src="${path}/images/board/minus.png" class="minus" onclick="minus()" >
 							</button>
-							<input type="text" readonly="readonly" value="1">
+							<input type="text" readonly="readonly" value="1" class="num">
 							<button>
-								<img src="${path}/images/board/plus.png">
+								<img src="${path}/images/board/plus.png" class="plus" onclick="add()">
 							</button>
 						</div>
 						<hr>
@@ -89,4 +89,19 @@
 		var selectedValue = this.value;
 		console.log(selectedValue);
 	})
+	
+	function add(){
+		var num = Number($(".num").val());
+		num += 1;
+		$(".num").val(num);
+	}
+	
+	function minus(){
+		var num = Number($(".num").val());
+		if(num>=1){
+		num -= 1;
+		}
+		$(".num").val(num);
+		console.log(num)
+	}
 </script>

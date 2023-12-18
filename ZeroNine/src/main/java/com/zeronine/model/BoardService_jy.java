@@ -6,6 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zeronine.dto.DealFailRefundVO;
+import com.zeronine.dto.DealSuccessBoardVO;
+
 @Service("boardService_jy")
 public class BoardService_jy {
 	
@@ -35,5 +38,17 @@ public class BoardService_jy {
 		Map<String, Object> detail = boardDAO_jy.selectOneDetail(boardId);
 		System.out.println("servie 에서 확인하는 one디테일" + detail);
 		return detail;
+	}
+	
+	public List<DealFailRefundVO> selectDealFailBoard(){
+		List<DealFailRefundVO> fail =  boardDAO_jy.selectDealFailBoard();
+		System.out.println("이건 서비스에서 찍는 fail 정보 : " + fail);
+		return fail;
+	}
+	
+	public List<DealSuccessBoardVO> selectDealSuccessBoard(){
+		List<DealSuccessBoardVO> success =  boardDAO_jy.selectDealSuccessBoard();
+		System.out.println("이건 서비스에서 찍는 success 정보 : " + success);
+		return success;
 	}
 }

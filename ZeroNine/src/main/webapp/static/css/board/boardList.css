@@ -79,7 +79,7 @@
 	align-items: center;
 }
 
-.pro_img {
+.close_img , .pro_img, .success_img {
 	width: 290px;
 	height: 290px;
 }
@@ -195,7 +195,7 @@ span.rate {
 }
 
 /* pro_img size */
-.pro_img {
+.pro_img, .close_img, .success_img{
 	margin-top: 30px;
 }
 
