@@ -27,8 +27,8 @@
 				</select>
 			</div>
 			<div class="time">
-				<input type="number" placeholder="3"> 시간 <input
-					type="number" placeholder="00"> 분 까지
+				<input type="number" placeholder="3" id="wait_hour"> 시간 <input
+					type="number" placeholder="00" id="wait_minute"> 분 까지
 			</div>
 		</div>
 	</div>

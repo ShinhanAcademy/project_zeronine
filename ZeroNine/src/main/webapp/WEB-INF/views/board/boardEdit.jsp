@@ -90,22 +90,30 @@
 		function editCom() {
 			var send_bt_to_com = $("#be_board_type").val();
 			console.log("editCom() => send_bt_to_com :", send_bt_to_com);
+		
+			//공통 내용
+			var board_type = $("#be_board_type").val();
+			var title = $(".title_input").val();
+			var content = $(".context_input").val();
 			
 			//1:1거래라면 이미지도 함께 전송이 되어야 한다.
 			if(send_bt_to_com=="oneTooneBoard") {
 				console.log("oneTooneBoard에 해당하는 AJAX를 실행할것이다.");
 		
 				var send_bt_to_com = $("#be_board_type").val();
-
+				var postingMinutes = $("#time_setting").val();
+				var address = $("#address").val();
+				var addressDetail = $("#address_detail").val();
+				
 				var form = $('#imgFile')[0].files[0];
 				var formData = new FormData();
 				
-				var board_type = $("#be_board_type").val();
+				/* var board_type = $("#be_board_type").val();
 				var postingMinutes = $("#time_setting").val();
 				var address = $("#address").val();
 				var addressDetail = $("#address_detail").val();
 				var title = $(".title_input").val();
-				var content = $(".context_input").val();
+				var content = $(".context_input").val(); */
 				
 
 				formData.append("imgFile", form);
@@ -129,10 +137,30 @@
 					}
 				});	
 			}
-			else {
+			else { //즉배, 무배 분기 해야 함
+				console.log($("#wait_minute"));
+				var dayAsMinute = $(".date").val(); //val은 minute으로 설정됨
+				
+				var waitHourValue = Number($('#wait_hour').val());
+				var waitMinuteValue = Number($('#wait_minute').val());
+			    
+				
+				
+				console.log(waitHourValue, waitMinuteValue);
+				
+				var postingMinutes = Number(dayAsMinute) + waitHourValue * 60 + waitMinuteValue;
+				
+				console.log(postingMinutes);
+				
 				$.ajax({
 					url : '/board/completeedit.do',
-					data: {"send_bt_to_com" : send_bt_to_com},
+					data: {
+						"send_bt_to_com" : board_type,
+						"postingMinutes" : postingMinutes,
+						"title" : title,
+						"content" : content
+						//구매 상품 정보도 넣어야 함
+						},
 					success : function(responseData) {
 						$("#edit").html(responseData);
 					}
