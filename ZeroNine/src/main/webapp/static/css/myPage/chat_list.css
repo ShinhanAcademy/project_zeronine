@@ -114,7 +114,7 @@ chatlist_wrap
 	background: #FF5C00;
 }
 
-.boardDetail{
+.boardDetail, .participantBoardDetail{
 	width: 80px;
 	border-radius: 15px;
 	height: 30px;
@@ -153,6 +153,13 @@ chatlist_wrap
 	font-family: "inter"!important;
 }
 
+.chat_kind .btn_deli {
+	cursor: pointer;
+}
+.chat_kind .btn_deli.on {
+	color: #00A1E6;	
+}
 
-
-
+.chat_kind {
+	margin-left: 10px;
+}

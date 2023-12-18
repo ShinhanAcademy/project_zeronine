@@ -96,6 +96,18 @@ public class BoardService_yn {
 	public Map<String, Object> chatListDetail(String boardId) {
 		return boardDAO.chatListDetail(boardId);
 	}
+
+	public Map<String, Object> freeBoardDetailEdit(String boardId) {
+		return boardDAO.freeBoardDetailEdit(boardId);
+	}
+
+	public List<Map<String, Object>> participantChatList(String customerId) {
+		return boardDAO.participantChatList(customerId);
+	}
+
+	public int numOfChatParticipant(String boardId) {
+		return boardDAO.numOfChatParticipant(boardId);
+	}
 	
 	
 

@@ -31,6 +31,11 @@
 		WHERE b."boardId" = cast(#{boardId} as UUID)
 	</select>
 	
+	<select id="freeBoardDetailEdit" resultType="map" parameterType="String">
+		
+	
+	</select>
+	
 	<select id="boardpCount" resultType="int" parameterType="String">
 		SELECT DISTINCT p."pCount" - COALESCE(sq."pickCount", 0) AS count
 		FROM "selectProduct" sp
@@ -186,8 +191,7 @@
 		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
 		left join public."oBoardImage" obi on (c."oBoardId"=obi."oBoardId")
-		where ob."oAuthorId"=cast(#{customerId} as UUID) or c."customerId"=cast(#{customerId} as UUID)
-		and ob."finishTime">NOW()
+		where ob."oAuthorId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
 	</select>
 	<select id="chatListDetail" resultType="map" parameterType="String">
 		SELECT ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",
@@ -195,5 +199,17 @@
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
 		left join public."oBoardImage" obi on (c."oBoardId"=obi."oBoardId")
 		where ob."oBoardId"=cast(#{boardId} as UUID)
+	</select>
+	<select id="participantChatList" resultType="map" parameterType="String">
+		SELECT ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
+		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
+		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
+		left join public."oBoardImage" obi on (c."oBoardId"=obi."oBoardId")
+		where c."customerId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
+	</select>
+	<select id="numOfChatParticipant" resultType="int" parameterType="String">
+		select count(c."customerId")
+		from "oneToOneBoard" ob left join "chat" c on (ob."oBoardId"=c."oBoardId")
+		WHERE ob."oBoardId" = cast(#{boardId} as UUID)
 	</select>
 </mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.zeronine.board">
+
+	<select id="insertOBoard" parameterType="hashMap" resultType="integer" statementType="CALLABLE">
+		CALL write_oboard(
+			#{boardId, mode=IN, jdbcType=VARCHAR} :: UUID,
+			#{authorId, mode=IN, jdbcType=VARCHAR} :: UUID,
+			#{title, mode=IN, jdbcType=VARCHAR},
+			#{content, mode=IN, jdbcType=VARCHAR},
+			#{postingMinutes, mode=IN, jdbcType=VARCHAR} :: INTEGER,
+			#{imgURL, mode=IN, jdbcType=VARCHAR},
+			#{address, mode=IN, jdbcType=VARCHAR},
+			#{addressDetail, mode=IN, jdbcType=VARCHAR},
+			#{is_write_success, mode=OUT, jdbcType=BIT} :: BOOLEAN
+		)
+
+		<!-- INSERT INTO "oBoardImage" ("oBoardId", "oBoardImagePath")
+		VALUES ('186b247b-eef7-4944-9c8b-30cd8af5b7a7', 'https://zeronine.s3.ap-northeast-2.amazonaws.com/7b420369-9592-479d-aaf5-4be5de61d599.png'); -->
+		
+		<!-- DO $$ 
+			DECLARE
+			    board_id UUID := cast(#{boardId} as UUID);
+			    author_id UUID := cast(#{authorId} as UUID);
+			    title CHARACTER VARYING := #{title};
+			    board_content CHARACTER VARYING := #{content};
+			    posting_minutes INTEGER := #{postingMinutes};
+			    image_url CHARACTER VARYING := #{imgURL};
+			    address CHARACTER VARYING := #{address};
+			    addressDetail CHARACTER VARYING := #{addressDetail};
+			    is_write_success BOOLEAN;
+			BEGIN
+			    CALL write_oboard(
+			        board_id,
+			        author_id,
+			        title,
+			        board_content,
+			        posting_minutes,
+			        image_url,
+			        address,
+			        addressDetail,
+			        OUT is_write_success
+			    );	    
+		END $$ -->
+	</select>	
+</mapper>
