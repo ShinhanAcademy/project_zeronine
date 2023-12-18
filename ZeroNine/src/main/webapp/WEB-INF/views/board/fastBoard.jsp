@@ -85,8 +85,8 @@
 		var id = '${email}';
 		if(id==""){
 			alert("로그인 후 작성 가능합니다.");
-			location.href="${path}/board/boardedit.do?boardType=fastBoard";
-			/* location.href="${path}/auth/login.do"; */
+			/* location.href="${path}/board/boardedit.do?boardType=fastBoard"; */
+			location.href="${path}/auth/login.do"; 
 		} else{
 			location.href="${path}/board/boardedit.do?boardType=fastBoard";
 		}
