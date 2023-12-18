@@ -49,8 +49,7 @@
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px;"
-						href="${path}/board/boardedit.do?boardType=oneTooneBoard"
-						data-value="oneTooneBoard">글쓰기</a>
+						data-value="oneTooneBoard" onclick="writeBoard()">글쓰기</a>
 					</span>
 				</div>
 			</div>
@@ -63,12 +62,44 @@
 	<%@include file="../common/footer.jsp"%>
 	<script src="../js/detailView.js"></script>
 	<script>
+	function writeBoard(){
+		var id = '${email}';
+		if(id==""){
+			alert("로그인 후 작성 가능합니다.");
+			location.href="${path}/auth/login.do";
+		} else{
+			location.href="${path}/board/boardedit.do?boardType=oneTooneBoard";
+		}
+	}
+	</script>
+	<script>
 	
 	var type_of_filter;
 	var infoOne_json;
 
 	$(filterType)
-	
+ $(document).on("click", ".detail_btn", function() {
+    function o_btn() {
+        var board_id = $(this).val();
+        console.log(board_id);
+
+        $.ajax({
+            type: "post",
+            url: "/board/oneboardDetail.do",
+            data: { boardId: board_id },
+            success: function(response) {
+                console.log(response);
+                $("#modal").html(response);
+                $("#detail_modal_wrap").css("display", "flex");
+                esc_btn();
+            },
+            error: function(error) {
+                alert("The article no longer exists.");
+            }
+        });
+    }
+});
+
 	
 	function filterType() {
 	    type_of_filter = document.querySelector(".filter").value;
@@ -144,29 +175,10 @@
             
 
             $("#allList").html(output);
-            
-            $(".detail_btn").on("click",
-            		function o_btn(){
-            			var board_id = $(this).val();
-            			console.log(board_id);
-
-            			$.ajax({
-            				type : "post",
-            				url : "/board/oneboardDetail.do",
-            				data: {boardId : board_id},
-            				success: function(response){
-            				
-            				console.log(response);
-            					$("#modal").html(response);
-            					$("#detail_modal_wrap").css("display","flex");
-            					esc_btn();
-            				},
-            				error: function(error) {
-            				alert("해당 글은 더 이상 존재하지 않습니다.");
-            				}
-            			});
-            		});
 	    }
+	    
+	   
+        		
 	</script>
 
 	<script type="text/javascript">

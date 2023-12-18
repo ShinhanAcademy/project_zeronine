@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zeronine.dto.DealFailRefundVO;
+import com.zeronine.dto.DealSuccessBoardVO;
+
 @Repository("boardDAO_jy")
 public class BoardDAOMybatis_jy {
 
@@ -40,6 +43,16 @@ public class BoardDAOMybatis_jy {
 		Map<String, Object> detail = sqlSession.selectOne(namespace+"selectOneDetail", boardId);
 		System.out.println(detail);
 		return detail;
+	}
+	
+	public List<DealFailRefundVO> selectDealFailBoard(){
+		List<DealFailRefundVO> fail = sqlSession.selectList(namespace+"selectDealFailBoard");
+		return fail;
+	}
+	
+	public List<DealSuccessBoardVO> selectDealSuccessBoard(){
+		List<DealSuccessBoardVO> success = sqlSession.selectList(namespace+"selectDealSuccessBoard");
+		return success;
 	}
 		
 		
