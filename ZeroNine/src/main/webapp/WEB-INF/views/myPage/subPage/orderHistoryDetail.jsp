@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- date format lib --%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <%-- functions lib --%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<script defer src="/js/myPage/orderHistoryDetail.js"></script>
+<script defer src="/js/myPage/subPage/orderHistoryDetail.js"></script>
 <div class="tbl_top_wrap">
 	<div class="total_count">
 		총 <span>${orderHistoryAll.size()}</span>건
@@ -30,68 +30,77 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${orderHistoryAll}" var="orderlist" varStatus="i">
-				<c:if test="${orderlist.deliveryId eq prev_row}">
-					<c:set var="check_row" value="${check_row + 1}" />
-				</c:if>
-				<c:if test="${orderlist.deliveryId ne prev_row}">
-					<c:set var="check_row" value="0" />
-				</c:if>
-				<tr>
-					<c:if test="${check_row == 0}">
-						<td rowspan="<c:out value='${orderlist.partcnt}' />">
-							<fmt:formatDate
-								value="${orderlist.purchaseDateTime}" pattern="yyyy.MM.dd" />
-							<div class="order_num color_blue">202311150000001</div>
-						</td>
+			<c:choose>
+				<c:when test="${orderHistoryAll.size() != 0}"> 
+					<c:forEach items="${orderHistoryAll}" var="orderlist" varStatus="i">
+					<c:if test="${orderlist.deliveryId eq prev_row}">
+						<c:set var="check_row" value="${check_row + 1}" />
 					</c:if>
-					<td class="product_info">
-						<div class="img_wrap">
-						<c:choose>
-							<c:when test="${not empty orderlist.imagePath}"> 
-								<img src="${orderlist.imagePath}" alt="product image" />
-							</c:when>
-							<c:otherwise>
-								<img src="${path}/images/common/img_preparing.png" alt="product image" />
-							</c:otherwise>
-						</c:choose>
-						</div>
-						<div class="detail">
-							<div class="brand_name">${orderlist.brand}</div>
-							<div class="product_name">${orderlist.pName}</div>
-						</div>
-					</td>
-					<td>${orderlist.productCount}</td>
-					<td class="price color_red ">
-						<fmt:formatNumber pattern="#,##0" value="${orderlist.price * orderlist.productCount}"/>원
-					</td>
-					<c:if test="${check_row == 0}">
-						<td class="order_status"
-							rowspan="<c:out value='${orderlist.partcnt}' />">
+					<c:if test="${orderlist.deliveryId ne prev_row}">
+						<c:set var="check_row" value="0" />
+					</c:if>
+					<tr>
+						<c:if test="${check_row == 0}">
+							<td rowspan="<c:out value='${orderlist.partcnt}' />">
+								<fmt:formatDate
+									value="${orderlist.purchaseDateTime}" pattern="yyyy.MM.dd" />
+								<div class="order_num color_blue">202311150000001</div>
+							</td>
+						</c:if>
+						<td class="product_info">
+							<div class="img_wrap">
 							<c:choose>
-								<c:when test="${orderlist.deliveryStatus eq 'ready'}"> 
-									배송준비중
-								</c:when>
-								<c:when test="${orderlist.deliveryStatus eq 'process'}"> 
-									배송중
-								</c:when>
-								<c:when test="${orderlist.deliveryStatus eq 'complete'}"> 
-									배송완료
-								<div>
-									<button class="btn_blue btn_delivery_check">배송조회</button>
-								</div>
+								<c:when test="${not empty orderlist.imagePath}"> 
+									<img src="${orderlist.imagePath}" alt="product image" />
 								</c:when>
 								<c:otherwise>
-								    저는 모두 해당이 안됩니다.
+									<img src="${path}/images/common/img_preparing.png" alt="product image" />
 								</c:otherwise>
 							</c:choose>
+							</div>
+							<div class="detail">
+								<div class="brand_name">${orderlist.brand}</div>
+								<div class="product_name">${orderlist.pName}</div>
+							</div>
 						</td>
-					</c:if>
-				</tr>
-				<c:set var="prev_row">
-					<c:out value="${orderlist.deliveryId}" />
-				</c:set>
-			</c:forEach>
+						<td>${orderlist.productCount}</td>
+						<td class="price color_red ">
+							<fmt:formatNumber pattern="#,##0" value="${orderlist.price * orderlist.productCount}"/>원
+						</td>
+						<c:if test="${check_row == 0}">
+							<td class="order_status"
+								rowspan="<c:out value='${orderlist.partcnt}' />">
+								<c:choose>
+									<c:when test="${orderlist.deliveryStatus eq 'ready'}"> 
+										배송준비중
+									</c:when>
+									<c:when test="${orderlist.deliveryStatus eq 'process'}"> 
+										배송중
+									</c:when>
+									<c:when test="${orderlist.deliveryStatus eq 'complete'}"> 
+										배송완료
+									<div>
+										<button class="btn_blue btn_delivery_check">배송조회</button>
+									</div>
+									</c:when>
+									<c:otherwise>
+									    저는 모두 해당이 안됩니다.
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</c:if>
+					</tr>
+					<c:set var="prev_row">
+						<c:out value="${orderlist.deliveryId}" />
+					</c:set>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<tr>
+						<td colspan="5">내역이 없습니다.</td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
 		</tbody>
 	</table>
 </div>
