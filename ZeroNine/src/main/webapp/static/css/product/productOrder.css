@@ -11,7 +11,10 @@
 	position: relative;
 	margin: 0 auto;
 }
-
+#gobtn:disabled {
+    background-color: gray;
+    /* Add any other styling you want for the disabled state */
+}
 .order_body .order_bodypart .order_bodypart_text {
 	padding: 60px 25px 60px 20px;
 	display: flex;
