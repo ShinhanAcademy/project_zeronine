@@ -164,9 +164,15 @@ function showMessage(message) {
 		addHtml.push(`</div>`);
 	}
 	
-	addHtml.push(`<div class="talk my_talk">`);
-	addHtml.push(`<div class="msg">${messageContent}</div>`);
-	addHtml.push(`</div>`);
+	console.log(`Received Message : ${messageContent}`);
+
+	//addHtml.push(`<div class="talk my_talk">`);
+	
+	// addHtml.push(`<div class="msg">`);
+	// addHtml.push(`${messageContent}`);
+	// addHtml.push(`</div>`);
+	addHtml.push(`<div class="talk other_talker">${messageContent}</div>`);
+	
 	
 	$("#chatDtlList").append(addHtml.join(""));
 	$("#message").val("");
