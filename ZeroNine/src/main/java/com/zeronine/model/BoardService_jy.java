@@ -47,6 +47,12 @@ public class BoardService_jy {
 		return infoFree;
 	}
 	
+	public Map<String, Object> selectFreeDetail(String boardId){
+		Map<String, Object> freeDetail = boardDAO_jy.selectFreeDetail(boardId);
+		System.out.println("이것은 서비스에서 찍는 freedetail"+freeDetail);
+		return freeDetail;
+	}
+	
 	//oneBoard
 	public List<Map<String, Object>> selectOneBoardList(){
 		List<Map<String, Object>> infoOne = boardDAO_jy.selecOneBoardList();

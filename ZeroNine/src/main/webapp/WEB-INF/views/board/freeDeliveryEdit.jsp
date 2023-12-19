@@ -78,12 +78,6 @@
 			<li><textarea class="context_input" placeholder="내용을 입력하세요."></textarea></li>
 		</ul>
 	</div>
-
-
-
-	<div class="done">
-		<button class="done_btn" onclick="editCom()">작성완료</button>
-	</div>
 </div>
 
 

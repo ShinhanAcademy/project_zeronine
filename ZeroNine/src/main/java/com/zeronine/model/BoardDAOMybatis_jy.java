@@ -3,6 +3,7 @@ package com.zeronine.model;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,12 @@ public class BoardDAOMybatis_jy {
 	public List<Map<String, Object>> selectFreeDeliveryBoard(){
 		List<Map<String, Object>> infoFree = sqlSession.selectList(namespace+"selectFreeDeliveryBoard");
 		return infoFree;
+	}
+	
+	public Map<String, Object> selectFreeDetail(String boardId){
+		Map<String, Object> freeDetail = sqlSession.selectOne(namespace+"selectFreeDetail",boardId);
+		System.out.println("이것은 dao의 디테일 "+freeDetail);
+		return freeDetail;
 	}
 	
 	//oneBoard

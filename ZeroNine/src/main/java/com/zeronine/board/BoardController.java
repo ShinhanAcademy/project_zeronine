@@ -153,6 +153,8 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		String email = (String)session.getAttribute("email");
 		model.addAttribute("email", email);
+		model.addAttribute("fail",failjson);
+		model.addAttribute("success", successjson);
 		model.addAttribute("infoFree",jsonarray);
 		logger.info("이것은 free의 제이슨:{} ", jsonarray);
 		return "board/freeDeliveryBoard";
@@ -307,17 +309,13 @@ public class BoardController {
 		return "board/fastDetailView";
 	}
 
-	/*
-	 * @RequestMapping("/freeboardDetail.do") public String
-	 * freeboardDetail(@RequestParam("boardId") String board_id ,Model model) {
-	 * Map<String, Object> detail = boardService.selectFreeDetail(board_id);
-	 * model.addAttribute("detail", detail);
-	 * 
-	 * logger.info("controller free 디테일 아이디 : {}", board_id);
-	 * logger.info("controller free 디테일 내용: {}", detail);
-	 * 
-	 * return "board/freeDetailView"; }
-	 */
+	@RequestMapping("/freeboardDetail.do")
+	public String selectFreeDetail (@RequestParam("boardId")String board_id, Model model) {
+		Map<String, Object> detailFree = boardService.selectFreeDetail(board_id);
+		model.addAttribute("detailFree", detailFree);
+		logger.info("이것은 컨트롤러에서 찍는 detailFree : {}", detailFree);
+		return "board/freeDetailView";
+	}
 
 	@RequestMapping("/oneboardDetail.do")
 	public String oneboardDetail(@RequestParam("boardId") String board_id, Model model) {
