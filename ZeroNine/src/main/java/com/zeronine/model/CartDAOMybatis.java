@@ -61,5 +61,12 @@ public class CartDAOMybatis {
 	    List<String> prodIds = sqlSession.selectList(NAMESPACE + "orderOneCart", map);
 	    return prodIds;
 	}
+	public int deleteCartItem(String customerId, String productId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("customerId", customerId);
+	    map.put("productId", productId);
+		
+		return sqlSession.delete(NAMESPACE + "deleteCartItem", map);
+	}
 	
 }

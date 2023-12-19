@@ -28,6 +28,7 @@
 		<typeAlias type="com.zeronine.dto.ProductAdditionalImageVO" alias="productAdditionalImageVo" />	
 		<typeAlias type="com.zeronine.dto.ProductMainImageVO" alias="productMainImageVo" />	
 		<typeAlias type="com.zeronine.dto.ProductVO" alias="productVo" />	
+		<typeAlias type="com.zeronine.dto.DeliveryProductVO" alias="deliveryproductVo" />	
 		<typeAlias type="com.zeronine.dto.SelectProductVO" alias="selectProductVo" />	
 		<typeAlias type="com.zeronine.dto.SubscriptionVO" alias="subscriptionVo" />
 		<typeAlias type="com.zeronine.dto.ChatVO" alias="chatVO" />	

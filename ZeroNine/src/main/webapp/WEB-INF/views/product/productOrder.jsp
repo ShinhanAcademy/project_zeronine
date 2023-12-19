@@ -241,7 +241,7 @@ $(".gobtn").click(function() {
 		data : obj,
 		type : "Post",
 		success : function() {
-			location.href = "${path}/product/productOrderSuccess.do";
+			location.href = path+"/product/productOrderSuccess.do";
 		},
 		error : function() {
 			alert("에러입니다.");

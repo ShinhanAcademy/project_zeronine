@@ -423,24 +423,29 @@
 }
 
 .detail_bodypart .detail_bottom_right .subtitle1 {
-	color: #000;
-	font-family: Lato;
-	font-size: 17px;
-	font-style: normal;
 }
 
 #sidebox {
-	margin: 10px;
 	background: #FAFAFA;
-	height: 109px;
 	display: flex;
+	gap: 10px;
 	justify-content: center;
-	padding: 5px;
 	flex-direction: column;
 	align-items: center;
-	
+	padding: 30px 15px;
+	color: #000;
+	font-family: Lato;
+	font-style: normal;
+	font-size: 17px;
 }
-
+#sidebox.scroll_on {
+    position: fixed;
+    width: 324px;
+    top: 160px;
+    left: calc(50% + 299px);
+    z-index: 102;
+	transition: 0.3s;
+}
 .detail_bodypart .detail_bottom_right .subtitle {
 	color: #000;
 	font-family: Lato;

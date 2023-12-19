@@ -84,81 +84,10 @@
 
 				<div class="menulist" id="here">
 
-					<c:forEach items="${plist}" var="product" varStatus="status">
-						<div class="menu_sub">
-							<div class="menu_image">
-								<img class="menupng" onclick="location.href='${Path }/product/productDetail.do?productId=${product.productId}'"
-									src="${path}/images/sangpumpage/ohddugi.png">
-
-								<div class="menu_gocart">
-
-									<c:if test="${customerid != null}">
-										<div class="heart_liked">
-											<button class="like" id="like${status.index}" type="button"
-												value="${product.productId}"
-												onclick="handleLikeButtonClick(${status.index}, '${product.productId}')">
-
-
-
-												<c:if test="${fn:contains(likedcid, product.productId)}">
-													<img class="menu_heart"   
-														src="${path}/images/board/red_heart.png">
-												</c:if>
-												<c:if
-													test="${not(fn:contains(likedcid, product.productId))}">
-													<img class="menu_heart"   
-														src="${path}/images/board/heart.png">
-												</c:if>
-											</button>
-										</div>
-										
-										<button class="gocart" id="gocart${status.index}"type="button"
-										onclick="handlegoCartButtonClick(${status.index}, '${product.productId}')">
-											<img class="gocart"
-												src="${path}/images/sangpumpage/gocart.png">
-										</button>
-									</c:if>
-								</div>
-								<div class="index">${status.index}</div>
-							</div>
-							<span class="menufont">${product.brand}</span> <span
-								class="menufont_name">${product.pName}</span> <span
-								class="menufont_price"> <fmt:formatNumber
-									value="${product.price}" maxFractionDigits="3"></fmt:formatNumber>
-								원
-							</span>
-						</div>
-					</c:forEach>
-
 				</div>
 			</div>
 			<div class="dist100"></div>
-			<div class="plus_btnpart">
-			<div style="display: block; text-align: center;">		
-			<c:if test="${paging.startPage != 1 }">
-				<a href="javascript:pcountchange(${paging.startPage - 1},${paging.cntPerPage})">&lt;&lt;</a>
-			</c:if>
-			 <script>
-			 	console.log("${paging.endPage}");
-			 </script>
-			<c:forEach begin="${paging.startPage}" end="${paging.lastPage}" var="p">
-				<c:choose>
-					<c:when test="${p == paging.nowPage}">
-						<%-- <b>${p}</b> --%>
-						<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
-					</c:when>
-					<c:when test="${p != paging.nowPage}">
-						<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
-					</c:when>
-				</c:choose>
-			</c:forEach>
-			<c:if test="${paging.endPage != paging.lastPage}">
-				<a href="javascript:pcountchange(${paging.endPage+1},${paging.cntPerPage})">&gt;&gt;</a>
-			</c:if>
-	    </div>
-
-				<div class="dist49"></div>
-			</div>
+		
 		</div>
 
 	</div>
@@ -179,11 +108,11 @@
 	    // Check if cartcheckArray is an array
 	    if (Array.isArray(cartcheckArray)) {
 	        // It's an array, you can use forEach
-	        console.log("Cart Items: ", cartcheckArray);
+	        
 			
 	        // If it's an array of strings, you can directly use it
 	        cartcheckArray.forEach(function(productId) {
-	            console.log("Product ID: ", productId);
+	            
 	            // You can perform other operations with productId
 	        });
 	    } else {
@@ -192,21 +121,36 @@
 	</script>
 
 	<script>
+	function pcountchange(currentpage,perpage){
+		console.log(currentpage);
+		var obj = {
+				//"value":event.target.value,	
+				"nowPage":currentpage,
+				"cntPerPage":perpage
+		};
+		console.log("Clicked button value: " + obj);
+		$.ajax({
+			//url : "${path}/product/productList.do",
+			url : "${path}/product/productPageCount.do",
+			type: "GET",
+			data : obj,
+			success:function(responseData){
+				$("#here").html(responseData);
+			},
+			error : function(){
+				alert("에러입니다.");
+			}
+			});
+	}
 	 function handlegoCartButtonClick(index, productId) {
-	     console.log(productId);
 		 function isproductinCart(productId){
 	    	  return cartcheckArray.some(function(item){
 	    		  return item == productId;
 	    	  })
 	      }
-		 //console.log(isproductinCart(productId));
-		 	console.log(productInCart);
-		 	console.log(productInCart.includes(productId));
 	        var likeButtonId = "gocart" + index;
 	        var custid = "${customerid}";
-	    console.log(custid);
-	    console.log(productId);
-		console.log(cartcheck);
+	   
 		if(productInCart.includes(productId)==false){
 				$.ajax({
 					url : "/product/goProductCart.do",
@@ -240,33 +184,10 @@
 					 
 				
 	 };
-	
-	function pcountchange(currentpage,perpage){
-		console.log(currentpage);
-		var obj = {
-				//"value":event.target.value,	
-				"nowPage":currentpage,
-				"cntPerPage":perpage
-		};
-		console.log("Clicked button value: " + obj);
-		$.ajax({
-			//url : "${path}/product/productList.do",
-			url : "${path}/product/productPageCount.do",
-			type: "GET",
-			data : obj,
-			success:function(responseData){
-				$("#here").html(responseData);
-			},
-			error : function(){
-				alert("에러입니다.");
-			}
-			});
-	}
 	 var str = "${likedcid}";
 	 var likedcidArr = [] ; 
 	 //str.split(/!|@|~|,| |Z/);
 	 likedcidArr = str.split(/,|\[|\]| /);
-	 console.log(likedcidArr);
 	 function handleLikeButtonClick(index, productId) {
 	      
 	        var likeButtonId = "like" + index;
@@ -274,8 +195,6 @@
 	    
 	    	//클래스가 heart liked => AJAX DELTE 호출
 	        var isRedHeart = likedcidArr.indexOf(productId);
-	    	
-			console.log(isRedHeart);
 			if(isRedHeart>=0) {
 				$.ajax({
 					url : "/product/deleteLikedProduct.do",

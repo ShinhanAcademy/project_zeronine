@@ -104,7 +104,7 @@
 													}
 												},
 												error:function() {
-													console.log("likeProduct ajax 오류");
+													console.log("deleteCartItem ajax 오류");
 												}
 											});
 										} //end If
