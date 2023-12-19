@@ -356,13 +356,11 @@ public class ProductController {
 		model.addAttribute("productId",productId);
 		int deliveryfirst = deliveryservice_ys.PersonGoDelivery(deliveryId, customerid,address,addressdetail);
 		int deliverysecond =deliveryproductservice_ys.PersonGoDeliveryProduct(deliveryId, customerid, productId);
-		return "product/productOrderSuccess";
+		return "redirect:/product/productOrderSuccess";
 	}
 	@GetMapping("/productOrderSuccess.do")
-	public void productOrderSuccess(Model model) {
+	public void productOrderSuccess(@RequestParam String productId,Model model) {
 		String productid = (String)model.getAttribute("productId");
-		
 		logger.info("707" + productid);
-		
 	}
 }
