@@ -32,16 +32,14 @@
 						<th>선택</th>
 					</tr>
 				</thead>
-				<tbody>
-				
+				<tbody id="cartList">
 					<c:choose>
 						<c:when test="${myCart.size() != 0}"> 
 							<c:forEach items="${myCart}" var="cartItem">
-								<tr>
+								<tr id="${cartItem.productId}">
 									<td class="check_item"><input type="checkbox" /></td>
 									<td class="product_info">
 										<div class="img_wrap">
-										
 											<c:choose>
 												<c:when test="${not empty cartItem.imagePath}"> 
 													<img src="${cartItem.imagePath}" alt="product image" />
@@ -75,30 +73,42 @@
 							</c:forEach>
 							<script>
 								$(function(){
-									$(".btn_del").on("click", function(){
-										deleteCartItem();
+									//delete cart item
+									$(".purchase_selection .btn_del").on("click", function(){
+										delCartItem();
 									});
-									//deleteCartItem
-									//Ajax
-									function deleteCartItem() {
-										var paramObj = {};
-		
-										paramObj.searchWord = $(".search_word input").val();
-										console.log("paramObj", paramObj);
-										
-										$.ajax({
-											url: contextPath + "/myPage/subPage/likeProductDetail.do",
-											data: paramObj,
-											success: function(resData) {
-												console.log("likeProduct 성공 !!");
-												$("#like_product_wrapper").html(resData);
-											},
-											error:function() {
-												console.log("likeProduct ajax 오류");
-											}
-										});
-									}
 									
+									//delete selected cart item 
+									$(".tbl_bottom_wrap .btn_del").on("click", function(){
+										const chkBox = $("#cartList input[type=checkbox]:checked");
+										
+										$(chkBox).each(function() {
+											delCartItem();
+										});
+									});
+									
+									function delCartItem() {
+										const productId = $(this).closest("tr").attr("id");
+										console.log("productId >>>> " + productId );
+										
+										if(confirm("삭제하시겠습니까?")){
+											$.ajax({
+												url: contextPath + "/product/deleteCartItem.do",
+												type : "POST",
+												data: {productId},
+												success: function(result) {
+													console.log("deleteCartItem 성공 !!");
+													console.log(result);
+													if(Object.keys(result).length > 0 && result.count > 0){
+														$("#" + productId).remove();
+													}
+												},
+												error:function() {
+													console.log("likeProduct ajax 오류");
+												}
+											});
+										} //end If
+									}// end Fn_delCartItem
 								});
 							</script>					
 							<%-- <tr>
