@@ -84,29 +84,6 @@ var output = "";
 $(filterType);
 $(searchBoard);
 
-
-
-	/* // 실패 정보 파싱 및 배열 생성
-    var fail_info = '${fail}';
-    var fail_info_array = JSON.parse(fail_info);
-    var failId_array = [];
-
-    for (var i = 0; i < fail_info_array.length; i++) {
-        var failId = fail_info_array[i].boardId;
-        failId_array.push(failId);
-    }
-    
-    //성공 정보 배열 생성
-     var success_info = '${success}';
-    var success_info_array = JSON.parse(success_info);
-    var successId_array = [];
-
-    for (var i = 0; i < success_info_array.length; i++) {
-        var successId = success_info_array[i].boardId;
-        successId_array.push(successId);
-    }
- */
-
 function show(jsondata) {
 	console.log(jsondata.length);
 	output = "";
@@ -136,21 +113,12 @@ function show(jsondata) {
         	output+= `<div id="list">`
         }
         output +=  ` 
-        <div class="pro_info">`
+        <div class="pro_info">
         
-        if(dealsuccess){
-        	output+=`
-    			<ul>
-    				<li><img class="success_img"
-    					src="${path}/images/board/success.png"></li>
-    			</ul>`
-        }else{ output+=`
 			<ul>
 				<li><img class="pro_img"
 					src="\${item.oBoardImagePath}"></li>
-			</ul>`}
-
-		output+=`
+			</ul>
 			 <div class="pro_name">
             <ul>
                 <li>\${item.oTitle}</li>
@@ -169,15 +137,9 @@ function show(jsondata) {
             <li class="detail_view">
                 <button class="like" type="button">
                     <img class="like" src="${path}/images/board/heart.png">
-                    </button>`
-					 if(dealsuccess){
-						output+=`<button id="one_detail_btn" class="detail_btn" style="background-color:#B0DDFF;" disabled="disabled">보기</button>`
-					}
-					else{
-					output += `<button id="one_detail_btn" class="detail_btn" value="\${item.oBoardId}" onclick="o_btn('\${item.oBoardId}')" >보기</button>`
-					}
-					
-					output += `</li>
+                    </button>
+                    <button id="one_detail_btn" class="detail_btn" value="\${item.oBoardId}" onclick="o_btn('\${item.oBoardId}')" >보기</button>
+					</li>
         </ul>
     </div>
 
