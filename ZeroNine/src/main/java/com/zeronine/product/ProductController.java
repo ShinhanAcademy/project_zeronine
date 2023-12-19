@@ -121,82 +121,50 @@ public class ProductController {
 	}
 
 	@GetMapping("/productList.do")
-	public void productlist(/* Integer value, */Model model, 
-			@RequestParam(value = "vo", required = false)PagingVO vo,
+	public void productlist() {
+	
+	}
+	
+	@GetMapping("/pcategoryPageCount.do")
+	// @ResponseBody //body���� �����ؼ� �޴´�.
+	public String pcategoryPageCount( Integer pCategoryId, Model model,@RequestParam(value = "vo", required = false)PagingVO vo,
 			@RequestParam(value = "nowPage", required = false) String nowPage,
-			@RequestParam(value = "cntPerPage", required = false) String cntPerPage, 
-			HttpSession session) {
-
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		session.setAttribute("customerid", customerid);
-		customerid = (String) session.getAttribute("customerid");
-		if (nowPage == null) {
-			nowPage = "1";
-		}
-		/*
-		 * if (nowPage == null && cntPerPage == null) { nowPage = "1"; cntPerPage = "7";
-		 * } else if (nowPage == null) { nowPage = "1"; } else if (cntPerPage == null) {
-		 * cntPerPage = "7"; }
-		 * 
-		 * if(cntPerPage.equals("")) { cntPerPage = "7"; }
-		 */
-
-		// List<ProductVO> productList = productService.selectAll();
 		int total = productService.countProduct();
+		if (nowPage == null && cntPerPage == null) {
+			
+			nowPage = "1";
+			cntPerPage = "7";
+		} else if (nowPage == null) {
+			nowPage = "1";
+		} else if (cntPerPage == null) {
+			cntPerPage = "7";
+		}
 
-		model.addAttribute("plist", productService.selectAll16os(Integer.parseInt(nowPage) - 1));
-		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(customerid));
+		if (cntPerPage.equals("")) {
+			cntPerPage = "7";
+		}
+
 		vo = new PagingVO(total, Integer.parseInt(nowPage));
-		// vo = new PagingVO(total, Integer.parseInt(nowPage),
-		// Integer.parseInt(cntPerPage));
 		model.addAttribute("paging", vo);
-		System.out.println(customerid);
-
+		Integer nowPageInt = Integer.parseInt(nowPage);
+		List<ProductVO> plist = productService.pcategoryPageCount(nowPageInt - 1,pCategoryId);
+		model.addAttribute("plist", plist);
 		if (customerid != null) {
 			model.addAttribute("likedcid", likedproductservice.selectByCidlist(customerid));
 			model.addAttribute("cartcheckpid", cartservice.cartCheckPid(customerid));
 		}
-
-	}
-	@GetMapping("/pcategoryPageCount.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String pcategoryPageCount( Integer pCategoryId, Model model, PagingVO vo,
-			@RequestParam(value = "nowPage", required = false) String nowPage,
-			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
-
-		int total = productService.countProduct();
-		if (nowPage == null && cntPerPage == null) {
-			
-			nowPage = "1";
-			cntPerPage = "7";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) {
-			cntPerPage = "7";
-		}
-
-		if (cntPerPage.equals("")) {
-			cntPerPage = "7";
-		}
-
-		vo = new PagingVO(total, Integer.parseInt(nowPage));
-
-		// logger.info("PRODUCT PAGE COUNT" + value);
-
-		Integer nowPageInt = Integer.parseInt(nowPage);
-		logger.info("CNT PER PAGE =>", nowPageInt);
-		logger.info("NOW PAGE =>" + nowPage);
-		List<ProductVO> plist = productService.pcategoryPageCount(nowPageInt - 1,pCategoryId);
-		model.addAttribute("plist", plist);
-		// return "product/catagory";
 		return "/product/catagory";
 	}
 	@GetMapping("/productPageCount.do")
 	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String productPageCount(/* Integer value, */Model model, PagingVO vo,
+	public String productPageCount(/* Integer value, */Model model, 
+			@RequestParam(value = "vo", required = false)PagingVO vo,
 			@RequestParam(value = "nowPage", required = false) String nowPage,
 			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
 
+		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
 		int total = productService.countProduct();
 		if (nowPage == null && cntPerPage == null) {
 			
@@ -213,15 +181,14 @@ public class ProductController {
 		}
 
 		vo = new PagingVO(total, Integer.parseInt(nowPage));
-
-		// logger.info("PRODUCT PAGE COUNT" + value);
-
+		model.addAttribute("paging", vo);
 		Integer nowPageInt = Integer.parseInt(nowPage);
-		logger.info("CNT PER PAGE =>", nowPageInt);
-		logger.info("NOW PAGE =>" + nowPage);
-		List<ProductVO> plist = productService.selectAll16os(nowPageInt - 1);
+		List<ProductVO> plist = productService.pcategoryPageCount(nowPageInt - 1,1);
 		model.addAttribute("plist", plist);
-		// return "product/catagory";
+		if (customerid != null) {
+			model.addAttribute("likedcid", likedproductservice.selectByCidlist(customerid));
+			model.addAttribute("cartcheckpid", cartservice.cartCheckPid(customerid));
+		}
 		return "/product/catagory";
 	}
 
