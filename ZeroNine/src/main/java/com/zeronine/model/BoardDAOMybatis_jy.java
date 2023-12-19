@@ -32,6 +32,22 @@ public class BoardDAOMybatis_jy {
 		return detail;
 	}
 	
+	public List<DealFailRefundVO> selectDealFailBoard(){
+		List<DealFailRefundVO> fail = sqlSession.selectList(namespace+"selectDealFailBoard");
+		return fail;
+	}
+	
+	public List<DealSuccessBoardVO> selectDealSuccessBoard(){
+		List<DealSuccessBoardVO> success = sqlSession.selectList(namespace+"selectDealSuccessBoard");
+		return success;
+	}
+	
+	//free
+	public List<Map<String, Object>> selectFreeDeliveryBoard(){
+		List<Map<String, Object>> infoFree = sqlSession.selectList(namespace+"selectFreeDeliveryBoard");
+		return infoFree;
+	}
+	
 	//oneBoard
 	public List<Map<String, Object>> selecOneBoardList() {
 		List<Map<String, Object>> infoOne = sqlSession.selectList(namespace+"selectOneBoardList");
@@ -45,15 +61,6 @@ public class BoardDAOMybatis_jy {
 		return detail;
 	}
 	
-	public List<DealFailRefundVO> selectDealFailBoard(){
-		List<DealFailRefundVO> fail = sqlSession.selectList(namespace+"selectDealFailBoard");
-		return fail;
-	}
 	
-	public List<DealSuccessBoardVO> selectDealSuccessBoard(){
-		List<DealSuccessBoardVO> success = sqlSession.selectList(namespace+"selectDealSuccessBoard");
-		return success;
-	}
-		
 		
 }

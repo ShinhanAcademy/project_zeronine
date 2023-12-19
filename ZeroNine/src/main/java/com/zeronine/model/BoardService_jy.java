@@ -28,6 +28,25 @@ public class BoardService_jy {
 		return detail;
 	}
 	
+	public List<DealFailRefundVO> selectDealFailBoard(){
+		List<DealFailRefundVO> fail =  boardDAO_jy.selectDealFailBoard();
+		System.out.println("이건 서비스에서 찍는 fail 정보 : " + fail);
+		return fail;
+	}
+	
+	public List<DealSuccessBoardVO> selectDealSuccessBoard(){
+		List<DealSuccessBoardVO> success =  boardDAO_jy.selectDealSuccessBoard();
+		System.out.println("이건 서비스에서 찍는 success 정보 : " + success);
+		return success;
+	}
+	
+	//free
+	public List<Map<String, Object>> selectFreeDeliveryBoard(){
+		List<Map<String, Object>> infoFree = boardDAO_jy.selectFreeDeliveryBoard();
+		System.out.println("이건 서비스에서 찍는 infoFree 정보 : " + infoFree);
+		return infoFree;
+	}
+	
 	//oneBoard
 	public List<Map<String, Object>> selectOneBoardList(){
 		List<Map<String, Object>> infoOne = boardDAO_jy.selecOneBoardList();
@@ -40,15 +59,5 @@ public class BoardService_jy {
 		return detail;
 	}
 	
-	public List<DealFailRefundVO> selectDealFailBoard(){
-		List<DealFailRefundVO> fail =  boardDAO_jy.selectDealFailBoard();
-		System.out.println("이건 서비스에서 찍는 fail 정보 : " + fail);
-		return fail;
-	}
 	
-	public List<DealSuccessBoardVO> selectDealSuccessBoard(){
-		List<DealSuccessBoardVO> success =  boardDAO_jy.selectDealSuccessBoard();
-		System.out.println("이건 서비스에서 찍는 success 정보 : " + success);
-		return success;
-	}
 }
