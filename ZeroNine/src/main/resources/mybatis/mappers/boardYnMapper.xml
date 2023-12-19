@@ -9,10 +9,25 @@
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
 		left join public."product" as p on (p."productId" = sp."productId")
 		left join public."productMainImage" as pi on (p."productId" = pi."productId")
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
 		where b."authorId" = cast(#{customerId} as UUID) and b."finishTime">NOW()
 		and b."bCategoryType" = 'fast_board'
+		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
 		order by "uploadTime"
 	</select>
+	<select id="successMyWriteBlist" resultType="map" parameterType="String">
+		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
+		to_char(b."finishTime"-NOW(),'dd일 HH24시 mi분 ss초') as 	"remainTime", b."boardId"
+		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+		left join public."product" as p on (p."productId" = sp."productId")
+		left join public."productMainImage" as pi on (p."productId" = pi."productId")
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		where b."authorId" = cast(#{customerId} as UUID) and b."finishTime">NOW()
+		and b."bCategoryType" = 'fast_board'
+		and b."boardId" in (select "boardId" from "dealSuccessBoard")
+		order by "uploadTime"
+	</select>
+	
 	<select id="boardDetail" resultType="map" parameterType="String">
 		select distinct p."pName",pi."imagePath", b.title, p.price/p."pCount" as price, 
 		to_char(b."finishTime",'yyyy-mm-dd HH24:mi:ss') as "finishTime", b."boardContent", b."boardId"
@@ -32,10 +47,19 @@
 	</select>
 	
 	<select id="freeBoardDetailEdit" resultType="map" parameterType="String">
-		
-	
+		select distinct b.title, b."boardContent", b."boardId", 
+		to_char(b."finishTime"-NOW(),'dd') as "day", to_char(b."finishTime"-NOW(),'HH24') as "hour",
+		to_char(b."finishTime"-NOW(),'mi') as "minute"
+		from board b left join "boardCart" bc ON (b."boardId"= bc."boardId")
+		where b."boardId" = cast(#{boardId} as UUID)
 	</select>
-	
+	<select id="freeBoardProductEdit" resultType="map" parameterType="map">	
+		select p."pName", p."brand", bc."purchaseCount", pi."imagePath"
+		from "boardCart" bc left join product p on (bc."productId"=p."productId")
+		left join "productMainImage" pi on (p."productId"=pi."productId")
+		where bc."boardId" = cast(#{boardId} as UUID)
+		and bc."customerId" = cast(#{customerId} as UUID)
+	</select>
 	<select id="boardpCount" resultType="int" parameterType="String">
 		SELECT DISTINCT p."pCount" - COALESCE(sq."pickCount", 0) AS count
 		FROM "selectProduct" sp
@@ -69,9 +93,31 @@
 		AS total
 		FROM public."board" AS b
 		LEFT JOIN public."boardCart" AS bc ON b."boardId" = bc."boardId"
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
 		WHERE b."authorId" = cast(#{customerId} as UUID)
 		AND b."finishTime" > NOW()
 		AND b."bCategoryType" = 'free_delivery_board'
+		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		ORDER BY "uploadTime"
+	</select>
+	<select id="successMyWriteFreeBlist" resultType="map" parameterType="String">
+		SELECT DISTINCT b.title, TO_CHAR(b."uploadTime",'yyyy-mm-dd') AS "uploadTime",
+		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime",
+		b."boardId",b."bCategoryType",
+		(SELECT
+		SUM(p.price * bc."purchaseCount")
+		FROM "boardCart" bc
+		LEFT JOIN product
+		p ON bc."productId" = p."productId"
+		WHERE bc."boardId" = b."boardId")
+		AS total
+		FROM public."board" AS b
+		LEFT JOIN public."boardCart" AS bc ON b."boardId" = bc."boardId"
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		WHERE b."authorId" = cast(#{customerId} as UUID)
+		AND b."finishTime" > NOW()
+		AND b."bCategoryType" = 'free_delivery_board'
+		and b."boardId" in (select "boardId" from "dealSuccessBoard")
 		ORDER BY "uploadTime"
 	</select>
 	<select id="freeBoardDetail" resultType="map" parameterType="String">
@@ -96,9 +142,24 @@
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
 		left join public."product" as p on (p."productId" = sp."productId")
 		left join public."productMainImage" as pi on (p."productId" = pi."productId")
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
 		where sp."customerId" = cast(#{customerId} as UUID) and b."finishTime">NOW()
 		and b."bCategoryType" = 'fast_board'
 		and b."authorId" != cast(#{customerId} as UUID)
+		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		order by "uploadTime"
+	</select>
+	<select id="successMyParticipatedBlist" resultType="map" parameterType="String">
+		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
+		to_char(b."finishTime"-NOW(),'dd일 HH24시 mi분 ss초') as 	"remainTime", b."boardId"
+		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+		left join public."product" as p on (p."productId" = sp."productId")
+		left join public."productMainImage" as pi on (p."productId" = pi."productId")
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		where sp."customerId" = cast(#{customerId} as UUID) and b."finishTime">NOW()
+		and b."bCategoryType" = 'fast_board'
+		and b."authorId" != cast(#{customerId} as UUID)
+		and b."boardId" in (select "boardId" from "dealSuccessBoard")
 		order by "uploadTime"
 	</select>
 	<select id="myParticipatedFreeBlist" resultType="map" parameterType="String">
@@ -114,10 +175,33 @@
 		AS total
 		FROM public."board" AS b
 		LEFT JOIN public."boardCart" AS bc ON (b."boardId" = bc."boardId")
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
 		WHERE bc."customerId" = cast(#{customerId} as UUID)
 		AND b."finishTime" > NOW()
 		AND b."bCategoryType" = 'free_delivery_board'
 		and b."authorId" != cast(#{customerId} as UUID)
+		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		ORDER BY "uploadTime"
+	</select>
+	<select id="successMyParticipatedFreeBlist" resultType="map" parameterType="String">
+		SELECT DISTINCT b.title, TO_CHAR(b."uploadTime",'yyyy-mm-dd') AS "uploadTime",
+		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime",
+		b."boardId",b."bCategoryType",
+		(SELECT
+		SUM(p.price * bc."purchaseCount")
+		FROM "boardCart" bc
+		LEFT JOIN product
+		p ON bc."productId" = p."productId"
+		WHERE bc."boardId" = b."boardId")
+		AS total
+		FROM public."board" AS b
+		LEFT JOIN public."boardCart" AS bc ON (b."boardId" = bc."boardId")
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		WHERE bc."customerId" = cast(#{customerId} as UUID)
+		AND b."finishTime" > NOW()
+		AND b."bCategoryType" = 'free_delivery_board'
+		and b."authorId" != cast(#{customerId} as UUID)
+		and b."boardId" in (select "boardId" from "dealSuccessBoard")
 		ORDER BY "uploadTime"
 	</select>
 	<select id="likeBoardBlist" resultType="map" parameterType="String">
@@ -175,41 +259,69 @@
 	<update id="completeEdit" parameterType="map">
 		UPDATE public.board
 		SET title=#{title}, "boardContent"=#{context}, "updateTime"=NOW()
-		WHERE "boardId"=cast(#{boardId} as UUID);
+		WHERE "boardId"=cast(#{boardId} as UUID)
 	</update>
 	<update id="completeEditTime" parameterType="map">
 		UPDATE public.board
 		SET title=#{title}, "boardContent"=#{context}, "postingMinutes"=#{remainTime}, "updateTime"=NOW()
-		WHERE "boardId"=cast(#{boardId} as UUID);
+		WHERE "boardId"=cast(#{boardId} as UUID)
 	</update>
 	<delete id="deleteBoard" parameterType="String">
-		DELETE FROM public."board" WHERE "boardId"=cast(#{boardId} as UUID);
+		DELETE FROM public."board" WHERE "boardId"=cast(#{boardId} as UUID)
 	</delete>
-	
 	<select id="chatBlist" resultType="map" parameterType="String">
-		SELECT ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
+		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
 		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
-		left join public."oBoardImage" obi on (c."oBoardId"=obi."oBoardId")
+		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
+		left join public."dealSuccessOboard" dso on (ob."oBoardId"=dso."oBoardId")
 		where ob."oAuthorId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
+		and ob."oBoardId" not in (select "oBoardId" from "dealSuccessOboard")
+	</select>
+	<select id="successChatBlist" resultType="map" parameterType="String">
+		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
+		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
+		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
+		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
+		left join public."dealSuccessOboard" dso on (ob."oBoardId"=dso."oBoardId")
+		where ob."oAuthorId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
+		and ob."oBoardId" in (select "oBoardId" from "dealSuccessOboard")
 	</select>
 	<select id="chatListDetail" resultType="map" parameterType="String">
-		SELECT ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",
+		SELECT distinct ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",
 		to_char(ob."finishTime",'yyyy-mm-dd HH24:mi:ss') as "finishTime"
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
-		left join public."oBoardImage" obi on (c."oBoardId"=obi."oBoardId")
+		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
 		where ob."oBoardId"=cast(#{boardId} as UUID)
 	</select>
 	<select id="participantChatList" resultType="map" parameterType="String">
-		SELECT ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
+		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
 		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
-		left join public."oBoardImage" obi on (c."oBoardId"=obi."oBoardId")
+		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
+		left join public."dealSuccessOboard" dso on (ob."oBoardId"=dso."oBoardId")
 		where c."customerId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
+		and ob."oBoardId" not in (select "oBoardId" from "dealSuccessOboard")
 	</select>
-	<select id="numOfChatParticipant" resultType="int" parameterType="String">
-		select count(c."customerId")
-		from "oneToOneBoard" ob left join "chat" c on (ob."oBoardId"=c."oBoardId")
-		WHERE ob."oBoardId" = cast(#{boardId} as UUID)
+	<select id="successParticipantChatList" resultType="map" parameterType="String">
+		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
+		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
+		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
+		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
+		left join public."dealSuccessOboard" dso on (ob."oBoardId"=dso."oBoardId")
+		where c."customerId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
+		and ob."oBoardId" in (select "oBoardId" from "dealSuccessOboard")
 	</select>
+	<select id="chatListEdit" resultType="map" parameterType="String">
+		select ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",
+		to_char(ob."finishTime"-NOW(),'HH24시간 mi분') as "remainTime"
+		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
+		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
+		where ob."oBoardId"=cast(#{boardId} as UUID)
+	</select>
+	<update id="completeChatEdit" parameterType="map">
+		update "oneToOneBoard" 
+		set "oTitle"=#{title}, "oContent"=#{context}, "oUpdateTime"=NOW()
+		where "oBoardId" = cast(#{boardId} as UUID)
+	</update>
 </mapper>

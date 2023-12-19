@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/main")
 public class MainController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-	
+
 	@RequestMapping("/main.do")
 	public void main(HttpSession session) {
-		String customerId = (String)session.getAttribute("customerId");
+		String customerId = (String) session.getAttribute("customerId");
 		logger.info(customerId);
 	}
-	
-	/*
-	 * @RequestMapping("main/introZeroNine.do") public void introZeroNine() { }
-	 */
 
-}
+	@RequestMapping("main/introZeroNine.do")
+	public void introZeroNine() {
+	}
+
+}	

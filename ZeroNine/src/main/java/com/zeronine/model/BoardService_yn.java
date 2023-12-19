@@ -108,6 +108,44 @@ public class BoardService_yn {
 	public int numOfChatParticipant(String boardId) {
 		return boardDAO.numOfChatParticipant(boardId);
 	}
+
+	public Map<String, Object> chatListEdit(String boardId) {
+		return boardDAO.chatListEdit(boardId);
+	}
+
+	public int completeChatEdit(String title, String context, String boardId) {
+		return boardDAO.completeChatEdit(title,context,boardId);
+	}
+
+	public List<Map<String, Object>> successMyWriteBlist(String customerId) {
+		return boardDAO.successMyWriteBlist(customerId);
+	}
+
+	public List<Map<String, Object>> successMyWriteFreeBlist(String customerId) {
+		return boardDAO.successMyWriteFreeBlist(customerId);
+	}
+
+	public List<Map<String, Object>> successMyParticipatedBlist(String customerId) {
+		return boardDAO.successMyParticipatedBlist(customerId);
+	}
+
+	public List<Map<String, Object>> successMyParticipatedFreeBlist(String customerId) {
+		return boardDAO.successMyParticipatedFreeBlist(customerId);
+	}
+
+	public List<Map<String, Object>> successChatBlist(String customerId) {
+		return boardDAO.successChatBlist(customerId);
+	}
+
+	public List<Map<String, Object>> successParticipantChatList(String customerId) {
+		return boardDAO.successParticipantChatList(customerId);
+	}
+
+	public List<Map<String, Object>> freeBoardProductEdit(String boardId, String customerId) {
+		return boardDAO.freeBoardProductEdit(boardId,customerId);
+	}
+
+	
 	
 	
 

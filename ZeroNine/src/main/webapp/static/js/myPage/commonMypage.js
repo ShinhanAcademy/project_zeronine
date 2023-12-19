@@ -44,13 +44,6 @@ function usingDatePicker(){
 	});
 }
 
-function convertTime(date) {
-  date = new Date(date);
-  let offset = date.getTimezoneOffset() * 60000; //ms단위라 60000곱해줌
-  let dateOffset = new Date(date.getTime() - offset);
-  return dateOffset.toISOString();
-}
-
 function deliveryModal() {
 	// delivery modal
 	$(".btn_delivery_check").on("click", function(){
@@ -121,8 +114,8 @@ function callOrderHistory() {
 	var paramObj = {};
 
 	paramObj.searchWord = $(".search_word input").val();
-	paramObj.startDate = convertTime(startDate).split("T")[0];
-	paramObj.endDate = convertTime(endDate).split("T")[0];
+	paramObj.startDate = convertTime(startDate);
+	paramObj.endDate = convertTime(endDate);
 	
 	$.ajax({
 		url: contextPath + "/myPage/subPage/orderHistoryDetail.do",

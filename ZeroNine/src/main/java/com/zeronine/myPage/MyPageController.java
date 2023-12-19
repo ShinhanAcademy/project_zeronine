@@ -92,8 +92,8 @@ public class MyPageController {
 	
 	@RequestMapping("/subPage/myCartDetail.do")
 	public void myCartDetail(Model model, HttpSession session) {
-//		String customerId = (String) session.getAttribute("customerId");
-		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		String customerId = (String) session.getAttribute("customerId");
+//		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
 		//System.out.println("ID = " + customerId);
 		
 		model.addAttribute("myCart", deliveryService.myCart(customerId));
@@ -132,18 +132,22 @@ public class MyPageController {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
+		List<Map<String, Object>> successInfo = boardService.successMyWriteBlist(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
 
 	}
 	@GetMapping("/subPage/createdBoardDetail.do")
-	public void createdBoardDetail(String boardId, Model model) {
+	public void createdBoardDetail(String boardId, String isSuccess, Model model) {
 		Map<String, Object> info = boardService.boardDetail(boardId);
 		int pCount = boardService.boardpCount(boardId);
 		int participant = boardService.numOfParticipant(boardId);
 		model.addAttribute("info", info);
 		model.addAttribute("pCount", pCount);
 		model.addAttribute("participant", participant);
+		model.addAttribute("isSuccess", isSuccess);
 	}
 	
 	@GetMapping("/subPage/cbFastboardEdit.do")
@@ -171,6 +175,7 @@ public class MyPageController {
 		}else {
 			model.addAttribute("message","게시물을 다시 수정해주세요.");
 		}
+		model.addAttribute("kind","create");
 	}
 	
 	@PostMapping("/subPage/isDeleteBoard.do")
@@ -187,9 +192,25 @@ public class MyPageController {
 	
 	@GetMapping("/subPage/cbFreeboardEdit.do")
 	public void cbFreeboardEdit(String boardId, int participant, Model model) {
+		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		Map<String, Object> info = boardService.freeBoardDetailEdit(boardId);
+		List<Map<String, Object>> productInfo = boardService.freeBoardProductEdit(boardId,customerId);
 		model.addAttribute("info", info);
+		model.addAttribute("productInfo", productInfo);
 		model.addAttribute("participant", participant);		
+	}
+	
+	@PostMapping("/subPage/isRefund.do")
+	public void isRefund(String boardId, Model model) {
+		logger.info(boardId);
+		
+	}
+	
+	@GetMapping("/subPage/pbFreeboardEdit.do")
+	public void pbFreeboardEdit(String boardId, Model model) {
+		//Map<String, Object> info = boardService.freeBoardDetailEdit(boardId);
+		//model.addAttribute("info", info);	
 	}
 	
 	@GetMapping("/subPage/cbFastDelivery.do")
@@ -197,8 +218,11 @@ public class MyPageController {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
+		List<Map<String, Object>> successInfo = boardService.successMyWriteBlist(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
 
 	}
 
@@ -207,16 +231,20 @@ public class MyPageController {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myWriteFreeBlist(customerId);
+		List<Map<String, Object>> successInfo = boardService.successMyWriteFreeBlist(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
 	}
 	
 	@GetMapping("/subPage/createdFreeBoardDetail.do")
-	public void createdFreeBoardDetail(String boardId, Model model) {
+	public void createdFreeBoardDetail(String boardId,String isSuccess,Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);
 		int participant = boardService.numOfFreeParticipant(boardId);
 		model.addAttribute("info", info);
 		model.addAttribute("participant", participant);
+		model.addAttribute("isSuccess", isSuccess);
 	}
 	
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
@@ -225,8 +253,11 @@ public class MyPageController {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+		List<Map<String, Object>> successInfo = boardService.successMyParticipatedBlist(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
 	}
 	
 	@GetMapping("/subPage/participatedBoardDetail.do")
@@ -242,8 +273,11 @@ public class MyPageController {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
+		List<Map<String, Object>> successInfo = boardService.successMyParticipatedFreeBlist(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
 	}
 	
 	@GetMapping("/subPage/pbFastDelivery.do")
@@ -251,18 +285,19 @@ public class MyPageController {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
+		List<Map<String, Object>> successInfo = boardService.successMyParticipatedBlist(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
 	}
 
-	
-	
 	@GetMapping("/subPage/participatedFreeBoardDetail.do")
-	public void participatedFreeBoardDetail(String boardId, Model model) {
+	public void participatedFreeBoardDetail(String boardId, String isSuccess,Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);
 		model.addAttribute("info", info);
+		model.addAttribute("isSuccess", isSuccess);
 	}
-
 
 	// likeBoard(占쏙옙占쏙옙 占쌉시깍옙)
 	@GetMapping("/likeBoard.do")
@@ -343,16 +378,18 @@ public class MyPageController {
 		//String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.chatBlist(customerId);
+		List<Map<String, Object>> successInfo = boardService.successChatBlist(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
 	}
 	
 	@GetMapping("/subPage/chatListDetail.do")
-	public void chatListDetail(String boardId, Model model) {
+	public void chatListDetail(String boardId, String isSuccess, Model model) {
 		Map<String, Object> info = boardService.chatListDetail(boardId);
-		int participant = boardService.numOfChatParticipant(boardId);
 		model.addAttribute("info", info);
-		model.addAttribute("participant", participant);
+		model.addAttribute("isSuccess", isSuccess);
 	}
 	
 	@GetMapping("/subPage/participantChatList.do")
@@ -360,14 +397,18 @@ public class MyPageController {
 		//String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.participantChatList(customerId);
+		List<Map<String, Object>> successInfo = boardService.successParticipantChatList(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
 	}
 	
-	@GetMapping("/subPage/participantBoardDetail.do")
-	public void participantBoardDetail(String boardId, Model model) {
+	@GetMapping("/subPage/participantChatDetail.do")
+	public void participantChatDetail(String boardId, String isSuccess, Model model) {
 		Map<String, Object> info = boardService.chatListDetail(boardId);
 		model.addAttribute("info", info);
+		model.addAttribute("isSuccess", isSuccess);
 	}
 	
 	@GetMapping("/subPage/authorChatList.do")
@@ -375,8 +416,32 @@ public class MyPageController {
 		//String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.chatBlist(customerId);
+		List<Map<String, Object>> successInfo = boardService.successChatBlist(customerId);
 		model.addAttribute("info", info);
 		model.addAttribute("count", info.size());
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successInfo.size());
+	}
+	
+	@GetMapping("/subPage/chatListEdit.do")
+	public void chatListEdit(String boardId, Model model) {
+		Map<String, Object> info = boardService.chatListEdit(boardId);
+		model.addAttribute("info", info);	
+	}
+	
+	@PostMapping(value="/subPage/completeChatEdit.do", consumes="application/json")
+	public String completeChatEdit(@RequestBody Map<String,Object> info, Model model) {
+		String boardId = (String)info.get("boardId");
+		String title = (String)info.get("title");
+		String context = (String)info.get("context");
+		int result = boardService.completeChatEdit(title,context,boardId);;
+		if(result>0) {
+			model.addAttribute("message","게시물이 정상적으로 수정되었습니다.");
+		}else {
+			model.addAttribute("message","게시물을 다시 수정해주세요.");
+		}
+		model.addAttribute("kind","chat");
+		return "myPage/subPage/completeEdit";
 	}
 	
 	/* ****************************

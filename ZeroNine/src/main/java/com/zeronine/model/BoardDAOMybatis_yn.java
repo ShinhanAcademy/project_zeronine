@@ -155,6 +155,60 @@ public class BoardDAOMybatis_yn {
 		return participant;
 	}
 
+	public Map<String, Object> chatListEdit(String boardId) {
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "chatListEdit", boardId);
+		return info;
+	}
+
+	public int completeChatEdit(String title, String context, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("context", context);
+		map.put("boardId", boardId);
+		int result = sqlSession.update(NAMESPACE + "completeChatEdit", map);
+		return result;
+	}
+
+	public List<Map<String, Object>> successMyWriteBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyWriteBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successMyWriteFreeBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyWriteFreeBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successMyParticipatedBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successMyParticipatedFreeBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedFreeBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successChatBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successChatBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successParticipantChatList(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successParticipantChatList",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> freeBoardProductEdit(String boardId, String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardId", boardId);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> productInfo = sqlSession.selectList(NAMESPACE + "freeBoardProductEdit", map);
+		return productInfo;
+	}
+
+	
+
 	
 
 }

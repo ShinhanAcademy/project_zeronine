@@ -31,6 +31,35 @@ public class BoardDAOMybatis_sg {
 		logger.info(map.toString());
 		return sqlSession.insert(NAMESPACE + "insertOBoard", map);
 	}
+
+	public int writeFastBoard(String authorId, String title, String content, String postingMinutes, String productId,
+			int pickCount) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("authorId", authorId);
+		map.put("title", title);
+		map.put("content", content);
+		map.put("postingMinutes", postingMinutes);
+		map.put("productId", productId);
+		map.put("pickCount", pickCount);
+		map.put("is_write_success", 0);
+		logger.info(map.toString());
+		return sqlSession.insert(NAMESPACE + "insertFastBoard", map);
+	}
+
+	public int writeFreeBoard(String authorId, String title, String content, String postingMinutes,
+			Map<String, Integer> products) {
+		Map<Object, Object> map = new HashMap<>();
+		map.put("authorId", authorId);
+		map.put("title", title);
+		map.put("content", content);
+		map.put("postingMinutes", postingMinutes);
+		map.put("products", products);
+		map.put("is_write_success", 0);
+		logger.info(map.toString());
+		int ret = sqlSession.insert(NAMESPACE + "insertFreeBoard", map);
+		logger.info("ret==>", ret);
+		return ret;
+	}
 	
 }
 

@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="../../common/head.jsp"%>
 <%@include file="../../common/header.jsp"%>
-<link rel="stylesheet" href="${path}/css/board/boardEdit.css" />
-
+<link rel="stylesheet" href="${path}/css/myPage/myPageBoardEdit.css" />
 <title>My page</title>
-
-
 </head>
 <body>
 	<div class="zero_container" style="padding-top: 180px;">
@@ -59,8 +56,10 @@
 									</select>
 								</div>
 								<div class="time">
-									<input type="number" placeholder="3"> 시간 <input
-										type="number" placeholder="00"> 분 까지
+									<input class="remaintime" id="input_hour" type="number"
+										value="${info.hour}" onchange="editHourF()">시간 <input
+										class="remaintime" id="input_minute" type="number"
+										value="${info.minute}" onchange="editMinuteF()"> 분 까지
 								</div>
 							</div>
 						</div>
@@ -75,27 +74,36 @@
 							<div class="cart_info">
 								<div class="cart_list">
 									<h1>게시물 공구 상품 보일거야~~~~</h1>
-									<ul>
-										<li class="cart_pro_name"><input id="product_checkbox"
-											type="checkbox" >
-											<p>
-												오랄비 <br> 칫솔 벨벳 초미세모 초소형헤드 3개입
-											</p></li>
-										<li>
-											<div class="count">
-												<button>
-													<img src="${path}/images/board/minus.png">
-												</button>
-												<input type="text" value="1">
-												<button>
-													<img src="${path}/images/board/plus.png">
-												</button>
-											</div>
-											<hr>
-										</li>
-									</ul>
-									<div class="cart_img">
-										<img src="${path}/images/board/product2.png">
+
+									<c:forEach items="${productInfo}" var="product">
+										<br>
+										<ul>
+											<li class="cart_pro_name"><input id="product_checkbox"
+												type="checkbox" checked disabled>
+												<p>
+													${product.brand} <br> ${product.pName}
+												</p></li>
+											<li>
+												<div class="count">
+													<button>
+														<img src="${path}/images/board/minus.png">
+													</button>
+													<input type="text" value="${product.purchaseCount}"
+														disabled>
+													<button>
+														<img src="${path}/images/board/plus.png">
+													</button>
+												</div>
+												<hr>
+											</li>
+										</ul>
+
+										<div class="cart_img">
+											<img src="${product.imagePath}">
+										</div>
+									</c:forEach>
+									<div class="refund">
+										<button class="refund_btn">환불하기</button>
 									</div>
 								</div>
 
@@ -110,24 +118,108 @@
 						<div class="main_text">
 							<ul>
 								<li class="title">제목</li>
-								<li><textarea class="title_input" placeholder="제목을 입력하세요."></textarea></li>
+								<li><textarea class="title_input" placeholder="제목을 입력하세요."
+										onchange="editTitleF()">${info.title}</textarea></li>
 								<li class="context">내용</li>
 								<li><textarea class="context_input"
-										placeholder="내용을 입력하세요."></textarea></li>
+										placeholder="내용을 입력하세요." onchange="editContextF()">${info.boardContent}</textarea></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 
 				<div class="done">
-					<button class="done_btn" onclick="editCom()">수정완료</button>
+					<button class="done_btn">수정완료</button>
 				</div>
 			</div>
 
 		</div>
 	</div>
-
+	<div id="here"></div>
 	<%@include file="../../common/footer.jsp"%>
+	<script>
+	$(".refund_btn").click(function(){
+		var obj = {
+				"boardId":"${info.boardId}"
+		};
+		$.ajax({
+			url : "${path}/myPage/subPage/isRefund.do",
+			data : obj,
+			type : "POST",
+			success : function(result) {
+				$("#here").html(result);
+			},
+			error : function() {
+				alert("에러입니다.");
+			}
+		});
+		
+	}
+	
+	var day = ${info.day} * 60 * 24;
+	var selectElement = $("#dateSelect option");
+	for(var i=0; i<selectElement.length; i++){
+		var option = selectElement[i];
+		if(option.value == day){
+			option.selected = true;
+			var editDay = $("#dateSelect option:selected").val();
+			break
+		}
+	}
+	editHour =  $("#input_hour").val();
+	editMinute =  $("#input_minute").val();
+	editTitle =  $(".title_input").val();
+	editContext =  $(".context_input").val();
+	if(${participant}>1){
+		$(".remaintime").attr("readonly",true);
+		$("#dateSelect").attr("disabled",true);
+	}else{
+		$("#dateSelect").change(function(){
+			editDay = $("#dateSelect option:selected").val();
+		});
+	}
+	function editHourF(){
+		editHour =  $("#input_hour").val();
+	}
+	function editMinuteF(){
+		editMinute =  $("#input_minute").val();
+	}
+	function editTitleF(){
+		editTitle =  $(".title_input").val();
+	}
+	function editContextF(){
+		editContext =  $(".context_input").val();
+	}
+	
+	/*
+	$(".done_btn").click(function(){
+		var obj = {
+				"boardId" : "${info.boardId}",
+				"participant" : "${participant}",
+				"day" : editDay,
+				"hour" : editHour,
+				"minute" : editMinute,
+				"title" : editTitle,
+				"context" : editContext
+				};
+		
+		$.ajax({
+					url : "${path}/myPage/subPage/completeEdit.do",
+					data : JSON.stringify(obj),
+					type : "POST",
+					contentType: "application/json",
+					success : function(result) {
+						$("#edit").html(result);
+					},
+					error : function() {
+						alert("에러입니다.");
+					}
+				});
+		
+	});
+	*/
+	
+	</script>
 </body>
 </html>
 

@@ -91,7 +91,7 @@ p.content {
     gap: 10px;
     margin-top: 30px;
 }
-.update_btn, .freeUpdate_btn{
+.update_btn, .freeUpdate_btn, .participated_freeUpdate_btn{
 	font-size: 25px;
 	color: white;
 	border-radius: 15px;

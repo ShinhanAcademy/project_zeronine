@@ -20,8 +20,12 @@ function draw(max, classname, colorname){
 $(".freeBoardDetail").click(function(){
 
 	var boardId = $(this).closest('tr').find('#hiddenBoardId').val();
+	var isSuccess = $(this).closest('tr').find('#hiddenIsSuccess').val();
 
-	var obj = {"boardId" : boardId};
+	var obj = {
+				"boardId" : boardId,
+				"isSuccess" : isSuccess
+				};
 	
 		$.ajax({
 					url : path + "/myPage/subPage/participatedFreeBoardDetail.do",
