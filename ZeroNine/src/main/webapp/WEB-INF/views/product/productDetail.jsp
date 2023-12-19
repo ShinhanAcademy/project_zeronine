@@ -125,6 +125,9 @@
 								value="${plist.price}" maxFractionDigits="3"></fmt:formatNumber>
 							원</span>
 					</div>
+					<div>
+						장바구니
+					</div>
 				</div>
 
 				<div class="sidebottom"></div>
@@ -151,13 +154,13 @@
 		var currentPosition = parseInt($("#sidebox").css("top"));
 		
 		$(window).scroll(function() {
-			var position = $(window).scrollTop();
-			if (position > 1600) {
-				$("#sidebox").stop().animate({
-					"top" : position + currentPosition - 1200 + "px"
-				}, 500);
+			let position = $(this).scrollTop();
+			let priceOffset = $(".detail_bottom").offset().top;
+			console.log("position", position);
+			if (position >= (priceOffset - 50)) {
+				$("#sidebox").addClass("scroll_on");
 			} else {
-				$("#sidebox").css("top", currentPosition + "px");
+				$("#sidebox").removeClass("scroll_on");
 			}
 
 		});

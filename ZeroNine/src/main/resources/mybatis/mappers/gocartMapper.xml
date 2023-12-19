@@ -41,4 +41,10 @@ SELECT product."productId",product."pName", cart."productCount", product."price"
 FROM (select "productId", "productCount" from cart where "customerId" = CAST(#{custid} AS UUID)	and "productId" = CAST(#{productId} AS UUID)
  ) cart JOIN product ON cart."productId" = product."productId";
 </select>
+<delete id="deleteCartItem" parameterType="map">
+	delete from cart
+	where
+	"customerId" = cast(#{customerId} as UUID)
+	AND "productId" = cast(#{productId} as UUID)
+</delete>
 </mapper>

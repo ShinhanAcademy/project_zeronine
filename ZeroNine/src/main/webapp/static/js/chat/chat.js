@@ -7,11 +7,12 @@ let stompClient = null;
 let chatId = null;
 let boardId = null;
 let sender = null;
+let myId = null;
 $(function(){
 	$(`#chatList .chat_unit`).on("click", function(){
 		$(`#chatList .chat_unit`).removeClass("on");
 		$(this).addClass("on");
-		
+	
 		chatId = $(this).attr("data-chatId");
 		boardId = $(this).attr("data-boardId");
 		
@@ -20,6 +21,9 @@ $(function(){
 			data : {chatId},
 			type : "POST",
 			success : function(result) {
+				console.log("RESULT=>", result);
+				myId = result.customerId;
+				console.log("MY ID", myId);
 				const {customerId, chatDtlList, chatDtlVO} = result;
 				const {customerName, address, title, path} = chatDtlVO;
 				
@@ -150,10 +154,29 @@ function showMessage(message) {
 //	p.style.wordWrap = "break-word";
 //	p.appendChild(document.createTextNode(message.sender + ": " + message.content));
 //	chatBox.appendChild(p);
-	
-	const {messageContent} = message;
-	
 	const addHtml = [];
+	console.log("SHOW MESSAGE", message);
+	const {messageContent} = message;
+	senderId = message.senderId;
+
+	var messageClass = `<div class="talk other_talker"> <img src="${contextPath}/images/mypage/img_chat_profile.png" alt="profile image" />`;
+	/*
+	addHtml.push(`<div class="profile img_wrap">`);
+	addHtml.push(`<img src="${contextPath}/images/mypage/img_chat_profile.png" alt="profile image" />`)	
+	addHtml.push(`</div>`);
+	
+	*/
+
+	console.log("compare sender id and myId ==>", senderId, myId, senderId == myId);
+	if(senderId == myId) {
+		messageClass = `<div class="talk my_talk">`
+	}
+	
+	addHtml.push(messageClass);
+
+	console.log("message=>", message);
+
+	
 	let currDate = convertTime(new Date());
 	
 	const lastDate = $("#chatDtlList div.date:last").text();
@@ -164,10 +187,28 @@ function showMessage(message) {
 		addHtml.push(`</div>`);
 	}
 	
-	addHtml.push(`<div class="talk my_talk">`);
-	addHtml.push(`<div class="msg">${messageContent}</div>`);
+	console.log(`Received Message : ${messageContent}`);
+
+	//addHtml.push(`<div class="talk my_talk">`);
+	
+	// addHtml.push(`<div class="msg">`);
+	// addHtml.push(`${messageContent}`);
+	// addHtml.push(`</div>`);
+	addHtml.push(`<div class="msg">`);
+	addHtml.push(`${messageContent}`);
+	addHtml.push(`</div>`);
 	addHtml.push(`</div>`);
 	
 	$("#chatDtlList").append(addHtml.join(""));
 	$("#message").val("");
+}
+
+//엔터 Trigger
+const chatTextArea = document.querySelector(".chat_wrap .text_wrap textarea");
+if (chatTextArea) {
+	chatTextArea.addEventListener("keyup", function(e) {
+		if (e.keyCode === 13) {
+			document.querySelector(".btn_write").click();
+		};
+	});
 }

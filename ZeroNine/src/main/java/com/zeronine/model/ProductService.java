@@ -65,6 +65,9 @@ public class ProductService {
 		// TODO Auto-generated method stub
 		return productDAO.pcategoryPageCount(pCount,pCategoryId);
 	}
+	public ProductVO selectByPricePname(String productId) {
+		return productDAO.selectByPricePname(productId);
+	}
 	
 }
 

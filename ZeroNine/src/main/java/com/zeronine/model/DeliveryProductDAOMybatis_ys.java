@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zeronine.dto.DeliveryProductVO;
+
 @Repository("deliveryproductDAO_ys")
 public class DeliveryProductDAOMybatis_ys {
 	@Autowired
@@ -33,11 +35,16 @@ public class DeliveryProductDAOMybatis_ys {
 		map.put("deliveryId", deliveryId);
 		map.put("custid", custid);
 		map.put("productId", productId);
-		return 0;
+		return sqlSession.insert(NAMESPACE + "PersonGoDeliveryProduct",map);
+	}
+
+
+	public DeliveryProductVO selectByDidpCount(String deliveryId) {
+		DeliveryProductVO deliveryproduct = sqlSession.selectOne(NAMESPACE + "selectByDidpCount",deliveryId);
+		return deliveryproduct;
 	}
 	
-	
-	
+
 }
 
 	

@@ -116,4 +116,11 @@
 		ORDER BY prcount DESC NULLS LAST, "pd"."price" ASC
 		LIMIT 4;
 	</select>
+	<select id="selectByPricePname" parameterType="String"
+		resultType="productVo">
+		SELECT price,"pName"
+		FROM "product"
+		where
+		"productId" = CAST(#{productId} AS UUID)
+	</select>
 </mapper>

@@ -36,6 +36,7 @@
 		ON "chat"."chatId" = "message"."chatId"
 		AND "message"."rowNum" = 1
 	WHERE "oneToOneBoard"."oAuthorId" = cast(#{oAuthorId} as uuid)
+	OR "chat"."customerId" = cast(#{customerId} as uuid)
 	</select>
 	
 	<select id="selectChatDtlList" parameterType="String" resultType="chatDtlVO">

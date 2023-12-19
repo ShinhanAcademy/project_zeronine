@@ -121,6 +121,12 @@ public class ProductDAOMybatis {
 		List<ProductVO> productList = sqlSession.selectList(namespace + "pcategoryPageCount", map);
 		return productList;
 	}
+	public ProductVO selectByPricePname(String productId) {
+		ProductVO product = sqlSession.selectOne(namespace + "selectByPricePname",productId);
+	return product;
+	}
+
+
 	
 }
 
