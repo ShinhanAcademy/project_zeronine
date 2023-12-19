@@ -3,6 +3,7 @@
     -- COMMON
 ****************************/
 $(function(){
+    let headerHeight=$(".zn_header").height();
 
 	//nav
 	/*
@@ -16,11 +17,9 @@ $(function(){
     
     //header
     $(window).scroll(function(){
-        var calSct=$(this).scrollTop();
-        var bannerOffset=$(".main_visual_wrap").offset().top;
-        console.log($(this).scrollTop());
-        console.log(bannerOffset);
-        if(calSct>=204) {
+        let calSct=$(this).scrollTop();
+        
+        if(calSct>=headerHeight) {
             $(".zn_header, .zn_header .top").addClass("on");
         }else{
             $(".zn_header, .zn_header .top").removeClass("on");
