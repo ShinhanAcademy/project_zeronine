@@ -113,12 +113,55 @@ public class BoardController {
 	}
 
 	@RequestMapping("/freedeliveryboard.do")
-	public String freeBoard() {
+	public String freeBoard( Model model, HttpServletRequest request) {
+		List<Map<String, Object>> infoFree = boardService.selectFreeDeliveryBoard();
+		List<DealFailRefundVO> fail = boardService.selectDealFailBoard();
+		List<DealSuccessBoardVO> success = boardService.selectDealSuccessBoard();
+		System.out.println("이건 컨트롤러: " + infoFree);
+		
+		JSONArray jsonarray = new JSONArray();
+		for (Map<String, Object> map : infoFree) {
+			JSONObject json = new JSONObject();
+
+			for (Map.Entry<String, Object> entry : map.entrySet()) {
+				String key = (String) entry.getKey();
+				String value = entry.getValue().toString();
+				json.put(key, value);
+			}
+			jsonarray.add(json);
+		}
+		
+		JSONArray failjson = new JSONArray();
+		for(DealFailRefundVO fdeal : fail) {
+			JSONObject fjson = new JSONObject();
+			fjson.put("boardId", fdeal.getBoardId());
+			
+			failjson.add(fjson);
+		}
+		
+		logger.info("확인 : {}", failjson);
+		
+		
+		JSONArray successjson = new JSONArray();
+		for(DealSuccessBoardVO sdeal : success) {
+			JSONObject sjson = new JSONObject();
+			sjson.put("boardId", sdeal.getBoardId());
+			
+			successjson.add(sjson);
+			
+		}
+		
+		HttpSession session = request.getSession();
+		String email = (String)session.getAttribute("email");
+		model.addAttribute("email", email);
+		model.addAttribute("infoFree",jsonarray);
+		logger.info("이것은 free의 제이슨:{} ", jsonarray);
 		return "board/freeDeliveryBoard";
 	}
+	
 
 	@RequestMapping("/onetooneboard.do")
-	public String onetooneBoard(Model model) {
+	public String onetooneBoard(Model model, HttpServletRequest request) {
 		List<Map<String, Object>> infoOne = boardService.selectOneBoardList();
 
 		JSONArray jsonarray = new JSONArray();
@@ -134,13 +177,14 @@ public class BoardController {
 			}
 			jsonarray.add(json);
 		}
-
+		HttpSession session = request.getSession();
+		String email = (String)session.getAttribute("email");
+		model.addAttribute("email", email);
 		logger.info("controller infoOne 정보: {}", jsonarray);
 		model.addAttribute("infoOne", jsonarray);
 		return "board/oneTooneBoard";
 	}
-
-
+	
 	// board_edit
 	@RequestMapping("/boardedit.do")
 	public String editBoard(@RequestParam(name = "boardType") String boardType, Model model) {
