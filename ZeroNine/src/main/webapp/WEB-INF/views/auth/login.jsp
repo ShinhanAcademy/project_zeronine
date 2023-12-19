@@ -33,7 +33,7 @@
 						<span class="nklogin-bottom" >네이버 간편로그인</span>
 					</button>
 				
-					<button class="kakao_login" onclick="location.href='#'">
+					<button type="submit" class="kakao_login" onclick="location.href='#'">
 						<div class="kakaoimg">
 							<img src="${path}/images/login/loginkakakoimg.png">
 						</div>

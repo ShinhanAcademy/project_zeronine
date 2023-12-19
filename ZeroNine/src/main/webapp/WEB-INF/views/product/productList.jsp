@@ -87,7 +87,7 @@
 				</div>
 			</div>
 			<div class="dist100"></div>
-		
+			
 		</div>
 
 	</div>
@@ -121,6 +121,9 @@
 	</script>
 
 	<script>
+	$(function(){
+		pcountchange();
+	});
 	function pcountchange(currentpage,perpage){
 		console.log(currentpage);
 		var obj = {

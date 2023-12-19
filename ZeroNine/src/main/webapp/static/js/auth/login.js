@@ -2,11 +2,11 @@ document.getElementById("join_btn").onclick = function(){
 	location.href = path + "/auth/joinMembership.do";
 };
 
-document.getElementById("login_btn").onclick = function(){
-	var obj = { 
+function search() {
+var obj = { 
 				"email" : $("#email").val(),
 				"password" : $("#password").val()
-			  }
+			  };
 			  
 	$.ajax({
 		url : path + "/auth/login.do",
@@ -25,6 +25,14 @@ document.getElementById("login_btn").onclick = function(){
 			alert("에러입니다.");
 		}
 	});
-};
-
+	}
+$("#password").keypress(function(event){
+	if(event.which===13){
+	event.preventDefault();
+	search();
+	}
+});
+$("#login_btn").click(function() {
+	search();
+});
 
