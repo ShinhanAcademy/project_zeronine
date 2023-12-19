@@ -46,7 +46,7 @@
 				<div class="chat_detail_info">
 					<div class="chat_top">
 						<div class="user_name" id="customerName"></div>
-						<button class="btn_exit" id="btnExit">나가기</button>
+						<button class="btn_exit" id="btnExit">채팅방 나가기</button>
 					</div>
 					<div class="product_info">
 						<div class="product img_wrap" id="path"></div>
@@ -112,8 +112,8 @@
 					<div class="chat_text">
 						<div class="text_wrap">
 							<textarea id="message"></textarea>
+							<button class="btn_write" onclick="sendMessage()">작성</button>
 						</div>
-						<button class="btn_write" onclick="sendMessage()">작성</button>
 					</div>
 				</div>
 			</div>
