@@ -54,6 +54,9 @@
     justify-content: space-evenly;
 }  
 
+.subscript_coupon > div >img {
+	cursor: pointer;
+}
 
 .subscript_banner_down img{
 	display: block;
