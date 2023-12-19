@@ -77,6 +77,7 @@
 		                    			</c:forEach>
 		                    		</tbody>
 		                    	</table>
+		                    	</div>
 		                    	<br><br>
 		                    	<div class="tbl_top_wrap">
 		                    	<div class="total_count">
