@@ -3,7 +3,7 @@
 
 <%@include file="../../common/head.jsp"%>
 <%@include file="../../common/header.jsp"%>
-<link rel="stylesheet" href="${path}/css/board/boardEdit.css" />
+<link rel="stylesheet" href="${path}/css/myPage/myPageBoardEdit.css" />
 
 <title>MyPage</title>
 

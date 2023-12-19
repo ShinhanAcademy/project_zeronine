@@ -24,9 +24,6 @@
 					<p class="content">${info.oContent}</p>
 				</div>
 			</div>
-			<div class="join_btn_div">
-				<button class="join_btn">채팅하기</button>
-			</div>
 		</div>
 	</div>
 </div>

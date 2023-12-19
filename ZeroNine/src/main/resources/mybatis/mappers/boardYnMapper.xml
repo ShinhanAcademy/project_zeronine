@@ -60,6 +60,7 @@
 		where bc."boardId" = cast(#{boardId} as UUID)
 		and bc."customerId" = cast(#{customerId} as UUID)
 	</select>
+	
 	<select id="boardpCount" resultType="int" parameterType="String">
 		SELECT DISTINCT p."pCount" - COALESCE(sq."pickCount", 0) AS count
 		FROM "selectProduct" sp
@@ -277,6 +278,7 @@
 		left join public."dealSuccessOboard" dso on (ob."oBoardId"=dso."oBoardId")
 		where ob."oAuthorId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
 		and ob."oBoardId" not in (select "oBoardId" from "dealSuccessOboard")
+		and ob."isDelete" = false
 	</select>
 	<select id="successChatBlist" resultType="map" parameterType="String">
 		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
@@ -302,6 +304,7 @@
 		left join public."dealSuccessOboard" dso on (ob."oBoardId"=dso."oBoardId")
 		where c."customerId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
 		and ob."oBoardId" not in (select "oBoardId" from "dealSuccessOboard")
+		and ob."isDelete" = false
 	</select>
 	<select id="successParticipantChatList" resultType="map" parameterType="String">
 		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
@@ -324,4 +327,25 @@
 		set "oTitle"=#{title}, "oContent"=#{context}, "oUpdateTime"=NOW()
 		where "oBoardId" = cast(#{boardId} as UUID)
 	</update>
+	<update id="completeFreeEdit" parameterType="map">
+		UPDATE public.board
+		SET title=#{title}, "boardContent"=#{context}, "updateTime"=NOW()
+		WHERE "boardId"=cast(#{boardId} as UUID)
+	</update>
+	<update id="completeFreeEditTime" parameterType="map">
+		UPDATE public.board
+		SET title=#{title}, "boardContent"=#{context}, "postingMinutes"=#{remainTime}, "updateTime"=NOW()
+		WHERE "boardId"=cast(#{boardId} as UUID)
+	</update>
+	<update id="deleteChat" parameterType="String">
+		UPDATE public."oneToOneBoard"
+		SET  "isDelete" = true
+		WHERE "oBoardId" = cast(#{boardId} as UUID)
+	</update>
+	<select id="myCartFast" resultType="map" parameterType="String">
+		select pi."imagePath", p.brand, p."pName", p."pCount", p."price", p."productId"
+		from cart c left join product p on (c."productId"=p."productId")
+		left join "productMainImage" pi on (p."productId"=pi."productId")
+		where c."customerId"=cast(#{customerId} as UUID)
+	</select>
 </mapper>

@@ -102,9 +102,7 @@
 											<img src="${product.imagePath}">
 										</div>
 									</c:forEach>
-									<div class="refund">
-										<button class="refund_btn">환불하기</button>
-									</div>
+									
 								</div>
 
 							</div>
@@ -138,23 +136,6 @@
 	<div id="here"></div>
 	<%@include file="../../common/footer.jsp"%>
 	<script>
-	$(".refund_btn").click(function(){
-		var obj = {
-				"boardId":"${info.boardId}"
-		};
-		$.ajax({
-			url : "${path}/myPage/subPage/isRefund.do",
-			data : obj,
-			type : "POST",
-			success : function(result) {
-				$("#here").html(result);
-			},
-			error : function() {
-				alert("에러입니다.");
-			}
-		});
-		
-	}
 	
 	var day = ${info.day} * 60 * 24;
 	var selectElement = $("#dateSelect option");
@@ -191,7 +172,6 @@
 		editContext =  $(".context_input").val();
 	}
 	
-	/*
 	$(".done_btn").click(function(){
 		var obj = {
 				"boardId" : "${info.boardId}",
@@ -204,7 +184,7 @@
 				};
 		
 		$.ajax({
-					url : "${path}/myPage/subPage/completeEdit.do",
+					url : "${path}/myPage/subPage/completeFreeEdit.do",
 					data : JSON.stringify(obj),
 					type : "POST",
 					contentType: "application/json",
@@ -217,7 +197,6 @@
 				});
 		
 	});
-	*/
 	
 	</script>
 </body>

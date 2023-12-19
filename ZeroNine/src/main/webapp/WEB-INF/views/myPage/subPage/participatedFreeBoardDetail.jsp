@@ -33,9 +33,6 @@
 					<p class="content">${info.boardContent}</p>
 				</div>
 			</div>
-			<div class="update_btn_div">
-				<button class="participated_freeUpdate_btn">수정하기</button>
-			</div>
 		</div>
 	</div>
 </div>

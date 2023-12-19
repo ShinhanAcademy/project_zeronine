@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.zeronine.dto.BoardVO;
-
 @Repository("boardDAO")
 public class BoardDAOMybatis_yn {
 	
@@ -206,6 +204,37 @@ public class BoardDAOMybatis_yn {
 		List<Map<String,Object>> productInfo = sqlSession.selectList(NAMESPACE + "freeBoardProductEdit", map);
 		return productInfo;
 	}
+
+	public int completeFreeEdit(String title, String context, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("context", context);
+		map.put("boardId", boardId);
+		int result = sqlSession.update(NAMESPACE + "completeFreeEdit", map);
+		return result;
+	}
+
+	public int completeFreeEditTime(String title, String context, int remainTime, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("context", context);
+		map.put("remainTime", remainTime);
+		map.put("boardId", boardId);
+		int result = sqlSession.update(NAMESPACE + "completeFreeEditTime", map);
+		return result;
+	}
+
+	public int deleteChat(String boardId) {
+		int result = sqlSession.update(NAMESPACE + "deleteChat", boardId);
+		return result;
+	}
+
+	public List<Map<String, Object>> myCartFast(String customerId) {
+		List<Map<String,Object>> myCart = sqlSession.selectList(NAMESPACE + "myCartFast", customerId);
+		return myCart;
+	}
+
+	
 
 	
 
