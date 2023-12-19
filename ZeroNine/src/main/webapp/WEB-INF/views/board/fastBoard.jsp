@@ -5,38 +5,6 @@
 <%@include file="../common/head.jsp"%>
 <%@include file="../common/header.jsp"%>
 
-<style>
-.donecss{
-	border: 1px solid black;
-	border-radius: 15px;
-	width: 418px;
-	margin: 10px 27px 30px 10px;
-	display: flex;
-	justify-content: flex-start;
-	flex-wrap: nowrap;
-	align-content: center;
-	flex-direction: column;
-	align-items: center;
-	background-color: rgb(0,0,0,0.1);
-	color : #c4c4c4;
-}
-
-.successcss{
-border: 1px solid black;
-	border-radius: 15px;
-	width: 418px;
-	margin: 10px 27px 30px 10px;
-	display: flex;
-	justify-content: flex-start;
-	flex-wrap: nowrap;
-	align-content: center;
-	flex-direction: column;
-	align-items: center;
-	background-color: rgb(230,244,255);
-	color : white;
-}
-</style>
-
 <title>FastBoard</title>
 <link rel="stylesheet" href="${path}/css/board/boardList.css" />
 <script src="../js/like.js"></script>
@@ -176,26 +144,10 @@ function show(jsondata) {
         	output+= `<div id="list">`
         }
         output +=  ` 
-        <div class="pro_info">`
-        
-        if(dealfail){
-        	output += `<ul>
-				<li><img class="close_img"
-				src="${path}/images/board/closed.png"></li>
-		</ul>`
-        } else if(dealsuccess){
-        	output+=`
-    			<ul>
-    				<li><img class="success_img"
-    					src="${path}/images/board/success.png"></li>
-    			</ul>`
-        }else{ output+=`
-			<ul>
-				<li><img class="pro_img"
-					src="\${item.imagePath}"></li>
-			</ul>`}
-
-		output+=`
+        <div class="pro_info">
+        	<ul>
+				<li><img class="pro_img" src="\${item.imagePath}"></li>
+			</ul>
 			<div class="pro_name">
 				<ul>
 					<li>\${item.brand}</li>
@@ -218,9 +170,9 @@ function show(jsondata) {
 						<img class="like" src="${path}/images/board/heart.png">
 					</button>`
 					if(dealfail){
-						output+=`<button id="fast_detail_btn" class="detail_btn" style="background-color:#c4c4c4;" disabled="disabled">보기</button>`
+						output+=`<button id="fast_detail_btn" class="detail_btn" disabled="disabled">보기</button>`
 					}else if(dealsuccess){
-						output+=`<button id="fast_detail_btn" class="detail_btn" style="background-color:#B0DDFF;" disabled="disabled">보기</button>`
+						output+=`<button id="fast_detail_btn" class="detail_btn" disabled="disabled">보기</button>`
 					}
 					else{
 					output += `<button id="fast_detail_btn" class="detail_btn" value="\${item.boardId}" onclick="f_btn('\${item.boardId}')" >보기</button>`

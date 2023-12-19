@@ -11,7 +11,7 @@
 			join public."product" as p on (p."productId" = sp."productId")
 			join public."productMainImage" as pi on (p."productId" = pi."productId")
 			group by b."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", pi."imagePath"
-			order by b."uploadTime" desc;
+			order by b."uploadTime" desc
 	</select>
 
 	<select id="selectFastDetail" resultType="map">
@@ -43,8 +43,24 @@
 					on bc."boardId" = b."boardId"
 				group by bc."boardId",b."title", b."boardContent",b."uploadTime", p."price", b."finishTime"
 				) as free_board_data
-		group by "boardId","title","boardContent", "uploadTime", "finishTime";
+		group by "boardId","title","boardContent", "uploadTime", "finishTime"
+		order by  "uploadTime" desc
 </select>
+
+	<select id="selectFreeDetail" resultType="map">
+		select "boardId","title","boardContent", "uploadTime", "finishTime", sum(sumprice)
+			from (
+				select bc."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime",((p."price")* sum(bc."purchaseCount")) as sumprice
+					from public."boardCart" as bc
+				join public."product" as p
+					on bc."productId" = p."productId"
+				join public."board" as b 
+					on bc."boardId" = b."boardId"
+				group by bc."boardId",b."title", b."boardContent",b."uploadTime", p."price", b."finishTime"
+				) as free_board_data
+			where "boardId" = cast(#{boardId} as UUID)
+		group by "boardId","title","boardContent", "uploadTime", "finishTime"
+	</select>
 	
 	<select id="selectOneBoardList" resultType="map">
 	select *, (ob."oUploadTime" + (ob."oPostingMinutes" || 'minutes')::interval) as finishTime
