@@ -34,4 +34,7 @@ public class CartService {
 	public List<String>orderOneCart(String custid, String productId) {
 		return cartDAO.orderOneCart(custid, productId);
 	}
+	public int deleteCartItem(String customerId, String productId) {
+		return cartDAO.deleteCartItem(customerId, productId);
+	}
 }

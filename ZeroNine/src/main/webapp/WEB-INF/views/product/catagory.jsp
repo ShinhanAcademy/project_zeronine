@@ -46,6 +46,32 @@
 		</span>
 	</div>
 </c:forEach>
+<div class="plus_btnpart">
+			<div style="display: block; text-align: center;">		
+			<c:if test="${paging.startPage != 1 }">
+				<a href="javascript:pcountchange(${paging.startPage - 1},${paging.cntPerPage})">&lt;&lt;</a>
+			</c:if>
+			 <script>
+			 	console.log("${paging.endPage}");
+			 </script>
+			<c:forEach begin="${paging.startPage}" end="${paging.lastPage}" var="p">
+				<c:choose>
+					<c:when test="${p == paging.nowPage}">
+						<%-- <b>${p}</b> --%>
+						<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
+					</c:when>
+					<c:when test="${p != paging.nowPage}">
+						<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${paging.endPage != paging.lastPage}">
+				<a href="javascript:pcountchange(${paging.endPage+1},${paging.cntPerPage})">&gt;&gt;</a>
+			</c:if>
+	    </div>
+
+				<div class="dist49"></div>
+			</div>
 <script>
 		var path = "${path}";
 		var custid = "${customerid}";

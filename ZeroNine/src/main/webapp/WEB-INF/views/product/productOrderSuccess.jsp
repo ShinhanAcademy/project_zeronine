@@ -8,7 +8,19 @@
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
 <link rel="stylesheet" href="${path}/css/product/productOrderSuccess.css" />
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Get the element by its ID
+    var element = document.getElementById('deliId');
 
+    // Display only the first 8 characters
+    var originalText = element.textContent.trim();
+    var truncatedText = originalText.slice(0, 8);
+
+    // Update the content of the element
+    element.textContent = truncatedText;
+});
+</script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -22,17 +34,18 @@
 				<div class="order_detail">
 					<div class="od_part">
 						<div class="od_subtitle">주문번호</div>
-						<div class="ob_subtext">20231123202304019</div>
+						<div class="ob_subtext" id="deliId">${deliproduct.deliveryId }</div>
 					</div >
 					<div class="jul"></div>
 					<div class="od_part">
 						<div class="od_subtitle">상품명</div>
-						<div class="ob_subtext">20231123202304019</div>
+						<div class="ob_subtext">${product.pName }</div>
 					</div>
 					<div class="jul"></div>
 					<div class="od_part">
 						<div class="od_subtitle">결제금액</div>
-						<div class="ob_subtext">20231123202304019</div>
+						<div class="ob_subtext"><fmt:formatNumber
+								value="${deliproduct.productCount*product.price}" maxFractionDigits="3"></fmt:formatNumber>원</div>
 					</div>
 				
 				</div>

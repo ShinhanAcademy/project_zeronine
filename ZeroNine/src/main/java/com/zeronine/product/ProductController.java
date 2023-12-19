@@ -1,6 +1,8 @@
 package com.zeronine.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zeronine.dto.PagingVO;
 import com.zeronine.dto.ProductVO;
@@ -117,9 +121,11 @@ public class ProductController {
 	}
 
 	@GetMapping("/productList.do")
-	public void productlist(/* Integer value, */Model model, PagingVO vo,
+	public void productlist(/* Integer value, */Model model, 
+			@RequestParam(value = "vo", required = false)PagingVO vo,
 			@RequestParam(value = "nowPage", required = false) String nowPage,
-			@RequestParam(value = "cntPerPage", required = false) String cntPerPage, HttpSession session) {
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage, 
+			HttpSession session) {
 
 		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
 		session.setAttribute("customerid", customerid);
@@ -333,6 +339,21 @@ public class ProductController {
 		}
 	
 	}
+	//은경
+		@PostMapping("/deleteCartItem.do")
+		@ResponseBody
+		public Map<String, Object> deleteCartItem(@RequestParam String productId,
+									HttpSession session) {
+			String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+			//String customerId = (String) session.getAttribute("customerId"); //customerId
+			
+			int count = cartservice.deleteCartItem(customerId, productId);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("count", count);
+			
+			return map;
+		}
 	
 	@GetMapping("/productOrder.do")
 	public String productOrder(String productid,  Model model, HttpSession session) {
@@ -353,16 +374,25 @@ public class ProductController {
 		session.setAttribute("customerid", customerid);
 		customerid = (String) session.getAttribute("customerid");
 		String deliveryId = UUID.randomUUID().toString();
-		model.addAttribute("productId",productId);
+		session.setAttribute("productId", productId);
+		session.setAttribute("deliveryId", deliveryId);
 		int deliveryfirst = deliveryservice_ys.PersonGoDelivery(deliveryId, customerid,address,addressdetail);
 		int deliverysecond =deliveryproductservice_ys.PersonGoDeliveryProduct(deliveryId, customerid, productId);
 		return "product/productOrderSuccess";
 	}
 	@GetMapping("/productOrderSuccess.do")
-	public void productOrderSuccess(Model model) {
-		String productid = (String)model.getAttribute("productId");
-		
-		logger.info("707" + productid);
-		
+	public void productOrderSuccess(Model model, HttpSession session) {
+		 String deliveryId = (String) session.getAttribute("deliveryId");
+		    String productId = (String) session.getAttribute("productId");
+
+		    // Use the values as needed
+		    logger.info("Delivery ID: " + deliveryId);
+		    logger.info("Product ID: " + productId);
+		    model.addAttribute("product",productService.selectByPricePname(productId));
+		    model.addAttribute("deliproduct",deliveryproductservice_ys.selectByDidpCount(deliveryId));
+		    // Clear session attributes if needed
+		    session.removeAttribute("deliveryId");
+		    session.removeAttribute("productId");
+		 	
 	}
 }
