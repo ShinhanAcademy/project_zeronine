@@ -72,3 +72,7 @@ $(".participantChatDetail").click(function(){
 
 });
 
+$(".chatlist_wrap .btn_more").on("click", function(){
+	location.href = "/chat.do";
+});
+

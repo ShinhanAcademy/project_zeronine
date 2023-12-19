@@ -114,8 +114,8 @@ function callOrderHistory() {
 	var paramObj = {};
 
 	paramObj.searchWord = $(".search_word input").val();
-	paramObj.startDate = convertTime(startDate).split("T")[0];
-	paramObj.endDate = convertTime(endDate).split("T")[0];
+	paramObj.startDate = convertTime(startDate);
+	paramObj.endDate = convertTime(endDate);
 	
 	$.ajax({
 		url: contextPath + "/myPage/subPage/orderHistoryDetail.do",
