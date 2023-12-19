@@ -178,8 +178,35 @@ public class MyPageController {
 		model.addAttribute("kind","create");
 	}
 	
+	@PostMapping(value="/subPage/completeFreeEdit.do", consumes="application/json")
+	public String completeFreeEdit(@RequestBody Map<String,Object> info, Model model) {
+		int participant = Integer.parseInt((String)info.get("participant"));
+		String boardId = (String)info.get("boardId");
+		String title = (String)info.get("title");
+		String context = (String)info.get("context");
+		int result;
+		if(participant>1) {
+			result = boardService.completeFreeEdit(title,context,boardId);
+		}else {
+			int remainTime = Integer.parseInt((String)info.get("day")) + (Integer.parseInt((String)info.get("hour")))*60 + Integer.parseInt((String)info.get("minute"));
+			result = boardService.completeFreeEditTime(title,context,remainTime,boardId);
+		}
+		if(result>0) {
+			model.addAttribute("message","게시물이 정상적으로 수정되었습니다.");
+		}else {
+			model.addAttribute("message","게시물을 다시 수정해주세요.");
+		}
+		model.addAttribute("kind","create");
+		return "myPage/subPage/completeEdit";
+	}
+	
 	@PostMapping("/subPage/isDeleteBoard.do")
 	public void isDeleteBoard(String boardId,Model model) {
+		model.addAttribute("boardId", boardId);
+	}
+	
+	@PostMapping("/subPage/isDeleteChat.do")
+	public void isDeleteChat(String boardId,Model model) {
 		model.addAttribute("boardId", boardId);
 	}
 	
@@ -190,8 +217,15 @@ public class MyPageController {
 		return result;
 	}
 	
+	@PostMapping("/subPage/deleteChat.do")
+	@ResponseBody
+	public int deleteChat(String boardId,Model model) {
+		int result = boardService.deleteChat(boardId);
+		return result;
+	}
+	
 	@GetMapping("/subPage/cbFreeboardEdit.do")
-	public void cbFreeboardEdit(String boardId, int participant, Model model) {
+	public void cbFreeboardEdit(String boardId, int participant, Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		Map<String, Object> info = boardService.freeBoardDetailEdit(boardId);
@@ -199,18 +233,6 @@ public class MyPageController {
 		model.addAttribute("info", info);
 		model.addAttribute("productInfo", productInfo);
 		model.addAttribute("participant", participant);		
-	}
-	
-	@PostMapping("/subPage/isRefund.do")
-	public void isRefund(String boardId, Model model) {
-		logger.info(boardId);
-		
-	}
-	
-	@GetMapping("/subPage/pbFreeboardEdit.do")
-	public void pbFreeboardEdit(String boardId, Model model) {
-		//Map<String, Object> info = boardService.freeBoardDetailEdit(boardId);
-		//model.addAttribute("info", info);	
 	}
 	
 	@GetMapping("/subPage/cbFastDelivery.do")
@@ -302,7 +324,7 @@ public class MyPageController {
 	// likeBoard(占쏙옙占쏙옙 占쌉시깍옙)
 	@GetMapping("/likeBoard.do")
 	public void likeBoard(Model model, HttpSession session) {
-		// String customerId = (String)session.getAttribute("customerId");
+		//String customerId = (String)session.getAttribute("customerId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> info = boardService.likeBoardBlist(customerId);
 		List<String> likedbid = boardService.likeBidList(customerId);

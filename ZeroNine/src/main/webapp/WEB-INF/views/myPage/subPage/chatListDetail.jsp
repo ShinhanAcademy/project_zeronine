@@ -27,11 +27,11 @@
 			<div class="join_btn_div">
 				<button class="delete_btn">삭제하기</button>
 				<button class="update_btn">수정하기</button>
-				<button class="join_btn">채팅하기</button>
 			</div>
 		</div>
 	</div>
 </div>
+<div id="delete_here"></div>
 <script>
 	var path = "${path}";
 	var boardId = "${info.oBoardId}";

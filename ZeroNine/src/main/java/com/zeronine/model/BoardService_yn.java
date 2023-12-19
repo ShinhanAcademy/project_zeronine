@@ -145,6 +145,24 @@ public class BoardService_yn {
 		return boardDAO.freeBoardProductEdit(boardId,customerId);
 	}
 
+	public int completeFreeEdit(String title, String context, String boardId) {
+		return boardDAO.completeFreeEdit(title,context,boardId);
+	}
+
+	public int completeFreeEditTime(String title, String context, int remainTime, String boardId) {
+		return boardDAO.completeFreeEditTime(title,context,remainTime,boardId);
+	}
+
+	public int deleteChat(String boardId) {
+		return boardDAO.deleteChat(boardId);
+	}
+
+	public List<Map<String, Object>> myCartFast(String customerId) {
+		return boardDAO.myCartFast(customerId);
+	}
+
+	
+
 	
 	
 	
