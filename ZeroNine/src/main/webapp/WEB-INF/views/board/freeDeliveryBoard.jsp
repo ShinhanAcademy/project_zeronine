@@ -111,7 +111,7 @@ $(searchBoard);
  var ratio_arr = [];
 function show(jsondata) {
 	console.log(jsondata.length);
-	
+	var output = "";
     $.each(jsondata, function (index, item) {
     	
     	//%구하기
@@ -258,7 +258,6 @@ function searchBoard() {
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
         	keyword = $("#search").val().toLowerCase();
-            alert(keyword);
             filterKeyword(infoFree_json, keyword);
         }
     });
@@ -274,9 +273,10 @@ function filterKeyword(infoFree_json, keyword) {
     var result_output = "";
     keyword = $("#search").val();
     $.each(infoFree_json, function (index, item) {
-        var product = item.pName;
-        var brand = item.brand;
-        if (product.includes(keyword) || brand.includes(keyword)) {
+        var title = item.title;
+        var left = 50000 - item.sum;
+        console.log(left);
+        if (title.includes(keyword) || left == keyword) {
             result.push(item);
         }
     });

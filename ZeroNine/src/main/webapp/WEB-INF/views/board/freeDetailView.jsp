@@ -42,7 +42,7 @@
 					</div>
 				</div>
 				<div class="join_btn_div">
-					<button class="join_btn">참여하기</button>
+					<button id="free_join_btn" class="join_btn">참여하기</button>
 				</div>
 			</div>
 		</div>

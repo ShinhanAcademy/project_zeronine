@@ -114,6 +114,7 @@ $(searchBoard);
 
 function show(jsondata) {
 	console.log(jsondata.length);
+	var output = "";
     $.each(jsondata, function (index, item) {
     	console.log('돌아라');
         // 날짜 포맷팅
@@ -258,7 +259,6 @@ function searchBoard() {
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
         	keyword = $("#search").val().toLowerCase();
-            alert(keyword);
             filterKeyword(infoFb_json, keyword);
         }
     });

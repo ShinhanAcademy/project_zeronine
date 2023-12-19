@@ -184,7 +184,7 @@ div.pro_detail {
 	grid-template-columns: repeat(3, 1fr);
 }
 
-#free_detail_btn {
+#free_detail_btn, #free_join_btn {
 	background-color: #00A991;
 }
 
