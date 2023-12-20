@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp"%>
+<%String customerId = (String)session.getAttribute("customerId");%>
 <title>구독권 구매</title>
 <link rel="stylesheet" href="${path}/css/subscription/subscription.css">
 <link rel="stylesheet" href="${path}/css/modal/modal.css">
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script> <!-- IAMPORT결제모듈 -->
+<script type="text/javascript" src="/js/pay/pay.js" ></script>
 </head>
 <%@include file="../common/header.jsp"%>
 <body>

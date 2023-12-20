@@ -1,4 +1,4 @@
-package com.zeronine.myPage;
+package com.zeronine.pay;
 
 
 import java.util.HashMap;
@@ -28,8 +28,8 @@ import com.zeronine.model.MyPageService;
 import com.zeronine.model.ProductService;
 
 @Controller
-@RequestMapping("/myPage")
-public class MyPageController {
+@RequestMapping("/pay")
+public class PayController {
 	
 	@Autowired
 	MyPageService deliveryService;
@@ -40,143 +40,23 @@ public class MyPageController {
 	@Autowired
 	CustomerService cService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PayController.class);
 
 	/* ****************************
 			MY_SHOPPING
 	 ****************************** */
-	// orderHistory(나의 지갑)
-	@GetMapping("/myWallet.do")
-	public void myWallet() {
-	}
 	
-	// orderHistory(주문 내역)
-	@RequestMapping("/orderHistory.do")
-	public void orderHistory() {
-	}
-
-	@RequestMapping("/subPage/orderHistoryDetail.do")
-	public void orderHistoryDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
-			@RequestParam(value = "startDate", required = false) String startDate,
-			@RequestParam(value = "endDate", required = false) String endDate,
-			Model model, HttpSession session) {
+	
+	@PostMapping(value="/subscription.do", consumes="application/json")
+	public String paySubscription(@RequestParam Map<String,Object> payInfo, Model model, HttpSession session) {
 		/*
-			String customerId = (String) session.getAttribute("customerId");
-		*/
-		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
-		System.out.println("ID = " + customerId);
-
-		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId, searchWord, startDate, endDate));
-	}
-	
-	// orderCancelHistory(취소 / 반품 내역)
-	@RequestMapping("/orderCancelHistory.do")
-	public void orderCancelHistory() {
-	}
-
-	@RequestMapping("/subPage/orderCancelHistoryDetail.do")
-	public void orderCancelHistoryDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
-			@RequestParam(value = "startDate", required = false) String startDate,
-			@RequestParam(value = "endDate", required = false) String endDate,
-			Model model, HttpSession session) {
-//		String customerId = (String) session.getAttribute("customerId");
-		String customerId = "7cb70b46-d6c2-462d-b785-dc27e1e7d045";
-		System.out.println("ID = " + customerId);
-		
-		model.addAttribute("orderCancelHistoryAll", deliveryService.orderCancelHistoryAll(customerId, searchWord, startDate, endDate));
-	}
-	
-	// myCart(장바구니)
-	@RequestMapping("/myCart.do")
-	public void myCart() {
-	}
-	
-	@RequestMapping("/subPage/myCartDetail.do")
-	public void myCartDetail(Model model, HttpSession session) {
-		String customerId = (String) session.getAttribute("customerId");
-//		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		//System.out.println("ID = " + customerId);
-		
-		model.addAttribute("myCart", deliveryService.myCart(customerId));
-	}
-
-	// likeProduct(찜한 상품)
-	@RequestMapping("/likeProduct.do")
-	public void likeProduct() {
-	}
-	@RequestMapping("/subPage/likeProductDetail.do")
-	public void likeProductDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
-			@RequestParam(value = "startDate", required = false) String startDate,
-			@RequestParam(value = "endDate", required = false) String endDate,
-			Model model, HttpSession session) {
-
-//		String customerId = (String) session.getAttribute("customerId");
-		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		//System.out.println("ID = " + customerId);
-		
-		model.addAttribute("likeProduct", deliveryService.likeProduct(customerId, searchWord));
-	}
-	
-	
-	
-	/* ****************************
-			MY_ACTIVITIES
-	 ****************************** */
-
-	// chatList(채占쏙옙 占쏙옙占�)
-	@RequestMapping("/ecoCare.do")
-	public void ecoCare() {
-	}
-	
-	@GetMapping("/createdBoard.do")
-	public void createdBoard(Model model, HttpSession session) {
-		// String customerId = (String)session.getAttribute("customerId");
-		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successMyWriteBlist(customerId);
-		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
-		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
-
-	}
-	@GetMapping("/subPage/createdBoardDetail.do")
-	public void createdBoardDetail(String boardId, String isSuccess, Model model) {
-		Map<String, Object> info = boardService.boardDetail(boardId);
-		int pCount = boardService.boardpCount(boardId);
-		int participant = boardService.numOfParticipant(boardId);
-		model.addAttribute("info", info);
-		model.addAttribute("pCount", pCount);
-		model.addAttribute("participant", participant);
-		model.addAttribute("isSuccess", isSuccess);
-	}
-	
-	@GetMapping("/subPage/cbFastboardEdit.do")
-	public void cbFastboardEdit(String boardId, int participant, Model model) {
-		Map<String, Object> info = boardService.boardDetailEdit(boardId);
-		model.addAttribute("info", info);
-		model.addAttribute("participant", participant);		
-	}
-	
-	@PostMapping(value="/subPage/completeEdit.do", consumes="application/json")
-	public void completeEdit(@RequestBody Map<String,Object> info, Model model) {
-		int participant = Integer.parseInt((String)info.get("participant"));
-		String boardId = (String)info.get("boardId");
-		String title = (String)info.get("title");
-		String context = (String)info.get("context");
-		int result;
-		if(participant>1) {
-			result = boardService.completeEdit(title,context,boardId);
-		}else {
-			int remainTime = Integer.parseInt((String)info.get("day")) + (Integer.parseInt((String)info.get("hour")))*60 + Integer.parseInt((String)info.get("minute"));
-			result = boardService.completeEditTime(title,context,remainTime,boardId);
-		}
-		if(result>0) {
-			model.addAttribute("message","게시물이 정상적으로 수정되었습니다.");
-		}else {
-			model.addAttribute("message","게시물을 다시 수정해주세요.");
-		}
-		model.addAttribute("kind","create");
+		 * System.out.println("!@!@!@!" + payInfo); String customerId =
+		 * (String)session.getAttribute("customerId"); String productDisplayName =
+		 * (String)payInfo.get("name"); int amount = (Integer)payInfo.get("amount");
+		 * System.out.println("!@!@!@!" + customerId + productDisplayName + amount);
+		 */
+		logger.info("lets go~");
+		return "redirect:main/main";
 	}
 	
 	@PostMapping(value="/subPage/completeFreeEdit.do", consumes="application/json")
