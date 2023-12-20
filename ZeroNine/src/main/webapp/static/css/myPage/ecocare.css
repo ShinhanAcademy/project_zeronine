@@ -6,3 +6,24 @@
  .contents.pickup_history_wrap .tbl_wrap table tbody td {
     padding: 10px 15px;
 }
+.dashboard_th{
+	border-top: 1px solid black;
+	height: 250px;
+}
+
+.bCanvas{
+	position : relative;
+	height: 225px;
+    width: 450px;
+}
+
+.dCanvas{
+	position : relative;
+	height: 90%;
+    width: 90%;
+}
+
+.dashboard_th td:nth-child(2){
+    display: flex;
+    justify-content: center;
+}
