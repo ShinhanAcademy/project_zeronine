@@ -251,6 +251,7 @@ body .chat_container,
 .chat_container .chat_room_list .my_talk .msg {
 	color: #fff;
 	background: #0F82FF;
+    text-align: right;
 }
 .chat_container .chat_room_list .talk .profile {
 	width: 60px;
