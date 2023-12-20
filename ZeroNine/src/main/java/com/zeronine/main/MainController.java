@@ -19,7 +19,7 @@ public class MainController {
 		logger.info(customerId);
 	}
 
-	@RequestMapping("main/introZeroNine.do")
+	@RequestMapping("introZeroNine.do")
 	public void introZeroNine() {
 	}
 

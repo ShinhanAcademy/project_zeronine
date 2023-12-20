@@ -23,12 +23,28 @@
 	<div class="bot">
 		<div class="bot_inner zn_center">
 			<%-- menu --%>
-			<nav class="menu">
-				<li><a href="${path}/product/productList.do">상품목록</a></li>
+			<ul class="menu gnb_1depth">
+				<li>
+					<a href="${path}/product/productList.do">상품목록</a>
+					<ul class="gnb_2depth">
+						<li>
+							<a href="${path}/product/productList.do">채소</a>
+						</li>
+						<li>
+							<a href="${path}/product/productList.do">생필품</a>
+						</li>
+						<li>
+							<a href="${path}/product/productList.do">음식</a>
+						</li>
+						<li>
+							<a href="${path}/product/productList.do">전체</a>
+						</li>
+					</ul>
+				</li>
 				<li><a href="${path}/board/">게시판</a></li>
 				<li><a href="${path}/myPage/ecoCare.do">마이 에코케어</a></li>
 				<li><a href="${path}/subscription/subscriptionBuy.do">구독권</a></li>
-			</nav>
+			</ul>
 			<%-- //menu --%>
 			<%-- user_fav --%>
 			<div class="user_fav">

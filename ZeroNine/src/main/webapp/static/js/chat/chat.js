@@ -10,10 +10,12 @@ let sender = null;
 let myId = null;
 let sendMsgImageFlag = false;
 
-$(function(){
+$(function() {
+	// 채팅 목록
 	$(`#chatList .chat_unit`).on("click", function(){
 		$(`#chatList .chat_unit`).removeClass("on");
 		$(this).addClass("on");
+		$("#message").val("").focus();
 	
 		chatId = $(this).attr("data-chatId");
 		boardId = $(this).attr("data-boardId");
@@ -31,7 +33,7 @@ $(function(){
 				
 				sender = customerId;
 				
-console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
+			console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
 
 				$("#customerName").html(customerName);
 				$("#address").html(address);
@@ -43,7 +45,7 @@ console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
 					$("#path").html(`<img src="../images/chat/img_no_product.png" alt="product no-image">`);
 				}
 				
-				if(Array.isArray(chatDtlList) && chatDtlList.length > 0){
+				if(Array.isArray(chatDtlList) && chatDtlList.length > 0) {
 					const addHtml = [];
 					let currDate = dateSet.convertDate(chatDtlList[0].sendTime);
 					let otherCurrTime = null;
@@ -56,6 +58,7 @@ console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
 					
 					for(const [idx, chatInfo] of chatDtlList.entries()){
 						let {messageContent, sendTime, senderId} = chatInfo;
+						messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, '<br>');
 						
 						if(currDate != dateSet.convertDate(sendTime)){
 							addHtml.push(`<div class="date">`);
@@ -93,9 +96,13 @@ console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
 							}
 							addHtml.push(`</div>`);
 						}
-						
+
 						$("#chatDtlList").html(addHtml.join(""));
+						console.log(
+							"???~~~~~~~~~~~"
+						);
 					}
+					$('.chat_room_list').scrollTop($('.chat_room_list')[0].scrollHeight);
 				}else{
 					$("#chatDtlList").html(`<div>대화내용이 없네요~~</div>`);
 				}
@@ -153,7 +160,13 @@ function connect() {
 
 function sendMessage() {
 	const message = document.getElementById("message").value;
+	// console.log("message == null", isEmpty(message));
+	// if(isEmpty(message)) {
+	// 	alert("내용을 입력해주세요.");
+	// 	$("#message").val("").focus();
+	// }
 
+	//return;
 	stompClient.send("/app/chat.sendMessage", {}, JSON.stringify({
 		messageContent : message,
 		chatId,
@@ -164,7 +177,8 @@ function sendMessage() {
 }
 
 function showMessage(message) {
-	const {messageContent} = message;
+	let {messageContent} = message;
+	messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, '<br>');
 	console.log("SHOW MESSAGE", message);
 	
 	const addHtml = [];
@@ -200,14 +214,19 @@ function showMessage(message) {
 	}
 
 	$("#chatDtlList").append(addHtml.join(""));
-	$("#message").val("");
+
+	$("#message").val("").focus();
+
+	$('.chat_room_list').stop().animate({
+		scrollTop: $(".chat_room_list")[0].scrollHeight
+	}, 400);
 }
 
 //엔터 Trigger
 const chatTextArea = document.querySelector(".chat_wrap .text_wrap textarea");
 if (chatTextArea) {
 	chatTextArea.addEventListener("keyup", function(e) {
-		if (e.keyCode === 13) {
+		if (e.keyCode === 13 && !e.shiftKey) {
 			document.querySelector(".btn_write").click();
 		};
 	});
