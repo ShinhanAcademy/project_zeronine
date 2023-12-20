@@ -2,26 +2,25 @@
     ZERO NINE
     -- COMMON
 ****************************/
-$(function(){
-    let headerHeight=$(".zn_header").height();
+$(function () {
+    let headerHeight = $(".zn_header").height();
 
-	//nav
-	/*
-    $("#c_gnb_wrap>ul>li").on("mouseover focusin", function(){
-        $(this).find("div").stop().slideDown(500);
+    //nav
+   
+    $(".zn_header .bot .gnb_1depth > li").on("mouseover focusin", function(){
+        $(this).addClass("on").find(".gnb_2depth").stop().slideDown(300);
     });
-    $("#c_gnb_wrap>ul>li").on("mouseout focusout", function(){
-        $(this).find("div").stop().slideUp(500);
+    $(".zn_header .bot .gnb_1depth > li").on("mouseout focusout", function(){
+        $(this).removeClass("on").find(".gnb_2depth").stop().slideUp(300);
     });
-    */
-    
+
     //header
-    $(window).scroll(function(){
-        let calSct=$(this).scrollTop();
-        
-        if(calSct>=headerHeight) {
+    $(window).scroll(function () {
+        let calSct = $(this).scrollTop();
+
+        if (calSct >= headerHeight) {
             $(".zn_header, .zn_header .top").addClass("on");
-        }else{
+        } else {
             $(".zn_header, .zn_header .top").removeClass("on");
         };
     });
@@ -29,34 +28,22 @@ $(function(){
 });
 
 const dateSet = {
-	convertTime: function(date) { //YYYY-MM-DD
-		let transOption = { hour: "numeric", minute: "numeric" };
-		return new Date(date).toLocaleTimeString("ko-KR", transOption);
-	},
-	convertDate: function(date) { //YYYY-MM-DD
-		date = new Date(date);
-		let offset = date.getTimezoneOffset() * 60000; //ms단위라 60000곱해줌
-		let dateOffset = new Date(date.getTime() - offset);
-		return dateOffset.toISOString().split("T")[0];
-	}
+    convertTime: function (date) { //YYYY-MM-DD
+        let transOption = { hour: "numeric", minute: "numeric" };
+        return new Date(date).toLocaleTimeString("ko-KR", transOption);
+    },
+    convertDate: function (date) { //YYYY-MM-DD
+        date = new Date(date);
+        let offset = date.getTimezoneOffset() * 60000; //ms단위라 60000곱해줌
+        let dateOffset = new Date(date.getTime() - offset);
+        return dateOffset.toISOString().split("T")[0];
+    }
 };
-/*
-function convertDate(date) { //YYYY-MM-DD
-  date = new Date(date);
-  let offset = date.getTimezoneOffset() * 60000; //ms단위라 60000곱해줌
-  let dateOffset = new Date(date.getTime() - offset);
-  return dateOffset.toISOString().split("T")[0];
-}
-*/
-/*
-function convertTime(date) { //HH24:MI:SS
-  date = new Date(date);
-  console.log("date!!!!!!!!!!!!!!"+date);
-  let offset = date.getTimezoneOffset() * 60000; //ms단위라 60000곱해줌
-  console.log("offset!!!!!!!!!!!"+offset);
-  let dateOffset = new Date(date.getTime() - offset);
-  console.log("dateOffset!!!!!!!!"+dateOffset);
-  console.log("dateOffset.toLocaleTimeString!!!!!!!!!!!!", dateOffset.toLocaleTimeString);
-  return dateOffset;
-}
-*/
+
+const isEmpty = function (value) {
+    let result = false;
+    if (value == "" || value == null || value == undefined || (value != null && typeof value == "object" && !Object.keys(value).length)) {
+        return true;
+    } 
+    return result;
+};

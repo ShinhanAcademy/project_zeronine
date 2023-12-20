@@ -48,21 +48,21 @@
 		    <section class="intro_wrap">
 		        <div class="title">똑똑한 소비의 3가지 방법</div>
 		        <div class="smart_shopping">
-		            <div class="intro_unit">
+		            <div class="intro_unit" data-name="fast">
 		                <div class="img_wrap">
 		                    <img src="${path}/images/main/img_rocket.png" alt="3ways_image">
 		                </div>
 		                <div class="sub_tit">슝슝 즉배</div>
 		                <p>필요 없는 1+1 상품을 나눠서 구매해요!</p>
 		            </div>
-		            <div class="intro_unit">
+		            <div class="intro_unit" data-name="free">
 		                <div class="img_wrap">
 		                    <img src="${path}/images/main/img_dollar.png" alt="3ways_image">
 		                </div>
 		                <div class="sub_tit">알뜰 무배</div>
 		                <p>같이 구매하고 무료 배송 받아요!</p>
 		            </div>
-		            <div class="intro_unit">
+		            <div class="intro_unit" data-name="one">
 		                <div class="img_wrap">
 		                    <img src="${path}/images/main/img_chat.png" alt="3ways_image">
 		                </div>

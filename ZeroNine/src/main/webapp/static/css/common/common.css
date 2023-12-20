@@ -30,8 +30,9 @@ html, body {
 
 /* HEADER */
 .zn_header {
+	position: relative;
 	z-index: 100;
-	background-color: #edf6ff;
+	background-color: #fff;
     box-shadow: 0px 2px 7px rgba(147, 147, 147, 0.1);
     transition: 0.3s;
 }
@@ -40,7 +41,6 @@ html, body {
     left: 0;
     top: 0;
     width: 100%;
-    background-color: #fff;
 }
 .zn_header .top {
 	border-bottom: 1px solid #e5e5e5;
@@ -100,24 +100,46 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 13px 10px;
+    padding: 0 10px;
 } 
-.zn_header .bot .bot_inner .menu,
-.zn_header .bot .bot_inner .user_fav ul {
+.zn_header .bot .gnb_1depth,
+.zn_header .bot .user_fav ul {
 	display: flex;
 }
-.zn_header .bot .bot_inner .menu li {
-	padding: 0 26px;
+.zn_header .bot .gnb_1depth > li {
+	position: relative;
+	padding: 13px 40px;
 }
-.zn_header .bot .bot_inner .menu a {
+.zn_header .bot .gnb_1depth > li > a {
 	display:inline-block;
-	font-size: 16px;
+	font-size: 17px;
 	padding: 10px;
 }
-.zn_header .bot .bot_inner .menu a:hover,
-.zn_header .bot .bot_inner .menu a:focus,
-.zn_header .bot .bot_inner .menu li.on a {
+.zn_header .bot .gnb_1depth > li a:hover,
+.zn_header .bot .gnb_1depth > li a:focus,
+.zn_header .bot .gnb_1depth > li.on > a {
 	color: #0F82FF;
+}
+.zn_header .bot .gnb_2depth {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	padding: 10px;
+	background: rgba(255 255 255 / 80%);
+	background: #fff;
+    box-shadow: 0px 2px 7px rgba(147, 147, 147, 0.1);
+}
+.zn_header .bot .gnb_2depth li {
+	padding: 12px 0;
+	text-align: center;
+}
+.zn_header .bot .gnb_2depth a {
+	font-size: 16px;
+}
+.zn_header .bot .user_fav {
+	padding: 13px 0;
 }
 .zn_header .bot .bot_inner .icon_btn button {
     width: 34px;

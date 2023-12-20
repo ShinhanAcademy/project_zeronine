@@ -33,6 +33,12 @@ intro_wrap
     border-radius: 5px;
     border: 1px solid #f3f3f3;
     box-shadow: 2px 3px 2px 0px rgba(221, 221, 221, .2);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.intro_wrap .intro_unit:hover {
+    border: 1px solid #ededed;
+    box-shadow: 4px 5px 6px 3px rgba(221, 221, 221, .25);
 }
 .intro_wrap .intro_unit .img_wrap {
     height: 90px;

@@ -11,4 +11,14 @@ $(function(){
 		});
 	});
 	
+	$(".smart_shopping .intro_unit").on("click", function(){
+		let dataName = $(this).attr("data-name");
+		if(dataName == "fast") {
+			location.href = contextPath + "/board/fastboard.do";
+		} else if(dataName == "free") {
+			location.href = contextPath + "/board/freedeliveryboard.do";
+		} else {
+			location.href = contextPath + "/board/onetooneboard.do";
+		}
+	});
 });
