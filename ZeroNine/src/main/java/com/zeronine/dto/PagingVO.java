@@ -2,81 +2,42 @@ package com.zeronine.dto;
 
 
 public class PagingVO {
-	// 현재페이지, 시작페이지, 끝페이지, 게시글 총 갯수, 페이지당 글 갯수, 마지막페이지, 
-		//SQL쿼리에 쓸 start, end
-		private int nowPage; 
-		private int startPage; 
-		private int endPage;	
-		private int total;    	
-		private int lastPage;	
-		private int cntPage = 5;  //
-		private int cntPerPage = 4;  //페이지당 글 갯수
-	 
-		public PagingVO(int total, int nowPage) {
-			setNowPage(nowPage);
-			setCntPerPage(cntPerPage);
-			setTotal(total);
-			calcLastPage(getTotal(), getCntPerPage());
-			calcStartEndPage(getNowPage(), cntPage);
-		}
-		// 제일 마지막 페이지 계산
-		public void calcLastPage(int total, int cntPerPage) {
-			setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
-		}
-		// 시작, 끝 페이지 계산
-		public void calcStartEndPage(int nowPage, int cntPage) {
-			setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
-			if (getLastPage() < getEndPage()) {
-				setEndPage(getLastPage());
-			}
-			setStartPage(getEndPage() - cntPage + 1);
-			if (getStartPage() < 1) {
-				setStartPage(1);
-			}
-		}
-	public int getNowPage() {
-		return nowPage;
+	private int pageNumber; // 현재 페이지 
+	private int maxPageNumber;// 페이지 끝번호 데이터를 얼마나 넣냐에따라 정해짐..
+	private int startPageNumber; // 페이지의 시작번호 1,6,11,16
+	private int endPageNumber;  // 페이지 끝번호 5,10,15,20
+	
+	
+	public int getPageNumber() {
+		return pageNumber;
 	}
-	public void setNowPage(int nowPage) {
-		this.nowPage = nowPage;
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
 	}
-	public int getStartPage() {
-		return startPage;
+	public int getMaxPageNumber() {
+		return maxPageNumber;
 	}
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
+	public void setMaxPageNumber(int maxPageNumber) {
+		this.maxPageNumber = maxPageNumber;
 	}
-	public int getEndPage() {
-		return endPage;
+	public int getStartPageNumber() {
+		return startPageNumber;
 	}
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
+	public void setStartPageNumber(int startPageNumber) {
+		this.startPageNumber = startPageNumber;
 	}
-	public int getTotal() {
-		return total;
+	public int getEndPageNumber() {
+		return endPageNumber;
 	}
-	public void setTotal(int total) {
-		this.total = total;
+	public void setEndPageNumber(int endPageNumber) {
+		this.endPageNumber = endPageNumber;
 	}
-	public int getLastPage() {
-		return lastPage;
+	@Override
+	public String toString() {
+		return "PagingVO [pageNumber=" + pageNumber + ", maxPageNumber=" + maxPageNumber + ", startPageNumber="
+				+ startPageNumber + ", endPageNumber=" + endPageNumber + "]";
 	}
-	public void setLastPage(int lastPage) {
-		this.lastPage = lastPage;
-	}
-	public int getCntPage() {
-		return cntPage;
-	}
-	public void setCntPage(int cntPage) {
-		this.cntPage = cntPage;
-	}
-	public int getCntPerPage() {
-		return cntPerPage;
-	}
-	public void setCntPerPage(int cntPerPage) {
-		System.out.println(cntPerPage);
-		this.cntPerPage = cntPerPage;
-	}
+	
 	
 	
  
