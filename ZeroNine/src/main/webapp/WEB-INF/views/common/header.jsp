@@ -40,7 +40,7 @@
 					</li>
 					<li class="icon_btn">
 						<button type="button" class="my"
-							onclick="location.href='${path}/myPage/myWallet.do';">마이페이지</button>
+							onclick="location.href='${path}/myPage/orderHistory.do';">마이페이지</button>
 					</li>
 					<li class="icon_btn">
 						<button type="button" class="cart"

@@ -65,7 +65,7 @@
 	            <div class="snb_wrap">
 	                <div class="sub_tit">MY SHOPPING</div>
 	                <ul>
-	                    <li><a href="${path}/myPage/myWallet.do">나의 지갑</a></li>
+	                    <%-- <li><a href="${path}/myPage/myWallet.do">나의 지갑</a></li> --%>
 	                    <li><a href="${path}/myPage/orderHistory.do">주문 내역</a></li>
 	                    <li><a href="${path}/myPage/orderCancelHistory.do">취소 / 반품 내역</a></li>
 	                    <li><a href="${path}/myPage/myCart.do">장바구니</a></li>
