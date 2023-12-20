@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zeronine.dto.ProductVO;
+
 
 @Service("boardService")
 public class BoardService_yn {
@@ -157,9 +159,30 @@ public class BoardService_yn {
 		return boardDAO.deleteChat(boardId);
 	}
 
-	public List<Map<String, Object>> myCartFast(String customerId) {
-		return boardDAO.myCartFast(customerId);
+	public List<Map<String, Object>> myCart(String customerId) {
+		return boardDAO.myCart(customerId);
 	}
+
+	public ProductVO selectByPid(String productId) {
+		return boardDAO.selectByPid(productId);
+	}
+
+	public int orderSuccess(String deliveryId, String customerId) {
+		return boardDAO.orderSuccess(deliveryId,customerId);
+	}
+
+	public int orderSuccessProduct(String deliveryId, String productId, int count) {
+		return boardDAO.orderSuccessProduct(deliveryId,productId,count);
+	}
+
+	public Map<String, Object> orderInfo(String customerId, String deliveryId) {
+		return boardDAO.orderInfo(customerId,deliveryId);
+	}
+
+	public int orderFastProduct(String customerId, String boardId, String productId, int count) {
+		return boardDAO.orderFastProduct(customerId,boardId,productId,count);
+	}
+
 
 	
 

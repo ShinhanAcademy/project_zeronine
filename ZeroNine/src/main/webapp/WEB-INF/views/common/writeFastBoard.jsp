@@ -18,6 +18,7 @@
 	</div>
 
 	<div class="zn_center" style="width: 1440px">
+	<div id="here">
 	<div class="con_tit">공동 구매 물품</div>
 	<!-- contents -->
 	<div class="contents">
@@ -42,10 +43,11 @@
 					<tbody>
 
 						<c:choose>
-							<c:when test="${myCart.size() != 0}">
-								<c:forEach items="${myCart}" var="cartItem">
+							<c:when test="${cart.size() != 0}">
+								<c:forEach items="${cart}" var="cartItem">
 									<tr>
-										<td class="check_item"><input type="checkbox" name="checkboxGroup" onclick="handleCheckbox(this)"/></td>
+										<td class="check_item">
+										<input id="check_box" type="checkbox" name="checkboxGroup" onclick="handleCheckbox(this)" value="${cartItem.productId}"/></td>
 										<td class="product_info">
 											<div class="img_wrap">
 
@@ -95,21 +97,25 @@
 			<div class="price_top">
 				<div class="price_info total_selling_price">
 					<div>총 판매가</div>
-					<div class="totalPrice">0<span> 원</span></div>
+					<div class="totalPrice">0&nbsp;원</div>
 				</div>
 				<div class="price_info delivery_fee">
 					<div>배송비</div>
-					<div>0&nbsp;원</div>
+					<div id="itemprice_deli">0&nbsp;원</div>
 				</div>
 			</div>
 			<div class="price_bottom">
 				<div class="noti">배송비는 구독권 및 공동구매여부에 따라 변경될 수 있습니다.</div>
 				<div class="expected_payment">
-					총 결제예상금액 <span class="totalPrice">0</span><span>원</span>
+					총 결제예상금액 <span class="realTotalPrice">0&nbsp;원</span>
 				</div>
 			</div>
 			<div class="btn_wrap">
+			<form action="${path}/common/orderFast.do" method="POST">
+				<input type="hidden" name="productId" id="productId">
+				<input type="hidden" name="count" id="count">
 				<button class="participate_btn">공구에 참여하기</button>
+			</form>
 			</div>
 		</div>
 	</div>
@@ -117,7 +123,11 @@
 </div>
 <!-- //contents -->
 </div>
+</div>
 <%@include file="../common/footer.jsp"%>
+<script>
+var path = "${path}";
+</script>
 <script src="${path}/js/common/participateBoard.js" type="text/javascript"></script>
 </body>
 </html>
