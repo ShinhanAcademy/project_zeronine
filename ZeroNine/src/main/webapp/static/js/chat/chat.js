@@ -41,22 +41,22 @@ $(function(){
 				
 				if(Array.isArray(chatDtlList) && chatDtlList.length > 0){
 					const addHtml = [];
-					let currDate = convertTime(chatDtlList[0].sendTime);
+					let currDate = convertDate(chatDtlList[0].sendTime);
 					
 					addHtml.push(`<div class="date">`);
-					addHtml.push(`<span>${convertTime(currDate)}</span>`);
+					addHtml.push(`<span>${convertDate(currDate)}</span>`);
 					addHtml.push(`</div>`);
 					
 					for(const [idx, chatInfo] of chatDtlList.entries()){
 						let makeImage = false;
 						let {messageContent, sendTime, senderId} = chatInfo;
 						
-						if(currDate != convertTime(sendTime)){
+						if(currDate != convertDate(sendTime)){
 							addHtml.push(`<div class="date">`);
-							addHtml.push(`<span>${convertTime(sendTime)}</span>`);
+							addHtml.push(`<span>${convertDate(sendTime)}</span>`);
 							addHtml.push(`</div>`);
 							
-							currDate = convertTime(sendTime);
+							currDate = convertDate(sendTime);
 						}
 						
 						if(customerId == senderId){
@@ -177,7 +177,7 @@ function showMessage(message) {
 	console.log("message=>", message);
 
 	
-	let currDate = convertTime(new Date());
+	let currDate = convertDate(new Date());
 	
 	const lastDate = $("#chatDtlList div.date:last").text();
 	
