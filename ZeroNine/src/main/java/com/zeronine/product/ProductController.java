@@ -44,19 +44,51 @@ public class ProductController {
 
 	@Autowired
 	CartService cartservice;
-	
+
 	@Autowired
 	CustomerService customerservice;
-	
+
 	@Autowired
 	DeliveryService_ys deliveryservice_ys;
-	
+
 	@Autowired
 	DeliveryProductService_ys deliveryproductservice_ys;
 
-	@PostMapping("/goProductCart.do")
-	public ResponseEntity<String> goProductCart(String custid, String productId, HttpSession session, Model model) {
+	
+	@GetMapping("/productList.do")
+	public String productlist() {
+		return "product/productList";
+	}
+	
+	@GetMapping("/pcategoryPageCount.do")
+	public String pcategoryPageCount(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int page,
+			@RequestParam(value="q", defaultValue="%")String q,
+			@RequestParam(value="selectedValue",required = false, defaultValue="0")String selectedValue,
+			@RequestParam(value="buttonValue",required = false, defaultValue="%")String buttonValue,
+			Model model,HttpSession session
+			) {
+		String custid = (String) session.getAttribute("customerId"); //customerId
+		
+		List<ProductVO> productList= productService.searchAll( page,Integer.parseInt(selectedValue),q,buttonValue);
+		PagingVO paginating = productService.getPages(page,Integer.parseInt(selectedValue), q, buttonValue);
+		
+		
 
+		
+		model.addAttribute("plist",productList);
+		model.addAttribute("paginating",paginating);
+		
+		System.out.println(productList);
+		
+		System.out.println(paginating);
+		return"/product/catagory";
+	}
+	
+	
+	@PostMapping("/goProductCart.do")
+	public ResponseEntity<String> goProductCart(String productId, HttpSession session, Model model) {
+		String custid = (String) session.getAttribute("customerId"); //customerId
 		int result = 0;
 		List<String> cart = cartservice.cartCheckPid(custid);
 
@@ -80,8 +112,8 @@ public class ProductController {
 	}
 
 	@PostMapping("/plusProductCart.do")
-	public ResponseEntity<String> plusProductCart(String custid, String productId, HttpSession session, Model model) {
-
+	public ResponseEntity<String> plusProductCart(String productId, HttpSession session, Model model) {
+		String custid = (String) session.getAttribute("customerId"); //customerId
 		int result = 0;
 
 		result = cartservice.plusProductCart(custid, productId);
@@ -96,7 +128,8 @@ public class ProductController {
 	}
 
 	@PostMapping("/productLike.do")
-	public ResponseEntity<String> productLike(String custid, String productId, Model model, PagingVO paging) {
+	public ResponseEntity<String> productLike(String productId, Model model, PagingVO paging, HttpSession session) {
+		String custid = (String) session.getAttribute("customerId"); //customerId
 		model.addAttribute("customerId", custid);
 		model.addAttribute("productId", productId);
 
@@ -112,173 +145,31 @@ public class ProductController {
 	}
 
 	@PostMapping("/deleteLikedProduct.do")
-	public ResponseEntity<Boolean> deleteLikedProduct(String productId, String custid, Model model) {
+	public ResponseEntity<Boolean> deleteLikedProduct(String productId, Model model, HttpSession session) {
+		String custid = (String) session.getAttribute("customerId"); //customerId
 		int result = likedproductservice.deleteLikedProduct(custid, productId);
 		boolean isUpdateSuccess = result == 1;
 
 		return ResponseEntity.ok(isUpdateSuccess);
 
 	}
-
-	@GetMapping("/productList.do")
-	public void productlist() {
-	
-	}
-	
-	@GetMapping("/pcategoryPageCount.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String pcategoryPageCount( Integer pCategoryId, Model model,@RequestParam(value = "vo", required = false)PagingVO vo,
-			@RequestParam(value = "nowPage", required = false) String nowPage,
-			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
-		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		int total = productService.countProduct();
-		if (nowPage == null && cntPerPage == null) {
-			
-			nowPage = "1";
-			cntPerPage = "7";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) {
-			cntPerPage = "7";
-		}
-
-		if (cntPerPage.equals("")) {
-			cntPerPage = "7";
-		}
-
-		vo = new PagingVO(total, Integer.parseInt(nowPage));
-		model.addAttribute("paging", vo);
-		Integer nowPageInt = Integer.parseInt(nowPage);
-		List<ProductVO> plist = productService.pcategoryPageCount(nowPageInt - 1,pCategoryId);
-		model.addAttribute("plist", plist);
-		if (customerid != null) {
-			model.addAttribute("likedcid", likedproductservice.selectByCidlist(customerid));
-			model.addAttribute("cartcheckpid", cartservice.cartCheckPid(customerid));
-		}
-		return "/product/catagory";
-	}
-	@GetMapping("/productPageCount.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String productPageCount(/* Integer value, */Model model, 
-			@RequestParam(value = "vo", required = false)PagingVO vo,
-			@RequestParam(value = "nowPage", required = false) String nowPage,
-			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
-
-		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		int total = productService.countProduct();
-		if (nowPage == null && cntPerPage == null) {
-			
-			nowPage = "1";
-			cntPerPage = "7";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) {
-			cntPerPage = "7";
-		}
-
-		if (cntPerPage.equals("")) {
-			cntPerPage = "7";
-		}
-
-		vo = new PagingVO(total, Integer.parseInt(nowPage));
-		model.addAttribute("paging", vo);
-		Integer nowPageInt = Integer.parseInt(nowPage);
-		List<ProductVO> plist = productService.pcategoryPageCount(nowPageInt - 1,1);
-		model.addAttribute("plist", plist);
-		if (customerid != null) {
-			model.addAttribute("likedcid", likedproductservice.selectByCidlist(customerid));
-			model.addAttribute("cartcheckpid", cartservice.cartCheckPid(customerid));
-		}
-		return "/product/catagory";
-	}
-
-	@GetMapping("/productCategory.do")
-	public String productvegetable(Integer pCategoryId, Model model) {
-		List<ProductVO> plist = productService.selectBypCategoryId(pCategoryId);
-		model.addAttribute("plist", plist);
-		return "product/catagory";
-	}
-
-	@GetMapping("/productCategoryall.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String productvegetableall(Integer pCategoryId, Model model) {
-		List<ProductVO> plist = productService.selectBypCategoryIdall(pCategoryId);
-		model.addAttribute("plist", plist);
-		return "product/catagory";
-	}
-
-	@GetMapping("/selectBymanyLiked.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String selectBymanyLiked(Model model) {
-		List<ProductVO> plist = productService.selectBymanyLiked();
-		model.addAttribute("plist", plist);
-		return "product/catagory";
-
-	}
-
-	@GetMapping("/selectByAll.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String selectByAll(Model model) {
-		List<ProductVO> plist = productService.selectAll();
-		model.addAttribute("plist", plist);
-		return "product/catagory";
-
-	}
-
-	@GetMapping("/selectByDelivery.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String selectByDelivery(Model model) {
-		List<ProductVO> plist = productService.selectByDelivery();
-		model.addAttribute("plist", plist);
-		return "product/catagory";
-
-	}
-
-	@GetMapping("/selectBypriceAsc.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String selectBypriceAsc(Model model) {
-		List<ProductVO> plist = productService.selectBypriceAsc();
-		model.addAttribute("plist", plist);
-		return "product/catagory";
-
-	}
-
-	@GetMapping("/selectBypriceDesc.do")
-	// @ResponseBody //body���� �����ؼ� �޴´�.
-	public String selectBypriceDesc(Model model) {
-		List<ProductVO> plist = productService.selectBypriceDesc();
-		model.addAttribute("plist", plist);
-		return "product/catagory";
-
-	}
-
-	@GetMapping("/selectByPnameBrand.do")
-	public String selectByPnameBrand(String q, Model model) {
-		List<ProductVO> plist = productService.selectByPnameBrand(q);
-		model.addAttribute("plist", plist);
-
-		return "product/catagory";
-	}
-
 	@GetMapping("/productDetail.do")
 	public String productDetail(String productId, Model model, HttpSession session) {
 		ProductVO product = productService.selectByProductId(productId);
-		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		session.setAttribute("customerid", customerid);
-		customerid = (String) session.getAttribute("customerid");
-		System.out.println(product);
+		String custid = (String) session.getAttribute("customerId"); //customerId
 		model.addAttribute("plist", productService.selectByProductId(productId));
-		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(customerid));
+		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 		model.addAttribute("deliverylist4", productService.selectDetailDelivery4());
 		return "product/productDetail";
 	}
+
 	@PostMapping("/goProductDCart.do")
-	public ResponseEntity<String> goProductDCart(String productid,int pcount, HttpSession session, Model model) {
-	int result =0;
-	//String custid = (String)session.getAttribute("customerId");
-	String custid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		result = cartservice.goProductDCart(custid, productid,pcount);
-		model.addAttribute("productid",productid);
+	public ResponseEntity<String> goProductDCart(String productid, int pcount, HttpSession session, Model model) {
+		int result = 0;
+		String custid = (String)session.getAttribute("customerId");
+		
+		result = cartservice.goProductDCart(custid, productid, pcount);
+		model.addAttribute("productid", productid);
 		if (result > 0) {
 			logger.info("Data Saved Successfully");
 			return ResponseEntity.ok("Data saved successfully. You can customize this message.");
@@ -286,17 +177,17 @@ public class ProductController {
 			logger.info("Data Save Failed");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
 		}
-	
+
 	}
+
 	@PostMapping("/beforeproductOrder.do")
-	public ResponseEntity<String> beforeproductOrder(String productid,int pcount, HttpSession session, Model model) {
-	int result = 0;
-	//String custid = (String)session.getAttribute("customerId");
-	String custid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		result = cartservice.beforeproductOrder(custid,productid,pcount);
+	public ResponseEntity<String> beforeproductOrder(String productid, int pcount, HttpSession session, Model model) {
+		int result = 0;
+		 String custid = (String)session.getAttribute("customerId");
+		
+		result = cartservice.beforeproductOrder(custid, productid, pcount);
 		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
-		
-		
+
 		if (result > 0) {
 			logger.info("Data Saved Successfully");
 			return ResponseEntity.ok("Data saved successfully. You can customize this message.");
@@ -304,62 +195,64 @@ public class ProductController {
 			logger.info("Data Save Failed");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
 		}
-	
+
 	}
-	//은경
-		@PostMapping("/deleteCartItem.do")
-		@ResponseBody
-		public Map<String, Object> deleteCartItem(@RequestParam String productId,
-									HttpSession session) {
-			String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-			//String customerId = (String) session.getAttribute("customerId"); //customerId
-			
-			int count = cartservice.deleteCartItem(customerId, productId);
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("count", count);
-			
-			return map;
-		}
-	
-	@GetMapping("/productOrder.do")
-	public String productOrder(String productid,  Model model, HttpSession session) {
-		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		session.setAttribute("customerid", customerid);
-		customerid = (String) session.getAttribute("customerid");
-		List<String> order = cartservice.orderOneCart(customerid, productid);
+
+	// 은경
+	@PostMapping("/deleteCartItem.do")
+	@ResponseBody
+	public Map<String, Object> deleteCartItem(@RequestParam String productId, HttpSession session) {
 		
-		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(customerid));
+		String customerId = (String) session.getAttribute("customerId"); //customerId
+
+		int count = cartservice.deleteCartItem(customerId, productId);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("count", count);
+
+		return map;
+	}
+
+	@GetMapping("/productOrder.do")
+	public String productOrder(String productid, Model model, HttpSession session) {
+		
+		
+		String custid = (String) session.getAttribute("customerId"); //customerId
+		List<String> order = cartservice.orderOneCart(custid, productid);
+
+		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 		model.addAttribute("orderonecart", order);
 
-		model.addAttribute("custlist",customerservice.selectById(customerid));
+		model.addAttribute("custlist", customerservice.selectById(custid));
 		return "product/productOrder";
 	}
+
 	@PostMapping("/Orderdelivery.do")
-	public String Orderdelivery(String productId,String address,String addressdetail,Model model, HttpSession session) {
-		String customerid = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		session.setAttribute("customerid", customerid);
-		customerid = (String) session.getAttribute("customerid");
+	public String Orderdelivery(String productId, String address, String addressdetail, Model model,
+			HttpSession session) {
+		String custid = (String) session.getAttribute("customerId"); //customerId
 		String deliveryId = UUID.randomUUID().toString();
 		session.setAttribute("productId", productId);
 		session.setAttribute("deliveryId", deliveryId);
-		int deliveryfirst = deliveryservice_ys.PersonGoDelivery(deliveryId, customerid,address,addressdetail);
-		int deliverysecond =deliveryproductservice_ys.PersonGoDeliveryProduct(deliveryId, customerid, productId);
+		int deliveryfirst = deliveryservice_ys.PersonGoDelivery(deliveryId, custid, address, addressdetail);
+		int deliverysecond = deliveryproductservice_ys.PersonGoDeliveryProduct(deliveryId, custid, productId);
 		return "product/productOrderSuccess";
 	}
+
 	@GetMapping("/productOrderSuccess.do")
 	public void productOrderSuccess(Model model, HttpSession session) {
-		 String deliveryId = (String) session.getAttribute("deliveryId");
-		    String productId = (String) session.getAttribute("productId");
+		String custid = (String) session.getAttribute("customerId"); //customerId
+		String deliveryId = (String) session.getAttribute("deliveryId");
+		String productId = (String) session.getAttribute("productId");
 
-		    // Use the values as needed
-		    logger.info("Delivery ID: " + deliveryId);
-		    logger.info("Product ID: " + productId);
-		    model.addAttribute("product",productService.selectByPricePname(productId));
-		    model.addAttribute("deliproduct",deliveryproductservice_ys.selectByDidpCount(deliveryId));
-		    // Clear session attributes if needed
-		    session.removeAttribute("deliveryId");
-		    session.removeAttribute("productId");
-		 	
+		// Use the values as needed
+		logger.info("Delivery ID: " + deliveryId);
+		logger.info("Product ID: " + productId);
+		model.addAttribute("product", productService.selectByPricePname(productId));
+		model.addAttribute("deliproduct", deliveryproductservice_ys.selectByDidpCount(deliveryId));
+		// Clear session attributes if needed
+		session.removeAttribute("deliveryId");
+		session.removeAttribute("productId");
+
 	}
 }

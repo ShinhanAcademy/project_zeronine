@@ -48,26 +48,46 @@
 </c:forEach>
 <div class="plus_btnpart">
 			<div style="display: block; text-align: center;">		
-			<c:if test="${paging.startPage != 1 }">
-				<a href="javascript:pcountchange(${paging.startPage - 1},${paging.cntPerPage})">&lt;&lt;</a>
-			</c:if>
-			 <script>
-			 	console.log("${paging.endPage}");
-			 </script>
-			<c:forEach begin="${paging.startPage}" end="${paging.lastPage}" var="p">
-				<c:choose>
-					<c:when test="${p == paging.nowPage}">
-						<%-- <b>${p}</b> --%>
-						<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
-					</c:when>
-					<c:when test="${p != paging.nowPage}">
-						<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
-					</c:when>
-				</c:choose>
-			</c:forEach>
-			<c:if test="${paging.endPage != paging.lastPage}">
-				<a href="javascript:pcountchange(${paging.endPage+1},${paging.cntPerPage})">&gt;&gt;</a>
-			</c:if>
+		<c:choose>
+		<c:when test="${paginating.pageNumber<=1}">
+			<span>[<<]</span>
+		</c:when>
+		<c:otherwise>
+			<a href="javascript:search(1)">[<<]</a>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when test="${paginating.pageNumber<=1}">
+			<span>[<]</span>
+		</c:when>
+		<c:otherwise>
+			<a href="javascript:search(${paginating.pageNumber-1})">[<]</a>
+		</c:otherwise>
+	</c:choose>
+
+	<c:forEach begin="${paginating.startPageNumber}"
+		end="${paginating.endPageNumber}" var="i" step="1">
+		<a href="javascript:search(${i})">${i}</a>
+	</c:forEach>
+
+	<c:choose>
+		<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
+			<span>[>]</span>
+		</c:when>
+		<c:otherwise>
+			<a href="javascript:search(${paginating.pageNumber+1})">[>]</a>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
+			<span>[>>]</span>
+		</c:when>
+		<c:otherwise>
+			<a href="javascript:search(${paginating.maxPageNumber})">[>>]</a>
+		</c:otherwise>
+	</c:choose>
 	    </div>
 
 				<div class="dist49"></div>
@@ -88,13 +108,9 @@ console.log(custid);
 	    		  return item == productId;
 	    	  })
 	      }
-		 //console.log(isproductinCart(productId));
-		 	console.log(productInCart);
-		 	console.log(productInCart.includes(productId));
+
 	        var likeButtonId = "gocart" + index;
-	    
-	    console.log(productId);
-		console.log(cartcheck);
+	   
 		if(productInCart.includes(productId)==false){
 				$.ajax({
 					url : "/product/goProductCart.do",
@@ -129,27 +145,7 @@ console.log(custid);
 				
 	 };
 	
-	function pcountchange(currentpage,perpage){
-		console.log(currentpage);
-		var obj = {
-				//"value":event.target.value,	
-				"nowPage":currentpage,
-				"cntPerPage":perpage
-		};
-		console.log("Clicked button value: " + obj);
-		$.ajax({
-			//url : "${path}/product/productList.do",
-			url : "${path}/product/productPageCount.do",
-			type: "GET",
-			data : obj,
-			success:function(responseData){
-				$("#here").html(responseData);
-			},
-			error : function(){
-				alert("에러입니다.");
-			}
-			});
-	}
+	
 	 var str = "${likedcid}";
 	 var likedcidArr = [] ; 
 	 //str.split(/!|@|~|,| |Z/);
@@ -194,23 +190,6 @@ console.log(custid);
 					};
 	
 	        
-	
-					
-		$(".raphael_cart").click(function() {
-			var obj = {
-				"pCategoryId" : 0
-			};
-
-			$.ajax({
-				url : path + "/product/productCategoryall.do",
-				data : obj,
-				type : "GET",
-				success : output, 
-				error : function() {
-					alert("에러입니다.");
-				}
-			});
-		})
 		$(".like").click(function (){
 
 			            var currentImagePath = $(this).find("img.menu_heart").attr("src");
