@@ -52,6 +52,11 @@ public class ProductVO {
 	public void setpStock(Integer pStock) {
 		this.pStock = pStock;
 	}
+	@Override
+	public String toString() {
+		return "ProductVO [productId=" + productId + ", pCategoryId=" + pCategoryId + ", pName=" + pName + ", brand="
+				+ brand + ", price=" + price + ", pCount=" + pCount + ", pStock=" + pStock + "]";
+	}
 	
 	
 	

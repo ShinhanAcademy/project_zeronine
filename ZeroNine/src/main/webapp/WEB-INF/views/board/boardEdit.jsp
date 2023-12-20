@@ -4,6 +4,8 @@
 <%@include file="../common/head.jsp"%>
 <%@include file="../common/header.jsp"%>
 <link rel="stylesheet" href="${path}/css/board/boardEdit.css" />
+<link rel="stylesheet" href="${path}/css/common/writeBoard.css" />
+<link rel="stylesheet" href="${path}/css/product/productOrder.css" />
 
 <title>BoardEdit</title>
 
@@ -137,7 +139,42 @@
 					}
 				});	
 			}
-			else { //즉배, 무배 분기 해야 함
+			else if(send_bt_to_com=="fastBoard") { //즉배
+				console.log($("#wait_minute"));
+				var dayAsMinute = $(".date").val(); //val은 minute으로 설정됨
+				
+				var waitHourValue = Number($('#wait_hour').val());
+				var waitMinuteValue = Number($('#wait_minute').val());
+			    var productId = $('#productId').val();
+			    var count = $('#count').val();
+				
+				console.log(waitHourValue, waitMinuteValue, productId, count);
+				
+				var postingMinutes = Number(dayAsMinute) + waitHourValue * 60 + waitMinuteValue;
+				
+				console.log(postingMinutes);
+				
+				var obj = {
+						"send_bt_to_com" : board_type,
+						"postingMinutes" : postingMinutes,
+						"title" : title,
+						"content" : content,
+						"productId" : productId,
+						"count" : count
+						//구매 상품 정보도 넣어야 함
+						}
+				
+				$.ajax({
+					url: '${path}/common/writeOrderFast.do',
+					type: "POST",
+					data: JSON.stringify(obj),
+					contentType: "application/json",
+					success : function(responseData) {
+						$("#edit").html(responseData);
+					}
+				});	
+			}
+			else { //무배
 				console.log($("#wait_minute"));
 				var dayAsMinute = $(".date").val(); //val은 minute으로 설정됨
 				

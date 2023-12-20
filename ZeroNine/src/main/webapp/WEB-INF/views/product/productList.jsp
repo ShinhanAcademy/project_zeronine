@@ -22,7 +22,7 @@
 
 					<div class="category">
 						<div class="img_wrap">
-							<button class="fluent_basket">
+							<button class="fluent_basket" data-value="1" onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/fluent_basket.png">
 							</button>
 						</div>
@@ -30,7 +30,7 @@
 					</div>
 					<div class="category">
 						<div class="img_wrap">
-							<button class="lotion">
+							<button class="lotion" data-value="2" onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/lotion.png">
 							</button>
 						</div>
@@ -38,7 +38,7 @@
 					</div>
 					<div class="category">
 						<div class="img_wrap">
-							<button class="food_navi">
+							<button class="food_navi" data-value="4" onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/food_navi.png">
 							</button>
 						</div>
@@ -46,7 +46,8 @@
 					</div>
 					<div class="category">
 						<div class="img_wrap">
-							<button class="raphael_cart">
+							<button class="raphael_cart"
+								onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/raphael_cart.png">
 							</button>
 						</div>
@@ -60,7 +61,7 @@
 			<div class="melong">
 				<div class="melong_hop">
 					<img class="menupng" src="${path}/images/board/filter.png"> <select
-						name="ptype" class="selectBox" onchange="chanb()">
+						name="ptype" class="selectBox" onchange="search(1)">
 						<option value="0" selected>전체</option>
 						<option value="1">찜순</option>
 						<option value="2">주문량순</option>
@@ -84,178 +85,25 @@
 
 				<div class="menulist" id="here">
 
-				</div>
+				ERROR
 			</div>
 			<div class="dist100"></div>
-			
+
+				<div class="dist49"></div>
+			</div>
 		</div>
 
 	</div>
 
 
 	<%@include file="../common/footer.jsp"%>
-	<script>
-		var path = "${path}";
-	    var cartcheck = "${cartcheckpid}";
+<script>
+var path = "${path}";
+var cartcheck = "${cartcheckpid}";
+</script>
+<script src="../js/product/productlist.js"></script>
 
-	    // Remove square brackets and split into an array
-	    cartcheck = cartcheck.replace(/\[|\]/g, ''); // Remove square brackets
-	    var cartcheckArray = cartcheck.split(',').map(function(item) {
-	        return item.trim(); // Remove extra spaces
-	    });
-		
-	    const productInCart = [];
-	    // Check if cartcheckArray is an array
-	    if (Array.isArray(cartcheckArray)) {
-	        // It's an array, you can use forEach
-	        
-			
-	        // If it's an array of strings, you can directly use it
-	        cartcheckArray.forEach(function(productId) {
-	            
-	            // You can perform other operations with productId
-	        });
-	    } else {
-	        console.error("Parsed cartcheckArray is not an array. Check the structure of the data.");
-	    }
-	</script>
 
-	<script>
-	$(function(){
-		pcountchange();
-	});
-	function pcountchange(currentpage,perpage){
-		console.log(currentpage);
-		var obj = {
-				//"value":event.target.value,	
-				"nowPage":currentpage,
-				"cntPerPage":perpage
-		};
-		console.log("Clicked button value: " + obj);
-		$.ajax({
-			//url : "${path}/product/productList.do",
-			url : "${path}/product/productPageCount.do",
-			type: "GET",
-			data : obj,
-			success:function(responseData){
-				$("#here").html(responseData);
-			},
-			error : function(){
-				alert("에러입니다.");
-			}
-			});
-	}
-	 function handlegoCartButtonClick(index, productId) {
-		 function isproductinCart(productId){
-	    	  return cartcheckArray.some(function(item){
-	    		  return item == productId;
-	    	  })
-	      }
-	        var likeButtonId = "gocart" + index;
-	        var custid = "${customerid}";
-	   
-		if(productInCart.includes(productId)==false){
-				$.ajax({
-					url : "/product/goProductCart.do",
-					type: "POST",
-					data : {"custid" :custid,"productId" :productId},
-					success : function(){
-						alert("잘담겼다!");
-						
-						if(!productInCart.includes(productId)) {
-							productInCart.push(productId);
-						}
-						cartcheckArray.filter((element) => element !== productId);
-					},
-					error : function(){
-						alert("에러입니다.");
-					}
-					}); 
-		}else{
-			$.ajax({
-				url : "/product/plusProductCart.do",
-				type: "POST",
-				data : {"custid" :custid,"productId" :productId},
-				success : function(){
-					alert("또담겼다!");
-				},
-				error : function(){
-					alert("에러입니다.");
-				}
-				}); 
-		}
-					 
-				
-	 };
-	 var str = "${likedcid}";
-	 var likedcidArr = [] ; 
-	 //str.split(/!|@|~|,| |Z/);
-	 likedcidArr = str.split(/,|\[|\]| /);
-	 function handleLikeButtonClick(index, productId) {
-	      
-	        var likeButtonId = "like" + index;
-	        var custid = "${customerid}";
-	    
-	    	//클래스가 heart liked => AJAX DELTE 호출
-	        var isRedHeart = likedcidArr.indexOf(productId);
-			if(isRedHeart>=0) {
-				$.ajax({
-					url : "/product/deleteLikedProduct.do",
-					type: "POST",
-					data : {"custid" :custid,"productId" :productId},
-					success : function(){
-						likedcidArr.filter((element) => element !== productId);
-					},
-					error : function(){
-						alert("에러입니다.");
-					}
-					});
-					 
-				}else{
 	
-				 $.ajax({
-						url : "/product/productLike.do",
-						type: "POST",
-						data : {"custid" :custid,"productId" :productId},
-						success : function(){
-							likedcidArr.push(productId);
-						},
-						error : function(){
-							alert("에러입니다.");
-						}
-						});
-				}
-					};
-	
-	        
-	
-					
-		$(".raphael_cart").click(function() {
-			var obj = {
-				"pCategoryId" : 0
-			};
-
-			$.ajax({
-				url : path + "/product/productCategoryall.do",
-				data : obj,
-				type : "GET",
-				success : output, 
-				error : function() {
-					alert("에러입니다.");
-				}
-			});
-		})
-		$(".like").click(function (){
-
-			            var currentImagePath = $(this).find("img.menu_heart").attr("src");
-			            var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
-			                path+"/images/board/red_heart.png" :
-			                path+"/images/board/heart.png";
-
-			            $(this).find("img.menu_heart").attr("src", newImagePath);
-			});
-		
-	</script>
-	<script src="../js/product/productlist.js"></script>
 </body>
 </html>

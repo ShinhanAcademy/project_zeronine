@@ -60,7 +60,6 @@
 		where bc."boardId" = cast(#{boardId} as UUID)
 		and bc."customerId" = cast(#{customerId} as UUID)
 	</select>
-	
 	<select id="boardpCount" resultType="int" parameterType="String">
 		SELECT DISTINCT p."pCount" - COALESCE(sq."pickCount", 0) AS count
 		FROM "selectProduct" sp
@@ -342,10 +341,43 @@
 		SET  "isDelete" = true
 		WHERE "oBoardId" = cast(#{boardId} as UUID)
 	</update>
-	<select id="myCartFast" resultType="map" parameterType="String">
+	<select id="myCart" resultType="map" parameterType="String">
 		select pi."imagePath", p.brand, p."pName", p."pCount", p."price", p."productId"
 		from cart c left join product p on (c."productId"=p."productId")
 		left join "productMainImage" pi on (p."productId"=pi."productId")
 		where c."customerId"=cast(#{customerId} as UUID)
+	</select>
+	<select id="selectByPid" resultType="productVo" parameterType="String">
+		select * from product where "productId" = cast(#{productId} as UUID)
+	</select>
+	<insert id="orderSuccess" parameterType="map">
+		INSERT INTO public.delivery("deliveryId", "customerId", address, "addressDetail")
+		VALUES (cast(#{deliveryId} as UUID), cast(#{customerId} as UUID), 
+		(select address from customer where "customerId"=cast(#{customerId} as UUID)), 
+	    (select "addressDetail" from customer where "customerId"=cast(#{customerId} as UUID)));
+	</insert>
+	<insert id="orderSuccessProduct" parameterType="map">
+		INSERT INTO public."deliveryProduct"("deliveryId", "productId", "pickCount")
+		VALUES (cast(#{deliveryId} as UUID), cast(#{productId} as UUID), #{count})
+	</insert>
+	<select id="orderInfo" resultType="map" parameterType="map">
+		select distinct to_char(d."purchaseDateTime",'yyyy-mm-dd HH24:mi:ss') as "purchaseDateTime",
+		c."customerName", dp."pickCount", p.price, p."pCount"
+		from delivery d left join "deliveryProduct" dp on (d."deliveryId"=dp."deliveryId")
+		left join product p on (dp."productId"=p."productId")
+		left join customer c on (d."customerId"=c."customerId")
+		where d."deliveryId" = cast(#{deliveryId} as UUID) and c."customerId" = cast(#{customerId} as UUID)
+	</select>
+	<insert id="orderFastProduct" parameterType="map">
+		INSERT INTO public."selectProduct"("customerId", "boardId", "productId", "pickCount")
+		VALUES (cast(#{customerId} as UUID),cast(#{boardId} as UUID),cast(#{productId} as UUID),#{count});
+	</insert>
+	<select id="fastBoardProduct" resultType="map" parameterType="String">
+		select pi."imagePath", p."pName", p.brand, p.price, p."pCount"
+		from product p left join "productMainImage" pi on (p."productId"=pi."productId")
+		where p."productId" = (
+		select distinct "productId"
+		from "selectProduct"
+		where "boardId" = cast(#{boardId} as UUID))
 	</select>
 </mapper>
