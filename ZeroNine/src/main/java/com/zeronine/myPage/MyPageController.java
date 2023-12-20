@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zeronine.dto.CustomerVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
 import com.zeronine.model.MyPageService;
@@ -488,7 +489,7 @@ public class MyPageController {
 
 		return cService.selectByEmail(email);	
 	}
-
+	*/
 	@RequestMapping("/myInfo.do")
 	public void myInfo(HttpSession session, Model model) {
 		String email = (String)session.getAttribute("email");
@@ -498,7 +499,7 @@ public class MyPageController {
 		model.addAttribute("birthdayFormmated", customerVo.getBirthday().toString().substring(0, 10));
 	
 	}
-	*/
+
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@RequestMapping("/subscriptionInfo.do")
