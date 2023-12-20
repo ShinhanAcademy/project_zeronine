@@ -235,7 +235,7 @@ body .chat_container,
 	margin-right: 300px;
 }
 .chat_container .chat_room_list .other_talker + .other_talker {
-	margin-left: 100px;
+	margin-left: 95px;
 }
 .chat_container .chat_room_list .other_talker .msg {
 	background: #e1e1e1;
@@ -292,4 +292,19 @@ body .chat_container,
     text-indent: -9999px;
     background: url(../../images/common/ico_send.png) no-repeat center / 35px 35px;
     transform: translateY(-50%);
+}
+
+
+/* test */
+#chatDtlList div.date:nth-last-child() span {
+	background: green;
+}
+#chatDtlList div.date:last-child span {
+	background: yellow;
+}
+#chatDtlList div.date:last span {
+	background: pink;
+}
+#chatDtlList .chat_room_list .date:last-child span {
+	background: orange;
 }
