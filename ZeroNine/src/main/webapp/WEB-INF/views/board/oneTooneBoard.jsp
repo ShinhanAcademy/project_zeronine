@@ -157,6 +157,7 @@ function filterType() {
     // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;
     infoOne_json = JSON.parse('${infoOne}');
+    console.log("필터 타입~~"+type_of_filter)
     showList();
 }
 
@@ -167,15 +168,15 @@ function showList() {
     	infoOne_json.sort(
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
-            }
-        );
+            } 
+        );console.log(infoOne_json);
     	show(infoOne_json);
-    } else { // 최신순 (default)
+    } else if (type_of_filter == 'recent'){ // 최신순 (default)
     	infoOne_json.sort(
             function (a, b) {
-                return new Date(b.uploadTime) - new Date(a.uploadTime);
+                return new Date(b.oUploadTime) - new Date(a.oUploadTime);
             }
-        );
+        );console.log(infoOne_json);
     	show(infoOne_json);
     }
 }

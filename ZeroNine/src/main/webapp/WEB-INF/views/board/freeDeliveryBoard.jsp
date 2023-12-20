@@ -108,10 +108,11 @@ $(searchBoard);
         successId_array.push(successId);
     }
 
- var ratio_arr = [];
+    var ratio_arr = [];
 function show(jsondata) {
 	console.log(jsondata.length);
 	var output = "";
+	ratio_arr = [];
     $.each(jsondata, function (index, item) {
     	
     	//%구하기
