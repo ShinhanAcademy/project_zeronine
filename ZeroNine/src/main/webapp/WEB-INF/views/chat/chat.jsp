@@ -61,50 +61,6 @@
 					<div class="chat_room_list">
 						<%-- chat_room_inner --%>
 						<div class="chat_room_inner" id="chatDtlList">
-							<%-- <c:forEach begin="1" end="10">
-								<div class="talk other_talker">
-									<div class="profile img_wrap">
-										<img src="${path}/images/mypage/img_chat_profile.png"
-											alt="profile image" />
-									</div>
-									<div class="msg">
-										안녕하세요 같이 구매 원합니당.
-									</div>
-								</div>
-								<div class="talk other_talker">
-									<div class="msg">
-										몇시 가능할까요?
-									</div>
-								</div>
-								<div class="talk my_talk">
-									<div class="msg">
-										네넵
-									</div>
-								</div>
-								<div class="talk my_talk">
-									<div class="msg">
-										저는 지금 앞이에요 ~!!
-									</div>
-								</div>
-							</c:forEach>
-							<div class="date">
-								<span>2022-01-01</span>
-							</div>
-							<div class="talk other_talker">
-								<div class="msg">
-									몇시 가능할까요?
-								</div>
-							</div>
-							<div class="talk my_talk">
-								<div class="msg">
-									네넵
-								</div>
-							</div>
-							<div class="talk my_talk">
-								<div class="msg">
-									저는 지금 앞이에요 ~!!
-								</div>
-							</div> --%>
 						</div>
 						<%-- //chat_room_inner --%>
 					</div>

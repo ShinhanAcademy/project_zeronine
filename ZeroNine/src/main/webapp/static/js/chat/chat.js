@@ -8,6 +8,8 @@ let chatId = null;
 let boardId = null;
 let sender = null;
 let myId = null;
+let sendMsgImageFlag = false;
+
 $(function(){
 	$(`#chatList .chat_unit`).on("click", function(){
 		$(`#chatList .chat_unit`).removeClass("on");
@@ -29,6 +31,8 @@ $(function(){
 				
 				sender = customerId;
 				
+console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
+
 				$("#customerName").html(customerName);
 				$("#address").html(address);
 				$("#title").html(title);
@@ -36,36 +40,43 @@ $(function(){
 				if(path != null && typeof path != "undefined"){
 					$("#path").html(`<img src="${path}" alt="product image">`);
 				}else{
-					$("#path").html(null);
+					$("#path").html(`<img src="../images/chat/img_no_product.png" alt="product no-image">`);
 				}
 				
 				if(Array.isArray(chatDtlList) && chatDtlList.length > 0){
 					const addHtml = [];
-					let currDate = convertDate(chatDtlList[0].sendTime);
+					let currDate = dateSet.convertDate(chatDtlList[0].sendTime);
+					let otherCurrTime = null;
+					let myCurrTime = null;
+					let makeImage = false;
 					
 					addHtml.push(`<div class="date">`);
-					addHtml.push(`<span>${convertDate(currDate)}</span>`);
+					addHtml.push(`<span>${dateSet.convertDate(currDate)}</span>`);
 					addHtml.push(`</div>`);
 					
 					for(const [idx, chatInfo] of chatDtlList.entries()){
-						let makeImage = false;
 						let {messageContent, sendTime, senderId} = chatInfo;
 						
-						if(currDate != convertDate(sendTime)){
+						if(currDate != dateSet.convertDate(sendTime)){
 							addHtml.push(`<div class="date">`);
-							addHtml.push(`<span>${convertDate(sendTime)}</span>`);
+							addHtml.push(`<span>${dateSet.convertDate(sendTime)}</span>`);
 							addHtml.push(`</div>`);
 							
-							currDate = convertDate(sendTime);
+							currDate = dateSet.convertDate(sendTime);
+							makeImage = false;
 						}
 						
-						if(customerId == senderId){
+						if(customerId == senderId) { //my msg
 							addHtml.push(`<div class="talk my_talk">`);
+							if(myCurrTime != dateSet.convertTime(sendTime)){
+								addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
+								myCurrTime = dateSet.convertTime(sendTime);
+							}
 							addHtml.push(`<div class="msg">${messageContent}</div>`);
 							addHtml.push(`</div>`);
 							
 							makeImage = false;
-						}else{
+						} else {  //other msg
 							addHtml.push(`<div class="talk other_talker">`);
 							if(!makeImage){
 								addHtml.push(`<div class="profile img_wrap">`);
@@ -76,6 +87,10 @@ $(function(){
 							}
 							
 							addHtml.push(`<div class="msg">${messageContent}</div>`);
+							if(otherCurrTime != dateSet.convertTime(sendTime)){
+								addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
+								otherCurrTime = dateSet.convertTime(sendTime);
+							}
 							addHtml.push(`</div>`);
 						}
 						
@@ -149,56 +164,41 @@ function sendMessage() {
 }
 
 function showMessage(message) {
-//	const chatBox = document.getElementById("chatBox");
-//	const p = document.createElement("p");
-//	p.style.wordWrap = "break-word";
-//	p.appendChild(document.createTextNode(message.sender + ": " + message.content));
-//	chatBox.appendChild(p);
-	const addHtml = [];
-	console.log("SHOW MESSAGE", message);
 	const {messageContent} = message;
-	senderId = message.senderId;
+	console.log("SHOW MESSAGE", message);
+	
+	const addHtml = [];
+	let currDate = dateSet.convertDate(new Date());
+	let lastDate = $("#chatDtlList div.date").last().text();
+	//let otherLastTime = $("#chatDtlList div.other_talker:last .time").text();
+	//let myLastTime = $("#chatDtlList div.my_talk:last .time").text();
 
-	var messageClass = `<div class="talk other_talker"> <img src="${contextPath}/images/mypage/img_chat_profile.png" alt="profile image" />`;
-	/*
-	addHtml.push(`<div class="profile img_wrap">`);
-	addHtml.push(`<img src="${contextPath}/images/mypage/img_chat_profile.png" alt="profile image" />`)	
-	addHtml.push(`</div>`);
-	
-	*/
-
-	console.log("compare sender id and myId ==>", senderId, myId, senderId == myId);
-	if(senderId == myId) {
-		messageClass = `<div class="talk my_talk">`
-	}
-	
-	addHtml.push(messageClass);
-
-	console.log("message=>", message);
-
-	
-	let currDate = convertDate(new Date());
-	
-	const lastDate = $("#chatDtlList div.date:last").text();
-	
 	if(currDate != lastDate){
 		addHtml.push(`<div class="date">`);
 		addHtml.push(`<span>${currDate}</span>`);
 		addHtml.push(`</div>`);
+		sendMsgImageFlag = false;
 	}
-	
-	console.log(`Received Message : ${messageContent}`);
 
-	//addHtml.push(`<div class="talk my_talk">`);
-	
-	// addHtml.push(`<div class="msg">`);
-	// addHtml.push(`${messageContent}`);
-	// addHtml.push(`</div>`);
-	addHtml.push(`<div class="msg">`);
-	addHtml.push(`${messageContent}`);
-	addHtml.push(`</div>`);
-	addHtml.push(`</div>`);
-	
+	if(message.senderId == myId){ // my msg
+		addHtml.push(`<div class="talk my_talk">`);
+		addHtml.push(`<div class="msg">${messageContent}</div>`);
+		addHtml.push(`</div>`);
+		
+		sendMsgImageFlag = false;
+	}else{ //other msg
+		addHtml.push(`<div class="talk other_talker">`);
+		if(!sendMsgImageFlag){
+			addHtml.push(`<div class="profile img_wrap">`);
+			addHtml.push(`<img src="${contextPath}/images/mypage/img_chat_profile.png" alt="profile image" />`)	
+			addHtml.push(`</div>`);
+			
+			sendMsgImageFlag = true;
+		}
+		addHtml.push(`<div class="msg">${messageContent}</div>`);
+		addHtml.push(`</div>`);
+	}
+
 	$("#chatDtlList").append(addHtml.join(""));
 	$("#message").val("");
 }
