@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zeronine.dto.CustomerVO;
@@ -32,14 +33,14 @@ public class CommonController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
 	
-	@GetMapping("/common/writeFastBoard.do")
-	public void writeFastBoard(String boardId, Model model, HttpSession session) {
+	@GetMapping("/common/participateBoard.do")
+	public void participateBoard(String boardId, Model model, HttpSession session) {
 		// String customerId = (String)session.getAttribute("customerId");
-		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		session.setAttribute("boardId", boardId);
-		List<Map<String,Object>> cart = boardService.myCart(customerId);
-		model.addAttribute("cart", cart);
-		model.addAttribute("boardId", boardId);
+		Map<String,Object> info = boardService.fastBoardProduct(boardId);
+		int remainCount = boardService.boardpCount(boardId);
+		model.addAttribute("info", info);
+		model.addAttribute("remainCount", remainCount);
 	}
 	
 	@PostMapping("/common/orderFast.do")
@@ -76,26 +77,35 @@ public class CommonController {
 		
 	}
 	
-	@GetMapping("/common/orderSuccess.do")
-	public void orderSuccess(Model model, HttpSession session) {
-		//String customerId = (String)session.getAttribute("customerId");
-		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		String deliveryId = (String) session.getAttribute("deliveryId");
-		Map<String,Object> info = boardService.orderInfo(customerId,deliveryId);
-		int totalPrice = (Integer)info.get("pickCount") * (Math.round((Integer)info.get("price")/(Integer)info.get("pCount")));
-		if(totalPrice<50000) {
-			totalPrice += 3000;
-		}
-		model.addAttribute("deliveryId",deliveryId);
-		model.addAttribute("info",info);
-		model.addAttribute("totalPrice",totalPrice);
-		session.removeAttribute("boardId");
-	}
+	@GetMapping("/common/orderSuccess.do") 
+	public void orderSuccess(Model model,HttpSession session) { 
+		//String customerId = (String)session.getAttribute("customerId"); 
+		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77"; 
+		String deliveryId = (String)session.getAttribute("deliveryId"); 
+		Map<String,Object> info = boardService.orderInfo(customerId,deliveryId); 
+		int price = (Integer)info.get("price"); 
+		int pCount = (Integer)info.get("pCount"); 
+		int totalPrice = (Integer)info.get("pickCount") * (Math.round(price/pCount));
+	    if(totalPrice<50000) { totalPrice += 3000; }
+	    model.addAttribute("deliveryId",deliveryId); model.addAttribute("info",info);
+	 	model.addAttribute("totalPrice",totalPrice);
+	 	session.removeAttribute("boardId"); 
+	 	}
 	
-	@GetMapping("/common/participateBoard.do")
-	public void participateBoard(String boardId, Model model, HttpSession session) {
-		//String customerId = (String)session.getAttribute("customerId");
-		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+	
+	
+	@PostMapping(value="/common/writeOrderFast.do", consumes="application/json")
+	public void writeOrderFast(@RequestBody Map<String,Object> info, Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		session.setAttribute("info", info);
+		String productId = (String)info.get("productId");
+		int count = Integer.parseInt((String)info.get("count"));
+		ProductVO product = boardService.selectByPid(productId);
+		CustomerVO customer =  customerService.selectById(customerId);
+		model.addAttribute("count",count);
+		model.addAttribute("product",product);
+		model.addAttribute("customer",customer);
+		
 	}
 	
 }

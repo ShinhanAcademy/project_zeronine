@@ -276,6 +276,11 @@ public class BoardDAOMybatis_yn {
 		return result;
 	}
 
+	public Map<String, Object> fastBoardProduct(String boardId) {
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "fastBoardProduct", boardId);
+		return info;
+	}
+
 	
 
 	

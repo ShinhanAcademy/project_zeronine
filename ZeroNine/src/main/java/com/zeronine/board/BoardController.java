@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.http.protocol.HTTP;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ import com.zeronine.dto.DealFailRefundVO;
 import com.zeronine.dto.DealSuccessBoardVO;
 import com.zeronine.model.BoardService_jy;
 import com.zeronine.model.BoardService_sg;
+import com.zeronine.model.BoardService_yn;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,6 +49,9 @@ public class BoardController {
 	
 	@Autowired
 	BoardService_sg boardServiceSg;
+	
+	@Autowired
+	BoardService_yn boardServiceYn;
 	
 	Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final S3Upload s3Upload;
@@ -85,7 +90,7 @@ public class BoardController {
 			failjson.add(fjson);
 		}
 		
-		logger.info("확인 : {}", failjson);
+		logger.info("�솗�씤 : {}", failjson);
 		
 		
 		JSONArray successjson = new JSONArray();
@@ -105,9 +110,9 @@ public class BoardController {
 		model.addAttribute("infoFb", jsonarray);
 		
 		
-		logger.info("controller fast정보: {}", infoFb);
-		logger.info("controller 의 fail 정보 : {}", fail);
-		logger.info("controller 의 success 정보 : {}", success);
+		logger.info("controller fast�젙蹂�: {}", infoFb);
+		logger.info("controller �쓽 fail �젙蹂� : {}", fail);
+		logger.info("controller �쓽 success �젙蹂� : {}", success);
 
 		return "board/fastBoard";
 	}
@@ -117,7 +122,7 @@ public class BoardController {
 		List<Map<String, Object>> infoFree = boardService.selectFreeDeliveryBoard();
 		List<DealFailRefundVO> fail = boardService.selectDealFailBoard();
 		List<DealSuccessBoardVO> success = boardService.selectDealSuccessBoard();
-		System.out.println("이건 컨트롤러: " + infoFree);
+		System.out.println("�씠嫄� 而⑦듃濡ㅻ윭: " + infoFree);
 		
 		JSONArray jsonarray = new JSONArray();
 		for (Map<String, Object> map : infoFree) {
@@ -139,7 +144,7 @@ public class BoardController {
 			failjson.add(fjson);
 		}
 		
-		logger.info("확인 : {}", failjson);
+		logger.info("�솗�씤 : {}", failjson);
 		
 		
 		JSONArray successjson = new JSONArray();
@@ -157,7 +162,7 @@ public class BoardController {
 		model.addAttribute("fail",failjson);
 		model.addAttribute("success", successjson);
 		model.addAttribute("infoFree",jsonarray);
-		logger.info("이것은 free의 제이슨:{} ", jsonarray);
+		logger.info("�씠寃껋� free�쓽 �젣�씠�뒯:{} ", jsonarray);
 		return "board/freeDeliveryBoard";
 	}
 	
@@ -182,7 +187,7 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		String email = (String)session.getAttribute("email");
 		model.addAttribute("email", email);
-		logger.info("controller infoOne 정보: {}", jsonarray);
+		logger.info("controller infoOne �젙蹂�: {}", jsonarray);
 		model.addAttribute("infoOne", jsonarray);
 		return "board/oneTooneBoard";
 	}
@@ -190,13 +195,16 @@ public class BoardController {
 	// board_edit
 	@RequestMapping("/boardedit.do")
 	public String editBoard(@RequestParam(name = "boardType") String boardType, Model model) {
-		logger.info("controller 보드 타입 정보 :{}   ", boardType);
+		logger.info("controller 蹂대뱶 ���엯 �젙蹂� :{}   ", boardType);
 		model.addAttribute("boardType", boardType);
 		return "board/boardEdit";
 	}
 
 	@RequestMapping("/fastEdit.do")
-	public String editFBoard() {
+	public String editFBoard(Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		List<Map<String,Object>> cart = boardServiceYn.myCart(customerId);
+		model.addAttribute("cart", cart);
 		return "board/fastEdit";
 	}
 
@@ -215,10 +223,10 @@ public class BoardController {
 		//String lower_boardListType = boardListType.toLowerCase();
 		//model.addAttribute("boardListType", lower_boardListType);
 		model.addAttribute("boardListType", "onetooneboard");
-		//view에서 (board type이 oneTooneBoard 이라면) 이미지가 전달되었음을 가정함.
+		//view�뿉�꽌 (board type�씠 oneTooneBoard �씠�씪硫�) �씠誘몄�媛� �쟾�떖�릺�뿀�쓬�쓣 媛��젙�븿.
 			System.out.println("mRequset" + mRequest);
 			
-			//임시로 사용할 MultipartFile 생성
+			//�엫�떆濡� �궗�슜�븷 MultipartFile �깮�꽦
 			/*
 			 * File file = new File("C:\\Users\\rohfr\\Downloads\\puppy.jpg");
 			 * logger.info("FILE NAME==>" + file.getName()); String extensionName =
@@ -231,7 +239,7 @@ public class BoardController {
 			 * { ex.printStackTrace(); } MultipartFile multipartFile = new
 			 * CommonsMultipartFile(fileItem);
 			 */
-			//**임시로 사용할 MultipartFile 생성
+			//**�엫�떆濡� �궗�슜�븷 MultipartFile �깮�꽦
 	        
 			
 	        String uuidStr = UUID.randomUUID().toString();
@@ -249,16 +257,16 @@ public class BoardController {
 	        	String originalFileName = imgFile.getOriginalFilename();
 	        	String imgExtension = getImgExtension(originalFileName);
 	        	s3ImageURL = s3Upload.upload(imgFile, uuidStr, imgExtension);
-	        	logger.info("oboard 이미지가 다음 경로에 저장됨 : " +  s3ImageURL);
+	        	logger.info("oboard �씠誘몄�媛� �떎�쓬 寃쎈줈�뿉 ���옣�맖 : " +  s3ImageURL);
 	        }
 	        else {
 	        	logger.info("imgFile is NULL");
-	        	//이미지를 넣지 않은 경우에는 그냥 Default이미지를 넣는다.
+	        	//�씠誘몄�瑜� �꽔吏� �븡�� 寃쎌슦�뿉�뒗 洹몃깷 Default�씠誘몄�瑜� �꽔�뒗�떎.
 	        	s3ImageURL = "https://zeronine.s3.ap-northeast-2.amazonaws.com/image/oboard/9ac7444b-f92a-4137-928b-d4d32c753133.jfif";
 	        }
 	        
 	        String oBoardId = uuidStr;
-	        //String oAuthorId = (String)session.getAttribute("customerId"); //세션에서 가지고 와야 함.
+	        //String oAuthorId = (String)session.getAttribute("customerId"); //�꽭�뀡�뿉�꽌 媛�吏�怨� ���빞 �븿.
 	        //String oAuthorId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 	        String oAuthorId = (String)session.getAttribute("customerId");
 	        logger.info("oAuthor ...", oAuthorId);
@@ -267,17 +275,17 @@ public class BoardController {
 	        String oPostingMinutes = postingMinutes;
 	        //String address = address;
 	        //String addressDetail =addressDetail;
-	        logger.info("작성자 ID ==>", oAuthorId);
+	        logger.info("�옉�꽦�옄 ID ==>", oAuthorId);
 	        
 	        
 	        boardServiceSg.writeOBoard(oBoardId, oAuthorId, oTitle, oContent, oPostingMinutes, s3ImageURL, address, addressDetail);
 	        /*
-	         UUID는 oBoardId가 됨, s3ImageURL은 해당 oBoard의 이미지 링크
-	         oBoard 생성할 때 uuid가 uuidStr로 외부에서 주입된 값으로 지정되어 INSERT 해야함
-	       	 oBoardImage에는 boardId(uuidStr) - URL(s3ImageURL) 쌍이 들어감
+	         UUID�뒗 oBoardId媛� �맖, s3ImageURL�� �빐�떦 oBoard�쓽 �씠誘몄� 留곹겕
+	         oBoard �깮�꽦�븷 �븣 uuid媛� uuidStr濡� �쇅遺��뿉�꽌 二쇱엯�맂 媛믪쑝濡� 吏��젙�릺�뼱 INSERT �빐�빞�븿
+	       	 oBoardImage�뿉�뒗 boardId(uuidStr) - URL(s3ImageURL) �뙇�씠 �뱾�뼱媛�
 	         * */
 		
-		//System.out.println("여기는 반드시 1:1 게시판 !! (oneTooneBoard) ==>" + boardListType);
+		//System.out.println("�뿬湲곕뒗 諛섎뱶�떆 1:1 寃뚯떆�뙋 !! (oneTooneBoard) ==>" + boardListType);
 		return "board/completeEdit";
 	}
 	
@@ -290,28 +298,23 @@ public class BoardController {
 
 	@RequestMapping("/completeedit.do")
 	//@PostMapping("/completeedit.do")
-	public String compliteEdit(@RequestParam Map<String, String> param , Model model ) throws IOException {
+	public String compliteEdit(HttpSession session, Model model ) throws IOException {
+		Map<String,Object> info = (Map<String,Object>)session.getAttribute("info");
+		String authorId = (String)session.getAttribute("customerId");
 		
-		
-		String lower_boardListType = param.get("send_bt_to_com").toLowerCase();
+		String lower_boardListType = ((String)info.get("send_bt_to_com")).toLowerCase();
 		model.addAttribute("boardListType", lower_boardListType);
-		String authorId = "490ef92a-d77f-432f-8bfb-2828eee6db77";//세션으로부터 가지고 와야 함.
-		
-		
-		String postingMinutes = param.get("postingMinutes");
-		String title = param.get("title");
-		String content = param.get("content");
-		
+		String postingMinutes = Integer.toString((Integer)info.get("postingMinutes"));
+		String title = (String)info.get("title");
+		String content = (String)info.get("content");
+		String mockProductId = (String)info.get("productId");
+		int mockPickCount = Integer.parseInt((String)info.get("count"));
 	
-		String mockProductId = "e282c3f1-4c33-42e6-a778-c4241c129830";
-		int mockPickCount = 2;
-	
-		
-		if(lower_boardListType.equals("fastboard")) {//즉배 로직
+		if(lower_boardListType.equals("fastboard")) {
 			logger.info("parameters=>" + postingMinutes + title + content);
 			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, mockProductId, mockPickCount);
 		}
-		else {// 무배 로직
+		else {// 臾대같 濡쒖쭅
 			Map<String, Integer> mockProducts = new HashMap<>(); //productId - purchaseCount
 			mockProducts.put("3733000a-9cdc-46db-976d-d6fe01b2bd5a", 1);
 			mockProducts.put("93a12e01-8e51-48bc-8539-580fcc65e1f0", 2);
@@ -319,21 +322,20 @@ public class BoardController {
 			boardServiceSg.writeFreeBoard(authorId, title, content, postingMinutes, mockProducts);
 		}
 		
-		
-		//view에서 (board type이 oneTooneBoard 이라면) 이미지가 전달되었음을 가정함.
-		
-		System.out.println("controller에서 게시글 작성 후 넘어가는 보드 타입 알고싶어~~" + lower_boardListType);
+		session.removeAttribute("info");
+		//view�뿉�꽌 (board type�씠 oneTooneBoard �씠�씪硫�) �씠誘몄�媛� �쟾�떖�릺�뿀�쓬�쓣 媛��젙�븿.
+		//System.out.println("controller�뿉�꽌 寃뚯떆湲� �옉�꽦 �썑 �꽆�뼱媛��뒗 蹂대뱶 ���엯 �븣怨좎떢�뼱~~" + lower_boardListType);
 		return "board/completeEdit";
 	}
 
-	// 디테일
+	// �뵒�뀒�씪
 	@RequestMapping("/fastboardDetail.do")
 	public String fastboardDetail(@RequestParam("boardId") String board_id, Model model) {
 		Map<String, Object> detail = boardService.selectFastDetail(board_id);
 		model.addAttribute("detail", detail);
 
-		logger.info("controller fast 디테일 아이디 : {}", board_id);
-		logger.info("controller fast 디테일 내용: {}", detail);
+		logger.info("controller fast �뵒�뀒�씪 �븘�씠�뵒 : {}", board_id);
+		logger.info("controller fast �뵒�뀒�씪 �궡�슜: {}", detail);
 
 		return "board/fastDetailView";
 	}
@@ -342,7 +344,7 @@ public class BoardController {
 	public String selectFreeDetail (@RequestParam("boardId")String board_id, Model model) {
 		Map<String, Object> detailFree = boardService.selectFreeDetail(board_id);
 		model.addAttribute("detailFree", detailFree);
-		logger.info("이것은 컨트롤러에서 찍는 detailFree : {}", detailFree);
+		logger.info("�씠寃껋� 而⑦듃濡ㅻ윭�뿉�꽌 李띾뒗 detailFree : {}", detailFree);
 		return "board/freeDetailView";
 	}
 
@@ -351,8 +353,8 @@ public class BoardController {
 		Map<String, Object> detail = boardService.selectOneDetail(board_id);
 		model.addAttribute("detail", detail);
 
-		logger.info("controller one 디테일 아이디 : {}", board_id);
-		logger.info("controller one 디테일 내용: {}", detail);
+		logger.info("controller one �뵒�뀒�씪 �븘�씠�뵒 : {}", board_id);
+		logger.info("controller one �뵒�뀒�씪 �궡�슜: {}", detail);
 
 		return "board/oneDetailView";
 	}

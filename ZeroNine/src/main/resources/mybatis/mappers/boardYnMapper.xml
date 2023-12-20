@@ -60,7 +60,6 @@
 		where bc."boardId" = cast(#{boardId} as UUID)
 		and bc."customerId" = cast(#{customerId} as UUID)
 	</select>
-	
 	<select id="boardpCount" resultType="int" parameterType="String">
 		SELECT DISTINCT p."pCount" - COALESCE(sq."pickCount", 0) AS count
 		FROM "selectProduct" sp
@@ -373,4 +372,12 @@
 		INSERT INTO public."selectProduct"("customerId", "boardId", "productId", "pickCount")
 		VALUES (cast(#{customerId} as UUID),cast(#{boardId} as UUID),cast(#{productId} as UUID),#{count});
 	</insert>
+	<select id="fastBoardProduct" resultType="map" parameterType="String">
+		select pi."imagePath", p."pName", p.brand, p.price, p."pCount"
+		from product p left join "productMainImage" pi on (p."productId"=pi."productId")
+		where p."productId" = (
+		select distinct "productId"
+		from "selectProduct"
+		where "boardId" = cast(#{boardId} as UUID))
+	</select>
 </mapper>

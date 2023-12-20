@@ -183,6 +183,10 @@ public class BoardService_yn {
 		return boardDAO.orderFastProduct(customerId,boardId,productId,count);
 	}
 
+	public Map<String, Object> fastBoardProduct(String boardId) {
+		return boardDAO.fastBoardProduct(boardId);
+	}
+
 
 	
 
