@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zeronine.dto.ProductVO;
+
 @Repository("boardDAO")
 public class BoardDAOMybatis_yn {
 	
@@ -229,9 +231,54 @@ public class BoardDAOMybatis_yn {
 		return result;
 	}
 
-	public List<Map<String, Object>> myCartFast(String customerId) {
-		List<Map<String,Object>> myCart = sqlSession.selectList(NAMESPACE + "myCartFast", customerId);
+	public List<Map<String, Object>> myCart(String customerId) {
+		List<Map<String,Object>> myCart = sqlSession.selectList(NAMESPACE + "myCart", customerId);
 		return myCart;
+	}
+
+	public ProductVO selectByPid(String productId) {
+		ProductVO product = sqlSession.selectOne(NAMESPACE + "selectByPid", productId);
+		return product;
+	}
+
+	public int orderSuccess(String deliveryId, String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("deliveryId", deliveryId);
+		map.put("customerId", customerId);
+		int result = sqlSession.insert(NAMESPACE + "orderSuccess", map);
+		return result;
+	}
+
+	public int orderSuccessProduct(String deliveryId, String productId, int count) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("deliveryId", deliveryId);
+		map.put("productId", productId);
+		map.put("count", count);
+		int result = sqlSession.insert(NAMESPACE + "orderSuccessProduct", map);
+		return result;
+	}
+
+	public Map<String, Object> orderInfo(String customerId, String deliveryId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("deliveryId", deliveryId);
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "orderInfo", map);
+		return info;
+	}
+
+	public int orderFastProduct(String customerId, String boardId, String productId, int count) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		map.put("productId", productId);
+		map.put("count", count);
+		int result = sqlSession.insert(NAMESPACE + "orderFastProduct", map);
+		return result;
+	}
+
+	public Map<String, Object> fastBoardProduct(String boardId) {
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "fastBoardProduct", boardId);
+		return info;
 	}
 
 	
