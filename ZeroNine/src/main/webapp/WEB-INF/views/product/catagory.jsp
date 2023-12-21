@@ -166,7 +166,7 @@ console.log(custid);
 					type: "POST",
 					data : {"custid" :custid,"productId" :productId},
 					success : function(){
-						likedcidArr.filter((element) => element !== productId);
+						likedcidArr = likedcidArr.filter(item => item !== productId);
 					},
 					error : function(){
 						alert("에러입니다.");
