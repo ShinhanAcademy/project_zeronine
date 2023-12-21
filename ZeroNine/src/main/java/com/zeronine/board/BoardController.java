@@ -321,8 +321,6 @@ public class BoardController {
 		if(lower_boardListType.equals("fastboard")) {
 			logger.info("parameters=>" + postingMinutes + title + content);
 			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, productId, pickCount);
-			//session.removeAttribute("info");
-			//return true;
 		}
 		else if (lower_boardListType.equals("freeboard")){// 臾대같 濡쒖쭅
 			Map<String, Integer> mockProducts = new HashMap<>(); //productId - purchaseCount
@@ -333,7 +331,7 @@ public class BoardController {
 		}
 		
 		session.removeAttribute("info");
-
+		
 		return "board/completeEdit";
 		//return false;
 	}
