@@ -206,13 +206,14 @@ function showList() {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             }
         );
+   		console.log(infoFb_json);
         each();
     } else { // 최신순 (default)
         infoFb_json.sort(
             function (a, b) {
                 return new Date(b.uploadTime) - new Date(a.uploadTime);
             }
-        );
+        );console.log(infoFb_json);
         each();
     }
 }
