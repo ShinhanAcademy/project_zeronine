@@ -117,7 +117,6 @@
 	<script>
 		var path = "${path}";
 	</script>
-	<script src="${path}/js/common/participateBoard.js"
-		type="text/javascript"></script>
+	<script src="${path}/js/common/participateBoard.js" type="text/javascript"></script>
 </body>
 </html>

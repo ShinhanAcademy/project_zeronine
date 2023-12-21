@@ -33,18 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				<span class="os_info_t">주문정보</span>
 				<div class="order_detail">
 					<div class="od_part">
-						<div class="od_subtitle">주문번호</div>
-						<div class="ob_subtext" id="deliId">${deliveryId}</div>
-					</div >
-					<div class="od_part">
 						<div class="od_subtitle">주문자명</div>
 						<div class="ob_subtext" id="deliId">${info.customerName}</div>
 					</div >
 					<div class="jul"></div>
-					<div class="od_part">
-						<div class="od_subtitle">주문날짜</div>
-						<div class="ob_subtext">${info.purchaseDateTime}</div>
-					</div>
 					<div class="jul"></div>
 					<div class="od_part">
 						<div class="od_subtitle">결제금액</div>

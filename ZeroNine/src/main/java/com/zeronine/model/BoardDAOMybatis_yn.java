@@ -241,39 +241,43 @@ public class BoardDAOMybatis_yn {
 		return product;
 	}
 
-	public int orderSuccess(String deliveryId, String customerId) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("deliveryId", deliveryId);
-		map.put("customerId", customerId);
-		int result = sqlSession.insert(NAMESPACE + "orderSuccess", map);
-		return result;
-	}
+	/*
+	 * public int orderSuccess(String deliveryId, String customerId) { Map<String,
+	 * Object> map = new HashMap<String, Object>(); map.put("deliveryId",
+	 * deliveryId); map.put("customerId", customerId); int result =
+	 * sqlSession.insert(NAMESPACE + "orderSuccess", map); return result; }
+	 * 
+	 * public int orderSuccessProduct(String deliveryId, String productId, int
+	 * count) { Map<String, Object> map = new HashMap<String, Object>();
+	 * map.put("deliveryId", deliveryId); map.put("productId", productId);
+	 * map.put("count", count); int result = sqlSession.insert(NAMESPACE +
+	 * "orderSuccessProduct", map); return result; }
+	 */
 
-	public int orderSuccessProduct(String deliveryId, String productId, int count) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("deliveryId", deliveryId);
-		map.put("productId", productId);
-		map.put("count", count);
-		int result = sqlSession.insert(NAMESPACE + "orderSuccessProduct", map);
-		return result;
-	}
-
-	public Map<String, Object> orderInfo(String customerId, String deliveryId) {
+	public Map<String, Object> orderInfo(String customerId, String boardId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customerId", customerId);
-		map.put("deliveryId", deliveryId);
+		map.put("boardId", boardId);
 		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "orderInfo", map);
 		return info;
 	}
 
-	public int orderFastProduct(String customerId, String boardId, String productId, int count) {
+	public int orderFastProduct(String customerId, String boardId, int count) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customerId", customerId);
 		map.put("boardId", boardId);
-		map.put("productId", productId);
 		map.put("count", count);
-		int result = sqlSession.insert(NAMESPACE + "orderFastProduct", map);
-		return result;
+		map.put("result_code", 0);
+		//int result = sqlSession.insert(NAMESPACE + "orderFastProduct", map);
+		sqlSession.insert(NAMESPACE + "orderFastProduct", map);
+		return (Integer)map.get("result_code");
+		/*
+		 * if(map.get("result_code")!=null &&
+		 * !"".equals(map.get("result_code").toString())) {
+		 * 
+		 * }
+		 */
+		//return result;
 	}
 
 	public Map<String, Object> fastBoardProduct(String boardId) {

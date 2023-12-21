@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
 <link rel="stylesheet" href="${path}/css/product/productdetail.css" />
+<link rel="stylesheet" href="${path}/css/modal/alreadyIncartModal.css">
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -21,8 +23,18 @@
 			<div class="detail_right">
 
 				<div class="detail_heartcart">
-					<img class="detail_heart" src="${path}/images/board/heart.png">
-					<img src="${path}/images/sangpumpage/productcart.png">
+				<button class="like" id="like" type="button"
+							value="${plist.productId}"
+							onclick="handleLikeButtonClick('${plist.productId}')">
+
+							<c:if test="${fn:contains(likedcid, plist.productId)}">
+								<img class="detail_heart" src="${path}/images/board/red_heart.png">
+							</c:if>
+							<c:if test="${not(fn:contains(likedcid, plist.productId))}">
+								<img class="detail_heart" src="${path}/images/board/heart.png">
+							</c:if>
+						</button>
+				
 				</div>
 				<span class="detail_pname">${plist.pName}</span>
 				<div class="detail_price">
@@ -68,9 +80,9 @@
 							원</span>
 					</div>
 					<div class="total_button">
-						<button   type="button" class="detail_cart" id="manygocart" onclick="manygocart">장바구니</button>
+						<button   type="button" class="detail_cart" id="manygocart" onclick="manygocart()">장바구니</button>
 						
-						<button class="detail_order"id="goOrder" onclick="goOrder">바로구매</button>
+						<button class="detail_order"id="goOrder" onclick="goOrder()">바로구매</button>
 					</div>
 				</div>
 			</div>
@@ -125,8 +137,10 @@
 								value="${plist.price}" maxFractionDigits="3"></fmt:formatNumber>
 							원</span>
 					</div>
-					<div>
-						장바구니
+					<div class="sidebox_btnpart">
+						<button   type="button" class="sidebox_btnCart" id="manygocart1" onclick="manygocart()">장바구니</button>
+						
+						<button class="sidebox_btnOrder"id="goOrder1" onclick="goOrder()">바로구매</button>
 					</div>
 				</div>
 
@@ -206,7 +220,8 @@
 	    var productid ="${plist.productId}";
 	
 		var cartcheckarr =cartCheck.split(',');
-		$("#goOrder").click(function(){
+		 function goOrder() {
+		
 			var cartCheckpid ="${cartCheckPid}";
 			 var productid ="${plist.productId}";
 			 console.log(productid);
@@ -249,19 +264,20 @@
 				
 			} 
 			
-		})
+		 }
+		 function manygocart() {
 		
-		$("#manygocart").click(function () {
 			 var productid ="${plist.productId}";
 			var result = updateQuantityAndTotal();
 		    var total = result.total;
 		    var quantityValue = result.quantityValue;
+		    var cartCheckpid ="${cartCheckPid}";
 		    console.log(custid);
 			 console.log(productid);
 			var obj = {
 				"productid" :productid,
 				"pcount": quantityValue};
-			
+			if(cartCheckpid.includes(productid)==false){
 			$.ajax({
 					url : path + "/product/goProductDCart.do",
 					data : obj,
@@ -273,7 +289,88 @@
 						alert("에러입니다.");
 					}
 				}); 
-})
+
+		}else{
+			$.ajax({
+				  url: path+"/product/alreadyInCartModal.do",
+				  type: "POST",
+				  success: function(response) {
+		
+					 $("#modal").show();
+				    // On success, replace the content of the modal div with the response
+				    $('#modal').html(response);
+				    // Now you might want to display the modal (assuming you have some CSS or JS for that)
+				    // For example, if you're using a Bootstrap modal:
+				    // $('#modal').modal('show');
+				  },
+				  error: function(error) {
+				    console.error('Error loading modal content:', error);
+				  }
+				});
+		}
+		}
+
+var str = "${likedcid}";
+	 var likedcidArr = [] ; 
+	 //str.split(/!|@|~|,| |Z/);
+	 likedcidArr = str.split(/,|\[|\]| /);
+	 console.log(likedcidArr);
+	 function handleLikeButtonClick(productId) {
+	      
+	        var custid = "${customerid}";
+	    
+	    	//클래스가 heart liked => AJAX DELTE 호출
+	        var isRedHeart = likedcidArr.indexOf(productId);
+	    	
+			console.log(isRedHeart);
+			if(isRedHeart>=0) {
+				$.ajax({
+					url : "/product/deleteLikedProduct.do",
+					type: "POST",
+					data : {"productId" :productId},
+					success : function(){
+						likedcidArr = likedcidArr.filter(item => item !== productId);
+					},
+					error : function(){
+						alert("에러입니다.");
+					}
+					});
+					 
+				}else{
+	
+				 $.ajax({
+						url : "/product/productLike.do",
+						type: "POST",
+						data : {"productId" :productId},
+						success : function(){
+							likedcidArr.push(productId);
+							console.log(likedcidArr);
+						},
+						error : function(){
+							alert("에러입니다.");
+						}
+						});
+				}
+					};
+	
+	        
+		$(".like").click(function (){
+
+			            var currentImagePath = $(this).find("img.detail_heart").attr("src");
+			            var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+			                path+"/images/board/red_heart.png" :
+			                path+"/images/board/heart.png";
+
+			            $(this).find("img.detail_heart").attr("src", newImagePath);
+			});
+		function esc_btn(){
+			$(document).keydown(function(event){
+				if(event.keyCode == 27){
+				$("#modal").hide();
+				}
+			})
+			
+		}
 	</script>
 
 </body>

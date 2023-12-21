@@ -46,15 +46,7 @@ $("#searchbtn").click(function() {
 })
 
 
-	$(".like").click(function (){
-
-			             currentImagePath = $(this).find("img.menu_heart").attr("src");
-			             newImagePath = currentImagePath === path+"/images/board/heart.png" ?
-			                path+"/images/board/red_heart.png" :
-			                path+"/images/board/heart.png";
-
-			            $(this).find("img.menu_heart").attr("src", newImagePath);
-			});	
+	
  
 
 function handlegoCartButtonClick(index, productId) {
@@ -98,3 +90,12 @@ function handlegoCartButtonClick(index, productId) {
 		}	
 	 }
 
+$(".like").click(function (){
+
+			             currentImagePath = $(this).find("img.menu_heart").attr("src");
+			             newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+			                path+"/images/board/red_heart.png" :
+			                path+"/images/board/heart.png";
+
+			            $(this).find("img.menu_heart").attr("src", newImagePath);
+			});	

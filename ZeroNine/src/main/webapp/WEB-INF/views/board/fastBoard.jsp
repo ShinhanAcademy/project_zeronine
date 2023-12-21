@@ -122,7 +122,8 @@ function show(jsondata) {
             item.finishTime.substr(11, 2) + "시 " + item.finishTime.substr(14, 2) + "분";
         
         // 가격 계산
-        var perprice = (item.price / item.pCount) - ((item.price / item.pCount) % 10);
+        //var perprice = (item.price / item.pCount) - ((item.price / item.pCount) % 10);
+        var perprice = Math.round(item.price/item.pCount);
 
         // 거래 실패 여부 확인
         var dealfail = false;
@@ -151,6 +152,7 @@ function show(jsondata) {
 			</ul>
 			<div class="pro_name">
 				<ul>
+					<li>\${item.title}</li>
 					<li>\${item.brand}</li>
 					<li>\${item.pName}</li>
 				</ul>
@@ -158,7 +160,7 @@ function show(jsondata) {
 			<div class="pro_detail">
 				<ul>
 					<li><img class="user" src="${path}/images/board/box.png">
-						<span> \${item.pCount - item.totalpickCount} 남음 </span></li>
+						<span> \${item.pCount - item.totalpickCount} 개 남음 </span></li>
 					<li><img class="card" src="${path}/images/board/card.png">
 						<span>\${perprice}원 </span> <span style="color: gray;">(개당)</span></li>
 					<li><img class="clock" src="${path}/images/board/clock.png">

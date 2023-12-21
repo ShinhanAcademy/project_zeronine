@@ -74,7 +74,8 @@
 
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_left
 	{
-	width: 650px;
+	display: flex;
+    width: 725px;
 }
 
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .box_text {
@@ -84,8 +85,16 @@
 	font-style: normal;
 	font-weight: 600;
 	line-height: 16px;
+	margin-right: 330px;
 }
-
+.order_body .order_bodypart .orderinfo .orderinfo_boxtext .box_text2 {
+	color: #000;
+	font-family: Lato;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 16px;
+}
 .order_body .order_bodypart .twinbox {
 	margin-top: 60px;
 	justify-content: space-between;

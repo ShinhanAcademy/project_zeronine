@@ -7,6 +7,9 @@
 /*
 intro_wrap
 */
+#zn_container {
+	padding-top: 10px;
+}
 .intro_wrap {
    	margin: 100px 0;
     color: #4d4d4d;

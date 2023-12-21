@@ -336,7 +336,7 @@ public class BoardController {
 
 		logger.info("controller fast �뵒�뀒�씪 �븘�씠�뵒 : {}", board_id);
 		logger.info("controller fast �뵒�뀒�씪 �궡�슜: {}", detail);
-
+		
 		return "board/fastDetailView";
 	}
 

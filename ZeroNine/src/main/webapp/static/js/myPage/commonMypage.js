@@ -114,8 +114,8 @@ function callOrderHistory() {
 	var paramObj = {};
 
 	paramObj.searchWord = $(".search_word input").val();
-	paramObj.startDate = convertDate(startDate);
-	paramObj.endDate = convertDate(endDate);
+	paramObj.startDate = dateSet.convertDate(startDate);
+	paramObj.endDate = dateSet.convertDate(endDate);
 	
 	$.ajax({
 		url: contextPath + "/myPage/subPage/orderHistoryDetail.do",
@@ -139,8 +139,8 @@ function callOrderCancelHistory() {
 	var paramObj = {};
 
 	paramObj.searchWord = $(".search_word input").val();
-	paramObj.startDate = convertDate(startDate);
-	paramObj.endDate = convertDate(endDate);
+	paramObj.startDate = dateSet.convertDate(startDate);
+	paramObj.endDate = dateSet.convertDate(endDate);
 	console.log("paramObj", paramObj);
 	
 	$.ajax({

@@ -74,8 +74,8 @@ public class ProductController {
 		PagingVO paginating = productService.getPages(page,Integer.parseInt(selectedValue), q, buttonValue);
 		
 		
-
-		
+		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
+		model.addAttribute("customerid",custid);
 		model.addAttribute("plist",productList);
 		model.addAttribute("paginating",paginating);
 		
@@ -157,12 +157,17 @@ public class ProductController {
 	public String productDetail(String productId, Model model, HttpSession session) {
 		ProductVO product = productService.selectByProductId(productId);
 		String custid = (String) session.getAttribute("customerId"); //customerId
+		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
+		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("plist", productService.selectByProductId(productId));
 		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 		model.addAttribute("deliverylist4", productService.selectDetailDelivery4());
 		return "product/productDetail";
 	}
-
+	@PostMapping("/alreadyInCartModal.do")
+	public String alreadyInCartModal() {
+		return "product/alreadyInCartModal";
+	}
 	@PostMapping("/goProductDCart.do")
 	public ResponseEntity<String> goProductDCart(String productid, int pcount, HttpSession session, Model model) {
 		int result = 0;
