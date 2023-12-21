@@ -197,7 +197,7 @@
 			var milliseconds = today.getMilliseconds();
 			var makeMerchantUid = hours +  minutes + seconds + milliseconds;
 			//var price = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
-			console.log(price);
+			//console.log(price);
 			IMP.request_pay({
 		        pg : 'html5_inicis',
 		        pay_method : 'card',
