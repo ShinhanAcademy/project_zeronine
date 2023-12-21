@@ -27,6 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -301,8 +302,12 @@ public class BoardController {
 
 	@RequestMapping("/completeedit.do")
 	//@PostMapping("/completeedit.do")
+	//@ResponseBody
 	public String compliteEdit(HttpSession session, Model model ) throws IOException {
+	//public boolean compliteEdit(HttpSession session, Model model ) throws IOException {	
+	
 		Map<String,Object> info = (Map<String,Object>)session.getAttribute("info");
+		logger.info(info.toString());
 		String authorId = (String)session.getAttribute("customerId");
 		
 		String lower_boardListType = ((String)info.get("send_bt_to_com")).toLowerCase();
@@ -310,25 +315,27 @@ public class BoardController {
 		String postingMinutes = Integer.toString((Integer)info.get("postingMinutes"));
 		String title = (String)info.get("title");
 		String content = (String)info.get("content");
-		String mockProductId = (String)info.get("productId");
-		int mockPickCount = Integer.parseInt((String)info.get("count"));
+		String productId = (String)info.get("productId");
+		int pickCount = Integer.parseInt((String)info.get("count"));
 	
 		if(lower_boardListType.equals("fastboard")) {
 			logger.info("parameters=>" + postingMinutes + title + content);
-			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, mockProductId, mockPickCount);
+			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, productId, pickCount);
+			//session.removeAttribute("info");
+			//return true;
 		}
-		else {// 臾대같 濡쒖쭅
+		else if (lower_boardListType.equals("freeboard")){// 臾대같 濡쒖쭅
 			Map<String, Integer> mockProducts = new HashMap<>(); //productId - purchaseCount
 			mockProducts.put("3733000a-9cdc-46db-976d-d6fe01b2bd5a", 1);
 			mockProducts.put("93a12e01-8e51-48bc-8539-580fcc65e1f0", 2);
-			
 			boardServiceSg.writeFreeBoard(authorId, title, content, postingMinutes, mockProducts);
+			//return true;
 		}
 		
 		session.removeAttribute("info");
-		//view 뿉 꽌 (board type 씠 oneTooneBoard  씠 씪硫 )  씠誘몄 媛   쟾 떖 릺 뿀 쓬 쓣 媛  젙 븿.
-		//System.out.println("controller 뿉 꽌 寃뚯떆湲   옉 꽦  썑  꽆 뼱媛  뒗 蹂대뱶    엯  븣怨좎떢 뼱~~" + lower_boardListType);
+
 		return "board/completeEdit";
+		//return false;
 	}
 
 	//  뵒 뀒 씪

@@ -207,12 +207,14 @@
 						"title" : title,
 						"content" : content,
 						"productId" : productId,
-						"count" : count
-						//구매 상품 정보도 넣어야 함
-						}
+						"count" : count		
+				}
+				
+				console.log("obj at boardEdit.jsp==>", obj);
 				
 				$.ajax({
 					url: '${path}/common/writeOrderFast.do',
+					//url: '${path}/board/completeedit.do',
 					type: "POST",
 					data: JSON.stringify(obj),
 					contentType: "application/json",
