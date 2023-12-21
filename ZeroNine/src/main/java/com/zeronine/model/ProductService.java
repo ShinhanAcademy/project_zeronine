@@ -23,7 +23,7 @@ public class ProductService {
 	public List<ProductVO> searchAll(int page, int selectedValue, String inputValue, String buttonValue) {
 		// 1페이지당 나오게할 때
 		int pageStartNum = (page - 1) * pageLimit;
-
+		System.out.println("searchAll"+selectedValue);
 		Map<String, Object> paginateParam = new HashMap<>();
 		paginateParam.put("start", pageStartNum);
 		paginateParam.put("selectedValue", selectedValue);

@@ -56,7 +56,11 @@ public class ProductController {
 
 	
 	@GetMapping("/productList.do")
-	public String productlist() {
+	public String productlist(@RequestParam(value="buttonValue",required = false, defaultValue="%")String buttonValue
+			,HttpSession session) {
+		
+		session.setAttribute("s1",buttonValue);
+		System.out.println("s1"+buttonValue);
 		return "product/productList";
 	}
 	
@@ -68,6 +72,11 @@ public class ProductController {
 			@RequestParam(value="buttonValue",required = false, defaultValue="%")String buttonValue,
 			Model model,HttpSession session
 			) {
+		String s1=(String)session.getAttribute("s1");
+		if(s1 !=null) {
+			buttonValue = s1;
+		}
+		System.out.println("s1"+buttonValue);
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		
 		List<ProductVO> productList= productService.searchAll( page,Integer.parseInt(selectedValue),q,buttonValue);
@@ -80,7 +89,7 @@ public class ProductController {
 		model.addAttribute("paginating",paginating);
 		
 		System.out.println(productList);
-		
+		session.removeAttribute("s1");
 		System.out.println(paginating);
 		return"/product/catagory";
 	}
