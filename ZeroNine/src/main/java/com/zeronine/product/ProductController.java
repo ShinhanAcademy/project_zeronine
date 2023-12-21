@@ -60,7 +60,6 @@ public class ProductController {
 			,HttpSession session) {
 		
 		session.setAttribute("s1",buttonValue);
-		System.out.println("s1"+buttonValue);
 		return "product/productList";
 	}
 	
@@ -81,16 +80,18 @@ public class ProductController {
 		
 		List<ProductVO> productList= productService.searchAll( page,Integer.parseInt(selectedValue),q,buttonValue);
 		PagingVO paginating = productService.getPages(page,Integer.parseInt(selectedValue), q, buttonValue);
-		
-		
+		Map<String,Object> inputbutton = new HashMap<>();
+		inputbutton.put("buttonValue", buttonValue);
+		inputbutton.put("inputValue", q);
+		 model.addAttribute("pCount",productService.countProduct(inputbutton));
 		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("customerid",custid);
 		model.addAttribute("plist",productList);
 		model.addAttribute("paginating",paginating);
 		
-		System.out.println(productList);
+	
 		session.removeAttribute("s1");
-		System.out.println(paginating);
+	
 		return"/product/catagory";
 	}
 	

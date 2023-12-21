@@ -47,52 +47,60 @@
 	</div>
 </c:forEach>
 			</div>
-			<div class="plus_btnpart">
-			<div style="display: block; text-align: center;">		
-		<c:choose>
-		<c:when test="${paginating.pageNumber<=1}">
-			<span>[<<]</span>
-		</c:when>
-		<c:otherwise>
-			<a href="javascript:search(1)">[<<]</a>
-		</c:otherwise>
-	</c:choose>
 
-	<c:choose>
-		<c:when test="${paginating.pageNumber<=1}">
-			<span>[<]</span>
-		</c:when>
-		<c:otherwise>
-			<a href="javascript:search(${paginating.pageNumber-1})">[<]</a>
-		</c:otherwise>
-	</c:choose>
-
-	<c:forEach begin="${paginating.startPageNumber}"
-		end="${paginating.endPageNumber}" var="i" step="1">
-		<a href="javascript:search(${i})">${i}</a>
-	</c:forEach>
-
-	<c:choose>
-		<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
-			<span>[>]</span>
-		</c:when>
-		<c:otherwise>
-			<a href="javascript:search(${paginating.pageNumber+1})">[>]</a>
-		</c:otherwise>
-	</c:choose>
-
-	<c:choose>
-		<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
-			<span>[>>]</span>
-		</c:when>
-		<c:otherwise>
-			<a href="javascript:search(${paginating.maxPageNumber})">[>>]</a>
-		</c:otherwise>
-	</c:choose>
-	    </div>
-
-				<div class="dist49"></div>
-			</div>
+<!-- pagination -->
+<c:if test="${pCount != 0}">
+	<div class=pagination>
+		<div class="pageLeft">
+			<c:choose>
+				<c:when test="${paginating.pageNumber<=1}">
+					<button class="btnFirst" disabled="disabled">첫페이지</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btnFirst" id="btnFirst" onclick="javascript:search(1)">첫페이지</button>
+				</c:otherwise>	
+			</c:choose>	
+			<c:choose>
+				<c:when test="${paginating.pageNumber<=1}">
+					<button class="btnPrev" disabled="disabled">이전페이지</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btnPrev" id="btnPrev" onclick="javascript:search(${paginating.pageNumber-1})">이전페이지</button>
+				</c:otherwise>	
+			</c:choose>	
+		</div>
+		<ul class="pagingWrap">
+			<c:forEach begin="${paginating.startPageNumber}"
+				end="${paginating.endPageNumber}" var="i" step="1">
+				<li>
+					<a href="javascript:search(${i})">${i}</a>
+				</li>
+			</c:forEach>
+		</ul>
+		<div class="pageRight">
+			<c:choose>
+				<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
+					<button class="btnNext" id="btnNext" disabled="disabled">다음페이지</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btnNext" id="btnNext" onclick="javascript:search(${paginating.pageNumber+1})">다음페이지</button>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
+					<button class="btnLast" disabled="disabled">마지막페이지</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btnLast" id="btnLast" onclick="javascript:search(${paginating.maxPageNumber})">마지막페이지</button>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+</c:if>
+<!-- //pagination -->
+			
+			
+			
 <script>
 		var path = "${path}";
 		var custid = "${customerid}";

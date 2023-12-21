@@ -110,8 +110,8 @@
 <c:if test="${orderHistoryAll.size() != 0}">
 <div class=pagination>
 	<div class="pageLeft">
-		<button class="btnFirst">첫페이지</button>
-		<button class="btnPrev">이전페이지</button>
+		<button class="btnFirst" id="btnFirst">첫페이지</button>
+		<button class="btnPrev" id="btnPrev">이전페이지</button>
 	</div>
 	<ul class="pagingWrap">
 		<li><a href="">1</a></li>
@@ -126,8 +126,8 @@
 		<li><a href="">10</a></li>
 	</ul>
 	<div class="pageRight">
-		<button class="btnNext">다음페이지</button>
-		<button class="btnLast">마지막페이지</button>
+		<button class="btnNext" id="btnNext">다음페이지</button>
+		<button class="btnLast" id="btnLast">마지막페이지</button>
 	</div>
 </div>
 </c:if>
