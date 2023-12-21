@@ -66,9 +66,9 @@ public class CommonController {
 		int isFastProduct = boardService.orderFastProduct(customerId,boardId,count);
 		System.out.println("isFastProduct" + isFastProduct);
 		if(isFastProduct==0 || isFastProduct==1) {
-			message = "Âü¿©¿Ï·á";
+			message = "ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½";
 		}else {
-			message = "ÀÌ¹Ì Âü¿©ÇÑ °Ô½Ã±ÛÀÔ´Ï´Ù.";
+			message = "ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½Ô´Ï´ï¿½.";
 		}
 		return message;
 		
@@ -93,6 +93,7 @@ public class CommonController {
 	
 	@PostMapping(value="/common/writeOrderFast.do", consumes="application/json")
 	public void writeOrderFast(@RequestBody Map<String,Object> info, Model model, HttpSession session) {
+	//public String writeOrderFast(@RequestBody Map<String,Object> info, Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		session.setAttribute("info", info);
 		String productId = (String)info.get("productId");
@@ -102,7 +103,7 @@ public class CommonController {
 		model.addAttribute("count",count);
 		model.addAttribute("product",product);
 		model.addAttribute("customer",customer);
-		
+		//return "board/completeEdit";
 	}
 	
 }

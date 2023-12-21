@@ -299,7 +299,9 @@ public class BoardController {
 	@RequestMapping("/completeedit.do")
 	//@PostMapping("/completeedit.do")
 	public String compliteEdit(HttpSession session, Model model ) throws IOException {
+		
 		Map<String,Object> info = (Map<String,Object>)session.getAttribute("info");
+		logger.info(info.toString());
 		String authorId = (String)session.getAttribute("customerId");
 		
 		String lower_boardListType = ((String)info.get("send_bt_to_com")).toLowerCase();
@@ -307,12 +309,12 @@ public class BoardController {
 		String postingMinutes = Integer.toString((Integer)info.get("postingMinutes"));
 		String title = (String)info.get("title");
 		String content = (String)info.get("content");
-		String mockProductId = (String)info.get("productId");
-		int mockPickCount = Integer.parseInt((String)info.get("count"));
+		String productId = (String)info.get("productId");
+		int pickCount = Integer.parseInt((String)info.get("count"));
 	
 		if(lower_boardListType.equals("fastboard")) {
 			logger.info("parameters=>" + postingMinutes + title + content);
-			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, mockProductId, mockPickCount);
+			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, productId, pickCount);
 		}
 		else {// 臾대같 濡쒖쭅
 			Map<String, Integer> mockProducts = new HashMap<>(); //productId - purchaseCount
@@ -323,6 +325,7 @@ public class BoardController {
 		}
 		
 		session.removeAttribute("info");
+		
 		//view�뿉�꽌 (board type�씠 oneTooneBoard �씠�씪硫�) �씠誘몄�媛� �쟾�떖�릺�뿀�쓬�쓣 媛��젙�븿.
 		//System.out.println("controller�뿉�꽌 寃뚯떆湲� �옉�꽦 �썑 �꽆�뼱媛��뒗 蹂대뱶 ���엯 �븣怨좎떢�뼱~~" + lower_boardListType);
 		return "board/completeEdit";
