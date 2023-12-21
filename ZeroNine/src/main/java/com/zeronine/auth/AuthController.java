@@ -73,8 +73,10 @@ public class AuthController {
 		
 		if(cnt>0) {
 			String customerId = customerService.getCustomerId(email,pwd);
+			String customerName = customerService.getCustomerName(email,pwd);
 			session.setAttribute("customerId", customerId);
 			session.setAttribute("email", email);
+			session.setAttribute("customerName", customerName);
 		}
 		
 		return cnt;

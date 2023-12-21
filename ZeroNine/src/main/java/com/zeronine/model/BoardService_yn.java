@@ -167,20 +167,12 @@ public class BoardService_yn {
 		return boardDAO.selectByPid(productId);
 	}
 
-	public int orderSuccess(String deliveryId, String customerId) {
-		return boardDAO.orderSuccess(deliveryId,customerId);
+	public Map<String, Object> orderInfo(String customerId, String boardId) {
+		return boardDAO.orderInfo(customerId, boardId);
 	}
 
-	public int orderSuccessProduct(String deliveryId, String productId, int count) {
-		return boardDAO.orderSuccessProduct(deliveryId,productId,count);
-	}
-
-	public Map<String, Object> orderInfo(String customerId, String deliveryId) {
-		return boardDAO.orderInfo(customerId,deliveryId);
-	}
-
-	public int orderFastProduct(String customerId, String boardId, String productId, int count) {
-		return boardDAO.orderFastProduct(customerId,boardId,productId,count);
+	public int orderFastProduct(String customerId, String boardId, int count) {
+		return boardDAO.orderFastProduct(customerId,boardId,count);
 	}
 
 	public Map<String, Object> fastBoardProduct(String boardId) {

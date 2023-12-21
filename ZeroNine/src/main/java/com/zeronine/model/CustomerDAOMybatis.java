@@ -87,7 +87,14 @@ public class CustomerDAOMybatis {
 		info.put("pwd", pwd);
 		String customerId = sqlSession.selectOne(NAMESPACE + "getCustomerId", info);
 		return customerId;
-
+	}
+	
+	public String getCustomerName(String email, String pwd) {
+		HashMap<String,String> info = new HashMap<>();
+		info.put("email", email);
+		info.put("pwd", pwd);
+		String customerName = sqlSession.selectOne(NAMESPACE + "getCustomerName", info);
+		return customerName;
 	}
 	
 	public boolean updateCustomerInfo(Map<String, String> infos) {

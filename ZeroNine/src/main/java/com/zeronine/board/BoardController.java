@@ -90,7 +90,7 @@ public class BoardController {
 			failjson.add(fjson);
 		}
 		
-		logger.info("�솗�씤 : {}", failjson);
+		logger.info("마감 정보 : {}", failjson);
 		
 		
 		JSONArray successjson = new JSONArray();
@@ -110,9 +110,9 @@ public class BoardController {
 		model.addAttribute("infoFb", jsonarray);
 		
 		
-		logger.info("controller fast�젙蹂�: {}", infoFb);
-		logger.info("controller �쓽 fail �젙蹂� : {}", fail);
-		logger.info("controller �쓽 success �젙蹂� : {}", success);
+		logger.info("controller fast정보: {}", infoFb);
+		logger.info("controller 에서 fail 정보 : {}", fail);
+		logger.info("controller 에서 success 정보 : {}", success);
 
 		return "board/fastBoard";
 	}
@@ -122,7 +122,7 @@ public class BoardController {
 		List<Map<String, Object>> infoFree = boardService.selectFreeDeliveryBoard();
 		List<DealFailRefundVO> fail = boardService.selectDealFailBoard();
 		List<DealSuccessBoardVO> success = boardService.selectDealSuccessBoard();
-		System.out.println("�씠嫄� 而⑦듃濡ㅻ윭: " + infoFree);
+		System.out.println("무배 정보: " + infoFree);
 		
 		JSONArray jsonarray = new JSONArray();
 		for (Map<String, Object> map : infoFree) {
@@ -144,7 +144,7 @@ public class BoardController {
 			failjson.add(fjson);
 		}
 		
-		logger.info("�솗�씤 : {}", failjson);
+		logger.info("실패 : {}", failjson);
 		
 		
 		JSONArray successjson = new JSONArray();
@@ -162,7 +162,7 @@ public class BoardController {
 		model.addAttribute("fail",failjson);
 		model.addAttribute("success", successjson);
 		model.addAttribute("infoFree",jsonarray);
-		logger.info("�씠寃껋� free�쓽 �젣�씠�뒯:{} ", jsonarray);
+		logger.info("직거래 정보:{} ", jsonarray);
 		return "board/freeDeliveryBoard";
 	}
 	
@@ -187,7 +187,7 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		String email = (String)session.getAttribute("email");
 		model.addAttribute("email", email);
-		logger.info("controller infoOne �젙蹂�: {}", jsonarray);
+		logger.info("controller infoOne 정보: {}", jsonarray);
 		model.addAttribute("infoOne", jsonarray);
 		return "board/oneTooneBoard";
 	}
@@ -195,7 +195,7 @@ public class BoardController {
 	// board_edit
 	@RequestMapping("/boardedit.do")
 	public String editBoard(@RequestParam(name = "boardType") String boardType, Model model) {
-		logger.info("controller 蹂대뱶 ���엯 �젙蹂� :{}   ", boardType);
+		logger.info("controller 에서 찍는 보드타입 :{}   ", boardType);
 		model.addAttribute("boardType", boardType);
 		return "board/boardEdit";
 	}
@@ -336,7 +336,7 @@ public class BoardController {
 
 		logger.info("controller fast �뵒�뀒�씪 �븘�씠�뵒 : {}", board_id);
 		logger.info("controller fast �뵒�뀒�씪 �궡�슜: {}", detail);
-
+		
 		return "board/fastDetailView";
 	}
 
