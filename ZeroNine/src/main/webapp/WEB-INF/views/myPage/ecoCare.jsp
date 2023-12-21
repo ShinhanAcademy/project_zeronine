@@ -256,7 +256,7 @@ var myDoughnutChart = new Chart(ctx2, {
 			data : [3, 17],
 			labels : [ "일반", "음식물"],
 			//borderColor : ["rgba(75, 192, 192, 1)", "rgba(54, 162, 235, 1)"],
-			backgroundColor : ["rgba(255, 206, 86, 0.3)","rgba(54, 162, 235, 0.3)"],
+			backgroundColor : ["rgba(153, 102, 255, 0.3)","rgba(54, 162, 235, 0.3)"],
 			borderWidth : 3
 		}
 		]
