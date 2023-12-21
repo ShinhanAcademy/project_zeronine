@@ -6,6 +6,7 @@
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
 <link rel="stylesheet" href="${path}/css/product/productdetail.css" />
+<link rel="stylesheet" href="${path}/css/modal/alreadyIncartModal.css">
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -79,9 +80,9 @@
 							원</span>
 					</div>
 					<div class="total_button">
-						<button   type="button" class="detail_cart" id="manygocart" onclick="manygocart">장바구니</button>
+						<button   type="button" class="detail_cart" id="manygocart" onclick="manygocart()">장바구니</button>
 						
-						<button class="detail_order"id="goOrder" onclick="goOrder">바로구매</button>
+						<button class="detail_order"id="goOrder" onclick="goOrder()">바로구매</button>
 					</div>
 				</div>
 			</div>
@@ -136,8 +137,10 @@
 								value="${plist.price}" maxFractionDigits="3"></fmt:formatNumber>
 							원</span>
 					</div>
-					<div>
-						장바구니
+					<div class="sidebox_btnpart">
+						<button   type="button" class="sidebox_btnCart" id="manygocart1" onclick="manygocart()">장바구니</button>
+						
+						<button class="sidebox_btnOrder"id="goOrder1" onclick="goOrder()">바로구매</button>
 					</div>
 				</div>
 
@@ -217,7 +220,8 @@
 	    var productid ="${plist.productId}";
 	
 		var cartcheckarr =cartCheck.split(',');
-		$("#goOrder").click(function(){
+		 function goOrder() {
+		
 			var cartCheckpid ="${cartCheckPid}";
 			 var productid ="${plist.productId}";
 			 console.log(productid);
@@ -260,9 +264,9 @@
 				
 			} 
 			
-		})
+		 }
+		 function manygocart() {
 		
-		$("#manygocart").click(function () {
 			 var productid ="${plist.productId}";
 			var result = updateQuantityAndTotal();
 		    var total = result.total;
@@ -285,9 +289,25 @@
 						alert("에러입니다.");
 					}
 				}); 
-})
+
 		}else{
-			
+			$.ajax({
+				  url: path+"/product/alreadyInCartModal.do",
+				  type: "POST",
+				  success: function(response) {
+		
+					 $("#modal").show();
+				    // On success, replace the content of the modal div with the response
+				    $('#modal').html(response);
+				    // Now you might want to display the modal (assuming you have some CSS or JS for that)
+				    // For example, if you're using a Bootstrap modal:
+				    // $('#modal').modal('show');
+				  },
+				  error: function(error) {
+				    console.error('Error loading modal content:', error);
+				  }
+				});
+		}
 		}
 
 var str = "${likedcid}";
@@ -343,6 +363,14 @@ var str = "${likedcid}";
 
 			            $(this).find("img.detail_heart").attr("src", newImagePath);
 			});
+		function esc_btn(){
+			$(document).keydown(function(event){
+				if(event.keyCode == 27){
+				$("#modal").hide();
+				}
+			})
+			
+		}
 	</script>
 
 </body>

@@ -4,20 +4,28 @@
 
 <div id="modal_wrap">
 		<div id="modal_body">
-		<c:if test="${email==null}">
-			<p>이메일이 존재하지 않습니다.</p>		
-			<p>회원가입해주세요.</p>		
-		</c:if>
-		<c:if test="${email!=null}">
-			<p>${name}님의 이메일은</p>
-			<p>${email}입니다.</p>
-		</c:if>
-			<button id="modal_btn">확인</button>
+		<span class="modal_text">동일한 상품이 장바구니에 존재합니다.
+		</span>
+		<span class="modal_text">장바구니로 이동하시겠습니까?</span>
+		 <div class="modal_btnpart">
+			<button id="modal_btn">이동</button>
+			<button id="modal_btn1" onclick="esc_btn()">취소</button>
+		</div>
 		</div>
 </div>
 
 <script>
 $("#modal_btn").click(function(){
-	location.href = path + "/auth/login.do";
+	location.href = path + "/myPage/myCart.do";
 })
+function esc_btn() {
+  $("#modal").hide();
+}
+
+$(document).keydown(function(event) {
+  if (event.keyCode == 27) {
+    $("#modal").hide();
+  }
+});
+
 </script>
