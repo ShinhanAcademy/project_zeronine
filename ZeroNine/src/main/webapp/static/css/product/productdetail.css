@@ -49,8 +49,10 @@
 	margin-top: 31px;
 	margin-left: 15px;
 }
-
-.detail_bodypart .detail_right .detail_pname {
+.detail_bodypart .detail_right .detail_pnamepart {
+	width: 590px;
+}
+.detail_bodypart .detail_right .detail_pnamepart .detail_pname {
 	padding-top: 19px;
 	color: #000;
 	text-align: center;
@@ -58,7 +60,6 @@
 	font-size: 34px;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 16px;
 	color: #000;
 }
 

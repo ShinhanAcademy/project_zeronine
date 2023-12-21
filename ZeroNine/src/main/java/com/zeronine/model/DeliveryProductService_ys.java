@@ -1,6 +1,8 @@
 package com.zeronine.model;
 
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class DeliveryProductService_ys {
 	public int PersonGoDeliveryProduct(String deliveryId, String custid,String productId) {
 		return deliveryproductDAO_ys.PersonGoDeliveryProduct(deliveryId, custid, productId);
 	}
-	public DeliveryProductVO selectByDidpCount(String deliveryId) {
-		return deliveryproductDAO_ys.selectByDidpCount(deliveryId);
+	public Map<String, Object> selectOrderInfo(String deliveryId) {
+		return deliveryproductDAO_ys.selectOrderInfo(deliveryId);
 	}
 }
