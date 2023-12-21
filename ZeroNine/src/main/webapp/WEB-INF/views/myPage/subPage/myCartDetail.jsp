@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%-- date format lib --%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%><%-- functions lib --%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<script defer src="/js/myPage/subPage/myCartDetail.js"></script>
 <div class="free_delivery_amount">
 	<div class="target_amount">
 		<div class="now_amount"></div>
@@ -25,7 +26,16 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th class="check_all"><input type="checkbox" /></th>
+						<th class="has_check check_all">
+							<c:choose>
+								<c:when test="${myCart.size() != 0}"> 
+									<input type="checkbox" />
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" disabled="disabled" />
+								</c:otherwise>
+							</c:choose>
+						</th>
 						<th>상품 정보</th>
 						<th>수량</th>
 						<th>구매가</th>
@@ -37,7 +47,9 @@
 						<c:when test="${myCart.size() != 0}"> 
 							<c:forEach items="${myCart}" var="cartItem">
 								<tr id="${cartItem.productId}">
-									<td class="check_item"><input type="checkbox" /></td>
+									<td class="has_check check_item">
+										<input type="checkbox" />
+									</td>
 									<td class="product_info">
 										<div class="img_wrap">
 											<c:choose>
@@ -61,8 +73,8 @@
 											</c:forEach>
 										</select>
 									</td>
-									<td class="price">
-										<fmt:formatNumber pattern="#,##0" value="${cartItem.price}"/>원
+									<td class="price" data-price=${cartItem.price}>
+										<fmt:formatNumber pattern="#,##0" value="${cartItem.price * cartItem.productCount}" /> 원
 									</td>
 									<td class="purchase_selection">
 										<button class="btn_buy btn_blue">바로구매</button>
@@ -70,175 +82,7 @@
 										<button class="btn_del btn_default">삭제</button>
 									</td>
 								</tr>
-							</c:forEach>
-							<script>
-								$(function(){
-									//delete cart item
-									$(".purchase_selection .btn_del").on("click", function(){
-										delCartItem();
-									});
-									
-									//delete selected cart item 
-									$(".tbl_bottom_wrap .btn_del").on("click", function(){
-										const chkBox = $("#cartList input[type=checkbox]:checked");
-										
-										$(chkBox).each(function() {
-											delCartItem();
-										});
-									});
-									
-									function delCartItem() {
-										const productId = $(this).closest("tr").attr("id");
-										console.log("productId >>>> " + productId );
-										
-										if(confirm("삭제하시겠습니까?")){
-											$.ajax({
-												url: contextPath + "/product/deleteCartItem.do",
-												type : "POST",
-												data: {productId},
-												success: function(result) {
-													console.log("deleteCartItem 성공 !!");
-													console.log(result);
-													if(Object.keys(result).length > 0 && result.count > 0){
-														$("#" + productId).remove();
-													}
-												},
-												error:function() {
-													console.log("deleteCartItem ajax 오류");
-												}
-											});
-										} //end If
-									}// end Fn_delCartItem
-								});
-							</script>					
-							<%-- <tr>
-								<td class="check_item"><input type="checkbox" /></td>
-								<td class="product_info">
-									<div class="img_wrap">
-										<img src="${path}/images/mypage/img_product_04.png"
-											alt="product image" />
-									</div>
-									<div class="detail">
-										<div class="brand_name">에스쁘아</div>
-										<div class="product_name">[증량기획] 에스쁘아 원터 스플래쉬 선크림 세라마이드
-											60ml+20ml 세트</div>
-									</div>
-								</td>
-								<td class="product_count"><select id="select_count">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-								</select></td>
-								<td class="price">66,000원</td>
-								<td class="purchase_selection">
-									<button class="btn_buy btn_blue">바로구매</button>
-									<button class="btn_addlike btn_default">쇼킹찜</button>
-									<button class="btn_del btn_default">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="check_item"><input type="checkbox" /></td>
-								<td class="product_info">
-									<div class="img_wrap">
-										<img src="${path}/images/mypage/img_product_05.png"
-											alt="product image" />
-									</div>
-									<div class="detail">
-										<div class="brand_name">유시몰</div>
-										<div class="product_name">[11/27 하루특가]유시몰 화이트닝 미백치약
-											106g+20g (가글 9ml 추가</div>
-									</div>
-								</td>
-								<td class="product_count"><select id="select_count">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-								</select></td>
-								<td class="price">66,000원</td>
-								<td class="purchase_selection">
-									<button class="btn_buy btn_blue">바로구매</button>
-									<button class="btn_addlike btn_default">쇼킹찜</button>
-									<button class="btn_del btn_default">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="check_item"><input type="checkbox" /></td>
-								<td class="product_info">
-									<div class="img_wrap">
-										<img src="${path}/images/mypage/img_product_06.png"
-											alt="product image" />
-									</div>
-									<div class="detail">
-										<div class="brand_name">라보에이치</div>
-										<div class="product_name">라보에이치 두피강화샴푸 탈모증상완화 333ml기획
-											(+112ml 증정)</div>
-									</div>
-								</td>
-								<td class="product_count"><select id="select_count">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-								</select></td>
-								<td class="price">66,000원</td>
-								<td class="purchase_selection">
-									<button class="btn_buy btn_blue">바로구매</button>
-									<button class="btn_addlike btn_default">쇼킹찜</button>
-									<button class="btn_del btn_default">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td class="check_item"><input type="checkbox" /></td>
-								<td class="product_info">
-									<div class="img_wrap">
-										<img src="${path}/images/mypage/img_product_07.png"
-											alt="product image" />
-									</div>
-									<div class="detail">
-										<div class="brand_name">에스쁘아</div>
-										<div class="product_name">[한정기획/베스트립증정]에스쁘아 비벨벳 커버쿠션 뉴클래스
-											미니립 2종[한정기획/베스트립증정]에스쁘아 비벨벳 커버쿠션 뉴클래스 미니립 2종</div>
-									</div>
-								</td>
-								<td class="product_count"><select id="select_count">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-								</select></td>
-								<td class="price">66,000원</td>
-								<td class="purchase_selection">
-									<button class="btn_buy btn_blue">바로구매</button>
-									<button class="btn_addlike btn_default">쇼킹찜</button>
-									<button class="btn_del btn_default">삭제</button>
-								</td>
-							</tr> --%>							
+							</c:forEach>				
 						</c:when>
 						<c:otherwise>
 							<tr>
@@ -246,7 +90,6 @@
 							</tr>
 						</c:otherwise>
 					</c:choose>
-					
 				</tbody>
 			</table>
 		</div>
@@ -262,7 +105,7 @@
 			<div class="price_top">
 				<div class="price_info total_selling_price">
 					<div>총 판매가</div>
-					<div>119,710원</div>
+					<div class="total_price">119,710원</div>
 				</div>
 				<div class="price_info delivery_fee">
 					<div>배송비</div>

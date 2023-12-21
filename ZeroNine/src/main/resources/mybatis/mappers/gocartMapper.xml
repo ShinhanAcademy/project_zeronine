@@ -3,48 +3,47 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.gocart">
-<insert id="goProductCart" parameterType="CartVo"> 
-	INSERT INTO public.cart(
-	"customerId", "productId", "productCount")
-		VALUES (CAST(#{custid} AS
-		UUID), CAST(#{productId} AS UUID), 1);
-</insert>
-<select id="cartCheckPid" parameterType="String" 
-resultType="String">
-SELECT  "productId"
-	FROM cart
-	where "customerId" = CAST(#{custid} AS
-		UUID);
-</select>
-	<update id="plusProductCart" parameterType="CartVo"> 
-	
-		UPDATE cart
-SET "productCount" = "productCount" + 1
-WHERE "customerId" = CAST(#{custid} AS UUID)
-  AND "productId" = CAST(#{productId} AS UUID)
-</update>
-	<insert id="goProductDCart" parameterType="map"> 
-	INSERT INTO cart(
-	"customerId", "productId", "productCount")
-		VALUES (CAST(#{custid} AS
-		UUID), CAST(#{productId} AS UUID), #{pcount});
-</insert>
-<update id="beforeproductOrder" parameterType="CartVo">
-UPDATE cart
-	SET  "productCount"= #{pcount}
-	WHERE "customerId"= CAST(#{custid} AS UUID)
-	and "productId"= CAST(#{productId} AS UUID)
-</update>
-<select id="orderOneCart" 
-resultType="map">
-SELECT product."productId",product."pName", cart."productCount", product."price"
-FROM (select "productId", "productCount" from cart where "customerId" = CAST(#{custid} AS UUID)	and "productId" = CAST(#{productId} AS UUID)
- ) cart JOIN product ON cart."productId" = product."productId";
-</select>
-<delete id="deleteCartItem" parameterType="map">
-	delete from cart
-	where
-	"customerId" = cast(#{customerId} as UUID)
-	AND "productId" = cast(#{productId} as UUID)
-</delete>
+	<insert id="goProductCart" parameterType="CartVo"> 
+		INSERT INTO public.cart(
+		"customerId", "productId", "productCount")
+			VALUES (CAST(#{custid} AS
+			UUID), CAST(#{productId} AS UUID), 1);
+	</insert>
+	<select id="cartCheckPid" parameterType="String" 
+	resultType="String">
+	SELECT  "productId"
+		FROM cart
+		where "customerId" = CAST(#{custid} AS
+			UUID);
+	</select>
+		<update id="plusProductCart" parameterType="CartVo"> 
+		
+			UPDATE cart
+	SET "productCount" = "productCount" + 1
+	WHERE "customerId" = CAST(#{custid} AS UUID)
+	  AND "productId" = CAST(#{productId} AS UUID)
+	</update>
+		<insert id="goProductDCart" parameterType="map"> 
+		INSERT INTO cart(
+		"customerId", "productId", "productCount")
+			VALUES (CAST(#{custid} AS
+			UUID), CAST(#{productId} AS UUID), #{pcount});
+	</insert>
+	<update id="beforeproductOrder" parameterType="CartVo">
+	UPDATE cart
+		SET  "productCount"= #{pcount}
+		WHERE "customerId"= CAST(#{custid} AS UUID)
+		and "productId"= CAST(#{productId} AS UUID)
+	</update>
+	<select id="orderOneCart" 
+	resultType="map">
+	SELECT product."productId",product."pName", cart."productCount", product."price"
+	FROM (select "productId", "productCount" from cart where "customerId" = CAST(#{custid} AS UUID)	and "productId" = CAST(#{productId} AS UUID)
+	 ) cart JOIN product ON cart."productId" = product."productId";
+	</select>
+	<delete id="deleteCartItem" parameterType="map">
+		delete from cart
+		where "customerId" = cast(#{customerId} as UUID)
+			AND "productId" = cast(#{productId} as UUID)
+	</delete>
 </mapper>
