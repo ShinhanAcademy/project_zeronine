@@ -5,6 +5,7 @@
 }
  .contents.pickup_history_wrap .tbl_wrap table tbody td {
     padding: 10px 15px;
+    border-right: 0px;
 }
 .dashboard_th{
 	border-top: 1px solid black;
@@ -19,11 +20,27 @@
 
 .dCanvas{
 	position : relative;
-	height: 90%;
-    width: 90%;
+	height: 235px;
+    width: 235px;
 }
 
-.dashboard_th td:nth-child(2){
-    display: flex;
-    justify-content: center;
+#myDoughnutChart{
+	margin-left: 26px;
+}
+
+.dashboard_th tr:nth-child(1) td{
+	border-bottom: 0px;
+	height: 50px;
+	font-family: Jura;
+	font-size: 14px;
+}
+
+.eco_level{
+	margin-left: 14px;
+}
+
+.eco_level span:nth-child(2){
+	font-size : 20px;
+	color : red;
+	font-weight: bold;
 }

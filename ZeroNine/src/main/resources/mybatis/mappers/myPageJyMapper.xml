@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.zeronine.mypage">
+	<!-- ecocare dash -->
+	<select id="selectEcoInfoAll" parameterType="String" resultType="map">
+		select p.*, cpc."isSubscription"
+		from public.pickup as p
+		left join public."customerPickCoupon" as cpc on p."customerId" = cpc."customerId"
+		where p."customerId"= cast(#{boardId} as UUID) and p."pickUpStatus" = 'complete'
+	</select>
+</mapper>

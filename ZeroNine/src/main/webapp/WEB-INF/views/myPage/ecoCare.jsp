@@ -34,13 +34,28 @@
 					<%-- dashboard_wrap --%>
 					<div class="contents dashboard_wrap">
 						<div class="tbl_wrap">
-							<table class="tbl_chat_wrap">
+							<table class="tbl_chat_wrap" >
 								<colgroup>
 									<col width="45%" />
 									<col span="2" />
 								</colgroup>
 
 								<tbody class="dashboard_th">
+								<tr>
+										<td>
+											<div> 에코케어 현황	</div>
+										</td>
+										<td>
+										<div> 배출 쓰레기 비율 </div>
+										</td>
+										<td>
+										<div class = "eco_level">
+											<span> 지금까지 총 </span>
+											<span class="num">   </span>
+											<span> 자연을 살렸습니다.</span>
+											</div>
+										</td>
+									</tr>
 									<tr>
 										<td>
 											<div class="bCanvas">
@@ -52,8 +67,8 @@
 												<canvas id="myDoughnutChart"></canvas>
 										</div>
 										</td>
-										<td>
-											<div>~~ 구독권 추천 ~~</div>
+										<td class ="img">
+											<%-- <img src="${path}/images/mypage/ecoLevel/lev3.gif"> --%>
 										</td>
 									</tr>
 								</tbody>
@@ -66,7 +81,56 @@
 
 					<div class="con_tit">회수 신청</div>
 					<%-- pickup_request_wrap --%>
-					<div class="contents pickup_request_wrap"></div>
+					
+					<div class="contents pickup_request_wrap">
+						<div class="tbl_wrap">
+							<table class="tbl_chat_wrap">
+								<colgroup>
+									<col width="6%" />
+									<col width="54%" />
+									<col span="2" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th>과거 회수 내역</th>
+										<th>승인 여부</th>
+										<th>회수 처리 결과</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>일반쓰레기 수거 요청건</td>
+										<td>완료</td>
+										<td>
+											<button class="btn_blue">상세 보기</button>
+										</td>
+									</tr>
+									<tr>
+										<td>일반쓰레기 수거 요청건</td>
+										<td>완료</td>
+										<td>
+											<button class="btn_blue">상세 보기</button>
+										</td>
+									</tr>
+									<tr>
+										<td>일반쓰레기 수거 요청건</td>
+										<td>완료</td>
+										<td>
+											<button class="btn_blue">상세 보기</button>
+										</td>
+									</tr>
+									<tr>
+										<td>일반쓰레기 수거 요청건</td>
+										<td>완료</td>
+										<td>
+											<button class="btn_blue">상세 보기</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
 					<%-- //pickup_request_wrap --%>
 					<div class="con_tit">회수 내역</div>
 					<%-- pickup_history_wrap --%>
@@ -176,18 +240,82 @@
 
 <script type="text/javascript">
 
+//currentMonth로 월만 추출 후 map저장
+var ecodashinfo_arr = [];
+var dash_arr = JSON.parse('${ecodashinfo}');
+console.log(dash_arr);
+for(var i=0 ; i<dash_arr.length; i++){
+	var map = dash_arr[i];
+	var str = dash_arr[i].pickUpRequestTime;
+	var month = str.substring(5,7);
+	map.currentMonth = month;
+	ecodashinfo_arr.push(map);
+}
+
+//월별 count
+var current_month = new Date().getMonth()+1;
+var month_1 = current_month-2;
+var month_2 = current_month-1;
+var month_3 = current_month;
+console.log(month_1, month_2, month_3);
+
+var ctn_month = [0,0,0];
+
+for(var i=0; i<ecodashinfo_arr.length; i++){
+	var month = ecodashinfo_arr[i].currentMonth;
+	if(month == month_1){
+		ctn_month[0] ++;	
+	} else if(month == month_2){
+		ctn_month[1] ++;
+	} else if(month == month_3){
+		ctn_month[2] ++;
+	}
+}
+console.log(ctn_month);
+var month_2ctn = ctn_month[2];
+console.log(month_2ctn);
+
+//화면 구성
+document.querySelector(".num").innerText = month_2ctn+"회";
+
+if(month_2ctn<=5){
+	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/ecoLevel/lev1.gif">';
+}else if(month_2ctn<=9){
+	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/ecoLevel/lev2.gif">';
+} else {
+	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/ecoLevel/lev3.gif">';
+}
+
+//배출 쓰레기 유형
+var waste_arr = [0,0];
+for(var i =0; i<ecodashinfo_arr.length; i++){
+	var waste = ecodashinfo_arr[i].isFoodWaste;
+	if(waste == "true" ){
+		waste_arr[0] ++;
+	} else{
+		waste_arr[1] ++;
+	}
+} 
+console.log(waste_arr);
+
+//lable display
+
+
+
+
+//바 차트
 	var now = new Date();
-	var label_1 = now.getMonth() - 1 + "월";
-	var label_2 = now.getMonth() + "월";
-	var label_3 = now.getMonth() + 1 + "월";
+	var label_1 = now.getMonth() - 1;
+	var label_2 = now.getMonth();
+	var label_3 = now.getMonth() + 1;
 	var ctx1 = document.getElementById("myBarChart");
 	
 	var myBarChart = new Chart(ctx1, {
 		type : "bar",
 		data : {
-			labels : [ label_1, label_2, label_3 ],
+			labels : [ label_1+ "월", label_2+ "월", label_3+ "월" ],
 			datasets : [ {
-				data : [ 3, 19, 8 ],
+				data : ctn_month,
 				borderColor : function(context) {
 					var index = context.dataIndex;
 					var value = context.dataset.data[index];
@@ -229,33 +357,39 @@
 			plugins : {
 				legend : false,
 				datalabels: {
-		            display: true,
+		            display:  function(context){
+		            	var index = context.dataIndex;
+						var value = context.dataset.data[index];
+						return value==0? false : true;
+		            },
 		            align: 'bottom',
 		            anchor: 'end',
 		            clamp: true,
-		            display: true,
-		            color: function (ctx) {
-		                const value = ctx.dataset.data[ctx.dataIndex];
+		            color: function (ctx1) {
+		                const value = ctx1.dataset.data[ctx1.dataIndex];
 		                return '#000000';
 		            },
 		            formatter: function (value, context) {
 		                return context.dataset.data[context.dataIndex] + "건";
 		            }
+		        },
+		        tooltip :{
+		        	enabled :false
 		        }
 			}
 		}
 	});
 	
 
+//파이 차트
 var ctx2 = document.getElementById("myDoughnutChart");	
 var myDoughnutChart = new Chart(ctx2, {
     type: 'pie',
   	data : {
 		labels : [ "일반", "음식물"],
 		datasets : [{
-			data : [3, 17],
+			data : waste_arr,
 			labels : [ "일반", "음식물"],
-			//borderColor : ["rgba(75, 192, 192, 1)", "rgba(54, 162, 235, 1)"],
 			backgroundColor : ["rgba(153, 102, 255, 0.3)","rgba(54, 162, 235, 0.3)"],
 			borderWidth : 3
 		}
@@ -278,13 +412,13 @@ var myDoughnutChart = new Chart(ctx2, {
 	            formatter: function (value, context) {
                     return context.dataset.data[context.dataIndex] + "건";
 	            }
+	        },
+	        tooltip :{
+	        	enabled :false
 	        }
 		}
 	}
 });
-
-
-
 
 
 

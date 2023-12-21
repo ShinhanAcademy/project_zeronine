@@ -13,7 +13,7 @@
 <body>
 
 	<div class="banner zn_center">
-		<div style="width: 1440px">
+		<div style="width: 1440px; padding:20px 0px">
 			<img src="${path}/images/board/banner1.png" style="width: 100%">
 		</div>
 
