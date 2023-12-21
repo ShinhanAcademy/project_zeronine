@@ -253,11 +253,18 @@ public class ProductController {
 		// Use the values as needed
 		logger.info("Delivery ID: " + deliveryId);
 		logger.info("Product ID: " + productId);
-		model.addAttribute("product", productService.selectByPricePname(productId));
-		model.addAttribute("deliproduct", deliveryproductservice_ys.selectByDidpCount(deliveryId));
+		model.addAttribute("deliproduct",deliveryproductservice_ys.selectOrderInfo(deliveryId));
+		/*
+		 * model.addAttribute("product", productService.selectByPricePname(productId));
+		 */
+		/*
+		 * model.addAttribute("deliproduct",
+		 * deliveryproductservice_ys.selectOrderInfo(deliveryId));
+		 */
 		// Clear session attributes if needed
-		session.removeAttribute("deliveryId");
-		session.removeAttribute("productId");
+		/*
+		 * session.removeAttribute("deliveryId"); session.removeAttribute("productId");
+		 */
 
 	}
 }

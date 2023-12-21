@@ -71,7 +71,10 @@
 	display: flex;
 	flex-direction: row;
 }
-
+.order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_right{
+	
+	margin-left: 50px;
+}
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_left
 	{
 	display: flex;
@@ -85,7 +88,7 @@
 	font-style: normal;
 	font-weight: 600;
 	line-height: 16px;
-	margin-right: 330px;
+	width: 530px;
 }
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .box_text2 {
 	color: #000;
@@ -94,6 +97,8 @@
 	font-style: normal;
 	font-weight: 600;
 	line-height: 16px;
+	width: 60px;
+
 }
 .order_body .order_bodypart .twinbox {
 	margin-top: 60px;

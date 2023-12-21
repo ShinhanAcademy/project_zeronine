@@ -4,26 +4,52 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.personorder">
 	<insert id="PersonGoDelivery" parameterType="map">
-		INSERT INTO delivery(
-		"deliveryId", "customerId", address,"addressDetail","isRefundable")
-		VALUES ( CAST(#{deliveryId} AS UUID), CAST(#{custid} AS UUID),
+		INSERT INTO
+		delivery(
+		"deliveryId", "customerId",
+		address,"addressDetail","isRefundable")
+		VALUES ( CAST(#{deliveryId} AS
+		UUID), CAST(#{custid} AS UUID),
 		#{address},#{addressdetail},true)
 	</insert>
 
 	<insert id="PersonGoDeliveryProduct" parameterType="map">
-		INSERT INTO "deliveryProduct"("deliveryId","productId","pickCount",
+		INSERT INTO
+		"deliveryProduct"("deliveryId","productId","pickCount",
 		"productCount")
 		VALUES (
-		CAST(#{deliveryId} AS UUID),CAST(#{productId} AS UUID),
-		(SELECT "pCount" FROM "product" WHERE "productId" = CAST(#{productId} AS
+		CAST(#{deliveryId} AS UUID),
+		CAST(#{productId}
+		AS UUID),
+		(SELECT "pCount" FROM "product" WHERE "productId" =
+		CAST(#{productId} AS
 		UUID)),
-		(SELECT "productCount" FROM "cart" WHERE "customerId" = CAST(#{custid} AS
-		UUID) AND "productId" = CAST(#{productId} AS UUID))
+		(SELECT "productCount" FROM "cart" WHERE
+		"customerId" = CAST(#{custid} AS
+		UUID) AND "productId" =
+		CAST(#{productId} AS UUID))
 		)
 	</insert>
-	<select id="selectByDidpCount" parameterType="String" resultType="deliveryproductVo"> 
-	SELECT "deliveryId", "productCount"
-	FROM "deliveryProduct" where "deliveryId" =CAST(#{deliveryId} AS UUID)
+	<resultMap id="deliveryResultMap" type="HashMap">
+    <id property="deliveryId" column="deliveryId" />
+    <result property="customerName" column="customerName" />
+    <result property="purchaseDateTime" column="purchaseTime" />
+    <result property="productCount" column="productCount" />
+    <result property="price" column="price" />
+</resultMap>
+
+	<select id="selectOrderInfo" parameterType="HashMap"
+		resultMap="deliveryResultMap">
+		SELECT dy."deliveryId",
+	cr."customerName", 
+	TO_CHAR(dy."purchaseDateTime", 'YYYY-MM-DD HH24:MI:SS') AS "purchaseTime", 
+	dp."productCount",
+	pt."price"
+	FROM 
+	"delivery" dy join "deliveryProduct" dp on dy."deliveryId" = dp."deliveryId"
+	join "product" pt on dp."productId" = pt."productId"
+	join "customer" cr on dy."customerId" = cr."customerId"
+	where dy."deliveryId" = CAST(#{deliveryId} AS UUID)
 	</select>
-	
+
 </mapper>
