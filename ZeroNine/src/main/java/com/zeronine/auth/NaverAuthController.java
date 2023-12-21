@@ -122,8 +122,10 @@ public class NaverAuthController {
 		
 		
 		String customerId = customerVo.getCustomerId();
+		String customerName = customerVo.getCustomerName();
 		logger.info("네이버 로그인", customerId);
 		session.setAttribute("customerId", customerId);
+		session.setAttribute("customerName", customerName);
 		session.setAttribute("email", customerVo.getEmail());
 		
 		return "/main/main";
