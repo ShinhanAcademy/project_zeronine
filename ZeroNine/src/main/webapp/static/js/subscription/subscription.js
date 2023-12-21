@@ -32,8 +32,9 @@ close_btn.onclick = function(){
 }
 
 btn_check.onclick = function(){
-	if(subscript_name.innerHTML == "에코케어+무료 배송 이용권"){
-		requestPaySubscription('에코케어 + 무료배송', 1); 
+	modal.style.display = 'none';
+	if(subscript_name.innerHTML == "에코케어+무료 배송 이용권"){	
+		requestPaySubscription('에코케어+무료 배송 이용권', 1); 
 	}else if(subscript_name.innerHTML == "에코케어 이용권"){
 		requestPaySubscription('에코케어 이용권', 1);
 		//location.href='subscriptionBanner.do?subscriptionType=ecocare';
