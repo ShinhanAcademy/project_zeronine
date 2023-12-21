@@ -56,7 +56,11 @@ public class ProductController {
 
 	
 	@GetMapping("/productList.do")
-	public String productlist() {
+	public String productlist(@RequestParam(value="buttonValue",required = false, defaultValue="%")String buttonValue
+			,HttpSession session) {
+		
+		session.setAttribute("s1",buttonValue);
+		System.out.println("s1"+buttonValue);
 		return "product/productList";
 	}
 	
@@ -68,6 +72,11 @@ public class ProductController {
 			@RequestParam(value="buttonValue",required = false, defaultValue="%")String buttonValue,
 			Model model,HttpSession session
 			) {
+		String s1=(String)session.getAttribute("s1");
+		if(s1 !=null) {
+			buttonValue = s1;
+		}
+		System.out.println("s1"+buttonValue);
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		
 		List<ProductVO> productList= productService.searchAll( page,Integer.parseInt(selectedValue),q,buttonValue);
@@ -80,7 +89,7 @@ public class ProductController {
 		model.addAttribute("paginating",paginating);
 		
 		System.out.println(productList);
-		
+		session.removeAttribute("s1");
 		System.out.println(paginating);
 		return"/product/catagory";
 	}
@@ -203,7 +212,6 @@ public class ProductController {
 
 	}
 
-	// 은경
 	@PostMapping("/deleteCartItem.do")
 	@ResponseBody
 	public Map<String, Object> deleteCartItem(@RequestParam String productId, HttpSession session) {
@@ -253,11 +261,18 @@ public class ProductController {
 		// Use the values as needed
 		logger.info("Delivery ID: " + deliveryId);
 		logger.info("Product ID: " + productId);
-		model.addAttribute("product", productService.selectByPricePname(productId));
-		model.addAttribute("deliproduct", deliveryproductservice_ys.selectByDidpCount(deliveryId));
+		model.addAttribute("deliproduct",deliveryproductservice_ys.selectOrderInfo(deliveryId));
+		/*
+		 * model.addAttribute("product", productService.selectByPricePname(productId));
+		 */
+		/*
+		 * model.addAttribute("deliproduct",
+		 * deliveryproductservice_ys.selectOrderInfo(deliveryId));
+		 */
 		// Clear session attributes if needed
-		session.removeAttribute("deliveryId");
-		session.removeAttribute("productId");
+		/*
+		 * session.removeAttribute("deliveryId"); session.removeAttribute("productId");
+		 */
 
 	}
 }

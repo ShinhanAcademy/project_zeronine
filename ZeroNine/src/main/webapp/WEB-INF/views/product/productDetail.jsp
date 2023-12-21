@@ -36,7 +36,9 @@
 						</button>
 				
 				</div>
+				<div class="detail_pnamepart">
 				<span class="detail_pname">${plist.pName}</span>
+				</div>
 				<div class="detail_price">
 					<span><fmt:formatNumber
 								value="${plist.price }" maxFractionDigits="3"></fmt:formatNumber>원</span>
@@ -48,10 +50,7 @@
 						<span class="subtitle">원산지</span> <span class="sub_explain">상품정보
 							원산지표시 참조</span>
 					</div>
-					<div class="detail_text">
-						<span class="subtitle_middle">적립정보</span> <span
-							class="sub_explain">${plist.price*0.001}포인트</span>
-					</div>
+					
 					<div class="detail_text_bottom">
 						<span class="subtitle_middle">배송정보</span> <span
 							class="sub_explain">3,000원</span><br>
@@ -245,9 +244,9 @@
 							location.href = "${path}/product/productOrder.do?productid="+productid;
 							
 							},
-						error : function() {
-							alert("에러입니다.");
-						}
+							error : function(request,status,error) {
+				                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				            }
 					}); 
 			}else{
 				$.ajax({
@@ -257,8 +256,8 @@
 					success : function(){
 			location.href = "${path}/product/productOrder.do?productid="+productid;
 					},
-					error : function() {
-						alert("에러입니다.");
+					error : function(request,status,error) {
+		                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 					}
 				}); 
 				

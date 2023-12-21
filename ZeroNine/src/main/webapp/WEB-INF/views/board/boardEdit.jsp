@@ -51,11 +51,56 @@
 
 
 	<script>
+	
+	
 		$(function() {
 			selectBoardEdit();
+			
 		});
 		
-	
+		
+
+		function handleCheckbox(){
+				price = 0;
+				checkboxes.forEach(function(checkbox){
+				var row = checkbox.closest('tr');
+				var productId = row.querySelector('#check_box').value;
+				var selectedCount = row.querySelector('[name=select_count]').value;
+				if(checkbox.checked){
+					price = price + (row.querySelector('#onePrice').value * selectedCount);
+					myMap.set(productId,selectedCount);
+				}else{
+					myMap.delete(productId);
+				}
+			})
+			$(".totalPrice").html(Intl.NumberFormat().format(price) + " 원");
+		}
+
+		function countQuantityF(clickedCheckbox) {
+			handleCheckbox();
+			
+			var cRow = clickedCheckbox.closest('tr');
+			var check = cRow.querySelector('#check_box');
+			var itemPriceValue = cRow.querySelector('[name=select_count]').value * cRow.querySelector('#onePrice').value;
+			var deliformattedValue = new Intl.NumberFormat('ko-KR', {
+				    style: 'decimal',
+				    currency: 'KRW' // 대한민국 원
+				  }).format(itemPriceValue);	
+			cRow.querySelector('#ob_price').innerText = deliformattedValue+"원";
+			/* var cRow = clickedCheckbox.closest('tr');
+			var check = cRow.querySelector('#check_box');
+			beforeSelectedCount = cRow.querySelector('[name=select_count]').value;
+			var changePrice = cRow.querySelector('#onePrice').value;
+			if(check.checked){
+				price = price - changePrice * beforeSelectedCount;
+				console.log(price)
+				selectedCount = cRow.querySelector('#select_count').value;
+				price = price + changePrice * selectedCount;
+				console.log(price)
+				myMap.set(cRow.querySelector('#check_box').value,selectedCount);
+			}
+			$(".totalPrice").html(Intl.NumberFormat().format(price) + " 원"); */
+		}
 		
 		function selectBoardEdit() {
 			/* var value = boardtype.value; */
@@ -76,6 +121,8 @@
 					url : '/board/freeDeliveryEdit.do',
 					success : function(responseData) {
 						$("#edit_change_area").html(responseData)
+						myMap = new Map();
+						checkboxes = document.getElementsByName('checkboxGroup');
 					}
 				});
 			} else if (board_type == "oneTooneBoard") {
@@ -190,20 +237,24 @@
 				var postingMinutes = Number(dayAsMinute) + waitHourValue * 60 + waitMinuteValue;
 				
 				console.log(postingMinutes);
-				
-				$.ajax({
-					url : '/board/completeedit.do',
-					data: {
+				var obj = {
 						"send_bt_to_com" : board_type,
 						"postingMinutes" : postingMinutes,
 						"title" : title,
-						"content" : content
+						"content" : content,
+						"myMap" : Object.fromEntries(myMap)
 						//구매 상품 정보도 넣어야 함
-						},
+				}
+				$.ajax({
+					url : '${path}/common/writeOrderFree.do',
+					type: "POST",
+					data: JSON.stringify(obj),
+					contentType: "application/json",
 					success : function(responseData) {
 						$("#edit").html(responseData);
 					}
-				});	
+				});
+				
 			}
 			
 			

@@ -1,7 +1,11 @@
 package com.zeronine.common;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -103,7 +107,32 @@ public class CommonController {
 		model.addAttribute("count",count);
 		model.addAttribute("product",product);
 		model.addAttribute("customer",customer);
-		//return "board/completeEdit";
+
+	}
+	
+	@PostMapping(value="/common/writeOrderFree.do", consumes="application/json")
+	public void writeOrderFree(@RequestBody Map<String,Object> info, Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		session.setAttribute("info", info);
+		Map<String,Object> data = (Map)info.get("myMap");
+		Set<Entry<String,Object>> entrys = data.entrySet();
+		List<Map<String,Object>> plist = new ArrayList<>();
+		int totalPrice = 0;
+		for(Entry<String,Object> row:entrys) {
+			Map<String,Object> map = new HashMap<>();
+			ProductVO product = boardService.selectByPid(row.getKey());
+			map.put("productId", product.getProductId());
+			map.put("count", row.getValue());
+			map.put("pName", product.getpName());
+			map.put("price", product.getPrice());
+			totalPrice += Integer.parseInt((String)row.getValue())*product.getPrice();
+			plist.add(map);
+		}
+		CustomerVO customer =  customerService.selectById(customerId);
+		model.addAttribute("plist",plist);
+		model.addAttribute("customer",customer);
+		model.addAttribute("totalPrice",totalPrice);		
+
 	}
 	
 }

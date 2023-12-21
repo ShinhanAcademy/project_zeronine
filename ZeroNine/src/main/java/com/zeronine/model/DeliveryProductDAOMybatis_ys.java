@@ -39,8 +39,8 @@ public class DeliveryProductDAOMybatis_ys {
 	}
 
 
-	public DeliveryProductVO selectByDidpCount(String deliveryId) {
-		DeliveryProductVO deliveryproduct = sqlSession.selectOne(NAMESPACE + "selectByDidpCount",deliveryId);
+	public Map<String, Object> selectOrderInfo(String deliveryId) {
+		Map<String, Object> deliveryproduct = sqlSession.selectOne(NAMESPACE + "selectOrderInfo",deliveryId);
 		return deliveryproduct;
 	}
 	

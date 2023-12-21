@@ -4,9 +4,12 @@ package com.zeronine.myPage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,8 @@ import com.zeronine.model.CustomerService;
 import com.zeronine.model.MyPageService;
 import com.zeronine.model.ProductService;
 
+import netscape.javascript.JSObject;
+
 @Controller
 @RequestMapping("/myPage")
 public class MyPageController {
@@ -39,6 +44,8 @@ public class MyPageController {
 	ProductService productService;
 	@Autowired
 	CustomerService cService;
+	@Autowired
+	MyPageService mypageservice;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 
@@ -61,11 +68,10 @@ public class MyPageController {
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
-		/*
-			String customerId = (String) session.getAttribute("customerId");
-		*/
-		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
-		System.out.println("ID = " + customerId);
+//		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
+		
+		String customerId = (String) session.getAttribute("customerId");
+//		System.out.println("ID = " + customerId);
 
 		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId, searchWord, startDate, endDate));
 	}
@@ -80,9 +86,9 @@ public class MyPageController {
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
-//		String customerId = (String) session.getAttribute("customerId");
-		String customerId = "7cb70b46-d6c2-462d-b785-dc27e1e7d045";
-		System.out.println("ID = " + customerId);
+//		String customerId = "7cb70b46-d6c2-462d-b785-dc27e1e7d045";
+		String customerId = (String) session.getAttribute("customerId");
+//		System.out.println("ID = " + customerId);
 		
 		model.addAttribute("orderCancelHistoryAll", deliveryService.orderCancelHistoryAll(customerId, searchWord, startDate, endDate));
 	}
@@ -94,8 +100,8 @@ public class MyPageController {
 	
 	@RequestMapping("/subPage/myCartDetail.do")
 	public void myCartDetail(Model model, HttpSession session) {
-		String customerId = (String) session.getAttribute("customerId");
 //		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		String customerId = (String) session.getAttribute("customerId");
 		//System.out.println("ID = " + customerId);
 		
 		model.addAttribute("myCart", deliveryService.myCart(customerId));
@@ -111,9 +117,9 @@ public class MyPageController {
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
 
-//		String customerId = (String) session.getAttribute("customerId");
-		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		//System.out.println("ID = " + customerId);
+//		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		String customerId = (String) session.getAttribute("customerId");
+//		System.out.println("ID = " + customerId);
 		
 		model.addAttribute("likeProduct", deliveryService.likeProduct(customerId, searchWord));
 	}
@@ -124,9 +130,24 @@ public class MyPageController {
 			MY_ACTIVITIES
 	 ****************************** */
 
-	// chatList(채占쏙옙 占쏙옙占�)
+	// ecoCare
 	@RequestMapping("/ecoCare.do")
-	public void ecoCare() {
+	public void ecoCare(HttpSession session, Model model, String customerId) {
+		String customer_id = (String)session.getAttribute("customerId");
+		List<Map<String, Object>> ecodashinfo = mypageservice.selectEcoInfoAll(customer_id);
+		
+		JSONArray ecoarray = new JSONArray();
+		for(Map<String, Object> map : ecodashinfo) {
+			JSONObject json = new JSONObject();
+			for(Map.Entry<String, Object> entry : map.entrySet()) {
+				String key = (String)entry.getKey();
+				String value = (String)entry.getValue().toString();
+				json.put(key, value);
+			} ecoarray.add(json);
+		}
+		model.addAttribute("ecodashinfo",ecoarray);
+		logger.info("이것은 컨트롤러에서 보여주는 id 정보 :{}",customer_id );
+		logger.info("이것은 컨트롤러에서 보여주는 정보 :{}",ecoarray);
 	}
 	
 	@GetMapping("/createdBoard.do")

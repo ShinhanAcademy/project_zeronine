@@ -45,5 +45,9 @@ public class MyPageService {
 	}
 	*/
 	
-	
+	public List<Map<String, Object>> selectEcoInfoAll (String customerId){
+		List<Map<String, Object>> ecodash = myPageDAO.selectEcoInfoAll(customerId);
+		System.out.println("이것은 service에서 보여주는 정보"+ecodash);
+		return ecodash;
+	}
 }

@@ -152,7 +152,6 @@ function show(jsondata) {
 			</ul>
 			<div class="pro_name">
 				<ul>
-					<li>\${item.title}</li>
 					<li>\${item.brand}</li>
 					<li>\${item.pName}</li>
 				</ul>

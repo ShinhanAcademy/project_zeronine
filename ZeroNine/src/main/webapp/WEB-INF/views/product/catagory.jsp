@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<div class="menulist" >
 <c:forEach items="${plist}" var="product" varStatus="status">
 	<div class="menu_sub">
 		<div class="menu_image">
@@ -46,7 +46,8 @@
 		</span>
 	</div>
 </c:forEach>
-<div class="plus_btnpart">
+			</div>
+			<div class="plus_btnpart">
 			<div style="display: block; text-align: center;">		
 		<c:choose>
 		<c:when test="${paginating.pageNumber<=1}">

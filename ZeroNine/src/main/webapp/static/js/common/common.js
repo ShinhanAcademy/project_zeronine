@@ -47,3 +47,13 @@ const isEmpty = function (value) {
     } 
     return result;
 };
+const numberWithDots = function (p_value) {
+    p_value = p_value + '';
+    p_value = parseInt(p_value.replace(/[^0-9]/gm, ''), 10);
+   
+    return p_value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');   
+};
+const parseNumber = function(p_value) {
+    p_value = p_value + '';
+    return parseInt(p_value.replace(/[^0-9]/gm, ''), 10);
+};

@@ -47,7 +47,7 @@
 }
 
 .order_success_part .os_part .os_info .order_detail {
-	height: 442px;
+	height: 350px;
 	width: 950px;
 	margin: 30px auto;
 	border: 1px solid #B7B7B7;
@@ -56,7 +56,7 @@
 }
 
 .order_success_part .os_part .os_info .order_detail .od_part {
-	    margin-top: 35px;
+	margin-top: 40px;
 	display: flex;
 	flex-direction: row;
 }

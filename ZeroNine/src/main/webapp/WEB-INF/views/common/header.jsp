@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%><%-- jstl lib --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%-- date format lib --%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%><%-- functions lib --%>
+
+<style>
+.active { 
+   border:1px solid red;
+}
+
+</style>
+
 <header class="zn_header">
 	<div class="top">
 		<div class="top_inner zn_center">
@@ -26,13 +34,11 @@
 				</c:choose>
 			</div>
 			<%-- //member --%>
-			<%-- logo --%>
 			<div class="logo">
 				<h1>
 					<a href="${path}/main/main.do"></a>
 				</h1>
 			</div>
-			<%-- //logo --%>
 		</div>
 	</div>
 	<div class="bot">
@@ -40,11 +46,11 @@
 			<%-- menu --%>
 			<ul class="menu gnb_1depth">
 				<li><a href="${path}/product/productList.do">상품목록</a>
-					<ul class="gnb_2depth">
-						<li><a href="${path}/product/productList.do">채소</a></li>
-						<li><a href="${path}/product/productList.do">생필품</a></li>
-						<li><a href="${path}/product/productList.do">음식</a></li>
-						<li><a href="${path}/product/productList.do">전체</a></li>
+					<ul class="gnb_2depth" >
+						<li ><a href="${path}/product/productList.do?buttonValue=1">채소</a></li>
+						<li ><a href="${path}/product/productList.do?buttonValue=2">생필품</a></li>
+						<li ><a href="${path}/product/productList.do?buttonValue=4">음식</a></li>
+						<li ><a href="${path}/product/productList.do?buttonValue=%">전체</a></li>
 					</ul></li>
 				<li><a href="${path}/board/">게시판</a></li>
 				<li><a href="${path}/myPage/ecoCare.do">마이 에코케어</a></li>
@@ -96,3 +102,26 @@
 		</div>
 	</div>
 </header>
+<!-- <script>
+   function changeCss(category){
+	   //sessionStorage.setItem("category", category);
+	   
+	   $("div.menu_bar > div").each(function(index, item){
+		   var category2 = $(this).find("p").text();
+		   if(category == category2){
+			   $(this).addClass("active");
+		   }else{
+			   $(this).removeClass("active");
+		   }
+	   });
+	    
+	   
+	   
+   }
+   
+</script> -->
+
+
+
+
+

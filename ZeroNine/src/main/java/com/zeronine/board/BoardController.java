@@ -210,7 +210,10 @@ public class BoardController {
 	}
 
 	@RequestMapping("/freeDeliveryEdit.do")
-	public String editFDBoard() {
+	public String editFDBoard(Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		List<Map<String,Object>> cart = boardServiceYn.myCart(customerId);
+		model.addAttribute("cart", cart);
 		return "board/freeDeliveryEdit";
 	}
 
@@ -224,10 +227,10 @@ public class BoardController {
 		//String lower_boardListType = boardListType.toLowerCase();
 		//model.addAttribute("boardListType", lower_boardListType);
 		model.addAttribute("boardListType", "onetooneboard");
-		//view�뿉�꽌 (board type�씠 oneTooneBoard �씠�씪硫�) �씠誘몄�媛� �쟾�떖�릺�뿀�쓬�쓣 媛��젙�븿.
+		//view 뿉 꽌 (board type 씠 oneTooneBoard  씠 씪硫 )  씠誘몄 媛   쟾 떖 릺 뿀 쓬 쓣 媛  젙 븿.
 			System.out.println("mRequset" + mRequest);
 			
-			//�엫�떆濡� �궗�슜�븷 MultipartFile �깮�꽦
+			// 엫 떆濡   궗 슜 븷 MultipartFile  깮 꽦
 			/*
 			 * File file = new File("C:\\Users\\rohfr\\Downloads\\puppy.jpg");
 			 * logger.info("FILE NAME==>" + file.getName()); String extensionName =
@@ -240,7 +243,7 @@ public class BoardController {
 			 * { ex.printStackTrace(); } MultipartFile multipartFile = new
 			 * CommonsMultipartFile(fileItem);
 			 */
-			//**�엫�떆濡� �궗�슜�븷 MultipartFile �깮�꽦
+			//** 엫 떆濡   궗 슜 븷 MultipartFile  깮 꽦
 	        
 			
 	        String uuidStr = UUID.randomUUID().toString();
@@ -258,16 +261,16 @@ public class BoardController {
 	        	String originalFileName = imgFile.getOriginalFilename();
 	        	String imgExtension = getImgExtension(originalFileName);
 	        	s3ImageURL = s3Upload.upload(imgFile, uuidStr, imgExtension);
-	        	logger.info("oboard �씠誘몄�媛� �떎�쓬 寃쎈줈�뿉 ���옣�맖 : " +  s3ImageURL);
+	        	logger.info("oboard  씠誘몄 媛   떎 쓬 寃쎈줈 뿉    옣 맖 : " +  s3ImageURL);
 	        }
 	        else {
 	        	logger.info("imgFile is NULL");
-	        	//�씠誘몄�瑜� �꽔吏� �븡�� 寃쎌슦�뿉�뒗 洹몃깷 Default�씠誘몄�瑜� �꽔�뒗�떎.
+	        	// 씠誘몄 瑜   꽔吏   븡   寃쎌슦 뿉 뒗 洹몃깷 Default 씠誘몄 瑜   꽔 뒗 떎.
 	        	s3ImageURL = "https://zeronine.s3.ap-northeast-2.amazonaws.com/image/oboard/9ac7444b-f92a-4137-928b-d4d32c753133.jfif";
 	        }
 	        
 	        String oBoardId = uuidStr;
-	        //String oAuthorId = (String)session.getAttribute("customerId"); //�꽭�뀡�뿉�꽌 媛�吏�怨� ���빞 �븿.
+	        //String oAuthorId = (String)session.getAttribute("customerId"); // 꽭 뀡 뿉 꽌 媛 吏 怨     빞  븿.
 	        //String oAuthorId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 	        String oAuthorId = (String)session.getAttribute("customerId");
 	        logger.info("oAuthor ...", oAuthorId);
@@ -276,17 +279,17 @@ public class BoardController {
 	        String oPostingMinutes = postingMinutes;
 	        //String address = address;
 	        //String addressDetail =addressDetail;
-	        logger.info("�옉�꽦�옄 ID ==>", oAuthorId);
+	        logger.info(" 옉 꽦 옄 ID ==>", oAuthorId);
 	        
 	        
 	        boardServiceSg.writeOBoard(oBoardId, oAuthorId, oTitle, oContent, oPostingMinutes, s3ImageURL, address, addressDetail);
 	        /*
-	         UUID�뒗 oBoardId媛� �맖, s3ImageURL�� �빐�떦 oBoard�쓽 �씠誘몄� 留곹겕
-	         oBoard �깮�꽦�븷 �븣 uuid媛� uuidStr濡� �쇅遺��뿉�꽌 二쇱엯�맂 媛믪쑝濡� 吏��젙�릺�뼱 INSERT �빐�빞�븿
-	       	 oBoardImage�뿉�뒗 boardId(uuidStr) - URL(s3ImageURL) �뙇�씠 �뱾�뼱媛�
+	         UUID 뒗 oBoardId媛   맖, s3ImageURL    빐 떦 oBoard 쓽  씠誘몄  留곹겕
+	         oBoard  깮 꽦 븷  븣 uuid媛  uuidStr濡   쇅遺  뿉 꽌 二쇱엯 맂 媛믪쑝濡  吏  젙 릺 뼱 INSERT  빐 빞 븿
+	       	 oBoardImage 뿉 뒗 boardId(uuidStr) - URL(s3ImageURL)  뙇 씠  뱾 뼱媛 
 	         * */
 		
-		//System.out.println("�뿬湲곕뒗 諛섎뱶�떆 1:1 寃뚯떆�뙋 !! (oneTooneBoard) ==>" + boardListType);
+		//System.out.println(" 뿬湲곕뒗 諛섎뱶 떆 1:1 寃뚯떆 뙋 !! (oneTooneBoard) ==>" + boardListType);
 		return "board/completeEdit";
 	}
 	
@@ -330,21 +333,19 @@ public class BoardController {
 		}
 		
 		session.removeAttribute("info");
-		
-		//view�뿉�꽌 (board type�씠 oneTooneBoard �씠�씪硫�) �씠誘몄�媛� �쟾�떖�릺�뿀�쓬�쓣 媛��젙�븿.
-		//System.out.println("controller�뿉�꽌 寃뚯떆湲� �옉�꽦 �썑 �꽆�뼱媛��뒗 蹂대뱶 ���엯 �븣怨좎떢�뼱~~" + lower_boardListType);
+
 		return "board/completeEdit";
 		//return false;
 	}
 
-	// �뵒�뀒�씪
+	//  뵒 뀒 씪
 	@RequestMapping("/fastboardDetail.do")
 	public String fastboardDetail(@RequestParam("boardId") String board_id, Model model) {
 		Map<String, Object> detail = boardService.selectFastDetail(board_id);
 		model.addAttribute("detail", detail);
 
-		logger.info("controller fast �뵒�뀒�씪 �븘�씠�뵒 : {}", board_id);
-		logger.info("controller fast �뵒�뀒�씪 �궡�슜: {}", detail);
+		logger.info("controller fast  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
+		logger.info("controller fast  뵒 뀒 씪  궡 슜: {}", detail);
 		
 		return "board/fastDetailView";
 	}
@@ -353,7 +354,7 @@ public class BoardController {
 	public String selectFreeDetail (@RequestParam("boardId")String board_id, Model model) {
 		Map<String, Object> detailFree = boardService.selectFreeDetail(board_id);
 		model.addAttribute("detailFree", detailFree);
-		logger.info("�씠寃껋� 而⑦듃濡ㅻ윭�뿉�꽌 李띾뒗 detailFree : {}", detailFree);
+		logger.info(" 씠寃껋  而⑦듃濡ㅻ윭 뿉 꽌 李띾뒗 detailFree : {}", detailFree);
 		return "board/freeDetailView";
 	}
 
@@ -362,8 +363,8 @@ public class BoardController {
 		Map<String, Object> detail = boardService.selectOneDetail(board_id);
 		model.addAttribute("detail", detail);
 
-		logger.info("controller one �뵒�뀒�씪 �븘�씠�뵒 : {}", board_id);
-		logger.info("controller one �뵒�뀒�씪 �궡�슜: {}", detail);
+		logger.info("controller one  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
+		logger.info("controller one  뵒 뀒 씪  궡 슜: {}", detail);
 
 		return "board/oneDetailView";
 	}

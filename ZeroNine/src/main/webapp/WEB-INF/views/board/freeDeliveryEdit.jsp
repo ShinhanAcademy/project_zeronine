@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="content">
 
 	<div class="due_date">
@@ -37,31 +40,77 @@
 				<li class="cart_ann_cf">* 상품과 수량을 선택해주세요.</li>
 			</ul>
 		</div>
-		<div class="cart_info">
-			<div class="cart_list">
-				<ul>
-					<li class="cart_pro_name"><input type="checkbox">
-						<p>
-							오랄비 <br> 칫솔 벨벳 초미세모 초소형헤드 3개입
-						</p></li>
-					<li>
-						<div class="count">
-							<button>
-								<img src="${path}/images/board/minus.png" class="minus" onclick="minus()" >
-							</button>
-							<input type="text" readonly="readonly" value="1" class="num">
-							<button>
-								<img src="${path}/images/board/plus.png" class="plus" onclick="add()">
-							</button>
-						</div>
-						<hr>
-					</li>
-				</ul>
-				<div class="cart_img">
-					<img src="${path}/images/board/product2.png">
-				</div>
-			</div>
+		<div class="cart_list contents">
+			<!-- tbl_wrap -->
+			<div class="tbl_wrap">
+				<table class="tbl_orderlist_wrap">
+					<colgroup>
+						<col width="6%" />
+						<col width="48%" />
+						<col span="2" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th></th>
+							<th>상품 정보</th>
+							<th>수량</th>
+							<th>구매가</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${cart.size() != 0}">
+								<c:forEach items="${cart}" var="cartItem">
+									<tr>
+										<td class="check_item"><input id="check_box"
+											type="checkbox" name="checkboxGroup" 
+											onclick="handleCheckbox()" value="${cartItem.productId}" /></td>
+										<td class="product_info">
+											<div class="img_wrap">
 
+												<c:choose>
+													<c:when test="${not empty cartItem.imagePath}">
+														<img src="${cartItem.imagePath}" alt="product image" />
+													</c:when>
+													<c:otherwise>
+														<img src="${path}/images/common/img_preparing.png"
+															alt="product image" />
+													</c:otherwise>
+												</c:choose>
+											</div>
+											<div class="detail">
+												<div class="brand_name">${cartItem.brand}</div>
+												<div class="product_name">${cartItem.pName}</div>
+											</div>
+										</td>
+										<td class="product_count"><select id="select_count"
+											name="select_count" onchange="countQuantityF(this)">
+												<c:forEach var="countQuantity" begin="1"
+													end="15">
+													<option value="${countQuantity}">${countQuantity}</option>
+												</c:forEach>
+										</select></td>
+										<td class="price">
+										<input type="hidden" id="onePrice" value="${cartItem.price}">
+											<div id="ob_price">
+											<fmt:formatNumber pattern="#,##0" value="${cartItem.price}" />원
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr style="height: 50px;">
+									<td colspan="4" >장바구니 내역이 없습니다.</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
+
+					</tbody>
+				</table>
+			</div>
+			<div class="totalPrice_div">총 구매가 <span class="totalPrice">0&nbsp;원</span></div>
+				
 		</div>
 	</div>
 </div>
@@ -80,9 +129,8 @@
 	</div>
 </div>
 
-
-
 <script>
+
 	document.querySelector(".date").addEventListener("change", function() {
 		var selectedValue = this.value;
 		console.log(selectedValue);

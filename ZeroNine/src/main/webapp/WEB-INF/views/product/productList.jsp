@@ -26,7 +26,7 @@
 								<img src="${path}/images/sangpumpage/fluent_basket.png">
 							</button>
 						</div>
-						<p>채소류</p>
+						<p>채소</p>
 					</div>
 					<div class="category">
 						<div class="img_wrap">
@@ -34,7 +34,7 @@
 								<img src="${path}/images/sangpumpage/lotion.png">
 							</button>
 						</div>
-						<p>생필품류</p>
+						<p>생필품</p>
 					</div>
 					<div class="category">
 						<div class="img_wrap">
@@ -42,7 +42,7 @@
 								<img src="${path}/images/sangpumpage/food_navi.png">
 							</button>
 						</div>
-						<p>음식류</p>
+						<p>음식</p>
 					</div>
 					<div class="category">
 						<div class="img_wrap">
@@ -80,13 +80,10 @@
 			</div>
 
 			<div class="content"></div>
-			<div class="menulistpart">
-
-
-				<div class="menulist" id="here">
-
+			<div class="menulistpart" id="here">
+			
 				ERROR
-			</div>
+			
 			<div class="dist100"></div>
 
 				<div class="dist49"></div>
