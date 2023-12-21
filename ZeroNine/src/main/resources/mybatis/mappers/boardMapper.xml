@@ -7,9 +7,9 @@
 	<select id="selectFastBoardList" resultType="map">
 		select b."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", sum(sp."pickCount") as "totalpickCount", pi."imagePath"
 			from public."board" as b
-			join public."selectProduct" as sp on (b."boardId" = sp."boardId")
-			join public."product" as p on (p."productId" = sp."productId")
-			join public."productMainImage" as pi on (p."productId" = pi."productId")
+			left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+			left join public."product" as p on (p."productId" = sp."productId")
+			left join public."productMainImage" as pi on (p."productId" = pi."productId")
 			group by b."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", pi."imagePath"
 			order by b."uploadTime" desc
 	</select>
@@ -17,9 +17,9 @@
 	<select id="selectFastDetail" resultType="map">
 		select b."boardId",b."title", b."boardContent", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", sum(sp."pickCount") as "totalpickCount", pi."imagePath"
 			from public."board" as b
-			join public."selectProduct" as sp on (b."boardId" = sp."boardId")
-			join public."product" as p on (p."productId" = sp."productId")
-			join public."productMainImage" as pi on (p."productId" = pi."productId")
+			left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+			left join public."product" as p on (p."productId" = sp."productId")
+			left join public."productMainImage" as pi on (p."productId" = pi."productId")
 			where b."boardId"= cast(#{boardId} as UUID)
 			group by b."boardId",b."title", b."boardContent", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", pi."imagePath"
 	</select>
@@ -37,9 +37,9 @@
 		from (
 				select bc."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime",((p."price")* sum(bc."purchaseCount")) as sumprice
 				from public."boardCart" as bc
-				join public."product" as p
+				left join public."product" as p
 					on bc."productId" = p."productId"
-				join public."board" as b 
+				left join public."board" as b 
 					on bc."boardId" = b."boardId"
 				group by bc."boardId",b."title", b."boardContent",b."uploadTime", p."price", b."finishTime"
 				) as free_board_data

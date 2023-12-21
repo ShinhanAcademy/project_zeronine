@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
 <link rel="stylesheet" href="${path}/css/product/productdetail.css" />
@@ -21,8 +22,18 @@
 			<div class="detail_right">
 
 				<div class="detail_heartcart">
-					<img class="detail_heart" src="${path}/images/board/heart.png">
-					<img src="${path}/images/sangpumpage/productcart.png">
+				<button class="like" id="like" type="button"
+							value="${plist.productId}"
+							onclick="handleLikeButtonClick('${plist.productId}')">
+
+							<c:if test="${fn:contains(likedcid, plist.productId)}">
+								<img class="detail_heart" src="${path}/images/board/red_heart.png">
+							</c:if>
+							<c:if test="${not(fn:contains(likedcid, plist.productId))}">
+								<img class="detail_heart" src="${path}/images/board/heart.png">
+							</c:if>
+						</button>
+				
 				</div>
 				<span class="detail_pname">${plist.pName}</span>
 				<div class="detail_price">
@@ -256,12 +267,13 @@
 			var result = updateQuantityAndTotal();
 		    var total = result.total;
 		    var quantityValue = result.quantityValue;
+		    var cartCheckpid ="${cartCheckPid}";
 		    console.log(custid);
 			 console.log(productid);
 			var obj = {
 				"productid" :productid,
 				"pcount": quantityValue};
-			
+			if(cartCheckpid.includes(productid)==false){
 			$.ajax({
 					url : path + "/product/goProductDCart.do",
 					data : obj,
@@ -274,6 +286,63 @@
 					}
 				}); 
 })
+		}else{
+			
+		}
+
+var str = "${likedcid}";
+	 var likedcidArr = [] ; 
+	 //str.split(/!|@|~|,| |Z/);
+	 likedcidArr = str.split(/,|\[|\]| /);
+	 console.log(likedcidArr);
+	 function handleLikeButtonClick(productId) {
+	      
+	        var custid = "${customerid}";
+	    
+	    	//클래스가 heart liked => AJAX DELTE 호출
+	        var isRedHeart = likedcidArr.indexOf(productId);
+	    	
+			console.log(isRedHeart);
+			if(isRedHeart>=0) {
+				$.ajax({
+					url : "/product/deleteLikedProduct.do",
+					type: "POST",
+					data : {"productId" :productId},
+					success : function(){
+						likedcidArr = likedcidArr.filter(item => item !== productId);
+					},
+					error : function(){
+						alert("에러입니다.");
+					}
+					});
+					 
+				}else{
+	
+				 $.ajax({
+						url : "/product/productLike.do",
+						type: "POST",
+						data : {"productId" :productId},
+						success : function(){
+							likedcidArr.push(productId);
+							console.log(likedcidArr);
+						},
+						error : function(){
+							alert("에러입니다.");
+						}
+						});
+				}
+					};
+	
+	        
+		$(".like").click(function (){
+
+			            var currentImagePath = $(this).find("img.detail_heart").attr("src");
+			            var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+			                path+"/images/board/red_heart.png" :
+			                path+"/images/board/heart.png";
+
+			            $(this).find("img.detail_heart").attr("src", newImagePath);
+			});
 	</script>
 
 </body>
