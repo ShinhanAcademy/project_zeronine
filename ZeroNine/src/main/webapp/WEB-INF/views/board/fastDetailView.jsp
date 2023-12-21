@@ -27,9 +27,12 @@
 							<li><img class="cart" src="${path}/images/common/cart.png">
 								<span> ${detail.brand}   /   ${detail.pName}</span></li>
 							<li><img class="box" src="${path}/images/board/box.png">
-								<span> ${detail.pCount - detail.totalpickCount} 남음 </span></li>
+								<span> ${detail.pCount - detail.totalpickCount} 개 남음 </span></li>
 							<li><img class="card" src="${path}/images/board/card.png">
-								<span> <fmt:formatNumber value="${detail.price/(detail.pCount - detail.pickCount)}" type="number"/>원  </span></li>
+								<span> 
+								<fmt:formatNumber value="${Math.round(detail.price/detail.pCount)}" type="number"/>원 
+								<%--<fmt:formatNumber value="${Math.round(detail.price/(detail.pCount - detail.pickCount))}" type="number"/>원--%>
+								<span style="color: gray;">(개당)</span>  </span></li>
 							<li><img class="clock" src="${path}/images/board/clock.png">
 								 <fmt:parseDate value="${detail.finishTime}" var="parsedDate" pattern="yyyy-MM-dd HH:mm"/> 
 									<span> <fmt:formatDate value="${parsedDate}" pattern="YY년 MM월 dd일 HH:mm" /> 까지 </span></li>
@@ -45,4 +48,11 @@
 		</div>
 	</div>
 </body>
+<script>
+var boardId = "${detail.boardId}";
+$(".join_btn").click(function(){
+	location.href = "${path}/common/participateBoard.do?boardId=" + boardId;
+});
+
+</script>
 </html>
