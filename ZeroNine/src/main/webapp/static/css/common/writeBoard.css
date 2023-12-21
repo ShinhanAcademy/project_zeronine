@@ -300,6 +300,10 @@
 .cart_list.contents .tbl_wrap table td:first-child {
 	padding: 0;
 }
+.cart_list.contents .tbl_wrap table th:nth-of-type(4),
+.cart_list.contents .tbl_wrap table td:nth-of-type(4) {
+	padding: 10px;
+}
 .totalPrice_div{
 	font-size: 20px;
 	margin-top: 5px;

@@ -7,7 +7,7 @@
 
 <%@include file="../common/head.jsp"%>
 <title>FastBoard</title>
-<link rel="stylesheet" href="${path}/css/product/productOrderSuccess.css" />
+<link rel="stylesheet" href="${path}/css/common/orderSuccess.css" />
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Get the element by its ID
@@ -34,9 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				<div class="order_detail">
 					<div class="od_part">
 						<div class="od_subtitle">주문자명</div>
-						<div class="ob_subtext" id="deliId">${info.customerName}</div>
+						<div class="ob_subtext">${info.customerName}</div>
 					</div >
 					<div class="jul"></div>
+					<div class="od_part">
+						<div class="od_subtitle">게시글명</div>
+						<div class="ob_subtext">${info.title }</div>
+					</div>
 					<div class="jul"></div>
 					<div class="od_part">
 						<div class="od_subtitle">결제금액</div>
