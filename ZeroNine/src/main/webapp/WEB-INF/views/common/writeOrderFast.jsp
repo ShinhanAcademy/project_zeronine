@@ -214,7 +214,11 @@
 						"productId":$("#hidden_productId").val(),
 						"count":$("#hidden_count").val(),	
 				} */
-
+				if(rsp.success) {
+					alert("결제 성공했습니다!");
+					location.href = path + "/board/completeedit.do";
+				}
+		    	/*
 				$.ajax({
 					url : path + "/board/completeedit.do",
 					//data : obj,
@@ -226,6 +230,7 @@
 						alert("ERROR!");
 					}
 				});
+				*/
 		    });
 		})
 
