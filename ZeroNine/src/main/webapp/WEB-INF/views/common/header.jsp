@@ -47,10 +47,10 @@
 			<ul class="menu gnb_1depth">
 				<li><a href="${path}/product/productList.do">상품목록</a>
 					<ul class="gnb_2depth" >
-						<li onclick="changeCss('채소')"><a href="${path}/product/productList.do">채소</a></li>
-						<li onclick="changeCss('생필품')"><a href="${path}/product/productList.do">생필품</a></li>
-						<li onclick="changeCss('음식')"><a href="${path}/product/productList.do">음식</a></li>
-						<li onclick="changeCss('전체')"><a href="${path}/product/productList.do">전체</a></li>
+						<li ><a href="${path}/product/productList.do?buttonValue=1">채소</a></li>
+						<li ><a href="${path}/product/productList.do?buttonValue=2">생필품</a></li>
+						<li ><a href="${path}/product/productList.do?buttonValue=4">음식</a></li>
+						<li ><a href="${path}/product/productList.do?buttonValue=%">전체</a></li>
 					</ul></li>
 				<li><a href="${path}/board/">게시판</a></li>
 				<li><a href="${path}/myPage/ecoCare.do">마이 에코케어</a></li>
