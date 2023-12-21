@@ -84,46 +84,61 @@
 					
 					<div class="contents pickup_request_wrap">
 						<div class="tbl_wrap">
-							<table class="tbl_chat_wrap">
+							<table class="tbl_pickup_request_wrap">
 								<colgroup>
 									<col width="6%" />
-									<col width="54%" />
+									<col width="40%" />
+									<col width="12%" />
 									<col span="2" />
 								</colgroup>
 								<thead>
 									<tr>
-										<th>과거 회수 내역</th>
-										<th>승인 여부</th>
-										<th>회수 처리 결과</th>
+										<th>
+											<input type="checkbox">
+										</th>
+										<th>보유 쿠폰</th>
+										<th>잔여 회수</th>
+										<th>회수 예정일</th>
+										<th>신청</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>일반쓰레기 수거 요청건</td>
-										<td>완료</td>
 										<td>
-											<button class="btn_blue">상세 보기</button>
+											<input type="checkbox">
+										</td>
+										<td class="pCoupon_info">
+											<div class="title">에코케어</div>
+											<div class="mid_title">쓰레기 회수 이용권</div>
+											<div class="ann">* 음식물 쓰레기 10회 + 일반 쓰레기 10회 (총 20회)</div>
+										</td>
+										<td>
+											3회
+										</td>
+										<td>
+											<div class="pickup_date"> 23년 12월 22일 20시 </div>
+										</td>
+										<td>
+											<button class="btn_blue">신청하기</button>
 										</td>
 									</tr>
 									<tr>
-										<td>일반쓰레기 수거 요청건</td>
-										<td>완료</td>
 										<td>
-											<button class="btn_blue">상세 보기</button>
+											<input type="checkbox">
 										</td>
-									</tr>
-									<tr>
-										<td>일반쓰레기 수거 요청건</td>
-										<td>완료</td>
-										<td>
-											<button class="btn_blue">상세 보기</button>
+										<td class="pCoupon_info">
+											<div class="title">5회 이용권</div>
+											<div class="mid_title">쓰레기 회수 이용권</div>
+											<div class="ann">* 음식물 쓰레기 5회 또는 일반 쓰레기 5회 (총 5회)</div>
 										</td>
-									</tr>
-									<tr>
-										<td>일반쓰레기 수거 요청건</td>
-										<td>완료</td>
 										<td>
-											<button class="btn_blue">상세 보기</button>
+											3회
+										</td>
+										<td>
+											<div class="pickup_date"> 23년 12월 22일 20시 </div>
+										</td>
+										<td>
+											<button class="btn_blue">신청하기</button>
 										</td>
 									</tr>
 								</tbody>
@@ -279,11 +294,11 @@ console.log(month_2ctn);
 document.querySelector(".num").innerText = month_2ctn+"회";
 
 if(month_2ctn<=5){
-	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/ecoLevel/lev1.gif">';
+	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/myEco/lev1.gif">';
 }else if(month_2ctn<=9){
-	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/ecoLevel/lev2.gif">';
+	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/myEco/lev2.gif">';
 } else {
-	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/ecoLevel/lev3.gif">';
+	document.querySelector(".img").innerHTML = '<img src="${path}/images/mypage/myEco/lev3.gif">';
 }
 
 //배출 쓰레기 유형
