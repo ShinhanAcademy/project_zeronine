@@ -212,7 +212,6 @@ public class ProductController {
 
 	}
 
-	// 은경
 	@PostMapping("/deleteCartItem.do")
 	@ResponseBody
 	public Map<String, Object> deleteCartItem(@RequestParam String productId, HttpSession session) {

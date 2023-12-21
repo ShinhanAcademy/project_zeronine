@@ -185,11 +185,10 @@ function myCartList() {
 		success: function(resData) {
 			console.log("myCartList 성공 !!");
 			$("#my_cart_wrapper").html(resData);
+			
 		},
 		error:function() {
 			console.log("myCartList ajax 오류");
 		}
 	});
 }
-
-

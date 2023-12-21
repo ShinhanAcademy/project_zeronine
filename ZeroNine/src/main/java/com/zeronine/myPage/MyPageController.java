@@ -68,11 +68,10 @@ public class MyPageController {
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
-		/*
-			String customerId = (String) session.getAttribute("customerId");
-		*/
-		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
-		System.out.println("ID = " + customerId);
+//		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
+		
+		String customerId = (String) session.getAttribute("customerId");
+//		System.out.println("ID = " + customerId);
 
 		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId, searchWord, startDate, endDate));
 	}
@@ -87,9 +86,9 @@ public class MyPageController {
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
-//		String customerId = (String) session.getAttribute("customerId");
-		String customerId = "7cb70b46-d6c2-462d-b785-dc27e1e7d045";
-		System.out.println("ID = " + customerId);
+//		String customerId = "7cb70b46-d6c2-462d-b785-dc27e1e7d045";
+		String customerId = (String) session.getAttribute("customerId");
+//		System.out.println("ID = " + customerId);
 		
 		model.addAttribute("orderCancelHistoryAll", deliveryService.orderCancelHistoryAll(customerId, searchWord, startDate, endDate));
 	}
@@ -101,8 +100,8 @@ public class MyPageController {
 	
 	@RequestMapping("/subPage/myCartDetail.do")
 	public void myCartDetail(Model model, HttpSession session) {
-		String customerId = (String) session.getAttribute("customerId");
 //		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		String customerId = (String) session.getAttribute("customerId");
 		//System.out.println("ID = " + customerId);
 		
 		model.addAttribute("myCart", deliveryService.myCart(customerId));
@@ -118,9 +117,9 @@ public class MyPageController {
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
 
-//		String customerId = (String) session.getAttribute("customerId");
-		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		//System.out.println("ID = " + customerId);
+//		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
+		String customerId = (String) session.getAttribute("customerId");
+//		System.out.println("ID = " + customerId);
 		
 		model.addAttribute("likeProduct", deliveryService.likeProduct(customerId, searchWord));
 	}
