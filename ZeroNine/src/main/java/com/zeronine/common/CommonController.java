@@ -62,16 +62,13 @@ public class CommonController {
 		// String customerId = (String)session.getAttribute("customerId");
 		String boardId = (String)session.getAttribute("boardId");
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		String deliveryId = UUID.randomUUID().toString();
-		session.setAttribute("deliveryId", deliveryId);
 		String message;
-		int isDelivery = boardService.orderSuccess(deliveryId,customerId);
-		int isDeliveryProduct = boardService.orderSuccessProduct(deliveryId,productId,count);
-		int isFastProduct = boardService.orderFastProduct(customerId,boardId,productId,count);
-		if(isDelivery>0 && isDeliveryProduct>0 && isFastProduct>0) {
+		int isFastProduct = boardService.orderFastProduct(customerId,boardId,count);
+		System.out.println("isFastProduct" + isFastProduct);
+		if(isFastProduct==0 || isFastProduct==1) {
 			message = "참여완료";
 		}else {
-			message = "참여미완료";
+			message = "이미 참여한 게시글입니다.";
 		}
 		return message;
 		
@@ -81,13 +78,13 @@ public class CommonController {
 	public void orderSuccess(Model model,HttpSession session) { 
 		//String customerId = (String)session.getAttribute("customerId"); 
 		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77"; 
-		String deliveryId = (String)session.getAttribute("deliveryId"); 
-		Map<String,Object> info = boardService.orderInfo(customerId,deliveryId); 
+		String boardId = (String)session.getAttribute("boardId");
+		Map<String,Object> info = boardService.orderInfo(customerId, boardId); 
 		int price = (Integer)info.get("price"); 
 		int pCount = (Integer)info.get("pCount"); 
 		int totalPrice = (Integer)info.get("pickCount") * (Math.round(price/pCount));
 	    if(totalPrice<50000) { totalPrice += 3000; }
-	    model.addAttribute("deliveryId",deliveryId); model.addAttribute("info",info);
+	    model.addAttribute("info",info);
 	 	model.addAttribute("totalPrice",totalPrice);
 	 	session.removeAttribute("boardId"); 
 	 	}
