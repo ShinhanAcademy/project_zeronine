@@ -342,7 +342,7 @@
 		WHERE "oBoardId" = cast(#{boardId} as UUID)
 	</update>
 	<select id="myCart" resultType="map" parameterType="String">
-		select pi."imagePath", p.brand, p."pName", p."pCount", p."price", p."productId"
+		select pi."imagePath", p.brand, p."pName", p."pCount", p."price", p."productId", p."pStock"
 		from cart c left join product p on (c."productId"=p."productId")
 		left join "productMainImage" pi on (p."productId"=pi."productId")
 		where c."customerId"=cast(#{customerId} as UUID)
@@ -375,8 +375,9 @@
 		)
 	</select>
 	<select id="orderInfo" resultType="map" parameterType="map">
-		select distinct	c."customerName", p.price, p."pCount", sp."pickCount"
+		select distinct	c."customerName", p.price, p."pCount", sp."pickCount", b."title"
 		from product p left join "selectProduct" sp on (p."productId" = sp."productId")
+		left join board b on (sp."boardId"=b."boardId")
 		left join customer c on (sp."customerId"=c."customerId")
 		where c."customerId" = cast(#{customerId} as UUID)
 		and sp."boardId" = cast(#{boardId} as UUID)

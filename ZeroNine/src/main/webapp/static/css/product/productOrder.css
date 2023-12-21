@@ -33,7 +33,8 @@
 }
 
 .order_body .order_bodypart .orderinfo .jul {
-	margin-top: 10px;
+	margin-top: 20px;
+	margin-bottom: 25px;
 	display: block;
 	overflow: hidden;
 	pointer-events: none;
@@ -70,15 +71,12 @@
 	{
 	display: flex;
 	flex-direction: row;
+	margin-top: 18px;
 }
-.order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_right{
-	
-	margin-left: 50px;
-}
+
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_left
 	{
-	display: flex;
-    width: 725px;
+	width: 650px;
 }
 
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .box_text {
@@ -88,18 +86,8 @@
 	font-style: normal;
 	font-weight: 600;
 	line-height: 16px;
-	width: 530px;
 }
-.order_body .order_bodypart .orderinfo .orderinfo_boxtext .box_text2 {
-	color: #000;
-	font-family: Lato;
-	font-size: 18px;
-	font-style: normal;
-	font-weight: 600;
-	line-height: 16px;
-	width: 60px;
 
-}
 .order_body .order_bodypart .twinbox {
 	margin-top: 60px;
 	justify-content: space-between;

@@ -101,8 +101,8 @@
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<tr>
-									<td colspan="4">내역이 없습니다.</td>
+								<tr style="height: 50px;">
+									<td colspan="4">장바구니 내역이 없습니다.</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
@@ -110,7 +110,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="totalPrice_div">총 판매가 <span class="totalPrice">0&nbsp;원</span></div>
+			<div class="totalPrice_div">총 구매가 <span class="totalPrice">0&nbsp;원</span></div>
 				
 		</div>
 	</div>
