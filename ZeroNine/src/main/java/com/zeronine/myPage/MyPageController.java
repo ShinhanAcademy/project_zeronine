@@ -4,9 +4,12 @@ package com.zeronine.myPage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,8 @@ import com.zeronine.model.CustomerService;
 import com.zeronine.model.MyPageService;
 import com.zeronine.model.ProductService;
 
+import netscape.javascript.JSObject;
+
 @Controller
 @RequestMapping("/myPage")
 public class MyPageController {
@@ -39,6 +44,8 @@ public class MyPageController {
 	ProductService productService;
 	@Autowired
 	CustomerService cService;
+	@Autowired
+	MyPageService mypageservice;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 
@@ -124,9 +131,24 @@ public class MyPageController {
 			MY_ACTIVITIES
 	 ****************************** */
 
-	// chatList(채占쏙옙 占쏙옙占�)
+	// ecoCare
 	@RequestMapping("/ecoCare.do")
-	public void ecoCare() {
+	public void ecoCare(HttpSession session, Model model, String customerId) {
+		String customer_id = (String)session.getAttribute("customerId");
+		List<Map<String, Object>> ecodashinfo = mypageservice.selectEcoInfoAll(customer_id);
+		
+		JSONArray ecoarray = new JSONArray();
+		for(Map<String, Object> map : ecodashinfo) {
+			JSONObject json = new JSONObject();
+			for(Map.Entry<String, Object> entry : map.entrySet()) {
+				String key = (String)entry.getKey();
+				String value = (String)entry.getValue().toString();
+				json.put(key, value);
+			} ecoarray.add(json);
+		}
+		model.addAttribute("ecodashinfo",ecoarray);
+		logger.info("이것은 컨트롤러에서 보여주는 id 정보 :{}",customer_id );
+		logger.info("이것은 컨트롤러에서 보여주는 정보 :{}",ecoarray);
 	}
 	
 	@GetMapping("/createdBoard.do")

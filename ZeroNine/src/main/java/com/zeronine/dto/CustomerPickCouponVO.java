@@ -11,4 +11,5 @@ public class CustomerPickCouponVO {
 	private String customerId;
 	private Timestamp startDateTime;
 	private Integer remaininCoupons;
+	private Boolean issubscription;
 }

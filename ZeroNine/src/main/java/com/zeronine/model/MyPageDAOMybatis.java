@@ -87,4 +87,9 @@ public class MyPageDAOMybatis {
 		return result;
 	}
 	*/
+	
+	public List<Map<String, Object>> selectEcoInfoAll (String customerId){
+		List<Map<String, Object>> ecodash = sqlSession.selectList(NAMESPACE+"selectEcoInfoAll", customerId);
+		return ecodash; 
+	}
 }
