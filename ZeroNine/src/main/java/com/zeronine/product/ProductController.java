@@ -164,7 +164,10 @@ public class ProductController {
 		model.addAttribute("deliverylist4", productService.selectDetailDelivery4());
 		return "product/productDetail";
 	}
-
+	@PostMapping("/alreadyInCartModal.do")
+	public String alreadyInCartModal() {
+		return "product/alreadyInCartModal";
+	}
 	@PostMapping("/goProductDCart.do")
 	public ResponseEntity<String> goProductDCart(String productid, int pcount, HttpSession session, Model model) {
 		int result = 0;

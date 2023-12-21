@@ -23,7 +23,9 @@
 						<div class="infotext_space">
 							<div class="infotext_space_left">
 								<span class="box_text">${item.pName}</span>
+							<span class="box_text2">${item.productCount}개</span>
 							</div>
+							
 							<div class="infotext_space_right">
 								<span id="itemPrice" class="box_text"><fmt:formatNumber
 								value="${item.price*item.productCount}" maxFractionDigits="3"></fmt:formatNumber>원</span>
@@ -84,9 +86,7 @@
 				<div class="tw_box">
 					<div class="tw_box_top">
 						<p class="tw_boxtext">배송지 정보</p>
-						<button type="button" class="change_address" 
-						onclick="$('.address_pop').fadeIn(200)">배송지 변경
-						<img class="" src="${path}/images/sangpumpage/deliveryupdateicon.png"></button>
+						
 					</div>
 					<div class="tw_wb">
 						<div class="deliverypinfo">
