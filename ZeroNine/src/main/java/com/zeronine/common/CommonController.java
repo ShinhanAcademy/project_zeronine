@@ -45,8 +45,8 @@ public class CommonController {
 	
 	@PostMapping("/common/orderFast.do")
 	public void orderFast(HttpServletRequest request, Model model, HttpSession session) {
-		// String customerId = (String)session.getAttribute("customerId");
-		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		String customerId = (String)session.getAttribute("customerId");
+		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		String productId = request.getParameter("productId");
 		int count = Integer.parseInt(request.getParameter("count"));
 		ProductVO product = boardService.selectByPid(productId);
@@ -59,9 +59,9 @@ public class CommonController {
 	@PostMapping(value="/common/orderSuccess.do", produces="application/text;charset=UTF-8")
 	@ResponseBody
 	public String orderSuccess(String productId, int count, Model model, HttpSession session) {
-		// String customerId = (String)session.getAttribute("customerId");
+		String customerId = (String)session.getAttribute("customerId");
 		String boardId = (String)session.getAttribute("boardId");
-		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		String message;
 		int isFastProduct = boardService.orderFastProduct(customerId,boardId,count);
 		System.out.println("isFastProduct" + isFastProduct);
@@ -76,8 +76,8 @@ public class CommonController {
 	
 	@GetMapping("/common/orderSuccess.do") 
 	public void orderSuccess(Model model,HttpSession session) { 
-		//String customerId = (String)session.getAttribute("customerId"); 
-		String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77"; 
+		String customerId = (String)session.getAttribute("customerId"); 
+		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77"; 
 		String boardId = (String)session.getAttribute("boardId");
 		Map<String,Object> info = boardService.orderInfo(customerId, boardId); 
 		int price = (Integer)info.get("price"); 
