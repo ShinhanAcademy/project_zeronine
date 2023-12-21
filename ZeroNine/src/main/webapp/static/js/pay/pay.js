@@ -12,6 +12,7 @@ var makeMerchantUid = hours +  minutes + seconds + milliseconds;
 //var email = 'yongsu9630@gmail.com';
 
 function requestPaySubscription(productName, price) {
+	
     IMP.request_pay({
         pg : 'html5_inicis',
         pay_method : 'card',
@@ -23,11 +24,21 @@ function requestPaySubscription(productName, price) {
         if (rsp.success) {
             console.log(rsp);
             $.ajax({
-                url: "/pay/subscription.do",
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                data : rsp
-            })
+                type: "POST",
+                url: "/pay/subscription.do", // Update the URL to match your controller mapping
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(rsp),
+                success: function (response) {
+                    //console.log(rsp);
+                    alert("구매가 완료되었습니다. 감사합니다.");
+                    location.href='/myPage/ecoCare.do';
+	                return;
+                    // Handle the response as needed
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
         } else {
             console.log(rsp);
         }

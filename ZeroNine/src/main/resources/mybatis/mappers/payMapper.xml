@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.zeronine.pay">
+	<select id="insertFreeDelivery" parameterType="String">
+		INSERT INTO public."customerFreeDelivery"("customerId")
+		VALUES (CAST(#{customerId} AS UUID))
+	</select>
+	
+	<select id="insert5Ecocare" parameterType="String">
+		INSERT INTO public."customerPickCoupon"
+		("customerId", "remainingCouponCount", "isSubscription")
+		VALUES (CAST(#{customerId} AS UUID), 5, 'false')
+	</select>
+	
+	<select id="payEcocareSubscription" parameterType="String">
+		INSERT INTO public."customerPickCoupon"
+		("customerId", "remainingCouponCount", "isSubscription")
+		VALUES (CAST(#{customerId} AS UUID), 20, 'true')
+	</select>
+</mapper>
