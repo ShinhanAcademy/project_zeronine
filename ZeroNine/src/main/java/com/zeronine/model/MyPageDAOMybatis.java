@@ -92,8 +92,9 @@ public class MyPageDAOMybatis {
 		List<Map<String, Object>> ecodash = sqlSession.selectList(NAMESPACE+"selectEcoInfoAll", customerId);
 		return ecodash; 
 	}
-	public List<Map<String, Object>> selectCouponCtn (String customerId){
-		List<Map<String, Object>> couponCtn = sqlSession.selectList(NAMESPACE+"selectCouponCtn", customerId);
+
+	public List<Map<String, Object>> selectCouponCtn(/* String customerId */){
+		List<Map<String, Object>> couponCtn = sqlSession.selectList(NAMESPACE + "selectCouponCtn"/* , customerId */);
 		return couponCtn; 
 	}
 	public int updateCouponCnt (String subscriptionId) {
