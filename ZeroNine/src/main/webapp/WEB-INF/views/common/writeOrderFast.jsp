@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
-	<div class="order_body">
+	<div class="order_body" id="payComplete">
 		<div class="zero_container order_bodypart">
 			<div class="order_bodypart_text">
 				<span class="top_text">주문서</span>
@@ -168,7 +168,7 @@
 				<button class="gobtn" id="gobtn" disabled>결제하기</button>
 			</div>
 
-
+			
 			<!-- order-bodypart -->
 		</div>
 	</div>
@@ -214,23 +214,30 @@
 						"productId":$("#hidden_productId").val(),
 						"count":$("#hidden_count").val(),	
 				} */
+				
+				/*
 				if(rsp.success) {
 					alert("결제 성공했습니다!");
 					location.href = path + "/board/completeedit.do";
 				}
-		    	/*
-				$.ajax({
-					url : path + "/board/completeedit.do",
-					//data : obj,
-					type : "GET",
-					success : function() {
-						location.href = path + "/board/completeedit.do";
-					},
-					error : function() {
-						alert("ERROR!");
-					}
-				});
-				*/
+		    	*/
+		    	
+		    	if(rsp.success) {
+		    		$.ajax({
+						url : path + "/board/completeedit.do",
+						//data : obj,
+						type : "POST",//GET
+						success : function(response) {
+							$('#payComplete').html(response);
+						},
+						error : function(response) {
+							console.log("ERROR RESPONSE==>", response);
+							alert("ERROR!");
+						}
+					});	
+		    	}
+		    	
+				
 		    });
 		})
 
