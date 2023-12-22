@@ -7,13 +7,14 @@
 	<select id="selectEcoInfoAll" parameterType="String" resultType="map">
 		select p.*, cpc."isSubscription", cpc."remainingCouponCount"
 		from public.pickup as p
-		left join public."customerPickCoupon" as cpc on p."customerId" = cpc."customerId"
+		join public."customerPickCoupon" as cpc on p."customerId" = cpc."customerId" and p."subscriptionId" = cpc."subscriptionId"
 		where p."customerId"= cast(#{customerId} as UUID) and "pickUpStatus"='complete' 
 	</select>
 	<select id="selectCouponCtn" resultType="map">
-	select distinct( p."customerId"),cpc."isSubscription", cpc."remainingCouponCount"
+	select  p."subscriptionId",p."customerId",cpc."isSubscription", cpc."remainingCouponCount"
 		from public.pickup as p
-		left join public."customerPickCoupon" as cpc on p."customerId" = cpc."customerId"
+		join public."customerPickCoupon" as cpc on p."subscriptionId" = cpc."subscriptionId"
 		where p."customerId"= cast(#{customerId} as UUID) and cpc."remainingCouponCount" > 0
+		group by p."subscriptionId",p."customerId",cpc."subscriptionId", cpc."remainingCouponCount"
 	</select>
 </mapper>
