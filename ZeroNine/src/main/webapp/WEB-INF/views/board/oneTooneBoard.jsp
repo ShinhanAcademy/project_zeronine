@@ -17,9 +17,8 @@
 <body>
 	<div class="banner zn_center">
 
-		<div style="width: 1440px">
-			<img src="${path}/images/board/banner3.png"
-				style="width: 100%; padding-top: 80px;">
+		<div style="width: 1440px; padding: 20px 0px;">
+			<img src="${path}/images/board/banner3.png">
 		</div>
 
 		<div class="search">
