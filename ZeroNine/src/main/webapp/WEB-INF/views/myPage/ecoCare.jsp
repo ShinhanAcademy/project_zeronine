@@ -68,7 +68,6 @@
 										</div>
 										</td>
 										<td class ="img">
-											<%-- <img src="${path}/images/mypage/ecoLevel/lev3.gif"> --%>
 										</td>
 									</tr>
 								</tbody>
@@ -112,7 +111,7 @@
 											<div class="mid_title">쓰레기 회수 이용권</div>
 											<div class="ann">* 음식물 쓰레기 10회 + 일반 쓰레기 10회 (총 20회)</div>
 										</td>
-										<td>
+										<td class="left_coupon">
 											3회
 										</td>
 										<td>
@@ -131,7 +130,7 @@
 											<div class="mid_title">쓰레기 회수 이용권</div>
 											<div class="ann">* 음식물 쓰레기 5회 또는 일반 쓰레기 5회 (총 5회)</div>
 										</td>
-										<td>
+										<td class="left_coupon">
 											3회
 										</td>
 										<td>
@@ -277,13 +276,15 @@ console.log(month_1, month_2, month_3);
 var ctn_month = [0,0,0];
 
 for(var i=0; i<ecodashinfo_arr.length; i++){
-	var month = ecodashinfo_arr[i].currentMonth;
-	if(month == month_1){
-		ctn_month[0] ++;	
-	} else if(month == month_2){
-		ctn_month[1] ++;
-	} else if(month == month_3){
-		ctn_month[2] ++;
+	if(ecodashinfo_arr[i].pickUpStatus == 'complete'){
+		var month = ecodashinfo_arr[i].currentMonth;
+		if(month == month_1){
+			ctn_month[0] ++;	
+		} else if(month == month_2){
+			ctn_month[1] ++;
+		} else if(month == month_3){
+			ctn_month[2] ++;
+		}
 	}
 }
 console.log(ctn_month);
@@ -304,19 +305,16 @@ if(month_2ctn<=5){
 //배출 쓰레기 유형
 var waste_arr = [0,0];
 for(var i =0; i<ecodashinfo_arr.length; i++){
-	var waste = ecodashinfo_arr[i].isFoodWaste;
-	if(waste == "true" ){
-		waste_arr[0] ++;
-	} else{
-		waste_arr[1] ++;
+	if(ecodashinfo_arr[i].currentMonth == current_month){
+		var waste = ecodashinfo_arr[i].isFoodWaste;
+		if(waste == "true" ){
+			waste_arr[0] ++;
+		} else{
+			waste_arr[1] ++;
+		}
 	}
 } 
 console.log(waste_arr);
-
-//lable display
-
-
-
 
 //바 차트
 	var now = new Date();
@@ -435,6 +433,7 @@ var myDoughnutChart = new Chart(ctx2, {
 	}
 });
 
-
+//request pickup
+var couponCtn_arr
 
 </script>

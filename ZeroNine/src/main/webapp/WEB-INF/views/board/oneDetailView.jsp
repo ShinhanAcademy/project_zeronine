@@ -54,6 +54,7 @@ $("#joinChat").on("click", function(){
 			type : "POST",
 			success : function(result){
 				location.href = "/chat.do";
+				$("#detail_modal_wrap").hide();
 			},
 			error : function(){
 				alert("에러입니다.");

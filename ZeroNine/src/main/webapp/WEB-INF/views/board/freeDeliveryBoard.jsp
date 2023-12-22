@@ -97,7 +97,7 @@ $(searchBoard);
         var failId = fail_info_array[i].boardId;
         failId_array.push(failId);
     }
-    
+    console.log(failId_array);
     //성공 정보 배열 생성
      var success_info = '${success}';
     var success_info_array = JSON.parse(success_info);
@@ -107,7 +107,7 @@ $(searchBoard);
         var successId = success_info_array[i].boardId;
         successId_array.push(successId);
     }
-
+    console.log(failId_array);
     var ratio_arr = [];
 function show(jsondata) {
 	console.log(jsondata.length);
@@ -140,6 +140,13 @@ function show(jsondata) {
         }
 
         // HTML 생성
+        if(dealfail){
+        	output+=`<div id="list" class="donecss">`
+        } else if(dealsuccess){
+        	output+=`<div id="list" class="successcss">`
+        } else{
+        	output+= `<div id="list">`
+        }
         output +=  ` 
         	<div id="list">
 			<div class="pro_info">
@@ -166,20 +173,24 @@ function show(jsondata) {
 					</ul>
 				</div>
 				<ul>
-					<li class="detail_view">
-						<button class="like" type="button">
-							<img class="like" src="${path}/images/board/heart.png">
-						</button>
-						<button id="free_detail_btn" class="detail_btn" value ="\${item.boardId}" onclick="O_btn('\${item.boardId}')">보기</button>
-					</li>
-				</ul>
-			</div>
-
-		</div>
-
-	</div>`;
-	 
-    });
+				<li class="detail_view">
+				<button class="like" type="button">
+					<img class="like" src="${path}/images/board/heart.png">
+				</button>`
+				if(dealfail){
+					output+=`<button id="free_detail_btn" class="detail_btn" disabled="disabled">보기</button>`
+				}else if(dealsuccess){
+					output+=`<button id="free_detail_btn" class="detail_btn" disabled="disabled">보기</button>`
+				}
+				else{
+				output += `<button id="free_detail_btn" class="detail_btn" value="\${item.boardId}" onclick="O_btn('\${item.boardId}')" >보기</button>`
+				}
+				
+				output += `</li>
+		</ul>
+       </div>
+    </div>`;
+});
 
     // 결과를 HTML에 삽입
     //console.log(output);

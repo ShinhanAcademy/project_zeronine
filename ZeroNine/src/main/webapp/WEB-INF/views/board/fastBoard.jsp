@@ -236,6 +236,7 @@ function each() {
 
 function f_btn(boardId) {
     // 상세 정보 가져오기
+    
     $.ajax({
         type: "post",
         url: "/board/fastboardDetail.do",
