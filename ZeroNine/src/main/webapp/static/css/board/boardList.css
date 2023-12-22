@@ -88,6 +88,7 @@
 	left:0;
     background-color: rgba(0,0,0,0.68);
     border-radius: 15px;
+    z-index: 1;
 }
 #list::after {
 	content: none;
@@ -103,6 +104,14 @@
 }
 #list.donecss::after {
 	content: "마 감";
+	z-index: 2;
+}
+#list.successcss::before {
+	content: "";
+}
+#list.successcss::after {
+	content: "성 공";
+	z-index: 2;
 }
 
 #list.successcss::before {

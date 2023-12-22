@@ -162,6 +162,20 @@ public class MyPageController {
 		logger.info("이것은 컨트롤러에서 보여주는 정보 :{}",ecoarray);
 		logger.info("이것은 컨트롤러에서 보여주는 쿠폰 정보 :{}", couponarr);
 	}
+	@RequestMapping("/requestPickup.do")
+	public ResponseEntity<String> updateCouponCnt(@RequestParam("subscriptionId") String subscription_id) {
+		logger.info("이것은 id:{}"+ subscription_id);
+		int result = mypageservice.updateCouponCnt(subscription_id);
+		//model.addAttribute("result",result);
+		if (result > 0) {
+			return ResponseEntity.ok("Data saved successfully. You can customize this message.");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
+		}
+	}
+	
+	
+	
 	
 	@GetMapping("/createdBoard.do")
 	public void createdBoard(Model model, HttpSession session) {
