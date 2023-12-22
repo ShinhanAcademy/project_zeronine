@@ -9,7 +9,9 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -307,31 +309,32 @@ public class BoardController {
 	//public boolean compliteEdit(HttpSession session, Model model ) throws IOException {	
 	
 		Map<String,Object> info = (Map<String,Object>)session.getAttribute("info");
-		logger.info(info.toString());
 		String authorId = (String)session.getAttribute("customerId");
-		
 		String lower_boardListType = ((String)info.get("send_bt_to_com")).toLowerCase();
 		model.addAttribute("boardListType", lower_boardListType);
 		String postingMinutes = Integer.toString((Integer)info.get("postingMinutes"));
 		String title = (String)info.get("title");
 		String content = (String)info.get("content");
-		String productId = (String)info.get("productId");
-		int pickCount = Integer.parseInt((String)info.get("count"));
+		
 	
 		if(lower_boardListType.equals("fastboard")) {
+			String productId = (String)info.get("productId");
+			int pickCount = Integer.parseInt((String)info.get("count"));
 			logger.info("parameters=>" + postingMinutes + title + content);
 			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, productId, pickCount);
 		}
-		else if (lower_boardListType.equals("freeboard")){// 臾대같 濡쒖쭅
-			Map<String, Integer> mockProducts = new HashMap<>(); //productId - purchaseCount
-			mockProducts.put("3733000a-9cdc-46db-976d-d6fe01b2bd5a", 1);
-			mockProducts.put("93a12e01-8e51-48bc-8539-580fcc65e1f0", 2);
-			boardServiceSg.writeFreeBoard(authorId, title, content, postingMinutes, mockProducts);
+		else if (lower_boardListType.equals("freedeliveryboard")){// 臾대같 濡쒖쭅
+			Map<String, Integer> productList = new HashMap<>(); //productId - purchaseCount
+			Map<String,Object> data = (Map)info.get("myMap");
+			Set<Entry<String,Object>> entrys = data.entrySet();
+			for(Entry<String,Object> row:entrys) {
+				productList.put(row.getKey(), Integer.parseInt((String)row.getValue()));
+			}
+			logger.info(productList.toString());
+			boardServiceSg.writeFreeBoard(authorId, title, content, postingMinutes, productList);
 			//return true;
 		}
-		
 		session.removeAttribute("info");
-		
 		return "board/completeEdit";
 		//return false;
 	}

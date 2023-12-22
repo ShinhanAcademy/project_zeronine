@@ -9,10 +9,11 @@
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
 		left join public."product" as p on (p."productId" = sp."productId")
 		left join public."productMainImage" as pi on (p."productId" = pi."productId")
-		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		<!-- left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId") -->
 		where b."authorId" = cast(#{customerId} as UUID) and b."finishTime">NOW()
 		and b."bCategoryType" = 'fast_board'
 		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and b."boardId" not in (select "boardId" from "dealFailRefund")
 		order by "uploadTime"
 	</select>
 	<select id="successMyWriteBlist" resultType="map" parameterType="String">
@@ -93,11 +94,12 @@
 		AS total
 		FROM public."board" AS b
 		LEFT JOIN public."boardCart" AS bc ON b."boardId" = bc."boardId"
-		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		<!--left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId") -->
 		WHERE b."authorId" = cast(#{customerId} as UUID)
 		AND b."finishTime" > NOW()
 		AND b."bCategoryType" = 'free_delivery_board'
 		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and b."boardId" not in (select "boardId" from "dealFailRefund")
 		ORDER BY "uploadTime"
 	</select>
 	<select id="successMyWriteFreeBlist" resultType="map" parameterType="String">
@@ -142,11 +144,12 @@
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
 		left join public."product" as p on (p."productId" = sp."productId")
 		left join public."productMainImage" as pi on (p."productId" = pi."productId")
-		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		<!-- left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId") -->
 		where sp."customerId" = cast(#{customerId} as UUID) and b."finishTime">NOW()
 		and b."bCategoryType" = 'fast_board'
 		and b."authorId" != cast(#{customerId} as UUID)
 		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and b."boardId" not in (select "boardId" from "dealFailRefund")
 		order by "uploadTime"
 	</select>
 	<select id="successMyParticipatedBlist" resultType="map" parameterType="String">
@@ -175,12 +178,13 @@
 		AS total
 		FROM public."board" AS b
 		LEFT JOIN public."boardCart" AS bc ON (b."boardId" = bc."boardId")
-		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		<!-- left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId") -->
 		WHERE bc."customerId" = cast(#{customerId} as UUID)
 		AND b."finishTime" > NOW()
 		AND b."bCategoryType" = 'free_delivery_board'
 		and b."authorId" != cast(#{customerId} as UUID)
 		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and b."boardId" not in (select "boardId" from "dealFailRefund")
 		ORDER BY "uploadTime"
 	</select>
 	<select id="successMyParticipatedFreeBlist" resultType="map" parameterType="String">
@@ -214,6 +218,8 @@
 		where lb."customerId" = cast(#{customerId} as UUID)
 		and b."finishTime">NOW()
 		and b."bCategoryType" = 'fast_board'
+		and lb."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and lb."boardId" not in (select "boardId" from "dealFailRefund")
 		order by "uploadTime"
 	</select>
 	<select id="likeBoardFreeBlist" resultType="map" parameterType="String">
@@ -231,6 +237,8 @@
 		where lb."customerId" = cast(#{customerId} as UUID)
 		and b."finishTime">NOW()
 		and b."bCategoryType" = 'free_delivery_board'
+		and lb."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and lb."boardId" not in (select "boardId" from "dealFailRefund")
 		ORDER BY "uploadTime"
 	</select>
 	<select id="likeBidList" resultType="String" parameterType="String">
@@ -239,6 +247,8 @@
 		where lb."customerId" = cast(#{customerId} as UUID)
 		and b."finishTime">NOW()
 		and b."bCategoryType" = 'fast_board'
+		and lb."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and lb."boardId" not in (select "boardId" from "dealFailRefund")
 	</select>
 	<delete id="deleteLikedBoard" parameterType="map">
 		delete from "likedBoard"
@@ -255,6 +265,8 @@
 		where lb."customerId" = cast(#{customerId} as UUID)
 		and b."finishTime">NOW()
 		and b."bCategoryType" = 'free_delivery_board'
+		and lb."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and lb."boardId" not in (select "boardId" from "dealFailRefund")
 	</select>
 	<update id="completeEdit" parameterType="map">
 		UPDATE public.board
