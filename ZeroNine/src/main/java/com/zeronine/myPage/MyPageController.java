@@ -160,7 +160,7 @@ public class MyPageController {
 		model.addAttribute("couponCtn", couponarr);
 		logger.info("이것은 컨트롤러에서 보여주는 id 정보 :{}",customer_id );
 		logger.info("이것은 컨트롤러에서 보여주는 정보 :{}",ecoarray);
-		logger.info("이것은 컨트롤러에서 보여주는 쿠폰 정보 :{}", couponCtn);
+		logger.info("이것은 컨트롤러에서 보여주는 쿠폰 정보 :{}", couponarr);
 	}
 	
 	@GetMapping("/createdBoard.do")

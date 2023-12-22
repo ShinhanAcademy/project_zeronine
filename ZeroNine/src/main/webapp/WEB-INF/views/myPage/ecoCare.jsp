@@ -101,45 +101,8 @@
 										<th>신청</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<input type="checkbox">
-										</td>
-										<td class="pCoupon_info">
-											<div class="title">에코케어</div>
-											<div class="mid_title">쓰레기 회수 이용권</div>
-											<div class="ann">* 음식물 쓰레기 10회 + 일반 쓰레기 10회 (총 20회)</div>
-										</td>
-										<td class="left_coupon">
-											3회
-										</td>
-										<td>
-											<div class="pickup_date"> 23년 12월 22일 20시 </div>
-										</td>
-										<td>
-											<button class="btn_blue">신청하기</button>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<input type="checkbox">
-										</td>
-										<td class="pCoupon_info">
-											<div class="title">5회 이용권</div>
-											<div class="mid_title">쓰레기 회수 이용권</div>
-											<div class="ann">* 음식물 쓰레기 5회 또는 일반 쓰레기 5회 (총 5회)</div>
-										</td>
-										<td class="left_coupon">
-											3회
-										</td>
-										<td>
-											<div class="pickup_date"> 23년 12월 22일 20시 </div>
-										</td>
-										<td>
-											<button class="btn_blue">신청하기</button>
-										</td>
-									</tr>
+								<tbody id="coupon_info_area">
+									
 								</tbody>
 							</table>
 						</div>
@@ -434,6 +397,78 @@ var myDoughnutChart = new Chart(ctx2, {
 });
 
 //request pickup
-var couponCtn_arr
+var couponInfo_arr = JSON.parse('${couponCtn}');
+console.log(couponInfo_arr);
+console.log(now.getHours());
+
+var output = "";
+var c_month = now.getMonth()+1;
+var str = now.getFullYear()+"년 "+c_month+"월 "+now.getDate()+"일 "+now.getHours()+"시";
+$.each(couponInfo_arr, function(index, item){
+	console.log("이거 확인" +item.isSubscription);
+	if(item.isSubscription=='true'){
+		output+=`
+		<tr>
+			<td>
+			<input type="checkbox">
+		</td>
+		<td class="pCoupon_info">
+			<div class="title">에코케어</div>
+			<div class="mid_title">쓰레기 회수 이용권</div>
+			<div class="ann">* 음식물 쓰레기 10회 + 일반 쓰레기 10회 (총 20회)</div>
+		</td> 
+		<td >
+			3회
+		</td>
+		<td>
+			<div class="pickup_date"> \${str} </div>
+		</td>
+		<td>
+			<button class="btn_blue" value="\${item.subscriptionId}" onclick="request_btn('\${item.subscriptionId}')">신청하기</button>
+		</td>
+		</tr>`
+	}else if(item.isSubscription=='false'){
+		output+=`
+		<tr>
+			<td>
+			<input type="checkbox">
+		</td>
+		<td class="pCoupon_info">
+			<div class="title">5회 이용권</div>
+			<div class="mid_title">쓰레기 회수 이용권</div>
+			<div class="ann">* 음식물 쓰레기 5회 또는 일반 쓰레기 5회 (총 5회)</div>
+		</td>
+		<td class="left_coupon">
+			3회
+		</td>
+		<td>
+			<div class="pickup_date"> \${str} </div>
+		</td>
+		<td>
+		<button class="btn_blue" value="\${item.subscriptionId}" onclick="request_btn('\${item.subscriptionId}')">신청하기</button>
+		</td>
+		</tr>`
+	} else {
+		output+=`
+		<tr>
+			<td>
+			</td>
+			<td class="pCoupon_info">
+				<div class="title">* 이용 중인 회수권이 없습니다. *</div>
+			</td>
+			<td>
+			</td>
+			<td>
+			</td>
+			<td>
+			</td>
+			</tr>`
+	}
+})
+$("#coupon_info_area").html(output);
+
+//request_btn
+
+
 
 </script>
