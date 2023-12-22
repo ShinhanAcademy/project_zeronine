@@ -14,6 +14,7 @@
 	select "subscriptionId","customerId","isSubscription", "remainingCouponCount"
 		from public."customerPickCoupon" 
 		where "customerId"='a6a48528-9215-4fb9-9dd0-5bb174103277' and "remainingCouponCount" > 0
+		order by "subscriptionId"
 	</select>
 	
 	<update id="updateCouponCnt" parameterType="String">
