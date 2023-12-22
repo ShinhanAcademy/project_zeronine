@@ -91,7 +91,7 @@ p.content {
     gap: 10px;
     margin-top: 30px;
 }
-.participate_btn{
+.participate_btn, .participate_free_btn{
 	font-size: 25px;
 	color: white;
 	border-radius: 15px;

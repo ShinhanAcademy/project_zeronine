@@ -345,8 +345,8 @@ public class BoardController {
 		Map<String, Object> detail = boardService.selectFastDetail(board_id);
 		model.addAttribute("detail", detail);
 
-		logger.info("controller fast  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
-		logger.info("controller fast  뵒 뀒 씪  궡 슜: {}", detail);
+		//logger.info("controller fast  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
+		//logger.info("controller fast  뵒 뀒 씪  궡 슜: {}", detail);
 		
 		return "board/fastDetailView";
 	}
@@ -355,7 +355,7 @@ public class BoardController {
 	public String selectFreeDetail (@RequestParam("boardId")String board_id, Model model) {
 		Map<String, Object> detailFree = boardService.selectFreeDetail(board_id);
 		model.addAttribute("detailFree", detailFree);
-		logger.info(" 씠寃껋  而⑦듃濡ㅻ윭 뿉 꽌 李띾뒗 detailFree : {}", detailFree);
+		//logger.info(" 씠寃껋  而⑦듃濡ㅻ윭 뿉 꽌 李띾뒗 detailFree : {}", detailFree);
 		return "board/freeDetailView";
 	}
 
@@ -364,8 +364,8 @@ public class BoardController {
 		Map<String, Object> detail = boardService.selectOneDetail(board_id);
 		model.addAttribute("detail", detail);
 
-		logger.info("controller one  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
-		logger.info("controller one  뵒 뀒 씪  궡 슜: {}", detail);
+		//logger.info("controller one  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
+		//logger.info("controller one  뵒 뀒 씪  궡 슜: {}", detail);
 
 		return "board/oneDetailView";
 	}

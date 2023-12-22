@@ -386,6 +386,18 @@
 			#{result_code, mode=OUT, jdbcType=INTEGER} :: INTEGER
 		)
 	</select>
+	<select id="orderFreeProduct" parameterType="hashMap" resultType="integer" statementType="CALLABLE">
+		CALL participate_free_delivery_board(
+			#{customer_id, mode=IN, jdbcType=VARCHAR} :: UUID,
+			#{board_id, mode=IN, jdbcType=VARCHAR} :: UUID,
+	        ARRAY[
+	            <foreach index="key" item="product" collection="products" separator=",">
+	                ROW('${key}', #{product, jdbcType=INTEGER})
+	            </foreach>
+	        ]::product_t[],
+	        #{result_code, mode=OUT, jdbcType=INTEGER} :: INTEGER
+		)
+	</select>	
 	<select id="orderInfo" resultType="map" parameterType="map">
 		select distinct	c."customerName", p.price, p."pCount", sp."pickCount", b."title"
 		from product p left join "selectProduct" sp on (p."productId" = sp."productId")
@@ -393,6 +405,20 @@
 		left join customer c on (sp."customerId"=c."customerId")
 		where c."customerId" = cast(#{customerId} as UUID)
 		and sp."boardId" = cast(#{boardId} as UUID)
+	</select>
+	<select id="freeOrderInfo" resultType="map" parameterType="map">
+		select distinct c."customerName", b."title"
+		from board b left join "boardCart" bc on (b."boardId"=bc."boardId")
+		left join customer c on (bc."customerId"=c."customerId")
+		where bc."boardId" = cast(#{boardId} as UUID)
+		and bc."customerId" = cast(#{customerId} as UUID)
+	</select>
+	<select id="freeTotalPrice" resultType="int" parameterType="map">
+		select sum(p.price*bc."purchaseCount") as totalSum
+		from "boardCart" bc
+		left join product p on bc."productId"=p."productId"
+		where bc."boardId" = cast(#{boardId} as UUID)
+		and bc."customerId" = cast(#{customerId} as UUID)
 	</select>
 	
 	<select id="fastBoardProduct" resultType="map" parameterType="String">

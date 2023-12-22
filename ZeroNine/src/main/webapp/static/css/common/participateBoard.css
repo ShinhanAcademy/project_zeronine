@@ -163,9 +163,11 @@
 }
 
 .con_tit {
+	margin-top: 80px;
+	text-align: center;
     color: #555;
     padding-bottom: 15px;
-    font-size: 20px;
+    font-size: 30px;
     line-height: 1;
 }
 

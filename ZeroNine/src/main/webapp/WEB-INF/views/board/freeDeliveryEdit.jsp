@@ -10,20 +10,20 @@
 			<li class="due_date_title">날짜 및 시간</li>
 			<li class="due_date_cf"><span> * 날짜는 최대 7일 후까시 설정 가능합니다.
 					<br> * 게재 날짜는 당일을 포함합니다.
-			</span> <span class="due_date_ex">(ex.1월 1일 작성 시, 7일 후 → 1월 7일) </span></li>
+			</span> <span class="due_date_ex">(ex.1월 1일 작성 시, 6일 후 → 1월 7일) </span></li>
 			<li class="due_date_cf"><span> * 몇 시간 동안 기다릴지 입력해주세요.</span></li>
 		</ul>
 
 		<div class="date_input">
 			<div>
 				<select class="date">
+					<option value="0">당일</option>
 					<option value="1440">1일</option>
 					<option value="2880">2일</option>
 					<option value="4320">3일</option>
 					<option value="5760">4일</option>
 					<option value="7200">5일</option>
 					<option value="8640">6일</option>
-					<option value="10080">7일</option>
 				</select>
 			</div>
 			<div class="time">
