@@ -22,8 +22,8 @@ public class BoardService_sg {
 	}
 
 	public int writeFreeBoard(String authorId, String title, String content, String postingMinutes,
-			Map<String, Integer> products) {
-		return boardDAO_sg.writeFreeBoard(authorId, title, content, postingMinutes, products);
+			Map<String, Integer> productList) {
+		return boardDAO_sg.writeFreeBoard(authorId, title, content, postingMinutes, productList);
 		
 	}
 		

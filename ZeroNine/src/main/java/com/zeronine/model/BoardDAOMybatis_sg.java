@@ -47,13 +47,13 @@ public class BoardDAOMybatis_sg {
 	}
 
 	public int writeFreeBoard(String authorId, String title, String content, String postingMinutes,
-			Map<String, Integer> products) {
+			Map<String, Integer> productList) {
 		Map<Object, Object> map = new HashMap<>();
 		map.put("authorId", authorId);
 		map.put("title", title);
 		map.put("content", content);
 		map.put("postingMinutes", postingMinutes);
-		map.put("products", products);
+		map.put("products", productList);
 		map.put("is_write_success", 0);
 		logger.info(map.toString());
 		int ret = sqlSession.insert(NAMESPACE + "insertFreeBoard", map);
