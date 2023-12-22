@@ -302,7 +302,7 @@ public class BoardController {
 	    return filename.substring(filename.lastIndexOf("."));
 	}
 
-	@RequestMapping("/completeedit.do")
+	@PostMapping("/completeedit.do")
 	//@PostMapping("/completeedit.do")
 	//@ResponseBody
 	public String compliteEdit(HttpSession session, Model model ) throws IOException {
