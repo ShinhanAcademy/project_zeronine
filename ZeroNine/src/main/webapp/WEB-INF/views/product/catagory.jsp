@@ -107,11 +107,6 @@
 
 <script>
 
-		 
-				
-	 
-	
-	
 	 var str = "${likedcid}";
 	 var likedcidArr = [] ; 
 	 //str.split(/!|@|~|,| |Z/);

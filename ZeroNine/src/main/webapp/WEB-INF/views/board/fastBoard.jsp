@@ -23,7 +23,7 @@
 				<li>
 					<div class="search_area">
 						<input name="q" placeholder="상품명, 제조사 검색" id="search">
-						<button type="button" onclick="check()" ></button>
+						<button type="button" onclick="check()"></button>
 					</div>
 				</li>
 			</ul>
@@ -40,19 +40,20 @@
 					</select>
 				</div>
 				<!-- 아이디 확인용 hidden  -->
-				<div id=email data-email="{email}" hidden="hidden"> ${email}</div> 
-				
+				<div id=email data-email="{email}" hidden="hidden">${email}</div>
+
 				<div class="edit">
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px;"
 						<%-- href="${path}/board/boardedit.do?boardType=fastBoard" --%>
-						data-value="fastBoard" onclick="writeBoard()">글쓰기</a>
+						data-value="fastBoard"
+						onclick="writeBoard()">글쓰기</a>
 					</span>
 				</div>
 			</div>
 		</div>
-		<div class="List" >
+		<div class="List">
 			<div id="allList"></div>
 			<div id="modal"></div>
 		</div>
@@ -61,7 +62,7 @@
 
 	<%@include file="../common/footer.jsp"%>
 	<script src="../js/detailView.js"></script>
-	
+
 	<script type="text/javascript">
 
 
@@ -78,13 +79,13 @@
 	
 	
 	</script>
-	
 
-<script>
+
+	<script>
 var type_of_filter;
 var infoFb_json;
 var output = "";
-
+var path = "${path}";
 // DOM이 준비되면 필터링 함수 호출
 $(filterType);
 $(searchBoard);
@@ -110,8 +111,60 @@ $(searchBoard);
         var successId = success_info_array[i].boardId;
         successId_array.push(successId);
     }
-
-
+    var str = "${likeBlist}";
+	 var likeBlistArr = [] ; 
+	 //str.split(/!|@|~|,| |Z/);
+	 likeBlistArr = str.split(/,|\[|\]| /);
+	 console.log(likeBlistArr);
+function handleLikeButtonClick(index, boardId) {
+	console.log(boardId);
+    var currentImagePath = $("#btn"+index).find("img.board_like").attr("src");
+    var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+        path+"/images/board/red_heart.png" :
+        path+"/images/board/heart.png";
+    $("#btn"+index).find("img.board_like").attr("src", newImagePath);
+	        var likeButtonId = "like" + index;
+	       
+	    
+	    	//클래스가 heart liked => AJAX DELTE 호출
+	        var isRedHeart = likeBlistArr.indexOf(boardId);
+	    	
+			console.log(isRedHeart);
+			if(isRedHeart>=0) {
+				$.ajax({
+					url : "/board/deletelikedboard.do",
+					type: "POST",
+					data : {"boardId" :boardId},
+					success : function(){
+						likeBlistArr = likeBlistArr.filter(item => item !== boardId);
+					},
+					error : function(){
+						alert("에러입니다.");
+					}
+					});
+					 
+				}else{
+	
+				 $.ajax({
+						url : "/board/fastboardlike.do",
+						type: "POST",
+						data : {"boardId" :boardId},
+						success : function(){
+							likeBlistArr.push(boardId);
+						},
+						error : function(){
+							alert("에러입니다.");
+						}
+						});
+				}
+					};
+	$(".like").click(function (){
+        var currentImagePath = $("#btn"+index).find("img.board_like").attr("src");
+        var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+            path+"/images/board/red_heart.png" :
+            path+"/images/board/heart.png";
+        $("#btn"+index).find("img.board_like").attr("src", newImagePath);
+    });
 function show(jsondata) {
 	console.log(jsondata.length);
 	var output = "";
@@ -136,7 +189,7 @@ function show(jsondata) {
         if (successId_array.includes(item.boardId)) {
         	dealsuccess = true;
         }
-
+    
         // HTML 생성
         if(dealfail){
         	output+=`<div id="list" class="donecss">`
@@ -168,8 +221,11 @@ function show(jsondata) {
 			</div>
 			<ul>
 				<li class="detail_view">
-					<button class="like" type="button">
-						<img class="like" src="${path}/images/board/heart.png">
+					<button class="like" id="btn\${index}" type="button" value="\${item.boardId}" onclick="handleLikeButtonClick(\${index}, \'\${item.boardId}\')">
+					  \${likeBlistArr.includes(item.boardId) ? 
+					    `<img class="board_like" id="board_like" src="${path}/images/board/red_heart.png">` : 
+					    `<img class="board_like" id="board_like" src="${path}/images/board/heart.png">`
+					  }
 					</button>`
 					if(dealfail){
 						output+=`<button id="fast_detail_btn" class="detail_btn" disabled="disabled">보기</button>`
@@ -185,7 +241,7 @@ function show(jsondata) {
            </div>
         </div>`;
     });
-
+  
     // 결과를 HTML에 삽입
     //console.log(output);
     $("#allList").html(output);
@@ -251,6 +307,8 @@ function f_btn(boardId) {
     });
 }
 
+
+
 // 검색 관련 함수
 var keyword ;
 
@@ -289,7 +347,7 @@ function filterKeyword(infoFb_json, keyword) {
 }
 
 </script>
-	
+
 
 </body>
 </html>
