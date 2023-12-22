@@ -179,6 +179,18 @@ public class BoardService_yn {
 		return boardDAO.fastBoardProduct(boardId);
 	}
 
+	public int orderFreeProduct(String customerId, String boardId, Map<String, Integer> productList) {
+		return boardDAO.orderFreeProduct(customerId,boardId,productList);
+	}
+
+	public Map<String, Object> freeOrderInfo(String customerId, String boardId) {
+		return boardDAO.freeOrderInfo(customerId, boardId);
+	}
+
+	public int freeTotalPrice(String customerId, String boardId) {
+		return boardDAO.freeTotalPrice(customerId, boardId);
+	}
+
 
 	
 
