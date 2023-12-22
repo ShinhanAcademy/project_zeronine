@@ -463,7 +463,7 @@ $.each(couponInfo_arr, function(index, item){
 			</td>
 			<td>
 			</td>
-			</tr>`
+		</tr>`
 	}
 })
 $("#coupon_info_area").html(output);
@@ -473,11 +473,12 @@ function request_btn(subscriptionId) {
 	  $.ajax({
 	    type: "POST",
 	    url: "/myPage/requestPickup.do",
-	    data: { subscriptionId: subscriptionId },
-	    success: {
+	    data: {subscriptionId: subscriptionId},
+	    success:function(){
 	    	alert("성공! 회수 요청이 정상적으로 접수되었습니다!");
-	    	location.href='${path}/myPage/ecoCard.do';
+			location.reload();
 	    },
+	   
 	    error: function (error) {
 	      alert("다시 시도해주세요.");
 	    }
