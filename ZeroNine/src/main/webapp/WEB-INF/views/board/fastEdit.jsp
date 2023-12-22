@@ -19,13 +19,13 @@
 		<div class="date_input">
 			<div>
 				<select class="date">
+					<option value="0"> 당일 </option>
 					<option value="1440">1일</option>
 					<option value="2880">2일</option>
 					<option value="4320">3일</option>
 					<option value="5760">4일</option>
 					<option value="7200">5일</option>
 					<option value="8640">6일</option>
-					<option value="10080">7일</option>
 				</select>
 			</div>
 			<div class="time">
