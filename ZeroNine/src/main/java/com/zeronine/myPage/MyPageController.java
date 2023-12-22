@@ -135,7 +135,7 @@ public class MyPageController {
 	public void ecoCare(HttpSession session, Model model, String customerId) {
 		String customer_id = (String)session.getAttribute("customerId");
 		List<Map<String, Object>> ecodashinfo = mypageservice.selectEcoInfoAll(customer_id);
-		List<Map<String, Object>> couponCtn = mypageservice.selectCouponCtn(customer_id);
+		List<Map<String, Object>> couponCtn = mypageservice.selectCouponCtn(/* customer_id */);
 		
 		JSONArray ecoarray = new JSONArray();
 		for(Map<String, Object> map : ecodashinfo) {
