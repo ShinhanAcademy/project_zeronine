@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	<div class="order_body">
 		<div class="zero_container order_bodypart">
 			<div class="order_bodypart_text">
@@ -178,12 +179,12 @@
 
 	<script>
 		var path = "${path}";
-		
+		/*
 		$(".gobtn").click(function() {
 
 			$.ajax({
 				url : path + "/board/completeedit.do",
-				type : "GET",
+				type : "POST",
 				success : function(response) {
 					$("#edit").html(response);
 				},
@@ -192,7 +193,57 @@
 				}
 			});
 		})
-
+		*/
+		$(".gobtn").click(function() {
+			var IMP = window.IMP; 
+			IMP.init("imp31265537"); //imp31265537
+			
+			var today = new Date();   
+			var hours = today.getHours(); // 시
+			var minutes = today.getMinutes();  // 분
+			var seconds = today.getSeconds();  // 초
+			var milliseconds = today.getMilliseconds();
+			var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+			//var price = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
+			//console.log(price);
+			IMP.request_pay({
+		        pg : 'html5_inicis',
+		        pay_method : 'card',
+		        merchant_uid: "IMP"+makeMerchantUid, 
+		        name : '무료배송 결제',
+		        //customerId : id,
+		        amount : 2 //나중에 실제 값으로 바꿔야 합니다...
+		    }, function (rsp) { // callback
+		    	/* var obj = {
+						"productId":$("#hidden_productId").val(),
+						"count":$("#hidden_count").val(),	
+				} */
+				
+				/*
+				if(rsp.success) {
+					alert("결제 성공했습니다!");
+					location.href = path + "/board/completeedit.do";
+				}
+		    	*/
+		    	
+		    	if(rsp.success) {
+		    		$.ajax({
+						url : path + "/board/completeedit.do",
+						//data : obj,
+						type : "POST",//GET
+						success : function(response) {
+							$('#edit').html(response);
+						},
+						error : function(response) {
+							console.log("ERROR RESPONSE==>", response);
+							alert("ERROR!");
+						}
+					});	
+		    	}
+		    	
+				
+		    });
+		})
 		$(".agreebtn").click(
 						function() {
 							var currentImagePath = $(this).find(
