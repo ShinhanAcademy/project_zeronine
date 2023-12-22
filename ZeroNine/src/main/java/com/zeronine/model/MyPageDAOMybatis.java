@@ -96,4 +96,8 @@ public class MyPageDAOMybatis {
 		List<Map<String, Object>> couponCtn = sqlSession.selectList(NAMESPACE+"selectCouponCtn", customerId);
 		return couponCtn; 
 	}
+	public int updateCouponCnt (String subscriptionId) {
+		int updateResult = sqlSession.update(NAMESPACE+"updateCouponCnt",subscriptionId);
+		return updateResult;
+	}
 }

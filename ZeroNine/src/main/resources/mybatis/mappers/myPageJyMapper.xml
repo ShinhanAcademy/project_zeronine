@@ -17,4 +17,10 @@
 		where p."customerId"= cast(#{customerId} as UUID) and cpc."remainingCouponCount" > 0
 		group by p."subscriptionId",p."customerId",cpc."subscriptionId", cpc."remainingCouponCount"
 	</select>
+	
+	<update id="updateCouponCnt" parameterType="String">
+	UPDATE public."customerPickCoupon"
+		SET "remainingCouponCount" = "remainingCouponCount" - 1
+		WHERE "subscriptionId" = cast(#{subscriptionId} as UUID)
+	</update>
 </mapper>
