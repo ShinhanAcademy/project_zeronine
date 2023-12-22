@@ -363,9 +363,10 @@ public class BoardController {
 	public String oneboardDetail(@RequestParam("boardId") String board_id, Model model) {
 		Map<String, Object> detail = boardService.selectOneDetail(board_id);
 		model.addAttribute("detail", detail);
+		model.addAttribute("board_id", board_id);
 
-		logger.info("controller one  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
-		logger.info("controller one  뵒 뀒 씪  궡 슜: {}", detail);
+		logger.info("controller one  board_id : {}", board_id);
+		logger.info("controller one  detail: {}", detail);
 
 		return "board/oneDetailView";
 	}

@@ -5,9 +5,15 @@
 <mapper namespace="net.zeronine.mypage">
 	<!-- ecocare dash -->
 	<select id="selectEcoInfoAll" parameterType="String" resultType="map">
-		select p.*, cpc."isSubscription"
+		select p.*, cpc."isSubscription", cpc."remainingCouponCount"
 		from public.pickup as p
 		left join public."customerPickCoupon" as cpc on p."customerId" = cpc."customerId"
-		where p."customerId"= cast(#{boardId} as UUID) and p."pickUpStatus" = 'complete'
+		where p."customerId"= cast(#{customerId} as UUID) and "pickUpStatus"='complete' 
+	</select>
+	<select id="selectCouponCtn" resultType="map">
+	select distinct( p."customerId"),cpc."isSubscription", cpc."remainingCouponCount"
+		from public.pickup as p
+		left join public."customerPickCoupon" as cpc on p."customerId" = cpc."customerId"
+		where p."customerId"= cast(#{customerId} as UUID) and cpc."remainingCouponCount" > 0
 	</select>
 </mapper>

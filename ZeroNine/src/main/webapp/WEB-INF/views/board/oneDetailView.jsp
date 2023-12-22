@@ -44,9 +44,9 @@
 </body>
 <script type="text/javascript">
 $("#joinChat").on("click", function(){
-	const oBoardId = "${boardId}";
+	const oBoardId = "${board_id}";
 	
-	
+	console.log("oBoardId??", oBoardId);
 	if(confirm("채팅에 참여하시겠습니까?")){
 		$.ajax({
 			url : contextPath +"/insertChatInfo.do",
@@ -54,6 +54,7 @@ $("#joinChat").on("click", function(){
 			type : "POST",
 			success : function(result){
 				location.href = "/chat.do";
+				$("#detail_modal_wrap").hide();
 			},
 			error : function(){
 				alert("에러입니다.");
