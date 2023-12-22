@@ -183,8 +183,7 @@ body .chat_container,
 }
 .chat_container .chat_room_list {
     overflow-y: auto;
-    min-height: 284px;
-    max-height: 424px;
+    height: 424px;
     padding-bottom: 15px;
 }
 .chat_container .chat_room_list .date {
