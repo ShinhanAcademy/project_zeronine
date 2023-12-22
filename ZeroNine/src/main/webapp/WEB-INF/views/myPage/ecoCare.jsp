@@ -68,7 +68,6 @@
 										</div>
 										</td>
 										<td class ="img">
-											<%-- <img src="${path}/images/mypage/ecoLevel/lev3.gif"> --%>
 										</td>
 									</tr>
 								</tbody>
@@ -102,45 +101,8 @@
 										<th>신청</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<input type="checkbox">
-										</td>
-										<td class="pCoupon_info">
-											<div class="title">에코케어</div>
-											<div class="mid_title">쓰레기 회수 이용권</div>
-											<div class="ann">* 음식물 쓰레기 10회 + 일반 쓰레기 10회 (총 20회)</div>
-										</td>
-										<td>
-											3회
-										</td>
-										<td>
-											<div class="pickup_date"> 23년 12월 22일 20시 </div>
-										</td>
-										<td>
-											<button class="btn_blue">신청하기</button>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<input type="checkbox">
-										</td>
-										<td class="pCoupon_info">
-											<div class="title">5회 이용권</div>
-											<div class="mid_title">쓰레기 회수 이용권</div>
-											<div class="ann">* 음식물 쓰레기 5회 또는 일반 쓰레기 5회 (총 5회)</div>
-										</td>
-										<td>
-											3회
-										</td>
-										<td>
-											<div class="pickup_date"> 23년 12월 22일 20시 </div>
-										</td>
-										<td>
-											<button class="btn_blue">신청하기</button>
-										</td>
-									</tr>
+								<tbody id="coupon_info_area">
+									
 								</tbody>
 							</table>
 						</div>
@@ -165,7 +127,7 @@
 						</div>
 						<div class="tbl_top_wrap">
 							<div class="total_count">
-								총 <span>2</span>건
+								총 <span>0</span>건
 							</div>
 						</div>
 						<div class="tbl_wrap">
@@ -182,7 +144,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<!-- <tr>
 										<td>일반쓰레기 수거 요청건</td>
 										<td>완료</td>
 										<td>
@@ -209,7 +171,7 @@
 										<td>
 											<button class="btn_blue">상세 보기</button>
 										</td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -247,6 +209,7 @@
 			<!-- //mypage_detail_wrap -->
 		</div>
 		<!-- //mypage_container -->
+		<div id="modal"></div>
 	</div>
 	<!-- //zero_container -->
 	<%@include file="../common/footer.jsp"%>
@@ -277,13 +240,15 @@ console.log(month_1, month_2, month_3);
 var ctn_month = [0,0,0];
 
 for(var i=0; i<ecodashinfo_arr.length; i++){
-	var month = ecodashinfo_arr[i].currentMonth;
-	if(month == month_1){
-		ctn_month[0] ++;	
-	} else if(month == month_2){
-		ctn_month[1] ++;
-	} else if(month == month_3){
-		ctn_month[2] ++;
+	if(ecodashinfo_arr[i].pickUpStatus == 'complete'){
+		var month = ecodashinfo_arr[i].currentMonth;
+		if(month == month_1){
+			ctn_month[0] ++;	
+		} else if(month == month_2){
+			ctn_month[1] ++;
+		} else if(month == month_3){
+			ctn_month[2] ++;
+		}
 	}
 }
 console.log(ctn_month);
@@ -304,19 +269,16 @@ if(month_2ctn<=5){
 //배출 쓰레기 유형
 var waste_arr = [0,0];
 for(var i =0; i<ecodashinfo_arr.length; i++){
-	var waste = ecodashinfo_arr[i].isFoodWaste;
-	if(waste == "true" ){
-		waste_arr[0] ++;
-	} else{
-		waste_arr[1] ++;
+	if(ecodashinfo_arr[i].currentMonth == current_month){
+		var waste = ecodashinfo_arr[i].isFoodWaste;
+		if(waste == "true" ){
+			waste_arr[0] ++;
+		} else{
+			waste_arr[1] ++;
+		}
 	}
 } 
 console.log(waste_arr);
-
-//lable display
-
-
-
 
 //바 차트
 	var now = new Date();
@@ -435,6 +397,93 @@ var myDoughnutChart = new Chart(ctx2, {
 	}
 });
 
+//request pickup
+var couponInfo_arr = JSON.parse('${couponCtn}');
+console.log(couponInfo_arr);
+console.log(now.getHours());
+
+var output = "";
+var c_month = now.getMonth()+1;
+var str = now.getFullYear()+"년 "+c_month+"월 "+now.getDate()+"일 "+now.getHours()+"시";
+$.each(couponInfo_arr, function(index, item){
+	console.log("이거 확인" +item.isSubscription);
+	if(item.isSubscription=='true'){
+		output+=`
+		<tr>
+			<td>
+			<input type="checkbox">
+		</td>
+		<td class="pCoupon_info">
+			<div class="title">에코케어</div>
+			<div class="mid_title">쓰레기 회수 이용권</div>
+			<div class="ann">* 음식물 쓰레기 10회 + 일반 쓰레기 10회 (총 20회)</div>
+		</td> 
+		<td >
+		\${item.remainingCouponCount}회
+		</td>
+		<td>
+			<div class="pickup_date"> \${str} </div>
+		</td>
+		<td>
+			<button class="btn_blue" value="\${item.subscriptionId}" onclick="request_btn('\${item.subscriptionId}')">신청하기</button>
+		</td>
+		</tr>`
+	}else if(item.isSubscription=='false'){
+		output+=`
+		<tr>
+			<td>
+			<input type="checkbox">
+		</td>
+		<td class="pCoupon_info">
+			<div class="title">5회 이용권</div>
+			<div class="mid_title">쓰레기 회수 이용권</div>
+			<div class="ann">* 음식물 쓰레기 5회 또는 일반 쓰레기 5회 (총 5회)</div>
+		</td>
+		<td class="left_coupon">
+			\${item.remainingCouponCount}회
+		</td>
+		<td>
+			<div class="pickup_date"> \${str} </div>
+		</td>
+		<td>
+		<button class="btn_blue" value="\${item.subscriptionId}" onclick="request_btn('\${item.subscriptionId}')">신청하기</button>
+		</td>
+		</tr>`
+	} else {
+		output+=`
+		<tr>
+			<td>
+			</td>
+			<td class="pCoupon_info">
+				<div class="title">* 이용 중인 회수권이 없습니다. *</div>
+			</td>
+			<td>
+			</td>
+			<td>
+			</td>
+			<td>
+			</td>
+		</tr>`
+	}
+})
+$("#coupon_info_area").html(output);
+
+//request_btn
+function request_btn(subscriptionId) {
+	  $.ajax({
+	    type: "POST",
+	    url: "/myPage/requestPickup.do",
+	    data: {subscriptionId: subscriptionId},
+	    success:function(){
+	    	alert("성공! 회수 요청이 정상적으로 접수되었습니다!");
+			location.reload();
+	    },
+	   
+	    error: function (error) {
+	      alert("다시 시도해주세요.");
+	    }
+	  });
+	}
 
 
 </script>

@@ -50,7 +50,7 @@
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px;"
 						<%-- href="${path}/board/boardedit.do?boardType=fastBoard" --%>
-						data-value="fastBoard" onclick="writeBoard()">글쓰기</a>
+						data-value="freeBoard" onclick="writeBoard()">글쓰기</a>
 					</span>
 				</div>
 			</div>
@@ -81,7 +81,7 @@
 var type_of_filter;
 var infoFree_json;
 var output = "";
-
+var path = "${path}";
 // DOM이 준비되면 필터링 함수 호출
 $(filterType);
 $(searchBoard);
@@ -97,7 +97,7 @@ $(searchBoard);
         var failId = fail_info_array[i].boardId;
         failId_array.push(failId);
     }
-    
+    console.log(failId_array);
     //성공 정보 배열 생성
      var success_info = '${success}';
     var success_info_array = JSON.parse(success_info);
@@ -107,7 +107,7 @@ $(searchBoard);
         var successId = success_info_array[i].boardId;
         successId_array.push(successId);
     }
-
+    console.log(failId_array);
     var ratio_arr = [];
 function show(jsondata) {
 	console.log(jsondata.length);
@@ -138,10 +138,15 @@ function show(jsondata) {
         if (successId_array.includes(item.boardId)) {
         	dealsuccess = true;
         }
-
         // HTML 생성
+        if(dealfail){
+        	output+=`<div id="list" class="donecss">`
+        } else if(dealsuccess){
+        	output+=`<div id="list" class="successcss">`
+        } else{
+        	output+= `<div id="list">`
+        }
         output +=  ` 
-        	<div id="list">
 			<div class="pro_info">
 				<ul>
 					<li class="rate_info">
@@ -167,19 +172,23 @@ function show(jsondata) {
 				</div>
 				<ul>
 					<li class="detail_view">
-						<button class="like" type="button">
-							<img class="like" src="${path}/images/board/heart.png">
-						</button>
+					<button class="like" id="btn\${index}" type="button" value="\${item.boardId}" onclick="handleLikeButtonClick(\${index}, \'\${item.boardId}\')">
+					  \${likeBlistArr.includes(item.boardId) ? 
+					    `<img class="board_like" id="board_like" src="${path}/images/board/red_heart.png">` : 
+					    `<img class="board_like" id="board_like" src="${path}/images/board/heart.png">`
+					  }
+					</button>
 						<button id="free_detail_btn" class="detail_btn" value ="\${item.boardId}" onclick="O_btn('\${item.boardId}')">보기</button>
 					</li>
 				</ul>
 			</div>
 
-		</div>
-
-	</div>`;
+		</div>`;
 	 
     });
+
+
+
 
     // 결과를 HTML에 삽입
     //console.log(output);
@@ -187,7 +196,58 @@ function show(jsondata) {
     $("#allList").html(output);
     drawChart();
 }
+// 찜하기 기능 구현 시작
+var str = "${likeBlist}";
+var likeBlistArr = [] ; 
+//str.split(/!|@|~|,| |Z/);
+likeBlistArr = str.split(/,|\[|\]| /);
+console.log(likeBlistArr);
+function handleLikeButtonClick(index, boardId) {
+console.log(boardId);
+var currentImagePath = $("#btn"+index).find("img.board_like").attr("src");
+var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+   path+"/images/board/red_heart.png" :
+   path+"/images/board/heart.png";
+$("#btn"+index).find("img.board_like").attr("src", newImagePath);
+       var likeButtonId = "like" + index;
+      
+   
+   	//클래스가 heart liked => AJAX DELTE 호출
+       var isRedHeart = likeBlistArr.indexOf(boardId);
+   	
+		console.log(isRedHeart);
+		if(isRedHeart>=0) {
+			$.ajax({
+				url : "/board/deletelikedboard.do",
+				type: "POST",
+				data : {"boardId" :boardId},
+				success : function(){
+					likeBlistArr = likeBlistArr.filter(item => item !== boardId);
+				},
+				error : function(){
+					alert("에러입니다.");
+				}
+				});
+				 
+			}else{
 
+			 $.ajax({
+					url : "/board/fastboardlike.do",
+					type: "POST",
+					data : {"boardId" :boardId},
+					success : function(){
+						likeBlistArr.push(boardId);
+					},
+					error : function(){
+						alert("에러입니다.");
+					}
+					});
+			}
+			
+
+
+};
+// 찜하기 기능 구현 끝
 function filterType() {
     // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;

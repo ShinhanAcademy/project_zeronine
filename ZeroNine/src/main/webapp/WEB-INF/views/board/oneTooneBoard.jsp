@@ -17,7 +17,7 @@
 <body>
 	<div class="banner zn_center">
 
-		<div style="width: 1440px; padding:20px 0px">
+		<div style="width: 1440px; padding: 20px 0px;">
 			<img src="${path}/images/board/banner3.png">
 		</div>
 
@@ -134,9 +134,6 @@ function show(jsondata) {
         </div>
         <ul>
             <li class="detail_view">
-                <button class="like" type="button">
-                    <img class="like" src="${path}/images/board/heart.png">
-                    </button>
                     <button id="one_detail_btn" class="detail_btn" value="\${item.oBoardId}" onclick="o_btn('\${item.oBoardId}')" >보기</button>
 					</li>
         </ul>
@@ -202,6 +199,7 @@ function o_btn(boardId) {
         url: "/board/oneboardDetail.do",
         data: { boardId: boardId },
         success: function(response) {
+            console.log(response);
             $("#modal").html(response);
             $("#detail_modal_wrap").css("display", "flex");
             esc_btn();

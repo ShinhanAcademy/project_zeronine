@@ -128,6 +128,7 @@ html, body {
 	color: #0F82FF;
 }
 .zn_header .bot .gnb_2depth {
+	display: none;
 	position: absolute;
 	top: 100%;
 	left: 0;

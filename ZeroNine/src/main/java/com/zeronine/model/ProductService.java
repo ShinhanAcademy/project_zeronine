@@ -33,25 +33,17 @@ public class ProductService {
 		List<ProductVO> plist = productDAO.searchAll(paginateParam);
 	
 
-
 		return  plist;
 	
 	}
 
 	// 하단 페이징한 데이터
 	public PagingVO getPages(int page, int selectedValue, String inputValue, String buttonValue) {
-		int pageStartNum = (page - 1) * pageLimit;
 		Map<String, Object> paginateParam = new HashMap<>();
-		paginateParam.put("start", pageStartNum);
-		paginateParam.put("limit", pageLimit);
 		paginateParam.put("inputValue", inputValue);
 		paginateParam.put("buttonValue", buttonValue);
-		String paramStr = buttonValue;
-		System.out.println("paramStr"+paramStr);
-		if (buttonValue.equals("0") || buttonValue==null) {
-			paramStr = "%"; // '1', 2 ,3, 4
-		}
-
+		
+		
 		int countProducts = productDAO.countProduct(paginateParam);
 
 		int maxPageNumber = (int) (Math.ceil((double) countProducts / pageLimit));
@@ -65,8 +57,9 @@ public class ProductService {
 		PagingVO paramsPage = new PagingVO();
 		paramsPage.setEndPageNumber(endPageNumber);
 		paramsPage.setMaxPageNumber(maxPageNumber);
-		paramsPage.setPageNumber(endPageNumber);
+		paramsPage.setPageNumber(page);
 		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
 		return paramsPage;
 
 	}
