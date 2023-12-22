@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- date format lib --%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <%-- functions lib --%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<script defer src="${path}/js/myPage/subPage/likeProductDetail.js"></script>
 <!-- product_list -->
 <div class="product_list">
 	<c:forEach items="${likeProduct}" var="item">
@@ -20,7 +21,7 @@
 							</c:otherwise>
 						</c:choose>
 					</a>
-					<button class="btn_like">like</button>
+					<button class="btn_like" data-custId="${customerId}" data-prodId="${item.productId}">like</button>
 				</div>
 				<div>
 					<div class="product_brand">${item.brand}</div>
@@ -32,178 +33,6 @@
 			</div>
 		</div>
 	</c:forEach>
-	<%-- <div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_08.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div>
-	<div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_01.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div>
-	<div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_01.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div>
-	<div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_02.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div>
-	<div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_02.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div>
-	<div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_02.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div>
-	<div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_08.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div>
-	<div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_08.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div>
-	<div class="like_item">
-		<div class="item_inner">
-			<div class="img_wrap">
-				<a href="javascript:void(0)"> <img
-					src="${path}/images/mypage/img_product_08.png" alt="product image" />
-				</a>
-				<button class="btn_like">like</button>
-			</div>
-			<div>
-				<div class="product_brand">엑스투</div>
-				<div class="product_name">
-					<a href="javascript:void(0)">신세계백화점 TRADITION(앤트레디션) 세타고 Setago
-						JH27 Maroon Grape신세계백화점 TRADITION(앤트레디션) 세타고 Setago JH27 Maroon
-						Grape</a>
-				</div>
-				<div class="price">200,000원</div>
-			</div>
-		</div>
-	</div> --%>
-
 </div>
 <!-- //product_list -->
 <!-- pagination -->

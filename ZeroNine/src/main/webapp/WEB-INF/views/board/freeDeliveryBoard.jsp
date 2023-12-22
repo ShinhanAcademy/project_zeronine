@@ -97,7 +97,7 @@ $(searchBoard);
         var failId = fail_info_array[i].boardId;
         failId_array.push(failId);
     }
-    
+    console.log(failId_array);
     //성공 정보 배열 생성
      var success_info = '${success}';
     var success_info_array = JSON.parse(success_info);
@@ -107,7 +107,7 @@ $(searchBoard);
         var successId = success_info_array[i].boardId;
         successId_array.push(successId);
     }
-
+    console.log(failId_array);
     var ratio_arr = [];
 function show(jsondata) {
 	console.log(jsondata.length);
@@ -139,6 +139,13 @@ function show(jsondata) {
         	dealsuccess = true;
         }
         // HTML 생성
+        if(dealfail){
+        	output+=`<div id="list" class="donecss">`
+        } else if(dealsuccess){
+        	output+=`<div id="list" class="successcss">`
+        } else{
+        	output+= `<div id="list">`
+        }
         output +=  ` 
         	<div id="list">
 			<div class="pro_info">
@@ -182,6 +189,9 @@ function show(jsondata) {
 	</div>`;
 	 
     });
+
+
+
 
     // 결과를 HTML에 삽입
     //console.log(output);

@@ -135,6 +135,7 @@ public class MyPageController {
 	public void ecoCare(HttpSession session, Model model, String customerId) {
 		String customer_id = (String)session.getAttribute("customerId");
 		List<Map<String, Object>> ecodashinfo = mypageservice.selectEcoInfoAll(customer_id);
+		List<Map<String, Object>> couponCtn = mypageservice.selectCouponCtn(customer_id);
 		
 		JSONArray ecoarray = new JSONArray();
 		for(Map<String, Object> map : ecodashinfo) {
@@ -145,9 +146,21 @@ public class MyPageController {
 				json.put(key, value);
 			} ecoarray.add(json);
 		}
+		
+		JSONArray couponarr = new JSONArray();
+		for(Map<String, Object> cmap : couponCtn) {
+			JSONObject cjson = new JSONObject();
+			for(Map.Entry<String, Object> entry : cmap.entrySet()) {
+				String key = (String)entry.getKey();
+				String value = (String)entry.getValue().toString();
+				cjson.put(key, value);
+			} couponarr.add(cjson);
+		}
 		model.addAttribute("ecodashinfo",ecoarray);
+		model.addAttribute("couponCtn", couponarr);
 		logger.info("이것은 컨트롤러에서 보여주는 id 정보 :{}",customer_id );
 		logger.info("이것은 컨트롤러에서 보여주는 정보 :{}",ecoarray);
+		logger.info("이것은 컨트롤러에서 보여주는 쿠폰 정보 :{}", couponarr);
 	}
 	
 	@GetMapping("/createdBoard.do")

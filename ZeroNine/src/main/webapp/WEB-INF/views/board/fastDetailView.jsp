@@ -52,6 +52,7 @@
 var boardId = "${detail.boardId}";
 $(".join_btn").click(function(){
 	location.href = "${path}/common/participateBoard.do?boardId=" + boardId;
+	$("#detail_modal_wrap").hide();
 });
 
 </script>
