@@ -8,7 +8,7 @@
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
 <link rel="stylesheet" href="${path}/css/product/product.css" />
-
+<link rel="stylesheet" href="${path}/css/modal/alreadyIncartModal.css">
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -91,7 +91,7 @@
 		</div>
 
 	</div>
-
+<div id="modal"></div>
 
 	<%@include file="../common/footer.jsp"%>
 <script>

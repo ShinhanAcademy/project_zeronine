@@ -110,29 +110,6 @@
 				<!-- twinbox -->
 			</div>
 		
-
-			<div class="buy_box">
-				<div class="buy_box_top">
-					<p class="buy_boxtext">주문자 정보</p>
-				</div>
-				<div class="buy_bx">
-					<div class="buy_btn">
-						<img class="img1" src="${path}/images/sangpumpage/Group 80.png">
-						<img class="img2"
-							src="${path}/images/sangpumpage/fillcheckbox.png">
-					</div>
-					<div class="buy_btn">
-						<img class="img1" src="${path}/images/sangpumpage/Group 81.png">
-						<img class="img2" src="${path}/images/sangpumpage/checkbox.png">
-					</div>
-					<div class="buy_btn">
-						<img class="img1" src="${path}/images/sangpumpage/Group 82.png">
-						<img class="img2" src="${path}/images/sangpumpage/checkbox.png">
-					</div>
-				</div>
-			</div>
-
-
 			<div class="last_area">
 				<div class="last_area1">
 					<div class="buy_box_top">
