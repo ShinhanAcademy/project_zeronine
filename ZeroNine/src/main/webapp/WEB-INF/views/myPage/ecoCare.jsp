@@ -127,7 +127,7 @@
 						</div>
 						<div class="tbl_top_wrap">
 							<div class="total_count">
-								총 <span>2</span>건
+								총 <span>0</span>건
 							</div>
 						</div>
 						<div class="tbl_wrap">
@@ -144,7 +144,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<!-- <tr>
 										<td>일반쓰레기 수거 요청건</td>
 										<td>완료</td>
 										<td>
@@ -171,7 +171,7 @@
 										<td>
 											<button class="btn_blue">상세 보기</button>
 										</td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -209,6 +209,7 @@
 			<!-- //mypage_detail_wrap -->
 		</div>
 		<!-- //mypage_container -->
+		<div id="modal"></div>
 	</div>
 	<!-- //zero_container -->
 	<%@include file="../common/footer.jsp"%>
@@ -418,7 +419,7 @@ $.each(couponInfo_arr, function(index, item){
 			<div class="ann">* 음식물 쓰레기 10회 + 일반 쓰레기 10회 (총 20회)</div>
 		</td> 
 		<td >
-			3회
+		\${item.remainingCouponCount}회
 		</td>
 		<td>
 			<div class="pickup_date"> \${str} </div>
@@ -439,7 +440,7 @@ $.each(couponInfo_arr, function(index, item){
 			<div class="ann">* 음식물 쓰레기 5회 또는 일반 쓰레기 5회 (총 5회)</div>
 		</td>
 		<td class="left_coupon">
-			3회
+			\${item.remainingCouponCount}회
 		</td>
 		<td>
 			<div class="pickup_date"> \${str} </div>
@@ -468,7 +469,20 @@ $.each(couponInfo_arr, function(index, item){
 $("#coupon_info_area").html(output);
 
 //request_btn
-
+function request_btn(subscriptionId) {
+	  $.ajax({
+	    type: "POST",
+	    url: "/myPage/requestPickup.do",
+	    data: { subscriptionId: subscriptionId },
+	    success: {
+	    	alert("성공! 회수 요청이 정상적으로 접수되었습니다!");
+	    	location.href='${path}/myPage/ecoCard.do';
+	    },
+	    error: function (error) {
+	      alert("다시 시도해주세요.");
+	    }
+	  });
+	}
 
 
 </script>
