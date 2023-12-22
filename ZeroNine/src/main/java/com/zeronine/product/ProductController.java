@@ -176,7 +176,7 @@ public class ProductController {
 	}
 	@PostMapping("/alreadyInCartModal.do")
 	public String alreadyInCartModal() {
-		return "product/alreadyInCartModal";
+		return "common/alreadyInCartModal";
 	}
 	@PostMapping("/goProductDCart.do")
 	public ResponseEntity<String> goProductDCart(String productid, int pcount, HttpSession session, Model model) {

@@ -17,6 +17,7 @@
 <script>
 $("#modal_btn").click(function(){
 	location.href = path + "/myPage/myCart.do";
+	$("#modal").hide();
 })
 function esc_btn() {
   $("#modal").hide();

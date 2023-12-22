@@ -76,17 +76,17 @@ function handlegoCartButtonClick(index, productId) {
 					}
 					}); 
 		}else{
-			$.ajax({
-				url : path +"/product/plusProductCart.do",
-				type: "POST",
-				data : {"productId" :productId},
-				success : function(){
-					alert("또담겼다!");
-				},
-				error : function(){
-					alert("에러입니다.");
-				}
-				}); 
+					$.ajax({
+				  url: path+"/product/alreadyInCartModal.do",
+				  type: "POST",
+				  success: function(response) {
+					 $("#modal").show();
+				    $('#modal').html(response);
+				  },
+				  error: function(error) {
+				    console.error('Error loading modal content:', error);
+				  }
+				});
 		}	
 	 }
 

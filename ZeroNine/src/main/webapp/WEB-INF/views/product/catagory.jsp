@@ -103,56 +103,13 @@
 			
 <script>
 		var path = "${path}";
-		var custid = "${customerid}";
-	    console.log(custid);
 	</script>
 
 <script>
-var custid = "${customerid}";
-console.log(custid);
-	 function handlegoCartButtonClick(index, productId) {
-	     console.log(productId);
-		 function isproductinCart(productId){
-	    	  return cartcheckArray.some(function(item){
-	    		  return item == productId;
-	    	  })
-	      }
 
-	        var likeButtonId = "gocart" + index;
-	   
-		if(productInCart.includes(productId)==false){
-				$.ajax({
-					url : "/product/goProductCart.do",
-					type: "POST",
-					data : {"custid" :custid,"productId" :productId},
-					success : function(){
-						alert("잘담겼다!");
-						
-						if(!productInCart.includes(productId)) {
-							productInCart.push(productId);
-						}
-						cartcheckArray.filter((element) => element !== productId);
-					},
-					error : function(){
-						alert("에러입니다.");
-					}
-					}); 
-		}else{
-			$.ajax({
-				url : "/product/plusProductCart.do",
-				type: "POST",
-				data : {"custid" :custid,"productId" :productId},
-				success : function(){
-					alert("또담겼다!");
-				},
-				error : function(){
-					alert("에러입니다.");
-				}
-				}); 
-		}
-					 
+		 
 				
-	 };
+	 
 	
 	
 	 var str = "${likedcid}";
@@ -163,7 +120,7 @@ console.log(custid);
 	 function handleLikeButtonClick(index, productId) {
 	      
 	        var likeButtonId = "like" + index;
-	        var custid = "${customerid}";
+	       
 	    
 	    	//클래스가 heart liked => AJAX DELTE 호출
 	        var isRedHeart = likedcidArr.indexOf(productId);
@@ -173,7 +130,7 @@ console.log(custid);
 				$.ajax({
 					url : "/product/deleteLikedProduct.do",
 					type: "POST",
-					data : {"custid" :custid,"productId" :productId},
+					data : {"productId" :productId},
 					success : function(){
 						likedcidArr = likedcidArr.filter(item => item !== productId);
 					},
@@ -187,7 +144,7 @@ console.log(custid);
 				 $.ajax({
 						url : "/product/productLike.do",
 						type: "POST",
-						data : {"custid" :custid,"productId" :productId},
+						data : {"productId" :productId},
 						success : function(){
 							likedcidArr.push(productId);
 						},
