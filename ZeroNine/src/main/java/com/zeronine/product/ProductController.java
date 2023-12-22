@@ -168,7 +168,6 @@ public class ProductController {
 		ProductVO product = productService.selectByProductId(productId);
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
-		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("plist", productService.selectByProductId(productId));
 		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 		model.addAttribute("deliverylist4", productService.selectDetailDelivery4());

@@ -95,18 +95,6 @@
 		"likedProduct" where "customerId" = CAST(#{custid} AS UUID) and
 		"productId" =CAST(#{productId} AS UUID)
 	</delete>
-	<select id="selectByPid" parameterType="String"
-		resultType="likedProductVo">
-		select * from "likedProduct" where "productId" =
-		CAST(#{productId} AS UUID)
-	</select>
-	<select id="selectByCid" parameterType="String"
-		resultType="likedProductVo">
-		select * from "likedProduct" where "customerId" =
-		CAST(#{custId} AS UUID)
-	</select>
-
-
 	<select id="selectByCidlist" parameterType="String"
 		resultType="String">
 		select "productId" from "likedProduct" where "customerId" =
