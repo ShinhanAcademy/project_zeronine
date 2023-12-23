@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.zeronine.board">
+
+	<select id="insertOBoard" parameterType="hashMap" resultType="integer" statementType="CALLABLE">
+		CALL write_oboard(
+			#{boardId, mode=IN, jdbcType=VARCHAR} :: UUID,
+			#{authorId, mode=IN, jdbcType=VARCHAR} :: UUID,
+			#{title, mode=IN, jdbcType=VARCHAR},
+			#{content, mode=IN, jdbcType=VARCHAR},
+			#{postingMinutes, mode=IN, jdbcType=VARCHAR} :: INTEGER,
+			#{imgURL, mode=IN, jdbcType=VARCHAR},
+			#{address, mode=IN, jdbcType=VARCHAR},
+			#{addressDetail, mode=IN, jdbcType=VARCHAR},
+			#{is_write_success, mode=OUT, jdbcType=BIT} :: BOOLEAN
+		)
+	</select>
+	
+	<select id="insertFastBoard" parameterType="hashMap" resultType="integer" statementType="CALLABLE">
+		CALL write_fast_board(
+			#{authorId, mode=IN, jdbcType=VARCHAR} :: UUID,
+			#{title, mode=IN, jdbcType=VARCHAR},
+			#{content, mode=IN, jdbcType=VARCHAR},
+			#{postingMinutes, mode=IN, jdbcType=VARCHAR} :: INTEGER,
+			#{productId, mode=IN, jdbcType=VARCHAR} :: UUID,
+			#{pickCount, mode=IN, jdbcType=INTEGER} :: INTEGER,
+			#{is_write_success, mode=OUT, jdbcType=BIT} :: BOOLEAN
+		)
+	</select>
+	
+	<select id="insertFreeBoard" parameterType="hashMap" resultType="integer" statementType="CALLABLE">
+	    CALL write_free_delivery_board(
+	        #{authorId, mode=IN, jdbcType=VARCHAR} :: UUID,
+	        #{title, mode=IN, jdbcType=VARCHAR},
+	        #{content, mode=IN, jdbcType=VARCHAR},
+	        #{postingMinutes, mode=IN, jdbcType=INTEGER} :: INTEGER,
+	        ARRAY[
+	            <foreach index="key" item="product" collection="products" separator=",">
+	                ROW('${key}', #{product, jdbcType=INTEGER})
+	            </foreach>
+	        ]::product_t[],
+	        #{is_write_success, mode=OUT, jdbcType=BIT} :: BOOLEAN
+	    )
+	</select>
+		
+</mapper>
+

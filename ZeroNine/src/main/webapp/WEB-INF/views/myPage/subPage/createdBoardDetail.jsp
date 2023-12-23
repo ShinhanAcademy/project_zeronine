@@ -19,7 +19,7 @@
 						<li><img class="user" src="${path}/images/board/user.png">
 							<span> ${pCount}개 남음 </span></li>
 						<li><img class="card" src="${path}/images/board/card.png">
-							<span>${info.price}원 (개당) </span></li>
+							<span>${info.price}원 <span style="color: gray;">(개당)</span> </span></li>
 						<li><img class="clock" src="${path}/images/board/clock.png">
 							<span>${info.finishTime}</span></li>
 					</ul>
@@ -33,11 +33,14 @@
 			</div>
 		</div>
 	</div>
+	<div id="delete_here"></div>
 </div>
+
+
 <script>
 	var path = "${path}";
 	var participant = "${participant}";
 	var boardId = "${info.boardId}";
-	
+	var isSuccess = "${isSuccess}";
 </script>
 <script src="${path}/js/myPage/cBdetailView.js" type="text/javascript"></script>

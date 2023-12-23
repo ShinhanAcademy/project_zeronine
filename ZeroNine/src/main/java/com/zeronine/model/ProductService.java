@@ -1,72 +1,88 @@
 package com.zeronine.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zeronine.dto.PagingVO;
 import com.zeronine.dto.ProductVO;
-
-
 
 @Service("productService")
 public class ProductService {
 
 	@Autowired
 	ProductDAOMybatis productDAO;
-	
-	public List<ProductVO> selectAll16os(Integer pCount) {
-		return productDAO.selectAll16os(pCount);
-		}
-	public List<ProductVO> selectAll16() {
-		return productDAO.selectAll16();
-		}
-	public List<ProductVO> selectAll() {
-		return productDAO.selectAll();
-		}
 
-	public List<ProductVO> selectBypCategoryId(Integer pCategoryId) {
-		return productDAO.selectBypCategoryId( pCategoryId);
+	int pageLimit = 12;
+	int blockLimit = 5;
+
+	public List<ProductVO> searchAll(int page, int selectedValue, String inputValue, String buttonValue) {
+		// 1페이지당 나오게할 때
+		int pageStartNum = (page - 1) * pageLimit;
+		System.out.println("searchAll"+selectedValue);
+		Map<String, Object> paginateParam = new HashMap<>();
+		paginateParam.put("start", pageStartNum);
+		paginateParam.put("selectedValue", selectedValue);
+		paginateParam.put("inputValue", inputValue);
+		paginateParam.put("buttonValue", buttonValue);
+		System.out.println(paginateParam.toString());
+		List<ProductVO> plist = productDAO.searchAll(paginateParam);
+	
+
+		return  plist;
+	
 	}
-	public List<ProductVO> selectBypCategoryIdall(Integer pCategoryId) {
-		return productDAO.selectBypCategoryIdall( pCategoryId);
+
+	// 하단 페이징한 데이터
+	public PagingVO getPages(int page, int selectedValue, String inputValue, String buttonValue) {
+		Map<String, Object> paginateParam = new HashMap<>();
+		paginateParam.put("inputValue", inputValue);
+		paginateParam.put("buttonValue", buttonValue);
 		
-	}
-	public List<ProductVO> selectBymanyLiked() {
-		return productDAO.selectBymanyLiked();
-	}
-	public List<ProductVO> selectByDelivery() {
-		return productDAO.selectByDelivery();
-	}
-	public List<ProductVO> selectBypriceAsc() {
-		return productDAO.selectBypriceAsc();
-	}
-	public List<ProductVO> selectBypriceDesc() {
-		return productDAO.selectBypriceDesc();
+		
+		int countProducts = productDAO.countProduct(paginateParam);
+
+		int maxPageNumber = (int) (Math.ceil((double) countProducts / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
 	}
 
-	public List<ProductVO> selectByPnameBrand(String q) {
-	
-		return productDAO.selectByPnameBrand(q);
-	}
-	public int countProduct() {
+
+	public int countProduct(Map<String, Object> inputValue) {
 		// TODO Auto-generated method stub
-		Integer cnt = productDAO.countProduct();
-		System.out.println("CountProduct cnt ==>"+cnt);
+		int cnt = productDAO.countProduct(inputValue);
+		System.out.println("CountProduct cnt ==>" + cnt);
 		return cnt;
 	}
+
 	public ProductVO selectByProductId(String productId) {
 		return productDAO.selectByProductId(productId);
 	}
-	public List<ProductVO> selectDetailDelivery4(){
+
+	public List<ProductVO> selectDetailDelivery4() {
 		return productDAO.selectDetailDelivery4();
 	}
-	public List<ProductVO> pcategoryPageCount(int pCount, Integer pCategoryId) {
-		// TODO Auto-generated method stub
-		return productDAO.pcategoryPageCount(pCount,pCategoryId);
-	}
+
 	
+	public ProductVO selectByPricePname(String productId) {
+		return productDAO.selectByPricePname(productId);
+	}
+
 }
-
-
-

@@ -1,8 +1,9 @@
-function draw(max, classname, colorname){
+
+function draw(max, classname, colorname, backgroundColor){
 	   var i=1;
 	    var func1 = setInterval(function(){
 	      if(i<=max){
-	          color1(i,classname,colorname);
+	          color1(i,classname,colorname,backgroundColor);
 	          i++;
 	      } else{
 	        clearInterval(func1);
@@ -10,18 +11,22 @@ function draw(max, classname, colorname){
 	    },10);
 	};
 
-	function color1(i, classname,colorname){
+	function color1(i, classname,colorname, backgroundColor){
 
 	   $(classname).css({
-	        "background":"conic-gradient("+colorname+" 0% "+i+"%, #7390BA "+i+"% 100%)"
+	        "background":"conic-gradient("+colorname+" 0% " + i + "%, " + backgroundColor + " " + i + "% 100%)"
 	   });
 	};
 
 $(".freeBoardDetail").click(function(){
 
 	var boardId = $(this).closest('tr').find('#hiddenBoardId').val();
+	var isSuccess = $(this).closest('tr').find('#hiddenIsSuccess').val();
 
-	var obj = {"boardId" : boardId};
+	var obj = {
+				"boardId" : boardId,
+				"isSuccess" : isSuccess
+				};
 	
 		$.ajax({
 					url : path + "/myPage/subPage/createdFreeBoardDetail.do",
@@ -29,7 +34,10 @@ $(".freeBoardDetail").click(function(){
 					type : "GET",
 					success : function(result) {
 						$("#here").html(result);
-						draw($("#chart").attr("value"), "#chart", '#09244B');
+						var each_ratio = $("#chart").attr("value");
+						var color = $("#chart").attr("value")<35?'#09244B':each_ratio>=35 && each_ratio<70?'#F1C21B':'#F11B1B';
+						var back = $("#chart").attr("value")<35?'#7390BA':each_ratio>=35 && each_ratio<70?'#F9E59E':'#F99E9E';
+						draw($("#chart").attr("value"), "#chart", color, back);
 					},
 					error : function() {
 						alert("에러입니다.");
@@ -46,7 +54,10 @@ $("#freeDelivery").click(function(){
 						$("#hereContents").html(result);
 						
 						$(".pie-chart").each(function(index,item){
-							draw($(this).attr("value"), this, '#09244B');
+							var each_ratio = $(this).attr("value");
+							var color = $(this).attr("value")<35?'#09244B':each_ratio>=35 && each_ratio<70?'#F1C21B':'#F11B1B';
+							var back = $(this).attr("value")<35?'#7390BA':each_ratio>=35 && each_ratio<70?'#F9E59E':'#F99E9E';
+							draw($(this).attr("value"), this, color, back);
 						});
 					
 					},
@@ -73,8 +84,12 @@ $("#fastDelivery").click(function(){
 $(".boardDetail").click(function(){
 
 	var boardId = $(this).closest('tr').find('#hiddenBoardId').val();
+	var isSuccess = $(this).closest('tr').find('#hiddenIsSuccess').val();
 
-	var obj = {"boardId" : boardId};
+	var obj = {
+				"boardId" : boardId,
+				"isSuccess" : isSuccess	
+			  };
 	
 		$.ajax({
 					url : path + "/myPage/subPage/createdBoardDetail.do",

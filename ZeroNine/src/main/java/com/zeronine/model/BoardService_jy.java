@@ -6,6 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zeronine.dto.DealFailRefundVO;
+import com.zeronine.dto.DealSuccessBoardVO;
+
 @Service("boardService_jy")
 public class BoardService_jy {
 	
@@ -25,6 +28,31 @@ public class BoardService_jy {
 		return detail;
 	}
 	
+	public List<DealFailRefundVO> selectDealFailBoard(){
+		List<DealFailRefundVO> fail =  boardDAO_jy.selectDealFailBoard();
+		System.out.println("이건 서비스에서 찍는 fail 정보 : " + fail);
+		return fail;
+	}
+	
+	public List<DealSuccessBoardVO> selectDealSuccessBoard(){
+		List<DealSuccessBoardVO> success =  boardDAO_jy.selectDealSuccessBoard();
+		System.out.println("이건 서비스에서 찍는 success 정보 : " + success);
+		return success;
+	}
+	
+	//free
+	public List<Map<String, Object>> selectFreeDeliveryBoard(){
+		List<Map<String, Object>> infoFree = boardDAO_jy.selectFreeDeliveryBoard();
+		System.out.println("이건 서비스에서 찍는 infoFree 정보 : " + infoFree);
+		return infoFree;
+	}
+	
+	public Map<String, Object> selectFreeDetail(String boardId){
+		Map<String, Object> freeDetail = boardDAO_jy.selectFreeDetail(boardId);
+		System.out.println("이것은 서비스에서 찍는 freedetail"+freeDetail);
+		return freeDetail;
+	}
+	
 	//oneBoard
 	public List<Map<String, Object>> selectOneBoardList(){
 		List<Map<String, Object>> infoOne = boardDAO_jy.selecOneBoardList();
@@ -36,4 +64,6 @@ public class BoardService_jy {
 		System.out.println("servie 에서 확인하는 one디테일" + detail);
 		return detail;
 	}
+	
+	
 }

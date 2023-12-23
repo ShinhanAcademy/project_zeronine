@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.zeronine.mypage">
+	<!-- ecocare dash -->
+	<select id="selectEcoInfoAll" parameterType="String" resultType="map">
+		select p.*, cpc."isSubscription", cpc."remainingCouponCount"
+		from public.pickup as p
+		join public."customerPickCoupon" as cpc on p."customerId" = cpc."customerId" and p."subscriptionId" = cpc."subscriptionId"
+		where p."customerId"= cast(#{customerId} as UUID) and "pickUpStatus"='complete' 
+	</select>
+	<select id="selectCouponCtn" resultType="map">
+	select "subscriptionId","customerId","isSubscription", "remainingCouponCount"
+		from public."customerPickCoupon" 
+		where "customerId"='a6a48528-9215-4fb9-9dd0-5bb174103277' and "remainingCouponCount" > 0
+	</select>
+	
+	<update id="updateCouponCnt" parameterType="String">
+	UPDATE public."customerPickCoupon"
+		SET "remainingCouponCount" = "remainingCouponCount" - 1
+		WHERE "subscriptionId" = cast(#{subscriptionId} as UUID)
+	</update>
+</mapper>

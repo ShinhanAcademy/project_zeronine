@@ -3,16 +3,16 @@
 <footer id="zn_footer" class="footer_wrap">
     <div class="inner zn_center">
         <div class="intro_unit">
-            <a href="#" class="logo">
+            <a href="${path}/main/main.do" class="logo">
                 <img src="${path}/images/common/ico_logo_footer.png" alt="logo">
             </a>
             <div class="abt_zn">
                 <span>since 2023</span>
                 <span>ⓒ 2023. ZeroNine co.<br>All rights reserved</span>
                 <ul class="social_wrap">
-                    <li><a href="#">facebook</a></li>
-                    <li><a href="#">twitter</a></li>
-                    <li><a href="#">instagram</a></li>
+                    <li><a href="javascript:void(0);">facebook</a></li>
+                    <li><a href="javascript:void(0);">twitter</a></li>
+                    <li><a href="javascript:void(0);">instagram</a></li>
                 </ul>
             </div>
         </div>
@@ -21,13 +21,13 @@
                 <div class="tit">Company</div>
                 <ul>
                     <li>
-                        <a href="#">About us</a>
+                        <a href="javascript:void(0);">About us</a>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="javascript:void(0);">Blog</a>
                     </li>
                     <li>
-                        <a href="#">Contact us</a>
+                        <a href="javascript:void(0);">Contact us</a>
                     </li>
                 </ul>
             </div>
@@ -35,13 +35,13 @@
                 <div class="tit">Support</div>
                 <ul>
                     <li>
-                        <a href="#">1:1 문의 게시판</a>
+                        <a href="javascript:void(0);">1:1 문의 게시판</a>
                     </li>
                     <li>
-                        <a href="#">고객센터</a>
+                        <a href="javascript:void(0);">고객센터</a>
                     </li>
                     <li>
-                        <a href="#">소비자 정책</a>
+                        <a href="javascript:void(0);">소비자 정책</a>
                     </li>
                 </ul>
             </div>

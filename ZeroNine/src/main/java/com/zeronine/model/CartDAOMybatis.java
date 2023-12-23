@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zeronine.dto.CartVO;
 import com.zeronine.dto.ProductVO;
 
 @Repository("cartDAO")
@@ -45,5 +46,27 @@ public class CartDAOMybatis {
 		map.put("pcount", pcount);
 		return sqlSession.insert(NAMESPACE + "goProductDCart", map);
 	}
-
+	//Detail      ֹ  ϱ             ǰ     ٱ  Ͽ       Ҷ  pcount           ٲ  ִ  query
+	public int beforeproductOrder(String custid, String productId, int pcount) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("custid", custid);
+		map.put("productId", productId);
+		map.put("pcount", pcount);
+		return sqlSession.update(NAMESPACE + "beforeproductOrder", map);
+	}
+	public List<String> orderOneCart(String custid, String productId) {
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("custid", custid);
+	    map.put("productId", productId);
+	    List<String> prodIds = sqlSession.selectList(NAMESPACE + "orderOneCart", map);
+	    return prodIds;
+	}
+	public int deleteCartItem(String customerId, String productId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("customerId", customerId);
+	    map.put("productId", productId);
+		
+		return sqlSession.delete(NAMESPACE + "deleteCartItem", map);
+	}
+	
 }

@@ -1,4 +1,4 @@
-$(window).ready(function(){
+ $(window).ready(function(){
    draw(80, '.pie-chart', '#F11B1B');
 });
 

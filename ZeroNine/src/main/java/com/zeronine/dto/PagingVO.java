@@ -1,108 +1,43 @@
 package com.zeronine.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-@NoArgsConstructor
 public class PagingVO {
-	// ÇöÀçÆäÀÌÁö, ½ÃÀÛÆäÀÌÁö, ³¡ÆäÀÌÁö, °Ô½Ã±Û ÃÑ °¹¼ö, ÆäÀÌÁö´ç ±Û °¹¼ö, ¸¶Áö¸·ÆäÀÌÁö, 
-		//SQLÄõ¸®¿¡ ¾µ start, end
-		private int nowPage; // ÇöÀçÆäÀÌÁö
-		private int startPage; // ½ÃÀÛÆäÀÌÁö
-		private int endPage;	//³¡ÆäÀÌÁö
-		private int total;    	//°Ô½Ã±Û ÃÑ °¹¼ö
-		private int lastPage;	//¸¶Áö¸·ÆäÀÌÁö
-		private int start;	//	start
-		private int end;	// end
-		private int cntPage = 5; //ÆäÀÌÁö << 1,2,3,4,5 >>
-		private int cntPerPage = 4; //ÆäÀÌÁö´ç ±Û °¹¼ö
-	 
-		public PagingVO(int total, int nowPage) {
-			setNowPage(nowPage);
-			setCntPerPage(cntPerPage);
-			setTotal(total);
-			calcLastPage(getTotal(), getCntPerPage());
-			calcStartEndPage(getNowPage(), cntPage);
-			calcStartEnd(getNowPage(), getCntPerPage());
-		}
-		// Á¦ÀÏ ¸¶Áö¸· ÆäÀÌÁö °è»ê
-		public void calcLastPage(int total, int cntPerPage) {
-			setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
-		}
-		// ½ÃÀÛ, ³¡ ÆäÀÌÁö °è»ê
-		public void calcStartEndPage(int nowPage, int cntPage) {
-			setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
-			if (getLastPage() < getEndPage()) {
-				setEndPage(getLastPage());
-			}
-			setStartPage(getEndPage() - cntPage + 1);
-			if (getStartPage() < 1) {
-				setStartPage(1);
-			}
-		}
-		// DB Äõ¸®¿¡¼­ »ç¿ëÇÒ start, end°ª °è»ê
-		public void calcStartEnd(int nowPage, int cntPerPage) {
-			setEnd(nowPage + cntPage > lastPage ? lastPage : nowPage + cntPage);
-			setStart(getEnd() - cntPage + 1);
-		}
-		
-	public int getNowPage() {
-		return nowPage;
+	private int pageNumber; // í˜„ì¬ í˜ì´ì§€ 
+	private int maxPageNumber;// í˜ì´ì§€ ëë²ˆí˜¸ ë°ì´í„°ë¥¼ ì–¼ë§ˆë‚˜ ë„£ëƒì—ë”°ë¼ ì •í•´ì§..
+	private int startPageNumber; // í˜ì´ì§€ì˜ ì‹œì‘ë²ˆí˜¸ 1,6,11,16
+	private int endPageNumber;  // í˜ì´ì§€ ëë²ˆí˜¸ 5,10,15,20
+	
+	
+	public int getPageNumber() {
+		return pageNumber;
 	}
-	public void setNowPage(int nowPage) {
-		this.nowPage = nowPage;
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
 	}
-	public int getStartPage() {
-		return startPage;
+	public int getMaxPageNumber() {
+		return maxPageNumber;
 	}
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
+	public void setMaxPageNumber(int maxPageNumber) {
+		this.maxPageNumber = maxPageNumber;
 	}
-	public int getEndPage() {
-		return endPage;
+	public int getStartPageNumber() {
+		return startPageNumber;
 	}
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
+	public void setStartPageNumber(int startPageNumber) {
+		this.startPageNumber = startPageNumber;
 	}
-	public int getTotal() {
-		return total;
+	public int getEndPageNumber() {
+		return endPageNumber;
 	}
-	public void setTotal(int total) {
-		this.total = total;
+	public void setEndPageNumber(int endPageNumber) {
+		this.endPageNumber = endPageNumber;
 	}
-	public int getLastPage() {
-		return lastPage;
+	@Override
+	public String toString() {
+		return "PagingVO [pageNumber=" + pageNumber + ", maxPageNumber=" + maxPageNumber + ", startPageNumber="
+				+ startPageNumber + ", endPageNumber=" + endPageNumber + "]";
 	}
-	public void setLastPage(int lastPage) {
-		this.lastPage = lastPage;
-	}
-	public int getStart() {
-		return start;
-	}
-	public void setStart(int start) {
-		this.start = start;
-	}
-	public int getEnd() {
-		return end;
-	}
-	public void setEnd(int end) {
-		this.end = end;
-	}
-	public int getCntPage() {
-		return cntPage;
-	}
-	public void setCntPage(int cntPage) {
-		this.cntPage = cntPage;
-	}
-	public int getCntPerPage() {
-		return cntPerPage;
-	}
-	public void setCntPerPage(int cntPerPage) {
-		System.out.println(cntPerPage);
-		this.cntPerPage = cntPerPage;
-	}
+	
 	
 	
  

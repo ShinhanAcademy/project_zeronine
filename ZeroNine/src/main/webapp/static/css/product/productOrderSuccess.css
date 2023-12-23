@@ -52,10 +52,11 @@
 	margin: 30px auto;
 	border: 1px solid #B7B7B7;
 	padding: 0px 10px;
+	border-radius: 15px;
 }
 
 .order_success_part .os_part .os_info .order_detail .od_part {
-	margin-top: 40px;
+	    margin-top: 35px;
 	display: flex;
 	flex-direction: row;
 }

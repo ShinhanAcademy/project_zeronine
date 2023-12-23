@@ -78,6 +78,7 @@
 	<select id="likeProduct" parameterType="String" resultType="map">
 		select 
 			"productMainImage"."imagePath",
+			product."productId",
 			product.brand,
 			product."pName",
 			product.price

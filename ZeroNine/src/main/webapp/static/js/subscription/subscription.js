@@ -32,13 +32,17 @@ close_btn.onclick = function(){
 }
 
 btn_check.onclick = function(){
-	if(subscript_name.innerHTML == "에코케어+무료 배송 이용권"){
-		location.href='subscriptionBanner.do?subscriptionType=free_delivery_ecocare';
+	modal.style.display = 'none';
+	if(subscript_name.innerHTML == "에코케어+무료 배송 이용권"){	
+		requestPaySubscription('에코케어+무료 배송 이용권', 1); 
 	}else if(subscript_name.innerHTML == "에코케어 이용권"){
-		location.href='subscriptionBanner.do?subscriptionType=ecocare';
+		requestPaySubscription('에코케어 이용권', 1);
+		//location.href='subscriptionBanner.do?subscriptionType=ecocare';
 	}else if(subscript_name.innerHTML == "무료 배송 이용권"){
-		location.href='subscriptionBanner.do?subscriptionType=free_delivery';
+		requestPaySubscription('무료 배송 이용권', 1);
+		//location.href='subscriptionBanner.do?subscriptionType=free_delivery';
 	}else{
-		location.href='subscriptionBanner.do?subscriptionType=ecocare_5';
+		requestPaySubscription('5회 이용권', 1);
+		//location.href='subscriptionBanner.do?subscriptionType=ecocare_5';
 	}
 }

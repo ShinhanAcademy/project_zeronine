@@ -35,5 +35,6 @@
 </div>
 <script>
 	var path = "${path}";
+	var boardId = "${info.boardId}"
 </script>
 <script src="${path}/js/myPage/cBdetailView.js" type="text/javascript"></script>

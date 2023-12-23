@@ -56,7 +56,10 @@ public class CustomerService {
 	
 	public String getCustomerId(String email, String pwd) {
 		return customerDAO.getCustomerId(email,pwd);
+	}
 
+	public String getCustomerName(String email, String pwd) {
+		return customerDAO.getCustomerName(email,pwd);
 	}
 	
 	public boolean updateCustomerInfo(Map<String, String> infos) {

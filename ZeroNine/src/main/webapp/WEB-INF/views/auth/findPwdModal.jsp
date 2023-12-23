@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" scope="application" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="${path}/css/modal/findpwdmodal.css">
 <span style='display: none'>no</span>
 <div id="modal_wrap">
 
@@ -18,7 +16,7 @@
 <script>
 var path = "${path}";
 
-$("#modal_btn_pwd").click(function(){
+$(".modal_btn_pwd").click(function(){
 	location.href = path + "/auth/login.do";
 })
 </script>

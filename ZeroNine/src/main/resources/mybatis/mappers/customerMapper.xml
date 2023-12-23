@@ -32,6 +32,12 @@
 		SELECT "customerId" FROM customer where email = #{email} and
 		"customerPassword" = #{pwd}
 	</select>
+	<select id="getCustomerName" resultType="String"
+		parameterType="java.util.HashMap">
+		select "customerName" 
+		from customer where email = #{email} 
+			and "customerPassword" = #{pwd}
+	</select>
 	<select id="findEmail" resultType="String"
 		parameterType="java.util.HashMap">
 		SELECT email FROM public.customer where "customerName" = #{name} and
@@ -44,7 +50,7 @@
 	</select>
 	<select id="selectById" resultType="customerVo"
 		parameterType="String">
-		select * from customer where "customerId" = #{customerId}
+		select * from customer where "customerId" = CAST(#{customerId} AS UUID)
 	</select>
 	<select id="selectByEmail" resultType="customerVo"
 		parameterType="String">

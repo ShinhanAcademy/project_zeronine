@@ -3,11 +3,15 @@ package com.zeronine.model;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.zeronine.dto.DealFailRefundVO;
+import com.zeronine.dto.DealSuccessBoardVO;
 
 @Repository("boardDAO_jy")
 public class BoardDAOMybatis_jy {
@@ -29,6 +33,28 @@ public class BoardDAOMybatis_jy {
 		return detail;
 	}
 	
+	public List<DealFailRefundVO> selectDealFailBoard(){
+		List<DealFailRefundVO> fail = sqlSession.selectList(namespace+"selectDealFailBoard");
+		return fail;
+	}
+	
+	public List<DealSuccessBoardVO> selectDealSuccessBoard(){
+		List<DealSuccessBoardVO> success = sqlSession.selectList(namespace+"selectDealSuccessBoard");
+		return success;
+	}
+	
+	//free
+	public List<Map<String, Object>> selectFreeDeliveryBoard(){
+		List<Map<String, Object>> infoFree = sqlSession.selectList(namespace+"selectFreeDeliveryBoard");
+		return infoFree;
+	}
+	
+	public Map<String, Object> selectFreeDetail(String boardId){
+		Map<String, Object> freeDetail = sqlSession.selectOne(namespace+"selectFreeDetail",boardId);
+		System.out.println("이것은 dao의 디테일 "+freeDetail);
+		return freeDetail;
+	}
+	
 	//oneBoard
 	public List<Map<String, Object>> selecOneBoardList() {
 		List<Map<String, Object>> infoOne = sqlSession.selectList(namespace+"selectOneBoardList");
@@ -41,6 +67,7 @@ public class BoardDAOMybatis_jy {
 		System.out.println(detail);
 		return detail;
 	}
-		
+	
+	
 		
 }

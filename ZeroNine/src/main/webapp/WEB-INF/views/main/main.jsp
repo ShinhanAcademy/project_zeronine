@@ -48,21 +48,21 @@
 		    <section class="intro_wrap">
 		        <div class="title">똑똑한 소비의 3가지 방법</div>
 		        <div class="smart_shopping">
-		            <div class="intro_unit">
+		            <div class="intro_unit" data-name="fast">
 		                <div class="img_wrap">
 		                    <img src="${path}/images/main/img_rocket.png" alt="3ways_image">
 		                </div>
 		                <div class="sub_tit">슝슝 즉배</div>
 		                <p>필요 없는 1+1 상품을 나눠서 구매해요!</p>
 		            </div>
-		            <div class="intro_unit">
+		            <div class="intro_unit" data-name="free">
 		                <div class="img_wrap">
 		                    <img src="${path}/images/main/img_dollar.png" alt="3ways_image">
 		                </div>
 		                <div class="sub_tit">알뜰 무배</div>
 		                <p>같이 구매하고 무료 배송 받아요!</p>
 		            </div>
-		            <div class="intro_unit">
+		            <div class="intro_unit" data-name="one">
 		                <div class="img_wrap">
 		                    <img src="${path}/images/main/img_chat.png" alt="3ways_image">
 		                </div>
@@ -127,19 +127,6 @@
 		        <div class="board_unit direct_deal">
 		            <div class="title">1:1 직거래</div>
 		            <ul class="card_list">
-		                <li onclick="o_btn()">
-		                    <div class="img_wrap img_user">
-		                        <img src="${path}/images/main/img_user.png" alt="user">
-		                    </div>
-		                    <div class="tit">소금빵 1+1입니다</div>
-		                    <p class="location_info">서울 마포구 월드컵북로 34 서교동 우도빌딩 1층, 호텔 아만티 건너편</p>
-		                    <ul class="needed">
-		                        <li>파리바게뜨 서교점</li>
-		                        <li>소금빵 1+1(마감세일) 5,200원</li>
-		                        <li>1명 모집</li>
-		                    </ul>
-		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                </li>
 		                <li onclick="o_btn()">
 		                    <div class="img_wrap img_user">
 		                        <img src="${path}/images/main/img_user.png" alt="user">

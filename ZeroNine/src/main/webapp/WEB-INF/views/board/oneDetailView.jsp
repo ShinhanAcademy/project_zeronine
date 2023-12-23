@@ -36,10 +36,32 @@
 					</div>
 				</div>
 				<div class="join_btn_div">
-					<button class="join_btn" style="background-color:#F4B242">채팅하기</button>
+					<button id="joinChat" class="join_btn" style="background-color:#F4B242">채팅하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+$("#joinChat").on("click", function(){
+	const oBoardId = "${board_id}";
+	
+	console.log("oBoardId??", oBoardId);
+	if(confirm("채팅에 참여하시겠습니까?")){
+		$.ajax({
+			url : contextPath +"/insertChatInfo.do",
+			data : {oBoardId},
+			type : "POST",
+			success : function(result){
+				location.href = "/chat.do";
+				$("#detail_modal_wrap").hide();
+			},
+			error : function(){
+				alert("에러입니다.");
+			}
+		})
+	}
+})
+
+</script>
 </html>

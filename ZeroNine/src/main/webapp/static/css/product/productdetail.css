@@ -49,8 +49,10 @@
 	margin-top: 31px;
 	margin-left: 15px;
 }
-
-.detail_bodypart .detail_right .detail_pname {
+.detail_bodypart .detail_right .detail_pnamepart {
+	width: 590px;
+}
+.detail_bodypart .detail_right .detail_pnamepart .detail_pname {
 	padding-top: 19px;
 	color: #000;
 	text-align: center;
@@ -58,7 +60,6 @@
 	font-size: 34px;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 16px;
 	color: #000;
 }
 
@@ -71,9 +72,13 @@
 	justify-content: flex-end;
 	padding-right: 28px;
 }
-
+.detail_bodypart .detail_right .detail_heartcart .like {
+	position: relative;
+}
 .detail_bodypart .detail_right .detail_heartcart .detail_heart {
 	margin-right: 15px;
+	width:38px;
+	height:38px;
 }
 
 .detail_bodypart .detail_right .detail_price {
@@ -423,24 +428,29 @@
 }
 
 .detail_bodypart .detail_bottom_right .subtitle1 {
-	color: #000;
-	font-family: Lato;
-	font-size: 17px;
-	font-style: normal;
 }
 
 #sidebox {
-	margin: 10px;
 	background: #FAFAFA;
-	height: 109px;
 	display: flex;
+	gap: 10px;
 	justify-content: center;
-	padding: 5px;
 	flex-direction: column;
 	align-items: center;
-	
+	padding: 30px 15px;
+	color: #000;
+	font-family: Lato;
+	font-style: normal;
+	font-size: 17px;
 }
-
+#sidebox.scroll_on {
+    position: fixed;
+    width: 324px;
+    top: 160px;
+    left: calc(50% + 299px);
+    z-index: 102;
+	transition: 0.3s;
+}
 .detail_bodypart .detail_bottom_right .subtitle {
 	color: #000;
 	font-family: Lato;
@@ -456,4 +466,43 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+}
+.detail_bodypart .detail_bottom_right .sidebox_btnpart{
+position: relative;
+    display: flex;
+    width: 300px;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+}
+.detail_bodypart .detail_bottom_right .sidebox_btnpart .sidebox_btnCart{
+	position: relative;
+   margin-right: 153px;
+    width: 135px;
+    height: 55px;
+    border-radius: 15px;
+    border: 1.5px solid #0083E6;
+    background: #FFFCFC;
+    color: #0083E6;
+    text-align: center;
+    font-family: Jua;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}
+.detail_bodypart .detail_bottom_right .sidebox_btnpart .sidebox_btnOrder{
+	    margin-left: 150px;
+    width: 135px;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #0083E6;
+    color: #F2F2F2;
+    text-align: center;
+    font-family: Jua;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 17px;
 }

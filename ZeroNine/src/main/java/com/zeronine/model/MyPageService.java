@@ -45,5 +45,18 @@ public class MyPageService {
 	}
 	*/
 	
-	
+	public List<Map<String, Object>> selectEcoInfoAll (String customerId){
+		List<Map<String, Object>> ecodash = myPageDAO.selectEcoInfoAll(customerId);
+		System.out.println("이것은 service에서 보여주는 정보"+ecodash);
+		return ecodash;
+	}
+
+	public List<Map<String, Object>> selectCouponCtn(/* String customerId */){
+		List<Map<String, Object>> couponCtn = myPageDAO.selectCouponCtn(/* customerId */);
+		System.out.println("이것은 service에서 보여주는 정보"+couponCtn);
+		return couponCtn;
+	}
+	public int updateCouponCnt (String subscriptionId) {
+		return myPageDAO.updateCouponCnt(subscriptionId);
+	}
 }

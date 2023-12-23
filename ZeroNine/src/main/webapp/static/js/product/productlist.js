@@ -1,72 +1,39 @@
-	
-	 
-$(".fluent_basket").click(function () {
-			var obj = {	"pCategoryId" : 1};
-			
-			$.ajax({
-					url : path + "/product/productCategory.do",
-					data : obj,
-					type : "GET",
-					success : output,
-					error : function() {
-						alert("에러입니다.");
-					}
-				});
-});
-$(".lotion").click(function () {
+ 
+  $(function(){
+	    	search();
+	    });
+	    
+	    
+	   
+	   const productInCart = [];  
+	   cartcheck = cartcheck.replace(/\[|\]/g, '');
+ 		cartcheckArray = cartcheck.split(',').map(function(item) {
+	        return item.trim(); // Remove extra spaces
+	    });
 
-			var obj = {	"pCategoryId" : 2};
-			
-			$.ajax({
-					url : path + "/product/productCategory.do",
-					data : obj,
-					type : "GET",
-					success : output,
-					error : function() {
-						alert("에러입니다.");
-					}
-				});
-});
-$(".food_navi").click(function () {
-			var obj = {	"pCategoryId" : 3};
-			
-			$.ajax({
-					url : path + "/product/productCategory.do",
-					data : obj,
-					type : "GET",
-					success : output,
-					error : function() {
-						alert("에러입니다.");
-					}
-				});
-});
-$(".raphael_cart").click(function () {
-			var obj = {	"pCategoryId" : 0};
-			
-			$.ajax({
-					url : path + "/product/productCategoryall.do",
-					data : obj,
-					type : "GET",
-					success : output,
-					error : function() {
-						alert("에러입니다.");
-					}
-				});
-})
-function search() {
-var obj = { "q" : $("#q").val() };
+function search(page,buttonValue) {
+ selectedValue = $('select[name="ptype"]').val();
+
+var obj = { "q" : $("#q").val(),
+ 			"selectedValue" : $('select[name="ptype"]').val(),
+ 			"pCount": page,
+ 			"buttonValue" : buttonValue
+ };
 
 	$.ajax({
             type: 'GET',
-            url: path + "/product/selectByPnameBrand.do",
+            url: path + "/product/pcategoryPageCount.do",
             data:obj,
-            success: output,
-           
+            success: function(response){
+            $('#here').html(response);
+            $("#q").val("");
+            },
             error: function () {
               alert("에러입니다.");
             }
         });
 }
+
 $("#q").keypress(function(event){
 	if(event.which===13){
 	event.preventDefault();
@@ -75,83 +42,60 @@ $("#q").keypress(function(event){
 });
 
 $("#searchbtn").click(function() {
-
-	search();
+	search(1);
 })
 
-function chanb() {
-    var selectedValue = $('select[name="ptype"]').val();
-    // Check if the selected value is 1
-    if (selectedValue === "1") {
-    
-        // Perform your AJAX request
-        $.ajax({
-            type: 'GET',
-            url: path + "/product/selectBymanyLiked.do",
-            
-            success: output,
-           
-            error: function () {
-              alert("에러입니다.");
-            }
-        });
-    }else if(selectedValue === "0") {
-    $.ajax({
-            type: 'GET',
-            url: path + "/product/selectByAll.do",
-            
-            success: output,
-           
-            error: function () {
-              alert("에러입니다.");
-            }
-        });
-    
-}else if(selectedValue === "2") {
-    $.ajax({
-            type: 'GET',
-            url: path + "/product/selectByDelivery.do",
-            
-            success: output,
-           
-            error: function () {
-              alert("에러입니다.");
-            }
-        });
-    
-}else if(selectedValue === "3") {
-    $.ajax({
-            type: 'GET',
-            url: path + "/product/selectBypriceAsc.do",
-            
-            success: output,
-           
-            error: function () {
-              alert("에러입니다.");
-            }
-        });
-    
-}else if(selectedValue === "4") {
-    $.ajax({
-            type: 'GET',
-            url: path + "/product/selectBypriceDesc.do",
-            
-            success: output,
-           
-            error: function () {
-              alert("에러입니다.");
-            }
-        });
-    
-}
-    }
 
-function output(response){ 
+	
  
- 
-$('#here').html(response);
 
+function handlegoCartButtonClick(index, productId) {
 
-} 
+		 function isproductinCart(productId){
+	    	  return cartcheckArray.some(function(item){
+	    		  return item == productId;
+	    	  })
+	      }
+	         likeButtonId = "gocart" + index;
+	      
+	        
+		if(productInCart.includes(productId)==false){
+				$.ajax({
+					url : path +"/product/goProductCart.do",
+					type: "POST",
+					data : {"productId" :productId},
+					success : function(){
+						alert("잘담겼다!");
+						
+						if(!productInCart.includes(productId)) {
+							productInCart.push(productId);
+						}
+					},
+					error : function(){
+						alert("에러입니다.");
+					}
+					}); 
+		}else{
+					$.ajax({
+				  url: path+"/product/alreadyInCartModal.do",
+				  type: "POST",
+				  success: function(response) {
+					 $("#modal").show();
+				    $('#modal').html(response);
+				  },
+				  error: function(error) {
+				    console.error('Error loading modal content:', error);
+				  }
+				});
+		}	
+	 }
 
+$(".like").click(function (){
 
+			             currentImagePath = $(this).find("img.menu_heart").attr("src");
+			             newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+			                path+"/images/board/red_heart.png" :
+			                path+"/images/board/heart.png";
+
+			            $(this).find("img.menu_heart").attr("src", newImagePath);
+			});	

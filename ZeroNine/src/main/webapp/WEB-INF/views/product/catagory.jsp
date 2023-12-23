@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<div class="menulist" >
 <c:forEach items="${plist}" var="product" varStatus="status">
 	<div class="menu_sub">
 		<div class="menu_image">
@@ -46,84 +46,67 @@
 		</span>
 	</div>
 </c:forEach>
+			</div>
+
+<!-- pagination -->
+<c:if test="${pCount != 0}">
+	<div class=pagination>
+		<div class="pageLeft">
+			<c:choose>
+				<c:when test="${paginating.pageNumber<=1}">
+					<button class="btnFirst" disabled="disabled">첫페이지</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btnFirst" id="btnFirst" onclick="javascript:search(1)">첫페이지</button>
+				</c:otherwise>	
+			</c:choose>	
+			<c:choose>
+				<c:when test="${paginating.pageNumber<=1}">
+					<button class="btnPrev" disabled="disabled">이전페이지</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btnPrev" id="btnPrev" onclick="javascript:search(${paginating.pageNumber-1})">이전페이지</button>
+				</c:otherwise>	
+			</c:choose>	
+		</div>
+		<ul class="pagingWrap">
+			<c:forEach begin="${paginating.startPageNumber}"
+				end="${paginating.endPageNumber}" var="i" step="1">
+				<li>
+					<a href="javascript:search(${i})">${i}</a>
+				</li>
+			</c:forEach>
+		</ul>
+		<div class="pageRight">
+			<c:choose>
+				<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
+					<button class="btnNext" id="btnNext" disabled="disabled">다음페이지</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btnNext" id="btnNext" onclick="javascript:search(${paginating.pageNumber+1})">다음페이지</button>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
+					<button class="btnLast" disabled="disabled">마지막페이지</button>
+				</c:when>
+				<c:otherwise>
+					<button class="btnLast" id="btnLast" onclick="javascript:search(${paginating.maxPageNumber})">마지막페이지</button>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+</c:if>
+<!-- //pagination -->
+			
+			
+			
 <script>
 		var path = "${path}";
-		var custid = "${customerid}";
-	    console.log(custid);
 	</script>
 
 <script>
-var custid = "${customerid}";
-console.log(custid);
-	 function handlegoCartButtonClick(index, productId) {
-	     console.log(productId);
-		 function isproductinCart(productId){
-	    	  return cartcheckArray.some(function(item){
-	    		  return item == productId;
-	    	  })
-	      }
-		 //console.log(isproductinCart(productId));
-		 	console.log(productInCart);
-		 	console.log(productInCart.includes(productId));
-	        var likeButtonId = "gocart" + index;
-	    
-	    console.log(productId);
-		console.log(cartcheck);
-		if(productInCart.includes(productId)==false){
-				$.ajax({
-					url : "/product/goProductCart.do",
-					type: "POST",
-					data : {"custid" :custid,"productId" :productId},
-					success : function(){
-						alert("잘담겼다!");
-						
-						if(!productInCart.includes(productId)) {
-							productInCart.push(productId);
-						}
-						cartcheckArray.filter((element) => element !== productId);
-					},
-					error : function(){
-						alert("에러입니다.");
-					}
-					}); 
-		}else{
-			$.ajax({
-				url : "/product/plusProductCart.do",
-				type: "POST",
-				data : {"custid" :custid,"productId" :productId},
-				success : function(){
-					alert("또담겼다!");
-				},
-				error : function(){
-					alert("에러입니다.");
-				}
-				}); 
-		}
-					 
-				
-	 };
-	
-	function pcountchange(currentpage,perpage){
-		console.log(currentpage);
-		var obj = {
-				//"value":event.target.value,	
-				"nowPage":currentpage,
-				"cntPerPage":perpage
-		};
-		console.log("Clicked button value: " + obj);
-		$.ajax({
-			//url : "${path}/product/productList.do",
-			url : "${path}/product/productPageCount.do",
-			type: "GET",
-			data : obj,
-			success:function(responseData){
-				$("#here").html(responseData);
-			},
-			error : function(){
-				alert("에러입니다.");
-			}
-			});
-	}
+
 	 var str = "${likedcid}";
 	 var likedcidArr = [] ; 
 	 //str.split(/!|@|~|,| |Z/);
@@ -132,7 +115,7 @@ console.log(custid);
 	 function handleLikeButtonClick(index, productId) {
 	      
 	        var likeButtonId = "like" + index;
-	        var custid = "${customerid}";
+	       
 	    
 	    	//클래스가 heart liked => AJAX DELTE 호출
 	        var isRedHeart = likedcidArr.indexOf(productId);
@@ -142,9 +125,9 @@ console.log(custid);
 				$.ajax({
 					url : "/product/deleteLikedProduct.do",
 					type: "POST",
-					data : {"custid" :custid,"productId" :productId},
+					data : {"productId" :productId},
 					success : function(){
-						likedcidArr.filter((element) => element !== productId);
+						likedcidArr = likedcidArr.filter(item => item !== productId);
 					},
 					error : function(){
 						alert("에러입니다.");
@@ -156,7 +139,7 @@ console.log(custid);
 				 $.ajax({
 						url : "/product/productLike.do",
 						type: "POST",
-						data : {"custid" :custid,"productId" :productId},
+						data : {"productId" :productId},
 						success : function(){
 							likedcidArr.push(productId);
 						},
@@ -168,23 +151,6 @@ console.log(custid);
 					};
 	
 	        
-	
-					
-		$(".raphael_cart").click(function() {
-			var obj = {
-				"pCategoryId" : 0
-			};
-
-			$.ajax({
-				url : path + "/product/productCategoryall.do",
-				data : obj,
-				type : "GET",
-				success : output, 
-				error : function() {
-					alert("에러입니다.");
-				}
-			});
-		})
 		$(".like").click(function (){
 
 			            var currentImagePath = $(this).find("img.menu_heart").attr("src");

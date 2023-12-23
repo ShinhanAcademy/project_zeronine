@@ -28,4 +28,13 @@ public class CartService {
 		// TODO Auto-generated method stub
 		return cartDAO.goProductDCart(custid, productId,pcount);
 	}
+	public int beforeproductOrder(String custid, String productId, int pcount) {
+		return cartDAO.beforeproductOrder(custid, productId, pcount);
+	}
+	public List<String>orderOneCart(String custid, String productId) {
+		return cartDAO.orderOneCart(custid, productId);
+	}
+	public int deleteCartItem(String customerId, String productId) {
+		return cartDAO.deleteCartItem(customerId, productId);
+	}
 }

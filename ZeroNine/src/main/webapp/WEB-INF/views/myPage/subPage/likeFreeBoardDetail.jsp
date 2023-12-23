@@ -34,12 +34,13 @@
 				</div>
 			</div>
 			<div class="participate_btn_div">
-				<button class="participate_btn">참여하기</button>
+				<button class="participate_free_btn">참여하기</button>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
 	var path = "${path}";
+	var boardId = "${info.boardId}"
 </script>
 <script src="${path}/js/myPage/cBdetailView.js" type="text/javascript"></script>

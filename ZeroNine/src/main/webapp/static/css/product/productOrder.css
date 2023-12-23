@@ -11,7 +11,10 @@
 	position: relative;
 	margin: 0 auto;
 }
-
+#gobtn:disabled {
+    background-color: gray;
+    /* Add any other styling you want for the disabled state */
+}
 .order_body .order_bodypart .order_bodypart_text {
 	padding: 60px 25px 60px 20px;
 	display: flex;
@@ -30,7 +33,8 @@
 }
 
 .order_body .order_bodypart .orderinfo .jul {
-	margin-top: 10px;
+	margin-top: 20px;
+	margin-bottom: 25px;
 	display: block;
 	overflow: hidden;
 	pointer-events: none;
@@ -67,6 +71,7 @@
 	{
 	display: flex;
 	flex-direction: row;
+	margin-top: 18px;
 }
 
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_left

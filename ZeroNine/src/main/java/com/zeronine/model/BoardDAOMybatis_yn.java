@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.zeronine.dto.BoardVO;
+import com.zeronine.dto.ProductVO;
 
 @Repository("boardDAO")
 public class BoardDAOMybatis_yn {
@@ -129,6 +129,191 @@ public class BoardDAOMybatis_yn {
 		int result = sqlSession.update(NAMESPACE + "completeEditTime", map);
 		return result;
 	}
+
+	public int deleteBoard(String boardId) {
+		int result = sqlSession.delete(NAMESPACE + "deleteBoard", boardId);
+		return result;
+	}
+
+	public Map<String, Object> chatListDetail(String boardId) {
+		Map<String,Object> info = sqlSession.selectOne(NAMESPACE + "chatListDetail",boardId);
+		return info;
+	}
+
+	public Map<String, Object> freeBoardDetailEdit(String boardId) {
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "freeBoardDetailEdit", boardId);
+		return info;
+	}
+
+	public List<Map<String, Object>> participantChatList(String customerId) {
+		List<Map<String, Object>> info = sqlSession.selectList(NAMESPACE + "participantChatList", customerId);
+		return info;
+	}
+
+	public int numOfChatParticipant(String boardId) {
+		int participant = sqlSession.selectOne(NAMESPACE + "numOfChatParticipant", boardId);
+		return participant;
+	}
+
+	public Map<String, Object> chatListEdit(String boardId) {
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "chatListEdit", boardId);
+		return info;
+	}
+
+	public int completeChatEdit(String title, String context, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("context", context);
+		map.put("boardId", boardId);
+		int result = sqlSession.update(NAMESPACE + "completeChatEdit", map);
+		return result;
+	}
+
+	public List<Map<String, Object>> successMyWriteBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyWriteBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successMyWriteFreeBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyWriteFreeBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successMyParticipatedBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successMyParticipatedFreeBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedFreeBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successChatBlist(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successChatBlist",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> successParticipantChatList(String customerId) {
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successParticipantChatList",customerId);
+		return info;
+	}
+
+	public List<Map<String, Object>> freeBoardProductEdit(String boardId, String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardId", boardId);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> productInfo = sqlSession.selectList(NAMESPACE + "freeBoardProductEdit", map);
+		return productInfo;
+	}
+
+	public int completeFreeEdit(String title, String context, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("context", context);
+		map.put("boardId", boardId);
+		int result = sqlSession.update(NAMESPACE + "completeFreeEdit", map);
+		return result;
+	}
+
+	public int completeFreeEditTime(String title, String context, int remainTime, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("context", context);
+		map.put("remainTime", remainTime);
+		map.put("boardId", boardId);
+		int result = sqlSession.update(NAMESPACE + "completeFreeEditTime", map);
+		return result;
+	}
+
+	public int deleteChat(String boardId) {
+		int result = sqlSession.update(NAMESPACE + "deleteChat", boardId);
+		return result;
+	}
+
+	public List<Map<String, Object>> myCart(String customerId) {
+		List<Map<String,Object>> myCart = sqlSession.selectList(NAMESPACE + "myCart", customerId);
+		return myCart;
+	}
+
+	public ProductVO selectByPid(String productId) {
+		ProductVO product = sqlSession.selectOne(NAMESPACE + "selectByPid", productId);
+		return product;
+	}
+
+	/*
+	 * public int orderSuccess(String deliveryId, String customerId) { Map<String,
+	 * Object> map = new HashMap<String, Object>(); map.put("deliveryId",
+	 * deliveryId); map.put("customerId", customerId); int result =
+	 * sqlSession.insert(NAMESPACE + "orderSuccess", map); return result; }
+	 * 
+	 * public int orderSuccessProduct(String deliveryId, String productId, int
+	 * count) { Map<String, Object> map = new HashMap<String, Object>();
+	 * map.put("deliveryId", deliveryId); map.put("productId", productId);
+	 * map.put("count", count); int result = sqlSession.insert(NAMESPACE +
+	 * "orderSuccessProduct", map); return result; }
+	 */
+
+	public Map<String, Object> orderInfo(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "orderInfo", map);
+		return info;
+	}
+
+	public int orderFastProduct(String customerId, String boardId, int count) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		map.put("count", count);
+		map.put("result_code", 0);
+		//int result = sqlSession.insert(NAMESPACE + "orderFastProduct", map);
+		sqlSession.insert(NAMESPACE + "orderFastProduct", map);
+		return (Integer)map.get("result_code");
+		/*
+		 * if(map.get("result_code")!=null &&
+		 * !"".equals(map.get("result_code").toString())) {
+		 * 
+		 * }
+		 */
+		//return result;
+	}
+
+	public Map<String, Object> fastBoardProduct(String boardId) {
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "fastBoardProduct", boardId);
+		return info;
+	}
+
+	public int orderFreeProduct(String customerId, String boardId, Map<String, Integer> productList) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customer_id", customerId);
+		map.put("board_id", boardId);
+		map.put("products", productList);
+		map.put("return_code", 0);
+		sqlSession.insert(NAMESPACE + "orderFreeProduct", map);
+		return (Integer)map.get("result_code");
+	}
+
+	public Map<String, Object> freeOrderInfo(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "freeOrderInfo", map);
+		return info;
+	}
+
+	public int freeTotalPrice(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		int totalPrice = sqlSession.selectOne(NAMESPACE + "freeTotalPrice", map);
+		return totalPrice;
+	}
+
+	
+
+	
 
 	
 

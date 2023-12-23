@@ -17,6 +17,8 @@
 		<typeAlias type="com.zeronine.dto.CustomerFreeDeliveryVO" alias="customerFreeDeliveryVo" />	
 		<typeAlias type="com.zeronine.dto.CustomerPickCouponVO" alias="customerPickCouponVo" />	
 		<typeAlias type="com.zeronine.dto.DeliveryVO" alias="deliveryVo" />	
+		<typeAlias type="com.zeronine.dto.DealFailRefundVO" alias="dealFailRefundVO" />	
+		<typeAlias type="com.zeronine.dto.DealSuccessBoardVO" alias="dealSuccessBoardVO" />	
 		<typeAlias type="com.zeronine.dto.LikedBoardVO" alias="likedBoardVo" />	
 		<typeAlias type="com.zeronine.dto.LikedProductVO" alias="likedProductVo" />	
 		<typeAlias type="com.zeronine.dto.MessageVO" alias="messageVo" />	
@@ -26,7 +28,10 @@
 		<typeAlias type="com.zeronine.dto.ProductAdditionalImageVO" alias="productAdditionalImageVo" />	
 		<typeAlias type="com.zeronine.dto.ProductMainImageVO" alias="productMainImageVo" />	
 		<typeAlias type="com.zeronine.dto.ProductVO" alias="productVo" />	
+		<typeAlias type="com.zeronine.dto.DeliveryProductVO" alias="deliveryproductVo" />	
 		<typeAlias type="com.zeronine.dto.SelectProductVO" alias="selectProductVo" />	
-		<typeAlias type="com.zeronine.dto.SubscriptionVO" alias="subscriptionVo" />	
+		<typeAlias type="com.zeronine.dto.SubscriptionVO" alias="subscriptionVo" />
+		<typeAlias type="com.zeronine.dto.ChatVO" alias="chatVO" />	
+		<typeAlias type="com.zeronine.dto.ChatDtlVO" alias="chatDtlVO" />	
 	</typeAliases>
 </configuration>

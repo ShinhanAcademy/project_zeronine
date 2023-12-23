@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../../common/head.jsp"%>
 <%@include file="../../common/header.jsp"%>
-<link rel="stylesheet" href="${path}/css/board/boardEdit.css" />
+<link rel="stylesheet" href="${path}/css/myPage/myPageBoardEdit.css" />
 
 <title>My page</title>
 
@@ -37,7 +37,7 @@
 								<li class="due_date_title">날짜 및 시간</li>
 								<li class="due_date_cf"><span> * 날짜는 최대 7일 후까시 설정
 										가능합니다. <br> * 게재 날짜는 당일을 포함입니다.
-								</span> <span class="due_date_ex">(ex.1월 1일 작성 시, 7일 후 → 1월 7일)
+								</span> <span class="due_date_ex">(ex.1월 1일 작성 시, 6일 후 → 1월 7일)
 								</span></li>
 								<li class="due_date_cf"><span> * 몇 시간 동안 기다릴지
 										입력해주세요.<span class="due_date_ex">(게시글 최초 게시시간 기준입니다.)</span></span></li>
@@ -53,7 +53,6 @@
 										<option value="5760">4일</option>
 										<option value="7200">5일</option>
 										<option value="8640">6일</option>
-										<option value="10080">7일</option>
 									</select>
 								</div>
 								<div class="time">
@@ -74,6 +73,7 @@
 							<div class="cart_info">
 								<div class="cart_list">
 									<h1>게시물 공구 상품 보일거야~~~~</h1>
+									<br>
 									<ul>
 										<li class="cart_pro_name"><input id="product_checkbox"
 											type="checkbox" checked disabled>
@@ -85,8 +85,7 @@
 												<button>
 													<img src="${path}/images/board/minus.png">
 												</button>
-												<input type="text" readonly="readonly"
-													value="${info.pickCount}">
+												<input type="text" disabled value="${info.pickCount}">
 												<button>
 													<img src="${path}/images/board/plus.png">
 												</button>
@@ -148,14 +147,13 @@
 		if(${participant}>1){
 			$(".remaintime").attr("readonly",true);
 			$("#dateSelect").attr("disabled",true);
-			var editHour =  $("#input_hour").val();
-			var editMinute =  $("#input_minute").val();
+			//var editHour =  $("#input_hour").val();
+			//var editMinute =  $("#input_minute").val();
 			
 		}else{
 			$("#dateSelect").change(function(){
 				editDay = $("#dateSelect option:selected").val();
 			});
-			
 		}
 		
 		function editHourF(){
@@ -200,4 +198,3 @@
 	</script>
 </body>
 </html>
-

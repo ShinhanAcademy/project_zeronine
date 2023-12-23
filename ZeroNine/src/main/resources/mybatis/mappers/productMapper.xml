@@ -4,57 +4,86 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.product">
 
-	<select id="selectAll" resultType="productVo">
-		select * from product
-	</select>
-	<select id="selectBypCategoryId" parameterType="Integer"
+	<select id="searchAll" parameterType="map"
 		resultType="productVo">
 		SELECT *
-		FROM public.product where "pCategoryId" =
-		#{pCategoryId} limit 4 offset #{pcount}
+		FROM "product" pd
+		<if test="selectedValue==1">
+			left join
+			(select
+			"productId", count("productId") prcount from "likedProduct" group by
+			"productId") ld
+			on pd."productId" = ld."productId"
+		</if>
+		<if test="selectedValue==2">
+			full outer join (select "productId", count("productId") prcount
+			from "deliveryProduct" group by "productId" ) l 
+			on l."productId" = "pd"."productId"
+		</if>
+
+		WHERE
+		("pName" LIKE CONCAT('%',#{inputValue}, '%')
+		OR "brand" LIKE CONCAT('%',
+		#{inputValue}, '%'))
+
+		AND CAST("pCategoryId" AS VARCHAR) like concat('%',#{buttonValue},'%')
+
+		<if test="selectedValue==3">
+			order by price asc
+		</if>
+		<if test="selectedValue==1">
+			order by prcount desc NULLS LAST, pd.price asc
+		</if>
+		<if test="selectedValue==2">
+			order by prcount desc NULLS LAST, "pd"."price" asc
+		</if>
+		<if test="selectedValue==4">
+			order by price desc
+		</if>
+		LIMIT 12 OFFSET #{start}
+
 	</select>
-	<select id="selectBypCategoryIdall" parameterType="Integer"
-		resultType="productVo">
-		SELECT *
-		FROM public.product where "pCategoryId" !=
-		#{pCategoryId}
+	<select id="countProduct" parameterType="map"
+		resultType="int">
+		select count(*)
+		FROM "product" pd
+		<if test="selectedValue==1">
+			left join
+			(select
+			"productId", count("productId") prcount from "likedProduct" group by
+			"productId") ld
+			on pd."productId" = ld."productId"
+		</if>
+		<if test="selectedValue==2">
+			(select "productId", count("productId")
+			prcount
+			from "deliveryProduct" group by "productId" ) l full outer join
+			"product"
+			pd on l."productId" = "pd"."productId"
+		</if>
+
+		WHERE
+		("pName" LIKE CONCAT('%',#{inputValue}, '%')
+		OR "brand" LIKE CONCAT('%',
+		#{inputValue}, '%'))
+
+		AND CAST("pCategoryId" AS VARCHAR) like concat('%',#{buttonValue},'%')
+
+		<if test="selectedValue==3">
+			order by price asc
+		</if>
+		<if test="selectedValue==1">
+			order by prcount desc NULLS LAST, pd.price asc
+		</if>
+		<if test="selectedValue==2">
+			order by prcount desc NULLS LAST, "pd"."price" asc
+		</if>
+		<if test="selectedValue==4">
+			order by price desc
+		</if>
 	</select>
-	<select id="selectBymanyLiked" resultType="productVo">
-		select pd."pName",
-		pd."brand", pd."price", prcount
-		from
-		product pd left join
-		(select
-		"productId", count("productId") prcount from "likedProduct" group by
-		"productId") ld
-		on pd."productId" = ld."productId" order by prcount
-		desc NULLS LAST,
-		pd.price asc
-	</select>
-	<select id="selectByDelivery" resultType="productVo">
-		select "pd"."pName",
-		"pd"."brand", "pd"."price"
-		from (select "productId", count("productId")
-		prcount
-		from "deliveryProduct" group by "productId" ) l full outer join
-		"product"
-		pd on l."productId" = "pd"."productId"
-		order by prcount desc
-		NULLS LAST, "pd"."price" asc ;
-	</select>
-	<select id="selectBypriceAsc" resultType="productVo">
-		select * from product
-		order by price asc;
-	</select>
-	<select id="selectBypriceDesc" resultType="productVo">
-		select * from product
-		order by price desc;
-	</select>
-	<select id="selectByPnameBrand" parameterType="String"
-		resultType="productVo">
-		select * from product where "pName" like #{q} or "brand"
-		like #{q}
-	</select>
+	
+
 	<insert id="insertLikedProduct" parameterType="likedProductVo">
 		INSERT INTO
 		"likedProduct"("customerId", "productId")
@@ -66,36 +95,15 @@
 		"likedProduct" where "customerId" = CAST(#{custid} AS UUID) and
 		"productId" =CAST(#{productId} AS UUID)
 	</delete>
-	<select id="selectByPid" parameterType="String"
-		resultType="likedProductVo">
-		select * from "likedProduct" where "productId" =
-		CAST(#{productId} AS UUID)
-	</select>
-	<select id="selectByCid" parameterType="String"
-		resultType="likedProductVo">
-		select * from "likedProduct" where "customerId" =
-		CAST(#{custId} AS UUID)
-	</select>
-
-
 	<select id="selectByCidlist" parameterType="String"
 		resultType="String">
 		select "productId" from "likedProduct" where "customerId" =
 		CAST(#{custid} AS UUID)
 	</select>
 
-	<select id="selectAll16os" parameterType="int"
-		resultType="productVo">
-		select * from "product" LIMIT 4 OFFSET #{pCount}
-	</select>
-	<select id="selectAll16" resultType="productVo">
-		select * from "product"
-		LIMIT 4 OFFSET 0
-	</select>
-	<select id="countProduct" resultType="int">
-		select count(*) from
-		"product"
-	</select>
+
+
+
 	<select id="selectByProductId" parameterType="String"
 		resultType="productVo">
 		SELECT "productId", "pName", brand, price
@@ -108,12 +116,23 @@
 		"pd"."productId",
 		"pd"."pName", "pd"."brand", "pd"."price"
 		FROM (
-		SELECT "productId", COUNT("productId") AS prcount
+		SELECT
+		"productId", COUNT("productId") AS prcount
 		FROM "deliveryProduct"
-		GROUP BY "productId"
+		GROUP
+		BY "productId"
 		) l
-		FULL OUTER JOIN "product" pd ON l."productId" = "pd"."productId"
+		FULL OUTER JOIN "product" pd ON l."productId" =
+		"pd"."productId"
 		ORDER BY prcount DESC NULLS LAST, "pd"."price" ASC
 		LIMIT 4;
+	</select>
+	<select id="selectByPricePname" parameterType="String"
+		resultType="productVo">
+		SELECT price,"pName"
+		FROM "product"
+		where
+		"productId" =
+		CAST(#{productId} AS UUID)
 	</select>
 </mapper>

@@ -2,6 +2,20 @@
     ZERO NINE
 	-- MyPage COMMON
 ****************************/
+$(function(){
+	
+	//SNB
+	$(".snb_wrap li").each(function() {
+		let href = $(this).find('a').attr('href');
+		if (href == window.location.pathname) {
+			$(this).addClass("on"); return false;
+		}
+		if (href.indexOf(window.location.pathname) > -1 ){
+			$(this).addClass("on"); return false;
+		}
+	});
+	
+});
 
 function usingDatePicker(){
 	let currentDate = new Date();
@@ -30,13 +44,6 @@ function usingDatePicker(){
 	});
 }
 
-function convertTime(date) {
-  date = new Date(date);
-  let offset = date.getTimezoneOffset() * 60000; //ms단위라 60000곱해줌
-  let dateOffset = new Date(date.getTime() - offset);
-  return dateOffset.toISOString();
-}
-
 function deliveryModal() {
 	// delivery modal
 	$(".btn_delivery_check").on("click", function(){
@@ -54,14 +61,23 @@ function deliveryModal() {
 	$(".delivery_modal_wrap .btn_close").on("click", function(){
 		closeModal();
 	});
-		
-	// $(document).mouseup(function (e){
-	// 	console.log("eeeeevent",e);
-	// 	console.log("?????", $(".delivery_modal_wrap .contents").has(e.target).length);
-	// 	if($(".delivery_modal_wrap .contents").has(e.target).length == 0){
-	// 		//closeModal();
-	// 	};
-	// });
+	
+	/*	
+	$(document).mouseup(function (e){
+		e.stopPropagation();
+		console.log("eeeeevent",e);
+		let dimmed = $(".delivery_modal_wrap .modal_contents");
+		console.log("?????", $(".delivery_modal_wrap .modal_contents").has(e.target).length);
+		if(dimmed.has(e.target).length == 0){
+		//	closeModal();
+		};
+	});
+	*/
+	
+    $(".delivery_modal_wrap .dimmed").click(function(){
+		closeModal();
+    });
+    
 	
 	// ESC key 이벤트
 	$(document).keydown(function(e){
@@ -80,11 +96,14 @@ function closeModal() {
 }
 
 //엔터 Trigger
-document.querySelector(".search_word input").addEventListener("keyup", function(e) {
-    if (e.keyCode === 13) {
-        document.querySelector(".btn_search").click();
-    }
-});
+const inputWord = document.querySelector(".search_word input");
+if (inputWord) {
+	inputWord.addEventListener("keyup", function(e) {
+		if (e.keyCode === 13) {
+			document.querySelector(".btn_search").click();
+		};
+	});
+}
 
 //orderHistory
 //Ajax
@@ -95,16 +114,18 @@ function callOrderHistory() {
 	var paramObj = {};
 
 	paramObj.searchWord = $(".search_word input").val();
-	paramObj.startDate = convertTime(startDate).split("T")[0];
-	paramObj.endDate = convertTime(endDate).split("T")[0];
+	paramObj.startDate = dateSet.convertDate(startDate);
+	paramObj.endDate = dateSet.convertDate(endDate);
 	
 	$.ajax({
 		url: contextPath + "/myPage/subPage/orderHistoryDetail.do",
 		data: paramObj,
 		success: function(resData) {
+			console.log("OrderHistory 성공 !!");
 			$("#order_history_wrapper").html(resData);
 		},
 		error:function() {
+			console.log("OrderHistory ajax 오류");
 		}
 	});
 }
@@ -118,8 +139,8 @@ function callOrderCancelHistory() {
 	var paramObj = {};
 
 	paramObj.searchWord = $(".search_word input").val();
-	paramObj.startDate = convertTime(startDate).split("T")[0];
-	paramObj.endDate = convertTime(endDate).split("T")[0];
+	paramObj.startDate = dateSet.convertDate(startDate);
+	paramObj.endDate = dateSet.convertDate(endDate);
 	console.log("paramObj", paramObj);
 	
 	$.ajax({
@@ -164,11 +185,10 @@ function myCartList() {
 		success: function(resData) {
 			console.log("myCartList 성공 !!");
 			$("#my_cart_wrapper").html(resData);
+			
 		},
 		error:function() {
 			console.log("myCartList ajax 오류");
 		}
 	});
 }
-
-
