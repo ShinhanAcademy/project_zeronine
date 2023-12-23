@@ -87,7 +87,8 @@
 					<c:forEach items="${plist}" var="product" varStatus="status">
 						<div class="menu_sub">
 							<div class="menu_image">
-								<img class="menupng" onclick="location.href='${Path }/product/productDetail.do?productId=${product.productId}'"
+								<img class="menupng"
+									onclick="location.href='${Path }/product/productDetail.do?productId=${product.productId}'"
 									src="${path}/images/sangpumpage/ohddugi.png">
 
 								<div class="menu_gocart">
@@ -98,22 +99,21 @@
 												value="${product.productId}"
 												onclick="handleLikeButtonClick(${status.index}, '${product.productId}')">
 
-
-
 												<c:if test="${fn:contains(likedcid, product.productId)}">
-													<img class="menu_heart"   
+													<img class="menu_heart"
 														src="${path}/images/board/red_heart.png">
 												</c:if>
 												<c:if
 													test="${not(fn:contains(likedcid, product.productId))}">
-													<img class="menu_heart"   
+													<img class="menu_heart"
 														src="${path}/images/board/heart.png">
 												</c:if>
 											</button>
 										</div>
-										
-										<button class="gocart" id="gocart${status.index}"type="button"
-										onclick="handlegoCartButtonClick(${status.index}, '${product.productId}')">
+
+										<button class="gocart" id="gocart${status.index}"
+											type="button"
+											onclick="handlegoCartButtonClick(${status.index}, '${product.productId}')">
 											<img class="gocart"
 												src="${path}/images/sangpumpage/gocart.png">
 										</button>
@@ -134,28 +134,30 @@
 			</div>
 			<div class="dist100"></div>
 			<div class="plus_btnpart">
-			<div style="display: block; text-align: center;">		
-			<c:if test="${paging.startPage != 1 }">
-				<a href="javascript:pcountchange(${paging.startPage - 1},${paging.cntPerPage})">&lt;&lt;</a>
-			</c:if>
-			 <script>
+			<%-- 	<div style="display: block; text-align: center;">
+					<c:if test="${paging.startPage != 1 }">
+						<a href="javascript:pcountchange(${paging.startPage -1},${paging.cntPerPage})">&lt;&lt;</a>
+					</c:if>
+					<script>
 			 	console.log("${paging.endPage}");
 			 </script>
-			<c:forEach begin="${paging.startPage}" end="${paging.lastPage}" var="p">
-				<c:choose>
-					<c:when test="${p == paging.nowPage}">
-						<%-- <b>${p}</b> --%>
-						<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
-					</c:when>
-					<c:when test="${p != paging.nowPage}">
-						<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
-					</c:when>
-				</c:choose>
-			</c:forEach>
-			<c:if test="${paging.endPage != paging.lastPage}">
-				<a href="javascript:pcountchange(${paging.endPage+1},${paging.cntPerPage})">&gt;&gt;</a>
-			</c:if>
-	    </div>
+					<c:forEach begin="${paging.startPage}" end="${paging.lastPage}"
+						var="p">
+						<c:choose>
+							<c:when test="${p == paging.nowPage}">
+								<b>${p}</b>
+								<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
+							</c:when>
+							<c:when test="${p != paging.nowPage}">
+								<a href="javascript:pcountchange(${p},${paging.lastPage})">${p}</a>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${paging.endPage != paging.lastPage}">
+						<a
+							href="javascript:pcountchange(${paging.endPage+1},${paging.cntPerPage})">&gt;&gt;</a>
+					</c:if>
+				</div> --%>
 
 				<div class="dist49"></div>
 			</div>
@@ -241,7 +243,7 @@
 				
 	 };
 	
-	function pcountchange(currentpage,perpage){
+/* 	function pcountchange(currentpage,perpage){
 		console.log(currentpage);
 		var obj = {
 				//"value":event.target.value,	
@@ -261,7 +263,7 @@
 				alert("에러입니다.");
 			}
 			});
-	}
+	} */
 	 var str = "${likedcid}";
 	 var likedcidArr = [] ; 
 	 //str.split(/!|@|~|,| |Z/);

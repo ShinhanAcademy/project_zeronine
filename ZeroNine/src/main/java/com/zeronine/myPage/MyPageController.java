@@ -338,33 +338,30 @@ public class MyPageController {
 	/* ****************************
 			MY_INFOMATION
 	 ****************************** */
-	@PostMapping(value = "/validatePw.do", consumes = "application/json")
-	@ResponseBody
-	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
-		String email = map.get("email");
-		String password = map.get("password");
-
-		boolean isValid = cService.login(email, password) > 0;
-
-		if(!isValid) {
-			CustomerVO invalidCustomer = new CustomerVO();
-			
-			invalidCustomer.setCustomerName("invalid");
-			return invalidCustomer;
-		}
-
-		return cService.selectByEmail(email);	
-	}
-
-	@RequestMapping("/myInfo.do")
-	public void myInfo(HttpSession session, Model model) {
-		String email = (String)session.getAttribute("email");
-		CustomerVO customerVo = cService.selectByEmail(email);
-		logger.info(customerVo.toString());
-		model.addAttribute("customerVo", customerVo);
-		model.addAttribute("birthdayFormmated", customerVo.getBirthday().toString().substring(0, 10));
-	
-	}
+	/*
+	 * @PostMapping(value = "/validatePw.do", consumes = "application/json")
+	 * 
+	 * @ResponseBody public CustomerVO validatePassword(@RequestBody Map<String,
+	 * String> map, Model model) { String email = map.get("email"); String password
+	 * = map.get("password");
+	 * 
+	 * boolean isValid = cService.login(email, password) > 0;
+	 * 
+	 * if(!isValid) { CustomerVO invalidCustomer = new CustomerVO();
+	 * 
+	 * invalidCustomer.setCustomerName("invalid"); return invalidCustomer; }
+	 * 
+	 * return cService.selectByEmail(email); }
+	 * 
+	 * @RequestMapping("/myInfo.do") public void myInfo(HttpSession session, Model
+	 * model) { String email = (String)session.getAttribute("email"); CustomerVO
+	 * customerVo = cService.selectByEmail(email);
+	 * logger.info(customerVo.toString()); model.addAttribute("customerVo",
+	 * customerVo); model.addAttribute("birthdayFormmated",
+	 * customerVo.getBirthday().toString().substring(0, 10));
+	 * 
+	 * }
+	 */
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@RequestMapping("/subscriptionInfo.do")

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zeronine.dto.CartVO;
 import com.zeronine.dto.ProductVO;
 
 @Repository("cartDAO")
@@ -45,5 +46,20 @@ public class CartDAOMybatis {
 		map.put("pcount", pcount);
 		return sqlSession.insert(NAMESPACE + "goProductDCart", map);
 	}
-
+	//Detail에서 주문하기 눌렀을때 상품이 장바구니에 존재할때 pcount의 개수로 바꿔주는 query
+	public int beforeproductOrder(String custid, String productId, int pcount) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("custid", custid);
+		map.put("productId", productId);
+		map.put("pcount", pcount);
+		return sqlSession.update(NAMESPACE + "beforeproductOrder", map);
+	}
+	public List<String> orderOneCart(String custid, String productId) {
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("custid", custid);
+	    map.put("productId", productId);
+	    List<String> prodIds = sqlSession.selectList(NAMESPACE + "orderOneCart", map);
+	    return prodIds;
+	}
+	
 }
