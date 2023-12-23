@@ -44,7 +44,7 @@
 	</select>
 	<select id="selectById" resultType="customerVo"
 		parameterType="String">
-		select * from customer where "customerId" = CAST(#{customerId} AS UUID)
+		select * from customer where "customerId" = #{customerId}
 	</select>
 	<select id="selectByEmail" resultType="customerVo"
 		parameterType="String">

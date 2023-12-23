@@ -1,7 +1,8 @@
 package com.zeronine.dto;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import lombok.Setter;
 
 
 @NoArgsConstructor
@@ -103,4 +104,7 @@ public class PagingVO {
 		this.cntPerPage = cntPerPage;
 	}
 	
+	
+ 
+	 
 }

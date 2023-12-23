@@ -26,8 +26,7 @@
 				</div>
 				<span class="detail_pname">${plist.pName}</span>
 				<div class="detail_price">
-					<span><fmt:formatNumber
-								value="${plist.price }" maxFractionDigits="3"></fmt:formatNumber>원</span>
+					<span>${plist.price}원</span>
 				</div>
 
 				<div class="jul"></div>
@@ -70,7 +69,7 @@
 					<div class="total_button">
 						<button   type="button" class="detail_cart" id="manygocart" onclick="manygocart">장바구니</button>
 						
-						<button class="detail_order"id="goOrder" onclick="goOrder">바로구매</button>
+						<button class="detail_order">바로구매</button>
 					</div>
 				</div>
 			</div>
@@ -135,7 +134,7 @@
 
 	</div>
 
-<div id="modal"></div>
+
 
 
 
@@ -146,8 +145,6 @@
 		 var custid = "${customerid}";
 		 var productid ="${plist.productId}";
 		 console.log(productid);
-		 var cartCheckpid ="${cartCheckPid}";
-		 console.log(cartCheckpid);
 		var currentPosition = parseInt($("#sidebox").css("top"));
 		
 		$(window).scroll(function() {
@@ -196,65 +193,14 @@
 			        quantityValue: quantityValue
 			    };
 		}
-		cartCheck = cartCheckpid.replace(/\[|\]/g, ''); // Remove square brackets
-	    var cartcheckArray = cartCheck.split(',').map(function(item) {
-	        return item.trim(); // Remove extra spaces
-	    });
-	    var productid ="${plist.productId}";
-	
-		var cartcheckarr =cartCheck.split(',');
-		$("#goOrder").click(function(){
-			var cartCheckpid ="${cartCheckPid}";
-			 var productid ="${plist.productId}";
-			 console.log(productid);
-			 console.log(cartCheckpid);
-			 console.log(cartCheckpid.includes(productid)==false);
-			 console.log(cartcheckarr.includes(productid)==false);
-			 console.log(cartcheckarr);
-				var result = updateQuantityAndTotal();
-			    var total = result.total;
-			    var quantityValue = result.quantityValue;
-				var obj = {
-						"cartCheckpid":cartCheckpid,
-					"productid" :productid,
-					"pcount": quantityValue};
-				 if(cartCheckpid.includes(productid)==false){
-				$.ajax({
-						url : path + "/product/goProductDCart.do",
-						data : obj,
-						type : "POST",
-						success : function(){
-							location.href = "${path}/product/productOrder.do?productid="+productid;
-							
-							},
-						error : function() {
-							alert("에러입니다.");
-						}
-					}); 
-			}else{
-				$.ajax({
-					url : path + "/product/beforeproductOrder.do",
-					data : obj,
-					type : "POST",
-					success : function(){
-			location.href = "${path}/product/productOrder.do?productid="+productid;
-					},
-					error : function() {
-						alert("에러입니다.");
-					}
-				}); 
-				
-			} 
-			
-		})
-		
 		$("#manygocart").click(function () {
 			 var productid ="${plist.productId}";
+			 console.log(custid);
+			 console.log(productid);
 			var result = updateQuantityAndTotal();
 		    var total = result.total;
 		    var quantityValue = result.quantityValue;
-		    console.log(custid);
-			 console.log(productid);
+		  
 			var obj = {
 				"productid" :productid,
 				"pcount": quantityValue};

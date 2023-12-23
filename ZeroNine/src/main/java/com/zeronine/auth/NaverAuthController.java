@@ -120,10 +120,8 @@ public class NaverAuthController {
 		}
 		
 		
-		/*
-		 * session.setAttribute("customerId", customerVo.getCustomerId());
-		 * session.setAttribute("email", customerVo.getEmail());
-		 */
+		session.setAttribute("customerId", customerVo.getCustomerId());
+		session.setAttribute("email", customerVo.getEmail());
 		
 		return "/main/main";
 		//logger.info(jsonObj.get("response").getClass().toString());

@@ -29,16 +29,4 @@ WHERE "customerId" = CAST(#{custid} AS UUID)
 		VALUES (CAST(#{custid} AS
 		UUID), CAST(#{productId} AS UUID), #{pcount});
 </insert>
-<update id="beforeproductOrder" parameterType="CartVo">
-UPDATE cart
-	SET  "productCount"= #{pcount}
-	WHERE "customerId"= CAST(#{custid} AS UUID)
-	and "productId"= CAST(#{productId} AS UUID)
-</update>
-<select id="orderOneCart" 
-resultType="map">
-SELECT product."pName", cart."productCount", product."price"
-FROM (select "productId", "productCount" from cart where "customerId" = CAST(#{custid} AS UUID)	and "productId" = CAST(#{productId} AS UUID)
- ) cart JOIN product ON cart."productId" = product."productId";
-</select>
 </mapper>

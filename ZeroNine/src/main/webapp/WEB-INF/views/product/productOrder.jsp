@@ -5,11 +5,6 @@
 <%@include file="../common/head.jsp"%>
 <title>상품목록</title>
 <link rel="stylesheet" href="${path}/css/product/productOrder.css" />
-	<script>
-		var path = "${path}";
-		var itempriceValue = document.getElementById("#itemprice").innerText;
-	    document.getElementById("#itemprice2").innerText = itempriceValue;
-	</script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -20,17 +15,15 @@
 			</div>
 
 			<div class="orderinfo">
-			<c:forEach var="item" items="${orderonecart}">
 				<span class="orderinfo_text">주문내역</span>
 				<div class="orderinfo_box">
 					<div class="orderinfo_boxtext">
 						<div class="infotext_space">
 							<div class="infotext_space_left">
-								<span class="box_text">${item.pName}</span>
+								<span class="box_text">옛날 오뚜기 500G, 1개</span>
 							</div>
 							<div class="infotext_space_right">
-								<span id="itemPrice" class="box_text"><fmt:formatNumber
-								value="${item.price*item.productCount}" maxFractionDigits="3"></fmt:formatNumber>원</span>
+								<span class="box_text">3,000원</span>
 							</div>
 						</div>
 						<div class="jul"></div>
@@ -39,7 +32,6 @@
 					<!-- orderinfo_box -->
 				</div>
 				<!-- orderinfo -->
-				</c:forEach>
 			</div>
 
 
@@ -56,7 +48,7 @@
 									<p class="odt-t">주문자명</p>
 								</div>
 								<div class="odd">
-									<input type="text" class="odd_input" value="${custlist.customerName }" readonly>
+									<input type="text" class="odd_input" value="방용수">
 								</div>
 
 							</div>
@@ -65,7 +57,7 @@
 									<p class="odt-t">연락처</p>
 								</div>
 								<div class="odd">
-									<input type="text" class="odd_input" value="${custlist.phoneNumber }" readonly>
+									<input type="text" class="odd_input" value="010-1234-5678">
 								</div>
 
 							</div>
@@ -74,7 +66,7 @@
 									<p class="odt-t">이메일</p>
 								</div>
 								<div class="odd">
-									<input type="text" class="odd_input" value="${custlist.email }" readonly>
+									<input type="text" class="odd_input" value="shinhan@naver.com">
 								</div>
 
 							</div>
@@ -96,11 +88,11 @@
 						<div class="deliverypinfo">
 							<div class="delpinfo">
 								<dl>
-									<dt id="order_name">${custlist.customerName}</dt>
-									<dd id="order_address">${custlist.address }</dd>
+									<dt id="order_name">방용수</dt>
+									<dd id="order_address">[11021]경기 파주시 저어딘가요 55 109동1004호</dd>
 								</dl>
 								<div class="delpPhone">
-									<span id="order_phone">${custlist.phoneNumber }</span>
+									<span id="order_phone">010-1234-4567</span>
 								</div>
 							</div>
 
@@ -125,10 +117,11 @@
 									<input type="text" value="0" name="p_poing" id="p_point"
 										class="p_input">
 									<p class="useable_point">
-										사용가능한 적립금 <strong>${custlist.point }</strong>
+										사용가능한 적립금 <strong>1500원</strong>
 									</p>
 									<button type="button" class="useptbtn" name="useptbtn"
 										id="useptbtn">모두사용</button>
+
 
 								</dd>
 							</dl>
@@ -183,11 +176,10 @@
 					<div class="bb_wb">
 						<div class="buy_box_middle">
 							<div class="purchaseinfo">
-								<span>주문금액</span><span>
-							11,000원</span>
+								<span>주문금액</span><strong><span>11,000원</span></strong>
 							</div>
 							<div class="purchaseinfo">
-								<span>배송비</span><span id="itemprice2"></span>
+								<span>배송비</span><strong><span>11,000원</span></strong>
 							</div>
 							<div class="purchaseinfo">
 								<span>포인트사용</span><strong><span>11,000원</span></strong>
@@ -206,11 +198,39 @@
 			</div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			<!-- order-bodypart -->
 		</div>
 	</div>
 
 	<%@include file="../common/footer.jsp"%>
-
+	<script>
+		var path = "${path}";
+	</script>
 </body>
 </html>

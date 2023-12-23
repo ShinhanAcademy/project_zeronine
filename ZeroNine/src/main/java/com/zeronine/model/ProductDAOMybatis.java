@@ -94,7 +94,7 @@ public class ProductDAOMybatis {
 		
 		//int productcount = sqlSession.selectOne(namespace + "countProduct");
 		//sqlSession.selectOne(namespace + "countProduct").
-		/* sqlSession.selectOne(namespace + "countProduct"); */
+		sqlSession.selectOne(namespace + "countProduct");
 		//System.out.println("countProduct ==>" + );
 		//logger.info("");
 		//return productcount;
