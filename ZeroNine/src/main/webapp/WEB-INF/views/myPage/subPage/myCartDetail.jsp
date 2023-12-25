@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%><%-- date format lib --%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%><%-- functions lib --%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<script defer src="/js/myPage/subPage/myCartDetail.js"></script>
-<div class="free_delivery_amount">
+<script defer src="${path}/js/myPage/subPage/myCartDetail.js"></script>
+<!-- <div class="free_delivery_amount">
 	<div class="target_amount">
 		<div class="now_amount"></div>
 	</div>
 	<div class="text">32,000원 추가하면 무료배송!!</div>
-</div>
+</div> -->
 <div class="con_tit">장바구니</div>
 <!-- contents -->
 <div class="contents">
@@ -45,6 +45,7 @@
 				<tbody id="cartList">
 					<c:choose>
 						<c:when test="${myCart.size() != 0}"> 
+							<form id="cartListForm" name="cartListForm">
 							<c:forEach items="${myCart}" var="cartItem">
 								<tr id="${cartItem.productId}">
 									<td class="has_check check_item">
@@ -67,7 +68,7 @@
 										</div>
 									</td>
 									<td class="product_count">
-										<select id="select_count" name="select_count">
+										<select class="select_count" name="select_count">
 											<c:forEach var="countQuantity" begin="1" end="100">
 												<option value="${countQuantity}" ${countQuantity == cartItem.productCount ? "selected" : ""}>${countQuantity}</option>
 											</c:forEach>
@@ -78,11 +79,12 @@
 									</td>
 									<td class="purchase_selection">
 										<button class="btn_buy btn_blue">바로구매</button>
-										<button class="btn_addlike btn_default">쇼킹찜</button>
+										<button class="btn_addlike btn_default" data-custId="${customerId}" data-prodId="${cartItem.productId}">쇼킹찜</button>
 										<button class="btn_del btn_default">삭제</button>
 									</td>
 								</tr>
-							</c:forEach>				
+							</c:forEach>
+							</form>				
 						</c:when>
 						<c:otherwise>
 							<tr>
@@ -119,8 +121,9 @@
 				</div>
 			</div>
 			<div class="btn_wrap">
-				<button class="partial_order btn_blue">선택 주문</button>
-				<button class="all_order">전체 주문</button>
+			<button class="partial_order btn_blue" ${myCart.size() == 0 ? "disabled": ""}>선택 주문</button>
+				<button class="all_order" ${myCart.size() == 0 ? "disabled": ""}>전체 주문</button>
+				<input type="hidden" name="checkedVAl" value="val">
 			</div>
 		</div>
 	</div>

@@ -3,7 +3,7 @@
 	-- MyPage / myCart
 ****************************/
 $(function(){
-	myCartList();	//likeProduct Ajax
+	myCartList();	//myCartList Ajax
 
 });
 

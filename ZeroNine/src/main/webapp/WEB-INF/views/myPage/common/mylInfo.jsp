@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script defer src="${path}/js/myPage/common/myInfo.js"></script>
 <div class="my_info_wrap">
 	<!-- info_left -->
 	<div class="info_left">
@@ -42,7 +43,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>회수 쿠폰</th>
+					<th>보유 회수 쿠폰</th>
 					<td>36회</td>
 				</tr>
 			</tbody>

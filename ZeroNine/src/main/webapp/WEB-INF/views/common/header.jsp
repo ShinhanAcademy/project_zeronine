@@ -13,7 +13,7 @@
 						<p><a href="${path}/myPage/orderHistory.do" class="user_name">${sessionScope.customerName}</a> 님 에코에코한 하루되세요😊!</p>
 						<ul>
 							<li><a href="${path}/myPage/orderHistory.do">마이페이지</a></li>
-							<li><a href="#">로그아웃</a></li>
+							<li><a href="${path}/auth/logout.do">로그아웃</a></li>
 						</ul>
 					</c:when>
 					<c:otherwise>
