@@ -74,12 +74,19 @@
 											</c:forEach>
 										</select>
 									</td>
-									<td class="price" data-price=${cartItem.price}>
+									<td class="price" data-price="${cartItem.price}">
 										<fmt:formatNumber pattern="#,##0" value="${cartItem.price * cartItem.productCount}" /> 원
 									</td>
 									<td class="purchase_selection">
 										<button class="btn_buy btn_blue">바로구매</button>
-										<button class="btn_addlike btn_default" data-custId="${customerId}" data-prodId="${cartItem.productId}">쇼킹찜</button>
+										<c:choose>
+											<c:when test="${cartItem.likedProductId ne null}">
+												<button class="btn_addlike btn_default on" data-custId="${customerId}" data-prodId="${cartItem.productId}">쇼킹찜</button>
+											</c:when>
+											<c:otherwise>
+												<button class="btn_addlike btn_default" data-custId="${customerId}" data-prodId="${cartItem.productId}">쇼킹찜</button>
+											</c:otherwise>
+										</c:choose>
 										<button class="btn_del btn_default">삭제</button>
 									</td>
 								</tr>

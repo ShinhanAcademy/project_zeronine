@@ -1,5 +1,7 @@
 package com.zeronine.chat;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zeronine.dto.ChatDtlVO;
 import com.zeronine.dto.ChatMessage;
 import com.zeronine.dto.ChatVO;
+import com.zeronine.dto.CustomerVO;
 import com.zeronine.dto.MessageVO;
 import com.zeronine.model.ChatService;
+import com.zeronine.model.CustomerService;
 
 @Controller
 public class ChatController {
@@ -36,6 +40,8 @@ public class ChatController {
 	
 	@Autowired
 	private ChatService chatService;
+	@Autowired
+	private CustomerService customerService;
 	
 	@RequestMapping("/chat.do")
 	public String main(HttpServletRequest request, Model model) {
@@ -66,9 +72,14 @@ public class ChatController {
 		HttpSession session  = request.getSession();
 		String customerId = (String) session.getAttribute("customerId");
 		
+		String senderId = chatDtlVO.getSenderId();
+		CustomerVO customerVO = customerService.selectById(senderId);
+		String customerName = customerVO.getCustomerName();
+		
 		result.put("chatDtlList", chatDtlList);
 		result.put("chatDtlVO", chatDtlVO);
 		result.put("customerId", customerId);
+		result.put("customerName", customerName);
 		return result;
 	}
 	
@@ -107,6 +118,13 @@ public class ChatController {
 		String customerId = chatMessage.getSender();
 		messageVO.setMessageId(uuid);
 		messageVO.setSenderId(customerId);
+		
+		// 현재 시간을 가져옴
+        Date currentDate = new Date();
+        // Date를 Timestamp로 변환
+        Timestamp timestamp = new Timestamp(currentDate.getTime());
+		
+        messageVO.setSendTime(timestamp);
 		
 		log.info("messageVO >>>> {}", messageVO);
 		chatService.insertMessageInfo(messageVO);

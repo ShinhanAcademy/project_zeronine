@@ -150,38 +150,39 @@ $(function () {
 		callOrderSheet(chkedBox);
 	});
 
-/*	//용수테 category.jsp 물어보기
     $(".btn_addlike").on("click", function () {
-		const custId = $(this).attr("data-custId")
 		const prodId = $(this).attr("data-prodId")
-		console.log("custId", custId);
 		console.log("prodId", prodId);
-		console.log("likeddArr", likeddArr);
-        callLikeProdList(likedArr, custId, prodId);
-		console.log("likeddArr", likedArr);
-		
-		console.log("click");
+		const target = this;
 
-        // $(".product_list .btn_like").on("click", function () {
-        //     let item = $(this).closest(".like_item");
-        //     unLikeData = {
-        //         custid: $(this).attr("data-custId"),
-        //         productId: $(this).attr("data-prodId"),
-        //     };
-        //     $.ajax({
-        //         url: "/product/deleteLikedProduct.do",
-        //         type: "POST",
-        //         data: unLikeData,
-        //         success: function () {
-        //             item.remove();
-        //         },
-        //         error: function () {
-        //             alert("에러입니다.");
-        //         },
-        //     });
-        // });
+        var hasRedHeart = $(this).hasClass("on");
+		console.log(hasRedHeart);
+		if(hasRedHeart) {
+			$.ajax({
+				url : "/product/deleteLikedProduct.do",
+				type: "POST",
+				data : {"productId" :prodId},
+				success : function(){
+					$(target).removeClass("on");
+				},
+				error : function(){
+					alert("에러입니다.");
+				}
+			});
+		}else{
+			 $.ajax({
+				url : "/product/productLike.do",
+				type: "POST",
+				data : {"productId" :prodId},
+				success : function(){
+					$(target).addClass("on");
+				},
+				error : function(){
+					alert("에러입니다.");
+				}
+			});
+		}
     });
-*/
 }); //End
 
 //delete cart item Ajax
