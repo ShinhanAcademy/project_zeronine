@@ -85,4 +85,9 @@ public class ProductService {
 		return productDAO.selectByPricePname(productId);
 	}
 
+	public List<ProductVO> selectByProductList(String[] productIdArr) {
+		// TODO Auto-generated method stub
+		return productDAO.selectByProductList(productIdArr);
+	}
+
 }
