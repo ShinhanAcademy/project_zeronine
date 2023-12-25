@@ -38,9 +38,7 @@
 				</tr>
 				<tr>
 					<th>My Point</th>
-					<td>4,280
-						<button class="btn_orange_small">충전하기</button>
-					</td>
+					<td>4,280</td>
 				</tr>
 				<tr>
 					<th>보유 회수 쿠폰</th>

@@ -90,6 +90,7 @@
 		,"oneToOneBoard"."oTitle" AS "title"
 		,"oBoardImage"."oBoardImagePath" AS "path"
 		,"customer"."customerName"
+		,"chat"."customerId" AS "senderId"
 	FROM "chat"
 	INNER JOIN "oneToOneBoard"
 		ON "chat"."oBoardId" = "oneToOneBoard"."oBoardId"
