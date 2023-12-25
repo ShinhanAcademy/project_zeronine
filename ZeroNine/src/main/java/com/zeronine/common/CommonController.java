@@ -100,6 +100,9 @@ public class CommonController {
 		String message;
 		if(isFreeProduct==0 || isFreeProduct==1) {
 			message = "참여완료"; //participate complete
+			for(Entry<String,Object> row:entrys) {
+				boardService.deleteCart(customerId, row.getKey());
+			}
 		}else {
 			message = "이미 참여한 게시글입니다."; //already
 		}
@@ -144,7 +147,7 @@ public class CommonController {
 		String productId = (String)info.get("productId");
 		int count = Integer.parseInt((String)info.get("count"));
 		ProductVO product = boardService.selectByPid(productId);
-		CustomerVO customer =  customerService.selectById(customerId);
+		CustomerVO customer = customerService.selectById(customerId);
 		model.addAttribute("count",count);
 		model.addAttribute("product",product);
 		model.addAttribute("customer",customer);

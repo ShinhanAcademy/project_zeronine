@@ -56,31 +56,31 @@
 					<p class="agree_tit">이용약관동의</p>
 					<hr>
 					<div class="agree_tot">
-						<input type="checkbox" name="agree" onclick="selectAll(this)">
+						<input id="check_all" type="checkbox" name="agree" onclick="selectAll(this)">
 						<p>전체 동의</p>
 					</div>
 					<hr>
 					<div class="agree_part">
 						<div>
-							<input type="checkbox" name="agree">
+							<input class="check_essential" type="checkbox" name="agree" onclick="BtnDisabled()">
 							<p>(필수)이용약관 동의</p>
 						</div>
 						<div>
-							<input type="checkbox" name="agree">
+							<input class="check_essential" type="checkbox" name="agree" onclick="BtnDisabled()">
 							<p>(필수)개인정보 수집,이용 동의</p>
 						</div>
 						<div>
-							<input type="checkbox" name="agree">
+							<input type="checkbox" name="agree" onclick="BtnDisabled()">
 							<p>(선택)광고정보 수신 동의</p>
 						</div>
 						<div>
-							<input type="checkbox" name="agree">
+							<input class="check_essential" type="checkbox" name="agree" onclick="BtnDisabled()">
 							<p>(필수)본인은 만 14세 이상입니다.</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<button type="button" id="join_btn">가입하기</button>
+			<button type="button" id="join_btn" disabled>가입하기</button>
 		</form>
 
 	</div>

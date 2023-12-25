@@ -134,9 +134,12 @@
 		WHERE b."boardId" = cast(#{boardId} as UUID)
 	</select>
 	<select id="numOfFreeParticipant" resultType="int" parameterType="String">
-		select count(bc."customerId")
+		select count(*)
+		from (
+		select distinct bc."customerId"
 		from board b left join "boardCart" bc on (b."boardId"=bc."boardId")
 		WHERE b."boardId" = cast(#{boardId} as UUID)
+		) as participant
 	</select>
 	<select id="myParticipatedBlist" resultType="map" parameterType="String">
 		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
@@ -429,4 +432,9 @@
 		from "selectProduct"
 		where "boardId" = cast(#{boardId} as UUID))
 	</select>
+	<delete id="deleteCart" parameterType="map">
+		DELETE FROM public.cart
+		WHERE "productId" = cast(#{productId} as UUID)
+		and "customerId" = cast(#{authorId} as UUID)
+	</delete>
 </mapper>

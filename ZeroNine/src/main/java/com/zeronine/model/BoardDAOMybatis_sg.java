@@ -42,7 +42,6 @@ public class BoardDAOMybatis_sg {
 		map.put("productId", productId);
 		map.put("pickCount", pickCount);
 		map.put("is_write_success", 0);
-		logger.info(map.toString());
 		return sqlSession.insert(NAMESPACE + "insertFastBoard", map);
 	}
 

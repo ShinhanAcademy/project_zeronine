@@ -311,6 +311,13 @@ public class BoardDAOMybatis_yn {
 		return totalPrice;
 	}
 
+	public void deleteCart(String authorId, String productId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("authorId", authorId);
+		map.put("productId", productId);
+		sqlSession.delete(NAMESPACE + "deleteCart", map);
+	}
+
 	
 
 	
