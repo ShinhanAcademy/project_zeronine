@@ -35,8 +35,7 @@ public class ProductDAOMybatis {
 	public ProductVO selectByProductId(String productId) {
 		ProductVO prodid = sqlSession.selectOne(namespace + "selectByProductId", productId);
 		
-		return prodid;
-		
+		return prodid;	
 	}
 
 
@@ -50,6 +49,11 @@ public class ProductDAOMybatis {
 	public ProductVO selectByPricePname(String productId) {
 		ProductVO product = sqlSession.selectOne(namespace + "selectByPricePname",productId);
 	return product;
+	}
+
+	public List<ProductVO> selectByProductList(String[] productIdArr) {
+		List<ProductVO> productList = sqlSession.selectList(namespace + "selectByProductList", productIdArr);
+		return productList;
 	}
 
 
