@@ -266,6 +266,7 @@ public class ProductController {
 		logger.info("Delivery ID: " + deliveryId);
 		logger.info("Product ID: " + productId);
 		model.addAttribute("deliproduct",deliveryproductservice_ys.selectOrderInfo(deliveryId));
+		model.addAttribute("IsFreeDelivery",payservice.IsFreeDelivery(custid));
 		/*
 		 * model.addAttribute("product", productService.selectByPricePname(productId));
 		 */

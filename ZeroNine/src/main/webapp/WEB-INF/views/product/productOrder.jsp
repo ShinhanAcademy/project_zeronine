@@ -178,8 +178,7 @@ $(".agreebtn").click(function (){
 })
 
 //배송비
-var IsFreeDelivery = "${IsFreeDelivery}";
-console.log(IsFreeDelivery);
+
 var itemPriceText = document.getElementById("itemPrice").innerText;
 var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText.replace(/[^\d.]/g, ''));
 document.getElementById("itemprice2").innerText = itemPriceText;
