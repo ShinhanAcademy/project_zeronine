@@ -54,18 +54,24 @@
 									</td>
 									<td class="product_info">
 										<div class="img_wrap">
-											<c:choose>
-												<c:when test="${not empty cartItem.imagePath}"> 
-													<img src="${cartItem.imagePath}" alt="product image" />
-												</c:when>
-												<c:otherwise>
-													<img src="${path}/images/common/img_preparing.png" alt="product image" />
-												</c:otherwise>
-											</c:choose>
+											<a href="${path}/product/productDetail.do?productId=${cartItem.productId}">
+												<c:choose>
+													<c:when test="${not empty cartItem.imagePath}"> 
+														<img src="${cartItem.imagePath}" alt="product image" />
+													</c:when>
+													<c:otherwise>
+														<img src="${path}/images/common/img_preparing.png" alt="product image" />
+													</c:otherwise>
+												</c:choose>
+											</a>
 										</div>
 										<div class="detail">
 											<div class="brand_name">${cartItem.brand}</div>
-											<div class="product_name">${cartItem.pName}</div>
+											<div class="product_name">
+												<a href="${Path}/product/productDetail.do?productId=${cartItem.productId}">
+													${cartItem.pName}
+												</a>
+											</div>
 										</div>
 									</td>
 									<td class="product_count">

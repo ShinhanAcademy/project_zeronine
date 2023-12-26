@@ -11,7 +11,8 @@
 		<div class="like_item">
 			<div class="item_inner">
 				<div class="img_wrap">
-					<a href="javascript:void(0)">
+					<!-- <a href="javascript:void(0)"> -->
+					<a href="${path}/product/productDetail.do?productId=${item.productId}">
 						<c:choose>
 							<c:when test="${not empty item.imagePath}"> 
 								<img src="${item.imagePath}" alt="product image" />
@@ -26,9 +27,11 @@
 				<div>
 					<div class="product_brand">${item.brand}</div>
 					<div class="product_name">
-						<a href="javascript:void(0)">${item.pName}</a>
+						<a href="${path}/product/productDetail.do?productId=${item.productId}">${item.pName}</a>
 					</div>
-					<div class="price">${item.price} 원</div>
+					<div class="price">
+						<fmt:formatNumber pattern="#,##0" value="${item.price}" /> 원
+					</div>
 				</div>
 			</div>
 		</div>

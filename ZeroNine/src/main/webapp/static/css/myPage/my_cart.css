@@ -45,9 +45,22 @@
     height: 130px;
     border: 1px solid #ebebeb;
 }
+.my_cart_wrap .product_info .img_wrap a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 .my_cart_wrap .product_info .img_wrap img {	
 	height: 100%;	
+    -o-object-fit: cover;
     object-fit: cover;
+    -webkit-transition: -webkit-transform 0.2s ease-in;
+    transition: -webkit-transform 0.2s ease-in;
+}
+.my_cart_wrap .product_info .img_wrap img:hover {
+    -webkit-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    transform: scale(1.08);
 }
 .my_cart_wrap .product_count select {
     width: 57px;
