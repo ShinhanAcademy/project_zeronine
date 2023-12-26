@@ -167,7 +167,7 @@ var path ="${path}";
 $(".agreebtn").click(function (){
 	 var currentImagePath = $(this).find("img.purchaseAgree").attr("src");
      var newImagePath = currentImagePath === path + "/images/sangpumpage/checkbox.png" ?
-    		 path + "/images/sangpumpage/fillcheckbox.png" :
+    		 path + "/images/sangpumpage/fillcheckbox.png":
     			 path + "/images/sangpumpage/checkbox.png";
 			
      
