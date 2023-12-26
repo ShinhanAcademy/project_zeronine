@@ -150,38 +150,10 @@ $(function () {
 		callOrderSheet(chkedBox);
 	});
 
-    $(".btn_addlike").on("click", function () {
-		const prodId = $(this).attr("data-prodId")
-		console.log("prodId", prodId);
-		const target = this;
-
-        var hasRedHeart = $(this).hasClass("on");
-		console.log(hasRedHeart);
-		if(hasRedHeart) {
-			$.ajax({
-				url : "/product/deleteLikedProduct.do",
-				type: "POST",
-				data : {"productId" :prodId},
-				success : function(){
-					$(target).removeClass("on");
-				},
-				error : function(){
-					alert("에러입니다.");
-				}
-			});
-		}else{
-			 $.ajax({
-				url : "/product/productLike.do",
-				type: "POST",
-				data : {"productId" :prodId},
-				success : function(){
-					$(target).addClass("on");
-				},
-				error : function(){
-					alert("에러입니다.");
-				}
-			});
-		}
+    //찜한 상품
+    $(".purchase_selection .btn_addlike").on("click", function () {
+        const targetItem = $(this);
+		callLikeProdList(targetItem);
     });
 }); //End
 
@@ -206,35 +178,86 @@ function delCartAjax(productId) {
 } // end_delCartAjax
 
 function calcTotalPrice(totalPrice) {
-    let targetChkedBox = $("#cartList input[type=checkbox]:checked")
-        .closest("tr")
-        .find(".price");
+    let targetChkedBox = $("#cartList input[type=checkbox]:checked").closest("tr").find(".price");
+    const freeDeliveryAmount = 50000;
+    let deliveryFee = 3000;
+    let indicatedPrice = 0;
     totalPrice = 0;
-    // console.log("???", targetChkedBox);
+
+    console.log("targetChkedBox??", targetChkedBox);
     targetChkedBox.each(function () {
-        totalPrice += parseNumber($(this).text());
+        totalPrice += parseNumber($(this).text().trim());
     });
 
-    $(".expected_payment span").html(`${numberWithDots(totalPrice)} 원`);
-    $(".total_selling_price .total_price").html(
-        `${numberWithDots(totalPrice)} 원`
-    );
+    
+    $(".free_delivery_amount .text.free_delivery, .free_delivery_amount .text.pay_delivery").hide();
+    if (totalPrice >= freeDeliveryAmount) {
+        if(targetChkedBox.length == 0) {
+            deliveryFee = 0;
+        }
+        
+        //percentage
+        $(".contents_wrap .now_amount").css({"width": "100%"});
+        
+        //상단 표시되는 금액
+        $(".free_delivery_amount .text.free_delivery").show();
+        
+    } else {
+        indicatedPrice = freeDeliveryAmount - totalPrice;
+        
+        //percentage
+        $(".contents_wrap .now_amount").css({"width": `${(totalPrice / freeDeliveryAmount) * 100}%`});
+        
+        //상단 표시되는 금액
+        $(".free_delivery_amount .text.pay_delivery span").html(numberWithDots(indicatedPrice));
+        $(".free_delivery_amount .text.pay_delivery").show();
+    }
+
+    //총 판매가
+    $(".total_selling_price .total_price").html(`${numberWithDots(totalPrice)} 원`);
+
+    //배송비
+    $(".delivery_fee .fee").html(`${numberWithDots(deliveryFee)} 원`);
+
+    //총 결제예상금액
+    $(".expected_payment span").html(`${numberWithDots(totalPrice + deliveryFee)} 원`);
 }
 
-function callLikeProdList(likedArr, custid, productId) {
-    $.ajax({
-        url: "/product/productLike.do",
-        type: "POST",
-        data: { custid: custid, productId: productId },
-        success: function () {
-            likedArr.push(productId);
-        },
-        error: function () {
-            alert("에러입니다.");
-        },
-    });
+//찜한 상품
+function callLikeProdList(targetItem) {
+    //console.log("???", targetItem);
+    const prodId = targetItem.attr("data-prodId");
+    let hasRedHeart = targetItem.hasClass("on");
+    //console.log(hasRedHeart);
+
+    if(hasRedHeart) {
+        $.ajax({
+            url : "/product/deleteLikedProduct.do",
+            type: "POST",
+            data : {"productId" :prodId},
+            success : function(){
+                targetItem.removeClass("on");
+            },
+            error : function(){
+                alert("에러입니다.");
+            }
+        });
+    }else{
+            $.ajax({
+            url : "/product/productLike.do",
+            type: "POST",
+            data : {"productId" :prodId},
+            success : function(){
+                targetItem.addClass("on");
+            },
+            error : function(){
+                alert("에러입니다.");
+            }
+        });
+    }
 }
 
+//주문서 Ajax
 function callOrderSheet(chkedBox) {
 	//let orderInfo = new Map();
 	let productId;

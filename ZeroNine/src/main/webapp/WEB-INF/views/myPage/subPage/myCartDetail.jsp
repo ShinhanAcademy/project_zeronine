@@ -5,12 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%><%-- functions lib --%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script defer src="${path}/js/myPage/subPage/myCartDetail.js"></script>
-<!-- <div class="free_delivery_amount">
+<div class="free_delivery_amount">
 	<div class="target_amount">
 		<div class="now_amount"></div>
 	</div>
-	<div class="text">32,000원 추가하면 무료배송!!</div>
-</div> -->
+	<div class="text pay_delivery"><span>32,000</span>원 추가하면 무료배송!!</div>
+	<div class="text free_delivery"><span class="color_red">❤</span> 무.료.배.송 <span class="color_red">❤</span></div>
+</div>
 <div class="con_tit">장바구니</div>
 <!-- contents -->
 <div class="contents">
@@ -81,10 +82,10 @@
 										<button class="btn_buy btn_blue">바로구매</button>
 										<c:choose>
 											<c:when test="${cartItem.likedProductId ne null}">
-												<button class="btn_addlike btn_default on" data-custId="${customerId}" data-prodId="${cartItem.productId}">쇼킹찜</button>
+												<button class="btn_addlike btn_default on" data-prodId="${cartItem.productId}">쇼킹찜</button>
 											</c:when>
 											<c:otherwise>
-												<button class="btn_addlike btn_default" data-custId="${customerId}" data-prodId="${cartItem.productId}">쇼킹찜</button>
+												<button class="btn_addlike btn_default" data-prodId="${cartItem.productId}">쇼킹찜</button>
 											</c:otherwise>
 										</c:choose>
 										<button class="btn_del btn_default">삭제</button>
@@ -118,7 +119,7 @@
 				</div>
 				<div class="price_info delivery_fee">
 					<div>배송비</div>
-					<div>0원</div>
+					<div class="fee">0원</div>
 				</div>
 			</div>
 			<div class="price_bottom">
