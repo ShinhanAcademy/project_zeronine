@@ -22,7 +22,7 @@
 
 					<div class="category">
 						<div class="img_wrap">
-							<button class="fluent_basket" data-value="1" onclick="search(1,this.getAttribute('data-value'))">
+							<button class="buttonValuebtn" data-value="1" onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/fluent_basket.png">
 							</button>
 						</div>
@@ -30,7 +30,7 @@
 					</div>
 					<div class="category">
 						<div class="img_wrap">
-							<button class="lotion" data-value="2" onclick="search(1,this.getAttribute('data-value'))">
+							<button class="buttonValuebtn" data-value="2" onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/lotion.png">
 							</button>
 						</div>
@@ -38,7 +38,7 @@
 					</div>
 					<div class="category">
 						<div class="img_wrap">
-							<button class="food_navi" data-value="4" onclick="search(1,this.getAttribute('data-value'))">
+							<button class="buttonValuebtn" data-value="4" onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/food_navi.png">
 							</button>
 						</div>
@@ -46,7 +46,7 @@
 					</div>
 					<div class="category">
 						<div class="img_wrap">
-							<button class="raphael_cart"
+							<button class="buttonValuebtn" data-value="%"
 								onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/raphael_cart.png">
 							</button>
