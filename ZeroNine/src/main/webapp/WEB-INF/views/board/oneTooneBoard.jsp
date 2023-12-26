@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${path}/css/board/boardList.css" />
 <script src="../js/like.js"></script>
 <script src="../js/detailView.js"></script>
+<script src="../js/board/loadMore.js"></script>
 </head>
 
 
@@ -54,6 +55,11 @@
 			</div>
 		</div>
 		<div id="allList"></div>
+		<div id="load_more_btn_wrap">
+			<button id="loadMore_btn" onclick="loadMore()"> 
+			<img src="${path}/images/board/loadmore.png">
+			</button>
+			</div>
 		<div id="modal"></div>
 	</div>
 
@@ -76,7 +82,7 @@
 
 <script>
 var type_of_filter;
-var infoOne_json;
+var info_json;
 var output = "";
 
 // DOM이 준비되면 필터링 함수 호출
@@ -85,7 +91,7 @@ $(searchBoard);
 
 function show(jsondata) {
 	console.log(jsondata.length);
-	output = "";
+	//output = "";
     $.each(jsondata, function (index, item) {
         // 날짜 포맷팅
        var str = item.finishtime.substr(2, 2)+"년 "+item.finishtime.substr(5, 2)+"월 "+item.finishtime.substr(8, 2)+"일 "+
@@ -152,7 +158,7 @@ function show(jsondata) {
 function filterType() {
     // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;
-    infoOne_json = JSON.parse('${infoOne}');
+    info_json = JSON.parse('${infoOne}');
     console.log("필터 타입~~"+type_of_filter)
     showList();
 }
@@ -161,36 +167,22 @@ function showList() {
     output = "";
 
     if (type_of_filter == 'imminent') { // 임박순
-    	infoOne_json.sort(
+    	info_json.sort(
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             } 
-        );console.log(infoOne_json);
-    	show(infoOne_json);
+        );console.log(info_json);
+    	loadMore();
     } else if (type_of_filter == 'recent'){ // 최신순 (default)
-    	infoOne_json.sort(
+    	info_json.sort(
             function (a, b) {
                 return new Date(b.oUploadTime) - new Date(a.oUploadTime);
             }
-        );console.log(infoOne_json);
-    	show(infoOne_json);
+        );console.log(info_json);
+        loadMore();
     }
 }
 
- /* function each() {
-    // 실패 정보 파싱 및 배열 생성
-    var fail_info = '${fail}';
-    var fail_info_array = JSON.parse(fail_info);
-    var failId_array = [];
-
-    for (var i = 0; i < fail_info_array.length; i++) {
-        var failId = fail_info_array[i].boardId;
-        failId_array.push(failId);
-    }
-
-    // 리스트 표시
-    
-}  */
 
 function o_btn(boardId) {
     
@@ -219,22 +211,24 @@ function searchBoard() {
    
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
+        	output = "";
         	keyword = $("#search").val().toLowerCase();
-            filterKeyword(infoOne_json, keyword);
+            filterKeyword(info_json, keyword);
         }
     });
 }
 
 function check() {
-    filterKeyword(infoOne_json, keyword);
+	output = "";
+	filterKeyword(info_json, keyword);
 }
 
 // 키워드로 필터링
-function filterKeyword(infoOne_json, keyword) {
-    var result = [];
-    var result_output = "";
-    keyword = $("#search").val();
-    $.each(infoOne_json, function (index, item) {
+function filterKeyword(info_json, keyword) {
+	  initNum = 0;
+	    keyword = $("#search").val();
+	    result=[];
+    $.each(info_json, function (index, item) {
         var title = item.oTitle.toLowerCase();
         var fullAddress = item.address.toLowerCase() + " " + item.addressDetail.toLowerCase();
         if (title.includes(keyword) || fullAddress.includes(keyword)) {
@@ -243,7 +237,7 @@ function filterKeyword(infoOne_json, keyword) {
     });
 
     // 결과 표시
-    show(result);
+    loadMore();
     console.log(result);
 }
 

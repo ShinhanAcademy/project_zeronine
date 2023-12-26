@@ -11,6 +11,7 @@
 <%-- <script src="${path}/js/chart.js"></script> --%>
 <script src="../js/like.js"></script> 
 <script src="../js/detailView.js"></script>
+<script src="../js/board/loadMore.js"></script>
 </head>
 
 
@@ -57,6 +58,11 @@
 		</div>
 		<div class="List" >
 			<div id="allList"></div>
+			<div id="load_more_btn_wrap">
+			<button id="loadMore_btn" onclick="loadMore()"> 
+			<img src="${path}/images/board/loadmore.png">
+			</button>
+			</div>
 			<div id="modal"></div>
 		</div>
 	</div>
@@ -79,9 +85,10 @@
 	
 <script>
 var type_of_filter;
-var infoFree_json;
+var info_json;
 var output = "";
 var path = "${path}";
+var result = [];
 // DOM이 준비되면 필터링 함수 호출
 $(filterType);
 $(searchBoard);
@@ -108,11 +115,11 @@ $(searchBoard);
         successId_array.push(successId);
     }
     console.log(failId_array);
+    
     var ratio_arr = [];
 function show(jsondata) {
 	console.log(jsondata.length);
-	var output = "";
-	ratio_arr = [];
+
     $.each(jsondata, function (index, item) {
     	
     	//%구하기
@@ -251,8 +258,8 @@ $("#btn"+index).find("img.board_like").attr("src", newImagePath);
 function filterType() {
     // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;
-    infoFree_json = JSON.parse('${infoFree}');
-    console.log("이것은 jsp의 제이슨 : "+ infoFree_json)
+    info_json = JSON.parse('${infoFree}');
+    console.log("이것은 jsp의 제이슨 : "+ info_json)
     showList();
 }
 
@@ -260,14 +267,14 @@ function showList() {
     output = "";
 
     if (type_of_filter == 'imminent') { // 임박순
-    	infoFree_json.sort(
+    	info_json.sort(
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             }
         );
         each();
     } else { // 최신순 (default)
-    	infoFree_json.sort(
+    	info_json.sort(
             function (a, b) {
                 return new Date(b.uploadTime) - new Date(a.uploadTime);
             }
@@ -288,7 +295,7 @@ function each() {
     }
 
     // 리스트 표시
-    show(infoFree_json);
+    loadMore();
 }
 
 function O_btn(boardId) {
@@ -318,22 +325,24 @@ function searchBoard() {
    
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
+        	output = "";
         	keyword = $("#search").val().toLowerCase();
-            filterKeyword(infoFree_json, keyword);
+            filterKeyword(info_json, keyword);
         }
     });
 }
 
 function check() {
-    filterKeyword(infoFree_json, keyword);
+	output = "";
+    filterKeyword(info_json, keyword);
 }
 
 // 키워드로 필터링
-function filterKeyword(infoFree_json, keyword) {
-    var result = [];
-    var result_output = "";
+function filterKeyword(info_json, keyword) {
+	initNum = 0;
     keyword = $("#search").val();
-    $.each(infoFree_json, function (index, item) {
+    result=[];
+    $.each(info_json, function (index, item) {
         var title = item.title;
         var left = 50000 - item.sum;
         console.log(left);
@@ -343,7 +352,7 @@ function filterKeyword(infoFree_json, keyword) {
     });
 
     // 결과 표시
-    show(result);
+    loadMore();
     console.log(result);
 }
 
