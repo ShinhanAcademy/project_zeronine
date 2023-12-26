@@ -23,6 +23,8 @@
 						<div class="infotext_space">
 							<div class="infotext_space_left">
 								<span class="box_text">${item.pName}</span>
+							</div>
+							<div class="infotext_space_left2">
 							<span class="box_text2">${item.productCount}개</span>
 							</div>
 							
