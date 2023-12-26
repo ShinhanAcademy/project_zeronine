@@ -191,6 +191,10 @@ public class BoardService_yn {
 		return boardDAO.freeTotalPrice(customerId, boardId);
 	}
 
+	public void deleteCart(String authorId, String productId) {
+		boardDAO.deleteCart(authorId, productId);
+	}
+
 
 	
 

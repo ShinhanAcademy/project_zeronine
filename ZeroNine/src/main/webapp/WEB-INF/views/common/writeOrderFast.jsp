@@ -17,6 +17,7 @@
 						<div class="infotext_space">
 							<div class="infotext_space_left">
 								<span class="box_text">${product.pName}</span>
+								<span class="box_text2">${count}개</span>	
 							</div>
 							<div class="infotext_space_right">
 								<span id="itemPrice" class="box_text"><fmt:formatNumber

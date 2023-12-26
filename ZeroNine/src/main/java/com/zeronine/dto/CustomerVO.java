@@ -8,7 +8,6 @@ import lombok.ToString;
 
 @Getter@Setter
 @ToString
-
 public class CustomerVO {
 	private String customerId;
 	private String customerPassword;
