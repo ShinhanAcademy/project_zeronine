@@ -128,8 +128,6 @@ function handleLikeButtonClick(index, boardId) {
 	    
 	    	//클래스가 heart liked => AJAX DELTE 호출
 	        var isRedHeart = likeBlistArr.indexOf(boardId);
-	    	
-			console.log(isRedHeart);
 			if(isRedHeart>=0) {
 				$.ajax({
 					url : "/board/deletelikedboard.do",
