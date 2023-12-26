@@ -137,7 +137,7 @@ public class NaverAuthController {
 		
 		//logger.info(apiResult);
 		
-        /* �꽕�씠踰� 濡쒓렇�씤 �꽦怨� �럹�씠吏� View �샇異� */
+        /* 네이버 로그인 성공 페이지 View 호출 */
 		//return "auth/naverSuccess";
 	}
 }

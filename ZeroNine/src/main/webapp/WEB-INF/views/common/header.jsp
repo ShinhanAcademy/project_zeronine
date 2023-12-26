@@ -40,12 +40,14 @@
 				<li>
 					<a href="${path}/product/productList.do">상품목록</a>
 					<ul class="gnb_2depth" >
-						<li ><a href="${path}/product/productList.do?buttonValue=1">채소</a></li>
-						<li ><a href="${path}/product/productList.do?buttonValue=2">생필품</a></li>
-						<li ><a href="${path}/product/productList.do?buttonValue=4">음식</a></li>
-						<li ><a href="${path}/product/productList.do?buttonValue=%">전체</a></li>
+						<li ><a  data-value="1" onclick="handleClick(event, this)">채소</a></li>
+						<li ><a data-value="2" onclick="handleClick(event, this)">생필품</a></li>
+						<li ><a data-value="4"onclick="handleClick(event, this)">음식</a></li>
+						<li ><a data-value="%" onclick="handleClick(event, this)">전체</a></li>
 					</ul>
 				</li>
+
+
 				<li>
 					<a href="${path}/board/">게시판</a>
 					<ul class="gnb_2depth" >
@@ -106,5 +108,34 @@
 
 
 
+<script>
+ var path="${path}";
+function handleClick(event, element) {
+    // 앵커 태그의 기본 동작 방지 (예: 새 페이지로 이동)
+    event.preventDefault();
 
+    // 클릭된 <a> 태그에서 data-value 속성 가져오기
+    var dataValue = element.getAttribute("data-value");
+
+    // buttonValue를 필요한 대로 사용
+    console.log("Button Value:", dataValue);
+    sessionStorage.setItem("buttonValue", dataValue);
+
+ // Redirecting to a new page
+    $.ajax({
+        type: 'GET',
+        url: path + "/product/productList.do",
+        data: {"buttonValue": dataValue},
+        success: function (response) {
+            console.log("Button Value:", dataValue);
+            var newUrl = path+"/product/productList.do";
+            window.location.replace(newUrl);
+            
+        },
+        error: function () {
+            console.error('Error loading modal content:', error);
+        }
+    });
+}
+</script>
 
