@@ -72,14 +72,16 @@ public class ChatController {
 		HttpSession session  = request.getSession();
 		String customerId = (String) session.getAttribute("customerId");
 		
-		String senderId = chatDtlVO.getSenderId();
-		CustomerVO customerVO = customerService.selectById(senderId);
-		String customerName = customerVO.getCustomerName();
+		/*
+		 * String senderId = chatDtlVO.getSenderId(); CustomerVO customerVO =
+		 * customerService.selectById(senderId); String customerName =
+		 * customerVO.getCustomerName();
+		 */
 		
 		result.put("chatDtlList", chatDtlList);
 		result.put("chatDtlVO", chatDtlVO);
 		result.put("customerId", customerId);
-		result.put("customerName", customerName);
+		/* result.put("customerName", customerName); */
 		return result;
 	}
 	
