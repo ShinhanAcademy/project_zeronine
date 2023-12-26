@@ -187,6 +187,12 @@
 		var path = "${path}";
 		
 		$(".gobtn").click(function() {
+			
+			if(${isParticipate}>0){
+				alert("이미 참여한 게시글입니다.")
+				return;
+			}
+			
 			/*결제 창*/
 			var IMP = window.IMP; 
 			IMP.init("imp31265537"); //imp31265537

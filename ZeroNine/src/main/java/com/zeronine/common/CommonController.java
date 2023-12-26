@@ -61,11 +61,14 @@ public class CommonController {
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		String productId = request.getParameter("productId");
 		int count = Integer.parseInt(request.getParameter("count"));
+		String boardId = (String)session.getAttribute("boardId");
 		ProductVO product = boardService.selectByPid(productId);
 		CustomerVO customer =  customerService.selectById(customerId);
+		int isParticipate = boardService.isParticipateFast(customerId,boardId);
 		model.addAttribute("count",count);
 		model.addAttribute("product",product);
 		model.addAttribute("customer",customer);
+		model.addAttribute("isParticipate",isParticipate);
 	}
 	
 	@PostMapping(value="/common/orderSuccess.do", produces="application/text;charset=UTF-8")
@@ -86,7 +89,7 @@ public class CommonController {
 	
 	@PostMapping(value="/common/freeOrderSuccess.do", produces="application/text;charset=UTF-8")
 	@ResponseBody
-	public String freeOrderSuccessP(Model model, HttpSession session) {
+	public void freeOrderSuccessP(Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		String boardId = (String)session.getAttribute("boardId");
 		Map<String,Object> productInfo = (Map<String,Object>)session.getAttribute("info");
@@ -96,6 +99,8 @@ public class CommonController {
 		for(Entry<String,Object> row:entrys) {
 			productList.put(row.getKey(), Integer.parseInt((String)row.getValue()));
 		}
+		boardService.orderFreeProduct(customerId, boardId, productList);
+		/*
 		int isFreeProduct = boardService.orderFreeProduct(customerId, boardId, productList);
 		String message;
 		if(isFreeProduct==0 || isFreeProduct==1) {
@@ -107,6 +112,7 @@ public class CommonController {
 			message = "이미 참여한 게시글입니다."; //already
 		}
 		return message;
+		*/
 		
 	}	
 	
@@ -182,6 +188,7 @@ public class CommonController {
 	@PostMapping(value="/common/orderFree.do", consumes="application/json")
 	public void orderFree(@RequestBody Map<String,Object> info, Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
+		String boardId = (String)session.getAttribute("boardId");
 		session.setAttribute("info", info);
 		Map<String,Object> data = (Map)info.get("myMap");
 		Set<Entry<String,Object>> entrys = data.entrySet();
@@ -198,9 +205,11 @@ public class CommonController {
 			plist.add(map);
 		}
 		CustomerVO customer =  customerService.selectById(customerId);
+		int isParticipate = boardService.isParticipateFree(customerId,boardId);
 		model.addAttribute("plist",plist);
 		model.addAttribute("customer",customer);
 		model.addAttribute("totalPrice",totalPrice); 		
+		model.addAttribute("isParticipate",isParticipate); 		
 	}
 	
 }
