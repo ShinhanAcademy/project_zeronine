@@ -165,22 +165,22 @@ function filterType() {
 
 function showList() {
     output = "";
-
+    result = [];
+    initNum = 0;
     if (type_of_filter == 'imminent') { // 임박순
     	info_json.sort(
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             } 
         );console.log(info_json);
-    	loadMore();
     } else if (type_of_filter == 'recent'){ // 최신순 (default)
     	info_json.sort(
             function (a, b) {
                 return new Date(b.oUploadTime) - new Date(a.oUploadTime);
             }
         );console.log(info_json);
-        loadMore();
     }
+    each();
 }
 
 
