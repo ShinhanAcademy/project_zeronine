@@ -11,11 +11,9 @@
 		where p."customerId"= cast(#{customerId} as UUID) and "pickUpStatus"='complete' 
 	</select>
 	<select id="selectCouponCtn" resultType="map">
-	select  p."subscriptionId",p."customerId",cpc."isSubscription", cpc."remainingCouponCount"
-		from public.pickup as p
-		join public."customerPickCoupon" as cpc on p."subscriptionId" = cpc."subscriptionId"
-		where p."customerId"= cast(#{customerId} as UUID) and cpc."remainingCouponCount" > 0
-		group by p."subscriptionId",p."customerId",cpc."subscriptionId", cpc."remainingCouponCount"
+	select "subscriptionId","customerId","isSubscription", "remainingCouponCount"
+		from public."customerPickCoupon" 
+		where "customerId"='a6a48528-9215-4fb9-9dd0-5bb174103277' and "remainingCouponCount" > 0
 	</select>
 	
 	<update id="updateCouponCnt" parameterType="String">

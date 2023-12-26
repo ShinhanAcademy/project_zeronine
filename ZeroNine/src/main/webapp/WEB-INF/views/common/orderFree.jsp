@@ -181,19 +181,19 @@
 		var path = "${path}";
 		
 		$(".gobtn").click(function() {
-
 			$.ajax({
-				url : path + "/board/completeedit.do",
+				url : path + "/common/freeOrderSuccess.do",
 				type : "POST",
 				success : function(response) {
-					$("#edit").html(response);
+					alert(response);
+					location.href = path+"/common/freeOrderSuccess.do";
 				},
 				error : function() {
 					alert("에러입니다.");
 				}
 			});
 		})
-
+		
 		$(".agreebtn").click(
 						function() {
 							var currentImagePath = $(this).find(
@@ -211,43 +211,6 @@
 
 						})
 						
-		/* var itemPriceText = document.getElementById("itemPrice").innerText;
-		var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText
-				.replace(/[^\d.]/g, ''));
-		document.getElementById("itemprice2").innerText = itemPriceText; */
-
-		/* if (itemPriceValue < 50000) {
-			document.getElementById("itemprice_deli").innerText = 3000;
-
-		} else {
-			document.getElementById("itemprice_deli").innerText = 0;
-
-		}
-		var deli = document.getElementById("itemprice_deli").innerText;
-
-		var deliValue = parseFloat(deli); */
-
-		/* document.getElementById("itemprice_deli").innerText = 0;
-		var deli = document.getElementById("itemprice_deli").innerText;
-		var deliValue = parseFloat(deli);
-		
-		document.getElementById("totalprice_text").innerText = (deliValue + itemPriceValue);
-		
-		totalpriceValue = document.getElementById("totalprice_text").innerText;
-		
-		
-		var deliformattedValue = new Intl.NumberFormat('ko-KR', {
-			style : 'decimal',
-			currency : 'KRW' // 대한민국 원
-		}).format(deli);
-		var formattedValue = new Intl.NumberFormat('ko-KR', {
-			style : 'decimal',
-			currency : 'KRW' // 대한민국 원
-		}).format(totalpriceValue);
-		document.getElementById("itemprice_deli").innerText = deliformattedValue
-				+ "원";
-		document.getElementById("totalprice_text").innerText = formattedValue
-				+ "원"; */
-	</script>
+</script>
 
 

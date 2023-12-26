@@ -298,7 +298,7 @@ public class BoardController {
 	        	String originalFileName = imgFile.getOriginalFilename();
 	        	String imgExtension = getImgExtension(originalFileName);
 	        	s3ImageURL = s3Upload.upload(imgFile, uuidStr, imgExtension);
-	        	logger.info("oboard  씠誘몄 媛   떎 쓬 寃쎈줈 뿉    옣 맖 : " +  s3ImageURL);
+	        	//logger.info("oboard  씠誘몄 媛   떎 쓬 寃쎈줈 뿉    옣 맖 : " +  s3ImageURL);
 	        }
 	        else {
 	        	logger.info("imgFile is NULL");
@@ -357,6 +357,7 @@ public class BoardController {
 			int pickCount = Integer.parseInt((String)info.get("count"));
 			logger.info("parameters=>" + postingMinutes + title + content);
 			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, productId, pickCount);
+			boardServiceYn.deleteCart(authorId, productId);		
 		}
 		else if (lower_boardListType.equals("freedeliveryboard")){// 臾대같 濡쒖쭅
 			Map<String, Integer> productList = new HashMap<>(); //productId - purchaseCount
@@ -367,6 +368,9 @@ public class BoardController {
 			}
 			logger.info(productList.toString());
 			boardServiceSg.writeFreeBoard(authorId, title, content, postingMinutes, productList);
+			for(Entry<String,Object> row:entrys) {
+				boardServiceYn.deleteCart(authorId, row.getKey());
+			}
 			//return true;
 		}
 		session.removeAttribute("info");

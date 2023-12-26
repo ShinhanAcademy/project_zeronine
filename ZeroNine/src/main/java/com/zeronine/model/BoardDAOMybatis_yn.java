@@ -285,6 +285,39 @@ public class BoardDAOMybatis_yn {
 		return info;
 	}
 
+	public int orderFreeProduct(String customerId, String boardId, Map<String, Integer> productList) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customer_id", customerId);
+		map.put("board_id", boardId);
+		map.put("products", productList);
+		map.put("return_code", 0);
+		sqlSession.insert(NAMESPACE + "orderFreeProduct", map);
+		return (Integer)map.get("result_code");
+	}
+
+	public Map<String, Object> freeOrderInfo(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		Map<String, Object> info = sqlSession.selectOne(NAMESPACE + "freeOrderInfo", map);
+		return info;
+	}
+
+	public int freeTotalPrice(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		int totalPrice = sqlSession.selectOne(NAMESPACE + "freeTotalPrice", map);
+		return totalPrice;
+	}
+
+	public void deleteCart(String authorId, String productId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("authorId", authorId);
+		map.put("productId", productId);
+		sqlSession.delete(NAMESPACE + "deleteCart", map);
+	}
+
 	
 
 	

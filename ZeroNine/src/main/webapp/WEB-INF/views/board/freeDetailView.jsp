@@ -49,6 +49,10 @@
 	</div>
 </body>
 <script type="text/javascript">
+var boardId = "${detailFree.boardId}";
+$(".join_btn").click(function(){
+	location.href = "${path}/common/participateFreeBoard.do?boardId=" + boardId;
+});
 
 var max = ${(detailFree.sum*100)/50000};
 var color = max<35?'#09244B':max>=35 && max<70?'#F1C21B':'#F11B1B';

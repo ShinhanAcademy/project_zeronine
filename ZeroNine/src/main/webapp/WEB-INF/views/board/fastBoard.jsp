@@ -13,7 +13,7 @@
 <body>
 
 	<div class="banner zn_center">
-		<div style="width: 1440px">
+		<div style="width: 1440px; padding: 20px 0px;">
 			<img src="${path}/images/board/banner1.png" style="width: 100%">
 		</div>
 
@@ -45,7 +45,7 @@
 				<div class="edit">
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
-					</span> <span class="edit_btn"> <a style="font-size: 25px;"
+					</span> <span class="edit_btn"> <a style="font-size: 25px; cursor: pointer;"
 						<%-- href="${path}/board/boardedit.do?boardType=fastBoard" --%>
 						data-value="fastBoard"
 						onclick="writeBoard()">글쓰기</a>

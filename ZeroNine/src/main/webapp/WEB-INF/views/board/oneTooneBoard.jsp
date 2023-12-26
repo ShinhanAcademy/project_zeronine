@@ -17,9 +17,8 @@
 <body>
 	<div class="banner zn_center">
 
-		<div style="width: 1440px">
-			<img src="${path}/images/board/banner3.png"
-				style="width: 100%; padding-top: 80px;">
+		<div style="width: 1440px; padding: 20px 0px;">
+			<img src="${path}/images/board/banner3.png">
 		</div>
 
 		<div class="search">
@@ -48,7 +47,7 @@
 				<div class="edit">
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
-					</span> <span class="edit_btn"> <a style="font-size: 25px;"
+					</span> <span class="edit_btn"> <a style="font-size: 25px; cursor: pointer;"
 						data-value="oneTooneBoard" onclick="writeBoard()">글쓰기</a>
 					</span>
 				</div>

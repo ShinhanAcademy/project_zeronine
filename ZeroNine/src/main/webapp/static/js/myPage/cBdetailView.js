@@ -2,6 +2,10 @@ $(".participate_btn").click(function(){
 	location.href = path + "/common/participateBoard.do?boardId=" + boardId;
 });
 
+$(".participate_free_btn").click(function(){
+	location.href = path + "/common/participateFreeBoard.do?boardId=" + boardId;
+});
+
 $("#close_btn").click(function(){
 	$("#detail_modal_wrap").hide();
 });
