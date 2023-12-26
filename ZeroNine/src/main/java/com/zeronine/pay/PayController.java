@@ -41,8 +41,8 @@ public class PayController {
 	public boolean paySubscription(@RequestBody Map<String,Object> payInfo, Model model, HttpSession session) {
 		String subscription = (String)payInfo.get("name");
 		logger.info(payInfo.toString());
-		//String customerId = (String)session.getAttribute("customerId");
-		String customerId = "a6a48528-9215-4fb9-9dd0-5bb174103277"; //네이버승광 
+		String customerId = (String)session.getAttribute("customerId");
+		//String customerId = "a6a48528-9215-4fb9-9dd0-5bb174103277"; //네이버승광 
 		
 		if(subscription.equals("5회 이용권")) {
 			payService.pay5Ecocare(customerId);

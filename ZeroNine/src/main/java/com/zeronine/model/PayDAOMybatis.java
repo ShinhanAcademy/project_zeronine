@@ -28,4 +28,9 @@ public class PayDAOMybatis {
 		return sqlSession.insert(NAMESPACE + "payEcocareSubscription", customerId);
 	}
 
+	public int IsFreeDelivery(String customerId) {
+		int result =sqlSession.selectOne(NAMESPACE+ "IsFreeDelivery",customerId);
+		return result;
+	}
+
 }

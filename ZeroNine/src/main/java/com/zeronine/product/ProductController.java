@@ -29,6 +29,7 @@ import com.zeronine.model.DeliveryProductDAOMybatis_ys;
 import com.zeronine.model.DeliveryProductService_ys;
 import com.zeronine.model.DeliveryService_ys;
 import com.zeronine.model.LikedProductService;
+import com.zeronine.model.PayService;
 import com.zeronine.model.ProductService;
 
 @Controller
@@ -53,6 +54,9 @@ public class ProductController {
 
 	@Autowired
 	DeliveryProductService_ys deliveryproductservice_ys;
+	
+	@Autowired
+	PayService payservice;
 
 	
 	@GetMapping("/productList.do")
@@ -232,10 +236,10 @@ public class ProductController {
 		
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		List<String> order = cartservice.orderOneCart(custid, productid);
-
+		
 		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 		model.addAttribute("orderonecart", order);
-
+		model.addAttribute("IsFreeDelivery",payservice.IsFreeDelivery(custid));
 		model.addAttribute("custlist", customerservice.selectById(custid));
 		return "product/productOrder";
 	}
