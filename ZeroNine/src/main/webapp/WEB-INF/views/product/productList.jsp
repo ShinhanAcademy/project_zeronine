@@ -12,11 +12,12 @@
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
-	<div class="zero_conatainer product_container"
-		style="padding: 160px 0 0;">
+	<div class="zero_conatainer product_container">
 		<div class="body-part">
 			<div class="body-left">
-				<img class="logo2" src="${path}/images/sangpumpage/banner.png">
+			<a href="${path}/main/introZeroNine.do">
+				<img class="logo2" src="${path}/images/main/mainvisual_02.png">
+			</a>	
 				<div class="dist98"></div>
 				<div class="menu_bar">
 

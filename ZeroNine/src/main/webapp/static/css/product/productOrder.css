@@ -76,9 +76,18 @@
 
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_left
 	{
-	width: 650px;
+	    width: 600px;
 }
-
+.order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_left2{
+	width: 150px;
+    font-size: 18px;
+    display: flex;
+    margin-left: 20px;
+}
+.order_body .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space .infotext_space_right{
+	    display: flex;
+    align-items: flex-start;
+}
 .order_body .order_bodypart .orderinfo .orderinfo_boxtext .box_text {
 	color: #000;
 	font-family: Lato;

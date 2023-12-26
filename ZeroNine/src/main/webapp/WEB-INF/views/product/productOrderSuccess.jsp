@@ -61,9 +61,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	</div>
 	<%@include file="../common/footer.jsp"%>
 	<script>
+	var IsFreeDelivery = "${IsFreeDelivery}";
 	var itemPriceValue = parseFloat(document.getElementById("ob_price").innerText.replace(/[^\d.]/g, ''));
+	if(IsFreeDelivery>0){
+		itemPriceValue = itemPriceValue + 0;
+	}else{
+		
 	if(itemPriceValue < 50000){
 		itemPriceValue = itemPriceValue + 3000;
+	}else {
+		itemPriceValue = itemPriceValue + 0;
+	}
 	}
 	var deliformattedValue = new Intl.NumberFormat('ko-KR', {
 	    style: 'decimal',

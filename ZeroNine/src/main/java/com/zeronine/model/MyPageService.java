@@ -9,12 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.zeronine.dto.PagingVO;
+import com.zeronine.dto.PickupVO;
+
 @Service("myPageService")
 public class MyPageService {
 
 	@Autowired
 	MyPageDAOMybatis myPageDAO;
 	
+	
+	int pageLimit = 5;
+	int blockLimit = 5;
+
 	/*
 	 * public List<DeliveryVO> selectAll(){ return deliveryDAO.selectAll(); }
 	 */
@@ -59,4 +66,42 @@ public class MyPageService {
 	public int updateCouponCnt (String subscriptionId) {
 		return myPageDAO.updateCouponCnt(subscriptionId);
 	}
+	
+public PagingVO getPages(int page,String customerId) {
+		
+		
+		int countProducts = myPageDAO.PickUpCount(customerId);
+
+		int maxPageNumber = (int) (Math.ceil((double) countProducts / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
+	}
+	
+	public List<PickupVO> PickUpList(int page ,String customerId){
+		int pageStartNum = (page - 1) * pageLimit;
+		System.out.println("pageStartNum"+pageStartNum);
+		return myPageDAO.PickUpList(pageStartNum,customerId);
+	}
+	
+	public int PickUpCount(String customerId){
+		int result = myPageDAO.PickUpCount(customerId);
+		return result;
+	}
+	public PickupVO PickUpDetail(String pickUpId) {
+		return myPageDAO.PickUpDetail(pickUpId);
+	}
+
 }
