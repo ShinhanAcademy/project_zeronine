@@ -11,9 +11,10 @@
 		<span class="modal_text">${pickUp.isFoodWaste}
 		</span>
 		<span class="modal_text">${pickUp.message }</span>
-		 </div>
+		 
 		 <div class="modal_btnpart">
-			<button id="modal_btn1" onclick="esc_btn()">취소</button>
+			<button id="modal_btn1" onclick="esc_btn()">나가기</button>
+		</div>
 		</div>
 		</div>
 </div>
