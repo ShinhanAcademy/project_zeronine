@@ -47,7 +47,7 @@
 				<div class="edit">
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
-					</span> <span class="edit_btn"> <a style="font-size: 25px;"
+					</span> <span class="edit_btn"> <a style="font-size: 25px; cursor: pointer;"
 						data-value="oneTooneBoard" onclick="writeBoard()">글쓰기</a>
 					</span>
 				</div>

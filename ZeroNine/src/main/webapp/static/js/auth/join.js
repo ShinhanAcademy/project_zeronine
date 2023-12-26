@@ -1,9 +1,32 @@
+BtnDisabled();
+
+function BtnDisabled(){
+if ($(".check_essential:checked").length === $(".check_essential").length) {
+  $("#join_btn").prop("disabled", false);
+  $("#join_btn").css("background-color", "#0083E6");
+} else {
+  $("#join_btn").prop("disabled", true);
+  $("#join_btn").css("background-color", "gray");
+}
+}
+
 function selectAll(selectAll){
+
 	const checkboxes = document.getElementsByName('agree');
 	
+	if(selectAll.checked){
 	checkboxes.forEach((checkbox)=>{
 		checkbox.checked = selectAll.checked;
+		if(checkbox != selectAll){checkbox.disabled = true;};
 	})
+	}else{
+	checkboxes.forEach((checkbox)=>{
+		checkbox.checked = selectAll.checked;
+		if(checkbox != selectAll){checkbox.disabled = false;};
+	})
+	}
+	
+	BtnDisabled();
 }
 
 function f_email_check() {
@@ -56,18 +79,23 @@ function f_join(){
 				
 				if($("#password").val()!=$("#password_check").val()){
 					alert("두 개의 비밀번호가 다릅니다.");
+					return;
 				}
 				if($("#hidden_email_check").val()=='0'){
 					alert("이메일 중복을 확인해주세요.");
+					return;
 				}
 				if($("#hidden_email_check").val()=='2'){
 					alert("다른 이메일을 사용해주세요.");
+					return;
 				}
 				if($("#hidden_phone_check").val()=='0'){
 					alert("휴대폰 번호 중복을 확인해주세요.");
+					return;
 				}
 				if($("#hidden_phone_check").val()=='2'){
 					alert("다른 휴대폰 번호를 사용해주세요.");
+					return;
 				}
 				
 				var obj = {

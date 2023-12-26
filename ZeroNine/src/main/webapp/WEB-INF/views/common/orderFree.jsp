@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-
-	<div class="order_body" id="payComplete">
+	<div class="order_body">
 		<div class="zero_container order_bodypart">
 			<div class="order_bodypart_text">
 				<span class="top_text">주문서</span>
@@ -13,21 +11,24 @@
 			<div class="orderinfo">
 				<span class="orderinfo_text">주문내역</span>
 				<div class="orderinfo_box">
+				
+				<c:forEach items="${plist}" var="product">
 					<div class="orderinfo_boxtext">
 						<div class="infotext_space">
 							<div class="infotext_space_left">
 								<span class="box_text">${product.pName}</span>
-								<span class="box_text2">${count}개</span>	
+								<span class="box_text2">${product.count}개</span>
 							</div>
 							<div class="infotext_space_right">
 								<span id="itemPrice" class="box_text"><fmt:formatNumber
-										value="${Math.round(product.price/product.pCount)*count}"
+										value="${product.price * product.count}"
 										maxFractionDigits="3"></fmt:formatNumber>원</span>
 							</div>
 						</div>
 						<div class="jul"></div>
 						<!--  orderinfo_boxtext -->
 					</div>
+				</c:forEach>
 					<!-- orderinfo_box -->
 				</div>
 				<!-- orderinfo -->
@@ -48,7 +49,7 @@
 								</div>
 								<div class="odd">
 									<input type="text" class="odd_input"
-										value="${customer.customerName }" readonly>
+										value="${customer.customerName}" readonly>
 								</div>
 
 							</div>
@@ -58,7 +59,7 @@
 								</div>
 								<div class="odd">
 									<input type="text" class="odd_input"
-										value="${customer.phoneNumber }" readonly>
+										value="${customer.phoneNumber}" readonly>
 								</div>
 
 							</div>
@@ -67,7 +68,7 @@
 									<p class="odt-t">이메일</p>
 								</div>
 								<div class="odd">
-									<input type="text" class="odd_input" value="${customer.email }"
+									<input type="text" class="odd_input" value="${customer.email}"
 										readonly>
 								</div>
 
@@ -84,12 +85,12 @@
 							<div class="delpinfo">
 								<dl>
 									<dt id="order_name">${customer.customerName}</dt>
-									<dd id="order_address">${customer.address }<br>
+									<dd id="order_address">${customer.address}<br>
 										${customer.addressDetail}
 									</dd>
 								</dl>
 								<div class="delpPhone">
-									<span id="order_phone">${customer.phoneNumber }</span>
+									<span id="order_phone">${customer.phoneNumber}</span>
 								</div>
 							</div>
 
@@ -150,16 +151,18 @@
 					<div class="bb_wb">
 						<div class="buy_box_middle">
 							<div class="purchaseinfo">
-								<span>주문금액</span><span id="itemprice2"></span>
+								<span>주문금액</span><span id="itemprice2">
+								<fmt:formatNumber value="${totalPrice}" maxFractionDigits="3"></fmt:formatNumber>원
+								</span>
 
 							</div>
 							<div class="purchaseinfo">
-								<span>배송비</span><span id="itemprice_deli"></span>
+								<span>배송비</span><span id="itemprice_deli">0&nbsp;원</span>
 							</div>
 
 							<div class="jul"></div>
 							<div class="total">
-								<span>총금액</span> <span id="totalprice_text"></span>
+								<span>총금액</span><span id="totalprice_text"><fmt:formatNumber value="${totalPrice}" maxFractionDigits="3"></fmt:formatNumber>원</span>
 							</div>
 						</div>
 					</div>
@@ -169,81 +172,29 @@
 				<button class="gobtn" id="gobtn" disabled>결제하기</button>
 			</div>
 
-			
+
 			<!-- order-bodypart -->
 		</div>
 	</div>
 
 	<script>
 		var path = "${path}";
-		/*
+		
 		$(".gobtn").click(function() {
-
 			$.ajax({
-				url : path + "/board/completeedit.do",
-				type : "GET",
+				url : path + "/common/freeOrderSuccess.do",
+				type : "POST",
 				success : function(response) {
-					$("#edit").html(response);
+					alert(response);
+					location.href = path+"/common/freeOrderSuccess.do";
 				},
 				error : function() {
 					alert("에러입니다.");
 				}
 			});
 		})
-		*/
-		$(".gobtn").click(function() {
-			var IMP = window.IMP; 
-			IMP.init("imp31265537"); //imp31265537
-			
-			var today = new Date();   
-			var hours = today.getHours(); // 시
-			var minutes = today.getMinutes();  // 분
-			var seconds = today.getSeconds();  // 초
-			var milliseconds = today.getMilliseconds();
-			var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-			//var price = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
-			//console.log(price);
-			IMP.request_pay({
-		        pg : 'html5_inicis',
-		        pay_method : 'card',
-		        merchant_uid: "IMP"+makeMerchantUid, 
-		        name : '즉시배송 결제',
-		        //customerId : id,
-		        amount : 2 //나중에 실제 값으로 바꿔야 합니다...
-		    }, function (rsp) { // callback
-		    	/* var obj = {
-						"productId":$("#hidden_productId").val(),
-						"count":$("#hidden_count").val(),	
-				} */
-				
-				/*
-				if(rsp.success) {
-					alert("결제 성공했습니다!");
-					location.href = path + "/board/completeedit.do";
-				}
-		    	*/
-		    	
-		    	if(rsp.success) {
-		    		$.ajax({
-						url : path + "/board/completeedit.do",
-						//data : obj,
-						type : "POST",//GET
-						success : function(response) {
-							$('#payComplete').html(response);
-						},
-						error : function(response) {
-							console.log("ERROR RESPONSE==>", response);
-							alert("ERROR!");
-						}
-					});	
-		    	}
-		    	
-				
-		    });
-		})
-
-		$(".agreebtn")
-				.click(
+		
+		$(".agreebtn").click(
 						function() {
 							var currentImagePath = $(this).find(
 									"img.purchaseAgree").attr("src");
@@ -259,36 +210,7 @@
 							document.getElementById("gobtn").disabled = isCheckboxImage;
 
 						})
-		var itemPriceText = document.getElementById("itemPrice").innerText;
-		var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText
-				.replace(/[^\d.]/g, ''));
-		document.getElementById("itemprice2").innerText = itemPriceText;
-
-		if (itemPriceValue < 50000) {
-			document.getElementById("itemprice_deli").innerText = 3000;
-
-		} else {
-			document.getElementById("itemprice_deli").innerText = 0;
-
-		}
-		var deli = document.getElementById("itemprice_deli").innerText;
-
-		var deliValue = parseFloat(deli);
-
-		document.getElementById("totalprice_text").innerText = (deliValue + itemPriceValue);
-		totalpriceValue = document.getElementById("totalprice_text").innerText;
-		var deliformattedValue = new Intl.NumberFormat('ko-KR', {
-			style : 'decimal',
-			currency : 'KRW' // 대한민국 원
-		}).format(deli);
-		var formattedValue = new Intl.NumberFormat('ko-KR', {
-			style : 'decimal',
-			currency : 'KRW' // 대한민국 원
-		}).format(totalpriceValue);
-		document.getElementById("itemprice_deli").innerText = deliformattedValue
-				+ "원";
-		document.getElementById("totalprice_text").innerText = formattedValue
-				+ "원";
-	</script>
+						
+</script>
 
 

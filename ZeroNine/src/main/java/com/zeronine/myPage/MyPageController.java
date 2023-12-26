@@ -1,10 +1,11 @@
 package com.zeronine.myPage;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,13 +25,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zeronine.dto.CustomerVO;
+import com.zeronine.dto.ProductVO;
 import com.zeronine.model.BoardService_yn;
+import com.zeronine.model.CartService;
 import com.zeronine.model.CustomerService;
 import com.zeronine.model.MyPageService;
 import com.zeronine.model.ProductService;
-
-import netscape.javascript.JSObject;
 
 @Controller
 @RequestMapping("/myPage")
@@ -46,6 +48,8 @@ public class MyPageController {
 	CustomerService cService;
 	@Autowired
 	MyPageService mypageservice;
+	@Autowired
+	CartService cartservice;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 
@@ -98,19 +102,77 @@ public class MyPageController {
 	public void myCart() {
 	}
 	
-	@RequestMapping("/subPage/myCartDetail.do")
-	public void myCartDetail(Model model, HttpSession session) {
-//		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
-		String customerId = (String) session.getAttribute("customerId");
+	
+	@RequestMapping("/subPage/myCartDetail.do") public void orderSheetJH(Model model,
+	  HttpSession session) { 
+		// String customerId ="4591549e-7eaa-4009-a4cd-b052d8b1f537"; 
+		String customerId = (String)session.getAttribute("customerId"); 
 		//System.out.println("ID = " + customerId);
-		
-		model.addAttribute("myCart", deliveryService.myCart(customerId));
+  
+		model.addAttribute("myCart", deliveryService.myCart(customerId)); 
 	}
 
+	// orderSheet(주문서)
+	@PostMapping(value="/beforeOrderSheet.do" )
+	public @ResponseBody String beforeOrderSheet(@RequestParam(value = "productIdArr[]" )  String[] productIdArr,
+			@RequestParam(value = "countArr[]") String[] countArr,
+			Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		
+		for(int i=0;i<productIdArr.length;i++) {
+			System.out.println("======================================================");
+			logger.info(customerId);
+			logger.info(productIdArr[i]);
+			logger.info(countArr[i]);
+			System.out.println(customerId+productIdArr[i]+countArr[i]);
+			cartservice.beforeproductOrder(customerId, productIdArr[i], Integer.parseInt(countArr[i]));
+		}
+		
+		List<ProductVO> productList = productService.selectByProductList(productIdArr);
+		System.out.println(productList);	
+		session.setAttribute("productList", productList);
+		logger.info("session test >>>>{}", productList);
+		
+		return "OK";
+	}
+	
+	@PostMapping("/orderSheet.do")
+	public void orderSheet(@RequestParam(value = "productIdArr" )  String[] productIdArr,
+			@RequestParam(value = "countArr") String[] countArr,
+			@RequestParam(value = "imagePathArr") String[] imagePathArr,
+			Model model, HttpSession session) {
+		
+		System.out.println("productIdArr");
+		System.out.println(Arrays.toString(productIdArr));
+		
+		System.out.println("countArr");
+		System.out.println(Arrays.toString(countArr));
+		
+		List<ProductVO> productList = productService.selectByProductList(productIdArr);
+		System.out.println(productList);
+		
+		ObjectMapper om = new ObjectMapper();
+		List<Map<String, Object>> pList = new ArrayList<Map<String,Object>>();
+		for(int i=0; i<productList.size(); i++) {
+			productList.get(i).setpCount(Integer.parseInt(countArr[i]));
+			
+			Map<String, Object> productMap = om.convertValue(productList.get(i), Map.class);
+			productMap.put("imagePath", imagePathArr[i]);
+			pList.add(productMap);
+		}
+		
+		String customerId = session.getAttribute("customerId").toString();
+		CustomerVO customerInfo =  cService.selectById(customerId);
+		
+		model.addAttribute("productList", pList);
+		model.addAttribute("customerInfo", customerInfo);
+	}
+	
 	// likeProduct(찜한 상품)
 	@RequestMapping("/likeProduct.do")
 	public void likeProduct() {
 	}
+	
 	@RequestMapping("/subPage/likeProductDetail.do")
 	public void likeProductDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
 			@RequestParam(value = "startDate", required = false) String startDate,

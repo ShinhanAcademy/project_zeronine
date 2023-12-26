@@ -28,12 +28,12 @@ $(function() {
 				console.log("RESULT=>", result);
 				myId = result.customerId;
 				console.log("MY ID", myId);
-				const {customerId, chatDtlList, chatDtlVO} = result;
-				const {customerName, address, title, path} = chatDtlVO;
+				const {customerId, chatDtlList, chatDtlVO, customerName} = result;
+				const {address, title, path, senderId} = chatDtlVO;
 				
-				sender = customerId;
+				sender = senderId;
 				
-			console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
+				console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
 
 				$("#customerName").html(customerName);
 				$("#address").html(address);
@@ -159,12 +159,13 @@ function connect() {
 }
 
 function sendMessage() {
-	const message = document.getElementById("message").value;
-	// console.log("message == null", isEmpty(message));
-	// if(isEmpty(message)) {
-	// 	alert("내용을 입력해주세요.");
-	// 	$("#message").val("").focus();
-	// }
+	let message = document.getElementById("message").value;
+	 console.log(typeof message);
+	 console.log("message == null", isEmpty(message));
+	 if(isEmpty(message) || message.trim() == "") {
+	 	$("#message").val("").focus();
+	 	return;
+	 }
 
 	//return;
 	stompClient.send("/app/chat.sendMessage", {}, JSON.stringify({
@@ -177,7 +178,7 @@ function sendMessage() {
 }
 
 function showMessage(message) {
-	let {messageContent} = message;
+	let {messageContent, sendTime} = message;
 	messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, '<br>');
 	console.log("SHOW MESSAGE", message);
 	
@@ -196,6 +197,7 @@ function showMessage(message) {
 
 	if(message.senderId == myId){ // my msg
 		addHtml.push(`<div class="talk my_talk">`);
+		addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
 		addHtml.push(`<div class="msg">${messageContent}</div>`);
 		addHtml.push(`</div>`);
 		
@@ -204,12 +206,13 @@ function showMessage(message) {
 		addHtml.push(`<div class="talk other_talker">`);
 		if(!sendMsgImageFlag){
 			addHtml.push(`<div class="profile img_wrap">`);
-			addHtml.push(`<img src="${contextPath}/images/mypage/img_chat_profile.png" alt="profile image" />`)	
+			addHtml.push(`<img src="${contextPath}/images/mypage/img_chat_profile.png" alt="profile image" />`);
 			addHtml.push(`</div>`);
 			
 			sendMsgImageFlag = true;
 		}
 		addHtml.push(`<div class="msg">${messageContent}</div>`);
+		addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
 		addHtml.push(`</div>`);
 	}
 

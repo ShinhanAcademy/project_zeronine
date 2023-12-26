@@ -52,14 +52,11 @@
 
 	<script>
 	
-	
 		$(function() {
 			selectBoardEdit();
 			
 		});
 		
-		
-
 		function handleCheckbox(){
 				price = 0;
 				checkboxes.forEach(function(checkbox){

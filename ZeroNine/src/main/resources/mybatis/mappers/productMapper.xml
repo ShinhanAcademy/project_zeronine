@@ -135,4 +135,18 @@
 		"productId" =
 		CAST(#{productId} AS UUID)
 	</select>
+	
+	<!-- 은경 추가 지우기 ㄴㄴ -->
+	<select id="selectByProductList" parameterType="String" resultType="productVo">
+	  SELECT *
+		FROM product
+		where
+		"productId" in (
+		
+		  <foreach collection="array" item="pid" separator="," >
+		 	 CAST(#{pid} AS UUID)
+		  </foreach>
+		)
+	
+	</select>
 </mapper>

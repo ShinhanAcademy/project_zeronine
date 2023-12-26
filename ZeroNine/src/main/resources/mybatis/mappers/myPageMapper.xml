@@ -67,10 +67,18 @@
 			product."pName",
 			product.price,
 			"productMainImage"."imagePath",
-			cart."productCount"
-		from customer join cart on customer."customerId" = cart."customerId"
-					  join product on cart."productId" = product."productId"
-					  left outer join "productMainImage" on product."productId" = "productMainImage"."productId"
+			cart."productCount",
+			"likedProduct"."productId" AS "likedProductId"
+		from customer 
+		join cart
+			on customer."customerId" = cart."customerId"
+		join product
+			on cart."productId" = product."productId"
+		left outer join "likedProduct"
+			on "product"."productId" = "likedProduct"."productId"
+			and "customer"."customerId" = "likedProduct"."customerId"
+		left outer join "productMainImage"
+			on product."productId" = "productMainImage"."productId"
 		where customer."customerId" = cast(#{customerId} as UUID)
 	</select>
 	

@@ -82,9 +82,15 @@ public class AuthController {
 		return cnt;
 	}
 
+	@GetMapping("/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/main/main.do";
+	}
+
 	@GetMapping("/findId.do")
 	public void findId() {
-
+		
 	}
 
 	@PostMapping("/findId.do")

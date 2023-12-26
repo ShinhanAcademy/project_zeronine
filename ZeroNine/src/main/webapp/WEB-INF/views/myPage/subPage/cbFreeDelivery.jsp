@@ -5,7 +5,7 @@
 <div class="tbl_top_wrap">
 	<div class="total_count">
 
-		총 <span>${count}</span>건 &nbsp[진행중]
+		총 <span>${count}</span>건 &nbsp;[진행중]
 	</div>
 	<div class="delivery_kind">
 		<span class="btn_deli" id="fastDelivery">즉배</span> <span>|</span> <span
@@ -65,7 +65,7 @@
 <div class="tbl_top_wrap">
 	<div class="total_count">
 
-		총 <span>${successCount}</span>건 &nbsp[완료]
+		총 <span>${successCount}</span>건 &nbsp;[완료]
 	</div>
 
 </div>
