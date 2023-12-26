@@ -91,11 +91,11 @@
     max-height: 2.6em;
     font-size: 15px;
     font-weight: bold;
-    color: #949494;
+    color: #666;
 }
 .contents .like_item .product_name a:hover,
 .contents .like_item .product_name a:focus {
-	color: #5f5f5f;
+	color: #333;
 }
 .contents .like_item .price {
 	font-size: 15px;

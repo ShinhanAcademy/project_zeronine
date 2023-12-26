@@ -112,6 +112,7 @@ html, body {
 .zn_header .bot .gnb_1depth,
 .zn_header .bot .user_fav ul {
 	display: flex;
+	align-items: center;
 }
 .zn_header .bot .gnb_1depth > li {
 	position: relative;
@@ -161,8 +162,15 @@ html, body {
 .zn_header .bot .bot_inner .icon_btn .wish {
     background: url("../../images/ecomall/wish-icon.svg?ver=1") no-repeat center;
 }
+.zn_header .bot .bot_inner .icon_btn:nth-of-type(2) {
+}
 .zn_header .bot .bot_inner .icon_btn .my {
-    background: url("../../images/ecomall/my-icon.svg?ver=1") no-repeat center;
+	width: 31px;
+	height: 31px;
+    background: url(../../images/ecomall/my-icon.svg?ver=1) no-repeat center / contain;
+    filter: grayscale(100%);
+    border-radius: 50%;
+    border: 1px solid #333;
 }
 .zn_header .bot .bot_inner .icon_btn .cart {
 	background: url("../../images/ecomall/cart-icon.svg?ver=1") no-repeat center;

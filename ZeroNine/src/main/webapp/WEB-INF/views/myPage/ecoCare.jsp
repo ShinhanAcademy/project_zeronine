@@ -17,12 +17,12 @@
 		<!-- mypage_container -->
 		<div class="mypage_container">
 			<!-- zero_sbn -->
-			<%@include file="common/myPageSnb.jsp"%>
+			<%@include file="common/myPageSnb.jsp"%>f
 			<!-- //zero_sbn -->
 			<!-- mypage_detail_wrap -->
 			<div class="mypage_detail_wrap">
 				<!-- my_info_wrap -->
-				<%@include file="common/mylInfo.jsp"%>
+				<%@include file="common/personalInfo.jsp"%>
 				<!-- //my_info_wrap -->
 				<!-- contents_wrap -->
 
