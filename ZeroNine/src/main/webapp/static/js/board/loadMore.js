@@ -13,7 +13,7 @@ function loadMore(data){
 	}
 	console.log(data);
 	totalList = data.length;
-	if(initNum < totalList){
+	if(initNum <= totalList){
 		show(data.slice(initNum, initNum+9))
 		initNum += 9;
 	} else {

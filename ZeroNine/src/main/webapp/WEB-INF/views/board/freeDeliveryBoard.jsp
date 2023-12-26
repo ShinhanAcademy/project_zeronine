@@ -265,22 +265,22 @@ function filterType() {
 
 function showList() {
     output = "";
-
+    result = [];
+    initNum = 0;
     if (type_of_filter == 'imminent') { // 임박순
     	info_json.sort(
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             }
         );
-        each();
     } else { // 최신순 (default)
     	info_json.sort(
             function (a, b) {
                 return new Date(b.uploadTime) - new Date(a.uploadTime);
             }
         );
-        each();
     }
+    each();
 }
 
 function each() {
