@@ -121,17 +121,17 @@ public class MyPageController {
 		
 		for(int i=0;i<productIdArr.length;i++) {
 			System.out.println("======================================================");
-			logger.info(customerId);
-			logger.info(productIdArr[i]);
-			logger.info(countArr[i]);
+//			logger.info(customerId);
+//			logger.info(productIdArr[i]);
+//			logger.info(countArr[i]);
 			System.out.println(customerId+productIdArr[i]+countArr[i]);
 			cartservice.beforeproductOrder(customerId, productIdArr[i], Integer.parseInt(countArr[i]));
 		}
 		
 		List<ProductVO> productList = productService.selectByProductList(productIdArr);
-		System.out.println(productList);	
+		//System.out.println(productList);	
 		session.setAttribute("productList", productList);
-		logger.info("session test >>>>{}", productList);
+		//logger.info("session test >>>>{}", productList);
 		
 		return "OK";
 	}
