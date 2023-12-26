@@ -15,6 +15,10 @@
 	height: 130px;
     border: 1px solid #ebebeb;
 }
+.order_history_wrap .product_info .img_wrap img {
+	height: 100%;
+    object-fit: cover;
+}
 .order_history_wrap .order_num {
 	margin-top: 5px;
 }

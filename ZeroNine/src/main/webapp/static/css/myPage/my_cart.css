@@ -45,6 +45,10 @@
     height: 130px;
     border: 1px solid #ebebeb;
 }
+.my_cart_wrap .product_info .img_wrap img {	
+	height: 100%;	
+    object-fit: cover;
+}
 .my_cart_wrap .product_count select {
     width: 57px;
     height: 28px;
