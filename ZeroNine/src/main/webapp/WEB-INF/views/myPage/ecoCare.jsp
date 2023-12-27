@@ -409,7 +409,6 @@ $.ajax({
 	    url: path+"/myPage/PickUpList.do",
 	    data:obj,
 	    success:function(response){
-	    	alert("성공! 회수 요청이 정상적으로 접수되었습니다!");
 	    	$('#hereis').html(response);
 	    },
 	   

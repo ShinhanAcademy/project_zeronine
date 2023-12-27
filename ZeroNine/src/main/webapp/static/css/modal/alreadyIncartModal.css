@@ -72,11 +72,7 @@
 	font-weight: 400;
 }
 
-.modal_btnpart {
-	display: flex;
-	flex-direction: row;
-	margin-top: 15px;
-}
+
 #detailmodal_body{
 	width: 800px;
     height: 400px;
@@ -86,11 +82,12 @@
     background-color: #fff;
     border-radius: 15px;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-top: 245px;
 }
 .modal_img img{
-	    width: 100px;
+	       width: 234px;
+    height: auto;
+    border-radius: 10px;
 	}
