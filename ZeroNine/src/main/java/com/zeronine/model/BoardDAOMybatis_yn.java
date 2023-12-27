@@ -334,5 +334,10 @@ public class BoardDAOMybatis_yn {
 		return isParticipate;
 	}
 
+	public List<Map<String, Object>> mySubscriptionInfo(String customerId) {
+		List<Map<String, Object>> info = sqlSession.selectList(NAMESPACE + "mySubscriptionInfo", customerId);
+		return info;
+	}
+
 
 }

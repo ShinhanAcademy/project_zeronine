@@ -203,6 +203,10 @@ public class BoardService_yn {
 		return boardDAO.isParticipateFree(customerId, boardId);
 	}
 
+	public List<Map<String, Object>> mySubscriptionInfo(String customerId) {
+		return boardDAO.mySubscriptionInfo(customerId);
+	}
+
 
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
 <script defer src="${path}/js/myPage/commonMypage.js"></script>
@@ -29,7 +30,7 @@
 	                    <div class="tbl_wrap">
 		                    <div class="tbl_top_wrap">
 		                    	<div class="total_count">
-									총 <span>2</span>건
+									총 <span>${count}</span>건
 		                    	</div>
 		                    	
 	                    	</div>
@@ -41,7 +42,6 @@
 							  </colgroup>
 	                    		<thead>
 	                    			<tr>
-	                    				
 	                    				<th>NO</th>
 	                    				<th>제로나인 구독권</th>
 	                    				<th>구독 날짜</th>
@@ -50,27 +50,15 @@
 	                    			</tr>
 	                    		</thead>
 	                    		<tbody>
+	                    		<c:forEach items="${info}" var="subscription" varStatus="index">
 	                    			<tr>
-	                    				<td>1</td>
-	                    				<td>무료배송+에코케어 구독권</td>
-	                    				<td>2023.11.24</td>
-	                    				<td>15</td>
-	                    				<td>2023.12.24</td>
+	                    				<td>${index.count}</td>
+	                    				<td>${subscription.name}</td>
+	                    				<td>${subscription.startDateTime}</td>
+	                    				<td>${subscription.remainingCouponCount}</td>
+	                    				<td>${subscription.after}</td>
 	                    			</tr>
-	                    			<tr>
-	                    				<td>2</td>
-	                    				<td>무료 배송 구독권</td>
-	                    				<td>2023.11.25</td>
-	                    				<td>-</td>
-	                    				<td> </td>
-	                    			</tr>
-	                    			<tr>
-	                    				<td>3</td>
-	                    				<td>에코케어 5회</td>
-	                    				<td>2023.11.26</td>
-	                    				<td>5</td>
-	                    				<td> </td>
-	                    			</tr>
+	                    		</c:forEach>	
 	                    		</tbody>
 	                    	</table>
 		                    
