@@ -151,6 +151,9 @@
 .mypage_detail_wrap .subscription_list li {
     margin-bottom: 5px;
 }
+.mypage_detail_wrap .subscription_list li:last-child {
+	margin-bottom: 0;
+}
 .mypage_detail_wrap .subscription_list li > div {
     margin-right: 8px;
 }
