@@ -50,6 +50,7 @@ public class MyPageDAOMybatis {
 		int OHcount =sqlSession.selectOne(NAMESPACE + "orderHistoryCount", mapData);
 		return OHcount;
 	}
+	
 
 	/* orderCancelHistoryAll */
 	public List<Map<String, Object>> orderCancelHistoryAll(String customerId, String searchWord, String startDate, String endDate) {
@@ -104,8 +105,8 @@ public class MyPageDAOMybatis {
 		return ecodash; 
 	}
 
-	public List<Map<String, Object>> selectCouponCtn(/* String customerId */){
-		List<Map<String, Object>> couponCtn = sqlSession.selectList(NAMESPACE + "selectCouponCtn"/* , customerId */);
+	public List<Map<String, Object>> selectCouponCtn( String customerId ){
+		List<Map<String, Object>> couponCtn = sqlSession.selectList(NAMESPACE + "selectCouponCtn", customerId);
 		return couponCtn; 
 	}
 	public int updateCouponCnt (String subscriptionId) {
@@ -113,12 +114,16 @@ public class MyPageDAOMybatis {
 		return updateResult;
 	}
 	
-	/*
-	 * public int insertPickupRequest(String customerId, String subscriptionId) {
-	 * System.out.println(subscriptionId); System.out.println(customerId); int
-	 * insertResult = sqlSession.insert(NAMESPACE+"insertPickupRequest", customerId,
-	 * subscriptionId); return insertResult; }
-	 */
+	public int insertPickupRequest(String customerId, String subscriptionId) {
+		System.out.println(subscriptionId);
+		System.out.println(customerId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("isFoodWaste", Math.random() < 0.5);
+		map.put("subscriptionId", subscriptionId);
+		logger.info(map.toString());
+		return sqlSession.insert(NAMESPACE+"insertPickupRequest",map);
+	}
 	
 	public List<PickupVO> PickUpList(int page ,String customerId){
 		System.out.println("pageStartNum"+page);
@@ -141,6 +146,4 @@ public class MyPageDAOMybatis {
 	public PickupVO PickUpDetail(String pickUpId) {
 		return sqlSession.selectOne(NAMESPACE+"PickUpDetail",pickUpId);
 	}
-
-
 }
