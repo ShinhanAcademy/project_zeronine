@@ -195,11 +195,14 @@ public class BoardService_yn {
 		boardDAO.deleteCart(authorId, productId);
 	}
 
+	public int isParticipateFast(String customerId, String boardId) {
+		return boardDAO.isParticipateFast(customerId, boardId);
+	}
 
-	
+	public int isParticipateFree(String customerId, String boardId) {
+		return boardDAO.isParticipateFree(customerId, boardId);
+	}
 
-	
-	
-	
+
 
 }

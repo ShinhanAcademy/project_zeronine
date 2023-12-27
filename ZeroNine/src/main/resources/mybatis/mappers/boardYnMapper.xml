@@ -423,7 +423,6 @@
 		where bc."boardId" = cast(#{boardId} as UUID)
 		and bc."customerId" = cast(#{customerId} as UUID)
 	</select>
-	
 	<select id="fastBoardProduct" resultType="map" parameterType="String">
 		select pi."imagePath", p."pName", p.brand, p.price, p."pCount", p."productId"
 		from product p left join "productMainImage" pi on (p."productId"=pi."productId")
@@ -437,4 +436,16 @@
 		WHERE "productId" = cast(#{productId} as UUID)
 		and "customerId" = cast(#{authorId} as UUID)
 	</delete>
+	<select id="isParticipateFast" resultType="int" parameterType="map">
+		select count(*) 
+		from "selectProduct" 
+		where "boardId" = cast(#{boardId} as UUID)
+		and "customerId" = cast(#{customerId} as UUID)
+	</select>
+	<select id="isParticipateFree" resultType="int" parameterType="map">
+		select count(*) 
+		from "boardCart"
+		where "boardId" = cast(#{boardId} as UUID)
+		and "customerId" = cast(#{customerId} as UUID)
+	</select>
 </mapper>

@@ -181,11 +181,17 @@
 		var path = "${path}";
 		
 		$(".gobtn").click(function() {
+			
+			if(${isParticipate}>0){
+				alert("이미 참여한 게시글입니다.")
+				return;
+			}
+			
 			$.ajax({
 				url : path + "/common/freeOrderSuccess.do",
 				type : "POST",
 				success : function(response) {
-					alert(response);
+					//alert(response);
 					location.href = path+"/common/freeOrderSuccess.do";
 				},
 				error : function() {

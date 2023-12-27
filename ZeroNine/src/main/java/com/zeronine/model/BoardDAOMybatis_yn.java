@@ -318,10 +318,21 @@ public class BoardDAOMybatis_yn {
 		sqlSession.delete(NAMESPACE + "deleteCart", map);
 	}
 
-	
+	public int isParticipateFast(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		int isParticipate = sqlSession.selectOne(NAMESPACE + "isParticipateFast", map);
+		return isParticipate;
+	}
 
-	
+	public int isParticipateFree(String customerId, String boardId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("customerId", customerId);
+		map.put("boardId", boardId);
+		int isParticipate = sqlSession.selectOne(NAMESPACE + "isParticipateFree", map);
+		return isParticipate;
+	}
 
-	
 
 }

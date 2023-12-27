@@ -8,6 +8,14 @@ if ($(".check_essential:checked").length === $(".check_essential").length) {
   $("#join_btn").prop("disabled", true);
   $("#join_btn").css("background-color", "gray");
 }
+
+const checkEssentialCheckboxes = $(".check_essential:checked").length === $(".check_essential").length;
+const checkSelectiveCheckbox = $("#check_selective:checked").length > 0;
+if (checkEssentialCheckboxes && checkSelectiveCheckbox) {
+        $("#check_all").prop("checked", true);
+    } else {
+        $("#check_all").prop("checked", false);
+    }
 }
 
 function selectAll(selectAll){
@@ -17,12 +25,6 @@ function selectAll(selectAll){
 	if(selectAll.checked){
 	checkboxes.forEach((checkbox)=>{
 		checkbox.checked = selectAll.checked;
-		if(checkbox != selectAll){checkbox.disabled = true;};
-	})
-	}else{
-	checkboxes.forEach((checkbox)=>{
-		checkbox.checked = selectAll.checked;
-		if(checkbox != selectAll){checkbox.disabled = false;};
 	})
 	}
 	

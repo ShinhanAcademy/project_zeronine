@@ -8,19 +8,6 @@
 <%@include file="../common/head.jsp"%>
 <title>FastBoard</title>
 <link rel="stylesheet" href="${path}/css/common/orderSuccess.css" />
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Get the element by its ID
-    var element = document.getElementById('deliId');
-
-    // Display only the first 8 characters
-    var originalText = element.textContent.trim();
-    var truncatedText = originalText.slice(0, 8);
-
-    // Update the content of the element
-    element.textContent = truncatedText;
-});
-</script>
 </head>
 <body>
 	<%@include file="../common/header.jsp"%>
@@ -51,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				</div>
 			</div>
 			<div class="orderlist-go">
-			<button class="orderlist-btn">주문내역 바로가기</button>
+				<button class="orderlist-btn">내가 쓴 게시글 바로가기</button>
 			</div>
 		</div>
 	</div>
@@ -59,7 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	</body>
 	<script>
 		$(".orderlist-btn").click(function(){
-			location.href = "${path}/myPage/orderHistory.do";
+			location.href = "${path}/myPage/participatedBoard.do";
 		});
+		
 	</script>
 </html>

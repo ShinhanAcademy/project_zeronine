@@ -100,11 +100,11 @@
 							</div>
 						</div>
 						<div class="btn_wrap">
-							<form action="${path}/common/orderFast.do" method="POST">
-								<input type="hidden" name="productId" id="productId"> <input
-									type="hidden" name="count" id="count">
+						<form action="${path}/common/orderFast.do" method="POST">
+								<input type="hidden" name="productId" id="productId"> 
+								<input type="hidden" name="count" id="count">
 								<button class="participate_btn">공구에 참여하기</button>
-							</form>
+						</form>
 						</div>
 					</div>
 				</div>
@@ -116,6 +116,7 @@
 	<%@include file="../common/footer.jsp"%>
 	<script>
 		var path = "${path}";
+		var isFreeDelivery = "${IsFreeDelivery}";
 	</script>
 	<script src="${path}/js/common/participateBoard.js" type="text/javascript"></script>
 </body>
