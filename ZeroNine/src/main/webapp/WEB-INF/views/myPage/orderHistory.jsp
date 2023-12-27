@@ -66,6 +66,24 @@
 	<!-- //zero_container -->
 	<%@include file="deliveryTracking.jsp" %>
 	<%@include file="../common/footer.jsp" %>
+	<script type="text/javascript">
+	function orderHistoryDetail(pickUpId){
+		var obj ={"pickUpId":pickUpId};
+
+		$.ajax({
+			    type: "GET",
+			    url: path+"/myPage/PickUpDetail.do",
+			    data:obj,
+			    success:function(response){
+			    	$('#modal').html(response);
+			    },
+			   
+			    error: function (error) {
+			      alert("다시 시도해주세요.");
+			    }
+			  });
+		}
+	</script>
 </body>
 </html>
 		               

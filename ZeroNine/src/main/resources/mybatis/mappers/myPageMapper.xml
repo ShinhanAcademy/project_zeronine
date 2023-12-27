@@ -35,6 +35,23 @@
 					 product."pName" LIKE #{searchWord})
 		 	</if>
 		order by delivery."purchaseDateTime" DESC
+		LIMIT 5 OFFSET #{page}
+	</select>
+	<select id="orderHistoryCount" parameterType="map" resultType="int">
+		select 
+		count(*)
+		from delivery join "deliveryProduct" on delivery."deliveryId" = "deliveryProduct"."deliveryId"
+				  join product on "deliveryProduct"."productId" = product."productId"
+				  left outer join "productMainImage" on "deliveryProduct"."productId" = "productMainImage"."productId"
+				  join customer on delivery."customerId" = customer."customerId"
+		where delivery."customerId" = cast(#{customerId} as UUID)
+			AND (delivery."purchaseDateTime" >= to_timestamp(#{startDate}, 'YYYY-MM-DD 00:00:00.00') 
+			AND delivery."purchaseDateTime" &lt;= to_timestamp(#{endDate}, 'YYYY-MM-DD HH24:MI:SS.MS'))
+		 	<if test="searchWord != ''">
+				AND (product.brand LIKE #{searchWord} OR
+					 product."pName" LIKE #{searchWord})
+		 	</if>
+		order by delivery."purchaseDateTime" DESC
 	</select>
 	
 	<!-- order cancel history -->
