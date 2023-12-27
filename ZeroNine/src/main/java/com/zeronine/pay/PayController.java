@@ -4,6 +4,7 @@ package com.zeronine.pay;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -57,8 +58,9 @@ public class PayController {
 			return true;
 		}
 		else if (subscription.equals("에코케어+무료 배송 이용권")) {
-			payService.payFreeDeliverySubscription(customerId);
-			payService.payEcocareSubscription(customerId);
+			String subscriptionId = UUID.randomUUID().toString();
+			payService.payFreeDeliverySubscription(customerId, subscriptionId);
+			payService.payEcocareSubscription(customerId, subscriptionId);
 			return true;
 		}
 		
