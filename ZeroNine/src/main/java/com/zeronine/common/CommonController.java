@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,19 +80,36 @@ public class CommonController {
 	
 	@PostMapping(value="/common/orderSuccess.do", produces="application/text;charset=UTF-8")
 	@ResponseBody
-	public void orderSuccessP(String productId, int count, Model model, HttpSession session) {
+	public ResponseEntity<String> orderSuccessP(String productId, int count, Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		String boardId = (String)session.getAttribute("boardId");
-		boardService.orderFastProduct(customerId,boardId,count);
-		/*
-		int isFastProduct = boardService.orderFastProduct(customerId,boardId,count);
-		if(isFastProduct==0 || isFastProduct==1) {
-			message = "Âü¿©¿Ï·á"; //participate complete
-		}else {
-			message = "ÀÌ¹Ì Âü¿©ÇÑ °Ô½Ã±ÛÀÔ´Ï´Ù."; //already
+		String message = null;
+		
+		int isFastProduct = -1;
+		try {
+			isFastProduct = boardService.orderFastProduct(customerId,boardId,count);
 		}
-		return message;
-		*/
+		catch (Exception e){
+			e.printStackTrace();
+			logger.warn(e.toString()); //ì˜¤ë¥˜íŽ˜ì´ì§€ ì¶œë ¥
+			message = "ì°¸ì—¬ ì‹¤íŒ¨ (ì™„ë£Œëœ ê²Œì‹œê¸€)";
+			logger.info(message);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+		}
+		
+		
+		if(isFastProduct == 0) {
+			message = "ì°¸ì—¬ ì™„ë£Œ => ê³µêµ¬ ë¯¸ì™„ë£Œ";
+		}
+		
+		if(isFastProduct == 1) {
+			message = "ì°¸ì—¬ ì™„ë£Œ => ê³µêµ¬ ì„±ì‚¬!";
+		}
+		
+		
+		logger.info("orderSuccess.do ... post returning true");
+		return ResponseEntity.ok(message);
+		
 	}
 	
 	@PostMapping(value="/common/freeOrderSuccess.do", produces="application/text;charset=UTF-8")
@@ -110,12 +129,12 @@ public class CommonController {
 		int isFreeProduct = boardService.orderFreeProduct(customerId, boardId, productList);
 		String message;
 		if(isFreeProduct==0 || isFreeProduct==1) {
-			message = "Âü¿©¿Ï·á"; //participate complete
+			message = "ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½"; //participate complete
 			for(Entry<String,Object> row:entrys) {
 				boardService.deleteCart(customerId, row.getKey());
 			}
 		}else {
-			message = "ÀÌ¹Ì Âü¿©ÇÑ °Ô½Ã±ÛÀÔ´Ï´Ù."; //already
+			message = "ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½Ô´Ï´ï¿½."; //already
 		}
 		return message;
 		*/
@@ -123,11 +142,16 @@ public class CommonController {
 	}	
 	
 	@GetMapping("/common/orderSuccess.do") 
-	public void orderSuccess(Model model,HttpSession session) { 
+	public String orderSuccess(Model model,HttpSession session) { 
 		String customerId = (String)session.getAttribute("customerId"); 
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77"; 
 		String boardId = (String)session.getAttribute("boardId");
-		Map<String,Object> info = boardService.orderInfo(customerId, boardId); 
+		Map<String,Object> info = boardService.orderInfo(customerId, boardId);
+		
+		if(info == null) {
+			return "/common/failParticipate";
+		}
+		
 		int price = (Integer)info.get("price"); 
 		int pCount = (Integer)info.get("pCount"); 
 		int totalPrice = (Integer)info.get("pickCount") * (Math.round(price/pCount));
@@ -137,8 +161,10 @@ public class CommonController {
 		}
 	    model.addAttribute("info",info);
 	 	model.addAttribute("totalPrice",totalPrice);
-	 	session.removeAttribute("boardId"); 
-	 	}
+	 	session.removeAttribute("boardId");
+	 	
+	 	return "/common/orderSuccess";
+	}
 	
 	@GetMapping("/common/freeOrderSuccess.do") 
 	public void freeOrderSuccess(Model model,HttpSession session) { 

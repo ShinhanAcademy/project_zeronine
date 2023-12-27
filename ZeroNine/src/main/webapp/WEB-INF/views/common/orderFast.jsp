@@ -229,7 +229,23 @@
 						location.href = path+"/common/orderSuccess.do";
 					},
 					error : function() {
-						alert("ERROR!");
+						//alert("ERROR!"); 
+						$.ajax(
+							{
+								url : "https://api.iamport.kr/payments/cancel",
+								type : "POST",
+								contentType : "application/json",
+								data : {imp_uid : rsp.imp_uid},
+								success : function() {
+									location.href = path+"/common/failParticipateRefund.do";
+									//결제 취소완료
+								},
+								error : function() {
+									//결제 취소 실패		
+									location.href = path+"/common/failParticipateRefund.do";
+								}
+							}		
+						);
 					}
 				});
 		    });

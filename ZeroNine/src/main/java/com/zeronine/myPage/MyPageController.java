@@ -585,7 +585,7 @@ public class MyPageController {
 			MY_INFOMATION
 	 ****************************** */
 	
-	/*
+	
 	@PostMapping(value = "/validatePw.do", consumes = "application/json")
 	@ResponseBody
 	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
@@ -603,7 +603,7 @@ public class MyPageController {
 
 		return cService.selectByEmail(email);	
 	}
-	*/
+	
 	@RequestMapping("/myInfo.do")
 	public void myInfo(HttpSession session, Model model) {
 		String email = (String)session.getAttribute("email");
