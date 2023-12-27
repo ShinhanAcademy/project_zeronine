@@ -316,7 +316,7 @@ console.log(now.getHours());
 
 var output = "";
 var c_month = now.getMonth()+1;
-var str = now.getFullYear()+"년 "+c_month+"월 "+now.getDate()+"일 "+now.getHours()+"시";
+var str = now.getFullYear()+"년 "+c_month+"월 "+(now.getDate()+1)+"일 "+now.getHours()+"시";
 $.each(couponInfo_arr, function(index, item){
 	console.log("이거 확인" +item.isSubscription);
 	if(item.isSubscription=='true'){

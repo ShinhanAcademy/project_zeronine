@@ -15,7 +15,7 @@
 
 </head>
 <body>
-	<div class="zero_container" style="padding-top: 180px;">
+	<div class="zero_container" style="padding-top: 20px;">
 		<div class="banner zn_center">
 			<div style="width: 1440px">
 				<img src="${path}/images/board/edit_banner.png" style="width: 100%">
