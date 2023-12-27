@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <div class="contents pickup_history_wrap">
 	<div class="search_wrap">
 		<div class="period">
@@ -44,10 +43,10 @@
 			<c:forEach items="${pickUpList}" var="pickupList" varStatus="status">
 				<tr>
 					<td>${pickupList.pickUpTime}</td>
-					<td>일반쓰레기 수거 요청건</td>
-					<td>${pickupList.pickUpStatus}</td>
+					<td>${pickupList.isFoodWaste==false ? "일반쓰레기 회수 요청 내역" : "음식물 쓰레기 회수 요청 내역"}</td>
+					<td class="status" data-value ="${pickupList.pickUpStatus}">${pickupList.pickUpStatus=="complete"? "완료" : pickupList.pickUpStatus=="ready" ? "준비 중" : pickupList.pickUpStatus=="process" ? "회수 중" : "거절"}</td>
 					<td>
-						<button class="btn_blue" value="${pickupList.pickUpId}"onclick="pickUpDetail('${pickupList.pickUpId}')">상세 보기</button>
+						<button class="btn_blue" value="${pickupList.pickUpId}"onclick="pickUpDetail('${pickupList.pickUpId}')" >상세 보기</button>
 					</td>
 				</tr>
 				</c:forEach>
@@ -115,3 +114,21 @@
 
 
 <!-- pagination -->
+
+<script type="text/javascript">
+	usingDatePicker();
+	$(color);
+	var result;
+	function color(){
+		 $(".status").each(function(){
+			 result = $(this).text();
+			 if(result == "완료"){
+				 $(this).css("color" , "#0F82FF");
+			 } else if(result == "거절"){
+				 $(this).css("color" , "red");
+			 }
+		 })
+	}
+	
+	
+</script>

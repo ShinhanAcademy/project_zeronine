@@ -84,9 +84,13 @@ public PagingVO orderHistorygetPages(int page,String customerId, String searchWo
 		System.out.println("이것은 service에서 보여주는 정보"+ecodash);
 		return ecodash;
 	}
+	
+	public int insertPickupRequest(String customerId, String subscriptionId) {
+		return myPageDAO.insertPickupRequest(customerId, subscriptionId);
+	}
 
-	public List<Map<String, Object>> selectCouponCtn(/* String customerId */){
-		List<Map<String, Object>> couponCtn = myPageDAO.selectCouponCtn(/* customerId */);
+	public List<Map<String, Object>> selectCouponCtn(String customerId ){
+		List<Map<String, Object>> couponCtn = myPageDAO.selectCouponCtn( customerId );
 		System.out.println("이것은 service에서 보여주는 정보"+couponCtn);
 		return couponCtn;
 	}
