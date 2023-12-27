@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${path}/css/modal/findModal.css">
+<script defer src="${path}/js/myPage/commonMypage.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>MyPage</title>
 <script>
@@ -62,9 +63,10 @@
 			<!-- //zero_sbn -->
 			<!-- mypage_detail_wrap -->
 			<div class="mypage_detail_wrap">
-				<!-- my_info_wrap -->
-				<%@include file="common/personalInfo.jsp" %>
-				<!-- //my_info_wrap -->
+	            <!-- my_info_wrap -->
+	            <div id="personalInfo" class="my_info_wrap">
+				</div>
+	            <!-- //my_info_wrap -->
 				<!-- contents_wrap -->
 				<div class="contents_wrap">
 					<span class="info_font">개인정보</span>

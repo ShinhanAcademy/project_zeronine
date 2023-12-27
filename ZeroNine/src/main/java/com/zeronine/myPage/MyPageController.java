@@ -57,6 +57,19 @@ public class MyPageController {
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 
 	/* ****************************
+			COMMON
+	****************************** */
+	@GetMapping("/common/personalInfo.do")
+	public void personalInfo(HttpSession session, Model model) {
+		String customerId = (String) session.getAttribute("customerId");
+		logger.info("personalInfo"+customerId);
+		Map<String, Object> personalInfo = mypageservice.personalInfo(customerId);
+		
+		model.addAttribute("personalInfo", personalInfo);
+		System.out.println("model!!!"+ model.getAttribute("personalInfo"));
+	}
+	
+	/* ****************************
 			MY_SHOPPING
 	 ****************************** */
 	// orderHistory(나의 지갑)

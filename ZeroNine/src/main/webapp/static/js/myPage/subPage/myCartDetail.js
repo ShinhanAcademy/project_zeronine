@@ -191,10 +191,13 @@ function calcTotalPrice(totalPrice) {
 
     
     $(".free_delivery_amount .text.free_delivery, .free_delivery_amount .text.pay_delivery").hide();
+    
+    if(targetChkedBox.length == 0) {
+        deliveryFee = 0;
+    }
+        
     if (totalPrice >= freeDeliveryAmount) {
-        if(targetChkedBox.length == 0) {
-            deliveryFee = 0;
-        }
+        deliveryFee = 0;
         
         //percentage
         $(".contents_wrap .now_amount").css({"width": "100%"});
