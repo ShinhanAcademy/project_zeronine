@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -56,6 +57,16 @@ public class MyPageController {
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 
 	/* ****************************
+			COMMON
+	****************************** */
+	@GetMapping("/common/personalInfo.do")
+	public void personalInfo(HttpSession session, Model model) {
+		String customerId = (String) session.getAttribute("customerId");
+		logger.info("personalInfo"+customerId);
+	}
+	
+	
+	/* ****************************
 			MY_SHOPPING
 	 ****************************** */
 	// orderHistory(나의 지갑)
@@ -70,16 +81,21 @@ public class MyPageController {
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")
-	public void orderHistoryDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+	public void orderHistoryDetail(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			@RequestParam(value = "searchWord", required = false) String searchWord,
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
 //		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		
 		String customerId = (String) session.getAttribute("customerId");
-//		System.out.println("ID = " + customerId);
-
-		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId, searchWord, startDate, endDate));
+		PagingVO orderHistorypaginating = mypageservice.orderHistorygetPages(Page,customerId, searchWord, startDate, endDate);
+		model.addAttribute("OHpagination",orderHistorypaginating);
+		model.addAttribute("pageCount",mypageservice.orderHistoryCount(customerId, searchWord, startDate, endDate));
+		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(Page,customerId, searchWord, startDate, endDate));
+	
+	
 	}
 	
 	// orderCancelHistory(취소 / 반품 내역)
@@ -144,11 +160,11 @@ public class MyPageController {
 			@RequestParam(value = "imagePathArr") String[] imagePathArr,
 			Model model, HttpSession session) {
 		
-		System.out.println("productIdArr");
-		System.out.println(Arrays.toString(productIdArr));
+		//System.out.println("productIdArr");
+		//System.out.println(Arrays.toString(productIdArr));
 		
-		System.out.println("countArr");
-		System.out.println(Arrays.toString(countArr));
+		//System.out.println("countArr");
+		//System.out.println(Arrays.toString(countArr));
 		
 		List<ProductVO> productList = productService.selectByProductList(productIdArr);
 		System.out.println(productList);
@@ -238,7 +254,15 @@ public class MyPageController {
 		}
 	}
 	
-	
+	/*
+	 * @RequestMapping("/requestPickup.do") public ResponseEntity<String>
+	 * insertPickupRequest(@RequestParam("subscriptionId") String subscription_id,
+	 * HttpServletRequest session){ String customer_id =
+	 * (String)session.getAttribute("customerId");
+	 * 
+	 * }
+	 * 
+	 */
 	
 	
 	@GetMapping("/createdBoard.do")

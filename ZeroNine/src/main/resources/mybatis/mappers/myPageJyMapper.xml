@@ -13,7 +13,7 @@
 	<select id="selectCouponCtn" resultType="map">
 	select "subscriptionId","customerId","isSubscription", "remainingCouponCount"
 		from public."customerPickCoupon" 
-		where "customerId"='a6a48528-9215-4fb9-9dd0-5bb174103277' and "remainingCouponCount" > 0
+		where "customerId"=cast(#{customerId} as UUID) and "remainingCouponCount" > 0
 		order by "subscriptionId"
 	</select>
 	
@@ -22,6 +22,13 @@
 		SET "remainingCouponCount" = "remainingCouponCount" - 1
 		WHERE "subscriptionId" = cast(#{subscriptionId} as UUID)
 	</update>
+	
+	<!-- <insert id="insertPickupRequest" parameterType="hashMap">
+	INSERT INTO public.pickup(
+	"customerId", "isFoodWaste", "subscriptionId")
+	VALUES (cast(#{customerId} as UUID), RANDOM() < 0.5, cast(#{subscriptionId} as UUID));
+	</insert>
+	 -->
 	<select id="PickUpList" parameterType="hashMap"
 		resultType="hashMap">
 		SELECT "pickUpId",

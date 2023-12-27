@@ -243,7 +243,7 @@ function callLikeProdList(targetItem) {
             }
         });
     }else{
-            $.ajax({
+        $.ajax({
             url : "/product/productLike.do",
             type: "POST",
             data : {"productId" :prodId},
