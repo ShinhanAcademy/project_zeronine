@@ -21,4 +21,7 @@ public class PayService {
 	public int payEcocareSubscription(String customerId) {
 		return payDAO.payEcocareSubscription(customerId);
 	}
+	public int IsFreeDelivery(String customerId) {
+		return payDAO.IsFreeDelivery(customerId);
+	}
 }

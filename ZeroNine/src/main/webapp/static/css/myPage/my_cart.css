@@ -19,22 +19,48 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 60%;
+	width: 0%;
 	height: 100%;
 	border-radius: 10px;
 	background-color: #0083E6;
+	transition-delay: .5s;
+    transition: .3s;
 }
 .contents_wrap .text {
+	display: none;
     text-align: center;
     margin-top: 15px;
     font-family: "Inter";
     font-weight: bold;
     font-size: 16px;
 }
+.contents_wrap .text span {
+	color: #005493;
+}
+.contents_wrap .text span.color_red {
+	color: #f00;
+}
 .my_cart_wrap .product_info .img_wrap {
     width: 130px;
     height: 130px;
     border: 1px solid #ebebeb;
+}
+.my_cart_wrap .product_info .img_wrap a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.my_cart_wrap .product_info .img_wrap img {	
+	height: 100%;	
+    -o-object-fit: cover;
+    object-fit: cover;
+    -webkit-transition: -webkit-transform 0.2s ease-in;
+    transition: -webkit-transform 0.2s ease-in;
+}
+.my_cart_wrap .product_info .img_wrap img:hover {
+    -webkit-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    transform: scale(1.08);
 }
 .my_cart_wrap .product_count select {
     width: 57px;
@@ -62,8 +88,12 @@
     background-position: 28px center;
 }
 .my_cart_wrap .purchase_selection .btn_addlike {
-	background-image: url("../../images/mypage/ico_like.png");
-	background-size: 16px 15px;
+	background-image: url("../../images/common/ico_heart_outline.png");
+	background-size: 17px 17px;
+}
+.my_cart_wrap .purchase_selection .btn_addlike.on {
+	background-image: url("../../images/common/ico_heart_red.png");
+	background-size: 17px 17px;
 }
 .my_cart_wrap .purchase_selection .btn_del {
 	background-image: url("../../images/mypage/ico_delete.png");

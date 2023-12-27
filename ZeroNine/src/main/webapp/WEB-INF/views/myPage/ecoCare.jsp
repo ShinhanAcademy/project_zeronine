@@ -6,6 +6,7 @@
 	src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/ecocare.css">
+<link rel="stylesheet" href="${path}/css/modal/alreadyIncartModal.css">
 <script defer src="${path}/js/myPage/commonMypage.js"></script>
 <script defer src="/js/myPage/ecoCare.js"></script>
 <title>MyPage</title>
@@ -17,12 +18,12 @@
 		<!-- mypage_container -->
 		<div class="mypage_container">
 			<!-- zero_sbn -->
-			<%@include file="common/myPageSnb.jsp"%>
+			<%@include file="common/myPageSnb.jsp"%>f
 			<!-- //zero_sbn -->
 			<!-- mypage_detail_wrap -->
 			<div class="mypage_detail_wrap">
 				<!-- my_info_wrap -->
-				<%@include file="common/mylInfo.jsp"%>
+				<%@include file="common/personalInfo.jsp"%>
 				<!-- //my_info_wrap -->
 				<!-- contents_wrap -->
 
@@ -80,7 +81,6 @@
 
 					<div class="con_tit">회수 신청</div>
 					<%-- pickup_request_wrap --%>
-					
 					<div class="contents pickup_request_wrap">
 						<div class="tbl_wrap">
 							<table class="tbl_pickup_request_wrap">
@@ -102,106 +102,17 @@
 									</tr>
 								</thead>
 								<tbody id="coupon_info_area">
-									
 								</tbody>
 							</table>
 						</div>
 					</div>
-					
 					<%-- //pickup_request_wrap --%>
 					<div class="con_tit">회수 내역</div>
 					<%-- pickup_history_wrap --%>
-					<div class="contents pickup_history_wrap">
-						<div class="search_wrap">
-							<div class="period">
-								<span>기간</span>
-								<button class="on" data-period="1">1개월</button>
-								<button data-period="3">3개월</button>
-								<button data-period="6">6개월</button>
-								<div class="calendar">
-									<input type="text" data-range="true"
-										data-multiple-dates-separator=" - " data-language="ko"
-										id="datepicker">
-								</div>
-							</div>
-						</div>
-						<div class="tbl_top_wrap">
-							<div class="total_count">
-								총 <span>0</span>건
-							</div>
-						</div>
-						<div class="tbl_wrap">
-							<table class="tbl_chat_wrap">
-								<colgroup>
-									<col width="66%" />
-									<col span="2" />
-								</colgroup>
-								<thead>
-									<tr>
-										<th>과거 회수 내역</th>
-										<th>승인 여부</th>
-										<th>회수 처리 결과</th>
-									</tr>
-								</thead>
-								<tbody>
-									<!-- <tr>
-										<td>일반쓰레기 수거 요청건</td>
-										<td>완료</td>
-										<td>
-											<button class="btn_blue">상세 보기</button>
-										</td>
-									</tr>
-									<tr>
-										<td>일반쓰레기 수거 요청건</td>
-										<td>완료</td>
-										<td>
-											<button class="btn_blue">상세 보기</button>
-										</td>
-									</tr>
-									<tr>
-										<td>일반쓰레기 수거 요청건</td>
-										<td>완료</td>
-										<td>
-											<button class="btn_blue">상세 보기</button>
-										</td>
-									</tr>
-									<tr>
-										<td>일반쓰레기 수거 요청건</td>
-										<td>완료</td>
-										<td>
-											<button class="btn_blue">상세 보기</button>
-										</td>
-									</tr> -->
-								</tbody>
-							</table>
-						</div>
-						<!-- pagination -->
-						<%-- <c:if test="${booklist.size() != 0}"> --%>
-						<div class=pagination>
-							<div class="pageLeft">
-								<button class="btnFirst">첫페이지</button>
-								<button class="btnPrev">이전페이지</button>
-							</div>
-							<ul class="pagingWrap">
-								<li><a href="">1</a></li>
-								<li><a href="">2</a></li>
-								<li><a href="">3</a></li>
-								<li><a href="">4</a></li>
-								<li><a href="">5</a></li>
-								<li><a href="">6</a></li>
-								<li><a href="">7</a></li>
-								<li><a href="">8</a></li>
-								<li><a href="">9</a></li>
-								<li><a href="">10</a></li>
-							</ul>
-							<div class="pageRight">
-								<button class="btnNext">다음페이지</button>
-								<button class="btnLast">마지막페이지</button>
-							</div>
-						</div>
-						<%-- </c:if> --%>
+			 		<div class="contents pickup_history_wrap" id="hereis">
+			 			Error
 						<!-- //pagination -->
-					</div>
+					</div> 
 					<%-- //pickup_history_wrap --%>
 				</div>
 				<!-- //contents_wrap -->
@@ -217,6 +128,7 @@
 </body>
 
 <script type="text/javascript">
+var path = "${path}";
 
 //currentMonth로 월만 추출 후 map저장
 var ecodashinfo_arr = [];
@@ -404,7 +316,7 @@ console.log(now.getHours());
 
 var output = "";
 var c_month = now.getMonth()+1;
-var str = now.getFullYear()+"년 "+c_month+"월 "+now.getDate()+"일 "+now.getHours()+"시";
+var str = now.getFullYear()+"년 "+c_month+"월 "+(now.getDate()+1)+"일 "+now.getHours()+"시";
 $.each(couponInfo_arr, function(index, item){
 	console.log("이거 확인" +item.isSubscription);
 	if(item.isSubscription=='true'){
@@ -484,6 +396,43 @@ function request_btn(subscriptionId) {
 	    }
 	  });
 	}
+$(document).ready(function(){
+	PickUpList();	
+})
+//PickUpList();	
 
+function PickUpList(page){
+var obj ={"pCount":page};
+
+$.ajax({
+	    type: "GET",
+	    url: path+"/myPage/PickUpList.do",
+	    data:obj,
+	    success:function(response){
+	    	$('#hereis').html(response);
+	    },
+	   
+	    error: function (error) {
+	      alert("다시 시도해주세요.");
+	    }
+	  });
+}
+
+function pickUpDetail(pickUpId){
+	var obj ={"pickUpId":pickUpId};
+
+	$.ajax({
+		    type: "GET",
+		    url: path+"/myPage/PickUpDetail.do",
+		    data:obj,
+		    success:function(response){
+		    	$('#modal').html(response);
+		    },
+		   
+		    error: function (error) {
+		      alert("다시 시도해주세요.");
+		    }
+		  });
+	}
 
 </script>

@@ -19,7 +19,7 @@
 	        <!-- mypage_detail_wrap -->
 	        <div class="mypage_detail_wrap">
 	            <!-- my_info_wrap -->
-				<%@include file="common/mylInfo.jsp" %>
+				<%@include file="common/personalInfo.jsp" %>
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div class="contents_wrap">
@@ -140,6 +140,7 @@
 	<%@include file="../common/footer.jsp" %>
 	<script>
 	var path = "${path}";
+	var customerId = "${customerId}"
 	</script>
 	<script src="${path}/js/myPage/chatList.js" type="text/javascript"></script>
 </body>

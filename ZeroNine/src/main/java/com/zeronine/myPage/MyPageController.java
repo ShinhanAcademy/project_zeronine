@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zeronine.dto.CustomerVO;
+import com.zeronine.dto.PagingVO;
+import com.zeronine.dto.PickupVO;
 import com.zeronine.dto.ProductVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CartService;
@@ -121,17 +123,17 @@ public class MyPageController {
 		
 		for(int i=0;i<productIdArr.length;i++) {
 			System.out.println("======================================================");
-			logger.info(customerId);
-			logger.info(productIdArr[i]);
-			logger.info(countArr[i]);
+//			logger.info(customerId);
+//			logger.info(productIdArr[i]);
+//			logger.info(countArr[i]);
 			System.out.println(customerId+productIdArr[i]+countArr[i]);
 			cartservice.beforeproductOrder(customerId, productIdArr[i], Integer.parseInt(countArr[i]));
 		}
 		
 		List<ProductVO> productList = productService.selectByProductList(productIdArr);
-		System.out.println(productList);	
+		//System.out.println(productList);	
 		session.setAttribute("productList", productList);
-		logger.info("session test >>>>{}", productList);
+		//logger.info("session test >>>>{}", productList);
 		
 		return "OK";
 	}
@@ -517,6 +519,7 @@ public class MyPageController {
 		model.addAttribute("count", info.size());
 		model.addAttribute("successInfo", successInfo);
 		model.addAttribute("successCount", successInfo.size());
+		model.addAttribute("customerId", customerId);
 	}
 	
 	@GetMapping("/subPage/chatListDetail.do")
@@ -614,8 +617,8 @@ public class MyPageController {
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@RequestMapping("/subscriptionInfo.do")
-	public String subscriptionInfo() {
-		return "myPage/subscriptionInfo";
+	public void subscriptionInfo() {
+		
 	}
 	
 	@RequestMapping("/checkPw.do")
@@ -635,6 +638,29 @@ public class MyPageController {
 		return ResponseEntity.ok(result);
 		//return "myPage/updateInfo.do";
 	}
+	@GetMapping("/PickUpList.do") 
+	public String PickUpList(@RequestParam(value="pCount",required = false, defaultValue="1")int page, Model model, HttpSession session) {
+		String customerId = (String) session.getAttribute("customerId"); //customerId
+		System.out.println("page이다"+page);
+		System.out.println("customerId이다"+customerId);
+		List<PickupVO> pickUpList = mypageservice.PickUpList(page, customerId);
+		int pickUpListCount =mypageservice.PickUpCount(customerId);
+		logger.info("확인ㅂ2: "+pickUpList);
+		logger.info("확인ㅂ3: "+pickUpListCount);
+		PagingVO paginating = mypageservice.getPages(page,customerId);
+		model.addAttribute("pickUpList",pickUpList);
+		model.addAttribute("pickUpListCount",pickUpListCount);
+		model.addAttribute("paginating",paginating);
+		
+		return"/myPage/subPage/echoCareInPickUpList";
+	}
+	@GetMapping("/PickUpDetail.do") 
+	public String PickUpDetail(String pickUpId,Model model ) {
+		PickupVO pickUp = mypageservice.PickUpDetail(pickUpId);
+		model.addAttribute("pickUp",pickUp);
+		return "/myPage/subPage/pickUpModal";
+	}
+
 	// personal_info(占쏙옙占쏙옙 占쏙옙占쏙옙) - vaildate_password(占쏙옙橘占싫� 확占쏙옙)
 	/*
 	 * @RequestMapping("/validatePassword.do") public String validatePassword() {

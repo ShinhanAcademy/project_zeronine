@@ -70,7 +70,7 @@
 							<p>(필수)개인정보 수집,이용 동의</p>
 						</div>
 						<div>
-							<input type="checkbox" name="agree" onclick="BtnDisabled()">
+							<input id="check_selective" type="checkbox" name="agree" onclick="BtnDisabled()">
 							<p>(선택)광고정보 수신 동의</p>
 						</div>
 						<div>

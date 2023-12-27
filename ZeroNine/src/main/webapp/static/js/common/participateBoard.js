@@ -7,12 +7,18 @@ $("#productId").val($('#check_box').val());
 $("#count").val($('#select_count').val());
 
 totalPrice = selectedCount * onePrice; 
-if(totalPrice<50000){
-	plus = 3000;
-	document.getElementById("itemprice_deli").innerText = "3000 원";
+
+if(isFreeDelivery>0){
+	document.getElementById("itemprice_deli").innerText = "0 원";
 }else{
-	document.getElementById("itemprice_deli").innerText= "0 원";
-}		
+		if (totalPrice < 50000) {
+			plus = 3000;
+			document.getElementById("itemprice_deli").innerText = "3000 원";
+		} else {
+			document.getElementById("itemprice_deli").innerText = "0 원";
+		}
+}
+
 $(".realTotalPrice").html(Intl.NumberFormat().format(totalPrice + plus) + " 원");
 
 function countQuantityF(){

@@ -23,6 +23,8 @@
 						<div class="infotext_space">
 							<div class="infotext_space_left">
 								<span class="box_text">${item.pName}</span>
+							</div>
+							<div class="infotext_space_left2">
 							<span class="box_text2">${item.productCount}개</span>
 							</div>
 							
@@ -165,7 +167,7 @@ var path ="${path}";
 $(".agreebtn").click(function (){
 	 var currentImagePath = $(this).find("img.purchaseAgree").attr("src");
      var newImagePath = currentImagePath === path + "/images/sangpumpage/checkbox.png" ?
-    		 path + "/images/sangpumpage/fillcheckbox.png" :
+    		 path + "/images/sangpumpage/fillcheckbox.png":
     			 path + "/images/sangpumpage/checkbox.png";
 			
      
@@ -174,16 +176,26 @@ $(".agreebtn").click(function (){
      document.getElementById("gobtn").disabled = isCheckboxImage;
 	
 })
+
+//배송비
+
 var itemPriceText = document.getElementById("itemPrice").innerText;
 var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText.replace(/[^\d.]/g, ''));
 document.getElementById("itemprice2").innerText = itemPriceText;
-
+var IsFreeDelivery = "${IsFreeDelivery}";
+console.log(IsFreeDelivery);
+if(IsFreeDelivery>0){
+	alert("무료배송구동권이 있어 배송비가 무료입니다!");
+	document.getElementById("itemprice_deli").innerText= 0;
+	
+}else{
 if(itemPriceValue<50000){
 	document.getElementById("itemprice_deli").innerText = 3000;
 	 
 }else{
 	document.getElementById("itemprice_deli").innerText= 0;
 	
+}
 }
 var deli = document.getElementById("itemprice_deli").innerText;
 

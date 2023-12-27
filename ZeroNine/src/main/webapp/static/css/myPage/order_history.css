@@ -15,6 +15,18 @@
 	height: 130px;
     border: 1px solid #ebebeb;
 }
+.order_history_wrap .product_info .img_wrap img {
+	height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -webkit-transition: -webkit-transform 0.2s ease-in;
+    transition: -webkit-transform 0.2s ease-in;
+}
+.order_history_wrap .product_info .img_wrap img:hover {
+    -webkit-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    transform: scale(1.08);
+}
 .order_history_wrap .order_num {
 	margin-top: 5px;
 }

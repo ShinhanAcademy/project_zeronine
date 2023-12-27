@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zeronine.dto.PickupVO;
+
 @Repository("myPageDAO")
 public class MyPageDAOMybatis {
 	@Autowired
@@ -100,5 +102,26 @@ public class MyPageDAOMybatis {
 	public int updateCouponCnt (String subscriptionId) {
 		int updateResult = sqlSession.update(NAMESPACE+"updateCouponCnt",subscriptionId);
 		return updateResult;
+	}
+	public List<PickupVO> PickUpList(int page ,String customerId){
+		System.out.println("pageStartNum"+page);
+		System.out.println("customerId"+customerId);
+		Map<String, Object> paginateParam = new HashMap<>();
+		paginateParam.put("customerId", customerId);
+		paginateParam.put("page", page);
+		
+		
+		List<PickupVO> pickList = sqlSession.selectList(NAMESPACE+"PickUpList",paginateParam);
+		logger.info("확인:" + pickList.toString());
+		return pickList;
+		
+	}
+	public int PickUpCount(String customerId){
+		logger.info("PickUpCount 확인: "+customerId);
+		int  pickUpCount = sqlSession.selectOne(NAMESPACE+"PickUpCount",customerId);
+		return pickUpCount;
+	}
+	public PickupVO PickUpDetail(String pickUpId) {
+		return sqlSession.selectOne(NAMESPACE+"PickUpDetail",pickUpId);
 	}
 }

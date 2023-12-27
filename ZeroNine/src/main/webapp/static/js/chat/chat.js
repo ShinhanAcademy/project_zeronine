@@ -28,10 +28,13 @@ $(function() {
 				console.log("RESULT=>", result);
 				myId = result.customerId;
 				console.log("MY ID", myId);
-				const {customerId, chatDtlList, chatDtlVO, customerName} = result;
-				const {address, title, path, senderId} = chatDtlVO;
+				const {customerId, chatDtlList, chatDtlVO} = result;
+				const {customerName, address, title, path} = chatDtlVO;
+				// const {customerId, chatDtlList, chatDtlVO, customerName} = result;
+				// const {address, title, path, senderId} = chatDtlVO;
 				
-				sender = senderId;
+				sender = customerId;
+				// sender = senderId;
 				
 				console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
 
@@ -181,7 +184,8 @@ function showMessage(message) {
 	let {messageContent, sendTime} = message;
 	messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, '<br>');
 	console.log("SHOW MESSAGE", message);
-	
+	console.log("??????", messageContent);
+
 	const addHtml = [];
 	let currDate = dateSet.convertDate(new Date());
 	let lastDate = $("#chatDtlList div.date").last().text();
@@ -194,7 +198,11 @@ function showMessage(message) {
 		addHtml.push(`</div>`);
 		sendMsgImageFlag = false;
 	}
-
+console.log("=============================================================");
+console.log("message.senderId", message.senderId);
+console.log("myId", myId);
+console.log("sender", sender);
+console.log("chatId", chatId);
 	if(message.senderId == myId){ // my msg
 		addHtml.push(`<div class="talk my_talk">`);
 		addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);

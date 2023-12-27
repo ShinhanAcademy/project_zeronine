@@ -49,7 +49,7 @@ var obj = { "q" : $("#q").val(),
         }
         var newButton = $('.buttonValuebtn[data-value="' + trimmedButtonValue + '"]');
         newButton.closest('.img_wrap').css('background-color', '#BFBFBF');
-        newButton.closest('.category').find('p').css('color', '#0047FF');
+        newButton.closest('.category').find('p').css('color', '#0F82FF');
         previousClickedButton = newButton;
       }
       sessionStorage.removeItem("buttonValue");

@@ -19,4 +19,8 @@
 		("customerId", "remainingCouponCount", "isSubscription")
 		VALUES (CAST(#{customerId} AS UUID), 20, 'true')
 	</select>
+	<select id="IsFreeDelivery" parameterType="String" resultType="int">
+	SELECT count(*)
+	FROM "customerFreeDelivery" where "customerId"= CAST(#{customerId} AS UUID)
+	</select>
 </mapper>

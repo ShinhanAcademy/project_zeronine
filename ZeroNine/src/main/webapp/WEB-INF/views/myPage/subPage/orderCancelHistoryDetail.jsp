@@ -48,18 +48,24 @@
 							</c:if>
 							<td class="product_info">
 								<div class="img_wrap">
-								<c:choose>
-									<c:when test="${not empty cancellist.imagePath}"> 
-										<img src="${cancellist.imagePath}" alt="product image" />
-									</c:when>
-									<c:otherwise>
-										<img src="${path}/images/common/img_preparing.png" alt="product image" />
-									</c:otherwise>
-								</c:choose>
+								<a href="${path}/product/productDetail.do?productId=${cancellist.productId}">
+									<c:choose>
+										<c:when test="${not empty cancellist.imagePath}"> 
+											<img src="${cancellist.imagePath}" alt="product image" />
+										</c:when>
+										<c:otherwise>
+											<img src="${path}/images/common/img_preparing.png" alt="product image" />
+										</c:otherwise>
+									</c:choose>
+								</a>
 								</div>
 								<div class="detail">
 									<div class="brand_name">${cancellist.brand}</div>
-									<div class="product_name">${cancellist.pName}</div>
+									<div class="product_name">
+										<a href="${path}/product/productDetail.do?productId=${cancellist.productId}">
+											${cancellist.pName}
+										</a>
+									</div>
 								</div>
 							</td>
 							<td>${cancellist.productCount}</td>

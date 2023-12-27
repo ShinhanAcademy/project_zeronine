@@ -6,7 +6,7 @@
 </head>
 <%@include file="../common/header.jsp"%>
 <body>
-	<div class="login_wrap zero_container">
+	<div class="login_wrap zero_container" style="min-height: calc( 100% - 320px );">
 		<h1>로그인</h1>
 		<form id="loginForm">
 			<div class="login_container zn_center">

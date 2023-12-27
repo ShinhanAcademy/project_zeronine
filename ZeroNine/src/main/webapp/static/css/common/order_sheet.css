@@ -1,0 +1,57 @@
+@charset "UTF-8";
+#order_dtl_wrapper {
+	font-family: "Lato";
+}
+#order_dtl_wrapper .order_bodypart .orderinfo .orderinfo_boxtext .infotext_space {
+	margin: 0;
+	padding: 20px 40px;
+	align-items: center;
+	justify-content: space-between;
+	gap: 30px;
+}
+#order_dtl_wrapper .order_bodypart .orderinfo .jul {
+	margin: 0;
+    background-color: #e5e5e5;
+}
+#order_dtl_wrapper .orderinfo_box .infotext_space .img_wrap {
+	flex-shrink: 0;
+	width: 100px;
+	height: 100px;
+	border: 1px solid #f5f5f5;
+	border-radius: 10px;
+	overflow: hidden;
+}
+#order_dtl_wrapper .infotext_space .img_wrap img {
+	height: 100%;
+	object-fit: cover;
+}
+#order_dtl_wrapper .infotext_space_left {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	width: auto;
+}
+#order_dtl_wrapper .infotext_space_left div {
+	line-height: 1.5;
+}
+#order_dtl_wrapper .infotext_space_left > div:first-child {
+	width: 600px;	
+}
+#order_dtl_wrapper .infotext_space_left .brand {
+	margin-bottom: 10px;
+	color: #747774;
+	font-size: 15px;
+}
+#order_dtl_wrapper .infotext_space_left > div:nth-of-type(2) {
+	flex-shrink: 0;
+}
+#order_dtl_wrapper .infotext_space_left > div:nth-of-type(2) span {
+	font-size: 16px;
+	font-weight: bold;
+}
+#order_dtl_wrapper .infotext_space_right {
+	flex-shrink: 0;
+}
+#order_dtl_wrapper .order_bodypart .orderinfo .orderinfo_boxtext .box_text {
+	
+}

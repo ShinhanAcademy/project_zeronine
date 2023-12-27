@@ -22,7 +22,7 @@
 		</ul>
 		<div class="sub_tit">MY INFOMATION</div>
 		<ul>
-			<li><a href="${path}/main/myInfo.do">개인 정보</a></li>
+			<li><a href="${path}/myPage/myInfo.do">개인 정보</a></li>
 			<li><a href="${path}/myPage/subscriptionInfo.do">구독 정보</a></li>
 		</ul>
 		<form id="frm" method="get" action="">

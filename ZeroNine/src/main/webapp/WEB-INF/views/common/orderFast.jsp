@@ -23,6 +23,8 @@
 						<div class="infotext_space">
 							<div class="infotext_space_left">
 								<span class="box_text">${product.pName}</span>
+							</div>
+							<div class="infotext_space_left2">
 								<span class="box_text2">${count}개</span>
 							</div>
 							<div class="infotext_space_right">
@@ -185,8 +187,15 @@
 	<%@include file="../common/footer.jsp"%>
 	<script>
 		var path = "${path}";
+		//var isFreeDelivery = "${IsFreeDelivery}";
 		
 		$(".gobtn").click(function() {
+			
+			if(${isParticipate}>0){
+				alert("이미 참여한 게시글입니다.")
+				return;
+			}
+			
 			/*결제 창*/
 			var IMP = window.IMP; 
 			IMP.init("imp31265537"); //imp31265537
@@ -268,12 +277,14 @@
 				.replace(/[^\d.]/g, ''));
 		document.getElementById("itemprice2").innerText = itemPriceText;
 
-		if (itemPriceValue < 50000) {
-			document.getElementById("itemprice_deli").innerText = 3000;
-
-		} else {
+		if(${IsFreeDelivery}>0){
 			document.getElementById("itemprice_deli").innerText = 0;
-
+		}else{
+			if (itemPriceValue < 50000) {
+				document.getElementById("itemprice_deli").innerText = 3000;
+			} else {
+				document.getElementById("itemprice_deli").innerText = 0;
+			}
 		}
 		var deli = document.getElementById("itemprice_deli").innerText;
 
@@ -293,6 +304,7 @@
 				+ "원";
 		document.getElementById("totalprice_text").innerText = formattedValue
 				+ "원";
+		
 	</script>
 </body>
 </html>

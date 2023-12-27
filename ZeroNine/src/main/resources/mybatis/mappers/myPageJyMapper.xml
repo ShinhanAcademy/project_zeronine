@@ -5,9 +5,11 @@
 <mapper namespace="net.zeronine.mypage">
 	<!-- ecocare dash -->
 	<select id="selectEcoInfoAll" parameterType="String" resultType="map">
-		SELECT * FROM public.pickup
-		where "customerId"= 'a6a48528-9215-4fb9-9dd0-5bb174103277' and "pickUpStatus"='complete'
+	select *
+	from public.pickup
+	where"customerId"= cast(#{customerId} as UUID) and "pickUpStatus"='complete'
 	</select>
+	
 	<select id="selectCouponCtn" resultType="map">
 	select "subscriptionId","customerId","isSubscription", "remainingCouponCount"
 		from public."customerPickCoupon" 
@@ -20,4 +22,33 @@
 		SET "remainingCouponCount" = "remainingCouponCount" - 1
 		WHERE "subscriptionId" = cast(#{subscriptionId} as UUID)
 	</update>
+	<select id="PickUpList" parameterType="hashMap"
+		resultType="hashMap">
+		SELECT "pickUpId",
+		"customerId",
+		"pickUpStatus",
+		TO_CHAR("pickUpRequestTime", 'YYYY-MM-DD HH24:MI') AS "pickUpTime",
+		"pickUpImagePath",
+		"isFoodWaste",
+		"subscriptionId",
+		 message
+		FROM pickup
+		where "customerId" = cast(#{customerId} as UUID)
+		order by "pickUpTime" desc
+		LIMIT 5 OFFSET #{page}
+	</select>
+	<select id="PickUpCount" parameterType="String" resultType="int">
+		SELECT count(*)
+		FROM pickup
+		where "customerId" =cast(#{customerId} as UUID)
+	</select>	
+	<select id="PickUpDetail" parameterType="String" resultType="pickupVo">
+	SELECT 
+		"pickUpStatus",
+		"pickUpImagePath",
+		"isFoodWaste",
+		 message
+		FROM pickup
+		where "pickUpId" = cast(#{pickUpId} as UUID)
+	</select>
 </mapper>

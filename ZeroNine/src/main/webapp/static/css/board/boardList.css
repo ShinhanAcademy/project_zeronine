@@ -278,3 +278,15 @@ span.rate, #detail_rate{
 .map_marker {
 	height: 31px;
 }
+
+#load_more_btn_wrap{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	width: 1440px;
+}
+
+#loadMore_btn img {
+	width : 115px;
+	margin-bottom: 10px;
+} 
