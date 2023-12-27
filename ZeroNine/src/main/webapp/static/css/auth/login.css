@@ -139,3 +139,9 @@ input::placeholder {
 .form_group {
 	display: flex;
 }
+
+#remember_id{
+	width: 13.333px;
+	height: 13.333px;
+	margin-right: 6px;
+}

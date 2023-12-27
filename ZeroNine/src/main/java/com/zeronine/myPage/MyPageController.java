@@ -77,7 +77,7 @@ public class MyPageController {
 	// orderHistory(주문 내역)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory(HttpSession session) {
-		session.removeAttribute("deliveryId");
+		//session.removeAttribute("deliveryId");
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")

@@ -32,9 +32,9 @@
 	        buyer_postcode : '123-456'
 	    }, function (rsp) { // callback
 	        if (rsp.success) {
-	            console.log(rsp);
+	            //console.log(rsp);
 	        } else {
-	            console.log(rsp);
+	            //console.log(rsp);
 	        }
 	    });
 	}

@@ -7,22 +7,47 @@ const close_btn = document.getElementById("btn_cancel");
 const subscript_name = document.getElementById("subscript_name");
 
 free_delivery_ecocare[0].onclick = function(){
+		if(customerId==""){
+			alert("로그인한 후 이용해주세요.");
+			location.href = "/auth/login.do";
+			return;	
+		}
 		subscript_name.innerHTML = free_delivery_ecocare[0].getAttribute('data-value');
 		modal.style.display = 'block';
 }
 ecocare[0].onclick = function(){
+		if(customerId==""){
+			alert("로그인한 후 이용해주세요.");
+			location.href = "/auth/login.do";	
+			return;
+		}
 		subscript_name.innerHTML = ecocare[0].getAttribute('data-value');
 		modal.style.display = 'block';
 }
 free_delivery[0].onclick = function(){
+		if(customerId==""){
+			alert("로그인한 후 이용해주세요.");
+			location.href = "/auth/login.do";	
+			return;
+		}
 		subscript_name.innerHTML = free_delivery[0].getAttribute('data-value');
 		modal.style.display = 'block';
 }
 ecocare_5[0].onclick = function(){
+		if(customerId==""){
+			alert("로그인한 후 이용해주세요.");
+			location.href = "/auth/login.do";
+			return;	
+		}
 		subscript_name.innerHTML = ecocare_5[0].getAttribute('data-value');
 		modal.style.display = 'block';
 }
 ecocare_5[1].onclick = function(){
+		if(customerId==""){
+			alert("로그인한 후 이용해주세요.");
+			location.href = "/auth/login.do";
+			return;	
+		}
 		subscript_name.innerHTML = ecocare_5[1].getAttribute('data-value');
 		modal.style.display = 'block';
 }
