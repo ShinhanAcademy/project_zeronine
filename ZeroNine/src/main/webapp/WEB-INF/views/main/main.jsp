@@ -160,60 +160,6 @@
 		        <div class="title">이런 상품은 어때요 ?</div>
 		        <div class="recommended_list">
 		            <div class="product_wrap">
-		                <div class="item">
-		                    <div class="img_wrap">
-		                        <img src="${path}/images/main/product_1.png" alt="product">
-		                    </div>
-		                    <div class="info">
-		                        <div class="tit">아이앤어스 3챔버 고농축 캡슐세제 실속형 50개입</div>
-		                        <div class="price">29,800원</div>
-		                    </div>
-		                </div>
-		                <div class="item">
-		                    <div class="img_wrap">
-		                        <img src="${path}/images/main/product_2.png" alt="product">
-		                    </div>
-		                    <div class="info">
-		                        <div class="tit">NEW 캐츠랑 전연령 점보 20kg</div>
-		                        <div class="price">58,000원</div>
-		                    </div>
-		                </div>
-		                <div class="item">
-		                    <div class="img_wrap">
-		                        <img src="${path}/images/main/product_2.png" alt="product">
-		                    </div>
-		                    <div class="info">
-		                        <div class="tit">NEW 캐츠랑 전연령 점보 20kg</div>
-		                        <div class="price">58,000원</div>
-		                    </div>
-		                </div>
-		                <div class="item">
-		                    <div class="img_wrap">
-		                        <img src="${path}/images/main/product_2.png" alt="product">
-		                    </div>
-		                    <div class="info">
-		                        <div class="tit">NEW 캐츠랑 전연령 점보 20kg</div>
-		                        <div class="price">58,000원</div>
-		                    </div>
-		                </div>
-		                <div class="item">
-		                    <div class="img_wrap">
-		                        <img src="${path}/images/main/product_2.png" alt="product">
-		                    </div>
-		                    <div class="info">
-		                        <div class="tit">NEW 캐츠랑 전연령 점보 20kg</div>
-		                        <div class="price">58,000원</div>
-		                    </div>
-		                </div>
-		                <div class="item">
-		                    <div class="img_wrap">
-		                        <img src="${path}/images/main/product_2.png" alt="product">
-		                    </div>
-		                    <div class="info">
-		                        <div class="tit">NEW 캐츠랑 전연령 점보 20kg</div>
-		                        <div class="price">58,000원</div>
-		                    </div>
-		                </div>
 		            </div>
 		            <div class="view_more">+</div>
 		        </div>

@@ -9,7 +9,21 @@ public class ProductVO {
 	private Integer price;
 	private Integer pCount;
 	private Integer pStock;
-	
+	private Integer totalPickCount;
+	private String imagePath;
+
+	public Integer getTotalPickCount() {
+		return totalPickCount;
+	}
+	public void setTotalPickCount(Integer totalPickCount) {
+		this.totalPickCount = totalPickCount;
+	}
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 	public String getProductId() {
 		return productId;
 	}

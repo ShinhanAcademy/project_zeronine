@@ -56,6 +56,16 @@ public class MyPageController {
 	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
 
 	/* ****************************
+			COMMON
+	****************************** */
+	@GetMapping("/common/personalInfo.do")
+	public void personalInfo(HttpSession session, Model model) {
+		String customerId = (String) session.getAttribute("customerId");
+		logger.info("personalInfo"+customerId);
+	}
+	
+	
+	/* ****************************
 			MY_SHOPPING
 	 ****************************** */
 	// orderHistory(나의 지갑)
@@ -144,11 +154,11 @@ public class MyPageController {
 			@RequestParam(value = "imagePathArr") String[] imagePathArr,
 			Model model, HttpSession session) {
 		
-		System.out.println("productIdArr");
-		System.out.println(Arrays.toString(productIdArr));
+		//System.out.println("productIdArr");
+		//System.out.println(Arrays.toString(productIdArr));
 		
-		System.out.println("countArr");
-		System.out.println(Arrays.toString(countArr));
+		//System.out.println("countArr");
+		//System.out.println(Arrays.toString(countArr));
 		
 		List<ProductVO> productList = productService.selectByProductList(productIdArr);
 		System.out.println(productList);

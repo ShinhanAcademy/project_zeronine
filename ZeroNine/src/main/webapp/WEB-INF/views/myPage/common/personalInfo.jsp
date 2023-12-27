@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script defer src="${path}/js/myPage/common/myInfo.js"></script>
 <div class="my_info_wrap">
 	<!-- info_left -->
 	<div class="info_left">
@@ -49,3 +48,16 @@
 	</div>
 	<!-- //info_right -->
 </div>
+<script>
+$(function(){
+	$.ajax({
+	    url : contextPath + "/myPage/common/personalInfo.do",
+	    success : function(){
+	        //targetItem.removeClass("on");
+	    },
+	    error : function(){
+	        alert("personalInfo 에러입니다.");
+	    }
+	});
+});
+</script>
