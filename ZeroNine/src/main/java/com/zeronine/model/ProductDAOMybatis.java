@@ -57,6 +57,10 @@ public class ProductDAOMybatis {
 	}
 
 
+	public List<ProductVO> selectRecommendedProducts(Integer count) {
+		List<ProductVO> productList = sqlSession.selectList(namespace + "selectRecommendedProducts", count);
+		return productList;
+	}
 	
 }
 

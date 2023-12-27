@@ -3,6 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.mypage">
+	<!-- personalInfo -->
+	<select id="personalInfoAll" parameterType="String" resultType="map">
+		
+	</select>
+
 	<!-- order history -->
 	<select id="orderHistoryAll" parameterType="String" resultType="map">
 		select 
