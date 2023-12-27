@@ -1,5 +1,8 @@
 package com.zeronine.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +34,20 @@ public class PayDAOMybatis {
 	public int IsFreeDelivery(String customerId) {
 		int result =sqlSession.selectOne(NAMESPACE+ "IsFreeDelivery",customerId);
 		return result;
+	}
+
+	public int payFreeDeliverySubscription(String customerId, String subscriptionId) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("customerId", customerId);
+		params.put("subscriptionId", subscriptionId);
+		return sqlSession.insert(NAMESPACE + "insertFreeDeliveryWithId", params);
+	}
+
+	public int payEcocareSubscription(String customerId, String subscriptionId) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("customerId", customerId);
+		params.put("subscriptionId", subscriptionId);
+		return sqlSession.insert(NAMESPACE + "insertEcocareSubscriptionWithId", params);
 	}
 
 }

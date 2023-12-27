@@ -20,7 +20,17 @@
 		VALUES (CAST(#{customerId} AS UUID), 20, 'true')
 	</select>
 	<select id="IsFreeDelivery" parameterType="String" resultType="int">
-	SELECT count(*)
-	FROM "customerFreeDelivery" where "customerId"= CAST(#{customerId} AS UUID)
+		SELECT count(*)
+		FROM "customerFreeDelivery" where "customerId"= CAST(#{customerId} AS UUID)
 	</select>
+	<select id="insertFreeDeliveryWithId" parameterType="hashMap" resultType="int">
+		INSERT INTO public."customerFreeDelivery"("customerId", "subscriptionId")
+		VALUES (CAST(#{customerId} AS UUID), CAST(#{subscriptionId} AS UUID))
+	</select>
+	<select id="insertEcocareSubscriptionWithId" parameterType="hashMap" resultType="int">
+		INSERT INTO public."customerPickCoupon"
+		("customerId", "remainingCouponCount", "isSubscription", "subscriptionId")
+		VALUES (CAST(#{customerId} AS UUID), 20, 'true', CAST(#{subscriptionId} AS UUID))
+	</select>
+	
 </mapper>
