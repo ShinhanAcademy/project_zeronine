@@ -80,16 +80,21 @@ public class MyPageController {
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")
-	public void orderHistoryDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+	public void orderHistoryDetail(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			@RequestParam(value = "searchWord", required = false) String searchWord,
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
 //		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		
 		String customerId = (String) session.getAttribute("customerId");
-//		System.out.println("ID = " + customerId);
-
-		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(customerId, searchWord, startDate, endDate));
+		PagingVO orderHistorypaginating = mypageservice.orderHistorygetPages(Page,customerId, searchWord, startDate, endDate);
+		model.addAttribute("OHpagination",orderHistorypaginating);
+		model.addAttribute("pageCount",mypageservice.orderHistoryCount(customerId, searchWord, startDate, endDate));
+		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(Page,customerId, searchWord, startDate, endDate));
+	
+	
 	}
 	
 	// orderCancelHistory(취소 / 반품 내역)

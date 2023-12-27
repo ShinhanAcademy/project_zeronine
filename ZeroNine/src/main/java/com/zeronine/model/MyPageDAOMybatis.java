@@ -28,18 +28,27 @@ public class MyPageDAOMybatis {
 	}
 	
 	/* orderHistoryAll */
-	public List<Map<String, Object>> orderHistoryAll(String customerId, String searchWord, String startDate, String endDate) {
+	public List<Map<String, Object>> orderHistoryAll(int page,String customerId, String searchWord, String startDate, String endDate) {
 		//List<Map<String, Object>> result = sqlSession.selectList(NAMESPACE + "orderHistoryAll", customerId);
 		Map<String, Object> mapData = new HashMap<>();
 		mapData.put("customerId", customerId);
 		mapData.put("searchWord", addPersentage(searchWord));
 		mapData.put("startDate", startDate);
 		mapData.put("endDate", endDateFormat(endDate));
-		
+		mapData.put("page", page);
 		List<Map<String, Object>> orderHistoryList = sqlSession.selectList(NAMESPACE + "orderHistoryAll", mapData);
 //		logger.info("orderHistoryAll조회조건:{}...결과:{}건", mapData, orderHistoryList.size());
 
 		return orderHistoryList;
+	}
+	public int orderHistoryCount(String customerId, String searchWord, String startDate, String endDate) {
+		Map<String, Object> mapData = new HashMap<>();
+		mapData.put("customerId", customerId);
+		mapData.put("searchWord", addPersentage(searchWord));
+		mapData.put("startDate", startDate);
+		mapData.put("endDate", endDateFormat(endDate));
+		int OHcount =sqlSession.selectOne(NAMESPACE + "orderHistoryCount", mapData);
+		return OHcount;
 	}
 
 	/* orderCancelHistoryAll */
@@ -124,4 +133,6 @@ public class MyPageDAOMybatis {
 	public PickupVO PickUpDetail(String pickUpId) {
 		return sqlSession.selectOne(NAMESPACE+"PickUpDetail",pickUpId);
 	}
+
+
 }
