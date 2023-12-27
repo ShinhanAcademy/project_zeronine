@@ -16,7 +16,7 @@ import com.zeronine.dto.PickupVO;
 public class MyPageDAOMybatis {
 	@Autowired
 	SqlSession sqlSession;
-	Logger logger = LoggerFactory.getLogger(ProductDAOMybatis.class);
+	Logger Logger = LoggerFactory.getLogger(ProductDAOMybatis.class);
 	final static String NAMESPACE="net.zeronine.mypage.";
 
 	public String addPersentage(String str) {
@@ -25,6 +25,18 @@ public class MyPageDAOMybatis {
 
 	public String endDateFormat(String str) {
 		return str+" 23:59:59";
+	}
+
+	/* common - personal info */
+	public Map<String, Object> personalInfo(String customerId) {
+		//List<Map<String, Object>> result = sqlSession.selectList(NAMESPACE + "orderHistoryAll", customerId);
+		Map<String, Object> mapData = new HashMap<>();
+		mapData.put("customerId", customerId);
+		
+		Map<String, Object> personalInfo = sqlSession.selectOne(NAMESPACE + "personalInfo", mapData);
+		Logger.info("personalInfo조회조건:{}...결과:{}건", mapData, personalInfo.size());
+
+		return personalInfo;
 	}
 	
 	/* orderHistoryAll */
@@ -37,7 +49,7 @@ public class MyPageDAOMybatis {
 		mapData.put("endDate", endDateFormat(endDate));
 		mapData.put("page", page);
 		List<Map<String, Object>> orderHistoryList = sqlSession.selectList(NAMESPACE + "orderHistoryAll", mapData);
-//		logger.info("orderHistoryAll조회조건:{}...결과:{}건", mapData, orderHistoryList.size());
+//		Logger.info("orderHistoryAll조회조건:{}...결과:{}건", mapData, orderHistoryList.size());
 
 		return orderHistoryList;
 	}
@@ -61,9 +73,9 @@ public class MyPageDAOMybatis {
 		mapData.put("startDate", startDate);
 		mapData.put("endDate", endDateFormat(endDate));
 		
-//		logger.info("endDate format{}", endDateFormat(endDate));
+//		Logger.info("endDate format{}", endDateFormat(endDate));
 		List<Map<String, Object>> orderCancelHistoryList = sqlSession.selectList(NAMESPACE + "orderCancelHistoryAll", mapData);
-		//logger.info("orderCancelHistoryAll조회조건:{}...결과:{}건", mapData, orderCancelHistoryList.size());
+		//Logger.info("orderCancelHistoryAll조회조건:{}...결과:{}건", mapData, orderCancelHistoryList.size());
 
 		return orderCancelHistoryList;
 	}
@@ -73,9 +85,9 @@ public class MyPageDAOMybatis {
 		Map<String, Object> mapData = new HashMap<>();
 		mapData.put("customerId", customerId);
 		
-//		logger.info("endDate format{}", endDateFormat(endDate));
+//		Logger.info("endDate format{}", endDateFormat(endDate));
 		List<Map<String, Object>> myCartList = sqlSession.selectList(NAMESPACE + "myCart", mapData);
-		logger.info("myCart조회조건:{}...결과:{}건", mapData, myCartList.size());
+		Logger.info("myCart조회조건:{}...결과:{}건", mapData, myCartList.size());
 
 		return myCartList;
 	}
@@ -86,9 +98,9 @@ public class MyPageDAOMybatis {
 		mapData.put("customerId", customerId);
 		mapData.put("searchWord", addPersentage(searchWord));
 		
-//		logger.info("endDate format{}", endDateFormat(endDate));
+//		Logger.info("endDate format{}", endDateFormat(endDate));
 		List<Map<String, Object>> likeProductList = sqlSession.selectList(NAMESPACE + "likeProduct", mapData);
-//		logger.info("likeProduct조회조건:{}...결과:{}건", mapData, likeProductList.size());
+//		Logger.info("likeProduct조회조건:{}...결과:{}건", mapData, likeProductList.size());
 
 		return likeProductList;
 	}
@@ -121,7 +133,7 @@ public class MyPageDAOMybatis {
 		map.put("customerId", customerId);
 		map.put("isFoodWaste", Math.random() < 0.5);
 		map.put("subscriptionId", subscriptionId);
-		logger.info(map.toString());
+		Logger.info(map.toString());
 		return sqlSession.insert(NAMESPACE+"insertPickupRequest",map);
 	}
 	
@@ -134,12 +146,12 @@ public class MyPageDAOMybatis {
 		
 		
 		List<PickupVO> pickList = sqlSession.selectList(NAMESPACE+"PickUpList",paginateParam);
-		logger.info("확인:" + pickList.toString());
+		Logger.info("확인:" + pickList.toString());
 		return pickList;
 		
 	}
 	public int PickUpCount(String customerId){
-		logger.info("PickUpCount 확인: "+customerId);
+		Logger.info("PickUpCount 확인: "+customerId);
 		int  pickUpCount = sqlSession.selectOne(NAMESPACE+"PickUpCount",customerId);
 		return pickUpCount;
 	}
