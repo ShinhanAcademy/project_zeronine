@@ -22,4 +22,33 @@
 		SET "remainingCouponCount" = "remainingCouponCount" - 1
 		WHERE "subscriptionId" = cast(#{subscriptionId} as UUID)
 	</update>
+	<select id="PickUpList" parameterType="hashMap"
+		resultType="hashMap">
+		SELECT "pickUpId",
+		"customerId",
+		"pickUpStatus",
+		TO_CHAR("pickUpRequestTime", 'YYYY-MM-DD HH24:MI') AS "pickUpTime",
+		"pickUpImagePath",
+		"isFoodWaste",
+		"subscriptionId",
+		 message
+		FROM pickup
+		where "customerId" = cast(#{customerId} as UUID)
+		order by "pickUpTime" desc
+		LIMIT 5 OFFSET #{page}
+	</select>
+	<select id="PickUpCount" parameterType="String" resultType="int">
+		SELECT count(*)
+		FROM pickup
+		where "customerId" =cast(#{customerId} as UUID)
+	</select>	
+	<select id="PickUpDetail" parameterType="String" resultType="pickupVo">
+	SELECT 
+		"pickUpStatus",
+		"pickUpImagePath",
+		"isFoodWaste",
+		 message
+		FROM pickup
+		where "pickUpId" = cast(#{pickUpId} as UUID)
+	</select>
 </mapper>

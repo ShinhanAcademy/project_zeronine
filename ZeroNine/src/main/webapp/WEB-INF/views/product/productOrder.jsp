@@ -23,6 +23,8 @@
 						<div class="infotext_space">
 							<div class="infotext_space_left">
 								<span class="box_text">${item.pName}</span>
+							</div>
+							<div class="infotext_space_left2">
 							<span class="box_text2">${item.productCount}개</span>
 							</div>
 							
@@ -165,7 +167,7 @@ var path ="${path}";
 $(".agreebtn").click(function (){
 	 var currentImagePath = $(this).find("img.purchaseAgree").attr("src");
      var newImagePath = currentImagePath === path + "/images/sangpumpage/checkbox.png" ?
-    		 path + "/images/sangpumpage/fillcheckbox.png" :
+    		 path + "/images/sangpumpage/fillcheckbox.png":
     			 path + "/images/sangpumpage/checkbox.png";
 			
      
@@ -176,8 +178,7 @@ $(".agreebtn").click(function (){
 })
 
 //배송비
-var IsFreeDelivery = "${IsFreeDelivery}";
-console.log(IsFreeDelivery);
+
 var itemPriceText = document.getElementById("itemPrice").innerText;
 var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText.replace(/[^\d.]/g, ''));
 document.getElementById("itemprice2").innerText = itemPriceText;

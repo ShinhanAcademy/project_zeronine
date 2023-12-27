@@ -37,6 +37,7 @@
 		select
 			refund."refundRequestTime",
 			"deliveryProduct"."productCount",
+			product."productId",
 			product.brand,
 			product."pName",
 			product.price,

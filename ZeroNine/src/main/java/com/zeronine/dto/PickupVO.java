@@ -11,5 +11,7 @@ public class PickupVO {
 	private String customerId;
 	private String pickUpStatus;
 	private Timestamp pickUpTime;
-	private String pickUpImage;
+	private String pickUpImagePath;
+	private String message;
+	private String isFoodWaste;
 }
