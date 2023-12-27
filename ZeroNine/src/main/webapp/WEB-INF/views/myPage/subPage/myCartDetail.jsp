@@ -113,7 +113,7 @@
 		<!-- tbl_bottom_wrap -->
 		<div class="tbl_bottom_wrap">
 			<div class="btn_wrap">
-				<button class="btn_del">선택상품 삭제</button>
+				<button class="btn_del" ${myCart.size() == 0 ? "disabled": ""}>선택상품 삭제</button>
 			</div>
 		</div>
 		<!-- //tbl_bottom_wrap -->
@@ -121,11 +121,11 @@
 			<div class="price_top">
 				<div class="price_info total_selling_price">
 					<div>총 판매가</div>
-					<div class="total_price">119,710원</div>
+					<div class="total_price"></div>
 				</div>
 				<div class="price_info delivery_fee">
 					<div>배송비</div>
-					<div class="fee">0원</div>
+					<div class="fee"></div>
 				</div>
 			</div>
 			<div class="price_bottom">

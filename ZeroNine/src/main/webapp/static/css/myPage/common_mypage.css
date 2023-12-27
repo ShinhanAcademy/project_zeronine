@@ -37,6 +37,10 @@
     color: #0083E6;
     font-size: 13px;
 }
+.btn_blue:disabled {
+	border: 1px solid #ddd;
+    color: #ddd;
+}
 .btn_orange_underline {
 	font-size: 13px;
 	color: #FF5C00;
@@ -124,10 +128,16 @@
     height: 65px;
     border: 1px solid #000;
     border-radius: 50%;
+    overflow: hidden;
 }
 .mypage_detail_wrap .profile .img_wrap img {
     display: block;
     width: 30px;
+}
+.mypage_detail_wrap .profile .img_wrap img.has_user_img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 .mypage_detail_wrap .subscription_list {
     display: table-cell;
@@ -342,6 +352,11 @@
 	line-height: 1;
 	color: #747774;
 	font-size: 14px;
+}
+.contents .tbl_bottom_wrap .btn_wrap button:disabled {
+	cursor: auto;
+    background: #f3f3f3;
+    color: #ccc;
 }
 .tbl_wrap .product_info .price {
 	font-family: "Lato";
