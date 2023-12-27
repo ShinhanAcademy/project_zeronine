@@ -16,7 +16,7 @@
 						id="password" name="password" placeholder="비밀번호를 입력하세요." required>
 				</div>
 				<div class="login-middle">
-					<img src="${path}/images/login/idcheckbox.png"> <span
+					<input type="checkbox" id="remember_id"> <span
 						class="idcheckboxfont">아이디 저장</span> <a href="${path}/auth/findId.do" class="idpwdfont">아이디
 						찾기</a><span class="idpwdfont">|</span><a href="${path}/auth/findPwd.do" class="idpwdfont">비밀번호
 						찾기</a>
