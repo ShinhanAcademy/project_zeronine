@@ -19,7 +19,8 @@
 	        <!-- mypage_detail_wrap -->
 	        <div class="mypage_detail_wrap">
 	            <!-- my_info_wrap -->
-				<%@include file="common/personalInfo.jsp" %>
+	            <div id="personalInfo" class="my_info_wrap">
+				</div>
 	            <!-- //my_info_wrap -->
 	            <!-- contents_wrap -->
 	            <div id="like_contents_wrap" class="contents_wrap">

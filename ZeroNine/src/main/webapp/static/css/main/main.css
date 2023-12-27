@@ -213,12 +213,12 @@ recommended_wrap
     display: flex;
     gap: 82px;
     align-items: center;
-    display:flex;
 }
-.product_wrap  {
+.product_wrap {
     display: flex;
     gap: 82px;
     overflow-x: auto;
+    transition: 0.3s;
 }
 .product_wrap .item {
     width: 290px;

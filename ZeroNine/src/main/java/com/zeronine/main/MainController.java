@@ -44,7 +44,6 @@ public class MainController {
 		System.out.println("????count"+ count);
 		List<ProductVO> productList = productService.selectRecommendedProducts(count);
 
-		model.addAttribute("recommendedList", productList);
 		return productList;
 	}
 }	
