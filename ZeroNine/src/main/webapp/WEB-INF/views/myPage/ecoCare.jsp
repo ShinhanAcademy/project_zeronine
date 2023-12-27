@@ -316,7 +316,7 @@ console.log(now.getHours());
 
 var output = "";
 var c_month = now.getMonth()+1;
-var str = now.getFullYear()+"년 "+c_month+"월 "+now.getDate()+"일 "+now.getHours()+"시";
+var str = now.getFullYear()+"년 "+c_month+"월 "+(now.getDate()+1)+"일 "+now.getHours()+"시";
 $.each(couponInfo_arr, function(index, item){
 	console.log("이거 확인" +item.isSubscription);
 	if(item.isSubscription=='true'){
@@ -409,7 +409,6 @@ $.ajax({
 	    url: path+"/myPage/PickUpList.do",
 	    data:obj,
 	    success:function(response){
-	    	alert("성공! 회수 요청이 정상적으로 접수되었습니다!");
 	    	$('#hereis').html(response);
 	    },
 	   
