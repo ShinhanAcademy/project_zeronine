@@ -137,6 +137,7 @@ html, body {
 	background: rgba(255 255 255 / 80%);
 	background: #fff;
     box-shadow: 0px 2px 7px rgba(147, 147, 147, 0.1);
+    cursor: pointer;
 }
 .zn_header .bot .gnb_2depth li {
 	padding: 12px 0;

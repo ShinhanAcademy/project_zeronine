@@ -140,6 +140,7 @@
 	<%@include file="../common/footer.jsp" %>
 	<script>
 	var path = "${path}";
+	var customerId = "${customerId}"
 	</script>
 	<script src="${path}/js/myPage/chatList.js" type="text/javascript"></script>
 </body>

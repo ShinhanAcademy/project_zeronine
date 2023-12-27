@@ -25,6 +25,7 @@ import com.zeronine.dto.CustomerVO;
 import com.zeronine.dto.ProductVO;
 import com.zeronine.model.BoardService_yn;
 import com.zeronine.model.CustomerService;
+import com.zeronine.model.PayService;
 import com.zeronine.myPage.MyPageController;
 
 @Controller
@@ -34,17 +35,20 @@ public class CommonController {
 	BoardService_yn boardService;
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	PayService payService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
 	
 	@GetMapping("/common/participateBoard.do")
 	public void participateBoard(String boardId, Model model, HttpSession session) {
-		//String customerId = (String)session.getAttribute("customerId");
+		String customerId = (String)session.getAttribute("customerId");
 		session.setAttribute("boardId", boardId);
 		Map<String,Object> info = boardService.fastBoardProduct(boardId);
 		int remainCount = boardService.boardpCount(boardId);
 		model.addAttribute("info", info);
 		model.addAttribute("remainCount", remainCount);
+		model.addAttribute("IsFreeDelivery",payService.IsFreeDelivery(customerId));
 	}
 	
 	@GetMapping("/common/participateFreeBoard.do")
@@ -69,14 +73,16 @@ public class CommonController {
 		model.addAttribute("product",product);
 		model.addAttribute("customer",customer);
 		model.addAttribute("isParticipate",isParticipate);
+		model.addAttribute("IsFreeDelivery",payService.IsFreeDelivery(customerId));
 	}
 	
 	@PostMapping(value="/common/orderSuccess.do", produces="application/text;charset=UTF-8")
 	@ResponseBody
-	public String orderSuccessP(String productId, int count, Model model, HttpSession session) {
+	public void orderSuccessP(String productId, int count, Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		String boardId = (String)session.getAttribute("boardId");
-		String message;
+		boardService.orderFastProduct(customerId,boardId,count);
+		/*
 		int isFastProduct = boardService.orderFastProduct(customerId,boardId,count);
 		if(isFastProduct==0 || isFastProduct==1) {
 			message = "참여완료"; //participate complete
@@ -84,7 +90,7 @@ public class CommonController {
 			message = "이미 참여한 게시글입니다."; //already
 		}
 		return message;
-		
+		*/
 	}
 	
 	@PostMapping(value="/common/freeOrderSuccess.do", produces="application/text;charset=UTF-8")
@@ -125,7 +131,10 @@ public class CommonController {
 		int price = (Integer)info.get("price"); 
 		int pCount = (Integer)info.get("pCount"); 
 		int totalPrice = (Integer)info.get("pickCount") * (Math.round(price/pCount));
-	    if(totalPrice<50000) { totalPrice += 3000; }
+		int isFreeDelivery = payService.IsFreeDelivery(customerId);
+		if (isFreeDelivery<=0) {
+			if(totalPrice<50000) { totalPrice += 3000; }
+		}
 	    model.addAttribute("info",info);
 	 	model.addAttribute("totalPrice",totalPrice);
 	 	session.removeAttribute("boardId"); 
@@ -157,7 +166,7 @@ public class CommonController {
 		model.addAttribute("count",count);
 		model.addAttribute("product",product);
 		model.addAttribute("customer",customer);
-
+		model.addAttribute("IsFreeDelivery",payService.IsFreeDelivery(customerId));
 	}
 	
 	@PostMapping(value="/common/writeOrderFree.do", consumes="application/json")

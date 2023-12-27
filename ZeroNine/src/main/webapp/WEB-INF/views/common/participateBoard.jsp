@@ -116,6 +116,7 @@
 	<%@include file="../common/footer.jsp"%>
 	<script>
 		var path = "${path}";
+		var isFreeDelivery = "${IsFreeDelivery}";
 	</script>
 	<script src="${path}/js/common/participateBoard.js" type="text/javascript"></script>
 </body>

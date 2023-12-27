@@ -204,10 +204,5 @@ public class BoardService_yn {
 	}
 
 
-	
-
-	
-	
-	
 
 }

@@ -517,6 +517,7 @@ public class MyPageController {
 		model.addAttribute("count", info.size());
 		model.addAttribute("successInfo", successInfo);
 		model.addAttribute("successCount", successInfo.size());
+		model.addAttribute("customerId", customerId);
 	}
 	
 	@GetMapping("/subPage/chatListDetail.do")
@@ -614,8 +615,8 @@ public class MyPageController {
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@RequestMapping("/subscriptionInfo.do")
-	public String subscriptionInfo() {
-		return "myPage/subscriptionInfo";
+	public void subscriptionInfo() {
+		
 	}
 	
 	@RequestMapping("/checkPw.do")

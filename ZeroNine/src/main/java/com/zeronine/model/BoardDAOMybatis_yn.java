@@ -334,10 +334,5 @@ public class BoardDAOMybatis_yn {
 		return isParticipate;
 	}
 
-	
-
-	
-
-	
 
 }
