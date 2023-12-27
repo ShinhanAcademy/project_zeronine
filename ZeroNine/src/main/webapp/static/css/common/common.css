@@ -171,7 +171,7 @@ html, body {
     background: url(../../images/ecomall/my-icon.svg?ver=1) no-repeat center / contain;
     filter: grayscale(100%);
     border-radius: 50%;
-    border: 1px solid #333;
+    border: 1px solid #555;
 }
 .zn_header .bot .bot_inner .icon_btn .cart {
 	background: url("../../images/ecomall/cart-icon.svg?ver=1") no-repeat center;

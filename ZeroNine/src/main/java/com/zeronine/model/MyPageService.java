@@ -27,8 +27,35 @@ public class MyPageService {
 	 */
 	
 	/* order history */
-	public List<Map<String, Object>> orderHistoryAll(String customerId, String searchWord, String startDate, String endDate) {
-		return myPageDAO.orderHistoryAll(customerId, searchWord, startDate, endDate);
+	public List<Map<String, Object>> orderHistoryAll(int page,String customerId, String searchWord, String startDate, String endDate) {
+		int pageStartNum = (page - 1) * pageLimit;
+		return myPageDAO.orderHistoryAll(pageStartNum,customerId, searchWord, startDate, endDate);
+	}
+	
+	public int orderHistoryCount(String customerId, String searchWord, String startDate, String endDate) {
+		return myPageDAO.orderHistoryCount(customerId,searchWord,startDate,endDate);
+	}
+	
+public PagingVO orderHistorygetPages(int page,String customerId, String searchWord, String startDate, String endDate) {
+		
+		int orderHistoryCount = myPageDAO.orderHistoryCount(customerId, searchWord, startDate, endDate);
+
+		int maxPageNumber = (int) (Math.ceil((double) orderHistoryCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
 	}
 
 	/* order cancel history */
@@ -70,9 +97,9 @@ public class MyPageService {
 public PagingVO getPages(int page,String customerId) {
 		
 		
-		int countProducts = myPageDAO.PickUpCount(customerId);
+		int countPickUp = myPageDAO.PickUpCount(customerId);
 
-		int maxPageNumber = (int) (Math.ceil((double) countProducts / pageLimit));
+		int maxPageNumber = (int) (Math.ceil((double) countPickUp / pageLimit));
 
 		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
 

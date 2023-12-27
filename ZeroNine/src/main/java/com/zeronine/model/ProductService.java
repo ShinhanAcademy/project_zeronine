@@ -90,4 +90,7 @@ public class ProductService {
 		return productDAO.selectByProductList(productIdArr);
 	}
 
+	public List<ProductVO> selectRecommendedProducts(Integer count) {
+		return productDAO.selectRecommendedProducts(count);
+	}
 }

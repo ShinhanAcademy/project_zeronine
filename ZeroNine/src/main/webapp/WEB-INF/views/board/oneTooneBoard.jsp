@@ -180,7 +180,7 @@ function showList() {
             }
         );console.log(info_json);
     }
-    each();
+    loadMore();
 }
 
 

@@ -142,11 +142,30 @@
 		FROM product
 		where
 		"productId" in (
-		
 		  <foreach collection="array" item="pid" separator="," >
 		 	 CAST(#{pid} AS UUID)
 		  </foreach>
 		)
-	
 	</select>
+	<select id="selectRecommendedProducts" parameterType="Integer" resultType="productVo">
+		SELECT 
+			product."productId",
+			product."pName",
+			product.brand,
+			product.price,
+			"bestSeller"."totalPickCount",
+			"prodImg"."imagePath"
+		FROM product
+		JOIN (
+			SELECT "productId", count("productId") AS "totalPickCount"
+		  	FROM "deliveryProduct"
+		  	GROUP BY "productId"
+		) AS "bestSeller" 
+			ON product."productId" = "bestSeller"."productId"
+		LEFT JOIN "productMainImage" AS "prodImg"
+			ON "prodImg"."productId" = product."productId"
+		ORDER BY "bestSeller"."totalPickCount" DESC, product."price" ASC
+		LIMIT #{count};
+	</select>
+	<!-- 은경 추가 지우기 ㄴㄴ -->
 </mapper>
