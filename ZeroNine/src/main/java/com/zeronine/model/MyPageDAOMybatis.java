@@ -103,6 +103,14 @@ public class MyPageDAOMybatis {
 		int updateResult = sqlSession.update(NAMESPACE+"updateCouponCnt",subscriptionId);
 		return updateResult;
 	}
+	
+	/*
+	 * public int insertPickupRequest(String customerId, String subscriptionId) {
+	 * System.out.println(subscriptionId); System.out.println(customerId); int
+	 * insertResult = sqlSession.insert(NAMESPACE+"insertPickupRequest", customerId,
+	 * subscriptionId); return insertResult; }
+	 */
+	
 	public List<PickupVO> PickUpList(int page ,String customerId){
 		System.out.println("pageStartNum"+page);
 		System.out.println("customerId"+customerId);

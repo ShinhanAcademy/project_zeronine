@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -238,7 +239,15 @@ public class MyPageController {
 		}
 	}
 	
-	
+	/*
+	 * @RequestMapping("/requestPickup.do") public ResponseEntity<String>
+	 * insertPickupRequest(@RequestParam("subscriptionId") String subscription_id,
+	 * HttpServletRequest session){ String customer_id =
+	 * (String)session.getAttribute("customerId");
+	 * 
+	 * }
+	 * 
+	 */
 	
 	
 	@GetMapping("/createdBoard.do")
