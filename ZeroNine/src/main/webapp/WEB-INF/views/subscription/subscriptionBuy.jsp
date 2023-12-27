@@ -54,6 +54,9 @@
 	</div>
 	
 	<%@include file="../common/footer.jsp"%>
+	<script>
+		var customerId = "${customerId}";
+ 	</script>
 	<script src="${path}/js/subscription/subscription.js" type="text/javascript"></script>
 </body>
 </html>

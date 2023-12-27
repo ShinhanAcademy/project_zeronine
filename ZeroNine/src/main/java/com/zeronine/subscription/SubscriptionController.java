@@ -1,5 +1,7 @@
 package com.zeronine.subscription;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,8 +19,9 @@ public class SubscriptionController {
 	private static final Logger logger = LoggerFactory.getLogger(SubscriptionController.class);
 	
 	@GetMapping("/subscriptionBuy.do")
-	public void SubscriptionMenu() {
-		
+	public void SubscriptionMenu(HttpSession session, Model model) {
+		String customerId = (String)session.getAttribute("customerId");
+		model.addAttribute("customerId", customerId);
 	}
 	
 	@GetMapping("/subscriptionBanner.do")
@@ -35,7 +38,7 @@ public class SubscriptionController {
 		
 	}
 	
-	//콜백 수신 처리
+	//肄쒕갚 �닔�떊 泥섎━
 	/*
 	 * @PostMapping("/sss") public ResponseEntity<> callback_receive(@RequestBody
 	 * Portone entity)
