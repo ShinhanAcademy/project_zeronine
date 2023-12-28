@@ -119,7 +119,7 @@ if (inputWord) {
 
 //orderHistory
 //Ajax
-function callOrderHistory() {
+function callOrderHistory(page) {
 	let startDate = $(".mypage_container #datepicker").data("datepicker").selectedDates[0];
 	let endDate = $(".mypage_container #datepicker").data("datepicker").selectedDates[1];
 
@@ -128,7 +128,7 @@ function callOrderHistory() {
 	paramObj.searchWord = $(".search_word input").val();
 	paramObj.startDate = dateSet.convertDate(startDate);
 	paramObj.endDate = dateSet.convertDate(endDate);
-	
+	paramObj.pCount = page;
 	$.ajax({
 		url: contextPath + "/myPage/subPage/orderHistoryDetail.do",
 		data: paramObj,

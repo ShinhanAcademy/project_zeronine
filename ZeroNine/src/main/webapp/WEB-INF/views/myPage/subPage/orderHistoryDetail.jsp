@@ -7,7 +7,7 @@
 <script defer src="/js/myPage/subPage/orderHistoryDetail.js"></script>
 <div class="tbl_top_wrap">
 	<div class="total_count">
-		총 <span>${orderHistoryAll.size()}</span>건
+		총 <span>${pageCount}</span>건
 	</div>
 </div>
 <!-- tbl_wrap -->
@@ -31,7 +31,7 @@
 		</thead>
 		<tbody>
 			<c:choose>
-				<c:when test="${orderHistoryAll.size() != 0}"> 
+				<c:when test="${pageCount != 0}"> 
 					<c:forEach items="${orderHistoryAll}" var="orderlist" varStatus="i">
 					<c:if test="${orderlist.deliveryId eq prev_row}">
 						<c:set var="check_row" value="${check_row + 1}" />
@@ -116,47 +116,47 @@
 		<div class=pagination>
 			<div class="pageLeft">
 				<c:choose>
-					<c:when test="${paginating.pageNumber<=1}">
+					<c:when test="${OHpagination.pageNumber<=1}">
 						<button class="btnFirst" disabled="disabled">첫페이지</button>
 					</c:when>
 					<c:otherwise>
 						<button class="btnFirst" id="btnFirst"
-							onclick="javascript:PickUpList(1)">첫페이지</button>
+							onclick="javascript:callOrderHistory(1)">첫페이지</button>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${paginating.pageNumber<=1}">
+					<c:when test="${OHpagination.pageNumber<=1}">
 						<button class="btnPrev" disabled="disabled">이전페이지</button>
 					</c:when>
 					<c:otherwise>
 						<button class="btnPrev" id="btnPrev"
-							onclick="javascript:PickUpList(${paginating.pageNumber-1})">이전페이지</button>
+							onclick="javascript:callOrderHistory(${OHpagination.pageNumber-1})">이전페이지</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
 			<ul class="pagingWrap">
-				<c:forEach begin="${paginating.startPageNumber}"
-					end="${paginating.endPageNumber}" var="i" step="1">
-					<li><a href="javascript:PickUpList(${i})">${i}</a></li>
+				<c:forEach begin="${OHpagination.startPageNumber}"
+					end="${OHpagination.endPageNumber}" var="i" step="1">
+					<li><a href="javascript:callOrderHistory(${i})">${i}</a></li>
 				</c:forEach>
 			</ul>
 			<div class="pageRight">
 				<c:choose>
-					<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
+					<c:when test="${OHpagination.pageNumber==OHpagination.maxPageNumber}">
 						<button class="btnNext" id="btnNext" disabled="disabled">다음페이지</button>
 					</c:when>
 					<c:otherwise>
 						<button class="btnNext" id="btnNext"
-							onclick="javascript:PickUpList(${paginating.pageNumber+1})">다음페이지</button>
+							onclick="javascript:callOrderHistory(${OHpagination.pageNumber+1})">다음페이지</button>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${paginating.pageNumber==paginating.maxPageNumber}">
+					<c:when test="${OHpagination.pageNumber==OHpagination.maxPageNumber}">
 						<button class="btnLast" disabled="disabled">마지막페이지</button>
 					</c:when>
 					<c:otherwise>
 						<button class="btnLast" id="btnLast"
-							onclick="javascript:PickUpList(${paginating.maxPageNumber})">마지막페이지</button>
+							onclick="javascript:callOrderHistory(${OHpagination.maxPageNumber})">마지막페이지</button>
 					</c:otherwise>
 				</c:choose>
 			</div>

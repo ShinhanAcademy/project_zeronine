@@ -6,16 +6,19 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zeronine.dto.PagingVO;
 import com.zeronine.dto.ProductVO;
-
 
 @Service("boardService")
 public class BoardService_yn {
-	
+
 	@Autowired
 	BoardDAOMybatis_yn boardDAO;
 
-	public List<Map<String,Object>> myWriteBlist(String customerId) {
+	int pageLimit = 5;
+	int blockLimit = 5;
+
+	public List<Map<String, Object>> myWriteBlist(String customerId) {
 		return boardDAO.myWriteBlist(customerId);
 	}
 
@@ -64,19 +67,46 @@ public class BoardService_yn {
 	}
 
 	public int deleteLikedBoard(String customerId, String boardId) {
-		return boardDAO.deleteLikedBoard(customerId,boardId);
+		return boardDAO.deleteLikedBoard(customerId, boardId);
 	}
 
 	public int insertLikedBoard(String customerId, String boardId) {
-		return boardDAO.insertLikedBoard(customerId,boardId);
+		return boardDAO.insertLikedBoard(customerId, boardId);
 	}
 
 	public List<String> likeFreeBidList(String customerId) {
 		return boardDAO.likeFreeBidList(customerId);
 	}
 
-	public List<Map<String, Object>> chatBlist(String customerId) {
-		return boardDAO.chatBlist(customerId);
+	public List<Map<String, Object>> chatBlist(int page, String customerId) {
+		int pageStartNum = (page - 1) * pageLimit;
+		return boardDAO.chatBlist(pageStartNum, customerId);
+	}
+
+	public int chatBlistCount(String customerId) {
+		return boardDAO.chatBlistCount(customerId);
+	}
+
+	public PagingVO chatBlistgetPages(int page, String customerId) {
+
+		int chatBlistCount = boardDAO.chatBlistCount(customerId);
+
+		int maxPageNumber = (int) (Math.ceil((double) chatBlistCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
 	}
 
 	public Map<String, Object> boardDetailEdit(String boardId) {
@@ -84,11 +114,11 @@ public class BoardService_yn {
 	}
 
 	public int completeEdit(String title, String context, String boardId) {
-		return boardDAO.completeEdit(title,context,boardId);
+		return boardDAO.completeEdit(title, context, boardId);
 	}
 
 	public int completeEditTime(String title, String context, int remainTime, String boardId) {
-		return boardDAO.completeEditTime(title,context,remainTime,boardId);
+		return boardDAO.completeEditTime(title, context, remainTime, boardId);
 	}
 
 	public int deleteBoard(String boardId) {
@@ -103,8 +133,35 @@ public class BoardService_yn {
 		return boardDAO.freeBoardDetailEdit(boardId);
 	}
 
-	public List<Map<String, Object>> participantChatList(String customerId) {
-		return boardDAO.participantChatList(customerId);
+	public List<Map<String, Object>> participantChatList(int page, String customerId) {
+		int pageStartNum = (page - 1) * pageLimit;
+		return boardDAO.participantChatList(pageStartNum, customerId);
+	}
+
+	public int participantChatListCount(String customerId) {
+		return boardDAO.participantChatListCount(customerId);
+	}
+
+	public PagingVO participantChatListgetPages(int page, String customerId) {
+
+		int participantChatListCount = boardDAO.participantChatListCount(customerId);
+
+		int maxPageNumber = (int) (Math.ceil((double) participantChatListCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
 	}
 
 	public int numOfChatParticipant(String boardId) {
@@ -116,7 +173,7 @@ public class BoardService_yn {
 	}
 
 	public int completeChatEdit(String title, String context, String boardId) {
-		return boardDAO.completeChatEdit(title,context,boardId);
+		return boardDAO.completeChatEdit(title, context, boardId);
 	}
 
 	public List<Map<String, Object>> successMyWriteBlist(String customerId) {
@@ -135,24 +192,16 @@ public class BoardService_yn {
 		return boardDAO.successMyParticipatedFreeBlist(customerId);
 	}
 
-	public List<Map<String, Object>> successChatBlist(String customerId) {
-		return boardDAO.successChatBlist(customerId);
-	}
-
-	public List<Map<String, Object>> successParticipantChatList(String customerId) {
-		return boardDAO.successParticipantChatList(customerId);
-	}
-
 	public List<Map<String, Object>> freeBoardProductEdit(String boardId, String customerId) {
-		return boardDAO.freeBoardProductEdit(boardId,customerId);
+		return boardDAO.freeBoardProductEdit(boardId, customerId);
 	}
 
 	public int completeFreeEdit(String title, String context, String boardId) {
-		return boardDAO.completeFreeEdit(title,context,boardId);
+		return boardDAO.completeFreeEdit(title, context, boardId);
 	}
 
 	public int completeFreeEditTime(String title, String context, int remainTime, String boardId) {
-		return boardDAO.completeFreeEditTime(title,context,remainTime,boardId);
+		return boardDAO.completeFreeEditTime(title, context, remainTime, boardId);
 	}
 
 	public int deleteChat(String boardId) {
@@ -172,7 +221,7 @@ public class BoardService_yn {
 	}
 
 	public int orderFastProduct(String customerId, String boardId, int count) {
-		return boardDAO.orderFastProduct(customerId,boardId,count);
+		return boardDAO.orderFastProduct(customerId, boardId, count);
 	}
 
 	public Map<String, Object> fastBoardProduct(String boardId) {
@@ -180,7 +229,7 @@ public class BoardService_yn {
 	}
 
 	public int orderFreeProduct(String customerId, String boardId, Map<String, Integer> productList) {
-		return boardDAO.orderFreeProduct(customerId,boardId,productList);
+		return boardDAO.orderFreeProduct(customerId, boardId, productList);
 	}
 
 	public Map<String, Object> freeOrderInfo(String customerId, String boardId) {
@@ -202,11 +251,8 @@ public class BoardService_yn {
 	public int isParticipateFree(String customerId, String boardId) {
 		return boardDAO.isParticipateFree(customerId, boardId);
 	}
-
 	public List<Map<String, Object>> mySubscriptionInfo(String customerId) {
 		return boardDAO.mySubscriptionInfo(customerId);
 	}
-
-
 
 }

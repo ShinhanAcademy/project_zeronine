@@ -17,7 +17,7 @@
 		<!-- mypage_container -->
 		<div class="mypage_container">
 			<!-- zero_sbn -->
-			<%@include file="common/myPageSnb.jsp"%>f
+			<%@include file="common/myPageSnb.jsp"%>
 			<!-- //zero_sbn -->
 			<!-- mypage_detail_wrap -->
 			<div class="mypage_detail_wrap">
