@@ -228,11 +228,12 @@
 					//data : obj,
 					type : "POST",
 					success : function(response) {
-						location.href = path+"/common/orderSuccess.do";
+						location.href = path+"/common/freeOrderSuccess.do";
 					},
 					error : function() {
+						location.href = path+"/common/failFreeBoardParticipate.do";
 						//alert("ERROR!"); 
-						$.ajax(
+						/* $.ajax(
 							{
 								url : "https://api.iamport.kr/payments/cancel",
 								type : "POST",
@@ -247,7 +248,7 @@
 									location.href = path+"/common/failParticipateRefund.do";
 								}
 							}		
-						);
+						); */
 					}
 				});
 		    });
