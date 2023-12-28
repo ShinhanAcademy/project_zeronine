@@ -187,9 +187,15 @@
     line-height: 1;
     font-size: 22px;
 }
+.my_cart_wrap .buy_price_wrap .btn_wrap button:disabled {
+	cursor: auto;
+}
 .my_cart_wrap .buy_price_wrap .all_order {
 	color: #fff;
 	background: #0083E6;
+}
+.my_cart_wrap .buy_price_wrap .all_order:disabled {
+    background: #ddd;
 }
 
 
