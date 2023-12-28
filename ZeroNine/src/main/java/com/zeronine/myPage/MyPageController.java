@@ -466,7 +466,7 @@ public class MyPageController {
 		String customerId = (String)session.getAttribute("customerId");
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		List<Map<String, Object>> successInfo = boardService.successMyParticipatedBlist(Page,customerId);
-		int successcount = boardService.myParticipatedBlistCount(customerId);
+		int successcount = boardService.successMyParticipatedBlistCount(customerId);
 		PagingVO boardSuccessPaging = boardService.successMyParticipatedBlistgetPages(Page, customerId);
 		model.addAttribute("successInfo", successInfo);
 		model.addAttribute("successCount", successcount);
