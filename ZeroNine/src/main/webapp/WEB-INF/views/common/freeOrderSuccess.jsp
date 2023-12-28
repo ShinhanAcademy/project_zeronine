@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<div class="orderlist-go">
-			<button class="orderlist-btn">내가 쓴 게시글 바로가기</button>
+			<button class="orderlist-btn">내가 참여한 게시글 바로가기</button>
 			</div>
 		</div>
 	</div>

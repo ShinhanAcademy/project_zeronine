@@ -15,6 +15,7 @@
 
 </head>
 <body>
+<div id="here">
 	<div class="zero_container" style="padding-top: 20px;">
 		<div class="banner zn_center">
 			<div style="width: 1440px">
@@ -47,7 +48,7 @@
 
 		</div>
 	</div>
-
+</div>
 
 
 	<script>
@@ -135,7 +136,7 @@
 
 		function editCom() {
 			var send_bt_to_com = $("#be_board_type").val();
-			console.log("editCom() => send_bt_to_com :", send_bt_to_com);
+			//console.log("editCom() => send_bt_to_com :", send_bt_to_com);
 		
 			//공통 내용
 			var board_type = $("#be_board_type").val();
@@ -144,7 +145,7 @@
 			
 			//1:1거래라면 이미지도 함께 전송이 되어야 한다.
 			if(send_bt_to_com=="oneTooneBoard") {
-				console.log("oneTooneBoard에 해당하는 AJAX를 실행할것이다.");
+				//console.log("oneTooneBoard에 해당하는 AJAX를 실행할것이다.");
 		
 				var send_bt_to_com = $("#be_board_type").val();
 				var postingMinutes = $("#time_setting").val();
@@ -184,7 +185,7 @@
 				});	
 			}
 			else if(send_bt_to_com=="fastBoard") { //즉배
-				console.log($("#wait_minute"));
+				//console.log($("#wait_minute"));
 				var dayAsMinute = $(".date").val(); //val은 minute으로 설정됨
 				
 				var waitHourValue = Number($('#wait_hour').val());
@@ -192,11 +193,11 @@
 			    var productId = $('#productId').val();
 			    var count = $('#count').val();
 				
-				console.log(waitHourValue, waitMinuteValue, productId, count);
+				//console.log(waitHourValue, waitMinuteValue, productId, count);
 				
 				var postingMinutes = Number(dayAsMinute) + waitHourValue * 60 + waitMinuteValue;
 				
-				console.log(postingMinutes);
+				//console.log(postingMinutes);
 				
 				var obj = {
 						"send_bt_to_com" : board_type,
@@ -207,7 +208,7 @@
 						"count" : count		
 				}
 				
-				console.log("obj at boardEdit.jsp==>", obj);
+				//console.log("obj at boardEdit.jsp==>", obj);
 				
 				$.ajax({
 					url: '${path}/common/writeOrderFast.do',
@@ -216,12 +217,13 @@
 					data: JSON.stringify(obj),
 					contentType: "application/json",
 					success : function(responseData) {
-						$("#edit").html(responseData);
+						//$("#edit").html(responseData);
+						$("#here").html(responseData);
 					}
 				});	
 			}
 			else { //무배
-				console.log($("#wait_minute"));
+				//console.log($("#wait_minute"));
 				var dayAsMinute = $(".date").val(); //val은 minute으로 설정됨
 				
 				var waitHourValue = Number($('#wait_hour').val());
@@ -229,11 +231,11 @@
 			    
 				
 				
-				console.log(waitHourValue, waitMinuteValue);
+				//console.log(waitHourValue, waitMinuteValue);
 				
 				var postingMinutes = Number(dayAsMinute) + waitHourValue * 60 + waitMinuteValue;
 				
-				console.log(postingMinutes);
+				//console.log(postingMinutes);
 				var obj = {
 						"send_bt_to_com" : board_type,
 						"postingMinutes" : postingMinutes,
@@ -248,7 +250,8 @@
 					data: JSON.stringify(obj),
 					contentType: "application/json",
 					success : function(responseData) {
-						$("#edit").html(responseData);
+						//$("#edit").html(responseData);
+						$("#here").html(responseData);
 					}
 				});
 				
