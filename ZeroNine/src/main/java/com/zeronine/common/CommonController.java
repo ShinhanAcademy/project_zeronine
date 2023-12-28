@@ -114,17 +114,37 @@ public class CommonController {
 	
 	@PostMapping(value="/common/freeOrderSuccess.do", produces="application/text;charset=UTF-8")
 	@ResponseBody
-	public void freeOrderSuccessP(Model model, HttpSession session) {
+	public ResponseEntity<String> freeOrderSuccessP(Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		String boardId = (String)session.getAttribute("boardId");
 		Map<String,Object> productInfo = (Map<String,Object>)session.getAttribute("info");
 		Map<String, Integer> productList = new HashMap<>(); //productId - purchaseCount
 		Map<String,Object> data = (Map)productInfo.get("myMap");
 		Set<Entry<String,Object>> entrys = data.entrySet();
+		
+		
 		for(Entry<String,Object> row:entrys) {
 			productList.put(row.getKey(), Integer.parseInt((String)row.getValue()));
 		}
-		boardService.orderFreeProduct(customerId, boardId, productList);
+		
+		int procedureCallResult =  boardService.orderFreeProduct(customerId, boardId, productList);
+		
+		
+		if(procedureCallResult == -1) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("참여 실패. 이미 완료된 게시글");
+		}
+		
+		if(procedureCallResult == 0) {
+			return ResponseEntity.ok("참여 완료. 공동구매 현재 진행중");
+		}
+		
+		
+		if(procedureCallResult == 1) {
+			return ResponseEntity.ok("참여 완료. 공동구매 성사 완료");
+		}
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("참여 실패"); 
+		 
 		/*
 		int isFreeProduct = boardService.orderFreeProduct(customerId, boardId, productList);
 		String message;
@@ -140,6 +160,12 @@ public class CommonController {
 		*/
 		
 	}	
+	
+	
+	@GetMapping("/common/failFreeBoardParticipate.do")
+	public String failFreeBoardParticipate() {
+		return "/common/failParticipate";
+	}
 	
 	@GetMapping("/common/orderSuccess.do") 
 	public String orderSuccess(Model model,HttpSession session) { 
