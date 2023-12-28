@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	<div class="order_body">
 		<div class="zero_container order_bodypart">
 			<div class="order_bodypart_text">
@@ -18,6 +17,8 @@
 						<div class="infotext_space">
 							<div class="infotext_space_left">
 								<span class="box_text">${product.pName}</span>
+							</div>
+							<div class="infotext_space_left2">
 								<span class="box_text2">${product.count}개</span>
 							</div>
 							<div class="infotext_space_right">
@@ -188,7 +189,7 @@
 				return;
 			}
 			
-			/* $.ajax({
+			$.ajax({
 				url : path + "/common/freeOrderSuccess.do",
 				type : "POST",
 				success : function(response) {
@@ -198,59 +199,7 @@
 				error : function() {
 					alert("에러입니다.");
 				}
-			}); */
-			var IMP = window.IMP; 
-			IMP.init("imp31265537"); //imp31265537
-			
-			var today = new Date();   
-			var hours = today.getHours(); // 시
-			var minutes = today.getMinutes();  // 분
-			var seconds = today.getSeconds();  // 초
-			var milliseconds = today.getMilliseconds();
-			var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-			//var price = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
-			//console.log(price);
-			IMP.request_pay({
-		        pg : 'html5_inicis',
-		        pay_method : 'card',
-		        merchant_uid: "IMP"+makeMerchantUid, 
-		        name : '즉시배송 결제',
-		        //customerId : id,
-		        amount : 2 //나중에 실제 값으로 바꿔야 합니다...
-		    }, function (rsp) { // callback
-		    	/* var obj = {
-						"productId":$("#hidden_productId").val(),
-						"count":$("#hidden_count").val()
-				} */
-
-				$.ajax({
-					url : path + "/common/freeOrderSuccess.do",
-					//data : obj,
-					type : "POST",
-					success : function(response) {
-						location.href = path+"/common/freeOrderSuccess.do";
-					},
-					error : function() {
-						//alert("ERROR!"); 
-						$.ajax(
-							{
-								url : "https://api.iamport.kr/payments/cancel",
-								type : "POST",
-								contentType : "application/json",
-								data : {imp_uid : rsp.imp_uid},
-								success : function() {
-									location.href = path+"/common/failParticipateRefund.do";
-									//결제 취소완료
-								},
-								error : function() {
-									//결제 취소 실패		
-									location.href = path+"/common/failParticipateRefund.do";
-								}
-							}		
-						);
-					}
-				});
-		    });
+			});
 		})
 		
 		$(".agreebtn").click(

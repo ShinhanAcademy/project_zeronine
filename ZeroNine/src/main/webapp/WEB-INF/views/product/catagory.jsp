@@ -10,7 +10,7 @@
 		<div class="menu_image">
 			<img class="menupng"
 				onclick="location.href='${Path }/product/productDetail.do?productId=${product.productId}'"
-				src="${path}/images/sangpumpage/ohddugi.png">
+				src="${product.imagePath}">
 
 			<div class="menu_gocart">
 

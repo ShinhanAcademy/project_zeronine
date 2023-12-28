@@ -14,9 +14,8 @@ document.getElementById("pw_check_btn").onclick = function() {
 				dataType: "json",
 				type: "POST",
 				success : function(result){
-					console.log("result->", result);
+					
 					if(result.customerName == "invalid") {
-						alert("틀린 비번");
 						
 						$('#modal').html(`
 							<div id="modal_wrap">
@@ -26,6 +25,8 @@ document.getElementById("pw_check_btn").onclick = function() {
 										<button id="modal_btn" style="
 										    font-size: 25px;
 										    border-radius: 15px;
+										    margin-top: 18px;
+    										color: white;
 										">확인</button>	
 									</div>
 										
@@ -39,10 +40,9 @@ document.getElementById("pw_check_btn").onclick = function() {
 							})
 							</script>
 						`);
-						//alert("비밀번호가 틀렸습니다. 다시 입력하세요.");
+						
 					}
 					else {
-						//alert("good");
 						
 						var epochTime = result.birthday; // 주어진 Epoch 시간
 						const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
@@ -90,7 +90,7 @@ function makeUpdateForm(result) {
 					<div class="form_group">
 						<label>새 비밀번호</label> <input type="password" name="password"
 							id="password" placeholder="새 비밀번호를 입력하세요."
-							onchange ="validatePassword()"
+							onchange ="validatePassword()" onclick="BtnDisabled()"
 							required
 						>
 					</div>
@@ -99,7 +99,7 @@ function makeUpdateForm(result) {
 						<input type="password"
 							name="password_check" id="password_check"
 							placeholder="새 비밀번호를 다시 입력하세요."
-							onchange="validatePassword()"
+							onchange="validatePassword()" onclick="BtnDisabled()"
 							required	
 						>
 					</div>
@@ -109,7 +109,6 @@ function makeUpdateForm(result) {
 							pattern="[0-9]{11}" placeholder="(-)를 제외하고 휴대폰 번호를 입력하세요."
 							value="${result.phoneNumber}"
 							required>
-						<button type="button" class="double_check_btn" id="phone_check">중복확인</button>
 						<input type="hidden" id="hidden_phone_check" value='0'>
 					</div>
 					<div class="form_group">
@@ -143,6 +142,18 @@ function makeUpdateForm(result) {
 
 		<!--  -->
 	</div>
+	<script>
+		BtnDisabled();
+		function BtnDisabled(){
+			if($("#password").val()!=$("#password_check").val()){
+				$("#update_btn").prop("disabled", true);
+  				$("#update_btn").css("background-color", "gray");		
+			}else{
+				$("#update_btn").prop("disabled", false);
+  				$("#update_btn").css("background-color", "#0083E6");
+			}
+		}
+	</script>
 	`;
 		
 }
