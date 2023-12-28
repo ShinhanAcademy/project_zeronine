@@ -5,9 +5,9 @@
 <mapper namespace="net.zeronine.product">
 
 	<select id="searchAll" parameterType="map"
-		resultType="productVo">
-		SELECT *
-		FROM "product" pd
+		resultType="map">
+		SELECT pd.*, pi."imagePath"
+		FROM "product" pd left join "productMainImage" pi on (pd."productId"=pi."productId")
 		<if test="selectedValue==1">
 			left join
 			(select
@@ -111,10 +111,10 @@
 		where
 		"productId" = CAST(#{productId} AS UUID)
 	</select>
-	<select id="selectDetailDelivery4" resultType="productVo">
+	<select id="selectDetailDelivery4" resultType="map">
 		SELECT
-		"pd"."productId",
-		"pd"."pName", "pd"."brand", "pd"."price"
+		pd."productId",
+		pd."pName", pd."brand", pd."price", pi."imagePath"
 		FROM (
 		SELECT
 		"productId", COUNT("productId") AS prcount
@@ -122,9 +122,9 @@
 		GROUP
 		BY "productId"
 		) l
-		FULL OUTER JOIN "product" pd ON l."productId" =
-		"pd"."productId"
-		ORDER BY prcount DESC NULLS LAST, "pd"."price" ASC
+		FULL OUTER JOIN "product" pd ON l."productId" = pd."productId"
+		left join "productMainImage" pi on (l."productId" = pi."productId")
+		ORDER BY prcount DESC NULLS LAST, pd."price" ASC
 		LIMIT 4;
 	</select>
 	<select id="selectByPricePname" parameterType="String"
@@ -166,6 +166,12 @@
 			ON "prodImg"."productId" = product."productId"
 		ORDER BY "bestSeller"."totalPickCount" DESC, product."price" ASC
 		LIMIT #{count};
+	</select>
+	<select id="selectPImage" resultType="String" parameterType="String">
+		select "imagePath" from "productMainImage" where "productId" = CAST(#{productId} AS UUID)
+	</select>
+	<select id="selectDetailImage" resultType="productAdditionalImageVo" parameterType="String">
+		select * from "productAdditionalImage" where "productId" = CAST(#{productId} AS UUID) order by "imageOrder" asc
 	</select>
 	<!-- 은경 추가 지우기 ㄴㄴ -->
 </mapper>

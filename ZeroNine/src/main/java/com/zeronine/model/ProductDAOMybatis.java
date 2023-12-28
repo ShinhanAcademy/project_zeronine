@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zeronine.dto.ProductAdditionalImageVO;
 import com.zeronine.dto.ProductVO;
 
 
@@ -21,9 +22,9 @@ public class ProductDAOMybatis {
 	String namespace = "net.zeronine.product.";
 	
 	
-	public List<ProductVO> searchAll(Map<String, Object> paginateParam) {
-		 List<ProductVO> productList = sqlSession.selectList(namespace + "searchAll", paginateParam);
-		logger.info("searchAll:{}��", productList.size());
+	public List<Map<String,Object>> searchAll(Map<String, Object> paginateParam) {
+		List<Map<String,Object>> productList = sqlSession.selectList(namespace + "searchAll", paginateParam);
+		//logger.info("searchAll:{}��", productList.size());
 		return productList;
 	}
 
@@ -39,8 +40,8 @@ public class ProductDAOMybatis {
 	}
 
 
-	public List<ProductVO> selectDetailDelivery4() {
-		List<ProductVO> productList = sqlSession.selectList(namespace + "selectDetailDelivery4");
+	public List<Map<String,Object>> selectDetailDelivery4() {
+		List<Map<String,Object>> productList = sqlSession.selectList(namespace + "selectDetailDelivery4");
 		return productList;
 	}
 
@@ -60,6 +61,16 @@ public class ProductDAOMybatis {
 	public List<ProductVO> selectRecommendedProducts(Integer count) {
 		List<ProductVO> productList = sqlSession.selectList(namespace + "selectRecommendedProducts", count);
 		return productList;
+	}
+
+	public String selectPImage(String productId) {
+		String pImage = sqlSession.selectOne(namespace + "selectPImage", productId);
+		return pImage;
+	}
+
+	public List<ProductAdditionalImageVO> selectDetailImage(String productId) {
+		List<ProductAdditionalImageVO> detailImage = sqlSession.selectList(namespace + "selectDetailImage", productId);
+		return detailImage;
 	}
 	
 }
