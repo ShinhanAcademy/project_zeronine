@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="tbl_top_wrap">
 	<div class="total_count">
 
@@ -28,7 +29,7 @@
 	</colgroup>
 	<thead>
 		<tr>
-			<th>상품</th>
+			<th>달성률</th>
 			<th>게시글 제목</th>
 			<th>게시일</th>
 			<th>마감 기한</th>
@@ -38,13 +39,20 @@
 	<tbody>
 		<c:forEach items="${info}" var="board">
 			<tr>
-				<td><img class="product_image" src="${board.imagePath}"></td>
+				<td>
+					<div class="tbl_chart">
+						<div class="pie-chart" value="${board.total/50000*100}">
+							<span class="rate"> <fmt:formatNumber type="percent"
+									maxIntegerDigits="3" value="${board.total/50000}" /></span>
+						</div>
+					</div>
+				</td>
 				<td class="td_font_title">${board.title}</td>
 				<td class="td_font_upload">${board.uploadTime}</td>
 				<td class="td_font_remain">${board.remainTime}</td>
 				<td class="read_status"><input id="hiddenBoardId" type="hidden"
 					value="${board.boardId}">
-					<button class="boardDetail">상세보기</button></td>
+					<button class="freeBoardDetail">상세보기</button></td>
 			</tr>
 		</c:forEach>
 	</tbody>
