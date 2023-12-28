@@ -40,7 +40,7 @@
 				<li>
 					<a data-value="%" onclick="handleClick(event, this)" style="cursor:pointer">상품목록</a>
 					<ul class="gnb_2depth" >
-						<li ><a  data-value="1" onclick="handleClick(event, this)">채소</a></li>
+						<li ><a  data-value="1" onclick="handleClick(event, this)">식재료</a></li>
 						<li ><a data-value="2" onclick="handleClick(event, this)">생필품</a></li>
 						<li ><a data-value="4"onclick="handleClick(event, this)">음식</a></li>
 						<li ><a data-value="%" onclick="handleClick(event, this)">전체</a></li>

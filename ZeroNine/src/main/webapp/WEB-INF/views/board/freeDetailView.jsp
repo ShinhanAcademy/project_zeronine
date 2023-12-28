@@ -50,7 +50,13 @@
 </body>
 <script type="text/javascript">
 var boardId = "${detailFree.boardId}";
+var customerId = "${customerId}";
 $(".join_btn").click(function(){
+	if(customerId==""){
+		alert("로그인 후 이용해주세요.");
+		location.href = "/auth/login.do";
+		return;
+	}
 	location.href = "${path}/common/participateFreeBoard.do?boardId=" + boardId;
 });
 

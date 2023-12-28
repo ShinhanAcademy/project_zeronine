@@ -380,9 +380,11 @@ public class BoardController {
 
 	//  뵒 뀒 씪
 	@RequestMapping("/fastboardDetail.do")
-	public String fastboardDetail(@RequestParam("boardId") String board_id, Model model) {
+	public String fastboardDetail(@RequestParam("boardId") String board_id, Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
 		Map<String, Object> detail = boardService.selectFastDetail(board_id);
 		model.addAttribute("detail", detail);
+		model.addAttribute("customerId", customerId);
 
 		logger.info("controller fast  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
 		logger.info("controller fast  뵒 뀒 씪  궡 슜: {}", detail);
@@ -391,18 +393,22 @@ public class BoardController {
 	}
 
 	@RequestMapping("/freeboardDetail.do")
-	public String selectFreeDetail (@RequestParam("boardId")String board_id, Model model) {
+	public String selectFreeDetail (@RequestParam("boardId")String board_id, Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
 		Map<String, Object> detailFree = boardService.selectFreeDetail(board_id);
 		model.addAttribute("detailFree", detailFree);
+		model.addAttribute("customerId", customerId);
 		logger.info(" 씠寃껋  而⑦듃濡ㅻ윭 뿉 꽌 李띾뒗 detailFree : {}", detailFree);
 		return "board/freeDetailView";
 	}
 
 	@RequestMapping("/oneboardDetail.do")
-	public String oneboardDetail(@RequestParam("boardId") String board_id, Model model) {
+	public String oneboardDetail(@RequestParam("boardId") String board_id, Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
 		Map<String, Object> detail = boardService.selectOneDetail(board_id);
 		model.addAttribute("detail", detail);
 		model.addAttribute("board_id", board_id);
+		model.addAttribute("customerId", customerId);
 
 		logger.info("controller one  board_id : {}", board_id);
 		logger.info("controller one  detail: {}", detail);
