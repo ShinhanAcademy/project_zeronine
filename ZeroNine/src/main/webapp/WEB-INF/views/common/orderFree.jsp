@@ -228,7 +228,7 @@
 					//data : obj,
 					type : "POST",
 					success : function(response) {
-						location.href = path+"/common/freeOrderSuccess.do";
+						location.href = path+"/common/orderSuccess.do";
 					},
 					error : function() {
 						//alert("ERROR!"); 

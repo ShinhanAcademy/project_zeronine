@@ -114,7 +114,7 @@ public class CommonController {
 	
 	@PostMapping(value="/common/freeOrderSuccess.do", produces="application/text;charset=UTF-8")
 	@ResponseBody
-	public void freeOrderSuccessP(Model model, HttpSession session) {
+	public ResponseEntity<String> freeOrderSuccessP(Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		String boardId = (String)session.getAttribute("boardId");
 		Map<String,Object> productInfo = (Map<String,Object>)session.getAttribute("info");
@@ -124,7 +124,8 @@ public class CommonController {
 		for(Entry<String,Object> row:entrys) {
 			productList.put(row.getKey(), Integer.parseInt((String)row.getValue()));
 		}
-		boardService.orderFreeProduct(customerId, boardId, productList);
+		
+		int success = boardService.orderFreeProduct(customerId, boardId, productList);
 		/*
 		int isFreeProduct = boardService.orderFreeProduct(customerId, boardId, productList);
 		String message;
@@ -139,6 +140,12 @@ public class CommonController {
 		return message;
 		*/
 		
+		if(success == 0) {
+			return ResponseEntity.ok("참여 완료 => 공구 미완료");
+
+		}
+		
+		return ResponseEntity.ok("참여 완료 => 공구 성사!");
 	}	
 	
 	@GetMapping("/common/orderSuccess.do") 
