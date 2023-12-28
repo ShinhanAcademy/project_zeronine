@@ -452,4 +452,49 @@
 		where "boardId" = cast(#{boardId} as UUID)
 		and "customerId" = cast(#{customerId} as UUID)
 	</select>
+	<select id="mySubscriptionInfo" resultType="map" parameterType="String">
+		<![CDATA[
+		WITH combined_data AS (
+  		SELECT '무료배송+에코케어 구독권' as name, TO_CHAR("startDateTime",'yyyy-mm-dd') as "startDateTime", "remainingCouponCount", (("startDateTime" + INTERVAL '1 month') - INTERVAL '1 day')::date as after
+  		FROM "customerPickCoupon"
+  		WHERE "subscriptionId" IN (
+      								SELECT "subscriptionId" 
+      								FROM "customerFreeDelivery" 
+      								WHERE "customerId" = cast(#{customerId} as UUID)
+    								)
+  		UNION ALL
+  		SELECT '무료배송' as name, TO_CHAR("startDateTime",'yyyy-mm-dd') as "startDateTime", null as "remainingCouponCount", (("startDateTime" + INTERVAL '1 month') - INTERVAL '1 day')::date as after
+  		FROM "customerFreeDelivery"
+ 		WHERE "subscriptionId" NOT IN (
+      									SELECT "subscriptionId" 
+      									FROM "customerPickCoupon" 
+      									WHERE "customerId" = cast(#{customerId} as UUID)
+    									)
+    	AND "customerId" = cast(#{customerId} as UUID)
+    	UNION ALL
+  		SELECT '에코케어' as name, TO_CHAR("startDateTime",'yyyy-mm-dd') as "startDateTime", "remainingCouponCount", (("startDateTime" + INTERVAL '1 month') - INTERVAL '1 day')::date as after
+  		FROM "customerPickCoupon"
+  		WHERE "subscriptionId" NOT IN (
+      									SELECT "subscriptionId" 
+      									FROM "customerFreeDelivery" 
+      									WHERE "customerId" = cast(#{customerId} as UUID)
+    									)
+    	AND "isSubscription" = true
+   		AND "customerId"  = cast(#{customerId} as UUID)
+    	UNION ALL
+  		SELECT '5회 이용권' as name, TO_CHAR("startDateTime",'yyyy-mm-dd') as "startDateTime", "remainingCouponCount", (("startDateTime" + INTERVAL '1 month') - INTERVAL '1 day')::date as after
+  		FROM "customerPickCoupon"
+  		WHERE "subscriptionId" NOT IN (
+      									SELECT "subscriptionId" 
+      									FROM "customerFreeDelivery" 
+      									WHERE "customerId" = cast(#{customerId} as UUID)
+    									)
+    	AND "isSubscription" = false
+    	AND "customerId"  = cast(#{customerId} as UUID)
+		)
+		SELECT * FROM combined_data
+		where after>NOW()
+		ORDER BY "startDateTime"
+		]]>
+	</select>
 </mapper>

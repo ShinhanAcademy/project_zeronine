@@ -14,11 +14,16 @@
 }
 
 #modal_body {
+	position: absolute;
+	top: 50%;
+	left: 50%;
 	width: 500px;
 	height: 250px;
 	padding: 60px 30px;
-	margin-left: 32%;
-	margin-top: 315px;
+	/* margin-left: 32%;
+	margin-top: 315px; */
+	margin-left: -250px;
+	margin-top: -125px;
 	border: 1px solid #777;
 	background-color: #fff;
 	border-radius: 15px;

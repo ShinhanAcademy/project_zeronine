@@ -15,6 +15,18 @@ $(function(){
 		}
 	});
 	
+	$(function(){
+		$.ajax({
+		    url : contextPath + "/myPage/common/personalInfo.do",
+		    success : function(res){
+		 	   $("#personalInfo").html(res);
+		    },
+		    error : function(){
+		        alert("personalInfo 에러입니다.");
+		    }
+		});
+	});
+	
 });
 
 function usingDatePicker(){

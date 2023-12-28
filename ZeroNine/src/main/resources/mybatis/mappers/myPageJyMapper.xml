@@ -23,12 +23,11 @@
 		WHERE "subscriptionId" = cast(#{subscriptionId} as UUID)
 	</update>
 	
-	<!-- <insert id="insertPickupRequest" parameterType="hashMap">
-	INSERT INTO public.pickup(
-	"customerId", "isFoodWaste", "subscriptionId")
-	VALUES (cast(#{customerId} as UUID), RANDOM() < 0.5, cast(#{subscriptionId} as UUID));
+	<insert id="insertPickupRequest" parameterType="hashMap">
+	INSERT INTO public.pickup("customerId", "isFoodWaste", "subscriptionId")
+	VALUES (cast(#{customerId} as UUID), cast(#{isFoodWaste} as BOOLEAN), cast(#{subscriptionId} as UUID));
 	</insert>
-	 -->
+	
 	<select id="PickUpList" parameterType="hashMap"
 		resultType="hashMap">
 		SELECT "pickUpId",

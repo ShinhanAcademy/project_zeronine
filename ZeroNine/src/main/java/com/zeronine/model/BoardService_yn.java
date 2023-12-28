@@ -251,5 +251,8 @@ public class BoardService_yn {
 	public int isParticipateFree(String customerId, String boardId) {
 		return boardDAO.isParticipateFree(customerId, boardId);
 	}
+	public List<Map<String, Object>> mySubscriptionInfo(String customerId) {
+		return boardDAO.mySubscriptionInfo(customerId);
+	}
 
 }

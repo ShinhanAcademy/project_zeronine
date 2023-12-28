@@ -63,8 +63,11 @@ public class MyPageController {
 	public void personalInfo(HttpSession session, Model model) {
 		String customerId = (String) session.getAttribute("customerId");
 		logger.info("personalInfo"+customerId);
+		Map<String, Object> personalInfo = mypageservice.personalInfo(customerId);
+		
+		model.addAttribute("personalInfo", personalInfo);
+		System.out.println("model!!!"+ model.getAttribute("personalInfo"));
 	}
-	
 	
 	/* ****************************
 			MY_SHOPPING
@@ -77,25 +80,20 @@ public class MyPageController {
 	// orderHistory(주문 내역)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory(HttpSession session) {
-		session.removeAttribute("deliveryId");
+		//session.removeAttribute("deliveryId");
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")
-	public void orderHistoryDetail(
-			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
-			@RequestParam(value = "searchWord", required = false) String searchWord,
+	public void orderHistoryDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
 //		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		
 		String customerId = (String) session.getAttribute("customerId");
-		PagingVO orderHistorypaginating = mypageservice.orderHistorygetPages(Page,customerId, searchWord, startDate, endDate);
-		model.addAttribute("OHpagination",orderHistorypaginating);
-		model.addAttribute("pageCount",mypageservice.orderHistoryCount(customerId, searchWord, startDate, endDate));
-		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(Page,customerId, searchWord, startDate, endDate));
-	
-	
+//		System.out.println("ID = " + customerId);
+
+//		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(page, customerId, searchWord, startDate, endDate));
 	}
 	
 	// orderCancelHistory(취소 / 반품 내역)
@@ -160,11 +158,11 @@ public class MyPageController {
 			@RequestParam(value = "imagePathArr") String[] imagePathArr,
 			Model model, HttpSession session) {
 		
-		//System.out.println("productIdArr");
-		//System.out.println(Arrays.toString(productIdArr));
+		System.out.println("productIdArr");
+		System.out.println(Arrays.toString(productIdArr));
 		
-		//System.out.println("countArr");
-		//System.out.println(Arrays.toString(countArr));
+		System.out.println("countArr");
+		System.out.println(Arrays.toString(countArr));
 		
 		List<ProductVO> productList = productService.selectByProductList(productIdArr);
 		System.out.println(productList);
@@ -215,7 +213,7 @@ public class MyPageController {
 	public void ecoCare(HttpSession session, Model model, String customerId) {
 		String customer_id = (String)session.getAttribute("customerId");
 		List<Map<String, Object>> ecodashinfo = mypageservice.selectEcoInfoAll(customer_id);
-		List<Map<String, Object>> couponCtn = mypageservice.selectCouponCtn(/* customer_id */);
+		List<Map<String, Object>> couponCtn = mypageservice.selectCouponCtn(customer_id);
 		
 		JSONArray ecoarray = new JSONArray();
 		for(Map<String, Object> map : ecodashinfo) {
@@ -254,15 +252,19 @@ public class MyPageController {
 		}
 	}
 	
-	/*
-	 * @RequestMapping("/requestPickup.do") public ResponseEntity<String>
-	 * insertPickupRequest(@RequestParam("subscriptionId") String subscription_id,
-	 * HttpServletRequest session){ String customer_id =
-	 * (String)session.getAttribute("customerId");
-	 * 
-	 * }
-	 * 
-	 */
+	@RequestMapping("/requestPickupInsert.do")
+	public ResponseEntity<String> insertPickupRequest(@RequestParam("subscriptionId") String subscription_id, HttpServletRequest request, HttpSession session){
+		String customer_id = (String)session.getAttribute("customerId");
+		String subscriptionId = request.getParameter(subscription_id);
+		int result = mypageservice.insertPickupRequest(customer_id, subscriptionId);
+		if (result > 0) {
+			return ResponseEntity.ok("Data saved successfully. You can customize this message.");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
+		}
+	}
+	
+	
 	
 	
 	@GetMapping("/createdBoard.do")
@@ -615,7 +617,7 @@ public class MyPageController {
 			MY_INFOMATION
 	 ****************************** */
 	
-	/*
+	
 	@PostMapping(value = "/validatePw.do", consumes = "application/json")
 	@ResponseBody
 	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
@@ -633,7 +635,7 @@ public class MyPageController {
 
 		return cService.selectByEmail(email);	
 	}
-	*/
+	
 	@RequestMapping("/myInfo.do")
 	public void myInfo(HttpSession session, Model model) {
 		String email = (String)session.getAttribute("email");
@@ -647,8 +649,11 @@ public class MyPageController {
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@RequestMapping("/subscriptionInfo.do")
-	public void subscriptionInfo() {
-		
+	public void subscriptionInfo(HttpSession session, Model model) {
+		String customerId = (String)session.getAttribute("customerId");
+		List<Map<String, Object>> info = boardService.mySubscriptionInfo(customerId);
+		model.addAttribute("info",info);
+		model.addAttribute("count",info.size());
 	}
 	
 	@RequestMapping("/checkPw.do")

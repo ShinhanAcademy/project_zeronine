@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${path}/css/modal/findModal.css">
+<script defer src="${path}/js/myPage/commonMypage.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>MyPage</title>
 <script>
@@ -62,9 +63,10 @@
 			<!-- //zero_sbn -->
 			<!-- mypage_detail_wrap -->
 			<div class="mypage_detail_wrap">
-				<!-- my_info_wrap -->
-				<%@include file="common/personalInfo.jsp" %>
-				<!-- //my_info_wrap -->
+	            <!-- my_info_wrap -->
+	            <div id="personalInfo" class="my_info_wrap">
+				</div>
+	            <!-- //my_info_wrap -->
 				<!-- contents_wrap -->
 				<div class="contents_wrap">
 					<span class="info_font">개인정보</span>
@@ -164,7 +166,7 @@
 		  	var password_check = document.getElementById("password_check");
 		  	if(password.value != password_check.value) { // 만일 두 인풋 필드값이 같지 않을 경우
 		    // setCustomValidity의 값을 지정해 무조건 경고 표시가 나게 하고
-		    	alert("비밀번호 확인 불일치");
+		    	//alert("비밀번호 확인 불일치");
 		    	password_check.setCustomValidity("비밀번호가 일치하지 않습니다."); 
 		  	} 
 		  	else { // 만일 두 인풋 필드값이 같을 경우

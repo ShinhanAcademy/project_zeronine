@@ -31,4 +31,10 @@ $(document).keydown(function(event) {
   }
 });
 
+window.onclick = function(event){
+	if($(event.target).is("#detail_modal_wrap")){
+		$("#detail_modal_wrap").hide();
+	}
+}
+
 </script>

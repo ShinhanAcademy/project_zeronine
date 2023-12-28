@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="${path}/css/myPage/ecocare.css">
 <link rel="stylesheet" href="${path}/css/modal/alreadyIncartModal.css">
 <script defer src="${path}/js/myPage/commonMypage.js"></script>
-<script defer src="/js/myPage/ecoCare.js"></script>
 <title>MyPage</title>
 </head>
 <body>
@@ -23,7 +22,7 @@
 			<!-- mypage_detail_wrap -->
 			<div class="mypage_detail_wrap">
 				<!-- my_info_wrap -->
-				<%@include file="common/personalInfo.jsp"%>
+				<%-- <%@include file="common/personalInfo.jsp"%> --%>
 				<!-- //my_info_wrap -->
 				<!-- contents_wrap -->
 
@@ -387,8 +386,15 @@ function request_btn(subscriptionId) {
 	    url: "/myPage/requestPickup.do",
 	    data: {subscriptionId: subscriptionId},
 	    success:function(){
-	    	alert("성공! 회수 요청이 정상적으로 접수되었습니다!");
-			location.reload();
+	    	$.ajax({
+	    		type: "POST",
+	    	    url: "/myPage/requestPickupInsert.do",
+	    	    data: {subscriptionId: subscriptionId},
+	    	    success: function(){
+	    	    	alert("성공! 회수 요청이 정상적으로 접수되었습니다!");
+	    			location.reload();
+	    	    }
+	    	})
 	    },
 	   
 	    error: function (error) {
@@ -420,19 +426,36 @@ $.ajax({
 
 function pickUpDetail(pickUpId){
 	var obj ={"pickUpId":pickUpId};
-
-	$.ajax({
+	var showDetail = false;
+	
+	$(".status").each(function(){
+		 result = $(this).data("value")
+		 console.log(result);
+		 if(result == "complete" || result=="refuse"){
+			showDetail = true; 
+		 } else{
+			 alert("처리 결과는 회수 진행이 완료된 후 가능합니다.");
+			 showDetail = false; 
+			 return false;
+		 }
+	 })
+	 
+	if(showDetail){
+		$.ajax({
 		    type: "GET",
 		    url: path+"/myPage/PickUpDetail.do",
 		    data:obj,
 		    success:function(response){
 		    	$('#modal').html(response);
+		    	$('#modal').show();
 		    },
 		   
 		    error: function (error) {
 		      alert("다시 시도해주세요.");
 		    }
 		  });
+	}
+	
 	}
 
 </script>

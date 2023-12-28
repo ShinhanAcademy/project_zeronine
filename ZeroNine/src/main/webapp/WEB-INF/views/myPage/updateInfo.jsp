@@ -16,9 +16,10 @@
 			<!-- //zero_sbn -->
 			<!-- mypage_detail_wrap -->
 			<div class="mypage_detail_wrap">
-				<!-- my_info_wrap -->
-				<%@include file="common/personalInfo.jsp" %>
-				<!-- //my_info_wrap -->
+	            <!-- my_info_wrap -->
+	            <div id="personalInfo" class="my_info_wrap">
+				</div>
+	            <!-- //my_info_wrap -->
 				<!-- contents_wrap -->
 				<div class="contents_wrap">
 					<span class="info_font">개인정보</span>
@@ -89,7 +90,9 @@
 
 	<!-- //zero_container -->
 	<%@include file="../common/footer.jsp"%>
-
+	<script>
+		
+	</script>
 
 
 

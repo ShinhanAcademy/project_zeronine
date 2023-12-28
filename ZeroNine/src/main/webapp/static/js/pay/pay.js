@@ -22,7 +22,7 @@ function requestPaySubscription(productName, price) {
         amount : price
     }, function (rsp) { // callback
         if (rsp.success) {
-            console.log(rsp);
+            //console.log(rsp);
             $.ajax({
                 type: "POST",
                 url: "/pay/subscription.do", // Update the URL to match your controller mapping
