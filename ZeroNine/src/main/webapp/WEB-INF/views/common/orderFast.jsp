@@ -249,26 +249,6 @@
 					}
 				});
 		    });
-			
-			
-			/**/
-			/* var obj = {
-					"productId":$("#hidden_productId").val(),
-					"count":$("#hidden_count").val()
-			}
-
-			$.ajax({
-				url : path + "/common/orderSuccess.do",
-				data : obj,
-				type : "POST",
-				success : function(response) {
-					alert(response);
-					location.href = path+"/common/orderSuccess.do";
-				},
-				error : function() {
-					alert("에러입니다.");
-				}
-			}); */
 		})
 
 		$(".agreebtn")

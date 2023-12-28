@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@include file="../common/head.jsp"%>
 <%@include file="../common/header.jsp"%>
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <title>FastBoard</title>
 <link rel="stylesheet" href="${path}/css/common/participateBoard.css" />
 </head>
@@ -117,6 +117,8 @@
 	<script>
 		var path = "${path}";
 		var isFreeDelivery = "${IsFreeDelivery}";
+		
+		
 	</script>
 	<script src="${path}/js/common/participateBoard.js" type="text/javascript"></script>
 </body>
