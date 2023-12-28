@@ -110,7 +110,7 @@
 				$.ajax({
 					url : '/board/fastEdit.do',
 					success : function(responseData) {
-						console.log(responseData);
+						//console.log(responseData);
 						$("#edit_change_area").html(responseData)
 					}
 				});

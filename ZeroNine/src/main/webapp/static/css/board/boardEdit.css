@@ -71,7 +71,7 @@ label, .title, .context {
 
 .edit_content {
 	width: 1381px;
-	min-height: 856px;
+	height: 1000px;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 15px;
 	border: 1px #C4C4C4 solid;
@@ -204,6 +204,7 @@ input::placeholder {
 
 .cart_list {
 	overflow: auto;
+	height: 300px;
 }
 
 .cart_list {

@@ -76,7 +76,7 @@
 			<li class="title">제목</li>
 			<li><textarea class="title_input" placeholder="제목을 입력하세요."></textarea></li>
 			<li id="one_context" class="context">내용</li>
-			<li><textarea class="context_input" placeholder="내용을 입력하세요."></textarea>
+			<li><textarea class="context_input" style="margin-bottom: 45px;" placeholder="내용을 입력하세요."></textarea>
 			</li>
 		</ul>
 	</div>
