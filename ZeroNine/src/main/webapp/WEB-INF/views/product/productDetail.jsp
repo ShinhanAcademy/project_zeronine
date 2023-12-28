@@ -11,14 +11,10 @@
 <body>
 	<%@include file="../common/header.jsp"%>
 	<div class="zero_container detail_bodypart zn_center">
-		<div class="detail_link">
-			<span id="home"
-				onclick="location.href='${Path }/product/productList.do'">홈</span> >
-			<span id="home">밀키트</span> > <span id="home" class="detail.tang">탕국찌개</span>
-		</div>
+		<div class="detail_link"></div>
 		<div class="detail_middle">
 			<div class="detail_img">
-				<img src="${path}/images/sangpumpage/image 1.png">
+				<img src="${pImage}">
 			</div>
 			<div class="detail_right">
 
@@ -100,7 +96,7 @@
 							<div class="forzero_image">
 							
 								<img class="menupng" onclick="location.href='${Path }/product/productDetail.do?productId=${dtop.productId}'"
-									src="https://zeronine.s3.ap-northeast-2.amazonaws.com/test.jpg">
+									src="${dtop.imagePath}">
 							</div>
 							<span class="menufont">${dtop.brand }</span> <span class="menufont_name">${dtop.pName}</span>
 							<span class="menufont_price"> <fmt:formatNumber
@@ -116,11 +112,9 @@
 		</div>
 		<div class="detail_bottom">
 			<div class="detail_bottom_left">
-				<img src="${path}/images/sangpumpage/image 3.png"> <img
-					class="detail_img2" src="${path}/images/sangpumpage/image 4.png">
-
-
-
+				<c:forEach items="${detailImage}" var="image">
+					<img class="detail_img2" src="${image.imagePath}">
+				</c:forEach>
 			</div>
 
 			<div class="detail_bottom_right">

@@ -79,3 +79,7 @@
 .contents .tbl_wrap table td{
 	font-size: 15px;
 }
+
+.eco_level span:nth-child(1),.eco_level span:nth-child(3){
+	font-size: 14px;
+} 

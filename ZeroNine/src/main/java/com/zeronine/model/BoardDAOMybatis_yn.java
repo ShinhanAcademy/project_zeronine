@@ -55,16 +55,40 @@ public class BoardDAOMybatis_yn {
 		return participant;
 	}
 
-	public List<Map<String, Object>> myParticipatedBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myParticipatedBlist",customerId);
+	public List<Map<String, Object>> myParticipatedBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myParticipatedBlist",map);
 		return info;
 	}
-
-	public List<Map<String, Object>> myParticipatedFreeBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myParticipatedFreeBlist",customerId);
+	public int myParticipatedBlistCount(String customerId) {
+		int count = sqlSession.selectOne(NAMESPACE + "myParticipatedBlistCount",customerId);
+		return count;
+	}
+	
+	public List<Map<String, Object>> successMyParticipatedBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedBlist",map);
 		return info;
 	}
-
+	public int successMyParticipatedBlistCount(String customerId) {
+		int count = sqlSession.selectOne(NAMESPACE + "successMyParticipatedBlistCount",customerId);
+		return count;
+	}
+	public List<Map<String, Object>> myParticipatedFreeBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myParticipatedFreeBlist",map);
+		return info;
+	}
+	public int myParticipatedFreeBlistCount(String customerId) {
+		int count = sqlSession.selectOne(NAMESPACE + "myParticipatedFreeBlistCount",customerId);
+		return count;
+	}
 	public List<Map<String, Object>> likeBoardBlist(String customerId) {
 		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "likeBoardBlist",customerId);
 		return info;
@@ -193,16 +217,19 @@ public class BoardDAOMybatis_yn {
 		return info;
 	}
 
-	public List<Map<String, Object>> successMyParticipatedBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedBlist",customerId);
-		return info;
-	}
 
-	public List<Map<String, Object>> successMyParticipatedFreeBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedFreeBlist",customerId);
+
+	public List<Map<String, Object>> successMyParticipatedFreeBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedFreeBlist",map);
 		return info;
 	}
-	
+	public int successMyParticipatedFreeBlistCount(String customerId) {
+		int count = sqlSession.selectOne(NAMESPACE + "successMyParticipatedFreeBlistCount",customerId);
+		return count;
+	}
 	public List<Map<String, Object>> freeBoardProductEdit(String boardId, String customerId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("boardId", boardId);
@@ -342,6 +369,8 @@ public class BoardDAOMybatis_yn {
 		List<Map<String, Object>> info = sqlSession.selectList(NAMESPACE + "mySubscriptionInfo", customerId);
 		return info;
 	}
+
+	
 
 
 

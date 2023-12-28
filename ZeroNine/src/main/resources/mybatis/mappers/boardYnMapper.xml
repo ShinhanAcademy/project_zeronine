@@ -141,7 +141,7 @@
 		WHERE b."boardId" = cast(#{boardId} as UUID)
 		) as participant
 	</select>
-	<select id="myParticipatedBlist" resultType="map" parameterType="String">
+	<select id="myParticipatedBlist" resultType="map" parameterType="map">
 		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
 		to_char(b."finishTime"-NOW(),'dd일 HH24시 mi분 ss초') as 	"remainTime", b."boardId"
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
@@ -154,8 +154,21 @@
 		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
 		and b."boardId" not in (select "boardId" from "dealFailRefund")
 		order by "uploadTime"
+		LIMIT 5 OFFSET #{page}
 	</select>
-	<select id="successMyParticipatedBlist" resultType="map" parameterType="String">
+		<select id="myParticipatedBlistCount" resultType="int" parameterType="String">
+		select count(distinct b."boardId")
+		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+		left join public."product" as p on (p."productId" = sp."productId")
+		left join public."productMainImage" as pi on (p."productId" = pi."productId")
+		<!-- left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId") -->
+		where sp."customerId" = cast(#{customerId} as UUID) and b."finishTime">NOW()
+		and b."bCategoryType" = 'fast_board'
+		and b."authorId" != cast(#{customerId} as UUID)
+		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and b."boardId" not in (select "boardId" from "dealFailRefund")
+	</select>
+	<select id="successMyParticipatedBlist" resultType="map" parameterType="map">
 		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 
 		to_char(b."finishTime"-NOW(),'dd일 HH24시 mi분 ss초') as 	"remainTime", b."boardId"
 		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
@@ -167,8 +180,20 @@
 		and b."authorId" != cast(#{customerId} as UUID)
 		and b."boardId" in (select "boardId" from "dealSuccessBoard")
 		order by "uploadTime"
+			LIMIT 5 OFFSET #{page}
 	</select>
-	<select id="myParticipatedFreeBlist" resultType="map" parameterType="String">
+	<select id="successMyParticipatedBlistCount" resultType="int" parameterType="String">
+		select count(distinct b."boardId")
+		from public."board" as b left join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+		left join public."product" as p on (p."productId" = sp."productId")
+		left join public."productMainImage" as pi on (p."productId" = pi."productId")
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		where sp."customerId" = cast(#{customerId} as UUID) and b."finishTime">NOW()
+		and b."bCategoryType" = 'fast_board'
+		and b."authorId" != cast(#{customerId} as UUID)
+		and b."boardId" in (select "boardId" from "dealSuccessBoard")
+	</select>
+	<select id="myParticipatedFreeBlist" resultType="map" parameterType="map">
 		SELECT DISTINCT b.title, TO_CHAR(b."uploadTime",'yyyy-mm-dd') AS "uploadTime",
 		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime",
 		b."boardId",b."bCategoryType",
@@ -189,8 +214,21 @@
 		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
 		and b."boardId" not in (select "boardId" from "dealFailRefund")
 		ORDER BY "uploadTime"
+		LIMIT 5 OFFSET #{page}
 	</select>
-	<select id="successMyParticipatedFreeBlist" resultType="map" parameterType="String">
+	<select id="myParticipatedFreeBlistCount" resultType="int" parameterType="String">
+		SELECT count(distinct b."boardId")
+		FROM public."board" AS b
+		LEFT JOIN public."boardCart" AS bc ON (b."boardId" = bc."boardId")
+		<!-- left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId") -->
+		WHERE bc."customerId" = cast(#{customerId} as UUID)
+		AND b."finishTime" > NOW()
+		AND b."bCategoryType" = 'free_delivery_board'
+		and b."authorId" != cast(#{customerId} as UUID)
+		and b."boardId" not in (select "boardId" from "dealSuccessBoard")
+		and b."boardId" not in (select "boardId" from "dealFailRefund")
+	</select>
+	<select id="successMyParticipatedFreeBlist" resultType="map" parameterType="map">
 		SELECT DISTINCT b.title, TO_CHAR(b."uploadTime",'yyyy-mm-dd') AS "uploadTime",
 		TO_CHAR(b."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime",
 		b."boardId",b."bCategoryType",
@@ -210,6 +248,18 @@
 		and b."authorId" != cast(#{customerId} as UUID)
 		and b."boardId" in (select "boardId" from "dealSuccessBoard")
 		ORDER BY "uploadTime"
+		LIMIT 5 OFFSET #{page}
+	</select>
+	<select id="successMyParticipatedFreeBlistCount" resultType="int" parameterType="String">
+		SELECT count(distinct b."boardId")
+		FROM public."board" AS b
+		LEFT JOIN public."boardCart" AS bc ON (b."boardId" = bc."boardId")
+		left join "dealSuccessBoard" as dcb on (b."boardId"=dcb."boardId")
+		WHERE bc."customerId" = cast(#{customerId} as UUID)
+		AND b."finishTime" > NOW()
+		AND b."bCategoryType" = 'free_delivery_board'
+		and b."authorId" != cast(#{customerId} as UUID)
+		and b."boardId" in (select "boardId" from "dealSuccessBoard")
 	</select>
 	<select id="likeBoardBlist" resultType="map" parameterType="String">
 		select distinct pi."imagePath",b.title,to_char(b."uploadTime",'yyyy-mm-dd') as "uploadTime", 

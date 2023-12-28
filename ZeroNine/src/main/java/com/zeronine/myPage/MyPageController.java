@@ -63,11 +63,8 @@ public class MyPageController {
 	public void personalInfo(HttpSession session, Model model) {
 		String customerId = (String) session.getAttribute("customerId");
 		logger.info("personalInfo"+customerId);
-		Map<String, Object> personalInfo = mypageservice.personalInfo(customerId);
-		
-		model.addAttribute("personalInfo", personalInfo);
-		System.out.println("model!!!"+ model.getAttribute("personalInfo"));
 	}
+	
 	
 	/* ****************************
 			MY_SHOPPING
@@ -80,20 +77,25 @@ public class MyPageController {
 	// orderHistory(주문 내역)
 	@RequestMapping("/orderHistory.do")
 	public void orderHistory(HttpSession session) {
-		//session.removeAttribute("deliveryId");
+		session.removeAttribute("deliveryId");
 	}
 
 	@RequestMapping("/subPage/orderHistoryDetail.do")
-	public void orderHistoryDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+	public void orderHistoryDetail(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			@RequestParam(value = "searchWord", required = false) String searchWord,
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
 //		String customerId = "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"; //주영이
 		
 		String customerId = (String) session.getAttribute("customerId");
-//		System.out.println("ID = " + customerId);
-
-//		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(page, customerId, searchWord, startDate, endDate));
+		PagingVO orderHistorypaginating = mypageservice.orderHistorygetPages(Page,customerId, searchWord, startDate, endDate);
+		model.addAttribute("OHpagination",orderHistorypaginating);
+		model.addAttribute("pageCount",mypageservice.orderHistoryCount(customerId, searchWord, startDate, endDate));
+		model.addAttribute("orderHistoryAll", deliveryService.orderHistoryAll(Page,customerId, searchWord, startDate, endDate));
+	
+	
 	}
 	
 	// orderCancelHistory(취소 / 반품 내역)
@@ -158,11 +160,11 @@ public class MyPageController {
 			@RequestParam(value = "imagePathArr") String[] imagePathArr,
 			Model model, HttpSession session) {
 		
-		System.out.println("productIdArr");
-		System.out.println(Arrays.toString(productIdArr));
+		//System.out.println("productIdArr");
+		//System.out.println(Arrays.toString(productIdArr));
 		
-		System.out.println("countArr");
-		System.out.println(Arrays.toString(countArr));
+		//System.out.println("countArr");
+		//System.out.println(Arrays.toString(countArr));
 		
 		List<ProductVO> productList = productService.selectByProductList(productIdArr);
 		System.out.println(productList);
@@ -252,19 +254,15 @@ public class MyPageController {
 		}
 	}
 	
-	@RequestMapping("/requestPickupInsert.do")
-	public ResponseEntity<String> insertPickupRequest(@RequestParam("subscriptionId") String subscription_id, HttpServletRequest request, HttpSession session){
-		String customer_id = (String)session.getAttribute("customerId");
-		String subscriptionId = request.getParameter(subscription_id);
-		int result = mypageservice.insertPickupRequest(customer_id, subscriptionId);
-		if (result > 0) {
-			return ResponseEntity.ok("Data saved successfully. You can customize this message.");
-		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
-		}
-	}
-	
-	
+	/*
+	 * @RequestMapping("/requestPickup.do") public ResponseEntity<String>
+	 * insertPickupRequest(@RequestParam("subscriptionId") String subscription_id,
+	 * HttpServletRequest session){ String customer_id =
+	 * (String)session.getAttribute("customerId");
+	 * 
+	 * }
+	 * 
+	 */
 	
 	
 	@GetMapping("/createdBoard.do")
@@ -412,14 +410,6 @@ public class MyPageController {
 	// chatList(占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙)
 	@GetMapping("/participatedBoard.do")
 	public void participatedBoard(Model model, HttpSession session) {
-		String customerId = (String)session.getAttribute("customerId");
-		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successMyParticipatedBlist(customerId);
-		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
-		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
 	}
 	
 	@GetMapping("/subPage/participatedBoardDetail.do")
@@ -431,27 +421,56 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/subPage/pbFreeDelivery.do")
-	public void pbFreeDelivery(Model model, HttpSession session) {
+	public void pbFreeDelivery(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successMyParticipatedFreeBlist(customerId);
+		List<Map<String, Object>> info = boardService.myParticipatedFreeBlist(Page,customerId);
+		int count = boardService.myParticipatedFreeBlistCount(customerId);
+		PagingVO boardPaging = boardService.myParticipatedFreeBlistgetPages(Page, customerId);
 		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
-		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
+		model.addAttribute("count", count);
+		model.addAttribute("boardPaging",boardPaging);
 	}
-	
+	@GetMapping("/subPage/pbFreeDeliverySuccess.do")
+	public void pbFreeDeliverySuccess(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		
+		List<Map<String, Object>> successInfo = boardService.successMyParticipatedFreeBlist(Page,customerId);
+		int successcount = boardService.successMyParticipatedFreeBlistCount(customerId);
+		PagingVO boardSuccessPaging = boardService.successMyParticipatedFreeBlistgetPages(Page, customerId);
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount", successcount);
+		model.addAttribute("boardSuccessPaging",boardSuccessPaging);
+	}
 	@GetMapping("/subPage/pbFastDelivery.do")
-	public void pbFastDelivery(Model model, HttpSession session) {
+	public void pbFastDelivery(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myParticipatedBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successMyParticipatedBlist(customerId);
+		List<Map<String, Object>> info = boardService.myParticipatedBlist(Page,customerId);
+		int count = boardService.myParticipatedBlistCount(customerId);
+		PagingVO boardPaging = boardService.myParticipatedBlistgetPages(Page, customerId);
 		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
+		model.addAttribute("count", count);
+		model.addAttribute("boardPaging",boardPaging);
+	}
+	@GetMapping("/subPage/pbFastSuccessDelivery.do")
+	public void pbFastSuccessDelivery(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> successInfo = boardService.successMyParticipatedBlist(Page,customerId);
+		int successcount = boardService.myParticipatedBlistCount(customerId);
+		PagingVO boardSuccessPaging = boardService.successMyParticipatedBlistgetPages(Page, customerId);
 		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
+		model.addAttribute("successCount", successcount);
+		model.addAttribute("boardSuccessPaging",boardSuccessPaging);
 	}
 
 	@GetMapping("/subPage/participatedFreeBoardDetail.do")
@@ -540,6 +559,7 @@ public class MyPageController {
 			Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> info = boardService.chatBlist(Page,customerId);
 		model.addAttribute("customerId", customerId);
 	}
 	
@@ -551,7 +571,8 @@ public class MyPageController {
 	}
 	
 
-
+	
+	
 	@GetMapping("/subPage/participantChatDetail.do")
 	public void participantChatDetail(String boardId, String isSuccess, Model model) {
 		Map<String, Object> info = boardService.chatListDetail(boardId);
@@ -617,7 +638,7 @@ public class MyPageController {
 			MY_INFOMATION
 	 ****************************** */
 	
-	
+	/*
 	@PostMapping(value = "/validatePw.do", consumes = "application/json")
 	@ResponseBody
 	public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
@@ -635,7 +656,7 @@ public class MyPageController {
 
 		return cService.selectByEmail(email);	
 	}
-	
+	*/
 	@RequestMapping("/myInfo.do")
 	public void myInfo(HttpSession session, Model model) {
 		String email = (String)session.getAttribute("email");
@@ -708,5 +729,20 @@ public class MyPageController {
 	 * 
 	 * @RequestMapping("/updateInfo.do") public void updateInfo() {}
 	 */
+	
+	@PostMapping(value = "/validatePw.do", consumes = "application/json")
+    @ResponseBody
+    public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
+        String email = map.get("email");
+        String password = map.get("password");
+        boolean isValid = cService.login(email, password) > 0;
+        if(!isValid) {
+            CustomerVO invalidCustomer = new CustomerVO();
+            
+            invalidCustomer.setCustomerName("invalid");
+            return invalidCustomer;
+        }
+        return cService.selectByEmail(email);   
+    }
 
 }

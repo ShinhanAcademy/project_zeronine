@@ -177,7 +177,7 @@ function show(jsondata) {
 	//console.log(totalList);
 	//var output = "";
     $.each(jsondata, function (index, item) {
-    	console.log('돌아라');
+    	
         // 날짜 포맷팅
         var str = item.finishTime.substr(2, 2) + "년 " + item.finishTime.substr(5, 2) + "월 " + item.finishTime.substr(8, 2) + "일 " +
             item.finishTime.substr(11, 2) + "시 " + item.finishTime.substr(14, 2) + "분";

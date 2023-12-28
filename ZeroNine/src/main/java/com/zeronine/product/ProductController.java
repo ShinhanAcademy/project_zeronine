@@ -82,12 +82,12 @@ public class ProductController {
 		System.out.println("s1"+buttonValue);
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		
-		List<ProductVO> productList= productService.searchAll( page,Integer.parseInt(selectedValue),q,buttonValue);
+		List<Map<String,Object>> productList= productService.searchAll( page,Integer.parseInt(selectedValue),q,buttonValue);
 		PagingVO paginating = productService.getPages(page,Integer.parseInt(selectedValue), q, buttonValue);
 		Map<String,Object> inputbutton = new HashMap<>();
 		inputbutton.put("buttonValue", buttonValue);
 		inputbutton.put("inputValue", q);
-		 model.addAttribute("pCount",productService.countProduct(inputbutton));
+		model.addAttribute("pCount",productService.countProduct(inputbutton));
 		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("customerid",custid);
 		model.addAttribute("plist",productList);
@@ -107,8 +107,8 @@ public class ProductController {
 		List<String> cart = cartservice.cartCheckPid(custid);
 
 		if (cart.contains(productId)) {
-			logger.info("이미 담겼다니까~");
-			return ResponseEntity.ok("이미 카트에 담긴놈임ㅋ");
+			logger.info("�씠誘� �떞寃쇰떎�땲源�~");
+			return ResponseEntity.ok("�씠誘� 移댄듃�뿉 �떞湲대냸�엫�뀑");
 			// return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed
 			// to save data.");
 		} else
@@ -175,6 +175,8 @@ public class ProductController {
 		model.addAttribute("plist", productService.selectByProductId(productId));
 		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 		model.addAttribute("deliverylist4", productService.selectDetailDelivery4());
+		model.addAttribute("pImage", productService.selectPImage(productId));
+		model.addAttribute("detailImage", productService.selectDetailImage(productId));
 		return "product/productDetail";
 	}
 	@PostMapping("/alreadyInCartModal.do")

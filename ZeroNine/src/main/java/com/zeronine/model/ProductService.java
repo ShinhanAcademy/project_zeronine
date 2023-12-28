@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zeronine.dto.PagingVO;
+import com.zeronine.dto.ProductAdditionalImageVO;
 import com.zeronine.dto.ProductVO;
 
 @Service("productService")
@@ -20,8 +21,8 @@ public class ProductService {
 	int pageLimit = 12;
 	int blockLimit = 5;
 
-	public List<ProductVO> searchAll(int page, int selectedValue, String inputValue, String buttonValue) {
-		// 1페이지당 나오게할 때
+	public List<Map<String,Object>> searchAll(int page, int selectedValue, String inputValue, String buttonValue) {
+		// 1�럹�씠吏��떦 �굹�삤寃뚰븷 �븣
 		int pageStartNum = (page - 1) * pageLimit;
 		System.out.println("searchAll"+selectedValue);
 		Map<String, Object> paginateParam = new HashMap<>();
@@ -30,14 +31,13 @@ public class ProductService {
 		paginateParam.put("inputValue", inputValue);
 		paginateParam.put("buttonValue", buttonValue);
 		System.out.println(paginateParam.toString());
-		List<ProductVO> plist = productDAO.searchAll(paginateParam);
+		List<Map<String,Object>> plist = productDAO.searchAll(paginateParam);
 	
-
 		return  plist;
 	
 	}
 
-	// 하단 페이징한 데이터
+	// �븯�떒 �럹�씠吏뺥븳 �뜲�씠�꽣
 	public PagingVO getPages(int page, int selectedValue, String inputValue, String buttonValue) {
 		Map<String, Object> paginateParam = new HashMap<>();
 		paginateParam.put("inputValue", inputValue);
@@ -76,7 +76,7 @@ public class ProductService {
 		return productDAO.selectByProductId(productId);
 	}
 
-	public List<ProductVO> selectDetailDelivery4() {
+	public List<Map<String,Object>>  selectDetailDelivery4() {
 		return productDAO.selectDetailDelivery4();
 	}
 
@@ -92,5 +92,13 @@ public class ProductService {
 
 	public List<ProductVO> selectRecommendedProducts(Integer count) {
 		return productDAO.selectRecommendedProducts(count);
+	}
+
+	public String selectPImage(String productId) {
+		return productDAO.selectPImage(productId);
+	}
+
+	public List<ProductAdditionalImageVO> selectDetailImage(String productId) {
+		return productDAO.selectDetailImage(productId);
 	}
 }
