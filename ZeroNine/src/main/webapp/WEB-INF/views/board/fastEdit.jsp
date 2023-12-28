@@ -42,7 +42,7 @@
 				<li class="cart_ann_cf">* 상품과 수량을 선택해주세요.</li>
 			</ul>
 		</div>
-		<div class="cart_list contents">
+		<div class="cart_list contents" >
 			<!-- tbl_wrap -->
 			<div class="tbl_wrap">
 				<table class="tbl_orderlist_wrap">
@@ -110,9 +110,10 @@
 					</tbody>
 				</table>
 			</div>
+			</div>
 			<div class="totalPrice_div">총 구매가 <span class="totalPrice">0&nbsp;원</span></div>
 				
-		</div>
+		
 	</div>
 </div>
 

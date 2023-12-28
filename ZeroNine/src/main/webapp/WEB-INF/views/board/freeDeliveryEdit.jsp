@@ -109,9 +109,8 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="totalPrice_div">총 구매가 <span class="totalPrice">0&nbsp;원</span></div>
-				
 		</div>
+		<div class="totalPrice_div">총 구매가 <span class="totalPrice">0&nbsp;원</span></div>
 	</div>
 </div>
 
