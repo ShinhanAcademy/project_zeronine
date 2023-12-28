@@ -200,7 +200,6 @@
 		$(".gobtn").click(function() {
 			var IMP = window.IMP; 
 			IMP.init("imp31265537"); //imp31265537
-			
 			var today = new Date();   
 			var hours = today.getHours(); // 시
 			var minutes = today.getMinutes();  // 분
@@ -228,14 +227,17 @@
 					location.href = path + "/board/completeedit.do";
 				}
 		    	*/
-		    	
+		    	console.log(rsp);
+		    	console.log(rsp.success);
 		    	if(rsp.success) {
 		    		$.ajax({
 						url : path + "/board/completeedit.do",
 						//data : obj,
 						type : "POST",//GET
 						success : function(response) {
-							$('#edit').html(response);
+							console.log("AT SUCCESS");
+							//location.href = "${path}/myPage/participatedBoard.do";
+							$('#here').html(response);//edit
 						},
 						error : function(response) {
 							console.log("ERROR RESPONSE==>", response);

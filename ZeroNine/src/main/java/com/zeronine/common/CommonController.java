@@ -149,12 +149,12 @@ public class CommonController {
 		int isFreeProduct = boardService.orderFreeProduct(customerId, boardId, productList);
 		String message;
 		if(isFreeProduct==0 || isFreeProduct==1) {
-			message = "�����Ϸ�"; //participate complete
+			message = "占쏙옙占쏙옙占싹뤄옙"; //participate complete
 			for(Entry<String,Object> row:entrys) {
 				boardService.deleteCart(customerId, row.getKey());
 			}
 		}else {
-			message = "�̹� ������ �Խñ��Դϴ�."; //already
+			message = "占싱뱄옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙占쌉니댐옙."; //already
 		}
 		return message;
 		*/
