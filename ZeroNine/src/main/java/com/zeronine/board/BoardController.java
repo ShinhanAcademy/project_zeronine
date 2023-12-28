@@ -303,7 +303,7 @@ public class BoardController {
 	        else {
 	        	logger.info("imgFile is NULL");
 	        	// 씠誘몄 瑜   꽔吏   븡   寃쎌슦 뿉 뒗 洹몃깷 Default 씠誘몄 瑜   꽔 뒗 떎.
-	        	s3ImageURL = "https://zeronine.s3.ap-northeast-2.amazonaws.com/image/oboard/9ac7444b-f92a-4137-928b-d4d32c753133.jfif";
+	        	s3ImageURL = "https://zeronine.s3.ap-northeast-2.amazonaws.com/image/oboard/default.png";
 	        }
 	        
 	        String oBoardId = uuidStr;

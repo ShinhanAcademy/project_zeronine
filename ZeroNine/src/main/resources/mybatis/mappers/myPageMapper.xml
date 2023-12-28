@@ -4,43 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.mypage">
 	<!-- personalInfo -->
-	<select id="personalInfo" parameterType="String" resultType="map">
-		SELECT 
-		    "customer"."customerId",
-		    "customer"."customerName",
-		    "customer"."point",
-		    COALESCE(SUM("customerPickCoupon"."remainingCouponCount"), 0) AS "returnCoupon",
-		    CASE
-		        WHEN EXISTS (
-		            SELECT 1
-		            FROM "customerPickCoupon"
-		            WHERE "customerPickCoupon"."customerId" = "customer"."customerId"
-		            AND "customerPickCoupon"."isSubscription" = true
-		        ) THEN true
-		        ELSE false
-		    END AS "pickSubscription",
-			COALESCE(SUM("ecoCareCount"."couponCount"), 0) AS "saveEarth",
-		    "customerFreeDelivery"."deliverySubscription"
-		FROM "customer"
-		LEFT JOIN "customerPickCoupon"
-		    ON "customerPickCoupon"."customerId" = "customer"."customerId"
-		LEFT JOIN (
-		    SELECT "customerId", COUNT(*) AS "couponCount"
-		    FROM "pickup"
-		    GROUP BY "customerId"
-		) AS "ecoCareCount"
-		    ON "ecoCareCount"."customerId" = "customer"."customerId"
-		LEFT JOIN (
-		    SELECT
-		        "customerId",
-		        MIN("startDateTime") AS "deliverySubscription"
-		    FROM "customerFreeDelivery"
-		    GROUP BY "customerId"
-		    ORDER BY "deliverySubscription"
-		) AS "customerFreeDelivery"
-		    ON "customerFreeDelivery"."customerId" = "customer"."customerId"
-		WHERE "customer"."customerId" = cast(#{customerId} as UUID)
-		GROUP BY "customer"."customerId", "customer"."customerName", "customer"."point", "ecoCareCount"."couponCount", "customerFreeDelivery"."deliverySubscription"
+	<select id="personalInfoAll" parameterType="String" resultType="map">
+		
 	</select>
 
 	<!-- order history -->
@@ -73,22 +38,27 @@
 		LIMIT 5 OFFSET #{page}
 	</select>
 	<select id="orderHistoryCount" parameterType="map" resultType="int">
-		select 
-		count(*)
-		from delivery join "deliveryProduct" on delivery."deliveryId" = "deliveryProduct"."deliveryId"
-				  join product on "deliveryProduct"."productId" = product."productId"
-				  left outer join "productMainImage" on "deliveryProduct"."productId" = "productMainImage"."productId"
-				  join customer on delivery."customerId" = customer."customerId"
-		where delivery."customerId" = cast(#{customerId} as UUID)
-			AND (delivery."purchaseDateTime" >= to_timestamp(#{startDate}, 'YYYY-MM-DD 00:00:00.00') 
-			AND delivery."purchaseDateTime" &lt;= to_timestamp(#{endDate}, 'YYYY-MM-DD HH24:MI:SS.MS'))
-		 	<if test="searchWord != ''">
-				AND (product.brand LIKE #{searchWord} OR
-					 product."pName" LIKE #{searchWord})
-		 	</if>
-		order by delivery."purchaseDateTime" DESC
-	</select>
-	
+   SELECT COUNT(*)
+    FROM
+        delivery
+    JOIN
+        "deliveryProduct" ON delivery."deliveryId" = "deliveryProduct"."deliveryId"
+    JOIN
+        product ON "deliveryProduct"."productId" = product."productId"
+    LEFT OUTER JOIN
+        "productMainImage" ON "deliveryProduct"."productId" = "productMainImage"."productId"
+    JOIN
+        customer ON delivery."customerId" = customer."customerId"
+    WHERE
+        delivery."customerId" = cast(#{customerId} as UUID)
+        AND (delivery."purchaseDateTime" >= to_timestamp(#{startDate}, 'YYYY-MM-DD 00:00:00.00') AND delivery."purchaseDateTime" <![CDATA[<=]]> to_timestamp(#{endDate}, 'YYYY-MM-DD HH24:MI:SS.MS'))
+        <if test="searchWord != ''">
+            AND (product.brand LIKE #{searchWord} OR product."pName" LIKE #{searchWord})
+        </if>
+    <!-- ORDER BY
+        delivery."purchaseDateTime" DESC -->
+
+</select>
 	<!-- order cancel history -->
 	<select id="orderCancelHistoryAll" parameterType="String" resultType="map">
 		select
