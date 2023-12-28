@@ -1,6 +1,13 @@
+
 $("#author_chat").click(function(){
-	$.ajax({
+	callChatList(1);
+});
+
+function callChatList(page){
+var obj = {"pCount" : page };
+$.ajax({
 					url : path + "/myPage/subPage/authorChatList.do",
+					data : obj,
 					type : "GET",
 					success : function(result) {
 						$("#hereContents").html(result);					
@@ -9,11 +16,16 @@ $("#author_chat").click(function(){
 						alert("에러입니다.");
 					}
 				});
-});
 
+}
 $("#participant_chat").click(function(){
-	$.ajax({
+	participantList(1);
+});
+function participantList(page){
+var obj = {"pCount" : page };
+$.ajax({
 					url : path + "/myPage/subPage/participantChatList.do",
+					data : obj,
 					type : "GET",
 					success : function(result) {
 						$("#hereContents").html(result);					
@@ -22,8 +34,7 @@ $("#participant_chat").click(function(){
 						alert("에러입니다.");
 					}
 				});
-});
-
+}
 $(".boardDetail").click(function(){
 
 	var boardId = $(this).closest('tr').find('#hiddenBoardId').val();

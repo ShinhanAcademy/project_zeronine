@@ -284,7 +284,7 @@
 	<delete id="deleteBoard" parameterType="String">
 		DELETE FROM public."board" WHERE "boardId"=cast(#{boardId} as UUID)
 	</delete>
-	<select id="chatBlist" resultType="map" parameterType="String">
+	<select id="chatBlist" resultType="map" parameterType="map">
 		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
 		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
@@ -293,15 +293,17 @@
 		where ob."oAuthorId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
 		and ob."oBoardId" not in (select "oBoardId" from "dealSuccessOboard")
 		and ob."isDelete" = false
+		LIMIT 5 OFFSET #{page}
 	</select>
-	<select id="successChatBlist" resultType="map" parameterType="String">
-		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
-		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
+	
+	<select id="chatBlistCount" resultType="int" parameterType="String">
+		SELECT  count(distinct ob."oBoardId")
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
 		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
 		left join public."dealSuccessOboard" dso on (ob."oBoardId"=dso."oBoardId")
 		where ob."oAuthorId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
-		and ob."oBoardId" in (select "oBoardId" from "dealSuccessOboard")
+		and ob."oBoardId" not in (select "oBoardId" from "dealSuccessOboard")
+		and ob."isDelete" = false
 	</select>
 	<select id="chatListDetail" resultType="map" parameterType="String">
 		SELECT distinct ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",
@@ -310,7 +312,7 @@
 		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
 		where ob."oBoardId"=cast(#{boardId} as UUID)
 	</select>
-	<select id="participantChatList" resultType="map" parameterType="String">
+	<select id="participantChatList" resultType="map" parameterType="map">
 		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
 		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
@@ -319,15 +321,17 @@
 		where c."customerId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
 		and ob."oBoardId" not in (select "oBoardId" from "dealSuccessOboard")
 		and ob."isDelete" = false
+		LIMIT 5 OFFSET #{page}
 	</select>
-	<select id="successParticipantChatList" resultType="map" parameterType="String">
-		SELECT distinct ob."oTitle", TO_CHAR(ob."oUploadTime",'yyyy-mm-dd') AS "uploadTime", obi."oBoardImagePath",ob."oBoardId", 
-		TO_CHAR(ob."finishTime" - NOW(), 'dd일 HH24시 mi분 ss초') AS "remainTime"
+		<select id="participantChatListCount" resultType="int" parameterType="String">
+		SELECT  count(distinct ob."oBoardId")
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
 		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")
 		left join public."dealSuccessOboard" dso on (ob."oBoardId"=dso."oBoardId")
 		where c."customerId"=cast(#{customerId} as UUID) and ob."finishTime">NOW()
-		and ob."oBoardId" in (select "oBoardId" from "dealSuccessOboard")
+		and ob."oBoardId" not in (select "oBoardId" from "dealSuccessOboard")
+		and ob."isDelete" = false
+		
 	</select>
 	<select id="chatListEdit" resultType="map" parameterType="String">
 		select ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",

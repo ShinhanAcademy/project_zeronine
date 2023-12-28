@@ -101,9 +101,16 @@ public class BoardDAOMybatis_yn {
 		return likedbid;
 	}
 
-	public List<Map<String, Object>> chatBlist(String customerId) {
-		List<Map<String, Object>> info = sqlSession.selectList(NAMESPACE + "chatBlist", customerId);
+	public List<Map<String, Object>> chatBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String, Object>> info = sqlSession.selectList(NAMESPACE + "chatBlist", map);
 		return info;
+	}
+	public int chatBlistCount(String customerId) {
+		int result = sqlSession.selectOne(NAMESPACE+"chatBlistCount", customerId);
+		return result;
 	}
 
 	public Map<String, Object> boardDetailEdit(String boardId) {
@@ -145,9 +152,16 @@ public class BoardDAOMybatis_yn {
 		return info;
 	}
 
-	public List<Map<String, Object>> participantChatList(String customerId) {
-		List<Map<String, Object>> info = sqlSession.selectList(NAMESPACE + "participantChatList", customerId);
+	public List<Map<String, Object>> participantChatList(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String, Object>> info = sqlSession.selectList(NAMESPACE + "participantChatList", map);
 		return info;
+	}
+	public int participantChatListCount(String customerId) {
+		int result = sqlSession.selectOne(NAMESPACE+"participantChatListCount", customerId);
+		return result;
 	}
 
 	public int numOfChatParticipant(String boardId) {
@@ -188,17 +202,7 @@ public class BoardDAOMybatis_yn {
 		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyParticipatedFreeBlist",customerId);
 		return info;
 	}
-
-	public List<Map<String, Object>> successChatBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successChatBlist",customerId);
-		return info;
-	}
-
-	public List<Map<String, Object>> successParticipantChatList(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successParticipantChatList",customerId);
-		return info;
-	}
-
+	
 	public List<Map<String, Object>> freeBoardProductEdit(String boardId, String customerId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("boardId", boardId);
@@ -333,6 +337,10 @@ public class BoardDAOMybatis_yn {
 		int isParticipate = sqlSession.selectOne(NAMESPACE + "isParticipateFree", map);
 		return isParticipate;
 	}
+
+
+
+	
 
 
 }

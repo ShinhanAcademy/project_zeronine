@@ -534,15 +534,10 @@ public class MyPageController {
 
 	// chatList(채占쏙옙 占쏙옙占�)
 	@GetMapping("/chatList.do")
-	public void chatList(Model model, HttpSession session) {
+	public void chatList(@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.chatBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successChatBlist(customerId);
-		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
-		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
 		model.addAttribute("customerId", customerId);
 	}
 	
@@ -553,18 +548,8 @@ public class MyPageController {
 		model.addAttribute("isSuccess", isSuccess);
 	}
 	
-	@GetMapping("/subPage/participantChatList.do")
-	public void participantChatList(Model model, HttpSession session) {
-		String customerId = (String)session.getAttribute("customerId");
-		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.participantChatList(customerId);
-		List<Map<String, Object>> successInfo = boardService.successParticipantChatList(customerId);
-		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
-		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
-	}
-	
+
+
 	@GetMapping("/subPage/participantChatDetail.do")
 	public void participantChatDetail(String boardId, String isSuccess, Model model) {
 		Map<String, Object> info = boardService.chatListDetail(boardId);
@@ -573,15 +558,36 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/subPage/authorChatList.do")
-	public void authorChatList(Model model, HttpSession session) {
+	public void authorChatList(@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.chatBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successChatBlist(customerId);
+		List<Map<String, Object>> info = boardService.chatBlist(Page,customerId);
+		PagingVO ChatListPage = boardService.chatBlistgetPages(Page, customerId);
+		model.addAttribute("ChatListPage",ChatListPage);
 		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
-		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
+		model.addAttribute("cBCount", boardService.chatBlistCount(customerId));
+		/*
+		 * List<Map<String, Object>> successInfo =boardService.successChatBlist(customerId);
+		 */
+		/*
+		 * model.addAttribute("successInfo", successInfo);
+		 * model.addAttribute("successCount", successInfo.size());
+		 */
+	}
+	@GetMapping("/subPage/participantChatList.do")
+	public void participantChatList(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
+		List<Map<String, Object>> partiInfo = boardService.participantChatList(Page,customerId);
+		PagingVO particiPaging = boardService.participantChatListgetPages(Page, customerId);
+		int participantCount =  boardService.participantChatListCount(customerId);
+		model.addAttribute("partiInfo", partiInfo);
+		model.addAttribute("participantCount", participantCount);
+		model.addAttribute("particiPaging", particiPaging);
+		
 	}
 	
 	@GetMapping("/subPage/chatListEdit.do")
@@ -665,12 +671,8 @@ public class MyPageController {
 	@GetMapping("/PickUpList.do") 
 	public String PickUpList(@RequestParam(value="pCount",required = false, defaultValue="1")int page, Model model, HttpSession session) {
 		String customerId = (String) session.getAttribute("customerId"); //customerId
-		System.out.println("page이다"+page);
-		System.out.println("customerId이다"+customerId);
 		List<PickupVO> pickUpList = mypageservice.PickUpList(page, customerId);
 		int pickUpListCount =mypageservice.PickUpCount(customerId);
-		logger.info("확인ㅂ2: "+pickUpList);
-		logger.info("확인ㅂ3: "+pickUpListCount);
 		PagingVO paginating = mypageservice.getPages(page,customerId);
 		model.addAttribute("pickUpList",pickUpList);
 		model.addAttribute("pickUpListCount",pickUpListCount);
