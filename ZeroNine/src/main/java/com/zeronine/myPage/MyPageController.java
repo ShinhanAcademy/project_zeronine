@@ -670,8 +670,11 @@ public class MyPageController {
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
 	@RequestMapping("/subscriptionInfo.do")
-	public void subscriptionInfo() {
-		
+	public void subscriptionInfo(HttpSession session, Model model) {
+		String customerId = (String)session.getAttribute("customerId");
+		List<Map<String, Object>> info = boardService.mySubscriptionInfo(customerId);
+		model.addAttribute("info",info);
+		model.addAttribute("count",info.size());
 	}
 	
 	@RequestMapping("/checkPw.do")
@@ -726,5 +729,20 @@ public class MyPageController {
 	 * 
 	 * @RequestMapping("/updateInfo.do") public void updateInfo() {}
 	 */
+	
+	@PostMapping(value = "/validatePw.do", consumes = "application/json")
+    @ResponseBody
+    public CustomerVO validatePassword(@RequestBody Map<String, String> map, Model model) {
+        String email = map.get("email");
+        String password = map.get("password");
+        boolean isValid = cService.login(email, password) > 0;
+        if(!isValid) {
+            CustomerVO invalidCustomer = new CustomerVO();
+            
+            invalidCustomer.setCustomerName("invalid");
+            return invalidCustomer;
+        }
+        return cService.selectByEmail(email);   
+    }
 
 }
