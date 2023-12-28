@@ -3,15 +3,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="tbl_top_wrap">
 	<div class="total_count">
+		총 <span>${successCount}</span>건 &nbsp[완료]
 
-		총 <span>${count}</span>건 &nbsp[진행중]
 	</div>
-	<div class="delivery_kind">
-		<span class="btn_deli on" id="fastDelivery">즉배</span> <span>|</span> <span
-			class="btn_deli" id="freeDelivery">무배</span>
-	</div>
-	
+
 </div>
+
 <table class="tbl_chat_wrap">
 
 	<colgroup>
@@ -36,7 +33,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${info}" var="board">
+		<c:forEach items="${successInfo}" var="board">
 			<tr>
 				<td><img class="product_image" src="${board.imagePath}"></td>
 				<td class="td_font_title">${board.title}</td>
@@ -44,58 +41,59 @@
 				<td class="td_font_remain">${board.remainTime}</td>
 				<td class="read_status"><input id="hiddenBoardId" type="hidden"
 					value="${board.boardId}">
-					<button class="boardDetail">상세보기</button></td>
+					<button class="boardDetail">상세보기</button>
+					<p id="isSuccess">공구 성공</p></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-				
+	
 							              	<%-- <c:if test="${booklist.size() != 0}"> --%>
-	<c:if test="${count != 0}">
+	<c:if test="${successCount != 0}">
 		<div class=pagination>
 			<div class="pageLeft">
 				<c:choose>
-					<c:when test="${boardPaging.pageNumber<=1}">
+					<c:when test="${boardSuccessPaging.pageNumber<=1}">
 						<button class="btnFirst" disabled="disabled">첫페이지</button>
 					</c:when>
 					<c:otherwise>
 						<button class="btnFirst" id="btnFirst"
-							onclick="javascript:callFastDelivery(1)">첫페이지</button>
+							onclick="javascript:callSuccessFreeDelivery(1)">첫페이지</button>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${boardPaging.pageNumber<=1}">
+					<c:when test="${boardSuccessPaging.pageNumber<=1}">
 						<button class="btnPrev" disabled="disabled">이전페이지</button>
 					</c:when>
 					<c:otherwise>
 						<button class="btnPrev" id="btnPrev"
-							onclick="javascript:callFastDelivery(${boardPaging.pageNumber-1})">이전페이지</button>
+							onclick="javascript:callSuccessFreeDelivery(${boardSuccessPaging.pageNumber-1})">이전페이지</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
 			<ul class="pagingWrap">
-				<c:forEach begin="${boardPaging.startPageNumber}"
-					end="${boardPaging.endPageNumber}" var="i" step="1">
-					<li><a href="javascript:callFastDelivery(${i})">${i}</a></li>
+				<c:forEach begin="${boardSuccessPaging.startPageNumber}"
+					end="${boardSuccessPaging.endPageNumber}" var="i" step="1">
+					<li><a href="javascript:callSuccessFreeDelivery(${i})">${i}</a></li>
 				</c:forEach>
 			</ul>
 			<div class="pageRight">
 				<c:choose>
-					<c:when test="${boardPaging.pageNumber==boardPaging.maxPageNumber}">
+					<c:when test="${boardSuccessPaging.pageNumber==boardSuccessPaging.maxPageNumber}">
 						<button class="btnNext" id="btnNext" disabled="disabled">다음페이지</button>
 					</c:when>
 					<c:otherwise>
 						<button class="btnNext" id="btnNext"
-							onclick="javascript:callFastDelivery(${boardPaging.pageNumber+1})">다음페이지</button>
+							onclick="javascript:callSuccessFreeDelivery(${boardSuccessPaging.pageNumber+1})">다음페이지</button>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${boardPaging.pageNumber==boardPaging.maxPageNumber}">
+					<c:when test="${boardSuccessPaging.pageNumber==boardSuccessPaging.maxPageNumber}">
 						<button class="btnLast" disabled="disabled">마지막페이지</button>
 					</c:when>
 					<c:otherwise>
 						<button class="btnLast" id="btnLast"
-							onclick="javascript:callFastDelivery(${boardPaging.maxPageNumber})">마지막페이지</button>
+							onclick="javascript:callSuccessFreeDelivery(${boardSuccessPaging.maxPageNumber})">마지막페이지</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -103,4 +101,5 @@
 	</c:if>
 	<%-- </c:if> --%>
 	<!-- //pagination -->
-<script src="${path}/js/myPage/participatedBoard.js" type="text/javascript"></script>
+<script src="${path}/js/myPage/participatedBoard.js"
+	type="text/javascript"></script>

@@ -45,13 +45,95 @@ public class BoardService_yn {
 	public int numOfFreeParticipant(String boardId) {
 		return boardDAO.numOfFreeParticipant(boardId);
 	}
+	
+	
+	public PagingVO myParticipatedBlistgetPages(int page, String customerId) {
 
-	public List<Map<String, Object>> myParticipatedBlist(String customerId) {
-		return boardDAO.myParticipatedBlist(customerId);
+		int myParticipatedBlistCount = boardDAO.myParticipatedBlistCount(customerId);
+
+		int maxPageNumber = (int) (Math.ceil((double) myParticipatedBlistCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
+	}
+	public List<Map<String, Object>> myParticipatedBlist(int page,String customerId) {
+		int pageStartNum = (page - 1) * pageLimit;
+		return boardDAO.myParticipatedBlist(pageStartNum,customerId);
+	}
+	public int myParticipatedBlistCount(String customerId) {
+		return boardDAO.myParticipatedBlistCount(customerId);
+	}
+	
+	
+	public PagingVO successMyParticipatedBlistgetPages(int page, String customerId) {
+
+		int successMyParticipatedBlistCount = boardDAO.successMyParticipatedBlistCount(customerId);
+
+		int maxPageNumber = (int) (Math.ceil((double) successMyParticipatedBlistCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
+	}
+	public List<Map<String, Object>> successMyParticipatedBlist(int page,String customerId) {
+		int pageStartNum = (page - 1) * pageLimit;
+		return boardDAO.successMyParticipatedBlist(pageStartNum,customerId);
+	}
+	public int successMyParticipatedBlistCount(String customerId) {
+		return boardDAO.successMyParticipatedBlistCount(customerId);
+	}
+	public PagingVO myParticipatedFreeBlistgetPages(int page, String customerId) {
+
+		int myParticipatedFreeBlistCount = boardDAO.myParticipatedFreeBlistCount(customerId);
+
+		int maxPageNumber = (int) (Math.ceil((double) myParticipatedFreeBlistCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
 	}
 
-	public List<Map<String, Object>> myParticipatedFreeBlist(String customerId) {
-		return boardDAO.myParticipatedFreeBlist(customerId);
+
+	public List<Map<String, Object>> myParticipatedFreeBlist(int page,String customerId) {
+		int pageStartNum = (page - 1) * pageLimit;
+		return boardDAO.myParticipatedFreeBlist(pageStartNum,customerId);
+	}
+	public int myParticipatedFreeBlistCount(String customerId) {
+		return boardDAO.myParticipatedFreeBlistCount(customerId);
 	}
 
 	public List<Map<String, Object>> likeBoardBlist(String customerId) {
@@ -184,14 +266,34 @@ public class BoardService_yn {
 		return boardDAO.successMyWriteFreeBlist(customerId);
 	}
 
-	public List<Map<String, Object>> successMyParticipatedBlist(String customerId) {
-		return boardDAO.successMyParticipatedBlist(customerId);
-	}
+	public PagingVO successMyParticipatedFreeBlistgetPages(int page, String customerId) {
 
-	public List<Map<String, Object>> successMyParticipatedFreeBlist(String customerId) {
-		return boardDAO.successMyParticipatedFreeBlist(customerId);
-	}
+		int successMyParticipatedFreeBlistCount = boardDAO.successMyParticipatedFreeBlistCount(customerId);
 
+		int maxPageNumber = (int) (Math.ceil((double) successMyParticipatedFreeBlistCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
+	}
+	public List<Map<String, Object>> successMyParticipatedFreeBlist(int page,String customerId) {
+		int pageStartNum = (page - 1) * pageLimit;
+		return boardDAO.successMyParticipatedFreeBlist(pageStartNum,customerId);
+	}
+	public int successMyParticipatedFreeBlistCount(String customerId) {
+		return boardDAO.successMyParticipatedFreeBlistCount(customerId);
+	}
 	public List<Map<String, Object>> freeBoardProductEdit(String boardId, String customerId) {
 		return boardDAO.freeBoardProductEdit(boardId, customerId);
 	}
