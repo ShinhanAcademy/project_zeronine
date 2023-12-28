@@ -428,17 +428,16 @@ function pickUpDetail(pickUpId){
 	var obj ={"pickUpId":pickUpId};
 	var showDetail = false;
 	
-	$(".status").each(function(){
-		 result = $(this).data("value")
-		 console.log(result);
-		 if(result == "complete" || result=="refuse"){
+	var event_btn = $(event.target).closest("tr");
+	var result = event_btn.find(".status_info").text();
+	console.log(result);
+		 if(result.includes("complete", "refuse")){
 			showDetail = true; 
 		 } else{
 			 alert("처리 결과는 회수 진행이 완료된 후 가능합니다.");
 			 showDetail = false; 
 			 return false;
 		 }
-	 })
 	 
 	if(showDetail){
 		$.ajax({
