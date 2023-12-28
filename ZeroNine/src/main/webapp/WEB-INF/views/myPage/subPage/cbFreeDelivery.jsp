@@ -82,7 +82,7 @@
 	</colgroup>
 	<thead>
 		<tr>
-			<th>상품</th>
+			<th>달성률</th>
 			<th>게시글 제목</th>
 			<th>게시일</th>
 			<th>마감 기한</th>
