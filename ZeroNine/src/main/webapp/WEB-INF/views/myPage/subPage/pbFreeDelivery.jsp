@@ -7,8 +7,8 @@
 		총 <span>${count}</span>건 &nbsp[진행중]
 	</div>
 	<div class="delivery_kind">
-		<span class="btn_deli on" id="fastDelivery">즉배</span> <span>|</span> <span
-			class="btn_deli" id="freeDelivery">무배</span>
+		<span class="btn_deli" id="fastDelivery">즉배</span> <span>|</span> <span
+			class="btn_deli on" id="freeDelivery">무배</span>
 	</div>
 	
 </div>
