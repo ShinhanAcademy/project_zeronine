@@ -33,7 +33,6 @@ public class ProductService {
 		System.out.println(paginateParam.toString());
 		List<Map<String,Object>> plist = productDAO.searchAll(paginateParam);
 	
-
 		return  plist;
 	
 	}
