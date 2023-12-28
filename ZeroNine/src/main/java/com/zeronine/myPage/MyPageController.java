@@ -267,14 +267,6 @@ public class MyPageController {
 	
 	@GetMapping("/createdBoard.do")
 	public void createdBoard(Model model, HttpSession session) {
-		String customerId = (String)session.getAttribute("customerId");
-		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successMyWriteBlist(customerId);
-		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
-		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
 
 	}
 	@GetMapping("/subPage/createdBoardDetail.do")
@@ -374,30 +366,55 @@ public class MyPageController {
 	}
 	
 	@GetMapping("/subPage/cbFastDelivery.do")
-	public void cbFastDelivery(Model model, HttpSession session) {
+	public void cbFastDelivery(@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
-		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myWriteBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successMyWriteBlist(customerId);
+		PagingVO myWritePaging = boardService.myWriteBlistgetPages(Page,customerId);
+		List<Map<String, Object>> info = boardService.myWriteBlist(Page,customerId);
+		int count = boardService.myWriteBlistCount(customerId);
 		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
+		model.addAttribute("count", count);
+		model.addAttribute("myWritePaging",myWritePaging);
+
+	}
+	@GetMapping("/subPage/cbFastSuccessDelivery.do")
+	public void cbFastSuccessDelivery(@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		List<Map<String, Object>> successInfo = boardService.successMyWriteBlist(Page,customerId);
+		int successCount = boardService.successMyWriteBlistCount(customerId);
+		PagingVO myWritePaging = boardService.successMyWriteBlistgetPages(Page,customerId);
 		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
+		model.addAttribute("successCount", successCount);
+		model.addAttribute("myWritePaging",myWritePaging);
 
 	}
 
 	@GetMapping("/subPage/cbFreeDelivery.do")
-	public void cbFreeDelivery(Model model, HttpSession session) {
+	public void cbFreeDelivery(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
-		List<Map<String, Object>> info = boardService.myWriteFreeBlist(customerId);
-		List<Map<String, Object>> successInfo = boardService.successMyWriteFreeBlist(customerId);
+		int count = boardService.myWriteFreeBlistCount(customerId);
+		List<Map<String, Object>> info = boardService.myWriteFreeBlist(Page,customerId);
+		PagingVO myWritePaging = boardService.myWriteFreeBlistgetPages(Page,customerId);
 		model.addAttribute("info", info);
-		model.addAttribute("count", info.size());
-		model.addAttribute("successInfo", successInfo);
-		model.addAttribute("successCount", successInfo.size());
+		model.addAttribute("count", count);
+		model.addAttribute("myWritePaging",myWritePaging);
 	}
-	
+	@GetMapping("/subPage/cbFreeSuccessDelivery.do")
+	public void cbFreeSuccessDelivery(
+			@RequestParam(value="pCount",required = false, defaultValue="1")int Page,
+			Model model, HttpSession session) {
+		String customerId = (String)session.getAttribute("customerId");
+		List<Map<String, Object>> successInfo = boardService.successMyWriteFreeBlist(Page,customerId);
+		int successCount = boardService.successMyWriteFreeBlistCount(customerId);
+		PagingVO myWritePaging = boardService.successMyWriteFreeBlistgetPages(Page,customerId);
+		model.addAttribute("successInfo", successInfo);
+		model.addAttribute("successCount",successCount);
+		model.addAttribute("myWritePaging",myWritePaging);
+	}
 	@GetMapping("/subPage/createdFreeBoardDetail.do")
 	public void createdFreeBoardDetail(String boardId,String isSuccess,Model model) {
 		Map<String, Object> info = boardService.freeBoardDetail(boardId);

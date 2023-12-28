@@ -20,11 +20,28 @@ public class BoardDAOMybatis_yn {
 	Logger logger = LoggerFactory.getLogger(BoardDAOMybatis_yn.class);
 	final static String NAMESPACE = "net.zeronine.board.";
 	
-	public List<Map<String,Object>> myWriteBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myWriteBlist",customerId);
+	public List<Map<String,Object>> myWriteBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myWriteBlist",map);
 		return info;
 	}
-
+	public int myWriteBlistCount(String customerId) {
+		int count = sqlSession.selectOne(NAMESPACE + "myWriteBlistCount",customerId);
+		return count;
+	}
+	public List<Map<String, Object>> successMyWriteBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyWriteBlist",map);
+		return info;
+	}
+	public int successMyWriteBlistCount(String customerId) {
+		int count = sqlSession.selectOne(NAMESPACE + "successMyWriteBlistCount",customerId);
+		return count;
+	}
 	public Map<String, Object> boardDetail(String boardId) {
 		Map<String,Object> info = sqlSession.selectOne(NAMESPACE + "boardDetail",boardId);
 		return info;
@@ -40,9 +57,16 @@ public class BoardDAOMybatis_yn {
 		return participant;
 	}
 
-	public List<Map<String, Object>> myWriteFreeBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myWriteFreeBlist",customerId);
+	public List<Map<String, Object>> myWriteFreeBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "myWriteFreeBlist",map);
 		return info;
+	}
+	public int myWriteFreeBlistCount(String customerId) {
+		int result = sqlSession.selectOne(NAMESPACE + "myWriteFreeBlistCount",customerId);
+	return result;
 	}
 
 	public Map<String, Object> freeBoardDetail(String boardId) {
@@ -207,14 +231,18 @@ public class BoardDAOMybatis_yn {
 		return result;
 	}
 
-	public List<Map<String, Object>> successMyWriteBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyWriteBlist",customerId);
+
+
+	public List<Map<String, Object>> successMyWriteFreeBlist(int page,String customerId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("customerId", customerId);
+		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyWriteFreeBlist",map);
 		return info;
 	}
-
-	public List<Map<String, Object>> successMyWriteFreeBlist(String customerId) {
-		List<Map<String,Object>> info = sqlSession.selectList(NAMESPACE + "successMyWriteFreeBlist",customerId);
-		return info;
+	public int successMyWriteFreeBlistCount(String customerId) {
+		int result = sqlSession.selectOne(NAMESPACE+"successMyWriteFreeBlistCount",customerId);
+		return result;
 	}
 
 
