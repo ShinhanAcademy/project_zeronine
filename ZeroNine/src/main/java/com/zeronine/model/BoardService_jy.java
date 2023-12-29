@@ -28,6 +28,12 @@ public class BoardService_jy {
 		return detail;
 	}
 	
+	public List<Map<String, Object>> selectValidFastList(){
+		List<Map<String, Object>> infoVFb = boardDAO_jy.selectValidFastList();
+		return infoVFb;
+	}
+	
+	//deal success fail
 	public List<DealFailRefundVO> selectDealFailBoard(){
 		List<DealFailRefundVO> fail =  boardDAO_jy.selectDealFailBoard();
 		System.out.println("이건 서비스에서 찍는 fail 정보 : " + fail);
@@ -51,6 +57,11 @@ public class BoardService_jy {
 		Map<String, Object> freeDetail = boardDAO_jy.selectFreeDetail(boardId);
 		System.out.println("이것은 서비스에서 찍는 freedetail"+freeDetail);
 		return freeDetail;
+	}
+	
+	public List<Map<String, Object>> selectValidFreeList(){
+		List<Map<String, Object>> infoVFreeb = boardDAO_jy.selectValidFreeList();
+		return infoVFreeb;
 	}
 	
 	//oneBoard

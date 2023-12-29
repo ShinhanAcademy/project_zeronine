@@ -39,6 +39,12 @@
 						<option value="recent">최신순</option>
 						<option value="imminent">임박순</option>
 					</select>
+					<span>
+					<input type="checkbox" class="checkbox" onclick="isCheck()">
+					</span>
+					<span class="check_option">
+					성공/마감 제외
+					</span>
 				</div>
 				<!-- 아이디 확인용 hidden  -->
 				<div id=email data-email="{email}" hidden="hidden">${email}</div>
@@ -89,13 +95,37 @@
 
 	<script>
 var type_of_filter;
-var info_json;
+var info_json = JSON.parse('${infoFb}');
+var info_valid = JSON.parse('${infoVf}');
+var checked;
 var output = "";
 var path = "${path}";
 var result = [];
+var data_json;
+var initNum = 0;
+var endNum = 0;
 // DOM이 준비되면 필터링 함수 호출
 $(filterType);
-$(searchBoard);
+$(searchBoard); 
+$(isCheck);
+
+//valid board
+function isCheck(){
+	var checkbox = document.querySelector(".checkbox");
+	checked = checkbox.checked;
+	console.log(checked);
+	
+	if(checked){
+		data_json = info_valid;
+	} else{
+		data_json = info_json;
+	}
+	console.log(data_json);
+	initNum = 0;
+	endNum = 0;
+	showList(data_json);
+}
+
 
 
 
@@ -135,34 +165,33 @@ function handleLikeButtonClick(index, boardId) {
 	    
 	    	//클래스가 heart liked => AJAX DELTE 호출
 	        var isRedHeart = likeBlistArr.indexOf(boardId);
-			if(isRedHeart>=0) {
-				$.ajax({
-					url : "/board/deletelikedboard.do",
-					type: "POST",
-					data : {"boardId" :boardId},
-					success : function(){
-						likeBlistArr = likeBlistArr.filter(item => item !== boardId);
-					},
-					error : function(){
-						alert("에러입니다.");
-					}
-					});
-					 
-				}else{
-	
-				 $.ajax({
-						url : "/board/fastboardlike.do",
-						type: "POST",
-						data : {"boardId" :boardId},
-						success : function(){
-							likeBlistArr.push(boardId);
-						},
-						error : function(){
-							alert("에러입니다.");
-						}
-						});
-				}
-					};
+	       	
+	        console.log(isRedHeart);
+	        if (isRedHeart >= 0) {
+	            $.ajax({
+	                url: "/board/deletelikedboard.do",
+	                type: "POST",
+	                data: { "boardId": boardId },
+	                success: function () {
+	                        likeBlistArr = likeBlistArr.filter(item => item !== boardId);
+	                }
+	            });
+	        } else {
+	            $.ajax({
+	                url: "/board/fastboardlike.do",
+	                type: "POST",
+	                data: { "boardId": boardId },
+	                success: function () {
+	                		likeBlistArr.push(boardId);
+	                },
+	                error: function() {
+	             	   alert("로그인 먼저 해주세요.");
+	                    $(".board_like").attr("src", '${path}/images/board/heart.png');
+	                    location.href = "${path}/auth/login.do";
+	                } 
+	            });
+	        }
+	 }   
 	$(".like").click(function (){
         var currentImagePath = $("#btn"+index).find("img.board_like").attr("src");
         var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
@@ -173,9 +202,9 @@ function handleLikeButtonClick(index, boardId) {
 	
 
 
-function show(jsondata) {
-	//console.log(totalList);
-	//var output = "";
+function showHtml(jsondata) {
+	/* console.log(jasondata); */
+	
     $.each(jsondata, function (index, item) {
     	
         // 날짜 포맷팅
@@ -258,28 +287,32 @@ function show(jsondata) {
 function filterType() {
     // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;
-    info_json = JSON.parse('${infoFb}');
-    showList();
+    isCheck();
 }
+
+
 
 function showList() {
     output = "";
     result = [];
     initNum = 0;
+    
     if (type_of_filter == 'imminent') { // 임박순
-    	info_json.sort(
+    	data_json.sort(
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             }
         );
-   		console.log(info_json);
+   		//console.log(data_json);
     } else { // 최신순 (default)
-    	info_json.sort(
+    	data_json.sort(
             function (a, b) {
                 return new Date(b.uploadTime) - new Date(a.uploadTime);
             }
-        );console.log(info_json);
+        );
+    //console.log(data_json);
     }
+    console.log(data_json);
     each();
 }
 
@@ -329,22 +362,22 @@ function searchBoard() {
         if (event.keyCode === 13) {
         	output = "";
         	keyword = $("#search").val().toLowerCase();
-            filterKeyword(info_json, keyword);
+            filterKeyword(data_json, keyword);
         }
     });
 }
 
 function check() {
 	output = "";
-    filterKeyword(info_json, keyword);
+    filterKeyword(data_json, keyword);
 }
 
 // 키워드로 필터링
-function filterKeyword(info_json, keyword) {
+function filterKeyword(data_json, keyword) {
     initNum = 0;
     keyword = $("#search").val();
     result=[];
-    $.each(info_json, function (index, item) {
+    $.each(data_json, function (index, item) {
         var product = item.pName;
         var brand = item.brand;
         if (product.includes(keyword) || brand.includes(keyword)) {
@@ -356,7 +389,6 @@ function filterKeyword(info_json, keyword) {
     loadMore();
     console.log(result);
 }
-
 </script>
 
 
