@@ -132,7 +132,7 @@ function callOrderHistory(page) {
 
 //orderCancelHistory
 //Ajax
-function callOrderCancelHistory() {
+function callOrderCancelHistory(page) {
 	let startDate = $(".mypage_container #datepicker").data("datepicker").selectedDates[0];
 	let endDate = $(".mypage_container #datepicker").data("datepicker").selectedDates[1];
 
@@ -141,6 +141,7 @@ function callOrderCancelHistory() {
 	paramObj.searchWord = $(".search_word input").val();
 	paramObj.startDate = dateSet.convertDate(startDate);
 	paramObj.endDate = dateSet.convertDate(endDate);
+	paramObj.page = page;
 	console.log("paramObj", paramObj);
 	
 	$.ajax({

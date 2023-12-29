@@ -404,14 +404,14 @@
 .detail_bodypart .detail_bottom .detail_bottom_left .detail_img2 {
 	margin-top: 60px;
 	width: 902px;
-	height: 891px;
+	 height: auto;
 	margin-bottom: 15px;
 }
 
 .detail_bodypart .detail_bottom .detail_bottom_right {
 	border: 1px solid #B7B7B7;
 	width: 326px;
-	height: 2012px;
+	height: auto;
 }
 
 .detail_bodypart .detail_bottom_right .sub_amountpm {

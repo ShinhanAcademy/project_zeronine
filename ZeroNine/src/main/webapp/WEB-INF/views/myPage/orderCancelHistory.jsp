@@ -65,5 +65,6 @@
 	</div>
 	<!-- //zero_container -->
 	<%@include file="../common/footer.jsp" %>
+	<script defer src="${path}/js/myPage/orderCancelHistory.js"></script>
 </body>
 </html>

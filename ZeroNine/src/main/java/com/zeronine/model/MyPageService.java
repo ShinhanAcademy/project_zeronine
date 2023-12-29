@@ -58,9 +58,35 @@ public class MyPageService {
 	}
 
 	/* order cancel history */
-	public List<Map<String, Object>> orderCancelHistoryAll(String customerId, String searchWord, String startDate,
+	public List<Map<String, Object>> orderCancelHistoryAll(int page,String customerId, String searchWord, String startDate,
 			String endDate) {
-		return myPageDAO.orderCancelHistoryAll(customerId, searchWord, startDate, endDate);
+		int pageStartNum = (page - 1) * pageLimit;
+		return myPageDAO.orderCancelHistoryAll(pageStartNum,customerId, searchWord, startDate, endDate);
+	}
+	public int orderCancelHistoryAllCount(String customerId, String searchWord, String startDate, String endDate) {
+		return myPageDAO.orderCancelHistoryAllCount(customerId, searchWord, startDate, endDate);
+	}
+	public PagingVO orderCancelHistoryAllgetPages(int page, String customerId, String searchWord, String startDate,
+			String endDate) {
+
+		int orderCancelHistoryAllCount = myPageDAO.orderCancelHistoryAllCount(customerId, searchWord, startDate, endDate);
+
+		int maxPageNumber = (int) (Math.ceil((double) orderCancelHistoryAllCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
 	}
 
 	/* like product */
