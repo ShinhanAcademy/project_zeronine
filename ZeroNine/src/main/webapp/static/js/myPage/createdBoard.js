@@ -47,11 +47,18 @@ $(".freeBoardDetail").click(function(){
 });
 
 $("#freeDelivery").click(function(){
-	$.ajax({
+	callFreeDelivery();
+	callFreeSuccessDelivery();
+});
+
+function callFreeDelivery(page){
+var obj = {"pCount" : page };
+$.ajax({
 					url : path + "/myPage/subPage/cbFreeDelivery.do",
+					data : obj,
 					type : "GET",
 					success : function(result) {
-						$("#hereContents").html(result);
+						$("#hereContents1").html(result);
 						
 						$(".pie-chart").each(function(index,item){
 							var each_ratio = $(this).attr("value");
@@ -65,22 +72,69 @@ $("#freeDelivery").click(function(){
 						alert("에러입니다.");
 					}
 				});
-});
 
-
-$("#fastDelivery").click(function(){
-	$.ajax({
-					url : path + "/myPage/subPage/cbFastDelivery.do",
+}
+function callFreeSuccessDelivery(page){
+var obj = {"pCount" : page };
+$.ajax({
+					url : path + "/myPage/subPage/cbFreeSuccessDelivery.do",
+					data : obj,
 					type : "GET",
 					success : function(result) {
-						$("#hereContents").html(result);
+						$("#hereContents2").html(result);
+						
+						$(".pie-chart").each(function(index,item){
+							var each_ratio = $(this).attr("value");
+							var color = $(this).attr("value")<35?'#09244B':each_ratio>=35 && each_ratio<70?'#F1C21B':'#F11B1B';
+							var back = $(this).attr("value")<35?'#7390BA':each_ratio>=35 && each_ratio<70?'#F9E59E':'#F99E9E';
+							draw($(this).attr("value"), this, color, back);
+						});
+					
 					},
 					error : function() {
 						alert("에러입니다.");
 					}
 				});
-});
 
+}
+
+
+$("#fastDelivery").click(function(){
+callFastDelivery(1);
+callFastSuccessDelivery(1);
+});
+function callFastDelivery(page){
+
+var obj = {"pCount" : page };
+$.ajax({
+					url : path + "/myPage/subPage/cbFastDelivery.do",
+					data : obj,
+					type : "GET",
+					success : function(result) {
+						$("#hereContents1").html(result);
+					console.log("여기오긴함?");
+					},
+					error : function() {
+						alert("에러입니다.");
+					}
+				});
+}
+function callFastSuccessDelivery(page){
+
+var obj = {"pCount" : page };
+$.ajax({
+					url : path + "/myPage/subPage/cbFastSuccessDelivery.do",
+					data : obj,
+					type : "GET",
+					success : function(result) {
+						$("#hereContents2").html(result);
+					console.log("여긴오는뎅..?");
+					},
+					error : function() {
+						alert("에러입니다.");
+					}
+				});
+}
 $(".boardDetail").click(function(){
 
 	var boardId = $(this).closest('tr').find('#hiddenBoardId').val();

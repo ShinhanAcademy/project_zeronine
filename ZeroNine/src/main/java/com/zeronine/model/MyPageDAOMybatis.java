@@ -65,21 +65,30 @@ public class MyPageDAOMybatis {
 	
 
 	/* orderCancelHistoryAll */
-	public List<Map<String, Object>> orderCancelHistoryAll(String customerId, String searchWord, String startDate, String endDate) {
+	public List<Map<String, Object>> orderCancelHistoryAll(int page,String customerId, String searchWord, String startDate, String endDate) {
 		//List<Map<String, Object>> result = sqlSession.selectList(NAMESPACE + "orderHistoryAll", customerId);
 		Map<String, Object> mapData = new HashMap<>();
 		mapData.put("customerId", customerId);
 		mapData.put("searchWord", addPersentage(searchWord));
 		mapData.put("startDate", startDate);
 		mapData.put("endDate", endDateFormat(endDate));
-		
+		mapData.put("page",page);
 //		Logger.info("endDate format{}", endDateFormat(endDate));
 		List<Map<String, Object>> orderCancelHistoryList = sqlSession.selectList(NAMESPACE + "orderCancelHistoryAll", mapData);
 		//Logger.info("orderCancelHistoryAll조회조건:{}...결과:{}건", mapData, orderCancelHistoryList.size());
 
 		return orderCancelHistoryList;
 	}
-
+	public int orderCancelHistoryAllCount(String customerId, String searchWord, String startDate, String endDate) {
+		Map<String, Object> mapData = new HashMap<>();
+		mapData.put("customerId", customerId);
+		mapData.put("searchWord", addPersentage(searchWord));
+		mapData.put("startDate", startDate);
+		mapData.put("endDate", endDateFormat(endDate));
+		
+		int count =sqlSession.selectOne(NAMESPACE + "orderCancelHistoryAllCount",mapData);
+		return count;
+	}
 	/* myCart */
 	public List<Map<String, Object>> myCart(String customerId) {
 		Map<String, Object> mapData = new HashMap<>();

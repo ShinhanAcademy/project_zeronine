@@ -1,17 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="tbl_top_wrap">
 	<div class="total_count">
 
-		 총 <span>${count}</span>건 &nbsp[진행중]
-	</div>
-	<div class="delivery_kind">
-		<span class="btn_deli on" id="fastDelivery">즉배</span> <span>|</span> <span
-			class="btn_deli" id="freeDelivery">무배</span>
+		총 <span>${successCount}</span>건 &nbsp;[완료]
 	</div>
 
 </div>
+
 <table class="tbl_chat_wrap">
 
 	<colgroup>
@@ -20,15 +18,11 @@
 		<col width="15%" />
 		<col width="18%" />
 		<col width="12%" />
-		<!-- 
-							    <col />
-							    <col span="2" class="batman" />
-							    <col span="2" class="flash" />
-							    -->
+
 	</colgroup>
 	<thead>
 		<tr>
-			<th>상품</th>
+			<th>달성률</th>
 			<th>게시글 제목</th>
 			<th>게시일</th>
 			<th>마감 기한</th>
@@ -36,20 +30,30 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${info}" var="board">
+		<c:forEach items="${successInfo}" var="board" varStatus="status">
 			<tr>
-				<td><img class="product_image" src="${board.imagePath}"></td>
+				<td>
+					<div class="tbl_chart">
+						<div class="pie-chart" value="${board.total/50000*100}">
+							<span class="rate"> <fmt:formatNumber type="percent"
+									maxIntegerDigits="3" value="${board.total/50000}" /></span>
+						</div>
+					</div>
+				</td>
 				<td class="td_font_title">${board.title}</td>
 				<td class="td_font_upload">${board.uploadTime}</td>
 				<td class="td_font_remain">${board.remainTime}</td>
-				<td class="read_status"><input id="hiddenBoardId" type="hidden"
-					value="${board.boardId}">
-					<button class="boardDetail">상세보기</button></td>
+				<td class="read_status">
+					<input id="hiddenBoardId" type="hidden" value="${board.boardId}"> 
+					<input id="hiddenIsSuccess" type="hidden" value="success">
+					<button class="freeBoardDetail">상세보기</button>
+					<p id="isSuccess">공구 성공</p>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-						              	<%-- <c:if test="${booklist.size() != 0}"> --%>
+
 	<c:if test="${count != 0}">
 		<div class=pagination>
 			<div class="pageLeft">
@@ -59,7 +63,7 @@
 					</c:when>
 					<c:otherwise>
 						<button class="btnFirst" id="btnFirst"
-							onclick="javascript:callFastDelivery(1)">첫페이지</button>
+							onclick="javascript:callFreeSuccessDelivery(1)">첫페이지</button>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
@@ -68,14 +72,14 @@
 					</c:when>
 					<c:otherwise>
 						<button class="btnPrev" id="btnPrev"
-							onclick="javascript:callFastDelivery(${myWritePaging.pageNumber-1})">이전페이지</button>
+							onclick="javascript:callFreeSuccessDelivery(${myWritePaging.pageNumber-1})">이전페이지</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
 			<ul class="pagingWrap">
 				<c:forEach begin="${myWritePaging.startPageNumber}"
 					end="${myWritePaging.endPageNumber}" var="i" step="1">
-					<li><a href="javascript:callFastDelivery(${i})">${i}</a></li>
+					<li><a href="javascript:callFreeSuccessDelivery(${i})">${i}</a></li>
 				</c:forEach>
 			</ul>
 			<div class="pageRight">
@@ -85,7 +89,7 @@
 					</c:when>
 					<c:otherwise>
 						<button class="btnNext" id="btnNext"
-							onclick="javascript:callFastDelivery(${myWritePaging.pageNumber+1})">다음페이지</button>
+							onclick="javascript:callFreeSuccessDelivery(${myWritePaging.pageNumber+1})">다음페이지</button>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
@@ -94,7 +98,7 @@
 					</c:when>
 					<c:otherwise>
 						<button class="btnLast" id="btnLast"
-							onclick="javascript:callFastDelivery(${myWritePaging.maxPageNumber})">마지막페이지</button>
+							onclick="javascript:callFreeSuccessDelivery(${myWritePaging.maxPageNumber})">마지막페이지</button>
 					</c:otherwise>
 				</c:choose>
 			</div>

@@ -120,6 +120,22 @@
 					 product."pName" LIKE #{searchWord})
 		 	</if>
 		order by refund."refundRequestTime" DESC
+		LIMIT 5 OFFSET #{page}
+	</select>
+	<select id="orderCancelHistoryAllCount" parameterType="map" resultType="int">
+		select count(*)	
+		from delivery  join "deliveryProduct" on delivery."deliveryId" = "deliveryProduct"."deliveryId"
+				     join product on "deliveryProduct"."productId" =product."productId"
+					 left outer join "productMainImage" on product."productId" = "productMainImage"."productId"
+					 join refund on delivery."deliveryId" = refund."deliveryId"
+		where delivery."customerId" = cast(#{customerId} as UUID)
+			AND (refund."refundRequestTime" >= to_timestamp(#{startDate}, 'YYYY-MM-DD 00:00:00.00') 
+			AND refund."refundRequestTime" &lt;= to_timestamp(#{endDate}, 'YYYY-MM-DD HH24:MI:SS.MS'))
+		 	<if test="searchWord != ''">
+				AND (product.brand LIKE #{searchWord} OR
+					 product."pName" LIKE #{searchWord})
+		 	</if>
+	
 	</select>
 	
 	<!-- my cart -->

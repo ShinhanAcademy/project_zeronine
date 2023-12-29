@@ -52,8 +52,8 @@ callSuccessFreeDelivery();
 
 //즉배
 $("#fastDelivery").click(function(){
-callFastDelivery();
-callSuccessFastDelivery();
+callFastDelivery(1);
+callSuccessFastDelivery(1);
 });
 function callFastDelivery(page){
 	var obj = {"pCount" : page };

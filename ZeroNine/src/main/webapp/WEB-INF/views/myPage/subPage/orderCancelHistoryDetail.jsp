@@ -6,7 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <div class="tbl_top_wrap">
 	<div class="total_count">
-		총 <span>${orderCancelHistoryAll.size()}</span>건
+		총 <span>${count}</span>건
 	</div>
 </div>
 <!-- tbl_wrap -->
@@ -30,7 +30,7 @@
 		</thead>
 		<tbody>
 			<c:choose>
-				<c:when test="${orderCancelHistoryAll.size() != 0}"> 
+				<c:when test="${count != 0}"> 
 					<c:forEach items="${orderCancelHistoryAll}" var="cancellist" varStatus="i">
 						<c:if test="${cancellist.deliveryId eq prev_row}">
 							<c:set var="check_row" value="${check_row + 1}" />
@@ -113,28 +113,58 @@
 </div>
 <!-- tbl_wrap -->
 <!-- pagination -->
-<c:if test="${orderCancelHistoryAll.size() != 0}">
-<div class=pagination>
-	<div class="pageLeft">
-		<button class="btnFirst">첫페이지</button>
-		<button class="btnPrev">이전페이지</button>
-	</div>
-	<ul class="pagingWrap">
-		<li><a href="">1</a></li>
-		<li><a href="">2</a></li>
-		<li><a href="">3</a></li>
-		<li><a href="">4</a></li>
-		<li><a href="">5</a></li>
-		<li><a href="">6</a></li>
-		<li><a href="">7</a></li>
-		<li><a href="">8</a></li>
-		<li><a href="">9</a></li>
-		<li><a href="">10</a></li>
-	</ul>
-	<div class="pageRight">
-		<button class="btnNext">다음페이지</button>
-		<button class="btnLast">마지막페이지</button>
-	</div>
-</div>
+<c:if test="${count != 0}">
+						              	<%-- <c:if test="${booklist.size() != 0}"> --%>
+		<div class=pagination>
+			<div class="pageLeft">
+				<c:choose>
+					<c:when test="${orderCancelpaging.pageNumber<=1}">
+						<button class="btnFirst" disabled="disabled">첫페이지</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btnFirst" id="btnFirst"
+							onclick="javascript:callOrderCancelHistory(1)">첫페이지</button>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${orderCancelpaging.pageNumber<=1}">
+						<button class="btnPrev" disabled="disabled">이전페이지</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btnPrev" id="btnPrev"
+							onclick="javascript:callOrderCancelHistory(${orderCancelpaging.pageNumber-1})">이전페이지</button>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<ul class="pagingWrap">
+				<c:forEach begin="${orderCancelpaging.startPageNumber}"
+					end="${orderCancelpaging.endPageNumber}" var="i" step="1">
+					<li><a href="javascript:callOrderCancelHistory(${i})">${i}</a></li>
+				</c:forEach>
+			</ul>
+			<div class="pageRight">
+				<c:choose>
+					<c:when test="${orderCancelpaging.pageNumber==orderCancelpaging.maxPageNumber}">
+						<button class="btnNext" id="btnNext" disabled="disabled">다음페이지</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btnNext" id="btnNext"
+							onclick="javascript:callOrderCancelHistory(${orderCancelpaging.pageNumber+1})">다음페이지</button>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${orderCancelpaging.pageNumber==orderCancelpaging.maxPageNumber}">
+						<button class="btnLast" disabled="disabled">마지막페이지</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btnLast" id="btnLast"
+							onclick="javascript:callOrderCancelHistory(${orderCancelpaging.maxPageNumber})">마지막페이지</button>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+
+	<!-- //pagination -->
 </c:if>
 <!-- //pagination -->
+<script src="${path}/js/myPage/commonMypage.js"></script>
