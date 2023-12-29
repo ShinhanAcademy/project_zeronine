@@ -1,14 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp" %>
+<!-- swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- chart -->
 <script src="${path}/js/jslib/chart.js"></script>
-<link href="${path}/css/csslib/jquery.bxslider.min.css" rel="stylesheet">
+
 <link href="${path}/css/main/main.css" rel="stylesheet" />
 <link href="${path}/css/detailView.css" rel="stylesheet" />
-<script src="${path}/js/jslib/jquery.bxslider.min.js"></script>
 <script defer src="${path}/js/main/main.js"></script>
 <script defer src="${path}/js/detailView.js"></script>
 <title>ZeroNine</title>
+<style>
+	.pie-chart {
+	  position: relative;
+	  display:inline-block;
+	  width: 64px;
+	  height: 64px;
+	  border-radius: 50%;
+	  transition: 0.3s;
+	  overflow: hidden;
+	}
+	span.center{
+		background: #fff;
+		display : block;
+		position: absolute;
+		top:50%; left:50%;
+		width: 75%;
+		height: 75%;
+		border-radius: 50%;
+		font-size: 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transform: translate(-50%, -50%);
+	}
+
+</style>
 </head>
 <body>
     <div id="zeronine_wrap">  
@@ -16,33 +45,42 @@
 		<div id="zn_container" class="zero_container main_container">
 		    <section class="main_visual_wrap">
 		        <div class="inner zn_center">
-			        <ul class="bxslider">
-					    <li>
-					    	<a href="${path}/main/introZeroNine.do">
-								<img src="${path}/images/main/mainvisual_01.png" alt="main visual">
-							</a>
-					    </li>
-					    <li>
-					    	<a href="${path}/main/introZeroNine.do">
-								<img src="${path}/images/main/mainvisual_02.png" alt="main visual">
-							</a>
-					    </li>
-					    <li>
-					    	<a href="${path}/main/introZeroNine.do">
-								<img src="${path}/images/main/mainvisual_03.png" alt="main visual">
-							</a>
-					    </li>
-					    <li>
-					    	<a href="${path}/main/introZeroNine.do">
-								<img src="${path}/images/main/mainvisual_04.png" alt="main visual">
-							</a>
-					    </li>
-					    <li>
-					    	<a href="${path}/main/introZeroNine.do">
-								<img src="${path}/images/main/mainvisual_05.png" alt="main visual">
-							</a>
-					    </li>
-					</ul>
+			    	<div class="visual_slide_wrap">
+				        <ul class="swiper-wrapper visual_list">
+						    <li class="swiper-slide">
+						    	<a href="${path}/main/introZeroNine.do">
+									<img src="${path}/images/main/mainvisual_01.png" alt="main visual">
+								</a>
+						    </li>
+						    <li class="swiper-slide">
+						    	<a href="${path}/main/introZeroNine.do">
+									<img src="${path}/images/main/mainvisual_02.png" alt="main visual">
+								</a>
+						    </li>
+						    <li class="swiper-slide">
+						    	<a href="${path}/main/introZeroNine.do">
+									<img src="${path}/images/main/mainvisual_03.png" alt="main visual">
+								</a>
+						    </li>
+						    <li class="swiper-slide">
+						    	<a href="${path}/main/introZeroNine.do">
+									<img src="${path}/images/main/mainvisual_04.png" alt="main visual">
+								</a>
+						    </li>
+						    <li class="swiper-slide">
+						    	<a href="${path}/main/introZeroNine.do">
+									<img src="${path}/images/main/mainvisual_05.png" alt="main visual">
+								</a>
+						    </li>
+						</ul>
+						
+						<!-- If we need pagination -->
+						<div class="swiper-pagination"></div>
+						
+						<!-- If we need navigation buttons -->
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+			    	</div>
 		        </div>
 		    </section>
 		    <section class="intro_wrap">
@@ -72,95 +110,72 @@
 		        </div>
 		    </section>
 		    <section class="board_wrap">
-		        <div class="board_unit immediate_delivery">
+		        <div class="board_unit fast_delivery">
 		            <div class="title">슝슝 즉배</div>
-		            <ul class="card_list">
-		                <li onclick="f_btn()">
-		                    <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
-		                    <p>CJ제일제당 스팸 싱글 마일드 80g*3</p>
-		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                </li>
-		                <li onclick="f_btn()">
-		                    <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
-		                    <p>CJ제일제당 스팸 싱글 마일드 80g*3</p>
-		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                </li>
-		                <li onclick="f_btn()">
-		                    <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
-		                    <p>CJ제일제당 스팸 싱글 마일드 80g*3</p>
-		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                </li>
-		            </ul>
+		            <div class="fast_list_wrap list_wrapper">
+			            <ul class="swiper-wrapper card_list fast_list">
+			            </ul>
+		            </div>
 		        </div>
-		        <div class="board_unit saving_delivery">
+		        <div class="board_unit free_delivery">
 		            <div class="title">알뜰 무배</div>
-		            <ul class="card_list">
-		                <li onclick="fd_btn()">
-		                    <div class="saving_target">
-		                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
-		                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                    </div>
-		                    <div class="progress_status">
-		                        <img src="${path}/images/main/img_progress01.png" alt="progress">
-		                    </div>
-		                </li>
-		                <li onclick="fd_btn()">
-		                    <div class="saving_target">
-		                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
-		                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                    </div>
-		                    <div class="progress_status">
-		                        <img src="${path}/images/main/img_progress01.png" alt="progress">
-		                    </div>
-		                </li>
-		                <li onclick="fd_btn()">
-		                    <div class="saving_target">
-		                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
-		                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                    </div>
-		                    <div class="progress_status">
-		                        <img src="${path}/images/main/img_progress01.png" alt="progress">
-		                    </div>
-		                </li>
-		            </ul>
+		            <div class="free_list_wrap list_wrapper">
+			            <ul class="swiper-wrapper card_list free_list">
+			            <!-- 
+				            <c:forEach begin="1" end="3">
+				                <li onclick="fd_btn()">
+				                    <div class="saving_target">
+				                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
+					                    <div class="deal_bottom">
+					                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
+					                    </div>
+				                    </div>
+				                    <div class="progress_status">
+				                        <img src="${path}/images/main/img_progress01.png" alt="progress">
+				                    </div>
+				                </li>
+				            </c:forEach>
+			             -->
+			            </ul>
+		            </div>
 		        </div>
 		        <div class="board_unit direct_deal">
 		            <div class="title">1:1 직거래</div>
-		            <ul class="card_list">
-		                <li onclick="o_btn()">
-		                    <div class="img_wrap img_user">
-		                        <img src="${path}/images/main/img_user.png" alt="user">
-		                    </div>
-		                    <div class="tit">소금빵 1+1입니다</div>
-		                    <p class="location_info">서울 마포구 월드컵북로 34 서교동 우도빌딩 1층, 호텔 아만티 건너편</p>
-		                    <ul class="needed">
-		                        <li>파리바게뜨 서교점</li>
-		                        <li>소금빵 1+1(마감세일) 5,200원</li>
-		                        <li>1명 모집</li>
-		                    </ul>
-		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                </li>
-		                <li onclick="o_btn()">
-		                    <div class="img_wrap img_user">
-		                        <img src="${path}/images/main/img_user.png" alt="user">
-		                    </div>
-		                    <div class="tit">소금빵 1+1입니다</div>
-		                    <p class="location_info">서울 마포구 월드컵북로 34 서교동 우도빌딩 1층, 호텔 아만티 건너편</p>
-		                    <ul class="needed">
-		                        <li>파리바게뜨 서교점</li>
-		                        <li>소금빵 1+1(마감세일) 5,200원</li>
-		                        <li>1명 모집</li>
-		                    </ul>
-		                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
-		                </li>
-		            </ul>
+		            <div class="direct_list_wrap list_wrapper">
+			            <ul class="swiper-wrapper card_list direct_list">
+			            <!-- 
+				            <c:forEach begin="1" end="2">
+				                <li class="direct_item">
+				                	<div class="deal_top">
+					                    <div class="img_wrap">
+					                        <img src="${path}/images/main/img_user.png" alt="product image">
+					                    </div>
+					                    <div>
+						                    <div class="tit">소금빵 1+1입니다</div>
+						                    <p class="location_info">서울 마포구 월드컵북로 34 서교동 우도빌딩 1층, 호텔 아만티 건너편</p>
+					                    </div>
+				                    </div>
+				                     <div class="deal_bottom">
+					                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
+				                    </div>
+				                </li>
+			                </c:forEach>
+			                 -->
+			            </ul>
+		            </div>
 		        </div>
 		    </section>
-		    <section class="recommended_wrap zn_center">
+		    <section class="recommended_wrap">
 		        <div class="title">이런 상품은 어때요 ?</div>
 		        <div class="recommended_list">
-		            <div class="product_wrap">
-		            </div>
+		        	<div class="recommended_list_inner">
+			            <!-- <div class="product_wrap swiper-wrapper"> -->
+			            <div class="product_wrap">
+			            </div>
+			            
+						<!-- If we need scrollbar -->
+						<!-- <div class="swiper-scrollbar"></div> -->
+		        	</div>
 		            <div class="view_more">+</div>
 		        </div>
 		    </section>
@@ -225,7 +240,7 @@
 		        </div>
 		    </section>
 		</div>
-		<%@include file="../common/detailView.jsp"%>
+		<%-- <%@include file="../common/detailView.jsp"%> --%>
 		<%@include file="../common/footer.jsp" %>
     </div>
 </body>
