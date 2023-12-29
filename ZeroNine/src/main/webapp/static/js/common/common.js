@@ -27,8 +27,36 @@ $(function () {
 
 });
 
+function handleClick(event, element) {
+    // 앵커 태그의 기본 동작 방지 (예: 새 페이지로 이동)
+    event.preventDefault();
+
+    // 클릭된 <a> 태그에서 data-value 속성 가져오기
+    var dataValue = element.getAttribute("data-value");
+
+    // buttonValue를 필요한 대로 사용
+    console.log("Button Value:", dataValue);
+    sessionStorage.setItem("buttonValue", dataValue);
+
+ // Redirecting to a new page
+    $.ajax({
+        type: 'GET',
+        url: contextPath + "/product/productList.do",
+        data: {"buttonValue": dataValue},
+        success: function (response) {
+            console.log("Button Value:", dataValue);
+            var newUrl = contextPath+"/product/productList.do";
+            window.location.replace(newUrl);
+            
+        },
+        error: function () {
+            console.error('Error loading modal content:', error);
+        }
+    });
+}
+
 const dateSet = {
-    convertTime: function (date) { //YYYY-MM-DD
+    convertTime: function (date) { //오후 00:00
         let transOption = { hour: "numeric", minute: "numeric" };
         return new Date(date).toLocaleTimeString("ko-KR", transOption);
     },
@@ -56,4 +84,21 @@ const numberWithDots = function (p_value) {
 const parseNumber = function(p_value) {
     p_value = p_value + '';
     return parseInt(p_value.replace(/[^0-9]/gm, ''), 10);
+};
+
+//백분율
+const getPercentage = function(target_amount, now_amount) {
+    return parseInt((now_amount / target_amount) * 100, 10);
+};
+
+//날짜 포멧
+const remainDateTime = function(targetDate) {
+	let date = new Date(targetDate);
+	let month = ('0' + (date.getMonth() + 1)).slice(-2);
+	let day = ('0' + date.getDate()).slice(-2);
+	let hours = ('0' + date.getHours()).slice(-2); 
+	let minutes = ('0' + date.getMinutes()).slice(-2);
+	let dateString = `${month}/${day} ${hours}:${minutes}`;
+	console.log("???",dateString);
+	return dateString;
 };
