@@ -195,7 +195,9 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/subPage/likeProductDetail.do")
-	public void likeProductDetail(@RequestParam(value = "searchWord", required = false) String searchWord,
+	public void likeProductDetail(
+			@RequestParam(value = "page", required = false ,defaultValue="1") int page,
+			@RequestParam(value = "searchWord", required = false) String searchWord,
 			@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
@@ -203,8 +205,11 @@ public class MyPageController {
 //		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
 		String customerId = (String) session.getAttribute("customerId");
 //		System.out.println("ID = " + customerId);
-		
-		model.addAttribute("likeProduct", deliveryService.likeProduct(customerId, searchWord));
+		PagingVO pagenation = deliveryService.likeProductgetPages(page, customerId, searchWord);
+		model.addAttribute("likeProduct", deliveryService.likeProduct(page,customerId, searchWord));
+		model.addAttribute("likeProductCount",deliveryService.likeProductCount(customerId, searchWord));
+		model.addAttribute("pagenation",pagenation);
+	
 	}
 	
 	

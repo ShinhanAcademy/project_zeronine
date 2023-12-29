@@ -37,30 +37,55 @@
 		</div>
 	</c:forEach>
 </div>
-<!-- //product_list -->
-<!-- pagination -->
-<c:if test="${likeProduct.size() != 0}">
-<div class=pagination>
-	<div class="pageLeft">
-		<button class="btnFirst">첫페이지</button>
-		<button class="btnPrev">이전페이지</button>
-	</div>
+<c:if test="${likeProductCount != 0}">
+		<div class=pagination>
+			<div class="pageLeft">
+				<c:choose>
+					<c:when test="${pagenation.pageNumber<=1}">
+						<button class="btnFirst" disabled="disabled">첫페이지</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btnFirst" id="btnFirst"
+							onclick="javascript:likeProduct(1)">첫페이지</button>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${pagenation.pageNumber<=1}">
+						<button class="btnPrev" disabled="disabled">이전페이지</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btnPrev" id="btnPrev"
+							onclick="javascript:likeProduct(${pagenation.pageNumber-1})">이전페이지</button>
+					</c:otherwise>
+				</c:choose>
+			</div>
 	<ul class="pagingWrap">
-		<li><a href="">1</a></li>
-		<li><a href="">2</a></li>
-		<li><a href="">3</a></li>
-		<li><a href="">4</a></li>
-		<li><a href="">5</a></li>
-		<li><a href="">6</a></li>
-		<li><a href="">7</a></li>
-		<li><a href="">8</a></li>
-		<li><a href="">9</a></li>
-		<li><a href="">10</a></li>
-	</ul>
-	<div class="pageRight">
-		<button class="btnNext">다음페이지</button>
-		<button class="btnLast">마지막페이지</button>
-	</div>
-</div>
-</c:if>
-<!-- //pagination -->
+				<c:forEach begin="${pagenation.startPageNumber}"
+					end="${pagenation.endPageNumber}" var="i" step="1">
+					<li><a href="javascript:likeProduct(${i})">${i}</a></li>
+				</c:forEach>
+			</ul>
+			<div class="pageRight">
+				<c:choose>
+					<c:when test="${pagenation.pageNumber==pagenation.maxPageNumber}">
+						<button class="btnNext" id="btnNext" disabled="disabled">다음페이지</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btnNext" id="btnNext"
+							onclick="javascript:likeProduct(${pagenation.pageNumber+1})">다음페이지</button>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${pagenation.pageNumber==pagenation.maxPageNumber}">
+						<button class="btnLast" disabled="disabled">마지막페이지</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btnLast" id="btnLast"
+							onclick="javascript:likeProduct(${pagenation.maxPageNumber})">마지막페이지</button>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+	</c:if>
+	<%-- </c:if> --%>
+	<!-- //pagination -->
