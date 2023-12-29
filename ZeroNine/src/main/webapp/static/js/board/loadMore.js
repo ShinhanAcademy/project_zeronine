@@ -1,23 +1,28 @@
-var initNum = 0;
-
+	
 //loadMore
 function loadMore(data){ 
 	keyword = $("#search").val();
 	console.log(keyword);
 	if(keyword==""){
 		console.log("aa");
-		var data = info_json;
+		var data = data_json;
 	} else{
 		console.log("bb");
 		data = result;
 	}
 	console.log(data);
-	totalList = data.length;
-	if(initNum <= totalList){
-		show(data.slice(initNum, initNum+9))
-		initNum += 9;
-	} else {
-		$("#loadMore_btn").hide();
-	}
-}
 	
+	var totalLength = data.length;
+	
+	if(endNum  < totalLength){
+	console.log(data);
+		$("#loadMore_btn").show();
+		showHtml(data.slice(initNum, initNum+9));
+		console.log(endNum);
+		endNum = initNum+8;
+		initNum += 9;
+		if(endNum >= totalLength){
+		$("#loadMore_btn").hide();
+			} 
+		}
+	}

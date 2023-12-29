@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+.checkbox{
+	width: 20px;
+	height: 20px;
+	margin-left: 20px;
+	margin-right: 10px;
+}
+
+.check_option{
+	font-size: 18px;	
+	padding-top: 5px;
+}
+
 .search_area {
 	display: flex;
 	border: 1px solid #eee;

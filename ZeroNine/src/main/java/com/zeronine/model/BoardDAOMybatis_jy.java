@@ -21,6 +21,7 @@ public class BoardDAOMybatis_jy {
 	Logger logger= LoggerFactory.getLogger(BoardDAOMybatis_jy.class);
 	final static String namespace = "net.zeronine.board.";
 	
+	//fast
 	public List<Map<String, Object>> selectFastBoardList(){
 		List<Map<String, Object>> infoFb =  sqlSession.selectList(namespace+"selectFastBoardList");
 		System.out.println(infoFb);
@@ -33,6 +34,13 @@ public class BoardDAOMybatis_jy {
 		return detail;
 	}
 	
+	//fast valid
+	public List<Map<String, Object>> selectValidFastList(){
+		List<Map<String, Object>> infoVFb = sqlSession.selectList(namespace+"selectValidFastList");
+		return infoVFb;
+	}
+	
+	//deal fail success
 	public List<DealFailRefundVO> selectDealFailBoard(){
 		List<DealFailRefundVO> fail = sqlSession.selectList(namespace+"selectDealFailBoard");
 		return fail;
@@ -53,6 +61,12 @@ public class BoardDAOMybatis_jy {
 		Map<String, Object> freeDetail = sqlSession.selectOne(namespace+"selectFreeDetail",boardId);
 		System.out.println("이것은 dao의 디테일 "+freeDetail);
 		return freeDetail;
+	}
+	
+	//free valid
+	public List<Map<String, Object>> selectValidFreeList(){
+		List<Map<String, Object>> infoVFreeb = sqlSession.selectList(namespace+"selectValidFreeList");
+		return infoVFreeb;
 	}
 	
 	//oneBoard

@@ -1,24 +1,16 @@
 package com.zeronine.board;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItem;
-import org.apache.http.protocol.HTTP;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -31,16 +23,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.amazonaws.util.IOUtils;
 import com.zeronine.dto.DealFailRefundVO;
 import com.zeronine.dto.DealSuccessBoardVO;
-import com.zeronine.dto.LikedBoardVO;
-import com.zeronine.dto.PagingVO;
 import com.zeronine.model.BoardService_jy;
 import com.zeronine.model.BoardService_sg;
 import com.zeronine.model.BoardService_yn;
@@ -80,9 +67,11 @@ public class BoardController {
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		
 		List<Map<String, Object>> infoFb = boardService.selectFastBoardList();
+		List<Map<String, Object>> infoVFb = boardService.selectValidFastList();
 		List<DealFailRefundVO> fail = boardService.selectDealFailBoard();
 		List<DealSuccessBoardVO> success = boardService.selectDealSuccessBoard();
 		List<String> likeBlist =likedboardService.selectByBidlist(custid);
+		
 		JSONArray jsonarray = new JSONArray();
 		for (Map<String, Object> map : infoFb) {
 			JSONObject json = new JSONObject();
@@ -94,6 +83,18 @@ public class BoardController {
 				json.put(key, value);
 			}
 			jsonarray.add(json);
+		}
+		
+		JSONArray validFastarray = new JSONArray();
+		for (Map<String, Object> vfmap : infoVFb) {
+			JSONObject vfjson = new JSONObject();
+			
+			for (Map.Entry<String, Object> vfentry : vfmap.entrySet()) {
+				String key = (String) vfentry.getKey();
+				String value = vfentry.getValue().toString();
+				vfjson.put(key, value);
+			}
+			validFastarray.add(vfjson);
 		}
 		
 		JSONArray failjson = new JSONArray();
@@ -122,24 +123,32 @@ public class BoardController {
 		model.addAttribute("fail",failjson);
 		model.addAttribute("success", successjson);
 		model.addAttribute("infoFb", jsonarray);
+		model.addAttribute("infoVf", validFastarray);
 		model.addAttribute("likeBlist",likeBlist);
 		
 		logger.info("controller fast정보: {}", infoFb);
 		logger.info("controller 에서 fail 정보 : {}", fail);
 		logger.info("controller 에서 success 정보 : {}", success);
+		logger.info("controller 에서 vf 정보 : {}", validFastarray);
 
 		return "board/fastBoard";
 	}
 	@RequestMapping("/fastboardlike.do")
 	public ResponseEntity<String> fastBoardLike(String boardId, Model model, HttpSession session) {
 		String customerId = (String) session.getAttribute("customerId"); //customerId
+		
+		if(customerId == null) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Login needed");
+		}
 		System.out.println("BoardId"+boardId);
+		model.addAttribute("customerId", customerId);
 		int result = boardServiceYn.insertLikedBoard(customerId, boardId);
 		if (result > 0) {
 			return ResponseEntity.ok("Data saved successfully. You can customize this message.");
-		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
-		}
+		} 
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
+		
 	}
 	
 	@PostMapping("/deletelikedboard.do")
@@ -156,6 +165,7 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		String customerId = (String) session.getAttribute("customerId"); //customerId
 		List<Map<String, Object>> infoFree = boardService.selectFreeDeliveryBoard();
+		List<Map<String, Object>> infoVFreeb = boardService.selectValidFreeList();
 		List<DealFailRefundVO> fail = boardService.selectDealFailBoard();
 		List<DealSuccessBoardVO> success = boardService.selectDealSuccessBoard();
 		List<String> likeBlist =likedboardService.selectByBidlist(customerId);
@@ -171,6 +181,18 @@ public class BoardController {
 				json.put(key, value);
 			}
 			jsonarray.add(json);
+		}
+		
+		JSONArray validFreearray = new JSONArray();
+		for (Map<String, Object> vfreemap : infoVFreeb) {
+			JSONObject vfreejson = new JSONObject();
+			
+			for (Map.Entry<String, Object> vfreeentry : vfreemap.entrySet()) {
+				String key = (String) vfreeentry.getKey();
+				String value = vfreeentry.getValue().toString();
+				vfreejson.put(key, value);
+			}
+			validFreearray.add(vfreejson);
 		}
 		
 		JSONArray failjson = new JSONArray();
@@ -199,8 +221,10 @@ public class BoardController {
 		model.addAttribute("fail",failjson);
 		model.addAttribute("success", successjson);
 		model.addAttribute("infoFree",jsonarray);
-		logger.info("직거래 정보:{} ", jsonarray);
+		model.addAttribute("infoVfree",validFreearray);
 		model.addAttribute("likeBlist",likeBlist);
+		logger.info("무배 정보:{} ", jsonarray);
+		logger.info("무배 valid 정보:{} ", validFreearray);
 		return "board/freeDeliveryBoard";
 	}
 	

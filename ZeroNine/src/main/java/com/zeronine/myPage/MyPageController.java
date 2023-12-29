@@ -262,16 +262,18 @@ public class MyPageController {
 		}
 	}
 	
-	/*
-	 * @RequestMapping("/requestPickup.do") public ResponseEntity<String>
-	 * insertPickupRequest(@RequestParam("subscriptionId") String subscription_id,
-	 * HttpServletRequest session){ String customer_id =
-	 * (String)session.getAttribute("customerId");
-	 * 
-	 * }
-	 * 
-	 */
-	
+	@RequestMapping("/requestPickupInsert.do")
+	public ResponseEntity<String> insertPickupRequest(@RequestParam("subscriptionId") String subscription_id, HttpServletRequest request, HttpSession session){
+		String customer_id = (String)session.getAttribute("customerId");
+		String subscriptionId = subscription_id;
+		System.out.println("ㅎㅎㅎ"+subscriptionId);
+		int result = mypageservice.insertPickupRequest(customer_id, subscriptionId);
+		if (result > 0) {
+			return ResponseEntity.ok("Data saved successfully. You can customize this message.");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save data.");
+		}
+	}
 	
 	@GetMapping("/createdBoard.do")
 	public void createdBoard(Model model, HttpSession session) {
