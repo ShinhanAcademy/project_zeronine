@@ -72,7 +72,7 @@ public class ProductController {
 			@RequestParam(value="pCount",required = false, defaultValue="1")int page,
 			@RequestParam(value="q", defaultValue="%")String q,
 			@RequestParam(value="selectedValue",required = false, defaultValue="0")String selectedValue,
-			@RequestParam(value="buttonValue",required = false, defaultValue="%")String buttonValue,
+			@RequestParam(value="buttonValue",required = false, defaultValue="%")String buttonValue,			
 			Model model,HttpSession session
 			) {
 		String s1=(String)session.getAttribute("s1");
@@ -177,6 +177,7 @@ public class ProductController {
 		model.addAttribute("deliverylist4", productService.selectDetailDelivery4());
 		model.addAttribute("pImage", productService.selectPImage(productId));
 		model.addAttribute("detailImage", productService.selectDetailImage(productId));
+		model.addAttribute("custid", custid);
 		return "product/productDetail";
 	}
 	@PostMapping("/alreadyInCartModal.do")

@@ -154,10 +154,9 @@
 		var path = "${path}";
 		var sidebox = $("#sidebox");
 		 var custid = "${customerid}";
+		 var isLogin = "${custid}";
 		 var productid ="${plist.productId}";
-		 console.log(productid);
 		 var cartCheckpid ="${cartCheckPid}";
-		 console.log(cartCheckpid);
 		var currentPosition = parseInt($("#sidebox").css("top"));
 		
 		$(window).scroll(function() {
@@ -214,14 +213,20 @@
 	
 		var cartcheckarr =cartCheck.split(',');
 		 function goOrder() {
-		
+			
+			if(isLogin==""){
+				alert("로그인 후 이용해주세요.");
+				location.href = "/auth/login.do";
+				return;
+			}
+			 
 			var cartCheckpid ="${cartCheckPid}";
 			 var productid ="${plist.productId}";
-			 console.log(productid);
-			 console.log(cartCheckpid);
-			 console.log(cartCheckpid.includes(productid)==false);
-			 console.log(cartcheckarr.includes(productid)==false);
-			 console.log(cartcheckarr);
+			 //console.log(productid);
+			 //console.log(cartCheckpid);
+			 //console.log(cartCheckpid.includes(productid)==false);
+			 //console.log(cartcheckarr.includes(productid)==false);
+			 //console.log(cartcheckarr);
 				var result = updateQuantityAndTotal();
 			    var total = result.total;
 			    var quantityValue = result.quantityValue;
@@ -265,8 +270,8 @@
 		    var total = result.total;
 		    var quantityValue = result.quantityValue;
 		    var cartCheckpid ="${cartCheckPid}";
-		    console.log(custid);
-			 console.log(productid);
+		    //console.log(custid);
+			//console.log(productid);
 			var obj = {
 				"productid" :productid,
 				"pcount": quantityValue};
@@ -307,7 +312,7 @@ var str = "${likedcid}";
 	 var likedcidArr = [] ; 
 	 //str.split(/!|@|~|,| |Z/);
 	 likedcidArr = str.split(/,|\[|\]| /);
-	 console.log(likedcidArr);
+	 //console.log(likedcidArr);
 	 function handleLikeButtonClick(productId) {
 	      
 	        var custid = "${customerid}";

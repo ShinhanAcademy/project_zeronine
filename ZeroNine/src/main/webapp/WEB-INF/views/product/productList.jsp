@@ -27,7 +27,7 @@
 								<img src="${path}/images/sangpumpage/fluent_basket.png">
 							</button>
 						</div>
-						<p>채소</p>
+						<p>식재료</p>
 					</div>
 					<div class="category">
 						<div class="img_wrap">

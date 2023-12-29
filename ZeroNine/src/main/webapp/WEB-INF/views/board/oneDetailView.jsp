@@ -43,10 +43,18 @@
 	</div>
 </body>
 <script type="text/javascript">
+var customerId = "${customerId}";
 $("#joinChat").on("click", function(){
+	
+	if(customerId==""){
+		alert("로그인 후 이용해주세요.");
+		location.href = "/auth/login.do";
+		return;
+	}
+	
 	const oBoardId = "${board_id}";
 	
-	console.log("oBoardId??", oBoardId);
+	//console.log("oBoardId??", oBoardId);
 	if(confirm("채팅에 참여하시겠습니까?")){
 		$.ajax({
 			url : contextPath +"/insertChatInfo.do",
