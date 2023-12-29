@@ -162,7 +162,7 @@
 	</select>
 	
 	<!-- like product -->
-	<select id="likeProduct" parameterType="String" resultType="map">
+	<select id="likeProduct" parameterType="map" resultType="map">
 		select 
 			"productMainImage"."imagePath",
 			product."productId",
@@ -177,5 +177,18 @@
 				AND (product.brand LIKE #{searchWord} OR
 					 product."pName" LIKE #{searchWord})
 		 	</if>
+		 	LIMIT 8 OFFSET #{page}
+	</select>
+		<select id="likeProductCount" parameterType="map" resultType="int">
+		select count(*)
+		from customer join "likedProduct" on customer."customerId" = "likedProduct"."customerId"
+					  join 	product on "likedProduct"."productId" = "product"."productId"
+					  left outer join "productMainImage" on "productMainImage"."productId" = "product"."productId"
+		where customer."customerId" = cast(#{customerId} as UUID)
+			<if test="searchWord != ''">
+				AND (product.brand LIKE #{searchWord} OR
+					 product."pName" LIKE #{searchWord})
+		 	</if>
+		 	
 	</select>
 </mapper>

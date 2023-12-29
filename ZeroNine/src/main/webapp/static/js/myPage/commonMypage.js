@@ -159,10 +159,11 @@ function callOrderCancelHistory(page) {
 
 //likeProduct
 //Ajax
-function likeProduct() {
+function likeProduct(page) {
 	var paramObj = {};
 
 	paramObj.searchWord = $(".search_word input").val();
+	paramObj.page = page;
 	console.log("paramObj", paramObj);
 	
 	$.ajax({

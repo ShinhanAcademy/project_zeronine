@@ -95,10 +95,35 @@ public class MyPageService {
 	}
 
 	/* like product */
-	public List<Map<String, Object>> likeProduct(String customerId, String searchWord) {
-		return myPageDAO.likeProduct(customerId, searchWord);
+	public List<Map<String, Object>> likeProduct(int page,String customerId, String searchWord) {
+		int pageStartNum = (page - 1) * pageLimit;
+		return myPageDAO.likeProduct(pageStartNum,customerId, searchWord);
 	}
+	public int likeProductCount(String customerId, String searchWord) {
+		return myPageDAO.likeProductCount(customerId, searchWord);
+	}
+	public PagingVO likeProductgetPages(int page,String customerId, String searchWord) {
+		 pageLimit = 8;
+		blockLimit = 8;
+		int likeProductCount = myPageDAO.likeProductCount(customerId, searchWord);
 
+		int maxPageNumber = (int) (Math.ceil((double) likeProductCount / pageLimit));
+
+		int startPageNumber = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+
+		int endPageNumber = startPageNumber + blockLimit - 1;
+		if (endPageNumber > maxPageNumber) {
+			endPageNumber = maxPageNumber;
+		}
+		PagingVO paramsPage = new PagingVO();
+		paramsPage.setEndPageNumber(endPageNumber);
+		paramsPage.setMaxPageNumber(maxPageNumber);
+		paramsPage.setPageNumber(page);
+		paramsPage.setStartPageNumber(startPageNumber);
+		System.out.println(paramsPage.toString());
+		return paramsPage;
+
+	}
 	/*
 	 * public Map<String, Object> orderHistoryAll(String customerId){ return
 	 * deliveryDAO.orderHistoryAll(customerId); }

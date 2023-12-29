@@ -102,9 +102,10 @@ public class MyPageDAOMybatis {
 	}
 	
 	/* likeProduct */
-	public List<Map<String, Object>> likeProduct(String customerId, String searchWord) {
+	public List<Map<String, Object>> likeProduct(int pageStartNum,String customerId, String searchWord) {
 		Map<String, Object> mapData = new HashMap<>();
 		mapData.put("customerId", customerId);
+		mapData.put("page", pageStartNum);
 		mapData.put("searchWord", addPersentage(searchWord));
 		
 //		Logger.info("endDate format{}", endDateFormat(endDate));
@@ -113,7 +114,13 @@ public class MyPageDAOMybatis {
 
 		return likeProductList;
 	}
-	
+	public int likeProductCount(String customerId, String searchWord) {
+		Map<String, Object> mapData = new HashMap<>();
+		mapData.put("customerId", customerId);
+		mapData.put("searchWord", addPersentage(searchWord));
+		int count = sqlSession.selectOne(NAMESPACE+"likeProductCount",mapData);
+		return count;
+	}
 	/*
 	public Map<String, Object> orderHistoryAll(String customerId){
 		Map<String, Object> result = sqlSession.selectOne(NAMESPACE+"orderHistoryAll",customerId);
