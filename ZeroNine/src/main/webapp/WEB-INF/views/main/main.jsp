@@ -121,21 +121,24 @@
 		            <div class="title">알뜰 무배</div>
 		            <div class="free_list_wrap list_wrapper">
 			            <ul class="swiper-wrapper card_list free_list">
-			            <!-- 
+			            	<!--  
 				            <c:forEach begin="1" end="3">
-				                <li onclick="fd_btn()">
+				                <li class="swiper-slide free_item">
 				                    <div class="saving_target">
+										<div class="saving_con">
 				                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
+											<div class="conBox">구매하자구매하자구매하자구매하자구매하자구매하자구매하자구매하자!!</div>
+										</div>
 					                    <div class="deal_bottom">
 					                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
 					                    </div>
 				                    </div>
 				                    <div class="progress_status">
-				                        <img src="${path}/images/main/img_progress01.png" alt="progress">
+				                        <img src="${path}/images/main/img_progress01.png" alt="progress" />
 				                    </div>
 				                </li>
 				            </c:forEach>
-			             -->
+				            -->
 			            </ul>
 		            </div>
 		        </div>

@@ -137,7 +137,7 @@ board_wrap
 }
 .card_list > li {
 	width: 100%;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
     background-color: #fff;
     border-radius: 8px;
     border: 1px solid #ddd;
@@ -149,17 +149,22 @@ board_wrap
 	display: flex;
     flex-direction: column;
     justify-content: space-between;
+	height: 130px;
 }
 .card_list.free_list > li {
 	display: flex;
 	align-items: center;
+	height: 103px;
 }
-.card_list.fast_list > li,
-.card_list.direct_list > li {
-	height: 130px;
-}
-.card_list.free_list > li {
-	height: 94px;
+.card_list.fast_list > li.no_list,
+.card_list.direct_list > li.no_list,
+.card_list.free_list > li.no_list {
+    height: 100%;
+    align-items: center;
+    font-size: 15px;
+    justify-content: center;
+    color: #999;
+    cursor: auto;
 }
 .card_list .deal_top {
 	display: flex;
@@ -193,12 +198,21 @@ board_wrap
     text-overflow: ellipsis;
     margin-bottom: 3px;
 }
+
+.card_list.free_list > li .conBox {
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 14px;
+	color: #666;
+}
 .card_list .deal_bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 5px;
-	margin-top: 15px;
+	/* margin-top: 15px; */
 	font-size: 13px;
     line-height: 1.3;
 }
@@ -230,6 +244,9 @@ board_wrap
 	display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: calc(100% - 80px);
+    height: 100%;
+    margin-right: 15px;
 }
 .card_list .saving_target .deadline {
     background-color: #CBDFD8;
@@ -239,23 +256,13 @@ board_wrap
     font-weight: normal;
 }
 .card_list .progress_status {
+    flex-shrink: 0;
     width: 64px;
     height: 64px;
 }
 .card_list .progress_status img {
     width: 100%;
 }
-/*
-.card_list .img_user {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-.card_list .img_user img {
-    width: 100%;
-}
-*/
 .card_list .location_info {
     margin-top: 6px;
     display: -webkit-box;

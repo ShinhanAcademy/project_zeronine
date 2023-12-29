@@ -99,6 +99,6 @@ const remainDateTime = function(targetDate) {
 	let hours = ('0' + date.getHours()).slice(-2); 
 	let minutes = ('0' + date.getMinutes()).slice(-2);
 	let dateString = `${month}/${day} ${hours}:${minutes}`;
-	console.log("???",dateString);
+
 	return dateString;
 };

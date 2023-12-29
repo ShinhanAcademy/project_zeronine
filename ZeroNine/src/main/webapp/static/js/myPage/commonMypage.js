@@ -14,7 +14,20 @@ $(function(){
 			$(this).addClass("on"); return false;
 		}
 	});
-	
+
+	//Personal Info
+	$(function(){
+		$.ajax({
+		    url : contextPath + "/myPage/common/personalInfo.do",
+		    type: "POST",
+		    success : function(res){
+		 	   $("#personalInfo").html(res);
+		    },
+		    error : function(){
+		        alert("personalInfo 에러입니다.");
+		    }
+		});
+	});
 });
 
 function usingDatePicker(){

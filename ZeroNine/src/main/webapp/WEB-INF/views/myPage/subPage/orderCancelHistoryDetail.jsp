@@ -167,4 +167,3 @@
 	<!-- //pagination -->
 </c:if>
 <!-- //pagination -->
-<script src="${path}/js/myPage/commonMypage.js"></script>
