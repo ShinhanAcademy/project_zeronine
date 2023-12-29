@@ -42,6 +42,12 @@
 						<option value="recent">최신순</option>
 						<option value="imminent">임박순</option>
 					</select>
+					<span>
+					<input type="checkbox" class="checkbox" onclick="isCheck()">
+					</span>
+					<span class="check_option">
+					성공/마감 제외
+					</span>
 				</div>
 				<!-- 아이디 확인용 hidden  -->
 				<div id=email data-email="{email}" hidden="hidden"> ${email}</div> 
@@ -85,17 +91,43 @@
 	
 <script>
 var type_of_filter;
-var info_json;
+var info_json = JSON.parse('${infoFree}');
+var info_valid = JSON.parse('${infoVfree}');
+var checked;
 var output = "";
 var path = "${path}";
 var result = [];
+var data_json;
+var initNum = 0;
+var endNum = 0;
 // DOM이 준비되면 필터링 함수 호출
 $(filterType);
 $(searchBoard);
+$(isCheck);
+
+
+//valid board
+function isCheck(){
+	var checkbox = document.querySelector(".checkbox");
+	checked = checkbox.checked;
+	console.log(checked);
+	
+	if(checked){
+		data_json = info_valid;
+	} else{
+		data_json = info_json;
+	}
+	console.log(data_json);
+	ratio_arr=[];
+	initNum = 0;
+	endNum = 0;
+	showList(data_json);
+}
 
 
 
-	// 실패 정보 파싱 및 배열 생성
+
+	// 실패 정보 파싱 및 배열 생성	
     var fail_info = '${fail}';
     var fail_info_array = JSON.parse(fail_info);
     var failId_array = [];
@@ -117,14 +149,17 @@ $(searchBoard);
     console.log(failId_array);
     
     var ratio_arr = [];
-function show(jsondata) {
-	console.log(jsondata.length);
+    
+function showHtml(jsondata) {
+	console.log(jsondata);
 
     $.each(jsondata, function (index, item) {
     	
     	//%구하기
     	var ratio = Math.round(((item.sum)/50000)*100);
+    	console.log(item.sum);
     	ratio_arr.push(ratio);
+    	console.log(ratio_arr);
     	
     	//남은 액수
     	var last = 50000-(item.sum);
@@ -222,45 +257,37 @@ $("#btn"+index).find("img.board_like").attr("src", newImagePath);
    	//클래스가 heart liked => AJAX DELTE 호출
        var isRedHeart = likeBlistArr.indexOf(boardId);
    	
-		console.log(isRedHeart);
-		if(isRedHeart>=0) {
-			$.ajax({
-				url : "/board/deletelikedboard.do",
-				type: "POST",
-				data : {"boardId" :boardId},
-				success : function(){
-					likeBlistArr = likeBlistArr.filter(item => item !== boardId);
-				},
-				error : function(){
-					alert("에러입니다.");
-				}
-				});
-				 
-			}else{
-
-			 $.ajax({
-					url : "/board/fastboardlike.do",
-					type: "POST",
-					data : {"boardId" :boardId},
-					success : function(){
-						likeBlistArr.push(boardId);
-					},
-					error : function(){
-						alert("에러입니다.");
-					}
-					});
-			}
-			
-
-
-};
+       console.log(isRedHeart);
+       if (isRedHeart >= 0) {
+           $.ajax({
+               url: "/board/deletelikedboard.do",
+               type: "POST",
+               data: { "boardId": boardId },
+               success: function () {
+                       likeBlistArr = likeBlistArr.filter(item => item !== boardId);
+               }
+           });
+       } else {
+           $.ajax({
+               url: "/board/fastboardlike.do",
+               type: "POST",
+               data: { "boardId": boardId },
+               success: function () {
+            	   likeBlistArr.push(boardId);
+               },
+               error: function() {
+            	   alert("로그인 먼저 해주세요.");
+                   $(".board_like").attr("src", '${path}/images/board/heart.png');
+                   location.href = "${path}/auth/login.do";
+               } 
+           });
+       }
+}   
 // 찜하기 기능 구현 끝
 function filterType() {
     // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;
-    info_json = JSON.parse('${infoFree}');
-    console.log("이것은 jsp의 제이슨 : "+ info_json)
-    showList();
+   	isCheck();
 }
 
 function showList() {
@@ -268,13 +295,13 @@ function showList() {
     result = [];
     initNum = 0;
     if (type_of_filter == 'imminent') { // 임박순
-    	info_json.sort(
+    	data_json.sort(
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             }
         );
     } else { // 최신순 (default)
-    	info_json.sort(
+    	data_json.sort(
             function (a, b) {
                 return new Date(b.uploadTime) - new Date(a.uploadTime);
             }
@@ -334,15 +361,15 @@ function searchBoard() {
 
 function check() {
 	output = "";
-    filterKeyword(info_json, keyword);
+    filterKeyword(data_json, keyword);
 }
 
 // 키워드로 필터링
-function filterKeyword(info_json, keyword) {
+function filterKeyword(data_json, keyword) {
 	initNum = 0;
     keyword = $("#search").val();
     result=[];
-    $.each(info_json, function (index, item) {
+    $.each(data_json, function (index, item) {
         var title = item.title;
         var left = 50000 - item.sum;
         console.log(left);

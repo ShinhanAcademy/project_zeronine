@@ -81,6 +81,40 @@
 		where ob."oBoardId"=cast(#{boardId} as UUID)
 	</select>
 	
+	<select id="selectValidFastList" resultType="map">
+	select b."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", sum(sp."pickCount") as "totalpickCount", pi."imagePath", dfr."boardId", dsb."boardId"
+			from public."board" as b
+			join public."selectProduct" as sp on (b."boardId" = sp."boardId")
+			join public."product" as p on (p."productId" = sp."productId")
+			join public."productMainImage" as pi on (p."productId" = pi."productId")
+			LEFT JOIN public."dealFailRefund" AS dfr ON b."boardId" = dfr."boardId"
+  			LEFT JOIN public."dealSuccessBoard" AS dsb ON b."boardId" = dsb."boardId"
+			where dfr."boardId" is null and dsb."boardId" is null
+			group by b."boardId",b."title", b."boardContent", b."uploadTime", b."finishTime", p."productId", p."pName", p."brand", p."price", p."pCount", pi."imagePath", dfr."boardId", dsb."boardId"
+			order by b."uploadTime" desc
+	</select>
+	
+	<select id="selectValidFreeList" resultType="map">
+	SELECT free_board_data."boardId", free_board_data."title", free_board_data."boardContent",
+       free_board_data."uploadTime", free_board_data."finishTime",
+       SUM(free_board_data.sumprice) AS sum, free_board_data."dfr_boardid", free_board_data."dsb_boardid"
+FROM (
+    SELECT bc."boardId", b."title", b."boardContent", b."uploadTime", b."finishTime",
+           (p."price" * SUM(bc."purchaseCount")) AS sumprice,
+           dfr."boardId" AS dfr_boardId, dsb."boardId" AS dsb_boardId
+    FROM public."boardCart" AS bc
+    LEFT JOIN public."product" AS p ON bc."productId" = p."productId"
+    LEFT JOIN public."board" AS b ON bc."boardId" = b."boardId"
+    LEFT JOIN public."dealFailRefund" AS dfr ON b."boardId" = dfr."boardId"
+    LEFT JOIN public."dealSuccessBoard" AS dsb ON b."boardId" = dsb."boardId"
+    GROUP BY bc."boardId", b."title", b."boardContent", b."uploadTime", p."price", b."finishTime", dfr."boardId", dsb."boardId"
+) AS free_board_data
+where free_board_data."dfr_boardid" is null and  free_board_data."dsb_boardid" is null
+GROUP BY free_board_data."boardId", free_board_data."title", free_board_data."boardContent",
+         free_board_data."uploadTime", free_board_data."finishTime",free_board_data."dfr_boardid", free_board_data."dsb_boardid"
+ORDER BY free_board_data."uploadTime" DESC;
+	</select>
+	
 	
 	
 </mapper>
