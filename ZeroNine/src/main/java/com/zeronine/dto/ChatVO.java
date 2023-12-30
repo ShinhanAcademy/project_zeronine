@@ -6,7 +6,7 @@ import lombok.Data;
 public class ChatVO {
 	private String boardId;
 	private String chatId;
-	private String oTitle;
+	private String boardTitle;
 	private String customerName;
 	private String address;
 	private String finishTime;

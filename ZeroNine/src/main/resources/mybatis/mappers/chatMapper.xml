@@ -5,38 +5,90 @@
 <mapper namespace="net.zeronine.chat">
 	<select id="selectChatList" parameterType="String" resultType="chatVO">
 	SELECT
-		 "oneToOneBoard"."oBoardId" AS "boardId"
-		,"chat"."chatId"
-		,"oneToOneBoard"."oTitle"
-		,"customer"."customerName"
-		,"oneToOneBoard"."address" || ' ' || "oneToOneBoard"."addressDetail" AS "address"
-		,TO_CHAR("oneToOneBoard"."finishTime", 'YYYY-MM-DD HH24:MI:SS') AS "finishTime"
-		, CASE 
-	        WHEN "oneToOneBoard"."oPostingMinutes" = 0 THEN 'D-day 0'
-	        ELSE 'D-' || FLOOR("oneToOneBoard"."oPostingMinutes" / 1440) 
-	    END AS "day"
-		,TO_CHAR("message"."sendTime", 'YYYY-MM-DD HH24:MI:SS') AS "sendTime"
-		,"oBoardImage"."oBoardImagePath" AS "path"
-		,"message"."messageContent"
-	FROM "oneToOneBoard"
-	INNER JOIN "chat"
-		ON "oneToOneBoard"."oBoardId" = "chat"."oBoardId"
-	INNER JOIN "customer"
-		ON "chat"."customerId" = "customer"."customerId"
-	LEFT JOIN "oBoardImage"
-		ON "oneToOneBoard"."oBoardId" = "oBoardImage"."oBoardId"
-	LEFT JOIN (
+		*
+	FROM (
+	--내가 작성한 글의 채팅 목록
 		SELECT
-			 "chatId"
-			,"messageContent"
-			,"sendTime"
-			,ROW_NUMBER() OVER(PARTITION BY "chatId" ORDER BY "sendTime" DESC) AS "rowNum"
-		FROM "message"
-	) "message"
-		ON "chat"."chatId" = "message"."chatId"
-		AND "message"."rowNum" = 1
-	WHERE "oneToOneBoard"."oAuthorId" = cast(#{oAuthorId} as uuid)
-	OR "chat"."customerId" = cast(#{customerId} as uuid)
+			 "oneToOneBoard"."oBoardId" AS "boardId"
+			,"chat"."chatId"
+			,"oneToOneBoard"."oTitle"
+			,"oneToOneBoard"."oAuthorId"
+			,"customer"."customerName"
+			,"customer"."customerId"
+			,"oneToOneBoard"."address" || ' ' || "oneToOneBoard"."addressDetail" AS "address"
+			,TO_CHAR("oneToOneBoard"."finishTime", 'YYYY-MM-DD HH24:MI:SS') AS "finishTime"
+			, CASE 
+		        WHEN "oneToOneBoard"."oPostingMinutes" = 0 THEN 'D-day 0'
+		        ELSE 'D-' || FLOOR("oneToOneBoard"."oPostingMinutes" / 1440) 
+		    END AS "day"
+			,TO_CHAR("message"."sendTime", 'YYYY-MM-DD HH24:MI:SS') AS "sendTime"
+			,"oBoardImage"."oBoardImagePath" AS "path"
+			,"message"."messageContent"
+			,TO_CHAR("chat"."createTime", 'YYYY-MM-DD HH24:MI:SS') AS "createTime"
+		FROM "oneToOneBoard"
+		INNER JOIN "chat"
+			ON "oneToOneBoard"."oBoardId" = "chat"."oBoardId"
+		INNER JOIN "customer"
+			ON "chat"."customerId" = "customer"."customerId"
+		LEFT JOIN "oBoardImage"
+			ON "oneToOneBoard"."oBoardId" = "oBoardImage"."oBoardId"
+		LEFT JOIN (
+			SELECT
+				 "chatId"
+				,"messageContent"
+				,"sendTime"
+				,ROW_NUMBER() OVER(PARTITION BY "chatId" ORDER BY "sendTime" DESC) AS "rowNum"
+			FROM "message"
+		) "message"
+			ON "chat"."chatId" = "message"."chatId"
+			AND "message"."rowNum" = 1
+		WHERE "oneToOneBoard"."oAuthorId" = cast(#{customerId} as uuid)
+		
+		UNION
+		
+		-- 상대방이 작성한 글에 채팅중인 목록
+		SELECT
+			 "oneToOneBoard"."oBoardId" AS "boardId"
+			,"chat"."chatId"
+			,"oneToOneBoard"."oTitle"
+			,"oneToOneBoard"."oAuthorId"
+			,"customer"."customerName"
+			,"customer"."customerId"
+			,"oneToOneBoard"."address" || ' ' || "oneToOneBoard"."addressDetail" AS "address"
+			,TO_CHAR("oneToOneBoard"."finishTime", 'YYYY-MM-DD HH24:MI:SS') AS "finishTime"
+			, CASE 
+		        WHEN "oneToOneBoard"."oPostingMinutes" = 0 THEN 'D-day 0'
+		        ELSE 'D-' || FLOOR("oneToOneBoard"."oPostingMinutes" / 1440) 
+		    END AS "day"
+			,TO_CHAR("message"."sendTime", 'YYYY-MM-DD HH24:MI:SS') AS "sendTime"
+			,"oBoardImage"."oBoardImagePath" AS "path"
+			,"message"."messageContent"
+			,TO_CHAR("chat"."createTime", 'YYYY-MM-DD HH24:MI:SS') AS "createTime"
+		FROM "chat"
+		INNER JOIN "oneToOneBoard"
+			ON "chat"."oBoardId" = "oneToOneBoard"."oBoardId"
+		INNER JOIN "customer"
+			ON "chat"."customerId" = "customer"."customerId"
+		LEFT JOIN "oBoardImage"
+			ON "oneToOneBoard"."oBoardId" = "oBoardImage"."oBoardId"
+		LEFT JOIN (
+			SELECT
+				 "chatId"
+				,"messageContent"
+				,"sendTime"
+				,ROW_NUMBER() OVER(PARTITION BY "chatId" ORDER BY "sendTime" DESC) AS "rowNum"
+			FROM "message"
+		) "message"
+			ON "chat"."chatId" = "message"."chatId"
+			AND "message"."rowNum" = 1
+		WHERE "chat"."customerId" = cast(#{customerId} as uuid)
+	) TBL
+	ORDER BY 
+		CASE
+	        WHEN TBL."sendTime" IS NOT NULL THEN TBL."sendTime"
+	        ELSE TBL."createTime"
+	    END DESC,
+	    "createTime" DESC
 	</select>
 	
 	<select id="selectChatDtlList" parameterType="String" resultType="chatDtlVO">
@@ -60,10 +112,12 @@
 			 "chatId"
 			,"customerId"
 			,"oBoardId"
+			,"createTime"
 		) VALUES (
 			 cast(#{chatId} AS uuid)
 			,cast(#{customerId} AS uuid)
 			,cast(#{boardId} AS uuid)
+			,CURRENT_TIMESTAMP
 		)
 	</insert>
 	
@@ -88,13 +142,14 @@
 		 "chat"."chatId"
 		,"oneToOneBoard"."address" || ' ' || "oneToOneBoard"."addressDetail" AS "address"
 		,"oneToOneBoard"."oTitle" AS "title"
-		,"oBoardImage"."oBoardImagePath" AS "path"
+		,"oBoardImage"."oBoardImagePath" AS "productImagePath"
 		,"customer"."customerName"
+		,"chat"."customerId" AS "otherCustomerId"
 	FROM "chat"
 	INNER JOIN "oneToOneBoard"
 		ON "chat"."oBoardId" = "oneToOneBoard"."oBoardId"
 	INNER JOIN "customer"
-		ON "oneToOneBoard"."oAuthorId" = "customer"."customerId"
+		ON "chat"."customerId" = "customer"."customerId"
 	LEFT JOIN "oBoardImage"
 		ON "oneToOneBoard"."oBoardId" = "oBoardImage"."oBoardId"
 	WHERE "chat"."chatId" = cast(#{chatId} AS uuid)
@@ -103,4 +158,11 @@
 	<delete id="deleteChatInfo" parameterType="String">
 		DELETE FROM "chat" WHERE "chat"."chatId" = cast(#{chatId} AS uuid)
 	</delete>
+	
+	<select id="findChatId" parameterType="String" resultType="String">
+	SELECT
+		 "chat"."chatId"
+	FROM "chat"
+	WHERE "chat"."oBoardId" = cast(#{oBoardId} AS uuid)
+	</select>
 </mapper>

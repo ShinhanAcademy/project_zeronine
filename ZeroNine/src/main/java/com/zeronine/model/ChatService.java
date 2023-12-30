@@ -39,4 +39,8 @@ public class ChatService {
 	public int deleteChatInfo(String chatId) {
 		return chatDAO.deleteChatInfo(chatId);
 	}
+
+	public String findChatId(String oBoardId) {
+		return chatDAO.findChatId(oBoardId);
+	}
 }

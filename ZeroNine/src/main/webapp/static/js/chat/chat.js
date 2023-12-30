@@ -6,8 +6,7 @@
 let stompClient = null;
 let chatId = null;
 let boardId = null;
-let sender = null;
-let myId = null;
+let sender = null; // myId
 let sendMsgImageFlag = false;
 
 $(function() {
@@ -26,15 +25,10 @@ $(function() {
 			type : "POST",
 			success : function(result) {
 				console.log("RESULT=>", result);
-				myId = result.customerId;
-				console.log("MY ID", myId);
-				const {customerId, chatDtlList, chatDtlVO} = result;
-				const {customerName, address, title, path} = chatDtlVO;
-				// const {customerId, chatDtlList, chatDtlVO, customerName} = result;
-				// const {address, title, path, senderId} = chatDtlVO;
+				const {chatDtlList, chatDtlVO} = result;
+				const {customerName, address, title, productImagePath, myCustomerId, otherCustomerId} = chatDtlVO;
 				
-				sender = customerId;
-				// sender = senderId;
+				sender = myCustomerId;
 				
 				console.log("chatDtlVO>>>>>>>>>>>>    ", chatDtlVO);
 
@@ -43,7 +37,7 @@ $(function() {
 				$("#title").html(title);
 				
 				if(path != null && typeof path != "undefined"){
-					$("#path").html(`<img src="${path}" alt="product image">`);
+					$("#path").html(`<img src="${productImagePath}" alt="product image">`);
 				}else{
 					$("#path").html(`<img src="../images/chat/img_no_product.png" alt="product no-image">`);
 				}
@@ -72,7 +66,7 @@ $(function() {
 							makeImage = false;
 						}
 						
-						if(customerId == senderId) { //my msg
+						if(sender == senderId) { //my msg
 							addHtml.push(`<div class="talk my_talk">`);
 							if(myCurrTime != dateSet.convertTime(sendTime)){
 								addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
@@ -86,7 +80,23 @@ $(function() {
 							addHtml.push(`<div class="talk other_talker">`);
 							if(!makeImage){
 								addHtml.push(`<div class="profile img_wrap">`);
-								addHtml.push(`<img src="${contextPath}/images/mypage/img_chat_profile.png" alt="profile image" />`)	
+								
+								let imagePath;
+								if(customerName == "유은경" || otherCustomerId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045"){
+									imagePath = "/images/common/img_user_ek.jpg";
+								}else if(customerName == "방용수" || otherCustomerId == "490ef92a-d77f-432f-8bfb-2828eee6db77"){
+									imagePath = "/images/common/img_user_ys.jpg";
+								}else if(customerName == "이예나" || otherCustomerId == "87c5033c-ef9d-4934-930a-2f172cdad795"){
+									imagePath = "/images/common/img_user_yn.jpg";
+								}else if(customerName == "정주영" || otherCustomerId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"){
+									imagePath = "/images/common/img_user_jy.jpg";
+								}else if(customerName == "노승광" || customerName == "네이버승광" || otherCustomerId == "68966705-7537-4e13-8262-dffaa09f39c8"){
+									imagePath = "/images/common/img_user_sg.jpg";
+								}else{
+									imagePath = "/images/mypage/img_mypage_profile.png";
+								}
+								
+								addHtml.push(`<img src="${contextPath}${imagePath}" alt="profile image" />`);
 								addHtml.push(`</div>`);
 								
 								makeImage = true;
@@ -145,6 +155,11 @@ $(function() {
 	});
 	
 	connect();
+	
+	if($("div[data-flag='Y']").length > 0){
+		console.log("zzzzzzzzzzzzzzzzzzzzz");
+		$("div[data-flag='Y']").click();
+	}
 });
 
 function connect() {
@@ -200,10 +215,9 @@ function showMessage(message) {
 	}
 console.log("=============================================================");
 console.log("message.senderId", message.senderId);
-console.log("myId", myId);
 console.log("sender", sender);
 console.log("chatId", chatId);
-	if(message.senderId == myId){ // my msg
+	if(message.senderId == sender){ // my msg
 		addHtml.push(`<div class="talk my_talk">`);
 		addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
 		addHtml.push(`<div class="msg">${messageContent}</div>`);

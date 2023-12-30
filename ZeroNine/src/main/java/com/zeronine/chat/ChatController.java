@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zeronine.dto.ChatDtlVO;
-import com.zeronine.dto.ChatMessage;
+import com.zeronine.dto.ChatMessageVO;
 import com.zeronine.dto.ChatVO;
 import com.zeronine.dto.CustomerVO;
 import com.zeronine.dto.MessageVO;
@@ -44,7 +44,9 @@ public class ChatController {
 	private CustomerService customerService;
 	
 	@RequestMapping("/chat.do")
-	public String main(HttpServletRequest request, Model model) {
+	public String main(HttpServletRequest request, Model model, @RequestParam(required = false) String chatId) {
+		log.info("/chat.do chatId >>>> {}", chatId);
+		
 		HttpSession session  = request.getSession();
 		String customerId = (String) session.getAttribute("customerId");
 		log.info("customerId >>>> {}", customerId);
@@ -53,6 +55,7 @@ public class ChatController {
 		log.info("chatList >>>> {}", chatList);
 		
 		model.addAttribute("chatList", chatList);
+		model.addAttribute("chatId", chatId);
 		return "chat/chat";
 	}
 	
@@ -70,7 +73,9 @@ public class ChatController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		HttpSession session  = request.getSession();
-		String customerId = (String) session.getAttribute("customerId");
+		String myCustomerId = (String) session.getAttribute("customerId");
+		
+		chatDtlVO.setMyCustomerId(myCustomerId);
 		
 		/*
 		 * String senderId = chatDtlVO.getSenderId(); CustomerVO customerVO =
@@ -80,7 +85,6 @@ public class ChatController {
 		
 		result.put("chatDtlList", chatDtlList);
 		result.put("chatDtlVO", chatDtlVO);
-		result.put("customerId", customerId);
 		/* result.put("customerName", customerName); */
 		return result;
 	}
@@ -94,7 +98,7 @@ public class ChatController {
 	
 	@MessageMapping("chat.sendMessage")
 	@SendTo("/topic/publicChatRoom")
-	public MessageVO sendMessage(@Payload ChatMessage chatMessage) {
+	public MessageVO sendMessage(@Payload ChatMessageVO chatMessage) {
 		log.info("chatMessage >>>> {}", chatMessage);
 		
 		/**
@@ -139,11 +143,18 @@ public class ChatController {
 	public ChatVO insertChatInfo(HttpServletRequest request, @RequestParam String oBoardId) {
 		log.info("oBoardId >>>> {}", oBoardId);
 		
+		String chatId = chatService.findChatId(oBoardId);
+		if(chatId != null && !chatId.equals("")) {
+			ChatVO chatVO = new ChatVO();
+			chatVO.setChatId(chatId);
+			return chatVO;
+		}
+		
 		HttpSession session = request.getSession();
 		
 		ChatVO chatVO = new ChatVO();
 		String customerId = (String) session.getAttribute("customerId");
-		String chatId = UUID.randomUUID().toString();
+		chatId = UUID.randomUUID().toString();
 		
 		chatVO.setChatId(chatId);
 		chatVO.setBoardId(oBoardId);
@@ -157,7 +168,7 @@ public class ChatController {
 	
 	@MessageMapping("/chat.addUser")
 	@SendTo("/topic/publicChatRoom")
-	public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+	public ChatMessageVO addUser(@Payload ChatMessageVO chatMessage, SimpMessageHeaderAccessor headerAccessor) {
 		headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
 		return chatMessage;
 	}

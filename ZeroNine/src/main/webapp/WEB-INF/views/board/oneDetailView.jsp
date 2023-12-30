@@ -61,7 +61,8 @@ $("#joinChat").on("click", function(){
 			data : {oBoardId},
 			type : "POST",
 			success : function(result){
-				location.href = "/chat.do";
+				console.log("result >>>> " , result);
+				location.href = "/chat.do?chatId=" + result.chatId;
 				$("#detail_modal_wrap").hide();
 			},
 			error : function(){

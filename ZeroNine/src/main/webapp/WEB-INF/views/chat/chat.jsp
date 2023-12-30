@@ -21,14 +21,14 @@
 					<%-- chat_list_inner --%>
 					<div class="chat_list_inner" id="chatList">
 						<c:forEach var="chatInfo" items="${chatList}">
-							<div class="chat_unit" data-chatId="${chatInfo.chatId}" data-boardId="${chatInfo.boardId}">
+							<div class="chat_unit" data-chatId="${chatInfo.chatId}" data-boardId="${chatInfo.boardId}" <c:if test="${chatId != null && chatId == chatInfo.chatId}">data-flag="Y"</c:if>>
 								<div class="profile img_wrap">
 									<img src="${chatInfo.path}" alt="profile image" />
 								</div>
 								<div class="info">
 									<div class="user_info">
 										<div class="name">${chatInfo.customerName}</div>
-										<span>${chatInfo.address}</span>
+										<span>${chatInfo.boardTitle} | ${chatInfo.address}</span>
 									</div>
 									<div class="message">${chatInfo.messageContent}</div>
 									<div class="deadline">${chatInfo.day} (${chatInfo.finishTime}까지)</div>

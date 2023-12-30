@@ -43,4 +43,8 @@ public class ChatDAOMybatis {
 	public int deleteChatInfo(String chatId) {
 		return sqlSession.delete(NAMESPACE + "deleteChatInfo", chatId);
 	}
+
+	public String findChatId(String oBoardId) {
+		return sqlSession.selectOne(NAMESPACE + "findChatId", oBoardId);
+	}
 }
