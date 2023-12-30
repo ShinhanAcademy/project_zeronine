@@ -85,6 +85,18 @@ $(function () {
 function callFastBoardList(fastBoardList) {
     let html = "";
 
+	//fastBoardList.length = 0;
+	if(fastBoardList.length == 0) {
+		html += `
+		<li class="swiper-slide no_list">
+			등록된 슝슝 즉배 게시글이 없습니다.
+		</li>`;
+
+		$(".fast_list").html(html);
+
+		return;
+	}
+
     console.log("??fastBoardList??", fastBoardList);
     $(fastBoardList).each(function (idx, item) {
         html += `
@@ -139,6 +151,18 @@ function callFastBoardList(fastBoardList) {
 function callFreeBoardList(freeBoardList) {
     let html = "";
 	const freeDeliveryAmount = 50000;
+	
+	//freeBoardList.length = 0;
+	if(freeBoardList.length == 0) {
+		html += `
+		<li class="swiper-slide no_list">
+			등록된 알뜰 무배 게시글이 없습니다.
+		</li>`;
+
+		$(".free_list").html(html);
+
+		return;
+	}
 
     console.log("??freeBoardList??", freeBoardList);
 
@@ -146,18 +170,21 @@ function callFreeBoardList(freeBoardList) {
         html += `
 			<li class="swiper-slide free_item">
 				<div class="saving_target">
-					<div class="tit">${item.title}</div>
+					<div class="saving_con">
+						<div class="tit">${item.title}</div>
+						<div class="conBox">${item.boardContent}</div>
+					</div>
 					<div class="deal_bottom">
 						<div class="deadline">D-${dDayCount(item.finishTime)} <span>(${remainDateTime(item.finishTime)}까지)</span></div>
 					</div>
 				</div>
 				<div class="progress_status">
 					<div class="pie-chart pie-chart${idx+1}">
-						<span class="center">${getPercentage(freeDeliveryAmount, item.totalsumprice)}%</span>
+						<span class="center">${getPercentage(freeDeliveryAmount, item.sum)}%</span>
 					</div>
 				</div>
 			</li>`;
-			draw(getPercentage(freeDeliveryAmount, item.totalsumprice), `.pie-chart${idx+1}`, "#F1C21B", "#F9E59E");
+			draw(getPercentage(freeDeliveryAmount, item.sum), `.pie-chart${idx+1}`, "#F1C21B", "#F9E59E");
     });
 	
     $(".free_list").html(html);
@@ -189,9 +216,19 @@ function callFreeBoardList(freeBoardList) {
 
 //oneToOneBoardList
 function callOneBoardList(oneToOneBoardList) {
+	let html = "";
+	
     console.log("??oneToOneBoardList??", oneToOneBoardList);
+	if(oneToOneBoardList.length == 0) {
+		html += `
+		<li class="swiper-slide no_list">
+			등록된 1:1 직거래 게시글이 없습니다.
+		</li>`;
 
-    let html = "";
+		$(".direct_list").html(html);
+
+		return;
+	}
 
     $(oneToOneBoardList).each(function (idx, item) {
         html += `

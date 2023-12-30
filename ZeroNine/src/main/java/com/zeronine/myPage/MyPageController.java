@@ -59,10 +59,14 @@ public class MyPageController {
 	/* ****************************
 			COMMON
 	****************************** */
-	@GetMapping("/common/personalInfo.do")
+	@PostMapping("/common/personalInfo.do")
 	public void personalInfo(HttpSession session, Model model) {
 		String customerId = (String) session.getAttribute("customerId");
 		logger.info("personalInfo"+customerId);
+		Map<String, Object> personalInfo = mypageservice.personalInfo(customerId);
+		
+		model.addAttribute("personalInfo", personalInfo); 
+		System.out.println("model!!!"+ model.getAttribute("personalInfo"));
 	}
 	
 	
