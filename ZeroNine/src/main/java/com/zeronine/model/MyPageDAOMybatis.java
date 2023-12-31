@@ -91,12 +91,12 @@ public class MyPageDAOMybatis {
 	}
 	/* myCart */
 	public List<Map<String, Object>> myCart(String customerId) {
-		Map<String, Object> mapData = new HashMap<>();
-		mapData.put("customerId", customerId);
+//		Map<String, Object> mapData = new HashMap<>();
+//		mapData.put("customerId", customerId);
 		
 //		Logger.info("endDate format{}", endDateFormat(endDate));
-		List<Map<String, Object>> myCartList = sqlSession.selectList(NAMESPACE + "myCart", mapData);
-		Logger.info("myCart조회조건:{}...결과:{}건", mapData, myCartList.size());
+		List<Map<String, Object>> myCartList = sqlSession.selectList(NAMESPACE + "myCart", customerId);
+		Logger.info("myCart조회조건:{}...결과:{}건", customerId, myCartList.size());
 
 		return myCartList;
 	}

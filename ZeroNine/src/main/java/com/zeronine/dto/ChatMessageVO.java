@@ -3,7 +3,7 @@ package com.zeronine.dto;
 import lombok.Data;
 
 @Data
-public class ChatMessage {
+public class ChatMessageVO {
 	private MessageType type;
 	private String messageContent;
 	private String sender;

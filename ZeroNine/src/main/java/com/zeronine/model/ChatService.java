@@ -1,6 +1,7 @@
 package com.zeronine.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +33,19 @@ public class ChatService {
 		chatDAO.insertMessageInfo(messageVO);
 	}
 
-	public ChatDtlVO selectChatDtlInfo(String chatId) {
-		return chatDAO.selectChatDtlInfo(chatId);
+	public ChatDtlVO selectChatDtlInfo(Map<String,Object> mapData) {
+		return chatDAO.selectChatDtlInfo(mapData);
 	}
 
 	public int deleteChatInfo(String chatId) {
 		return chatDAO.deleteChatInfo(chatId);
+	}
+
+	public String findChatId(Map<String, String> params) {
+		return chatDAO.findChatId(params);
+	}
+
+	public String findOAuthorId(String oBoardId) {
+		return chatDAO.findOAuthorId(oBoardId);
 	}
 }

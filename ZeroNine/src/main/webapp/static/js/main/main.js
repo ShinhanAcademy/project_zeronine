@@ -232,7 +232,7 @@ function callOneBoardList(oneToOneBoardList) {
 
     $(oneToOneBoardList).each(function (idx, item) {
         html += `
-			<li class="swiper-slide direct_item">
+			<li class="swiper-slide direct_item" data-one="${item.oBoardId}">
 				<div class="deal_top">
 					<div class="img_wrap">
 						<img src="${item.oBoardImagePath}" alt="product image" />
@@ -249,6 +249,7 @@ function callOneBoardList(oneToOneBoardList) {
     });
 
     $(".direct_list").html(html);
+    
 
     if (html.indexOf("swiper-slide") > -1) {
         const directBoardListSwiper = new Swiper(".direct_list_wrap", {
@@ -273,6 +274,12 @@ function callOneBoardList(oneToOneBoardList) {
             });
         }
     }
+    
+    $(".direct_list [data-one]").on("click", function(){
+    	let boardId = $(this).attr("data-one");
+    	console.log(`boardId >>>> ${boardId}`);
+    	o_btn(boardId);
+    });
 }
 
 function dDayCount(date) {
@@ -337,5 +344,24 @@ function callRecommendedProduct(recommendedCount, showProducts) {
         error: function () {
             alert("recommended products 에러입니다.");
         },
+    });
+}
+
+
+function o_btn(boardId) {
+    
+    $.ajax({
+        type: "post",
+        url: "/board/oneboardDetail.do",
+        data: { boardId: boardId },
+        success: function(response) {
+            console.log(response);
+            $("#modal").html(response);
+            $("#detail_modal_wrap").css("display", "flex");
+            esc_btn();
+        },
+        error: function(error) {
+            alert("The article no longer exists.");
+        }
     });
 }

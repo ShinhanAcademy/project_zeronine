@@ -246,5 +246,6 @@
 		<%-- <%@include file="../common/detailView.jsp"%> --%>
 		<%@include file="../common/footer.jsp" %>
     </div>
+    <div id="modal"></div>
 </body>
 </html>

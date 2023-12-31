@@ -1,6 +1,7 @@
 package com.zeronine.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -36,11 +37,21 @@ public class ChatDAOMybatis {
 		sqlSession.insert(NAMESPACE + "insertMessageInfo", messageVO);
 	}
 
-	public ChatDtlVO selectChatDtlInfo(String chatId) {
-		return sqlSession.selectOne(NAMESPACE + "selectChatDtlInfo", chatId);
+	public ChatDtlVO selectChatDtlInfo(Map<String,Object> mapData) {
+		return sqlSession.selectOne(NAMESPACE + "selectChatDtlInfo", mapData);
 	}
 
 	public int deleteChatInfo(String chatId) {
-		return sqlSession.delete(NAMESPACE + "deleteChatInfo", chatId);
+		int deletedMessageCount = sqlSession.delete(NAMESPACE + "deleteChatMessages", chatId);
+		logger.info("deletedMessageCount >>>> {}", deletedMessageCount);
+		return sqlSession.delete(NAMESPACE + "deleteChatRoom", chatId);
+	}
+
+	public String findChatId(Map<String, String> params) {
+		return sqlSession.selectOne(NAMESPACE + "findChatId", params);
+	}
+
+	public String findOAuthorId(String oBoardId) {
+		return sqlSession.selectOne(NAMESPACE + "findOAuthorId", oBoardId);
 	}
 }
