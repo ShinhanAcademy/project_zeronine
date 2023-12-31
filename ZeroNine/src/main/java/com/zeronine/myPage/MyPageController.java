@@ -128,8 +128,8 @@ public class MyPageController {
 	}
 	
 	
-	@RequestMapping("/subPage/myCartDetail.do") public void orderSheetJH(Model model,
-	  HttpSession session) { 
+	@RequestMapping("/subPage/myCartDetail.do") 
+	public void myCartDetail(Model model, HttpSession session) { 
 		// String customerId ="4591549e-7eaa-4009-a4cd-b052d8b1f537"; 
 		String customerId = (String)session.getAttribute("customerId"); 
 		//System.out.println("ID = " + customerId);

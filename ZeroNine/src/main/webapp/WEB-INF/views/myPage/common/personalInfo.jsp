@@ -21,7 +21,7 @@
 						alt="profile image" class="has_user_img" />
 				</c:when>
 				<c:when test="${personalInfo.customerName eq '노승광' || personalInfo.customerName eq '네이버승광' || personalInfo.customerId eq '68966705-7537-4e13-8262-dffaa09f39c8'}">
-					<img src="${path}/images/common/img_user_sg.jpg"
+					<img src="${path}/images/common/img_user_sg.png"
 						alt="profile image" class="has_user_img" />
 				</c:when>
 				<c:when test="${personalInfo.customerName eq '유은경' || personalInfo.customerId eq '7cb70b46-d6c2-462d-b785-dc27e1e7d045'}">
@@ -29,7 +29,7 @@
 						alt="profile image" class="has_user_img" />
 				</c:when>
 				<c:otherwise>
-					<img src="${path}/images/mypage/img_mypage_profile.png"
+					<img src="${path}/images/common/img_user_profile.png"
 						alt="profile image" class="has_user_img" />
 				</c:otherwise>
 			</c:choose>

@@ -61,6 +61,11 @@ $("#joinChat").on("click", function(){
 			data : {oBoardId},
 			type : "POST",
 			success : function(result){
+				if(result.chatId == null || result.chatId == ""){
+					alert("내가 쓴 게시물에 채팅은 참여할 수 없습니다.");
+					return;
+				}
+				
 				console.log("result >>>> " , result);
 				location.href = "/chat.do?chatId=" + result.chatId;
 				$("#detail_modal_wrap").hide();

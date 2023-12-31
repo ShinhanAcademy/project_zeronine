@@ -28,10 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zeronine.dto.ChatDtlVO;
 import com.zeronine.dto.ChatMessageVO;
 import com.zeronine.dto.ChatVO;
-import com.zeronine.dto.CustomerVO;
 import com.zeronine.dto.MessageVO;
 import com.zeronine.model.ChatService;
-import com.zeronine.model.CustomerService;
 
 @Controller
 public class ChatController {
@@ -40,8 +38,6 @@ public class ChatController {
 	
 	@Autowired
 	private ChatService chatService;
-	@Autowired
-	private CustomerService customerService;
 	
 	@RequestMapping("/chat.do")
 	public String main(HttpServletRequest request, Model model, @RequestParam(required = false) String chatId) {
@@ -62,26 +58,25 @@ public class ChatController {
 	@ResponseBody
 	@RequestMapping(value="/chatDtl.do", method=RequestMethod.POST)
 	public Map<String, Object> chatDtl(HttpServletRequest request, @RequestParam String chatId) {
+		
+		HttpSession session  = request.getSession();
+		String customerId = (String) session.getAttribute("customerId");
+
+		Map<String,Object> mapData = new HashMap<>();
+		mapData.put("chatId",chatId);
+		mapData.put("customerId", customerId);
+		
 		log.info("chatId >>>> {}", chatId);
 		
 		List<ChatDtlVO> chatDtlList = chatService.selectChatDtlList(chatId);
 		log.info("chatDtlList >>>> {}", chatDtlList);
 		
-		ChatDtlVO chatDtlVO = chatService.selectChatDtlInfo(chatId);
+		ChatDtlVO chatDtlVO = chatService.selectChatDtlInfo(mapData);
 		log.info("chatDtlVO >>>> {}", chatDtlVO);
 		
+		chatDtlVO.setMyCustomerId(customerId);
+		
 		Map<String, Object> result = new HashMap<String, Object>();
-		
-		HttpSession session  = request.getSession();
-		String myCustomerId = (String) session.getAttribute("customerId");
-		
-		chatDtlVO.setMyCustomerId(myCustomerId);
-		
-		/*
-		 * String senderId = chatDtlVO.getSenderId(); CustomerVO customerVO =
-		 * customerService.selectById(senderId); String customerName =
-		 * customerVO.getCustomerName();
-		 */
 		
 		result.put("chatDtlList", chatDtlList);
 		result.put("chatDtlVO", chatDtlVO);
@@ -100,20 +95,6 @@ public class ChatController {
 	@SendTo("/topic/publicChatRoom")
 	public MessageVO sendMessage(@Payload ChatMessageVO chatMessage) {
 		log.info("chatMessage >>>> {}", chatMessage);
-		
-		/**
-		 * chat table insert
-		
-		ChatVO chatVO = new ChatVO();
-		String boardId = chatMessage.getBoardId();
-		
-		BeanUtils.copyProperties(chatMessage, chatVO);
-		chatVO.setCustomerId(customerId);
-		chatVO.setBoardId(boardId);
-		
-		log.info("chatVO >>>> {}", chatVO);
-		chatService.insertChatInfo(chatVO);
-		 */
 		
 		/**
 		 * message table insert
@@ -143,22 +124,31 @@ public class ChatController {
 	public ChatVO insertChatInfo(HttpServletRequest request, @RequestParam String oBoardId) {
 		log.info("oBoardId >>>> {}", oBoardId);
 		
-		String chatId = chatService.findChatId(oBoardId);
+		HttpSession session = request.getSession();
+		String customerId = (String) session.getAttribute("customerId");
+		String oAuthorId = chatService.findOAuthorId(oBoardId);
+		if(customerId.equals(oAuthorId)) { // 내가 만든 게시글에 내가 참여하는 경우는 못하게 처리
+			ChatVO chatVO = new ChatVO();
+			return chatVO;
+		}
+		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("customerId", customerId);
+		params.put("oBoardId", oBoardId);
+		
+		String chatId = chatService.findChatId(params);
 		if(chatId != null && !chatId.equals("")) {
 			ChatVO chatVO = new ChatVO();
 			chatVO.setChatId(chatId);
 			return chatVO;
 		}
 		
-		HttpSession session = request.getSession();
-		
 		ChatVO chatVO = new ChatVO();
-		String customerId = (String) session.getAttribute("customerId");
 		chatId = UUID.randomUUID().toString();
 		
 		chatVO.setChatId(chatId);
 		chatVO.setBoardId(oBoardId);
-		chatVO.setCustomerId(customerId);
+		chatVO.setChatCustId(customerId);
 		
 		log.info("chatVO >>>> {}", chatVO);
 		chatService.insertChatInfo(chatVO);

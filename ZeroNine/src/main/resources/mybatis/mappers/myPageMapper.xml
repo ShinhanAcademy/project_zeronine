@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.zeronine.mypage">
 	<!-- personalInfo -->
-	<select id="personalInfo" parameterType="String" resultType="map">
+	<select id="personalInfo" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT 
 		    "customer"."customerId",
 		    "customer"."customerName",
@@ -44,7 +44,7 @@
 	</select>
 
 	<!-- order history -->
-	<select id="orderHistoryAll" parameterType="String" resultType="map">
+	<select id="orderHistoryAll" parameterType="java.util.Map" resultType="java.util.Map">
 		select 
 			delivery."purchaseDateTime",
 			delivery."deliveryId",
@@ -95,7 +95,7 @@
 
 </select>
 	<!-- order cancel history -->
-	<select id="orderCancelHistoryAll" parameterType="String" resultType="map">
+	<select id="orderCancelHistoryAll" parameterType="java.util.Map" resultType="java.util.Map">
 		select
 			refund."refundRequestTime",
 			"deliveryProduct"."productCount",
@@ -139,7 +139,7 @@
 	</select>
 	
 	<!-- my cart -->
-	<select id="myCart" parameterType="String" resultType="map">
+	<select id="myCart" parameterType="String" resultType="java.util.Map">
 		select
 			product."productId",
 			product.brand,
@@ -162,7 +162,7 @@
 	</select>
 	
 	<!-- like product -->
-	<select id="likeProduct" parameterType="map" resultType="map">
+	<select id="likeProduct" parameterType="java.util.Map" resultType="java.util.Map">
 		select 
 			"productMainImage"."imagePath",
 			product."productId",

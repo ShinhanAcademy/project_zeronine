@@ -12,6 +12,10 @@ public class ChatDtlVO {
 	private String address;
 	private String title;
 	private String productImagePath;
+	private String chatCustId;
+	private String authorCustId;
+	private String chatCustName;
+	private String authorCustName;
+	private String lastTalkerId;
 	private String myCustomerId;
-	private String otherCustomerId;
 }
