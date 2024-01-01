@@ -13,9 +13,14 @@ let sendMsgImageFlag = false;
 //let lastTalkCustId = null;
 
 let selectedData = {};
+let selectedChatDtlList = {};
 
 $(function() {
 	clickEventInit();
+	
+	if(currChatId == null || typeof currChatId == "undefined"){
+		document.querySelectorAll("#chatList div.chat_unit")[0].click();
+	}
 	
 	//채팅방 나가기
 	$("#btnExit").on("click", function(){
@@ -33,10 +38,19 @@ $(function() {
 						const div = $(`div[data-chatId="${currChatId}"]`);
 						$(div).remove();
 						
+						//chat top
 						$("#customerName").html(null);
+						$("#btnExit").attr("disabled", true);
+						
+						//product info
 						$("#address").html(null);
 						$("#chatTitle").html(null);
 						$("#path").html(null);
+					
+						//chat room
+						$("#chatDtlList").html(null);
+						$(".text_wrap #message, .text_wrap .btn_write").attr("disabled", true);
+						
 					}
 				},
 				error : function() {
@@ -85,10 +99,10 @@ function showMessage(message) {
 	let {messageContent, sendTime, chatId} = message;
 
 	messageContent = messageContent.replace(/(?:\r\n|\r|\n)/g, '<br>');
-	console.log("SHOW MESSAGE", message);
-	console.log("??????", messageContent);
+	//console.log("SHOW MESSAGE", message);
+	//console.log("??????", messageContent);
 	
-	console.log(`currChatId >>>> ${currChatId} | chatId >>>> ${chatId}`);
+	//console.log(`currChatId >>>> ${currChatId} | chatId >>>> ${chatId}`);
 
 
 	if(selectedData.chatId == chatId){
@@ -98,6 +112,10 @@ function showMessage(message) {
 		//let otherLastTime = $("#chatDtlList div.other_talker:last .time").text();
 		//let myLastTime = $("#chatDtlList div.my_talk:last .time").text();
 	
+		if(Array.isArray(selectedChatDtlList) && selectedChatDtlList.length <= 0) {
+			$("#chatDtlList").html("");
+		}
+
 		if(currDate != lastDate){
 			addHtml.push(`<div class="date">`);
 			addHtml.push(`<span>${currDate}</span>`);
@@ -105,7 +123,6 @@ function showMessage(message) {
 			sendMsgImageFlag = false;
 		}
 		
-
 		if(message.senderId == selectedData.myCustomerId){
 			addHtml.push(`<div class="talk my_talk">`);
 			addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
@@ -115,18 +132,10 @@ function showMessage(message) {
 			sendMsgImageFlag = false;
 		}else{ //other msg
 			
-			if(message.senderId != selectedData.authorCustId //상대방 true
-				& message.senderId == selectedData.lastTalkCustId) { 
-				sendMsgImageFlag = true;
-			} else if(message.senderId != selectedData.chatCustId //상대방 true
-				&& message.senderId == selectedData.lastTalkCustId) {
+			if(message.senderId == selectedData.lastTalkerId) { 
 				sendMsgImageFlag = true;
 			}
-
-			// if(message.senderId == selectedData.lastTalkCustId) {
-			// 	sendMsgImageFlag = true;
-			// }
-
+			
 			addHtml.push(`<div class="talk other_talker">`);
 			if(!sendMsgImageFlag){
 				addHtml.push(`<div class="profile img_wrap">`);
@@ -135,30 +144,42 @@ function showMessage(message) {
 				if(selectedData.myCustomerId != selectedData.chatCustId) {
 					let _chatCustName = selectedData.chatCustName;
 					let _chatCustId = selectedData.chatCustId;
-					if(_chatCustName == "유은경" || _chatCustId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045"){
+					if(_chatCustName == "유은경" || _chatCustId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045") {
 						imagePath = "/images/common/img_user_ek.jpg";
-					}else if(_chatCustName == "방용수" || _chatCustId == "490ef92a-d77f-432f-8bfb-2828eee6db77"){
+					} else if(_chatCustName == "방용수" || _chatCustId == "490ef92a-d77f-432f-8bfb-2828eee6db77") {
 						imagePath = "/images/common/img_user_ys.jpg";
-					}else if(_chatCustName == "이예나" || _chatCustId == "87c5033c-ef9d-4934-930a-2f172cdad795"){
+					} else if(_chatCustName == "이예나" || _chatCustId == "87c5033c-ef9d-4934-930a-2f172cdad795") {
 						imagePath = "/images/common/img_user_yn.jpg";
-					}else if(_chatCustName == "정주영" || _chatCustId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"){
+					} else if(_chatCustName == "정주영" || _chatCustId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9") {
 						imagePath = "/images/common/img_user_jy.jpg";
-					}else if(_chatCustName == "노승광" || _chatCustName == "네이버승광" || _chatCustId == "68966705-7537-4e13-8262-dffaa09f39c8"){
+					} else if(_chatCustName == "노승광" || _chatCustName == "네이버승광" || _chatCustId == "68966705-7537-4e13-8262-dffaa09f39c8") {
 						imagePath = "/images/common/img_user_sg.png";
+					} else if(_chatCustName == "배재호" || _chatCustId == "5144fdf1-3645-4899-b4c0-149f9b88d8ca") {
+						imagePath = "/images/common/img_user_jh.jpg";
+					} else if(_chatCustName == "정진" || _chatCustId == "f9ecc37a-75d5-494e-aae3-0722fffd37b8") {
+						imagePath = "/images/common/img_user_jj.jpg";
+					} else {
+						imagePath = "/images/common/img_user_profile.png";
 					}
 				} else if(selectedData.myCustomerId != selectedData.authorCustId) {
 					let _authorCustName = selectedData.authorCustName;
 					let _authorCustId = selectedData.authorCustId;
-					if(_authorCustName == "유은경" || _authorCustId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045"){
+					if(_authorCustName == "유은경" || _authorCustId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045") {
 						imagePath = "/images/common/img_user_ek.jpg";
-					}else if(_authorCustName == "방용수" || _authorCustId == "490ef92a-d77f-432f-8bfb-2828eee6db77"){
+					} else if(_authorCustName == "방용수" || _authorCustId == "490ef92a-d77f-432f-8bfb-2828eee6db77") {
 						imagePath = "/images/common/img_user_ys.jpg";
-					}else if(_authorCustName == "이예나" || _authorCustId == "87c5033c-ef9d-4934-930a-2f172cdad795"){
+					} else if(_authorCustName == "이예나" || _authorCustId == "87c5033c-ef9d-4934-930a-2f172cdad795") {
 						imagePath = "/images/common/img_user_yn.jpg";
-					}else if(_authorCustName == "정주영" || _authorCustId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"){
+					} else if(_authorCustName == "정주영" || _authorCustId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9") {
 						imagePath = "/images/common/img_user_jy.jpg";
-					}else if(_authorCustName == "노승광" || _authorCustName == "네이버승광" || _authorCustId == "68966705-7537-4e13-8262-dffaa09f39c8"){
+					} else if(_authorCustName == "노승광" || _authorCustName == "네이버승광" || _authorCustId == "68966705-7537-4e13-8262-dffaa09f39c8") {
 						imagePath = "/images/common/img_user_sg.png";
+					} else if(_authorCustName == "배재호" || _authorCustId == "5144fdf1-3645-4899-b4c0-149f9b88d8ca") {
+						imagePath = "/images/common/img_user_jh.jpg";
+					} else if(_authorCustName == "정진" || _authorCustId == "f9ecc37a-75d5-494e-aae3-0722fffd37b8") {
+						imagePath = "/images/common/img_user_jj.jpg";
+					} else {
+						imagePath = "/images/common/img_user_profile.png";
 					}
 				} else {
 					imagePath = "/images/common/img_user_profile.png";
@@ -186,27 +207,14 @@ function showMessage(message) {
 		
 		const chatUnit = $("#chatList div.chat_unit.on");
 		const outHTML = $("#chatList div.chat_unit.on")[0].outerHTML;
-		
-		console.log("메시지 보낼때마다 호출");
-		$(chatUnit).remove();
-		$("#chatList").prepend(outHTML);
-		$("#chatList div.chat_unit.on").find("div.message").html(messageContent);
-		console.log("메시지 보낼때마다 호출");
-		
-	} else {
-		console.log("else!!!!!!!!!!!!!!!!!!!!!");
-		console.log(`chatId >>> ${chatId}`);
-		console.log(`messageContent >>> ${messageContent}`);
-		
-		const chatUnit = $(`#chatList div[data-chatid="${chatId}"]`);
-		const outHTML = $(`#chatList div[data-chatid="${chatId}"]`)[0].outerHTML;
-		
-		console.log("else 메시지 보낼때마다 호출");
-		$(chatUnit).remove();
-		$("#chatList").prepend(outHTML);
-		$(`#chatList div[data-chatid="${chatId}"]`).find("div.message").html(messageContent);
-		console.log("else 메시지 보낼때마다 호출");
 	}
+
+	const chatUnit = $(`#chatList div[data-chatid="${chatId}"]`);
+	const outHTML = $(`#chatList div[data-chatid="${chatId}"]`)[0].outerHTML;
+	
+	$(chatUnit).remove();
+	$("#chatList").prepend(outHTML);
+	$(`#chatList div[data-chatid="${chatId}"]`).find("div.message").html(messageContent);
 
 	clickEventInit();
 }
@@ -226,6 +234,7 @@ function clickEventInit() {
 	$(`#chatList .chat_unit`).off().on("click", function(){
 		$(`#chatList .chat_unit`).removeClass("on");
 		$(this).addClass("on");
+
 	
 		currChatId = $(this).attr("data-chatId");
 		boardId = $(this).attr("data-boardId");
@@ -235,29 +244,40 @@ function clickEventInit() {
 			data : {chatId:currChatId},
 			type : "POST",
 			success : function(result) {
-				console.log("RESULT======================================>", result);
+				//console.log("RESULT======================================>", result);
 				const {chatDtlList, chatDtlVO} = result;
 
 				//const {chatId, address, title, productImagePath, chatCustId, authorCusId, chatCustName, authorCustName, lastTalkerId} = chatDtlVO;
 				//const {customerName, address, title, productImagePath, myCustomerId, otherCustomerId, lastTalkerId} = chatDtlVO;
 				selectedData = {...chatDtlVO};
+				selectedChatDtlList = [...chatDtlList];
 				
-				console.log("selectedData >>>>>>>>>>>    ", selectedData);
+				//console.log("selectedData >>>>>>>>>>>    ", selectedData);
+				//console.log("selectedChatDtlList >>>>>>>>>>>    ", selectedChatDtlList);
 
 				if(chatDtlVO.myCustomerId != chatDtlVO.chatCustId) {
-					$("#customerName").html(selectedData.authorCustName);
+					$("#customerName").html(selectedData.chatCustName);
 
 				} else {
-					$("#customerName").html(selectedData.chatCustName);
+					$("#customerName").html(selectedData.authorCustName);
 				}
+				
 				$("#address").html(chatDtlVO.address);
 				$("#chatTitle").html(chatDtlVO.title);
-				
-				if(path != null && typeof path != "undefined"){
-					$("#path").html(`<img src="${chatDtlVO.productImagePath}" alt="product image">`);
+						
+				if(chatDtlVO.productImagePath != null && typeof chatDtlVO.productImagePath != "undefined"){
+					$("#path").html(`<img src="${chatDtlVO.productImagePath}" alt="product image" />`);
 				}else{
-					$("#path").html(`<img src="../images/chat/img_no_product.png" alt="product no-image">`);
+					$("#path").html(`<img src="../images/chat/img_no_product.png" alt="product no-image" />`);
 				}
+				
+				if($("#btnExit").attr("disabled")) {
+					$("#btnExit").attr("disabled", false);
+				}
+				
+				if($(".text_wrap #message, .text_wrap .btn_write").attr("disabled")) {
+					$(".text_wrap #message, .text_wrap .btn_write").attr("disabled", false);
+				} 
 				
 				if(Array.isArray(chatDtlList) && chatDtlList.length > 0) {
 					const addHtml = [];
@@ -303,32 +323,40 @@ function clickEventInit() {
 								if(chatDtlVO.myCustomerId != chatDtlVO.chatCustId) {
 									let _chatCustName = chatDtlVO.chatCustName;
 									let _chatCustId = chatDtlVO.chatCustId;
-									if(_chatCustName == "유은경" || _chatCustId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045"){
+									if(_chatCustName == "유은경" || _chatCustId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045") {
 										imagePath = "/images/common/img_user_ek.jpg";
-									}else if(_chatCustName == "방용수" || _chatCustId == "490ef92a-d77f-432f-8bfb-2828eee6db77"){
+									} else if(_chatCustName == "방용수" || _chatCustId == "490ef92a-d77f-432f-8bfb-2828eee6db77") {
 										imagePath = "/images/common/img_user_ys.jpg";
-									}else if(_chatCustName == "이예나" || _chatCustId == "87c5033c-ef9d-4934-930a-2f172cdad795"){
+									} else if(_chatCustName == "이예나" || _chatCustId == "87c5033c-ef9d-4934-930a-2f172cdad795") {
 										imagePath = "/images/common/img_user_yn.jpg";
-									}else if(_chatCustName == "정주영" || _chatCustId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"){
+									} else if(_chatCustName == "정주영" || _chatCustId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9") {
 										imagePath = "/images/common/img_user_jy.jpg";
-									}else if(_chatCustName == "노승광" || _chatCustName == "네이버승광" || _chatCustId == "68966705-7537-4e13-8262-dffaa09f39c8"){
+									} else if(_chatCustName == "노승광" || _chatCustName == "네이버승광" || _chatCustId == "68966705-7537-4e13-8262-dffaa09f39c8") {
 										imagePath = "/images/common/img_user_sg.png";
+									} else if(_chatCustName == "배재호" || _chatCustId == "5144fdf1-3645-4899-b4c0-149f9b88d8ca") {
+										imagePath = "/images/common/img_user_jh.jpg";
+									} else if(_chatCustName == "정진" || _chatCustId == "f9ecc37a-75d5-494e-aae3-0722fffd37b8") {
+										imagePath = "/images/common/img_user_jj.jpg";
 									} else {
 										imagePath = "/images/common/img_user_profile.png";
 									}
 								} else if(chatDtlVO.myCustomerId != chatDtlVO.authorCustId) {
 									let _authorCustName = chatDtlVO.authorCustName;
 									let _authorCustId = chatDtlVO.authorCustId;
-									if(_authorCustName == "유은경" || _authorCustId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045"){
+									if(_authorCustName == "유은경" || _authorCustId == "7cb70b46-d6c2-462d-b785-dc27e1e7d045") {
 										imagePath = "/images/common/img_user_ek.jpg";
-									}else if(_authorCustName == "방용수" || _authorCustId == "490ef92a-d77f-432f-8bfb-2828eee6db77"){
+									} else if(_authorCustName == "방용수" || _authorCustId == "490ef92a-d77f-432f-8bfb-2828eee6db77") {
 										imagePath = "/images/common/img_user_ys.jpg";
-									}else if(_authorCustName == "이예나" || _authorCustId == "87c5033c-ef9d-4934-930a-2f172cdad795"){
+									} else if(_authorCustName == "이예나" || _authorCustId == "87c5033c-ef9d-4934-930a-2f172cdad795") {
 										imagePath = "/images/common/img_user_yn.jpg";
-									}else if(_authorCustName == "정주영" || _authorCustId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9"){
+									} else if(_authorCustName == "정주영" || _authorCustId == "e70c4145-25b8-43d3-9ff8-60ef51d4adb9") {
 										imagePath = "/images/common/img_user_jy.jpg";
-									}else if(_authorCustName == "노승광" || _authorCustName == "네이버승광" || _authorCustId == "68966705-7537-4e13-8262-dffaa09f39c8"){
+									} else if(_authorCustName == "노승광" || _authorCustName == "네이버승광" || _authorCustId == "68966705-7537-4e13-8262-dffaa09f39c8") {
 										imagePath = "/images/common/img_user_sg.png";
+									} else if(_authorCustName == "배재호" || _authorCustId == "5144fdf1-3645-4899-b4c0-149f9b88d8ca") {
+										imagePath = "/images/common/img_user_jh.jpg";
+									} else if(_authorCustName == "정진" || _authorCustId == "f9ecc37a-75d5-494e-aae3-0722fffd37b8") {
+										imagePath = "/images/common/img_user_jj.jpg";
 									} else {
 										imagePath = "/images/common/img_user_profile.png";
 									}
@@ -354,8 +382,8 @@ function clickEventInit() {
 					}
 					
 					$('.chat_room_list').scrollTop($('.chat_room_list')[0].scrollHeight);
-				}else{
-					$("#chatDtlList").html(`<div>대화내용이 없네요~~</div>`);
+				} else {
+					$("#chatDtlList").html(`<div class="no_msg">📝대화를 시작하세요.</div>`);
 				}
 			},
 			error : function() {

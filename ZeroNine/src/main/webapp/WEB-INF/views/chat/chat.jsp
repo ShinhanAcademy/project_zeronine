@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% pageContext.setAttribute("newLineChar", "\n"); %>
 <%@include file="../common/head.jsp"%>
 <link rel="stylesheet" href="${path}/css/chat/chat.css">
 
@@ -49,6 +50,14 @@
 												<img src="${path}/images/common/img_user_ek.jpg"
 													alt="profile image" class="has_user_img" />
 											</c:when>
+											<c:when test="${chatInfo.chatCustName eq '배재호' || chatInfo.chatCustId eq '5144fdf1-3645-4899-b4c0-149f9b88d8ca'}">
+												<img src="${path}/images/common/img_user_jh.jpg"
+													alt="profile image" class="has_user_img" />
+											</c:when>
+											<c:when test="${chatInfo.chatCustName eq '정진' || chatInfo.chatCustId eq 'f9ecc37a-75d5-494e-aae3-0722fffd37b8'}">
+												<img src="${path}/images/common/img_user_jj.jpg"
+													alt="profile image" class="has_user_img" />
+											</c:when>
 											<c:otherwise>
 												<img src="${path}/images/common/img_user_profile.png"
 													alt="profile image" />
@@ -77,6 +86,14 @@
 												<img src="${path}/images/common/img_user_ek.jpg"
 													alt="profile image" class="has_user_img" />
 											</c:when>
+											<c:when test="${chatInfo.authorCustName eq '배재호' || chatInfo.authorCusId eq '5144fdf1-3645-4899-b4c0-149f9b88d8ca'}">
+												<img src="${path}/images/common/img_user_jh.jpg"
+													alt="profile image" class="has_user_img" />
+											</c:when>
+											<c:when test="${chatInfo.authorCustName eq '정진' || chatInfo.authorCusId eq 'f9ecc37a-75d5-494e-aae3-0722fffd37b8'}">
+												<img src="${path}/images/common/img_user_jj.jpg"
+													alt="profile image" class="has_user_img" />
+											</c:when>
 											<c:otherwise>
 												<img src="${path}/images/common/img_user_profile.png"
 													alt="profile image" />
@@ -85,6 +102,7 @@
 									</c:if>
 								</div>
 								<div class="info">
+									<div class="tit">${chatInfo.boardTitle}</div>
 									<div class="user_info">
 										<c:if test="${sessionScope.customerId ne chatInfo.chatCustId}">
 											<div class="name">${chatInfo.chatCustName}</div>
@@ -92,9 +110,9 @@
 										<c:if test="${sessionScope.customerId ne chatInfo.authorCusId}">
 											<div class="name">${chatInfo.authorCustName}</div>
 										</c:if>
-										<span>${chatInfo.boardTitle} | ${chatInfo.address}, ${chatInfo.addrDetail}</span>
+										<span>${chatInfo.address}, ${chatInfo.addrDetail}</span>
 									</div>
-									<div class="message">${chatInfo.messageContent}</div>
+									<div class="message">${fn:replace(chatInfo.messageContent, newLineChar, "<br/>")}</div>
 									<div class="deadline">${chatInfo.remainingDays} (${chatInfo.finishTime}까지)</div>
 								</div>
 								<div class="product img_wrap">
@@ -116,9 +134,8 @@
 					<div class="product_info">
 						<div class="product img_wrap" id="path"></div>
 						<div>
-							<div class="brand_name" id="address"></div>						
-							<div class="prouct_tit" id="chatTitle">
-							</div>						
+							<div class="addr" id="address"></div>						
+							<div class="prouct_tit" id="chatTitle"></div>						
 						</div>
 					</div>
 					<%-- chat_room_list --%>
