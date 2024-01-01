@@ -124,13 +124,6 @@ board_wrap
 	height: calc(100% - 40px);
 	overflow: hidden;
 }
-/* .board_wrap .board_unit .direct_list_wrap {
-	width: 387px;
-	height: calc(100% - 40px);
-	overflow: hidden;
-} */
-.board_wrap .board_unit .card_list {
-}
 .card_list.free_list > li  {
     display: flex;
     justify-content: space-between;
@@ -260,9 +253,32 @@ board_wrap
     width: 64px;
     height: 64px;
 }
-.card_list .progress_status img {
-    width: 100%;
+.card_list .progress_status .pie-chart {
+	position: relative;
+	display:inline-block;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	transition: 0.3s;
+	overflow: hidden;
 }
+.card_list .progress_status .pie-chart span.center {
+	background: #fff;
+	display : block;
+	position: absolute;
+	top:50%; left:50%;
+	width: 65%;
+	height: 65%;
+	border-radius: 50%;
+	font-size: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translate(-50%, -50%);
+}
+/* .card_list .progress_status img {
+    width: 100%;
+} */
 .card_list .location_info {
     margin-top: 6px;
     display: -webkit-box;
@@ -274,6 +290,34 @@ board_wrap
 	max-height: 2.6em;
     font-family: "Lato";
     font-size: 12px;
+}
+
+/*
+free_delivery modal chart
+*/
+.pie-chart, .detail_chart {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+span.rate {
+	background: #fff;
+	display : block;
+	position: absolute;
+	top:50%; left:50%;
+    width: 60%;
+    height: 60%;
+	border-radius: 50%;
+	font-size: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-weight: bold;
 }
 
 /*
