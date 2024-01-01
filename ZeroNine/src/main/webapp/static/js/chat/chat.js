@@ -18,8 +18,13 @@ let selectedChatDtlList = {};
 $(function() {
 	clickEventInit();
 	
-	if(currChatId == null || typeof currChatId == "undefined"){
-		document.querySelectorAll("#chatList div.chat_unit")[0].click();
+	if(document.querySelectorAll("#chatList div.chat_unit").length > 0) {
+		if(currChatId == null || typeof currChatId == "undefined") {
+			document.querySelectorAll("#chatList div.chat_unit")[0].click();
+		}
+	} else {
+		$("#btnExit").attr("disabled", true);
+		$(".text_wrap #message, .text_wrap .btn_write").attr("disabled", true);
 	}
 	
 	//채팅방 나가기
@@ -247,8 +252,6 @@ function clickEventInit() {
 				//console.log("RESULT======================================>", result);
 				const {chatDtlList, chatDtlVO} = result;
 
-				//const {chatId, address, title, productImagePath, chatCustId, authorCusId, chatCustName, authorCustName, lastTalkerId} = chatDtlVO;
-				//const {customerName, address, title, productImagePath, myCustomerId, otherCustomerId, lastTalkerId} = chatDtlVO;
 				selectedData = {...chatDtlVO};
 				selectedChatDtlList = [...chatDtlList];
 				
