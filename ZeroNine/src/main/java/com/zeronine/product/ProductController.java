@@ -173,6 +173,7 @@ public class ProductController {
 		model.addAttribute("detailImage", productService.selectDetailImage(productId));
 		return "product/productDetail";
 	}
+	
 	@PostMapping("/alreadyInCartModal.do")
 	public String alreadyInCartModal() {
 		return "common/alreadyInCartModal";
@@ -200,7 +201,6 @@ public class ProductController {
 		 String custid = (String)session.getAttribute("customerId");
 		
 		result = cartservice.beforeproductOrder(custid, productid, pcount);
-		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 
 		if (result > 0) {
 			logger.info("Data Saved Successfully");
@@ -229,11 +229,8 @@ public class ProductController {
 	@GetMapping("/productOrder.do")
 	public String productOrder(String productid, Model model, HttpSession session) {
 		
-		
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		List<String> order = cartservice.orderOneCart(custid, productid);
-		
-		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 		model.addAttribute("orderonecart", order);
 		model.addAttribute("IsFreeDelivery",payservice.IsFreeDelivery(custid));
 		model.addAttribute("custlist", customerservice.selectById(custid));
@@ -257,10 +254,7 @@ public class ProductController {
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		String deliveryId = (String) session.getAttribute("deliveryId");
 		String productId = (String) session.getAttribute("productId");
-
-		// Use the values as needed
-		logger.info("Delivery ID: " + deliveryId);
-		logger.info("Product ID: " + productId);
+		cartservice.deleteCartItem(custid, productId);
 		model.addAttribute("deliproduct",deliveryproductservice_ys.selectOrderInfo(deliveryId));
 		model.addAttribute("IsFreeDelivery",payservice.IsFreeDelivery(custid));
 		/*

@@ -30,6 +30,7 @@
 		CAST(#{productId} AS UUID))
 		)
 	</insert>
+	
 	<resultMap id="deliveryResultMap" type="HashMap">
     <id property="deliveryId" column="deliveryId" />
     <result property="customerName" column="customerName" />

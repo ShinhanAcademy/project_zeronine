@@ -192,12 +192,7 @@
 			document.getElementById('quantity-right').innerText = quantityValue;
 			document.getElementById('total_price').innerText = total
 					.toLocaleString()
-					+ ' 원'; // Assuming you want to display price with two decimal places
-			document.getElementById('total_price').innerText = total
-					.toLocaleString()
-					+ ' 원'; // Assuming you want to display price with two decimal places
-			console.log(total);
-			console.log(quantityValue);
+					+ ' 원'; 
 			 return {
 			        total: total,
 			        quantityValue: quantityValue
@@ -208,6 +203,8 @@
 	        return item.trim(); 
 	    });
 		var cartcheckarr =cartCheck.split(',');
+		
+		
 		 function goOrder() {
 			
 			if(custid==""){
@@ -255,7 +252,6 @@
 		 
 		 function manygocart() {
 			var result = updateQuantityAndTotal();
-		    var total = result.total;
 		    var quantityValue = result.quantityValue;
 			var obj = {
 				"productid" :productid,

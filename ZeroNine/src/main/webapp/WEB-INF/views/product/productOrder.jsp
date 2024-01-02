@@ -178,14 +178,12 @@ $(".agreebtn").click(function (){
 })
 
 //배송비
-
 var itemPriceText = document.getElementById("itemPrice").innerText;
 var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText.replace(/[^\d.]/g, ''));
 document.getElementById("itemprice2").innerText = itemPriceText;
 var IsFreeDelivery = "${IsFreeDelivery}";
 console.log(IsFreeDelivery);
 if(IsFreeDelivery>0){
-	//alert("무료배송구동권이 있어 배송비가 무료입니다!");
 	document.getElementById("itemprice_deli").innerText= 0;
 	
 }else{

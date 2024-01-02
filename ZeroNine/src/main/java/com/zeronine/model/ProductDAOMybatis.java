@@ -45,7 +45,7 @@ public class ProductDAOMybatis {
 
 	public List<Map<String,Object>> selectDetailDelivery4() {
 		List<Map<String,Object>> productList = sqlSession.selectList(namespace + "selectDetailDelivery4");
-		return productList;
+		return productList;	
 	}
 
 
