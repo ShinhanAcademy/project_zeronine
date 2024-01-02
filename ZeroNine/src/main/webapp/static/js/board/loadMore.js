@@ -1,28 +1,22 @@
-	
-//loadMore
-function loadMore(data){ 
+function loadMore(){ 
 	keyword = $("#search").val();
-	console.log(keyword);
+	console.log("keyword", keyword);
+	var data = info_json;
 	if(keyword==""){
-		console.log("aa");
-		var data = data_json;
+		data = info_json;
 	} else{
-		console.log("bb");
 		data = result;
 	}
-	console.log(data);
-	
+
 	var totalLength = data.length;
-	
-	if(endNum  < totalLength){
-	console.log(data);
+	var endNum = initNum;
+
+	if(endNum < totalLength){
 		$("#loadMore_btn").show();
-		showHtml(data.slice(initNum, initNum+9));
-		console.log(endNum);
-		endNum = initNum+8;
+		show(data.slice(initNum, initNum+9));
 		initNum += 9;
 		if(endNum >= totalLength){
-		$("#loadMore_btn").hide();
-			} 
-		}
+			$("#loadMore_btn").hide();
+		} 
 	}
+}

@@ -3,7 +3,6 @@
 	-- MyPage COMMON
 ****************************/
 $(function(){
-	
 	//SNB
 	$(".snb_wrap li").each(function() {
 		let href = $(this).find('a').attr('href');
@@ -20,11 +19,12 @@ $(function(){
 		$.ajax({
 		    url : contextPath + "/myPage/common/personalInfo.do",
 		    type: "POST",
-		    success : function(res){
-		 	   $("#personalInfo").html(res);
+		    success : function(res) {
+		 	  	$("#personalInfo").html(res);
 		    },
-		    error : function(){
-		        alert("personalInfo 에러입니다.");
+		    error : function(res){
+				alert("로그인 후 이용해주세요.");
+				location.href = "/auth/login.do";
 		    }
 		});
 	});
