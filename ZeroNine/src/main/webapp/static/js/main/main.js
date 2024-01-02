@@ -55,6 +55,8 @@ $(function () {
         $(".recommended_wrap .recommended_list .recommended_list_inner").addClass("on");
     });
 
+
+
 	//게시판AJAX
     $.ajax({
         url: contextPath + "/main/boardList.do",
@@ -78,7 +80,6 @@ $(function () {
         },
     });
 
-
 }); //End_Ready
 
 //fastBoardList
@@ -100,7 +101,7 @@ function callFastBoardList(fastBoardList) {
     console.log("??fastBoardList??", fastBoardList);
     $(fastBoardList).each(function (idx, item) {
         html += `
-			  <li class="swiper-slide fast_item">
+			  <li class="swiper-slide fast_item" data-fast="${item.boardId}">
 				<div class="deal_top">
 					<div class="img_wrap">
 						<img src="${item.imagePath}" alt="product image" />
@@ -122,14 +123,21 @@ function callFastBoardList(fastBoardList) {
 
     $(".fast_list").html(html);
 
+    let itemLoopFlag = false;
+    let slidePerCnt = 3;
+
+    if(document.querySelectorAll(".fast_item").length > slidePerCnt) {
+        itemLoopFlag = true;
+    }
+
     if (html.indexOf("swiper-slide") > -1) {
         const fastBoardListSwiper = new Swiper(".fast_list_wrap", {
             direction: "vertical",
-            loop: true,
+            loop: itemLoopFlag,
             effect: "slide",
-            slidesPerView: 3,
+            slidesPerView: slidePerCnt,
             autoplay: true,
-            speed: 500,
+            speed: 600,
             spaceBetween: 12,
 			watchOverflow: true,
         });
@@ -145,6 +153,12 @@ function callFastBoardList(fastBoardList) {
             });
         }
     }
+
+    $(".fast_list [data-fast]").on("click", function(){
+    	let boardId = $(this).attr("data-fast");
+    	showBoardModal("fastBoard", boardId);
+    });
+
 }
 
 //freeBoardList
@@ -168,7 +182,7 @@ function callFreeBoardList(freeBoardList) {
 
     $(freeBoardList).each(function (idx, item) {
         html += `
-			<li class="swiper-slide free_item">
+			<li class="swiper-slide free_item" data-free="${item.boardId}">
 				<div class="saving_target">
 					<div class="saving_con">
 						<div class="tit">${item.title}</div>
@@ -184,19 +198,38 @@ function callFreeBoardList(freeBoardList) {
 					</div>
 				</div>
 			</li>`;
-			draw(getPercentage(freeDeliveryAmount, item.sum), `.pie-chart${idx+1}`, "#F1C21B", "#F9E59E");
+			draw(getPercentage(freeDeliveryAmount, item.sum), `.pie-chart${idx+1}`);
     });
 	
     $(".free_list").html(html);
 
+/*
+	let boardStartFlag = false;
+	let smartShoppingOffset=$(".main_container .smart_shopping").offset().top;
+console.log("?smartShoppingOffset?", smartShoppingOffset);
+    $(window).scroll(function(){
+        let calSct=$(this).scrollTop();
+        console.log("?calSct?",calSct);
+        if(calSct>=smartShoppingOffset){
+            boardStartFlag = true;
+        }
+    });
+ */
+    let itemLoopFlag = false;
+    let slidePerCnt = 4;
+
+    if(document.querySelectorAll(".free_item").length > slidePerCnt) {
+        itemLoopFlag = true;
+    }
+
     if (html.indexOf("swiper-slide") > -1) {
         const freeBoardListSwiper = new Swiper(".free_list_wrap", {
             direction: "vertical",
-            loop: true,
+            loop: itemLoopFlag,
             effect: "slide",
-            slidesPerView: 4,
+            slidesPerView: slidePerCnt,
             autoplay: true,
-            speed: 500,
+            speed: 600,
             spaceBetween: 12,
 			watchOverflow: true,
         });
@@ -212,6 +245,12 @@ function callFreeBoardList(freeBoardList) {
             });
         }
     }
+
+    $(".free_list [data-free]").on("click", function(){
+    	let boardId = $(this).attr("data-free");
+    	showBoardModal("freeBoard", boardId);
+    });
+
 }
 
 //oneToOneBoardList
@@ -249,16 +288,22 @@ function callOneBoardList(oneToOneBoardList) {
     });
 
     $(".direct_list").html(html);
-    
+
+    let itemLoopFlag = false;
+    let slidePerCnt = 3;
+
+    if(document.querySelectorAll(".direct_item").length > slidePerCnt) {
+        itemLoopFlag = true;
+    }
 
     if (html.indexOf("swiper-slide") > -1) {
         const directBoardListSwiper = new Swiper(".direct_list_wrap", {
             direction: "vertical",
-            loop: true,
+            loop: itemLoopFlag,
             effect: "slide",
-            slidesPerView: 3,
+            slidesPerView: slidePerCnt,
             autoplay: true,
-            speed: 500,
+            speed: 600,
             spaceBetween: 12,
 			watchOverflow: true,
         });
@@ -277,8 +322,7 @@ function callOneBoardList(oneToOneBoardList) {
     
     $(".direct_list [data-one]").on("click", function(){
     	let boardId = $(this).attr("data-one");
-    	console.log(`boardId >>>> ${boardId}`);
-    	o_btn(boardId);
+    	showBoardModal("oneToOneBoard", boardId);
     });
 }
 
@@ -329,7 +373,7 @@ function callRecommendedProduct(recommendedCount, showProducts) {
 					slidesPerView: showProducts,
 					spaceBetween: 82,
 					loop: true,
-				    speed: 500,
+				    speed: 600,
 				    //loopAdditionalSlides: 1,
 				    
 					scrollbar:{
@@ -347,21 +391,28 @@ function callRecommendedProduct(recommendedCount, showProducts) {
     });
 }
 
+function showBoardModal(targetName, boardId) {
+    let ajaxUrl = null;
 
-function o_btn(boardId) {
-    
+    if (targetName == "oneToOneBoard") {
+        ajaxUrl = "/board/oneboardDetail.do";
+    } else if(targetName == "freeBoard") {
+        ajaxUrl = "/board/freeboardDetail.do";
+    } else {
+        ajaxUrl = "/board/fastboardDetail.do";
+    }
+
     $.ajax({
         type: "post",
-        url: "/board/oneboardDetail.do",
-        data: { boardId: boardId },
-        success: function(response) {
-            console.log(response);
+        url: ajaxUrl,
+        data: { boardId : boardId},
+        success: function (response) {
             $("#modal").html(response);
             $("#detail_modal_wrap").css("display", "flex");
             esc_btn();
         },
-        error: function(error) {
-            alert("The article no longer exists.");
+        error: function (error) {
+            alert("해당 글은 더 이상 존재하지 않습니다.");
         }
     });
 }

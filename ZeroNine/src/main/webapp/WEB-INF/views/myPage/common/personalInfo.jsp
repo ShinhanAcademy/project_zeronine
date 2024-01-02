@@ -28,6 +28,14 @@
 					<img src="${path}/images/common/img_user_ek.jpg"
 						alt="profile image" class="has_user_img" />
 				</c:when>
+				<c:when test="${personalInfo.customerName eq '배재호' || personalInfo.customerId eq '5144fdf1-3645-4899-b4c0-149f9b88d8ca'}">
+					<img src="${path}/images/common/img_user_jh.jpg"
+						alt="profile image" class="has_user_img" />
+				</c:when>
+				<c:when test="${personalInfo.customerName eq '정진' || personalInfo.customerId eq 'f9ecc37a-75d5-494e-aae3-0722fffd37b8'}">
+					<img src="${path}/images/common/img_user_jj.jpg"
+						alt="profile image" class="has_user_img" />
+				</c:when>
 				<c:otherwise>
 					<img src="${path}/images/common/img_user_profile.png"
 						alt="profile image" class="has_user_img" />
