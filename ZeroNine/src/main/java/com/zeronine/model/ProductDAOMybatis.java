@@ -28,8 +28,11 @@ public class ProductDAOMybatis {
 		return productList;
 	}
 
-	public int countProduct(Map<String, Object> paginateParam) {
-		int result = sqlSession.selectOne(namespace + "countProduct",paginateParam);
+	public int countProduct(String inputValue,String buttonValue) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("inputValue", inputValue);
+		map.put("buttonValue", buttonValue);
+		int result = sqlSession.selectOne(namespace + "countProduct",map);
 		
 		return result;
 	}

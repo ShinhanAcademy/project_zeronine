@@ -44,7 +44,7 @@ public class ProductService {
 		paginateParam.put("buttonValue", buttonValue);
 		
 		
-		int countProducts = productDAO.countProduct(paginateParam);
+		int countProducts = productDAO.countProduct(inputValue ,buttonValue);
 
 		int maxPageNumber = (int) (Math.ceil((double) countProducts / pageLimit));
 
@@ -65,10 +65,9 @@ public class ProductService {
 	}
 
 
-	public int countProduct(Map<String, Object> inputValue) {
+	public int countProduct(String inputValue,String buttonValue) {
 		// TODO Auto-generated method stub
-		int cnt = productDAO.countProduct(inputValue);
-		System.out.println("CountProduct cnt ==>" + cnt);
+		int cnt = productDAO.countProduct(inputValue,buttonValue);
 		return cnt;
 	}
 
