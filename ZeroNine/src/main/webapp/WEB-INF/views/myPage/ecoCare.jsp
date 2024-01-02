@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../common/head.jsp"%>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
 <link rel="stylesheet" href="${path}/css/myPage/ecocare.css">
 <link rel="stylesheet" href="${path}/css/modal/alreadyIncartModal.css">
@@ -144,9 +143,18 @@ for(var i=0 ; i<dash_arr.length; i++){
 
 //월별 count
 var current_month = new Date().getMonth()+1;
-var month_1 = current_month-2;
-var month_2 = current_month-1;
+
+var month_1; 
+var month_2;
 var month_3 = current_month;
+
+if(current_month == 1){
+	month_1 = 11;
+	month_2 = 12;
+} else if(current_month == 2){
+	month_1 = 12;
+	month_2 = 1;
+}
 console.log(month_1, month_2, month_3);
 
 var ctn_month = [0,0,0];
@@ -194,15 +202,12 @@ console.log(waste_arr);
 
 //바 차트
 	var now = new Date();
-	var label_1 = now.getMonth() - 1;
-	var label_2 = now.getMonth();
-	var label_3 = now.getMonth() + 1;
 	var ctx1 = document.getElementById("myBarChart");
 	
 	var myBarChart = new Chart(ctx1, {
 		type : "bar",
 		data : {
-			labels : [ label_1+ "월", label_2+ "월", label_3+ "월" ],
+			labels : [ month_1+ "월", month_2+ "월", month_3+ "월" ],
 			datasets : [ {
 				data : ctn_month,
 				borderColor : function(context) {
@@ -232,7 +237,6 @@ console.log(waste_arr);
 					}
 				},
 				y : {
-					type : 'linear',
 					grace : '10%',
 					grid : {
 						color : function(context) {
@@ -255,7 +259,6 @@ console.log(waste_arr);
 		            anchor: 'end',
 		            clamp: true,
 		            color: function (ctx1) {
-		                const value = ctx1.dataset.data[ctx1.dataIndex];
 		                return '#000000';
 		            },
 		            formatter: function (value, context) {
@@ -293,9 +296,7 @@ var myDoughnutChart = new Chart(ctx2, {
 	            align: 'center',
 	            anchor: 'center',
 	            clamp: true,
-	            display: true,
 	            color: function (ctx) {
-	                const value = ctx.dataset.data[ctx.dataIndex];
 	                return '#000000';
 	            },
 	            formatter: function (value, context) {
@@ -311,8 +312,6 @@ var myDoughnutChart = new Chart(ctx2, {
 
 //request pickup
 var couponInfo_arr = JSON.parse('${couponCtn}');
-console.log(couponInfo_arr);
-console.log(now.getHours());
 
 var output = "";
 var c_month = now.getMonth()+1;
