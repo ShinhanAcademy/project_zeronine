@@ -26,16 +26,21 @@ $(function () {
 
     // 카트 전체 선택
     $(".tbl_orderlist_wrap th.check_all input").on("click", function () {
-        checkBoxAll = $("#cartList input[type=checkbox]");
-
-        if (checkBoxAll.is(":checked")) {
-            //전체 해제
-            checkBoxAll.prop("checked", false);
-        } else {
-            //전체 선택
-            checkBoxAll.prop("checked", true);
+        isChecked = document.querySelector(".tbl_orderlist_wrap th.check_all input").checked;
+        if(isChecked){
+            const checkboxes = $("#cartList input[type=checkbox]");
+    
+            for(const checkbox of checkboxes){
+                checkbox.checked = true;
+            }
         }
-
+        else{
+            const checkboxes = $("#cartList input[type=checkbox]");
+            
+            for(const checkbox of checkboxes){
+                checkbox.checked = false;
+            }
+        }
         calcTotalPrice(totalPrice);
     });
 
