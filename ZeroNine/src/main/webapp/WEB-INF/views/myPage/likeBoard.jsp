@@ -120,7 +120,7 @@
 			
 			function handleLikeButtonClick(index, boardId) {
 				
-				var likeButtonId = "like" + index;
+				//var likeButtonId = "like" + index;
 		    
 		    	//클래스가 heart liked => AJAX DELTE 호출
 		        var isRedHeart = likedbidArr.indexOf(boardId);
