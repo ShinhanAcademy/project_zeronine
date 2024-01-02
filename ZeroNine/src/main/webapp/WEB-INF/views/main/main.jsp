@@ -95,6 +95,24 @@
 		            <div class="title">알뜰 무배</div>
 		            <div class="free_list_wrap list_wrapper">
 			            <ul class="swiper-wrapper card_list free_list">
+			            	<!--  
+				            <c:forEach begin="1" end="3">
+				                <li class="swiper-slide free_item">
+				                    <div class="saving_target">
+										<div class="saving_con">
+				                        <div class="tit">스팸 싱글 마일드 2개 나눠요!</div>
+											<div class="conBox">구매하자구매하자구매하자구매하자구매하자구매하자구매하자구매하자!!</div>
+										</div>
+					                    <div class="deal_bottom">
+					                        <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
+					                    </div>
+				                    </div>
+				                    <div class="progress_status">
+				                        <img src="${path}/images/main/img_progress01.png" alt="progress" />
+				                    </div>
+				                </li>
+				            </c:forEach>
+				            -->
 			            </ul>
 		            </div>
 		        </div>
@@ -102,6 +120,24 @@
 		            <div class="title">1:1 직거래</div>
 		            <div class="direct_list_wrap list_wrapper">
 			            <ul class="swiper-wrapper card_list direct_list">
+			            <!-- 
+				            <c:forEach begin="1" end="2">
+				                <li class="direct_item">
+				                	<div class="deal_top">
+					                    <div class="img_wrap">
+					                        <img src="${path}/images/main/img_user.png" alt="product image">
+					                    </div>
+					                    <div>
+						                    <div class="tit">소금빵 1+1입니다</div>
+						                    <p class="location_info">서울 마포구 월드컵북로 34 서교동 우도빌딩 1층, 호텔 아만티 건너편</p>
+					                    </div>
+				                    </div>
+				                     <div class="deal_bottom">
+					                    <div class="deadline">D-6 <span>(11/29 23:59까지)</span></div>
+				                    </div>
+				                </li>
+			                </c:forEach>
+			                 -->
 			            </ul>
 		            </div>
 		        </div>
@@ -111,8 +147,11 @@
 		        <div class="recommended_list">
 		        	<div class="recommended_list_inner">
 			            <!-- <div class="product_wrap swiper-wrapper"> -->
-			            <div class="product_wrap">
+			            <div class="swiper-wrapper product_wrap">
 			            </div>
+			            
+						<!-- If we need scrollbar -->
+						<!-- <div class="swiper-scrollbar"></div> -->
 		        	</div>
 		            <div class="view_more">+</div>
 		        </div>
