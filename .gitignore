@@ -5,3 +5,8 @@ postgreInfo.properties
 
 ## 폴더 무시
 target/
+ZeroNine/.idea/.gitignore
+ZeroNine/.idea/compiler.xml
+ZeroNine/.idea/jarRepositories.xml
+ZeroNine/.idea/misc.xml
+ZeroNine/.idea/vcs.xml
