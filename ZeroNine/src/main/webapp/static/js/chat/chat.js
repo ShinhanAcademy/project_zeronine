@@ -163,6 +163,8 @@ function showMessage(message) {
 						imagePath = "/images/common/img_user_jh.jpg";
 					} else if(_chatCustName == "정진" || _chatCustId == "f9ecc37a-75d5-494e-aae3-0722fffd37b8") {
 						imagePath = "/images/common/img_user_jj.jpg";
+					} else if(_chatCustName == "박정우" || _chatCustId == "c400cd08-531b-4e74-85ec-032f2aedd38b") {
+						imagePath = "/images/common/img_user_jw.png";
 					} else {
 						imagePath = "/images/common/img_user_profile.png";
 					}
@@ -183,6 +185,8 @@ function showMessage(message) {
 						imagePath = "/images/common/img_user_jh.jpg";
 					} else if(_authorCustName == "정진" || _authorCustId == "f9ecc37a-75d5-494e-aae3-0722fffd37b8") {
 						imagePath = "/images/common/img_user_jj.jpg";
+					} else if(_authorCustName == "박정우" || _authorCustId == "c400cd08-531b-4e74-85ec-032f2aedd38b") {
+						imagePath = "/images/common/img_user_jw.png";
 					} else {
 						imagePath = "/images/common/img_user_profile.png";
 					}
@@ -340,6 +344,8 @@ function clickEventInit() {
 										imagePath = "/images/common/img_user_jh.jpg";
 									} else if(_chatCustName == "정진" || _chatCustId == "f9ecc37a-75d5-494e-aae3-0722fffd37b8") {
 										imagePath = "/images/common/img_user_jj.jpg";
+									} else if(_chatCustName == "박정우" || _chatCustId == "c400cd08-531b-4e74-85ec-032f2aedd38b") {
+										imagePath = "/images/common/img_user_jw.png";
 									} else {
 										imagePath = "/images/common/img_user_profile.png";
 									}
@@ -360,6 +366,8 @@ function clickEventInit() {
 										imagePath = "/images/common/img_user_jh.jpg";
 									} else if(_authorCustName == "정진" || _authorCustId == "f9ecc37a-75d5-494e-aae3-0722fffd37b8") {
 										imagePath = "/images/common/img_user_jj.jpg";
+									} else if(_authorCustName == "박정우" || _authorCustId == "c400cd08-531b-4e74-85ec-032f2aedd38b") {
+										imagePath = "/images/common/img_user_jw.png";
 									} else {
 										imagePath = "/images/common/img_user_profile.png";
 									}

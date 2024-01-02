@@ -36,6 +36,10 @@
 					<img src="${path}/images/common/img_user_jj.jpg"
 						alt="profile image" class="has_user_img" />
 				</c:when>
+				<c:when test="${personalInfo.customerName eq '박정우' || personalInfo.customerId eq 'c400cd08-531b-4e74-85ec-032f2aedd38b'}">
+					<img src="${path}/images/common/img_user_jw.png"
+						alt="profile image" class="has_user_img" />
+				</c:when>
 				<c:otherwise>
 					<img src="${path}/images/common/img_user_profile.png"
 						alt="profile image" class="has_user_img" />
@@ -78,12 +82,6 @@
 			<tr>
 				<th>지구 지킴이 횟수</th>
 				<td>${personalInfo.saveEarth} 회</td>
-			</tr>
-			<tr>
-				<th>My Point</th>
-				<td>
-					<fmt:formatNumber pattern="#,##0" value="${personalInfo.point}" />
-				</td>
 			</tr>
 			<tr>
 				<th>보유 회수 쿠폰</th>

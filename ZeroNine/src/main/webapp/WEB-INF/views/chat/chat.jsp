@@ -58,6 +58,10 @@
 												<img src="${path}/images/common/img_user_jj.jpg"
 													alt="profile image" class="has_user_img" />
 											</c:when>
+											<c:when test="${chatInfo.chatCustName eq '박정우' || chatInfo.chatCustId eq 'c400cd08-531b-4e74-85ec-032f2aedd38b'}">
+												<img src="${path}/images/common/img_user_jw.png"
+													alt="profile image" class="has_user_img" />
+											</c:when>
 											<c:otherwise>
 												<img src="${path}/images/common/img_user_profile.png"
 													alt="profile image" />
@@ -92,6 +96,10 @@
 											</c:when>
 											<c:when test="${chatInfo.authorCustName eq '정진' || chatInfo.authorCusId eq 'f9ecc37a-75d5-494e-aae3-0722fffd37b8'}">
 												<img src="${path}/images/common/img_user_jj.jpg"
+													alt="profile image" class="has_user_img" />
+											</c:when>
+											<c:when test="${chatInfo.authorCustName eq '박정우' || chatInfo.authorCusId eq 'c400cd08-531b-4e74-85ec-032f2aedd38b'}">
+												<img src="${path}/images/common/img_user_jw.png"
 													alt="profile image" class="has_user_img" />
 											</c:when>
 											<c:otherwise>

@@ -44,15 +44,14 @@ $(function () {
 
     //상품 추천
     let recommendedCount = 3;
-    let showProducts = 3;
-    callRecommendedProduct(recommendedCount, showProducts);
+    
+    callRecommendedProduct(recommendedCount);
 
     $(".recommended_list .view_more").on("click", function () {
-        recommendedCount = 6;
-        showProducts = 4;
-        callRecommendedProduct(recommendedCount, showProducts);
+        recommendedCount = 20;
+        callRecommendedProduct(recommendedCount);
         $(this).hide();
-        $(".recommended_wrap .recommended_list .recommended_list_inner").addClass("on");
+        $(".recommended_wrap").addClass("on");
     });
 
 
@@ -80,6 +79,17 @@ $(function () {
         },
     });
 
+    $(window).scroll(function(){
+        let newSct = $(this).scrollTop();
+        let showSubVisual = 1800;
+        //console.log("newSct",newSct);
+        
+        //sub_visual wrap scroll event
+        if(newSct >= showSubVisual) {
+            $(".sub_visual_wrap").addClass("on");
+        }
+    });
+
 }); //End_Ready
 
 //fastBoardList
@@ -98,7 +108,7 @@ function callFastBoardList(fastBoardList) {
 		return;
 	}
 
-    console.log("??fastBoardList??", fastBoardList);
+    //console.log("??fastBoardList??", fastBoardList);
     $(fastBoardList).each(function (idx, item) {
         html += `
 			  <li class="swiper-slide fast_item" data-fast="${item.boardId}">
@@ -114,7 +124,7 @@ function callFastBoardList(fastBoardList) {
 				</div>
 				<div class="deal_bottom">
 					<div class="deadline">
-						D-${dDayCount(item.finishTime)} <span>(${remainDateTime(item.finishTime)}까지)</span>
+						D-${dDayCount(item.finishTime)} <span>&#40;${remainDateTime(item.finishTime)}까지&#41;</span>
 					</div>
 					<div class="left"><span>${item.totalpickCount}</span> 개 남음</div>
 				</div>
@@ -178,7 +188,7 @@ function callFreeBoardList(freeBoardList) {
 		return;
 	}
 
-    console.log("??freeBoardList??", freeBoardList);
+    //console.log("??freeBoardList??", freeBoardList);
 
     $(freeBoardList).each(function (idx, item) {
         html += `
@@ -189,7 +199,7 @@ function callFreeBoardList(freeBoardList) {
 						<div class="conBox">${item.boardContent}</div>
 					</div>
 					<div class="deal_bottom">
-						<div class="deadline">D-${dDayCount(item.finishTime)} <span>(${remainDateTime(item.finishTime)}까지)</span></div>
+						<div class="deadline">D-${dDayCount(item.finishTime)} <span>&#40;${remainDateTime(item.finishTime)}까지&#41;</span></div>
 					</div>
 				</div>
 				<div class="progress_status">
@@ -203,18 +213,6 @@ function callFreeBoardList(freeBoardList) {
 	
     $(".free_list").html(html);
 
-/*
-	let boardStartFlag = false;
-	let smartShoppingOffset=$(".main_container .smart_shopping").offset().top;
-console.log("?smartShoppingOffset?", smartShoppingOffset);
-    $(window).scroll(function(){
-        let calSct=$(this).scrollTop();
-        console.log("?calSct?",calSct);
-        if(calSct>=smartShoppingOffset){
-            boardStartFlag = true;
-        }
-    });
- */
     let itemLoopFlag = false;
     let slidePerCnt = 4;
 
@@ -257,7 +255,7 @@ console.log("?smartShoppingOffset?", smartShoppingOffset);
 function callOneBoardList(oneToOneBoardList) {
 	let html = "";
 	
-    console.log("??oneToOneBoardList??", oneToOneBoardList);
+    //console.log("??oneToOneBoardList??", oneToOneBoardList);
 	if(oneToOneBoardList.length == 0) {
 		html += `
 		<li class="swiper-slide no_list">
@@ -282,7 +280,7 @@ function callOneBoardList(oneToOneBoardList) {
 					</div>
 				</div>
 				<div class="deal_bottom">
-					<div class="deadline">D-${dDayCount(item.finishtime)} <span>(${remainDateTime(item.finishtime)}까지)</span></div>
+					<div class="deadline">D-${dDayCount(item.finishtime)} <span>&#40;${remainDateTime(item.finishtime)}까지&#41;</span></div>
 				</div>
 			</li>`;
     });
@@ -349,7 +347,7 @@ function callRecommendedProduct(recommendedCount, showProducts) {
                 $(res).each(function (idx, item) {
                     // console.log("res", res[idx]);
                     html += `
-						<div class="item">
+						<div class="item swiper-slide">
 			                <div class="img_wrap">
 			                	<a href= "${contextPath}/product/productDetail.do?productId=${res[idx].productId}" >
 			                    	<img src="${res[idx].imagePath}" alt="product">
@@ -361,28 +359,24 @@ function callRecommendedProduct(recommendedCount, showProducts) {
 				                    	${res[idx].pName}
 				                    </a>
 		                    	</div>
-			                    <div class="price">${res[idx].price} 원</div>
+			                    <div class="price">${numberWithDots(res[idx].price)} 원</div>
 			                </div>
 			            </div>`;
                 });
                 $(".product_wrap").html(html);
-                /*
-                const recommendedProducts = new Swiper(".recommended_list_inner", {
-                    // Optional parameters
-                    direction: "horizontal",
-					slidesPerView: showProducts,
-					spaceBetween: 82,
-					loop: true,
-				    speed: 600,
-				    //loopAdditionalSlides: 1,
-				    
-					scrollbar:{
-						el : ".swiper-scrollbar",
-				        draggable: true, 
-				    },
-	
-                });
-*/
+
+                if(recommendedCount > 3) {
+                    const recommendedProducts = new Swiper(".recommended_list_inner", {
+                        direction: "horizontal",
+                        effect: "slide",
+                        slidesPerView : 4,
+                        spaceBetween: 82,
+                        loop: true,
+                        autoplay: true,
+                        speed: 500,
+                        loopAdditionalSlides : 1,
+                    });
+                }
             }
         },
         error: function () {
@@ -398,7 +392,7 @@ function showBoardModal(targetName, boardId) {
         ajaxUrl = "/board/oneboardDetail.do";
     } else if(targetName == "freeBoard") {
         ajaxUrl = "/board/freeboardDetail.do";
-    } else {
+    } else if(targetName == "fastBoard") {
         ajaxUrl = "/board/fastboardDetail.do";
     }
 
