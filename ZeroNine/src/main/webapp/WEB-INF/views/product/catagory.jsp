@@ -103,16 +103,55 @@
 			
 <script>
 		var path = "${path}";
+		var cartcheck = "${cartcheckpid}";
 	</script>
 
 <script>
+var cartcheck = "${cartcheckpid}";
+const productInCart = [];  
+ cartcheck = cartcheck.replace(/\[|\]/g,'');
+	cartcheckArray = cartcheck.split(',').map(function(item) {
+      return item.trim();
+  });
+	console.log(cartcheckArray);
+function handlegoCartButtonClick(index, productId) {
+	 function isproductinCart(productId){
+  	  return cartcheckArray.some(item => item === productId);
+    }
+	 console.log(isproductinCart(productId));
+	if(isproductinCart(productId)==false){
+			$.ajax({
+				url : path +"/product/goProductCart.do",
+				type: "POST",
+				data : {"productId" :productId},
+				success : function(){
+					alert("잘담겼다!");
+					cartcheckArray.push(productId);
+					console.log(productInCart);
+				},
+				error : function(){
+					alert("에러입니다.");
+				}
+				}); 
+	}else{
+				$.ajax({
+			  url: path+"/product/alreadyInCartModal.do",
+			  type: "POST",
+			  success: function(response) {
+				 $("#modal").show();
+			    $('#modal').html(response);
+			  },
+			  error: function(error) {
+			    console.error('Error loading modal content:', error);
+			  }
+			});
+	}	
+}
 
 	 var str = "${likedcid}";
 	 var likedcidArr = [] ; 
-	 //str.split(/!|@|~|,| |Z/);
 	 likedcidArr = str.split(/,|\[|\]| /);
 	 function handleLikeButtonClick(index, productId) {
-	    	//클래스가 heart liked => AJAX DELTE 호출
 	        var isRedHeart = likedcidArr.indexOf(productId);
 			if(isRedHeart>=0) {
 				$.ajax({
@@ -155,4 +194,3 @@
 			});
 		
 	</script>
-

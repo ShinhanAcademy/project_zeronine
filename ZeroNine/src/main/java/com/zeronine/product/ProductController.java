@@ -80,9 +80,12 @@ public class ProductController {
 			buttonValue = s1;
 		}
 		String custid = (String) session.getAttribute("customerId"); //customerId
-		List<Map<String,Object>> productList= productService.searchAll( page,Integer.parseInt(selectedValue),inputValue,buttonValue);
-		PagingVO paginating = productService.getPages(page,Integer.parseInt(selectedValue), inputValue, buttonValue);
+		List<Map<String,Object>> productList= productService.searchAll
+				(page,Integer.parseInt(selectedValue),inputValue,buttonValue);
+		PagingVO paginating = productService.getPages
+				(page,Integer.parseInt(selectedValue), inputValue, buttonValue);
 		model.addAttribute("pCount",productService.countProduct(inputValue,buttonValue));
+		model.addAttribute("cartcheckpid",cartservice.cartCheckPid(custid));
 		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("customerid",custid);
 		model.addAttribute("plist",productList);
@@ -99,14 +102,10 @@ public class ProductController {
 		List<String> cart = cartservice.cartCheckPid(custid);
 
 		if (cart.contains(productId)) {
-			logger.info("�씠誘� �떞寃쇰떎�땲源�~");
 			return ResponseEntity.ok("�씠誘� 移댄듃�뿉 �떞湲대냸�엫�뀑");
 			// return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed
 			// to save data.");
-		} else
-
-			result = cartservice.goProductCart(custid, productId);
-		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
+		} else { result = cartservice.goProductCart(custid, productId);}
 		if (result > 0) {
 			model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
 			logger.info("Data Saved Successfully");
@@ -166,11 +165,12 @@ public class ProductController {
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("plist", productService.selectByProductId(productId));
+		
 		model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
+
 		model.addAttribute("deliverylist4", productService.selectDetailDelivery4());
 		model.addAttribute("pImage", productService.selectPImage(productId));
 		model.addAttribute("detailImage", productService.selectDetailImage(productId));
-		model.addAttribute("custid", custid);
 		return "product/productDetail";
 	}
 	@PostMapping("/alreadyInCartModal.do")

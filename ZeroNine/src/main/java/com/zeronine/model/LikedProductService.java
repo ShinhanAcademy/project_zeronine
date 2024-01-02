@@ -28,6 +28,7 @@ public class LikedProductService {
 	public List<String> selectByCidlist(String custId) {
 		return likedproductDAO.selectByCidlist(custId);
 	}
+
 	public int deleteLikedProduct(String custid, String productId) {
 		return likedproductDAO.deleteLikedProduct(custid, productId);
 	}

@@ -97,7 +97,6 @@
 	<%@include file="../common/footer.jsp"%>
 <script>
 var path = "${path}";
-var cartcheck = "${cartcheckpid}";
 </script>
 <script src="../js/product/productlist.js"></script>
 

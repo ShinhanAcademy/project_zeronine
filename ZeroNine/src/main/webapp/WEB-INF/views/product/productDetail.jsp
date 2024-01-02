@@ -153,7 +153,6 @@
 		var path = "${path}";
 		var sidebox = $("#sidebox");
 		 var custid = "${customerId}";
-		 var isLogin = "${custid}";
 		 var productid ="${plist.productId}";
 		 var cartCheckpid ="${cartCheckPid}";
 		var currentPosition = parseInt($("#sidebox").css("top"));
@@ -171,7 +170,7 @@
 		});
 
 		var quantityValue = 1;
-		var price = ${plist.price}; // Assuming product.price is a numeric value
+		var price = ${plist.price};
 
 		function increment() {
 			if (quantityValue < 100) {
@@ -204,28 +203,19 @@
 			        quantityValue: quantityValue
 			    };
 		}
-		cartCheck = cartCheckpid.replace(/\[|\]/g, ''); // Remove square brackets
+		cartCheck = cartCheckpid.replace(/\[|\]/g, ''); 
 	    var cartcheckArray = cartCheck.split(',').map(function(item) {
-	        return item.trim(); // Remove extra spaces
+	        return item.trim(); 
 	    });
-	    var productid ="${plist.productId}";
-	
 		var cartcheckarr =cartCheck.split(',');
 		 function goOrder() {
 			
-			if(isLogin==""){
+			if(custid==""){
 				alert("로그인 후 이용해주세요.");
 				location.href = "/auth/login.do";
 				return;
 			}
 			 
-			var cartCheckpid ="${cartCheckPid}";
-			 var productid ="${plist.productId}";
-			 //console.log(productid);
-			 //console.log(cartCheckpid);
-			 //console.log(cartCheckpid.includes(productid)==false);
-			 //console.log(cartcheckarr.includes(productid)==false);
-			 //console.log(cartcheckarr);
 				var result = updateQuantityAndTotal();
 			    var total = result.total;
 			    var quantityValue = result.quantityValue;
@@ -262,15 +252,11 @@
 			} 
 			
 		 }
+		 
 		 function manygocart() {
-		
-			 var productid ="${plist.productId}";
 			var result = updateQuantityAndTotal();
 		    var total = result.total;
 		    var quantityValue = result.quantityValue;
-		    var cartCheckpid ="${cartCheckPid}";
-		    //console.log(custid);
-			//console.log(productid);
 			var obj = {
 				"productid" :productid,
 				"pcount": quantityValue};
@@ -294,11 +280,7 @@
 				  success: function(response) {
 		
 					 $("#modal").show();
-				    // On success, replace the content of the modal div with the response
 				    $('#modal').html(response);
-				    // Now you might want to display the modal (assuming you have some CSS or JS for that)
-				    // For example, if you're using a Bootstrap modal:
-				    // $('#modal').modal('show');
 				  },
 				  error: function(error) {
 				    console.error('Error loading modal content:', error);
@@ -309,15 +291,10 @@
 
 		 var str = "${likedcid}";
 		 var likedcidArr = [] ; 
-		 //str.split(/!|@|~|,| |Z/);
 		 likedcidArr = str.split(/,|\[|\]| /);
-		 //console.log(likedcidArr);
 		 	$(".like").click(function (event){
 		 		var productId = $(this).val();
-		 		console.log(productId);
-		 		var custid = "${customerId}";
 		 		 if(custid === ""){
-		 			 console.log("2222"+custid);
 					 alert("비로그인상태입니다. 로그인페이지로 이동합니다. ");
 					 location.href ="${path}/auth/login.do";
 					
@@ -330,13 +307,7 @@
 					 }
 				}); 
 		 function handleLikeButtonClick(productId) {
-			 var custid = "${customerId}";
-			 console.log(productId+"프로덕트아이디")
-			 console.log(custid);
-		    	//클래스가 heart liked => AJAX DELTE 호출
 		        var isRedHeart = likedcidArr.indexOf(productId);
-		    	
-				console.log(isRedHeart);
 				if(isRedHeart>=0) {
 					$.ajax({
 						url : "/product/deleteLikedProduct.do",
@@ -349,7 +320,6 @@
 							alert("에러입니다.");
 						}
 						});
-						 
 					}else{
 		
 					 $.ajax({
@@ -365,6 +335,7 @@
 							});
 					}
 		 }
+		 
 		function esc_btn(){
 			$(document).keydown(function(event){
 				if(event.keyCode == 27){
