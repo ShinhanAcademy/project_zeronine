@@ -15,7 +15,7 @@ function loadMore(){
 		$("#loadMore_btn").show();
 		show(data.slice(initNum, initNum+9));
 		initNum += 9;
-		if(endNum >= totalLength){
+		if(initNum >= totalLength){
 			$("#loadMore_btn").hide();
 		} 
 	}
