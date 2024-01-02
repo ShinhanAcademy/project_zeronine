@@ -70,7 +70,7 @@ public class ProductController {
 	@GetMapping("/pcategoryPageCount.do")
 	public String pcategoryPageCount(
 			@RequestParam(value="pCount",required = false, defaultValue="1")int page,
-			@RequestParam(value="q", defaultValue="%")String q,
+			@RequestParam(value="inputValue", defaultValue="%")String inputValue,
 			@RequestParam(value="selectedValue",required = false, defaultValue="0")String selectedValue,
 			@RequestParam(value="buttonValue",required = false, defaultValue="%")String buttonValue,			
 			Model model,HttpSession session
@@ -79,23 +79,15 @@ public class ProductController {
 		if(s1 !=null) {
 			buttonValue = s1;
 		}
-		System.out.println("s1"+buttonValue);
 		String custid = (String) session.getAttribute("customerId"); //customerId
-		
-		List<Map<String,Object>> productList= productService.searchAll( page,Integer.parseInt(selectedValue),q,buttonValue);
-		PagingVO paginating = productService.getPages(page,Integer.parseInt(selectedValue), q, buttonValue);
-		Map<String,Object> inputbutton = new HashMap<>();
-		inputbutton.put("buttonValue", buttonValue);
-		inputbutton.put("inputValue", q);
-		model.addAttribute("pCount",productService.countProduct(inputbutton));
+		List<Map<String,Object>> productList= productService.searchAll( page,Integer.parseInt(selectedValue),inputValue,buttonValue);
+		PagingVO paginating = productService.getPages(page,Integer.parseInt(selectedValue), inputValue, buttonValue);
+		model.addAttribute("pCount",productService.countProduct(inputValue,buttonValue));
 		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("customerid",custid);
 		model.addAttribute("plist",productList);
 		model.addAttribute("paginating",paginating);
-		
-	
 		session.removeAttribute("s1");
-	
 		return"/product/catagory";
 	}
 	
@@ -144,7 +136,6 @@ public class ProductController {
 	@PostMapping("/productLike.do")
 	public ResponseEntity<String> productLike(String productId, Model model, PagingVO paging, HttpSession session) {
 		String custid = (String) session.getAttribute("customerId"); //customerId
-		model.addAttribute("customerId", custid);
 		model.addAttribute("productId", productId);
 
 		// Assuming insertLikedProduct returns the number of rows affected or some
@@ -158,8 +149,10 @@ public class ProductController {
 		}
 	}
 
+
 	@PostMapping("/deleteLikedProduct.do")
-	public ResponseEntity<Boolean> deleteLikedProduct(String productId, Model model, HttpSession session) {
+	public ResponseEntity<Boolean> deleteLikedProduct(String productId,
+			Model model, HttpSession session) {
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		int result = likedproductservice.deleteLikedProduct(custid, productId);
 		boolean isUpdateSuccess = result == 1;
@@ -167,9 +160,9 @@ public class ProductController {
 		return ResponseEntity.ok(isUpdateSuccess);
 
 	}
+	
 	@GetMapping("/productDetail.do")
 	public String productDetail(String productId, Model model, HttpSession session) {
-		ProductVO product = productService.selectByProductId(productId);
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("plist", productService.selectByProductId(productId));

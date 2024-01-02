@@ -72,7 +72,7 @@
 				</div>
 				<div class="search_area">
 					<form class="search_form">
-						<input type="text" name="q" id="q" placeholder="상품명, 제조사 검색">
+						<input type="text" name="inputValue" id="inputValue" placeholder="상품명, 제조사 검색">
 						<button type="button" name="searchbtn" id="searchbtn">
 							<img src="${path}/images/sangpumpage/search.png">
 						</button>

@@ -24,10 +24,10 @@ public class LikedProductDAOMybatis {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("custid", custid);
 		map.put("productId", productId);
-
 		return sqlSession.insert(namespace + "insertLikedProduct", map);
 	}
 
+	
 	public LikedProductVO selectByPid(String productId) {
 		LikedProductVO Lpro = sqlSession.selectOne(namespace + "selectByPid", productId);
 		return Lpro;

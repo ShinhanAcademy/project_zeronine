@@ -34,16 +34,17 @@
 }
 
 .detail_bodypart .detail_middle .detail_img {
-	margin-top: 66px;
+	margin-top: 154px;
 	display: flex;
 	justify-content: center;
 }
 
 .detail_bodypart .detail_middle .detail_img img {
-	width: 304px;
-	height: 384px;
+	border-radius: 5px;
+	margin-right: 15px;
+	width: 500px;
+	height: 500px;
 }
-
 .detail_bodypart .detail_right {
 	width: 50%;
 	margin-top: 31px;

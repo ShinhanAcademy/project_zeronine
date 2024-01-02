@@ -87,14 +87,15 @@
 	<insert id="insertLikedProduct" parameterType="likedProductVo">
 		INSERT INTO
 		"likedProduct"("customerId", "productId")
-		VALUES (CAST(#{custid} AS
-		UUID), CAST(#{productId} AS UUID))
+		VALUES (CAST(#{custid} AS UUID), CAST(#{productId} AS UUID))
 	</insert>
+	
 	<delete id="deleteLikedProduct" parameterType="String">
 		delete from
 		"likedProduct" where "customerId" = CAST(#{custid} AS UUID) and
 		"productId" =CAST(#{productId} AS UUID)
 	</delete>
+	
 	<select id="selectByCidlist" parameterType="String"
 		resultType="String">
 		select "productId" from "likedProduct" where "customerId" =

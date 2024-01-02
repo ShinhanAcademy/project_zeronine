@@ -14,7 +14,6 @@ public class LikedProductService {
 	LikedProductDAOMybatis likedproductDAO;
 
 	public int insertLikedProduct(String custid, String productId) {
-
 		return likedproductDAO.insertLikedProduct(custid, productId);
 	}
 

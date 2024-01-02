@@ -111,16 +111,9 @@
 	 var likedcidArr = [] ; 
 	 //str.split(/!|@|~|,| |Z/);
 	 likedcidArr = str.split(/,|\[|\]| /);
-	 console.log(likedcidArr);
 	 function handleLikeButtonClick(index, productId) {
-	      
-	        var likeButtonId = "like" + index;
-	       
-	    
 	    	//클래스가 heart liked => AJAX DELTE 호출
 	        var isRedHeart = likedcidArr.indexOf(productId);
-	    	
-			console.log(isRedHeart);
 			if(isRedHeart>=0) {
 				$.ajax({
 					url : "/product/deleteLikedProduct.do",

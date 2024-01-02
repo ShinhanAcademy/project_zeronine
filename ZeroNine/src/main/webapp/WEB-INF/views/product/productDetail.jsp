@@ -20,8 +20,7 @@
 
 				<div class="detail_heartcart">
 				<button class="like" id="like" type="button"
-							value="${plist.productId}"
-							onclick="handleLikeButtonClick('${plist.productId}')">
+							value="${plist.productId}">
 
 							<c:if test="${fn:contains(likedcid, plist.productId)}">
 								<img class="detail_heart" src="${path}/images/board/red_heart.png">
@@ -153,7 +152,7 @@
 	<script>
 		var path = "${path}";
 		var sidebox = $("#sidebox");
-		 var custid = "${customerid}";
+		 var custid = "${customerId}";
 		 var isLogin = "${custid}";
 		 var productid ="${plist.productId}";
 		 var cartCheckpid ="${cartCheckPid}";
@@ -308,59 +307,64 @@
 		}
 		}
 
-var str = "${likedcid}";
-	 var likedcidArr = [] ; 
-	 //str.split(/!|@|~|,| |Z/);
-	 likedcidArr = str.split(/,|\[|\]| /);
-	 //console.log(likedcidArr);
-	 function handleLikeButtonClick(productId) {
-	      
-	        var custid = "${customerid}";
-	    
-	    	//클래스가 heart liked => AJAX DELTE 호출
-	        var isRedHeart = likedcidArr.indexOf(productId);
-	    	
-			console.log(isRedHeart);
-			if(isRedHeart>=0) {
-				$.ajax({
-					url : "/product/deleteLikedProduct.do",
-					type: "POST",
-					data : {"productId" :productId},
-					success : function(){
-						likedcidArr = likedcidArr.filter(item => item !== productId);
-					},
-					error : function(){
-						alert("에러입니다.");
-					}
-					});
-					 
-				}else{
-	
-				 $.ajax({
-						url : "/product/productLike.do",
+		 var str = "${likedcid}";
+		 var likedcidArr = [] ; 
+		 //str.split(/!|@|~|,| |Z/);
+		 likedcidArr = str.split(/,|\[|\]| /);
+		 //console.log(likedcidArr);
+		 	$(".like").click(function (event){
+		 		var productId = $(this).val();
+		 		console.log(productId);
+		 		var custid = "${customerId}";
+		 		 if(custid === ""){
+		 			 console.log("2222"+custid);
+					 alert("비로그인상태입니다. 로그인페이지로 이동합니다. ");
+					 location.href ="${path}/auth/login.do";
+					
+				 }else{
+					 var currentImagePath = $(this).find("img.detail_heart").attr("src");
+				     var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
+				      	 path+"/images/board/red_heart.png" : path+"/images/board/heart.png";
+				            $(this).find("img.detail_heart").attr("src", newImagePath);
+				            handleLikeButtonClick(productId);
+					 }
+				}); 
+		 function handleLikeButtonClick(productId) {
+			 var custid = "${customerId}";
+			 console.log(productId+"프로덕트아이디")
+			 console.log(custid);
+		    	//클래스가 heart liked => AJAX DELTE 호출
+		        var isRedHeart = likedcidArr.indexOf(productId);
+		    	
+				console.log(isRedHeart);
+				if(isRedHeart>=0) {
+					$.ajax({
+						url : "/product/deleteLikedProduct.do",
 						type: "POST",
 						data : {"productId" :productId},
 						success : function(){
-							likedcidArr.push(productId);
-							console.log(likedcidArr);
+							likedcidArr = likedcidArr.filter(item => item !== productId);
 						},
 						error : function(){
 							alert("에러입니다.");
 						}
 						});
-				}
-					};
-	
-	        
-		$(".like").click(function (){
-
-			            var currentImagePath = $(this).find("img.detail_heart").attr("src");
-			            var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
-			                path+"/images/board/red_heart.png" :
-			                path+"/images/board/heart.png";
-
-			            $(this).find("img.detail_heart").attr("src", newImagePath);
-			});
+						 
+					}else{
+		
+					 $.ajax({
+							url : "/product/productLike.do",
+							type: "POST",
+							data : {"productId" :productId},
+							success : function(){
+								likedcidArr.push(productId);
+							},
+							error : function(){
+								alert("에러입니다.");
+							}
+							});
+					}
+		 }
 		function esc_btn(){
 			$(document).keydown(function(event){
 				if(event.keyCode == 27){
