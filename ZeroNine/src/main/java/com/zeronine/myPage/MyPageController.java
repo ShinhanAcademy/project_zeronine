@@ -734,7 +734,6 @@ public class MyPageController {
 		model.addAttribute("pickUpList",pickUpList);
 		model.addAttribute("pickUpListCount",pickUpListCount);
 		model.addAttribute("paginating",paginating);
-		
 		return"/myPage/subPage/echoCareInPickUpList";
 	}
 	@GetMapping("/PickUpDetail.do") 

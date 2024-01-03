@@ -18,12 +18,12 @@
 		</div>
 	</div>
 	<div class="tbl_top_wrap">
-	
+
 		<div class="total_count">
 			총 <span>${pickUpListCount}</span>건
 		</div>
 	</div>
-	
+
 	<div class="tbl_wrap">
 		<table class="tbl_chat_wrap">
 			<colgroup>
@@ -40,21 +40,21 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${pickUpList}" var="pickupList" varStatus="status">
-				<tr>
-					<td>${pickupList.pickUpTime}</td>
-					<td>${pickupList.isFoodWaste==false ? "일반쓰레기 회수 요청 내역" : "음식물 쓰레기 회수 요청 내역"}</td>
-					<td class="status" data-value ="${pickupList.pickUpStatus}">${pickupList.pickUpStatus=="complete"? "완료" : pickupList.pickUpStatus=="ready" ? "준비 중" : pickupList.pickUpStatus=="process" ? "회수 중" : "거절"}</td>
-					<td>
-						<insert class="status_info" hidden> ${pickupList.pickUpStatus} </insert>
-						<button class="btn_blue" value="${pickupList.pickUpId}"onclick="pickUpDetail('${pickupList.pickUpId}')" >상세 보기</button>
-					</td>
-				</tr>
+				<c:forEach items="${pickUpList}" var="pickupList" varStatus="status">
+					<tr>
+						<td>${pickupList.pickUpTime}</td>
+						<td>${pickupList.isFoodWaste==false ? "일반쓰레기 회수 요청 내역" : "음식물 쓰레기 회수 요청 내역"}</td>
+						<td class="status" data-value="${pickupList.pickUpStatus}">${pickupList.pickUpStatus=="complete"? "완료" : pickupList.pickUpStatus=="ready" ? "준비 중" : pickupList.pickUpStatus=="process" ? "회수 중" : "거절"}</td>
+						<td>
+							<button class="btn_blue" value="${pickupList.pickUpId}"
+								onclick="pickUpDetail('${pickupList.pickUpId}')">상세 보기</button>
+						</td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	
+
 	<!-- pagination -->
 	<%-- <c:if test="${booklist.size() != 0}"> --%>
 	<c:if test="${pCount != 0}">
