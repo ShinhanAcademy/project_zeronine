@@ -188,7 +188,8 @@ function calcTotalPrice(totalPrice) {
     let deliveryFee = 3000;
     let indicatedPrice = 0;
     totalPrice = 0;
-    let hasDeliverySubscription = $(".free_delivery_amount").attr("data-subscription");
+    //let hasDeliverySubscription = $(".free_delivery_amount").attr("data-subscription");
+    let hasDeliverySubscription = $(".subscription_list").attr("data-deliverySubscription");
 
     targetChkedBox.each(function () {
         totalPrice += parseNumber($(this).text().trim());
@@ -196,22 +197,27 @@ function calcTotalPrice(totalPrice) {
     
     $(".free_delivery_amount .text.free_delivery, .free_delivery_amount .text.pay_delivery, .free_delivery_amount .text.subscription_delivery").hide();
     
-    if(targetChkedBox.length == 0 || hasDeliverySubscription != "") {
+    if(targetChkedBox.length == 0) {
         deliveryFee = 0;
     }
-        
-    if (totalPrice >= freeDeliveryAmount || hasDeliverySubscription != "") {
+     
+    if(hasDeliverySubscription != "" || hasDeliverySubscription != "undifined") { //무료배송구독중
         deliveryFee = 0;
         
         //percentage
         $(".contents_wrap .now_amount").css({"width": "100%"});
         
         //상단 표시되는 금액
-        if(hasDeliverySubscription != "") {
-	        $(".free_delivery_amount .text.subscription_delivery").show();
-        } else {
-        	$(".free_delivery_amount .text.free_delivery").show();
-        }
+        $(".free_delivery_amount .text.subscription_delivery").show();
+
+    } else if (totalPrice >= freeDeliveryAmount) {
+        deliveryFee = 0;
+        
+        //percentage
+        $(".contents_wrap .now_amount").css({"width": "100%"});
+        
+        //상단 표시되는 금액
+        $(".free_delivery_amount .text.free_delivery").show();
         
     } else {
         indicatedPrice = freeDeliveryAmount - totalPrice;
