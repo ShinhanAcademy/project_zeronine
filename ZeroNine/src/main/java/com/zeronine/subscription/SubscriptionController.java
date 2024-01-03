@@ -27,13 +27,20 @@ public class SubscriptionController {
 	@GetMapping("/subscriptionBanner.do")
 	public void SubscriptionBuying(String subscriptionType, Model model) {
 		logger.info("subscripton Type: "+subscriptionType);
-		String[] pg_code = {"tosspayments"};
-		String[] channelKey = {"channel-key-1918b0a8-8461-412e-ac87-031e27a5b205"};
+		/*
+		 * String[] pg_code = {"tosspayments"}; String[] channelKey =
+		 * {"channel-key-1918b0a8-8461-412e-ac87-031e27a5b205"};
+		 */
 		
 		//long selected_pg = product_id % 2;
 		
-		model.addAttribute("storeId", "store-6abdf6f7-f7a0-47dd-b006-bb33315ba0bd");
-		model.addAttribute("tosspayments", "channel-key-1918b0a8-8461-412e-ac87-031e27a5b205");
+		/*
+		 * model.addAttribute("storeId", "store-6abdf6f7-f7a0-47dd-b006-bb33315ba0bd");
+		 */
+		/*
+		 * model.addAttribute("tosspayments",
+		 * "channel-key-1918b0a8-8461-412e-ac87-031e27a5b205");
+		 */
 		model.addAttribute("subscriptionType", subscriptionType);
 		
 	}

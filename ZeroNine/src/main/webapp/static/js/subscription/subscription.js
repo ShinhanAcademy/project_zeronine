@@ -59,15 +59,15 @@ close_btn.onclick = function(){
 btn_check.onclick = function(){
 	modal.style.display = 'none';
 	if(subscript_name.innerHTML == "에코케어+무료 배송 이용권"){	
-		requestPaySubscription('에코케어+무료 배송 이용권', 1); 
+		requestPaySubscription('에코케어+무료 배송 이용권', 9000/100); 
 	}else if(subscript_name.innerHTML == "에코케어 이용권"){
-		requestPaySubscription('에코케어 이용권', 1);
+		requestPaySubscription('에코케어 이용권', 5900/100);
 		//location.href='subscriptionBanner.do?subscriptionType=ecocare';
 	}else if(subscript_name.innerHTML == "무료 배송 이용권"){
-		requestPaySubscription('무료 배송 이용권', 1);
+		requestPaySubscription('무료 배송 이용권', 5400/100);
 		//location.href='subscriptionBanner.do?subscriptionType=free_delivery';
 	}else{
-		requestPaySubscription('5회 이용권', 1);
+		requestPaySubscription('5회 이용권', 2300/100);
 		//location.href='subscriptionBanner.do?subscriptionType=ecocare_5';
 	}
 }
