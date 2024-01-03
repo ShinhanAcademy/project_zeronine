@@ -83,14 +83,11 @@
 									</c:when>
 									<c:when test="${orderlist.deliveryStatus eq 'complete'}"> 
 										배송완료
-									<div>
-										<button class="btn_blue btn_delivery_check">배송조회</button>
-									</div>
 									</c:when>
-									<c:otherwise>
-									    저는 모두 해당이 안됩니다.
-									</c:otherwise>
 								</c:choose>
+								<div>
+									<button class="btn_blue btn_delivery_check" data-delivery="${orderlist.deliveryStatus}">배송조회</button>
+								</div>
 							</td>
 						</c:if>
 					</tr>

@@ -9,20 +9,17 @@
 			<div class="delivery_status">
 				<div class="bg"></div>
 				<div class="progress_info">
-					<div class="img_wrap progress">
-						<%-- <img src="${path}/images/mypage/img_delivery_ready.png" alt="delivery progress image"> --%>
-						<img src="${path}/images/mypage/img_delivery_ready_on.png"
-							alt="delivery progress image">
+					<div class="img_wrap progress ready">
+						<img src="${path}/images/mypage/img_delivery_ready.png" alt="delivery progress image">
+						<img class="on" src="${path}/images/mypage/img_delivery_ready_on.png" alt="delivery progress image">
 					</div>
-					<div class="img_wrap progress">
-						<img src="${path}/images/mypage/img_delivery_sending.png"
-							alt="delivery progress image">
-						<%-- <img src="${path}/images/mypage/img_delivery_sending_on.png" alt="delivery progress image"> --%>
+					<div class="img_wrap progress process">
+						<img src="${path}/images/mypage/img_delivery_sending.png" alt="delivery progress image">
+						<img class="on" src="${path}/images/mypage/img_delivery_sending_on.png" alt="delivery progress image">
 					</div>
-					<div class="img_wrap progress">
-						<img src="${path}/images/mypage/img_delivery_complete.png"
-							alt="delivery progress image">
-						<%-- <img src="${path}/images/mypage/img_delivery_complete.png" alt="delivery progress image"> --%>
+					<div class="img_wrap progress complete">
+						<img src="${path}/images/mypage/img_delivery_complete.png" alt="delivery progress image">
+						<img class="on" src="${path}/images/mypage/img_delivery_complete_on.png" alt="delivery progress image">
 					</div>
 				</div>
 			</div>

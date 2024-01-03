@@ -78,6 +78,9 @@
 	position: relative;
 	height: 80px;
 }
+.delivery_modal_wrap .progress_info .progress .on {
+	display: none;
+}
 .delivery_modal_wrap .progress_info .progress::after {
     content: "";
     position: absolute;
