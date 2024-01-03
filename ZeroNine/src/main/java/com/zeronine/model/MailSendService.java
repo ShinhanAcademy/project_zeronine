@@ -27,10 +27,10 @@ public class MailSendService {
 		makeRandomNumber();
 		String setFrom = "bys9032@naver.com";
 		String toMail = email;
-		String title = "ºñ¹Ğ¹øÈ£ Ã£±â ÀÎÁõ ÀÌ¸ŞÀÏ ÀÔ´Ï´Ù.";
-		String content = "È¨ÆäÀÌÁö¸¦ ¹æ¹®ÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù." + "<br><br>"+
-						"ÀÎÁõ ¹øÈ£´Â " + authNumber + "ÀÔ´Ï´Ù." + "<br>" +
-						"ÇØ´ç ÀÎÁõ¹øÈ£¸¦ ÀÎÁõ¹øÈ£ È®ÀÎ¶õ¿¡ ±âÀÔÇÏ¿© ÁÖ¼¼¿ä.";
+		String title = "ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì¸ì¦ ì´ë©”ì¼ ì…ë‹ˆë‹¤.";
+		String content = "í™ˆí˜ì´ì§€ë¥¼ ë°©ë¬¸í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤." + "<br><br>"+
+						"ì¸ì¦ ë²ˆí˜¸ëŠ” " + authNumber + "ì…ë‹ˆë‹¤." + "<br>" +
+						"í•´ë‹¹ ì¸ì¦ë²ˆí˜¸ë¥¼ ì¸ì¦ë²ˆí˜¸ í™•ì¸ë€ì— ê¸°ì…í•˜ì—¬ ì£¼ì„¸ìš”.";
 		mailSend(setFrom,toMail,title,content);
 		return Integer.toString(authNumber);
 	}
