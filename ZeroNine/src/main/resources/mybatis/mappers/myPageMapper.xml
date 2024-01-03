@@ -8,7 +8,6 @@
 		SELECT 
 		    "customer"."customerId",
 		    "customer"."customerName",
-		    "customer"."point",
 		    COALESCE(SUM("customerPickCoupon"."remainingCouponCount"), 0) AS "returnCoupon",
 		    CASE
 		        WHEN EXISTS (
