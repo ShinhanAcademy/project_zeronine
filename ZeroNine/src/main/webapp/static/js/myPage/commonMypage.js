@@ -64,7 +64,8 @@ function deliveryModal() {
 		
 		//배송처리 상태
 		$(".delivery_modal_wrap").show();
-		$(`.delivery_modal_wrap .progress.${deliveryStatus} img`).hide();
+		$(".delivery_modal_wrap .progress img").show();
+		$(`.delivery_modal_wrap .progress.${deliveryStatus} img, .delivery_modal_wrap .progress img.on`).hide();
 		$(`.delivery_modal_wrap .progress.${deliveryStatus} img.on`).show();
 		
 		//스크롤 제어
