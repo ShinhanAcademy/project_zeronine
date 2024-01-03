@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -31,7 +31,7 @@
 							<li><img class="card" src="${path}/images/board/card.png">
 								<span> 
 								<fmt:formatNumber value="${Math.round(detail.price/detail.pCount)}" type="number"/>원 
-								<%--<fmt:formatNumber value="${Math.round(detail.price/(detail.pCount - detail.pickCount))}" type="number"/>원--%>
+								<fmt:formatNumber value="${Math.round(detail.price/(detail.pCount - detail.pickCount))}" type="number"/>원
 								<span style="color: gray;">(개당)</span>  </span></li>
 							<li><img class="clock" src="${path}/images/board/clock.png">
 								 <fmt:parseDate value="${detail.finishTime}" var="parsedDate" pattern="yyyy-MM-dd HH:mm"/> 
@@ -56,4 +56,4 @@ $(".join_btn").click(function(){
 });
 
 </script>
-</html>
+</html> --%>

@@ -50,13 +50,25 @@
 	                    		</thead>
 	                    		<tbody>
 	                    		<c:forEach items="${info}" var="subscription" varStatus="index">
-	                    			<tr>
+	                    			<c:if test="${subscription.name == '5회 이용권'}">
+	                    				<tr>
+	                    				<td>${index.count}</td>
+	                    				<td>${subscription.name}</td>
+	                    				<td>${subscription.startDateTime}</td>
+	                    				<td>${subscription.remainingCouponCount}</td>
+	                    				<td></td>
+	                    				</tr>
+	                    			</c:if>
+	                    			<c:if test="${subscription.name != '5회 이용권'}">
+	                    				<tr>
 	                    				<td>${index.count}</td>
 	                    				<td>${subscription.name}</td>
 	                    				<td>${subscription.startDateTime}</td>
 	                    				<td>${subscription.remainingCouponCount}</td>
 	                    				<td>${subscription.after}</td>
-	                    			</tr>
+	                    				</tr>
+	                    			</c:if>
+	                    			
 	                    		</c:forEach>	
 	                    		</tbody>
 	                    	</table>
