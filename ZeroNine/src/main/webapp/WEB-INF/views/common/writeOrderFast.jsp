@@ -69,7 +69,7 @@
 									<p class="odt-t">이메일</p>
 								</div>
 								<div class="odd">
-									<input type="text" class="odd_input" value="${customer.email }"
+									<input type="text" class="odd_input" value="${customer.email}"
 										readonly>
 								</div>
 
@@ -178,21 +178,6 @@
 
 	<script>
 		var path = "${path}";
-		/*
-		$(".gobtn").click(function() {
-
-			$.ajax({
-				url : path + "/board/completeedit.do",
-				type : "GET",
-				success : function(response) {
-					$("#edit").html(response);
-				},
-				error : function() {
-					alert("에러입니다.");
-				}
-			});
-		})
-		*/
 		$(".gobtn").click(function() {
 			var IMP = window.IMP; 
 			IMP.init("imp31265537"); //imp31265537
@@ -203,33 +188,24 @@
 			var seconds = today.getSeconds();  // 초
 			var milliseconds = today.getMilliseconds();
 			var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-			//var price = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
-			//console.log(price);
+			var priceWon = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
+			var price = priceWon.substr(0, priceWon.length-1);
+			var email =  "${customer.email}";
+			var name = "${customer.customerName}";
+			
 			IMP.request_pay({
 		        pg : 'html5_inicis',
 		        pay_method : 'card',
 		        merchant_uid: "IMP"+makeMerchantUid, 
-		        name : '즉시배송 결제',
-		        //customerId : id,
-		        amount : 2 //나중에 실제 값으로 바꿔야 합니다...
-		    }, function (rsp) { // callback
-		    	/* var obj = {
-						"productId":$("#hidden_productId").val(),
-						"count":$("#hidden_count").val(),	
-				} */
-				
-				/*
-				if(rsp.success) {
-					alert("결제 성공했습니다!");
-					location.href = path + "/board/completeedit.do";
-				}
-		    	*/
-		    	
+		        name : '즉시배송 결제', 
+		        amount : price/100,
+		        buyer_name : name,
+		        buyer_email : email
+		    }, function (rsp) { // callback    	
 		    	if(rsp.success) {
 		    		$.ajax({
 						url : path + "/board/completeedit.do",
-						//data : obj,
-						type : "POST",//GET
+						type : "POST",
 						success : function(response) {
 							$('#payComplete').html(response);
 						},
@@ -239,8 +215,7 @@
 						}
 					});	
 		    	}
-		    	
-				
+
 		    });
 		})
 

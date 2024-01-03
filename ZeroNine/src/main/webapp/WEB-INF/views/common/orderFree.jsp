@@ -190,17 +190,8 @@
 				return;
 			}
 			
-			/* $.ajax({
-				url : path + "/common/freeOrderSuccess.do",
-				type : "POST",
-				success : function(response) {
-					//alert(response);
-					location.href = path+"/common/freeOrderSuccess.do";
-				},
-				error : function() {
-					alert("에러입니다.");
-				}
-			}); */
+			
+			/*결제 창*/
 			var IMP = window.IMP; 
 			IMP.init("imp31265537"); //imp31265537
 			
@@ -210,15 +201,19 @@
 			var seconds = today.getSeconds();  // 초
 			var milliseconds = today.getMilliseconds();
 			var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-			//var price = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
-			//console.log(price);
+			var priceWon = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
+			var price = priceWon.substr(0, priceWon.length-1);
+			var email =  "${customer.email}";
+			var name = "${customer.customerName}";
+			
 			IMP.request_pay({
-		        pg : 'html5_inicis',
+				pg : 'html5_inicis',
 		        pay_method : 'card',
 		        merchant_uid: "IMP"+makeMerchantUid, 
-		        name : '즉시배송 결제',
-		        //customerId : id,
-		        amount : 2 //나중에 실제 값으로 바꿔야 합니다...
+		        name : '즉시배송 결제', 
+		        amount : price/100,
+		        buyer_name : name,
+		        buyer_email : email
 		    }, function (rsp) { // callback
 		    	/* var obj = {
 						"productId":$("#hidden_productId").val(),
