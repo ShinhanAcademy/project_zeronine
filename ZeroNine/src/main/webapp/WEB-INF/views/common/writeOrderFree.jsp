@@ -182,53 +182,30 @@
 
 	<script>
 		var path = "${path}";
-		/*
-		$(".gobtn").click(function() {
-
-			$.ajax({
-				url : path + "/board/completeedit.do",
-				type : "POST",
-				success : function(response) {
-					$("#edit").html(response);
-				},
-				error : function() {
-					alert("에러입니다.");
-				}
-			});
-		})
-		*/
 		$(".gobtn").click(function() {
 			var IMP = window.IMP; 
 			IMP.init("imp31265537"); //imp31265537
+			
 			var today = new Date();   
 			var hours = today.getHours(); // 시
 			var minutes = today.getMinutes();  // 분
 			var seconds = today.getSeconds();  // 초
 			var milliseconds = today.getMilliseconds();
 			var makeMerchantUid = hours +  minutes + seconds + milliseconds;
-			//var price = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
-			//console.log(price);
+			var priceWon = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
+			var price = priceWon.substr(0, priceWon.length-1);
+			var email =  "${customer.email}";
+			var name = "${customer.customerName}";
+			
 			IMP.request_pay({
-		        pg : 'html5_inicis',
+				pg : 'html5_inicis',
 		        pay_method : 'card',
 		        merchant_uid: "IMP"+makeMerchantUid, 
-		        name : '무료배송 결제',
-		        //customerId : id,
-		        amount : 2 //나중에 실제 값으로 바꿔야 합니다...
+		        name : '즉시배송 결제', 
+		        amount : price/100,
+		        buyer_name : name,
+		        buyer_email : email
 		    }, function (rsp) { // callback
-		    	/* var obj = {
-						"productId":$("#hidden_productId").val(),
-						"count":$("#hidden_count").val(),	
-				} */
-				
-				/*
-				if(rsp.success) {
-					alert("결제 성공했습니다!");
-					location.href = path + "/board/completeedit.do";
-				}
-		    	*/
-		    	console.log(rsp);
-		    	console.log(rsp.success);
 		    	if(rsp.success) {
 		    		$.ajax({
 						url : path + "/board/completeedit.do",
@@ -236,7 +213,6 @@
 						type : "POST",//GET
 						success : function(response) {
 							console.log("AT SUCCESS");
-							//location.href = "${path}/myPage/participatedBoard.do";
 							$('#here').html(response);//edit
 						},
 						error : function(response) {
@@ -266,43 +242,6 @@
 
 						})
 						
-		/* var itemPriceText = document.getElementById("itemPrice").innerText;
-		var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText
-				.replace(/[^\d.]/g, ''));
-		document.getElementById("itemprice2").innerText = itemPriceText; */
-
-		/* if (itemPriceValue < 50000) {
-			document.getElementById("itemprice_deli").innerText = 3000;
-
-		} else {
-			document.getElementById("itemprice_deli").innerText = 0;
-
-		}
-		var deli = document.getElementById("itemprice_deli").innerText;
-
-		var deliValue = parseFloat(deli); */
-
-		/* document.getElementById("itemprice_deli").innerText = 0;
-		var deli = document.getElementById("itemprice_deli").innerText;
-		var deliValue = parseFloat(deli);
-		
-		document.getElementById("totalprice_text").innerText = (deliValue + itemPriceValue);
-		
-		totalpriceValue = document.getElementById("totalprice_text").innerText;
-		
-		
-		var deliformattedValue = new Intl.NumberFormat('ko-KR', {
-			style : 'decimal',
-			currency : 'KRW' // 대한민국 원
-		}).format(deli);
-		var formattedValue = new Intl.NumberFormat('ko-KR', {
-			style : 'decimal',
-			currency : 'KRW' // 대한민국 원
-		}).format(totalpriceValue);
-		document.getElementById("itemprice_deli").innerText = deliformattedValue
-				+ "원";
-		document.getElementById("totalprice_text").innerText = formattedValue
-				+ "원"; */
 	</script>
 
 

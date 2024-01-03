@@ -48,7 +48,7 @@
 										<div class="img_wrap">
 
 											<c:choose>
-												<c:when test="${not empty cartItem.imagePath}">
+												<c:when test="${not empty info.imagePath}">
 													<img src="${info.imagePath}" alt="product image" />
 												</c:when>
 												<c:otherwise>
