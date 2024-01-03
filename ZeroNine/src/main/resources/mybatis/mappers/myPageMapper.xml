@@ -147,7 +147,8 @@
 			product.price,
 			"productMainImage"."imagePath",
 			cart."productCount",
-			"likedProduct"."productId" AS "likedProductId"
+			"likedProduct"."productId" AS "likedProductId",
+		    "customerFreeDelivery"."deliverySubscription"
 		from customer 
 		join cart
 			on customer."customerId" = cart."customerId"
@@ -158,6 +159,15 @@
 			and "customer"."customerId" = "likedProduct"."customerId"
 		left outer join "productMainImage"
 			on product."productId" = "productMainImage"."productId"
+		left outer join (
+						    SELECT
+						        "customerId",
+						        MIN("startDateTime") AS "deliverySubscription"
+						    FROM "customerFreeDelivery"
+						    GROUP BY "customerId"
+						    ORDER BY "deliverySubscription"
+						) AS "customerFreeDelivery"
+		    ON "customerFreeDelivery"."customerId" = "customer"."customerId"
 		where customer."customerId" = cast(#{customerId} as UUID)
 	</select>
 	
@@ -179,7 +189,7 @@
 		 	</if>
 		 	LIMIT 8 OFFSET #{page}
 	</select>
-		<select id="likeProductCount" parameterType="map" resultType="int">
+	<select id="likeProductCount" parameterType="map" resultType="int">
 		select count(*)
 		from customer join "likedProduct" on customer."customerId" = "likedProduct"."customerId"
 					  join 	product on "likedProduct"."productId" = "product"."productId"
@@ -189,6 +199,5 @@
 				AND (product.brand LIKE #{searchWord} OR
 					 product."pName" LIKE #{searchWord})
 		 	</if>
-		 	
 	</select>
 </mapper>
