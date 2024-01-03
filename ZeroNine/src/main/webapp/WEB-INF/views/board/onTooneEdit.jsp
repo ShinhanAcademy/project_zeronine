@@ -149,11 +149,8 @@
 		var input_address_detail = document.querySelector("#address_detail")
 		input_address_detail.addEventListener("keydown", function(event) {
 			if (event.keyCode === 13) {
-				console.log($("#address").val());
-				console.log($("#address_detail").val());
 				var fulladdress = $("#address").val() + " "
 						+ $("#address_detail").val();
-				console.log(fulladdress);
 				mapshow(fulladdress)
 			}
 		})
@@ -161,7 +158,6 @@
 	}
 
 	function mapshow(fulladdress) {
-
 		$.ajax({
 			url : "https://dapi.kakao.com/v2/local/search/address.json?query="
 					+ fulladdress,
@@ -180,28 +176,24 @@
 						var xPoint = documents.address.x;
 						var yPoint = documents.address.y;
 					}
-					console.log(xPoint);
-					console.log(yPoint);
 				}
-				console.log(data);
 
-				//map 그리기
 				$("#map").show();
-				var container = document.querySelector("#map"); //HTML의 #map에 지도 그리기
+				var container = document.querySelector("#map");
 				var onptions = {
-					center : new kakao.maps.LatLng(yPoint, xPoint), //좌표
+					center : new kakao.maps.LatLng(yPoint, xPoint), 
 					level : 3
-				//확대 가능한 레벨
+				
 				};
-				var map = new kakao.maps.Map(container, onptions); //map을 좌표에 맞춰 생성
+				var map = new kakao.maps.Map(container, onptions); 
 
-				//marker 생성
-				var markerPosition = new kakao.maps.LatLng(yPoint, xPoint); //marker위치를 장소 위치로 생성
+				
+				var markerPosition = new kakao.maps.LatLng(yPoint, xPoint); 
 				var marker = new kakao.maps.Marker({
 					position : markerPosition
-				//marker 생성
+				
 				});
-				marker.setMap(map); //마커를 map에 위치하여 그림 (set:속성을 부여)
+				marker.setMap(map); 
 			},
 			error : function(e) {
 				console.log(e);

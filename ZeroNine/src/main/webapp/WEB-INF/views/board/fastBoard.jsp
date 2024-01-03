@@ -113,7 +113,6 @@ $(isCheck);
 function isCheck(){
 	var checkbox = document.querySelector(".checkbox");
 	checked = checkbox.checked;
-	console.log(checked);
 	
 	if(checked){
 		data_json = info_valid;
@@ -125,8 +124,6 @@ function isCheck(){
 	endNum = 0;
 	showList(data_json);
 }
-
-
 
 
 	// 실패 정보 파싱 및 배열 생성
@@ -148,6 +145,7 @@ function isCheck(){
         var successId = success_info_array[i].boardId;
         successId_array.push(successId);
     }
+    
     var str = "${likeBlist}";
 	 var likeBlistArr = [] ; 
 	 //str.split(/!|@|~|,| |Z/);
@@ -166,7 +164,6 @@ function handleLikeButtonClick(index, boardId) {
 	    	//클래스가 heart liked => AJAX DELTE 호출
 	        var isRedHeart = likeBlistArr.indexOf(boardId);
 	       	
-	        console.log(isRedHeart);
 	        if (isRedHeart >= 0) {
 	            $.ajax({
 	                url: "/board/deletelikedboard.do",
@@ -203,7 +200,6 @@ function handleLikeButtonClick(index, boardId) {
 
 
 function showHtml(jsondata) {
-	/* console.log(jasondata); */
 	
     $.each(jsondata, function (index, item) {
     	
@@ -302,16 +298,13 @@ function showList() {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             }
         );
-   		//console.log(data_json);
     } else { // 최신순 (default)
     	data_json.sort(
             function (a, b) {
                 return new Date(b.uploadTime) - new Date(a.uploadTime);
             }
         );
-    //console.log(data_json);
     }
-    console.log(data_json);
     each();
 }
 

@@ -152,7 +152,7 @@ function isCheck(){
     
 function showHtml(jsondata) {
 	console.log(jsondata);
-
+	ratio_arr = [];
     $.each(jsondata, function (index, item) {
     	
     	//%구하기
