@@ -7,6 +7,7 @@
     <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script>
+
 	var IMP = window.IMP; 
 	IMP.init("imp31265537"); //imp31265537
 	
@@ -16,20 +17,21 @@
 	var seconds = today.getSeconds();  // 초
 	var milliseconds = today.getMilliseconds();
 	var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+	var priceWon = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
+	var price = priceWon.substr(0, priceWon.length-1);
+	var email =  "${customer.email}";
+	var name = "${customer.customerName}";
 	
 	
 	function requestPay() {
 	    IMP.request_pay({
-	        pg : 'html5_inicis',
+	    	pg : 'html5_inicis',
 	        pay_method : 'card',
 	        merchant_uid: "IMP"+makeMerchantUid, 
-	        name : '당근 10kg',
-	        amount : 10,
-	        buyer_email : 'Iamport@chai.finance',
-	        buyer_name : '아임포트 기술지원팀',
-	        buyer_tel : '010-1234-5678',
-	        buyer_addr : '서울특별시 강남구 삼성동',
-	        buyer_postcode : '123-456'
+	        name : '즉시배송 결제', 
+	        amount : price/100,
+	        buyer_name : name,
+	        buyer_email : email
 	    }, function (rsp) { // callback
 	        if (rsp.success) {
 	            //console.log(rsp);
