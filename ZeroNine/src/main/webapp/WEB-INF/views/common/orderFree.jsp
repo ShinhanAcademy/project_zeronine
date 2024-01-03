@@ -210,7 +210,7 @@
 				pg : 'html5_inicis',
 		        pay_method : 'card',
 		        merchant_uid: "IMP"+makeMerchantUid, 
-		        name : '즉시배송 결제', 
+		        name : '무료배송 결제', 
 		        amount : price/100,
 		        buyer_name : name,
 		        buyer_email : email

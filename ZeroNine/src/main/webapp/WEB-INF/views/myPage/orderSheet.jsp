@@ -82,7 +82,7 @@
 								</div>
 								<div class="odd">
 									<input type="text" class="odd_input"
-										value="${customerInfo.email }" readonly>
+										value="${customerInfo.email}" readonly>
 								</div>
 							</div>
 						</div>
@@ -173,58 +173,36 @@
 				var IMP = window.IMP;
 				IMP.init("imp31265537"); //imp31265537
 
-				var today = new Date();
+				var today = new Date();   
 				var hours = today.getHours(); // 시
-				var minutes = today.getMinutes(); // 분
-				var seconds = today.getSeconds(); // 초
+				var minutes = today.getMinutes();  // 분
+				var seconds = today.getSeconds();  // 초
 				var milliseconds = today.getMilliseconds();
-				var makeMerchantUid = hours + minutes + seconds + milliseconds;
-				//var price = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
-				//console.log(price);
+				var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+				var priceWon = document.getElementById("totalprice_text").innerText.replace(/,/g,'');
+				var price = priceWon.substr(0, priceWon.length-1);
+				var email =  "${customerInfo.email}";
+				var name = "${customerInfo.customerName}";
+				
 				IMP.request_pay({
 					pg : 'html5_inicis',
-					pay_method : 'card',
-					merchant_uid : "IMP" + makeMerchantUid,
-					name : '즉시배송 결제',
-					//customerId : id,
-					amount : 2
-				//나중에 실제 값으로 바꿔야 합니다...
+			        pay_method : 'card',
+			        merchant_uid: "IMP"+makeMerchantUid, 
+					name : '개인배송 결제',
+					amount : price/100,
+			        buyer_name : name,
+			        buyer_email : email
 				}, function(rsp) { // callback
-					console.log("콜백인가?????????????");
-					console.log(rsp);
 					var obj = {
 						"productId" : $("#hidden_productId").val(),
 						"count" : $("#hidden_count").val()
 					}
-
-					/*
-					$.ajax({
-						url : contextPath + "/common/orderSuccess.do",
-						data : obj,
-						type : "POST",
-						success : function() {
-							location.href = contextPath +"/common/orderSuccess.do";
-						},
-						error : function() {
-							alert("ERROR!");
-						}
-					});
-					*/
-				});
-
-				/*
-				$.ajax({
-					url : contextPath + "/product/Orderdelivery.do",
-					data : obj,
-					type : "Post",
-					success : function() {
-						location.href = contextPath +"/product/productOrderSuccess.do";
-					},
-					error : function() {
-						alert("에러입니다.");
+				
+					if(rsp.success) {
+						alert('구매가 완료되었습니다. 감사합니다.');
+						location.href = "${path}/myPage/orderHistory.do"
 					}
 				});
-				*/
 			})
 		});
 	</script>
