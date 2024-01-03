@@ -188,27 +188,30 @@ function calcTotalPrice(totalPrice) {
     let deliveryFee = 3000;
     let indicatedPrice = 0;
     totalPrice = 0;
+    let hasDeliverySubscription = $(".free_delivery_amount").attr("data-subscription");
 
-    console.log("targetChkedBox??", targetChkedBox);
     targetChkedBox.each(function () {
         totalPrice += parseNumber($(this).text().trim());
     });
-
     
-    $(".free_delivery_amount .text.free_delivery, .free_delivery_amount .text.pay_delivery").hide();
+    $(".free_delivery_amount .text.free_delivery, .free_delivery_amount .text.pay_delivery, .free_delivery_amount .text.subscription_delivery").hide();
     
-    if(targetChkedBox.length == 0) {
+    if(targetChkedBox.length == 0 || hasDeliverySubscription != "") {
         deliveryFee = 0;
     }
         
-    if (totalPrice >= freeDeliveryAmount) {
+    if (totalPrice >= freeDeliveryAmount || hasDeliverySubscription != "") {
         deliveryFee = 0;
         
         //percentage
         $(".contents_wrap .now_amount").css({"width": "100%"});
         
         //상단 표시되는 금액
-        $(".free_delivery_amount .text.free_delivery").show();
+        if(hasDeliverySubscription != "") {
+	        $(".free_delivery_amount .text.subscription_delivery").show();
+        } else {
+        	$(".free_delivery_amount .text.free_delivery").show();
+        }
         
     } else {
         indicatedPrice = freeDeliveryAmount - totalPrice;

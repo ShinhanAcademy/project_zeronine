@@ -700,7 +700,7 @@ public class MyPageController {
 
 
 	// subscriptionInfo(占쏙옙占쏙옙 占쏙옙占쏙옙)
-	@RequestMapping("/subscriptionInfo.do")
+	@GetMapping("/subscriptionInfo.do")
 	public void subscriptionInfo(HttpSession session, Model model) {
 		String customerId = (String)session.getAttribute("customerId");
 		List<Map<String, Object>> info = boardService.mySubscriptionInfo(customerId);
