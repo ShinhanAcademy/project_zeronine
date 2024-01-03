@@ -97,6 +97,46 @@
 	<%@include file="../common/footer.jsp"%>
 <script>
 var path = "${path}";
+var previousClickedButton =null;
+function search(page,buttonValue) {
+	if(buttonValue != null){
+	sessionStorage.setItem("buttonVal", buttonValue);
+		sessionStorage.removeItem("buttonValue");
+	}
+	var buttonVal = sessionStorage.getItem("buttonVal");
+	 selectedValue = $('select[name="ptype"]').val();
+
+
+var obj = { "inputValue" : $("#inputValue").val(),
+ 			"selectedValue" : $('select[name="ptype"]').val(),
+ 			"pCount": page,
+ 			"buttonValue" : buttonVal
+ };
+
+	$.ajax({
+            type: 'GET',
+            url: path + "/product/pcategoryPageCount.do",
+            data:obj,
+            success: function(response){
+            $('#here').html(response);
+            $("#inputValue").val("");
+         if (buttonValue && buttonValue.trim) {
+        var trimmedButtonValue = buttonValue.trim();
+        if (previousClickedButton) {
+          previousClickedButton.closest('.img_wrap').css('background-color', '#F2F2F2'); 
+           previousClickedButton.closest('.category').find('p').css('color', '#000000'); 
+        }
+        var newButton = $('.buttonValuebtn[data-value="' + trimmedButtonValue + '"]');
+        newButton.closest('.img_wrap').css('background-color', '#BFBFBF');
+        newButton.closest('.category').find('p').css('color', '#0F82FF');
+        previousClickedButton = newButton;
+      }
+            },
+            error: function () {
+             console.error('Error loading modal content:', error);
+            }
+        });
+}
 </script>
 <script src="../js/product/productlist.js"></script>
 

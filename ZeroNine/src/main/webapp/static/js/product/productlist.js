@@ -20,8 +20,9 @@ function search(page,buttonValue) {
 		sessionStorage.removeItem("buttonValue");
 	}
 	var buttonVal = sessionStorage.getItem("buttonVal");
- selectedValue = $('select[name="ptype"]').val();
-console.log(buttonValue);
+	 selectedValue = $('select[name="ptype"]').val();
+
+
 var obj = { "inputValue" : $("#inputValue").val(),
  			"selectedValue" : $('select[name="ptype"]').val(),
  			"pCount": page,
@@ -37,7 +38,6 @@ var obj = { "inputValue" : $("#inputValue").val(),
             $("#inputValue").val("");
          if (buttonValue && buttonValue.trim) {
         var trimmedButtonValue = buttonValue.trim();
-        console.log("Trimmed Button Value:", trimmedButtonValue);
         if (previousClickedButton) {
           previousClickedButton.closest('.img_wrap').css('background-color', '#F2F2F2'); 
            previousClickedButton.closest('.category').find('p').css('color', '#000000'); 
