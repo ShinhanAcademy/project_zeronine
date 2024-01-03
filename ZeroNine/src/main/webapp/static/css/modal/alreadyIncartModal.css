@@ -45,9 +45,9 @@
 }
 
 #modal_btn {
-	width: 187px;
+	width: 150px;
 	margin-right: 10px;
-	height: 65px;
+	height: 55px;
 	border-radius: 15px;
 	background: #0083E6;
 	color: #F2F2F2;
@@ -59,8 +59,8 @@
 }
 
 #modal_btn1 {
-	width: 187px;
-	height: 65px;
+	width: 150px;
+	height: 55px;
 	border-radius: 15px;
 	border: 1.5px solid #0083E6;
 	background: #FFFCFC;
@@ -85,6 +85,9 @@
     flex-direction: row;
     align-items: center;
     margin-top: 245px;
+}
+.modal_btnpart{
+	margin-top: 15px;
 }
 .modal_img img{
 	       width: 234px;

@@ -28,17 +28,12 @@ $(function () {
 });
 
 function handleClick(event, element) {
-    // 앵커 태그의 기본 동작 방지 (예: 새 페이지로 이동)
     event.preventDefault();
 
-    // 클릭된 <a> 태그에서 data-value 속성 가져오기
     var dataValue = element.getAttribute("data-value");
 
-    // buttonValue를 필요한 대로 사용
     console.log("Button Value:", dataValue);
     sessionStorage.setItem("buttonValue", dataValue);
-
- // Redirecting to a new page
     $.ajax({
         type: 'GET',
         url: contextPath + "/product/productList.do",

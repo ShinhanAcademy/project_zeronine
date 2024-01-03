@@ -46,7 +46,7 @@ public class CartDAOMybatis {
 		map.put("pcount", pcount);
 		return sqlSession.insert(NAMESPACE + "goProductDCart", map);
 	}
-	//Detail      ֹ  ϱ             ǰ     ٱ  Ͽ       Ҷ  pcount           ٲ  ִ  query
+
 	public int beforeproductOrder(String custid, String productId, int pcount) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("custid", custid);
