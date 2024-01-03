@@ -76,17 +76,15 @@ public class ProductController {
 			Model model,HttpSession session
 			) {
 		
-		String custid = (String) session.getAttribute("customerId"); //customerId
-		List<Map<String,Object>> productList= productService.searchAll
-				(page,Integer.parseInt(selectedValue),inputValue,buttonValue);
-		PagingVO paginating = productService.getPages
-				(page,Integer.parseInt(selectedValue), inputValue, buttonValue);
+		String custid = (String) session.getAttribute("customerId");
 		model.addAttribute("pCount",productService.countProduct(inputValue,buttonValue));
 		model.addAttribute("cartcheckpid",cartservice.cartCheckPid(custid));
 		model.addAttribute("likedcid", likedproductservice.selectByCidlist(custid));
 		model.addAttribute("customerid",custid);
-		model.addAttribute("plist",productList);
-		model.addAttribute("paginating",paginating);
+		model.addAttribute("plist",productService.searchAll
+				(page,Integer.parseInt(selectedValue),inputValue,buttonValue));
+		model.addAttribute("paginating",
+				productService.getPages(page,Integer.parseInt(selectedValue), inputValue, buttonValue));
 		session.removeAttribute("s1");
 		return"/product/catagory";
 	}

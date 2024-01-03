@@ -37,7 +37,6 @@ public class ProductService {
 	
 	}
 
-	// �븯�떒 �럹�씠吏뺥븳 �뜲�씠�꽣
 	public PagingVO getPages(int page, int selectedValue, String inputValue, String buttonValue) {
 		Map<String, Object> paginateParam = new HashMap<>();
 		paginateParam.put("inputValue", inputValue);
