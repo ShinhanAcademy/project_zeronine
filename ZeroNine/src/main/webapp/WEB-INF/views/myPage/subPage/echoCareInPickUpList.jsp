@@ -45,6 +45,7 @@
 						<td>${pickupList.pickUpTime}</td>
 						<td>${pickupList.isFoodWaste==false ? "일반쓰레기 회수 요청 내역" : "음식물 쓰레기 회수 요청 내역"}</td>
 						<td class="status" data-value="${pickupList.pickUpStatus}">${pickupList.pickUpStatus=="complete"? "완료" : pickupList.pickUpStatus=="ready" ? "준비 중" : pickupList.pickUpStatus=="process" ? "회수 중" : "거절"}</td>
+						<td class="status_info" hidden> ${pickupList.pickUpStatus} </td>
 						<td>
 							<button class="btn_blue" value="${pickupList.pickUpId}"
 								onclick="pickUpDetail('${pickupList.pickUpId}')">상세 보기</button>
