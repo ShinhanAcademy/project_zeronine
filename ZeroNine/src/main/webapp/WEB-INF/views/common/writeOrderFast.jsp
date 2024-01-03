@@ -192,13 +192,14 @@
 			var price = priceWon.substr(0, priceWon.length-1);
 			var email =  "${customer.email}";
 			var name = "${customer.customerName}";
-			
+			price /= 100;
+			var priceInt = parseInt(price);
 			IMP.request_pay({
-		        pg : 'html5_inicis',
+				pg : 'html5_inicis',
 		        pay_method : 'card',
 		        merchant_uid: "IMP"+makeMerchantUid, 
-		        name : '즉시배송 결제', 
-		        amount : price/100,
+		        name : '즉시 배송 결제', 
+		        amount : priceInt,
 		        buyer_name : name,
 		        buyer_email : email
 		    }, function (rsp) { // callback    	
