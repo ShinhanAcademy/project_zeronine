@@ -60,8 +60,13 @@ function usingDatePicker(){
 function deliveryModal() {
 	// delivery modal
 	$(".btn_delivery_check").on("click", function(){
+		let deliveryStatus = $(this).attr("data-delivery");
+		
+		//배송처리 상태
 		$(".delivery_modal_wrap").show();
-			
+		$(`.delivery_modal_wrap .progress.${deliveryStatus} img`).hide();
+		$(`.delivery_modal_wrap .progress.${deliveryStatus} img.on`).show();
+		
 		//스크롤 제어
 		$('.delivery_modal_wrap').on('scroll touchmove mousewheel', function(event) {
 			event.preventDefault();
