@@ -8,6 +8,7 @@
 		SELECT 
 		    "customer"."customerId",
 		    "customer"."customerName",
+		    "customer"."point",
 		    COALESCE(SUM("customerPickCoupon"."remainingCouponCount"), 0) AS "returnCoupon",
 		    CASE
 		        WHEN EXISTS (
@@ -15,10 +16,11 @@
 		            FROM "customerPickCoupon"
 		            WHERE "customerPickCoupon"."customerId" = "customer"."customerId"
 		            AND "customerPickCoupon"."isSubscription" = true
+		            and (("startDateTime" + INTERVAL '1 month') - INTERVAL '1 day')::date > NOW()
 		        ) THEN true
 		        ELSE false
 		    END AS "pickSubscription",
-			COALESCE(SUM("ecoCareCount"."couponCount"), 0) AS "saveEarth",
+			COALESCE(("ecoCareCount"."couponCount"), 0) AS "saveEarth",
 		    "customerFreeDelivery"."deliverySubscription"
 		FROM "customer"
 		LEFT JOIN "customerPickCoupon"

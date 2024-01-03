@@ -585,7 +585,7 @@
     	AND "customerId"  = cast(#{customerId} as UUID)
 		)
 		SELECT * FROM combined_data
-		where after>NOW()
+		where  after>NOW()
 		ORDER BY "startDateTime"
 		]]>
 	</select>
