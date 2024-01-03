@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=cdc6b7de5328dfd553ed184a128185fa&autoload=false"></script>
+<!-- <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=cdc6b7de5328dfd553ed184a128185fa&autoload=false"></script> -->
 
 
 <div class="content">
