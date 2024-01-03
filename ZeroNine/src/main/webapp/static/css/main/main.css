@@ -14,6 +14,7 @@ intro_wrap
 	position: relative;
 	width: 100%;
 	height: 450px;
+	overflow: hidden;
 }
 #zn_container .swiper-button-next, .swiper-button-prev {
 	color: #97b0f9;
