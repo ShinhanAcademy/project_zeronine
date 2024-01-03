@@ -39,7 +39,7 @@
 					</div>
 					<div class="category">
 						<div class="img_wrap">
-							<button class="buttonValuebtn" data-value="4" onclick="search(1,this.getAttribute('data-value'))">
+							<button class="buttonValuebtn" data-value="3" onclick="search(1,this.getAttribute('data-value'))">
 								<img src="${path}/images/sangpumpage/food_navi.png">
 							</button>
 						</div>

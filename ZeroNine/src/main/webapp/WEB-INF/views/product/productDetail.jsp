@@ -340,6 +340,7 @@
 			})
 			
 		}
+		sessionStorage.removeItem("buttonValue");
 	</script>
 
 </body>
