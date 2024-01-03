@@ -426,7 +426,7 @@
 		
 	</select>
 	<select id="chatListEdit" resultType="map" parameterType="String">
-		select ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",
+		select distinct ob."oTitle", obi."oBoardImagePath", ob."oBoardId", ob."oContent", ob."address", ob."addressDetail",
 		to_char(ob."finishTime"-NOW(),'HH24시간 mi분') as "remainTime"
 		FROM public."oneToOneBoard" ob left join chat c on (ob."oBoardId"=c."oBoardId")
 		left join public."oBoardImage" obi on (ob."oBoardId"=obi."oBoardId")

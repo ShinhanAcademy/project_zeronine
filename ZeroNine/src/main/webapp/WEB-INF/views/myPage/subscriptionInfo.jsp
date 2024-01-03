@@ -3,7 +3,6 @@
 <%@include file="../common/head.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${path}/css/myPage/common_mypage.css">
-<link rel="stylesheet" href="${path}/css/myPage/mypage_chat.css">
 <script defer src="${path}/js/myPage/commonMypage.js"></script>
 <title>MyPage</title>
 </head>
