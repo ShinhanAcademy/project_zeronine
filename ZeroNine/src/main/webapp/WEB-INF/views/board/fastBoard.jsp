@@ -291,7 +291,6 @@ function filterType() {
 }
 
 
-
 function showList() {
     output = "";
     result = [];

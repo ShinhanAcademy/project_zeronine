@@ -1,9 +1,9 @@
 function loadMore(){ 
 	keyword = $("#search").val();
 	console.log("keyword", keyword);
-	var data = info_json;
+	var data = data_json;
 	if(keyword==""){
-		data = info_json;
+		data = data_json;
 	} else{
 		data = result;
 	}
@@ -13,7 +13,7 @@ function loadMore(){
 
 	if(endNum < totalLength){
 		$("#loadMore_btn").show();
-		show(data.slice(initNum, initNum+9));
+		showHtml(data.slice(initNum, initNum+9));
 		initNum += 9;
 		if(initNum >= totalLength){
 			$("#loadMore_btn").hide();
