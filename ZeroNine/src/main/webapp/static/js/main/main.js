@@ -82,11 +82,16 @@ $(function () {
     $(window).scroll(function(){
         let newSct = $(this).scrollTop();
         let showSubVisual = 1800;
+        let showAd = 2550;
         //console.log("newSct",newSct);
         
         //sub_visual wrap scroll event
         if(newSct >= showSubVisual) {
             $(".sub_visual_wrap").addClass("on");
+        }
+        
+        if(newSct>=showAd) {
+            $(".advertisement_wrap").addClass("on");
         }
     });
 

@@ -427,3 +427,51 @@ html, body {
     font-weight: 800;
     background-color: #f8f8f8;
 }
+
+/* keyframes */
+@keyframes bungbung {
+    from {
+    	transform:translateX(0px) translateY(0px) rotate(-13deg);
+    }
+    12% {
+        transform:translateX(7px) translateY(-2px) rotate(-10deg);
+    }
+    25% {
+        transform:translateX(13px) translateY(0px) rotate(-7deg);
+    }
+    37% {
+        transform:translateX(15px) translateY(7px) rotate(-3deg);
+    }
+    50% {
+        transform:translateX(13px) translateY(13px) rotate(0deg);
+    }
+    62% {
+        transform:translateX(7px) translateY(15px) rotate(-3deg);
+    }
+    75% {
+        transform:translateX(0px) translateY(13px) rotate(-7deg);
+    }
+    87% {
+        transform:translateX(-2px) translateY(7px) rotate(-10deg);
+    }
+    to {
+        transform:translateX(0px) translateY(0px) rotate(-13deg);
+    }
+}
+@keyframes cardAni {
+	from {
+    	transform: translateY(0px) rotate(0deg);
+	}
+	25% {
+		transform: translateY(-5px) rotate(3deg);
+	}
+	50% {
+		transform: translateY(5px) rotate(0deg);
+	}
+	75% {
+		transform: translateY(-5px) rotate(-3deg);
+	}
+	to {
+    	transform: translateY(0px) rotate(0deg);
+	}
+}

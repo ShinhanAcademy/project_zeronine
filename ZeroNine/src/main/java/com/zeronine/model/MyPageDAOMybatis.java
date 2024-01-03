@@ -29,7 +29,6 @@ public class MyPageDAOMybatis {
 
 	/* common - personal info */
 	public Map<String, Object> personalInfo(String customerId) {
-		//List<Map<String, Object>> result = sqlSession.selectList(NAMESPACE + "orderHistoryAll", customerId);
 		Map<String, Object> mapData = new HashMap<>();
 		mapData.put("customerId", customerId);
 		
