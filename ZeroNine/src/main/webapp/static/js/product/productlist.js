@@ -4,8 +4,7 @@ console.log(bValue);
   $(function(){
   if(bValue!=null){
 	search(1,bValue);
-	sessionStorage.removeItem("buttonValue");
-  sessionStorage.removeItem("buttonVal");
+
 }else{
 	    	search();
 	    	}
@@ -15,18 +14,12 @@ console.log(bValue);
 	   
 	 
 var previousClickedButton =null;
-if(bValue!=null){
-	console.log("갔냐?..");
-	search(1,bValue);
-}
 function search(page,buttonValue) {
 	if(buttonValue != null){
 	sessionStorage.setItem("buttonVal", buttonValue);
+		sessionStorage.removeItem("buttonValue");
 	}
 	var buttonVal = sessionStorage.getItem("buttonVal");
-	if(bValue != null){
-		buttonVal = bValue;
-	}
  selectedValue = $('select[name="ptype"]').val();
 console.log(buttonValue);
 var obj = { "inputValue" : $("#inputValue").val(),
