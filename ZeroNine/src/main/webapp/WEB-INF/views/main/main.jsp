@@ -209,12 +209,20 @@
 		        </div>
 		    </section>
 		    <section class="advertisement_wrap zn_center">
-		        <div class="img_warp ad_01">
-		            <img src="${path}/images/main/img_ad_01.png" alt="advertisement">
-		        </div>
-		        <div class="img_warp ad_02">
-		            <img src="${path}/images/main/img_ad_02.png" alt="advertisement">
-		        </div>
+		    	<div class="ad_box zn_car_box">
+		    		<div class="ad_word">더 이상 기다리지 마세요 !</div>
+		    		<div class="ad_word">로켓보다 빠른 하루 배송</div>
+		    		<div class="img_warp ad_01">
+		            	<img src="${path}/images/main/img_ad_01.png" alt="advertisement">
+		        	</div>
+		    	</div>
+		    	<div class="ad_box zn_card_box">
+		    		<div class="img_warp ad_02">
+		            	<img src="${path}/images/main/img_ad_02.png" alt="advertisement">
+		        	</div>
+		    		<div class="ad_word">기다려 온 만남 신한카드 X Zero9</div>
+		    		<div class="ad_word">제로카트로 구독료 결제 시, 7% 포인트 즉시 적립</div>
+		    	</div>
 		    </section>
 		</div>
 		<%-- <%@include file="../common/detailView.jsp"%> --%>
