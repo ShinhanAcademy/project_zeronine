@@ -84,12 +84,13 @@
 var type_of_filter;
 var info_json;
 var output = "";
+var data_json;
 
 // DOM이 준비되면 필터링 함수 호출
 $(filterType);
 $(searchBoard);
 
-function show(jsondata) {
+function showHtml(jsondata) {
 	console.log(jsondata.length);
 	//output = "";
     $.each(jsondata, function (index, item) {
@@ -158,7 +159,7 @@ function show(jsondata) {
 function filterType() {
     // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;
-    info_json = JSON.parse('${infoOne}');
+    data_json = JSON.parse('${infoOne}');
     console.log("필터 타입~~"+type_of_filter)
     showList();
 }
@@ -168,17 +169,17 @@ function showList() {
     result = [];
     initNum = 0;
     if (type_of_filter == 'imminent') { // 임박순
-    	info_json.sort(
+    	data_json.sort(
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             } 
-        );console.log(info_json);
+        );console.log(data_json);
     } else if (type_of_filter == 'recent'){ // 최신순 (default)
-    	info_json.sort(
+    	data_json.sort(
             function (a, b) {
                 return new Date(b.oUploadTime) - new Date(a.oUploadTime);
             }
-        );console.log(info_json);
+        );console.log(data_json);
     }
     loadMore();
 }
@@ -213,22 +214,22 @@ function searchBoard() {
         if (event.keyCode === 13) {
         	output = "";
         	keyword = $("#search").val().toLowerCase();
-            filterKeyword(info_json, keyword);
+            filterKeyword(data_json, keyword);
         }
     });
 }
 
 function check() {
 	output = "";
-	filterKeyword(info_json, keyword);
+	filterKeyword(data_json, keyword);
 }
 
 // 키워드로 필터링
-function filterKeyword(info_json, keyword) {
+function filterKeyword(data_json, keyword) {
 	  initNum = 0;
 	    keyword = $("#search").val();
 	    result=[];
-    $.each(info_json, function (index, item) {
+    $.each(data_json, function (index, item) {
         var title = item.oTitle.toLowerCase();
         var fullAddress = item.address.toLowerCase() + " " + item.addressDetail.toLowerCase();
         if (title.includes(keyword) || fullAddress.includes(keyword)) {
