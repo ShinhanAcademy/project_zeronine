@@ -1,7 +1,7 @@
-var cookieEmail = getCookie("Cookie_email");
+var localEmail = localStorage.getItem("EMAIL");
 
-if(cookieEmail){
-	$("#email").val(cookieEmail);
+if(localEmail){
+	$("#email").val(localEmail);
 	$("#remember_id").attr("checked", true);
 }
 
@@ -15,9 +15,9 @@ var email = $("#email").val();
 var idChk = $("#remember_id").is(":checked");
 
 if(idChk){
-	setCookie("Cookie_email", email, 7); //7일동안 저장
+	localStorage.setItem("EMAIL", email); 
 }else{
-	deleteCookie("Cookie_email");
+	window.localStorage.removeItem("EMAIL");
 }
 
 var obj = { 
