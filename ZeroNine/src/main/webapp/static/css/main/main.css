@@ -139,7 +139,7 @@ board_wrap
     padding: 14px;
     cursor: pointer;
 }
-.card_list > li:hover {
+.card_list > li:not(.no_list):hover {
     background-color: rgba(0, 176, 255, 0.03);
 }
 .card_list.fast_list > li,
