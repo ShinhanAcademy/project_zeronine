@@ -201,7 +201,7 @@ function calcTotalPrice(totalPrice) {
         deliveryFee = 0;
     }
      
-    if(hasDeliverySubscription != "" || hasDeliverySubscription != "undifined") { //무료배송구독중
+    if(hasDeliverySubscription != "") { //무료배송구독중
         deliveryFee = 0;
         
         //percentage
@@ -218,7 +218,6 @@ function calcTotalPrice(totalPrice) {
         
         //상단 표시되는 금액
         $(".free_delivery_amount .text.free_delivery").show();
-        
     } else {
         indicatedPrice = freeDeliveryAmount - totalPrice;
         
