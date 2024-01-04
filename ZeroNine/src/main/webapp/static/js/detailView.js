@@ -55,21 +55,21 @@ function o_btn(){
 function esc_btn(){
 	$(document).keydown(function(event){
 		if(event.keyCode == 27){
-		$("#detail_modal_wrap").hide();
+			$("#detail_modal_wrap").hide();
+			$("#detail_modal_wrap").off("scroll touchmove mousewheel");
 		}
 	})
 }
 
-
-
 //close
-function close_btn(){
+function close_btn() {
 	$("#detail_modal_wrap").hide();
+	$("#detail_modal_wrap").off("scroll touchmove mousewheel");
 }
 
 //modal_body 를 제외한 부분을 클릭시 취소
 window.onclick = function(event){
 	if($(event.target).is("#detail_modal_wrap")){
-		$("#detail_modal_wrap").hide();
+		close_btn();
 	}
 }

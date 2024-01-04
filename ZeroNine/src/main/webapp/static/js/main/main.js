@@ -82,7 +82,7 @@ $(function () {
     $(window).scroll(function(){
         let newSct = $(this).scrollTop();
         let showSubVisual = 1800;
-        let showAd = 2550;
+        let showAd = 2090;
         //console.log("newSct",newSct);
         
         //sub_visual wrap scroll event
@@ -171,7 +171,7 @@ function callFastBoardList(fastBoardList) {
 
     $(".fast_list [data-fast]").on("click", function(){
     	let boardId = $(this).attr("data-fast");
-    	showBoardModal("fastBoard", boardId);
+    	callBoardModal("fastBoard", boardId);
     });
 
 }
@@ -251,7 +251,7 @@ function callFreeBoardList(freeBoardList) {
 
     $(".free_list [data-free]").on("click", function(){
     	let boardId = $(this).attr("data-free");
-    	showBoardModal("freeBoard", boardId);
+    	callBoardModal("freeBoard", boardId);
     });
 
 }
@@ -325,7 +325,7 @@ function callOneBoardList(oneToOneBoardList) {
     
     $(".direct_list [data-one]").on("click", function(){
     	let boardId = $(this).attr("data-one");
-    	showBoardModal("oneToOneBoard", boardId);
+    	callBoardModal("oneToOneBoard", boardId);
     });
 }
 
@@ -390,7 +390,7 @@ function callRecommendedProduct(recommendedCount, showProducts) {
     });
 }
 
-function showBoardModal(targetName, boardId) {
+function callBoardModal(targetName, boardId) {
     let ajaxUrl = null;
 
     if (targetName == "oneToOneBoard") {
@@ -405,13 +405,24 @@ function showBoardModal(targetName, boardId) {
         type: "post",
         url: ajaxUrl,
         data: { boardId : boardId},
-        success: function (response) {
-            $("#modal").html(response);
-            $("#detail_modal_wrap").css("display", "flex");
-            esc_btn();
+        success: function(response) {
+            showBoardModal(response);
         },
-        error: function (error) {
+        error: function(error) {
             alert("해당 글은 더 이상 존재하지 않습니다.");
         }
     });
+}
+
+function showBoardModal(response) {
+	$("#modal").html(response);
+	$("#detail_modal_wrap").css("display", "flex");
+	esc_btn();
+ 
+	//스크롤 제어
+	$('#detail_modal_wrap').on('scroll touchmove mousewheel', function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		return false;
+	});
 }
