@@ -152,7 +152,7 @@ function isCheck(){
     
 function showHtml(jsondata) {
 	console.log(jsondata);
-	ratio_arr = [];
+	//ratio_arr = [];
     $.each(jsondata, function (index, item) {
     	
     	//%구하기
@@ -349,12 +349,12 @@ var keyword ;
 function searchBoard() {
     var search = document.querySelector("#search");
     console.log("여기는 search: "+search);
-   
+    ratio_arr=[];
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
         	output = "";
         	keyword = $("#search").val().toLowerCase();
-            filterKeyword(info_json, keyword);
+            filterKeyword(data_json, keyword);
         }
     });
 }
