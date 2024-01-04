@@ -305,21 +305,6 @@ function showList() {
             }
         );
     }
-    each();
-}
-
-function each() {
-    // 실패 정보 파싱 및 배열 생성
-    var fail_info = '${fail}';
-    var fail_info_array = JSON.parse(fail_info);
-    var failId_array = [];
-
-    for (var i = 0; i < fail_info_array.length; i++) {
-        var failId = fail_info_array[i].boardId;
-        failId_array.push(failId);
-    }
-
-    // 리스트 표시
     loadMore();
 }
 
@@ -348,8 +333,6 @@ var keyword ;
 
 function searchBoard() {
     var search = document.querySelector("#search");
-    console.log("여기는 search: "+search);
-    //console.log("searchBoard의 output"+output);
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
         	output = "";

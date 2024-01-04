@@ -1,6 +1,5 @@
 function loadMore(){ 
 	keyword = $("#search").val();
-	console.log("keyword", keyword);
 	var data = data_json;
 	if(keyword==""){
 		data = data_json;
