@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/zeronine/board/BoardController.java=UTF-8
 encoding//src/main/java/com/zeronine/common/CommonController.java=UTF-8
+encoding//src/main/java/com/zeronine/model/MailSendService.java=UTF-8
 encoding//src/main/java/com/zeronine/model/ProductService.java=UTF-8
 encoding//src/main/java/com/zeronine/myPage/MyPageController.java=UTF-8
 encoding//src/main/java/com/zeronine/pay/PayController.java=UTF-8
