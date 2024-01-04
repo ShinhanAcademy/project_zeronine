@@ -79,7 +79,7 @@
 			<ul class="pagingWrap">
 				<c:forEach begin="${paginating.startPageNumber}"
 					end="${paginating.endPageNumber}" var="i" step="1">
-					<li><a href="javascript:search(${i})">${i}</a></li>
+					<li class="${paginating.pageNumber == i? 'on':''}"><a href="javascript:search(${i})">${i}</a></li>
 				</c:forEach>
 			</ul>
 			<div class="pageRight">
@@ -116,11 +116,9 @@
 
 
 <script>
-		var path = "${path}";
-		var cartcheck = "${cartcheckpid}";
-	</script>
+var path = "${path}";
+var cartcheck = "${cartcheckpid}";
 
-<script>
  cartcheck = cartcheck.replace(/\[|\]/g,'');
 	cartcheckArray = cartcheck.split(',').map(function(item) {
       return item.trim();
