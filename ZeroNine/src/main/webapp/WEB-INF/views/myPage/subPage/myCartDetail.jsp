@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%><%-- functions lib --%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script defer src="${path}/js/myPage/subPage/myCartDetail.js"></script>
-<div class="free_delivery_amount" data-subscription="${myCart[0].deliverySubscription}">
+<div class="free_delivery_amount">
 	<div class="target_amount">
 		<div class="now_amount"></div>
 	</div>
