@@ -100,6 +100,7 @@ function sendMessage() {
 	}));
 }
 
+let newTalkFlag = true;
 function showMessage(message) {
 	let {messageContent, sendTime, chatId} = message;
 
@@ -109,16 +110,24 @@ function showMessage(message) {
 	
 	//console.log(`currChatId >>>> ${currChatId} | chatId >>>> ${chatId}`);
 
-
-	if(selectedData.chatId == chatId){
+	//console.log("selectedData.chatId", selectedData.chatId);
+	if(selectedData.chatId == chatId) {
 		const addHtml = [];
 		let currDate = dateSet.convertDate(new Date());
 		let lastDate = $("#chatDtlList div.date").last().text();
 		//let otherLastTime = $("#chatDtlList div.other_talker:last .time").text();
 		//let myLastTime = $("#chatDtlList div.my_talk:last .time").text();
 	
-		if(Array.isArray(selectedChatDtlList) && selectedChatDtlList.length <= 0) {
+	/*
+		console.log("Array.isArray(selectedChatDtlList)????", Array.isArray(selectedChatDtlList));
+		console.log("selectedChatDtlList????", selectedChatDtlList);
+		console.log("selectedChatDtlList.length <= 0????", selectedChatDtlList.length <= 0);
+		console.log("selectedChatDtlList.length??", selectedChatDtlList.length);
+		console.log("newTalkFlag/??", newTalkFlag);
+	 */
+		if(newTalkFlag && selectedChatDtlList.length <= 0) {
 			$("#chatDtlList").html("");
+			newTalkFlag = false;
 		}
 
 		if(currDate != lastDate){
@@ -128,21 +137,27 @@ function showMessage(message) {
 			sendMsgImageFlag = false;
 		}
 		
-		if(message.senderId == selectedData.myCustomerId){
+		//console.log("???message.senderId == selectedData.myCustomerId", message.senderId == selectedData.myCustomerId);
+		
+		if(message.senderId == selectedData.myCustomerId){ //my msg
 			addHtml.push(`<div class="talk my_talk">`);
 			addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
 			addHtml.push(`<div class="msg">${messageContent}</div>`);
 			addHtml.push(`</div>`);
 			
 			sendMsgImageFlag = false;
-		}else{ //other msg
+			selectedData.lastTalkerId =null;
+		} else { //other msg
 			
-			if(message.senderId == selectedData.lastTalkerId) { 
+			//console.log("selectedData.lastTalkerId", selectedData.lastTalkerId);
+			//console.log("message.senderId", message.senderId)
+			if(message.senderId == selectedData.lastTalkerId) {
+				selectedData.lastTalkerId =null;
 				sendMsgImageFlag = true;
 			}
 			
 			addHtml.push(`<div class="talk other_talker">`);
-			if(!sendMsgImageFlag){
+			if(!sendMsgImageFlag) {
 				addHtml.push(`<div class="profile img_wrap">`);
 				
 				let imagePath;
@@ -198,8 +213,6 @@ function showMessage(message) {
 				addHtml.push(`</div>`);
 				
 				sendMsgImageFlag = true;
-				
-			
 			}
 			addHtml.push(`<div class="msg">${messageContent}</div>`);
 			addHtml.push(`<div class="time">${dateSet.convertTime(sendTime)}</div>`);
@@ -214,8 +227,8 @@ function showMessage(message) {
 			scrollTop: $(".chat_room_list")[0].scrollHeight
 		}, 400);
 		
-		const chatUnit = $("#chatList div.chat_unit.on");
-		const outHTML = $("#chatList div.chat_unit.on")[0].outerHTML;
+		//const chatUnit = $("#chatList div.chat_unit.on");
+		//const outHTML = $("#chatList div.chat_unit.on")[0].outerHTML;
 	}
 
 	const chatUnit = $(`#chatList div[data-chatid="${chatId}"]`);

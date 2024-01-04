@@ -48,7 +48,7 @@
 		</div>
 		${personalInfo.customerName} 님
 	</div>
-	<ul class="subscription_list">
+	<ul class="subscription_list" data-deliverySubscription="${personalInfo.deliverySubscription}">
 		<c:choose>
 			<c:when test="${personalInfo.deliverySubscription ne null || personalInfo.pickSubscription ne false}">
 				<c:if test="${personalInfo.deliverySubscription ne null}">

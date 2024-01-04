@@ -147,8 +147,7 @@
 			product.price,
 			"productMainImage"."imagePath",
 			cart."productCount",
-			"likedProduct"."productId" AS "likedProductId",
-		    "customerFreeDelivery"."deliverySubscription"
+			"likedProduct"."productId" AS "likedProductId"
 		from customer 
 		join cart
 			on customer."customerId" = cart."customerId"
@@ -159,15 +158,6 @@
 			and "customer"."customerId" = "likedProduct"."customerId"
 		left outer join "productMainImage"
 			on product."productId" = "productMainImage"."productId"
-		left outer join (
-						    SELECT
-						        "customerId",
-						        MIN("startDateTime") AS "deliverySubscription"
-						    FROM "customerFreeDelivery"
-						    GROUP BY "customerId"
-						    ORDER BY "deliverySubscription"
-						) AS "customerFreeDelivery"
-		    ON "customerFreeDelivery"."customerId" = "customer"."customerId"
 		where customer."customerId" = cast(#{customerId} as UUID)
 	</select>
 	
