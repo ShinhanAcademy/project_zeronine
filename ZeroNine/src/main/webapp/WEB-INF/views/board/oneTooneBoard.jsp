@@ -98,6 +98,12 @@ function showHtml(jsondata) {
        var str = item.finishtime.substr(2, 2)+"년 "+item.finishtime.substr(5, 2)+"월 "+item.finishtime.substr(8, 2)+"일 "+
 	            			item.finishtime.substr(11, 2)+"시 "+item.finishtime.substr(14, 2)+"분";
 
+        /* // 거래 실패 여부 확인
+        var dealfail = false;
+        if (failId_array.includes(item.boardId)) {
+            dealfail = true;
+        } */
+        
         //거래 성공 여부 확인
         var dealsuccess = false;
         if (item.isDealFinish == "true") {
@@ -144,6 +150,9 @@ function showHtml(jsondata) {
 `;
 });
 
+
+    // 결과를 HTML에 삽입
+    //console.log(output);
     $("#allList").html(output);
 }
 

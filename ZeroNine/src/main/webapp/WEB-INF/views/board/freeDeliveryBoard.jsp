@@ -93,7 +93,6 @@
 var type_of_filter;
 var info_json = JSON.parse('${infoFree}');
 var info_valid = JSON.parse('${infoVfree}');
-var checkbox = document.querySelector(".checkbox");
 var checked;
 var output = "";
 var path = "${path}";
@@ -109,6 +108,7 @@ $(isCheck);
 
 //valid board
 function isCheck(){
+	var checkbox = document.querySelector(".checkbox");
 	checked = checkbox.checked;
 	console.log(checked);
 	
@@ -229,6 +229,12 @@ function showHtml(jsondata) {
 	 
     });
 
+
+
+
+    // 결과를 HTML에 삽입
+    //console.log(output);
+    
     $("#allList").html(output);
     drawChart();
 }
@@ -301,6 +307,21 @@ function showList() {
             }
         );
     }
+    each();
+}
+
+function each() {
+    // 실패 정보 파싱 및 배열 생성
+    var fail_info = '${fail}';
+    var fail_info_array = JSON.parse(fail_info);
+    var failId_array = [];
+
+    for (var i = 0; i < fail_info_array.length; i++) {
+        var failId = fail_info_array[i].boardId;
+        failId_array.push(failId);
+    }
+
+    // 리스트 표시
     loadMore();
 }
 
@@ -348,7 +369,6 @@ function filterKeyword(data_json, keyword) {
 	initNum = 0;
     keyword = $("#search").val();
     result=[];
-    
     $.each(data_json, function (index, item) {
         var title = item.title;
         var left = 50000 - item.sum;
