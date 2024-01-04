@@ -8,13 +8,7 @@ function drawChart(){
 	
 	console.log("이것은 drawChart가 찍는 ratio_arr의 길이"+ratio_arr.length);
 	console.log(ratio_arr);
-	//output="";
-	/* $(".pie-chart").each(function(index, item){
-		var each_ratio = ratio_arr[index];
-		var color = each_ratio<35?'#09244B':each_ratio>=35 && each_ratio<70?'#F1C21B':'#F11B1B';
-		var back = each_ratio<35?'#7390BA':each_ratio>=35 && each_ratio<70?'#F9E59E':'#F99E9E';
-		draw(each_ratio, this, color, back)();	
-	}); */
+	
 	$.each(ratio_arr, function(index, item){
 		var each_ratio = ratio_arr[index];
 		var color = each_ratio<35?'#09244B':each_ratio>=35 && each_ratio<70?'#F1C21B':'#F11B1B';

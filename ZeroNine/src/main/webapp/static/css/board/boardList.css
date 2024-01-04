@@ -91,6 +91,11 @@
 	flex-direction: column;
 	align-items: center;
 }
+
+.pro_info{
+	width: 290px;
+}
+
 #list::before {
 	content: none;
 	position: absolute;
