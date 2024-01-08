@@ -187,10 +187,8 @@
 						var xPoint = documents.address.x;
 						var yPoint = documents.address.y;
 					}
-					console.log(xPoint);
-					console.log(yPoint);
+				
 				}
-				console.log(data);
 
 				//map 그리기
 				$("#map").show();
@@ -211,7 +209,6 @@
 				marker.setMap(map); //마커를 map에 위치하여 그림 (set:속성을 부여)
 			},
 			error : function(e) {
-				console.log(e);
 			}
 		})
 	}

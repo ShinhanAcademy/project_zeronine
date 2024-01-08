@@ -21,11 +21,7 @@
 		<col width="15%" />
 		<col width="18%" />
 		<col width="12%" />
-		<!-- 
-							    <col />
-							    <col span="2" class="batman" />
-							    <col span="2" class="flash" />
-							    -->
+
 	</colgroup>
 	<thead>
 		<tr>
@@ -73,7 +69,6 @@ var path = "${path}";
 var str = "${likedbid}";
 var likedbidArr = [] ; 
 likedbidArr = str.split(/,|\[|\]| /);
-console.log(likedbidArr);
 
 function handleLikeButtonClick(index, boardId) {
 	
@@ -82,7 +77,6 @@ function handleLikeButtonClick(index, boardId) {
 	//클래스가 heart liked => AJAX DELTE 호출
     var isRedHeart = likedbidArr.indexOf(boardId);
 	
-	console.log(isRedHeart);
 	if(isRedHeart>=0) {
 		$.ajax({
 			url : path + "/myPage/subPage/deleteLikedBoard.do",

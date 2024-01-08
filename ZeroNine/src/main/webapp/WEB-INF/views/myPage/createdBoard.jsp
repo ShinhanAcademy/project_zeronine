@@ -58,7 +58,6 @@
 	<script>
 	var path = "${path}";
 	$(function(){
-		console.log("여기아님?..");
 		callFastDelivery();
 		callFastSuccessDelivery();
     });

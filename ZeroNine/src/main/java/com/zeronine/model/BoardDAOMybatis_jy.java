@@ -24,13 +24,11 @@ public class BoardDAOMybatis_jy {
 	//fast
 	public List<Map<String, Object>> selectFastBoardList(){
 		List<Map<String, Object>> infoFb =  sqlSession.selectList(namespace+"selectFastBoardList");
-		System.out.println(infoFb);
 		return infoFb;
 	}
 	
 	public Map<String, Object> selectFastDetail(String boardId){
 		Map<String, Object> detail = sqlSession.selectOne(namespace+"selectFastDetail", boardId);
-		System.out.println(detail);
 		return detail;
 	}
 	
@@ -59,7 +57,6 @@ public class BoardDAOMybatis_jy {
 	
 	public Map<String, Object> selectFreeDetail(String boardId){
 		Map<String, Object> freeDetail = sqlSession.selectOne(namespace+"selectFreeDetail",boardId);
-		System.out.println("이것은 dao의 디테일 "+freeDetail);
 		return freeDetail;
 	}
 	
@@ -78,7 +75,6 @@ public class BoardDAOMybatis_jy {
 	
 	public Map<String, Object> selectOneDetail(String boardId){
 		Map<String, Object> detail = sqlSession.selectOne(namespace+"selectOneDetail", boardId);
-		System.out.println(detail);
 		return detail;
 	}
 	

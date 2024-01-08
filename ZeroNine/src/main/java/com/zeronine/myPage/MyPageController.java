@@ -66,7 +66,6 @@ public class MyPageController {
 		Map<String, Object> personalInfo = mypageservice.personalInfo(customerId);
 		
 		model.addAttribute("personalInfo", personalInfo); 
-		System.out.println("model!!!"+ model.getAttribute("personalInfo"));
 	}
 	
 	
@@ -130,9 +129,7 @@ public class MyPageController {
 	
 	@RequestMapping("/subPage/myCartDetail.do") 
 	public void myCartDetail(Model model, HttpSession session) { 
-		// String customerId ="4591549e-7eaa-4009-a4cd-b052d8b1f537"; 
 		String customerId = (String)session.getAttribute("customerId"); 
-		//System.out.println("ID = " + customerId);
   
 		model.addAttribute("myCart", deliveryService.myCart(customerId)); 
 	}
@@ -145,18 +142,11 @@ public class MyPageController {
 		String customerId = (String)session.getAttribute("customerId");
 		
 		for(int i=0;i<productIdArr.length;i++) {
-			System.out.println("======================================================");
-//			logger.info(customerId);
-//			logger.info(productIdArr[i]);
-//			logger.info(countArr[i]);
-			System.out.println(customerId+productIdArr[i]+countArr[i]);
 			cartservice.beforeproductOrder(customerId, productIdArr[i], Integer.parseInt(countArr[i]));
 		}
 		
 		List<ProductVO> productList = productService.selectByProductList(productIdArr);
-		//System.out.println(productList);	
 		session.setAttribute("productList", productList);
-		//logger.info("session test >>>>{}", productList);
 		
 		return "OK";
 	}
@@ -167,14 +157,9 @@ public class MyPageController {
 			@RequestParam(value = "imagePathArr") String[] imagePathArr,
 			Model model, HttpSession session) {
 		
-		//System.out.println("productIdArr");
-		//System.out.println(Arrays.toString(productIdArr));
-		
-		//System.out.println("countArr");
-		//System.out.println(Arrays.toString(countArr));
+
 		
 		List<ProductVO> productList = productService.selectByProductList(productIdArr);
-		System.out.println(productList);
 		
 		ObjectMapper om = new ObjectMapper();
 		List<Map<String, Object>> pList = new ArrayList<Map<String,Object>>();
@@ -206,9 +191,7 @@ public class MyPageController {
 			@RequestParam(value = "endDate", required = false) String endDate,
 			Model model, HttpSession session) {
 
-//		String customerId = "4591549e-7eaa-4009-a4cd-b052d8b1f537";
 		String customerId = (String) session.getAttribute("customerId");
-//		System.out.println("ID = " + customerId);
 		PagingVO pagenation = deliveryService.likeProductgetPages(page, customerId, searchWord);
 		model.addAttribute("likeProduct", deliveryService.likeProduct(page,customerId, searchWord));
 		model.addAttribute("likeProductCount",deliveryService.likeProductCount(customerId, searchWord));
@@ -270,7 +253,6 @@ public class MyPageController {
 	public ResponseEntity<String> insertPickupRequest(@RequestParam("subscriptionId") String subscription_id, HttpServletRequest request, HttpSession session){
 		String customer_id = (String)session.getAttribute("customerId");
 		String subscriptionId = subscription_id;
-		System.out.println("ㅎㅎㅎ"+subscriptionId);
 		int result = mypageservice.insertPickupRequest(customer_id, subscriptionId);
 		if (result > 0) {
 			return ResponseEntity.ok("Data saved successfully. You can customize this message.");

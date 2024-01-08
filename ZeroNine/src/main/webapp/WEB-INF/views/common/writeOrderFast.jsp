@@ -211,7 +211,6 @@
 							$('#payComplete').html(response);
 						},
 						error : function(response) {
-							console.log("ERROR RESPONSE==>", response);
 							alert("ERROR!");
 						}
 					});	

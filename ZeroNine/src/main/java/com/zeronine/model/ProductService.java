@@ -24,13 +24,11 @@ public class ProductService {
 	public List<Map<String,Object>> searchAll(int page, int selectedValue, String inputValue, String buttonValue) {
 		// 1�럹�씠吏��떦 �굹�삤寃뚰븷 �븣
 		int pageStartNum = (page - 1) * pageLimit;
-		System.out.println("searchAll"+selectedValue);
 		Map<String, Object> paginateParam = new HashMap<>();
 		paginateParam.put("start", pageStartNum);
 		paginateParam.put("selectedValue", selectedValue);
 		paginateParam.put("inputValue", inputValue);
 		paginateParam.put("buttonValue", buttonValue);
-		System.out.println(paginateParam.toString());
 		List<Map<String,Object>> plist = productDAO.searchAll(paginateParam);
 	
 		return  plist;
@@ -58,14 +56,12 @@ public class ProductService {
 		paramsPage.setMaxPageNumber(maxPageNumber);
 		paramsPage.setPageNumber(page);
 		paramsPage.setStartPageNumber(startPageNumber);
-		System.out.println(paramsPage.toString());
 		return paramsPage;
 
 	}
 
 
 	public int countProduct(String inputValue,String buttonValue) {
-		// TODO Auto-generated method stub
 		int cnt = productDAO.countProduct(inputValue,buttonValue);
 		return cnt;
 	}
@@ -84,7 +80,6 @@ public class ProductService {
 	}
 
 	public List<ProductVO> selectByProductList(String[] productIdArr) {
-		// TODO Auto-generated method stub
 		return productDAO.selectByProductList(productIdArr);
 	}
 

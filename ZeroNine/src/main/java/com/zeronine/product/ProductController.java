@@ -98,8 +98,7 @@ public class ProductController {
 
 		if (cart.contains(productId)) {
 			return ResponseEntity.ok("�씠誘� 移댄듃�뿉 �떞湲대냸�엫�뀑");
-			// return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed
-			// to save data.");
+		
 		} else { result = cartservice.goProductCart(custid, productId);}
 		if (result > 0) {
 			model.addAttribute("cartCheckPid", cartservice.cartCheckPid(custid));
@@ -132,8 +131,6 @@ public class ProductController {
 		String custid = (String) session.getAttribute("customerId"); //customerId
 		model.addAttribute("productId", productId);
 
-		// Assuming insertLikedProduct returns the number of rows affected or some
-		// result
 		int result = likedproductservice.insertLikedProduct(custid, productId);
 
 		if (result > 0) {
@@ -252,17 +249,7 @@ public class ProductController {
 		cartservice.deleteCartItem(custid, productId);
 		model.addAttribute("deliproduct",deliveryproductservice_ys.selectOrderInfo(deliveryId));
 		model.addAttribute("IsFreeDelivery",payservice.IsFreeDelivery(custid));
-		/*
-		 * model.addAttribute("product", productService.selectByPricePname(productId));
-		 */
-		/*
-		 * model.addAttribute("deliproduct",
-		 * deliveryproductservice_ys.selectOrderInfo(deliveryId));
-		 */
-		// Clear session attributes if needed
-		/*
-		 * session.removeAttribute("deliveryId"); session.removeAttribute("productId");
-		 */
+
 
 	}
 }

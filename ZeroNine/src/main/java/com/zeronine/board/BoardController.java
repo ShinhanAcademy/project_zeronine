@@ -54,13 +54,11 @@ public class BoardController {
 	Logger logger = LoggerFactory.getLogger(BoardController.class);
 	private final S3Upload s3Upload;
 	
-	// board_Main
 	@RequestMapping("/")
 	public String boardListGet() {
 		return "board/boardMain";
 	}
 
-	// board_list
 	@RequestMapping("/fastboard.do")
 	public String fastBoard(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
@@ -78,7 +76,6 @@ public class BoardController {
 
 			for (Map.Entry<String, Object> entry : map.entrySet()) {
 				String key = (String) entry.getKey();
-				// Object value = (Object)entry.getValue();
 				String value = entry.getValue().toString();
 				json.put(key, value);
 			}
@@ -105,7 +102,6 @@ public class BoardController {
 			failjson.add(fjson);
 		}
 		
-		logger.info("마감 정보 : {}", failjson);
 		
 		
 		JSONArray successjson = new JSONArray();
@@ -140,7 +136,6 @@ public class BoardController {
 		if(customerId == null) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Login needed");
 		}
-		System.out.println("BoardId"+boardId);
 		model.addAttribute("customerId", customerId);
 		int result = boardServiceYn.insertLikedBoard(customerId, boardId);
 		if (result > 0) {
@@ -169,7 +164,6 @@ public class BoardController {
 		List<DealFailRefundVO> fail = boardService.selectDealFailBoard();
 		List<DealSuccessBoardVO> success = boardService.selectDealSuccessBoard();
 		List<String> likeBlist =likedboardService.selectByBidlist(customerId);
-		System.out.println("무배 정보: " + infoFree);
 		
 		JSONArray jsonarray = new JSONArray();
 		for (Map<String, Object> map : infoFree) {
@@ -285,28 +279,8 @@ public class BoardController {
 	
 	@PostMapping("/completeeditO.do")
 	public String completeeditO(MultipartHttpServletRequest mRequest, Model model, HttpSession session) throws IOException {
-		//String lower_boardListType = boardListType.toLowerCase();
-		//model.addAttribute("boardListType", lower_boardListType);
+		
 		model.addAttribute("boardListType", "onetooneboard");
-		//view 뿉 꽌 (board type 씠 oneTooneBoard  씠 씪硫 )  씠誘몄 媛   쟾 떖 릺 뿀 쓬 쓣 媛  젙 븿.
-			System.out.println("mRequset" + mRequest);
-			
-			// 엫 떆濡   궗 슜 븷 MultipartFile  깮 꽦
-			/*
-			 * File file = new File("C:\\Users\\rohfr\\Downloads\\puppy.jpg");
-			 * logger.info("FILE NAME==>" + file.getName()); String extensionName =
-			 * file.getName().substring(file.getName().lastIndexOf('.') + 1);
-			 * logger.info("extension Name ==>", extensionName); FileItem fileItem = new
-			 * DiskFileItem("originFile", Files.probeContentType(file.toPath()), false,
-			 * file.getName(), (int) file.length(), file.getParentFile()); try { InputStream
-			 * input = new FileInputStream(file); OutputStream os =
-			 * fileItem.getOutputStream(); IOUtils.copy(input, os); } catch (IOException ex)
-			 * { ex.printStackTrace(); } MultipartFile multipartFile = new
-			 * CommonsMultipartFile(fileItem);
-			 */
-			//** 엫 떆濡   궗 슜 븷 MultipartFile  깮 꽦
-	        
-			
 	        String uuidStr = UUID.randomUUID().toString();
 	        String s3ImageURL;
 	        MultipartFile imgFile = mRequest.getFile("imgFile");
@@ -322,35 +296,18 @@ public class BoardController {
 	        	String originalFileName = imgFile.getOriginalFilename();
 	        	String imgExtension = getImgExtension(originalFileName);
 	        	s3ImageURL = s3Upload.upload(imgFile, uuidStr, imgExtension);
-	        	//logger.info("oboard  씠誘몄 媛   떎 쓬 寃쎈줈 뿉    옣 맖 : " +  s3ImageURL);
 	        }
 	        else {
-	        	logger.info("imgFile is NULL");
-	        	// 씠誘몄 瑜   꽔吏   븡   寃쎌슦 뿉 뒗 洹몃깷 Default 씠誘몄 瑜   꽔 뒗 떎.
 	        	s3ImageURL = "https://zeronine.s3.ap-northeast-2.amazonaws.com/image/oboard/default.png";
 	        }
 	        
 	        String oBoardId = uuidStr;
-	        //String oAuthorId = (String)session.getAttribute("customerId"); // 꽭 뀡 뿉 꽌 媛 吏 怨     빞  븿.
-	        //String oAuthorId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 	        String oAuthorId = (String)session.getAttribute("customerId");
-	        logger.info("oAuthor ...", oAuthorId);
 	        String oTitle = title;
 	        String oContent = content;
 	        String oPostingMinutes = postingMinutes;
-	        //String address = address;
-	        //String addressDetail =addressDetail;
-	        logger.info(" 옉 꽦 옄 ID ==>", oAuthorId);
-	        
-	        
 	        boardServiceSg.writeOBoard(oBoardId, oAuthorId, oTitle, oContent, oPostingMinutes, s3ImageURL, address, addressDetail);
-	        /*
-	         UUID 뒗 oBoardId媛   맖, s3ImageURL    빐 떦 oBoard 쓽  씠誘몄  留곹겕
-	         oBoard  깮 꽦 븷  븣 uuid媛  uuidStr濡   쇅遺  뿉 꽌 二쇱엯 맂 媛믪쑝濡  吏  젙 릺 뼱 INSERT  빐 빞 븿
-	       	 oBoardImage 뿉 뒗 boardId(uuidStr) - URL(s3ImageURL)  뙇 씠  뱾 뼱媛 
-	         * */
-		
-		//System.out.println(" 뿬湲곕뒗 諛섎뱶 떆 1:1 寃뚯떆 뙋 !! (oneTooneBoard) ==>" + boardListType);
+
 		return "board/completeEdit";
 	}
 	
@@ -362,10 +319,8 @@ public class BoardController {
 	}
 
 	@PostMapping("/completeedit.do")
-	//@PostMapping("/completeedit.do")
-	//@ResponseBody
+	
 	public String compliteEdit(HttpSession session, Model model ) throws IOException {
-	//public boolean compliteEdit(HttpSession session, Model model ) throws IOException {	
 	
 		Map<String,Object> info = (Map<String,Object>)session.getAttribute("info");
 		String authorId = (String)session.getAttribute("customerId");
@@ -379,7 +334,6 @@ public class BoardController {
 		if(lower_boardListType.equals("fastboard")) {
 			String productId = (String)info.get("productId");
 			int pickCount = Integer.parseInt((String)info.get("count"));
-			logger.info("parameters=>" + postingMinutes + title + content);
 			boardServiceSg.writeFastBoard(authorId, title, content, postingMinutes, productId, pickCount);
 			boardServiceYn.deleteCart(authorId, productId);		
 		}
@@ -390,19 +344,15 @@ public class BoardController {
 			for(Entry<String,Object> row:entrys) {
 				productList.put(row.getKey(), Integer.parseInt((String)row.getValue()));
 			}
-			logger.info(productList.toString());
 			boardServiceSg.writeFreeBoard(authorId, title, content, postingMinutes, productList);
 			for(Entry<String,Object> row:entrys) {
 				boardServiceYn.deleteCart(authorId, row.getKey());
 			}
-			//return true;
 		}
 		session.removeAttribute("info");
 		return "board/completeEdit";
-		//return false;
 	}
 
-	//  뵒 뀒 씪
 	@RequestMapping("/fastboardDetail.do")
 	public String fastboardDetail(@RequestParam("boardId") String board_id, Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
@@ -410,9 +360,6 @@ public class BoardController {
 		model.addAttribute("detail", detail);
 		model.addAttribute("customerId", customerId);
 
-		logger.info("controller fast  뵒 뀒 씪  븘 씠 뵒 : {}", board_id);
-		logger.info("controller fast  뵒 뀒 씪  궡 슜: {}", detail);
-		
 		return "board/fastDetailView";
 	}
 
@@ -422,7 +369,6 @@ public class BoardController {
 		Map<String, Object> detailFree = boardService.selectFreeDetail(board_id);
 		model.addAttribute("detailFree", detailFree);
 		model.addAttribute("customerId", customerId);
-		logger.info(" 씠寃껋  而⑦듃濡ㅻ윭 뿉 꽌 李띾뒗 detailFree : {}", detailFree);
 		return "board/freeDetailView";
 	}
 
@@ -433,9 +379,6 @@ public class BoardController {
 		model.addAttribute("detail", detail);
 		model.addAttribute("board_id", board_id);
 		model.addAttribute("customerId", customerId);
-
-		logger.info("controller one  board_id : {}", board_id);
-		logger.info("controller one  detail: {}", detail);
 
 		return "board/oneDetailView";
 	}

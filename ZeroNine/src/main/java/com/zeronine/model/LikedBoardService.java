@@ -13,10 +13,6 @@ public class LikedBoardService {
 	@Autowired
 	LikedBoardDAOMybatis likedboardDAO;
 
-	
-
-	
-
 	public List<String> selectByBidlist(String custId) {
 		return likedboardDAO.selectByBidlist(custId);
 	}

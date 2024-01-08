@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class S3Upload {
 
-    //@Value("${cloud.aws.s3.bucket}")
     private String bucket = "zeronine";
 
     
@@ -31,7 +30,6 @@ public class S3Upload {
 			objMeta.setContentLength(multipartFile.getInputStream().available());
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	

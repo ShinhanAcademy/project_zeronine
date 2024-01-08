@@ -182,7 +182,6 @@ var itemPriceText = document.getElementById("itemPrice").innerText;
 var itemPriceValue = parseFloat(document.getElementById("itemPrice").innerText.replace(/[^\d.]/g, ''));
 document.getElementById("itemprice2").innerText = itemPriceText;
 var IsFreeDelivery = "${IsFreeDelivery}";
-console.log(IsFreeDelivery);
 if(IsFreeDelivery>0){
 	document.getElementById("itemprice_deli").innerText= 0;
 	

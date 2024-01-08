@@ -17,7 +17,6 @@
 			var address = $("#address").val();
 			var addressDetail = $("#address_detail").val();
 			var birthday = $("#date").val();
-			console.log("birthday @ AJAX call", birthday);
 			
 			var obj = {
 					"email" : email,
@@ -28,7 +27,6 @@
 					"birthday" : birthday + ""
 			}
 			
-			console.log(obj.birthday);
 			
 			$.ajax({
 				url : path + "/myPage/updateCustomerInfo.do",

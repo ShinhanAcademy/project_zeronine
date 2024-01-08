@@ -53,7 +53,6 @@
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px; cursor: pointer;"
-						<%-- href="${path}/board/boardedit.do?boardType=fastBoard" --%>
 						data-value="fastBoard"
 						onclick="writeBoard()">글쓰기</a>
 					</span>
@@ -82,7 +81,6 @@
 		var id = '${email}';
 		if(id==""){
 			alert("로그인 후 작성 가능합니다.");
-			/* location.href="${path}/board/boardedit.do?boardType=fastBoard"; */
 			location.href="${path}/auth/login.do";
 		} else{
 			location.href="${path}/board/boardedit.do?boardType=fastBoard";
@@ -119,7 +117,7 @@ function isCheck(){
 	} else{
 		data_json = info_json;
 	}
-	console.log(data_json);
+
 	initNum = 0;
 	endNum = 0;
 	showList(data_json);
@@ -148,11 +146,8 @@ function isCheck(){
     
     var str = "${likeBlist}";
 	 var likeBlistArr = [] ; 
-	 //str.split(/!|@|~|,| |Z/);
 	 likeBlistArr = str.split(/,|\[|\]| /);
-	 console.log(likeBlistArr);
 function handleLikeButtonClick(index, boardId) {
-	console.log(boardId);
     var currentImagePath = $("#btn"+index).find("img.board_like").attr("src");
     var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
         path+"/images/board/red_heart.png" :
@@ -208,7 +203,6 @@ function showHtml(jsondata) {
             item.finishTime.substr(11, 2) + "시 " + item.finishTime.substr(14, 2) + "분";
         
         // 가격 계산
-        //var perprice = (item.price / item.pCount) - ((item.price / item.pCount) % 10);
         var perprice = Math.round(item.price/item.pCount);
 
         // 거래 실패 여부 확인
@@ -276,7 +270,6 @@ function showHtml(jsondata) {
     });
   
     // 결과를 HTML에 삽입
-    //console.log(output);
     $("#allList").html(output);
 }
 
@@ -348,8 +341,6 @@ var keyword ;
 
 function searchBoard() {
     var search = document.querySelector("#search");
-    console.log("여기는 search: "+search);
-    //console.log("searchBoard의 output"+output);
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
         	output = "";
@@ -379,7 +370,6 @@ function filterKeyword(data_json, keyword) {
 
     // 결과 표시
     loadMore();
-    console.log(result);
 }
 </script>
 
