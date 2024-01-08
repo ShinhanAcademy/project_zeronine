@@ -165,7 +165,6 @@
 
 	document.querySelector(".date").addEventListener("change", function() {
 		var selectedValue = this.value;
-		console.log(selectedValue);
 	})
 
 	function add() {
@@ -180,6 +179,5 @@
 			num -= 1;
 		}
 		$(".num").val(num);
-		console.log(num)
 	}
 </script>

@@ -213,11 +213,9 @@
 						//data : obj,
 						type : "POST",//GET
 						success : function(response) {
-							console.log("AT SUCCESS");
 							$('#here').html(response);//edit
 						},
 						error : function(response) {
-							console.log("ERROR RESPONSE==>", response);
 							alert("ERROR!");
 						}
 					});	

@@ -91,29 +91,19 @@ $(filterType);
 $(searchBoard);
 
 function showHtml(jsondata) {
-	console.log(jsondata.length);
-	//output = "";
     $.each(jsondata, function (index, item) {
-        // 날짜 포맷팅
        var str = item.finishtime.substr(2, 2)+"년 "+item.finishtime.substr(5, 2)+"월 "+item.finishtime.substr(8, 2)+"일 "+
 	            			item.finishtime.substr(11, 2)+"시 "+item.finishtime.substr(14, 2)+"분";
 
-        /* // 거래 실패 여부 확인
-        var dealfail = false;
-        if (failId_array.includes(item.boardId)) {
-            dealfail = true;
-        } */
-        
+
         //거래 성공 여부 확인
         var dealsuccess = false;
         if (item.isDealFinish == "true") {
         	dealsuccess = true;
         }
-        console.log("완료 여부 확인 " +dealsuccess)
 
         // HTML 생성
         if(dealsuccess){
-        	console.log("여기 true로 찍히는지 확인")
         	output+=`<div id="list" class="successcss">`
         } else{
         	output+= `<div id="list">`
@@ -152,7 +142,6 @@ function showHtml(jsondata) {
 
 
     // 결과를 HTML에 삽입
-    //console.log(output);
     $("#allList").html(output);
 }
 
@@ -160,7 +149,6 @@ function filterType() {
     // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;
     data_json = JSON.parse('${infoOne}');
-    console.log("필터 타입~~"+type_of_filter)
     showList();
 }
 
@@ -173,13 +161,13 @@ function showList() {
             function (a, b) {
                 return new Date(a.finishTime) - new Date(b.finishTime);
             } 
-        );console.log(data_json);
+        );
     } else if (type_of_filter == 'recent'){ // 최신순 (default)
     	data_json.sort(
             function (a, b) {
                 return new Date(b.oUploadTime) - new Date(a.oUploadTime);
             }
-        );console.log(data_json);
+        );
     }
     loadMore();
 }
@@ -192,7 +180,6 @@ function o_btn(boardId) {
         url: "/board/oneboardDetail.do",
         data: { boardId: boardId },
         success: function(response) {
-            console.log(response);
             $("#modal").html(response);
             $("#detail_modal_wrap").css("display", "flex");
             esc_btn();
@@ -208,7 +195,6 @@ var keyword ;
 
 function searchBoard() {
     var search = document.querySelector("#search");
-    console.log("여기는 search: "+search);
    
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
@@ -239,7 +225,6 @@ function filterKeyword(data_json, keyword) {
 
     // 결과 표시
     loadMore();
-    console.log(result);
 }
 
 </script>

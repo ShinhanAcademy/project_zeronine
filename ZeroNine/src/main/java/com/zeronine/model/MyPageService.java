@@ -52,7 +52,6 @@ public class MyPageService {
 		paramsPage.setMaxPageNumber(maxPageNumber);
 		paramsPage.setPageNumber(page);
 		paramsPage.setStartPageNumber(startPageNumber);
-		System.out.println(paramsPage.toString());
 		return paramsPage;
 
 	}
@@ -84,7 +83,6 @@ public class MyPageService {
 		paramsPage.setMaxPageNumber(maxPageNumber);
 		paramsPage.setPageNumber(page);
 		paramsPage.setStartPageNumber(startPageNumber);
-		System.out.println(paramsPage.toString());
 		return paramsPage;
 
 	}
@@ -120,18 +118,13 @@ public class MyPageService {
 		paramsPage.setMaxPageNumber(maxPageNumber);
 		paramsPage.setPageNumber(page);
 		paramsPage.setStartPageNumber(startPageNumber);
-		System.out.println(paramsPage.toString());
 		return paramsPage;
 
 	}
-	/*
-	 * public Map<String, Object> orderHistoryAll(String customerId){ return
-	 * deliveryDAO.orderHistoryAll(customerId); }
-	 */
+	
 
 	public List<Map<String, Object>> selectEcoInfoAll(String customerId) {
 		List<Map<String, Object>> ecodash = myPageDAO.selectEcoInfoAll(customerId);
-		System.out.println("이것은 service에서 보여주는 정보" + ecodash);
 		return ecodash;
 	}
 
@@ -141,7 +134,6 @@ public class MyPageService {
 
 	public List<Map<String, Object>> selectCouponCtn(String customerId) {
 		List<Map<String, Object>> couponCtn = myPageDAO.selectCouponCtn(customerId);
-		System.out.println("이것은 service에서 보여주는 정보" + couponCtn);
 		return couponCtn;
 	}
 
@@ -166,14 +158,12 @@ public class MyPageService {
 		paramsPage.setMaxPageNumber(maxPageNumber);
 		paramsPage.setPageNumber(page);
 		paramsPage.setStartPageNumber(startPageNumber);
-		System.out.println(paramsPage.toString());
 		return paramsPage;
 
 	}
 
 	public List<PickupVO> PickUpList(int page, String customerId) {
 		int pageStartNum = (page - 1) * pageLimit;
-		System.out.println("pageStartNum" + pageStartNum);
 		return myPageDAO.PickUpList(pageStartNum, customerId);
 	}
 

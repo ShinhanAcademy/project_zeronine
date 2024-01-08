@@ -85,32 +85,17 @@
 				    currency: 'KRW' // 대한민국 원
 				  }).format(itemPriceValue);	
 			cRow.querySelector('#ob_price').innerText = deliformattedValue+"원";
-			/* var cRow = clickedCheckbox.closest('tr');
-			var check = cRow.querySelector('#check_box');
-			beforeSelectedCount = cRow.querySelector('[name=select_count]').value;
-			var changePrice = cRow.querySelector('#onePrice').value;
-			if(check.checked){
-				price = price - changePrice * beforeSelectedCount;
-				console.log(price)
-				selectedCount = cRow.querySelector('#select_count').value;
-				price = price + changePrice * selectedCount;
-				console.log(price)
-				myMap.set(cRow.querySelector('#check_box').value,selectedCount);
-			}
-			$(".totalPrice").html(Intl.NumberFormat().format(price) + " 원"); */
+		
 		}
 		
 		function selectBoardEdit() {
-			/* var value = boardtype.value; */
 			var board_type = $("#be_board_type").val();
 			
-			console.log(board_type);
 
 			if (board_type == "fastBoard") {
 				$.ajax({
 					url : '/board/fastEdit.do',
 					success : function(responseData) {
-						//console.log(responseData);
 						$("#edit_change_area").html(responseData)
 					}
 				});
@@ -136,7 +121,6 @@
 
 		function editCom() {
 			var send_bt_to_com = $("#be_board_type").val();
-			//console.log("editCom() => send_bt_to_com :", send_bt_to_com);
 		
 			//공통 내용
 			var board_type = $("#be_board_type").val();
@@ -145,7 +129,6 @@
 			
 			//1:1거래라면 이미지도 함께 전송이 되어야 한다.
 			if(send_bt_to_com=="oneTooneBoard") {
-				//console.log("oneTooneBoard에 해당하는 AJAX를 실행할것이다.");
 		
 				var send_bt_to_com = $("#be_board_type").val();
 				var postingMinutes = $("#time_setting").val();
@@ -154,13 +137,6 @@
 				
 				var form = $('#imgFile')[0].files[0];
 				var formData = new FormData();
-				
-				/* var board_type = $("#be_board_type").val();
-				var postingMinutes = $("#time_setting").val();
-				var address = $("#address").val();
-				var addressDetail = $("#address_detail").val();
-				var title = $(".title_input").val();
-				var content = $(".context_input").val(); */
 				
 
 				formData.append("imgFile", form);
@@ -185,7 +161,6 @@
 				});	
 			}
 			else if(send_bt_to_com=="fastBoard") { //즉배
-				//console.log($("#wait_minute"));
 				var dayAsMinute = $(".date").val(); //val은 minute으로 설정됨
 				
 				var waitHourValue = Number($('#wait_hour').val());
@@ -193,11 +168,7 @@
 			    var productId = $('#productId').val();
 			    var count = $('#count').val();
 				
-				//console.log(waitHourValue, waitMinuteValue, productId, count);
-				
 				var postingMinutes = Number(dayAsMinute) + waitHourValue * 60 + waitMinuteValue;
-				
-				//console.log(postingMinutes);
 				
 				var obj = {
 						"send_bt_to_com" : board_type,
@@ -208,41 +179,31 @@
 						"count" : count		
 				}
 				
-				//console.log("obj at boardEdit.jsp==>", obj);
 				
 				$.ajax({
 					url: '${path}/common/writeOrderFast.do',
-					//url: '${path}/board/completeedit.do',
 					type: "POST",
 					data: JSON.stringify(obj),
 					contentType: "application/json",
 					success : function(responseData) {
-						//$("#edit").html(responseData);
 						$("#here").html(responseData);
 					}
 				});	
 			}
 			else { //무배
-				//console.log($("#wait_minute"));
 				var dayAsMinute = $(".date").val(); //val은 minute으로 설정됨
 				
 				var waitHourValue = Number($('#wait_hour').val());
 				var waitMinuteValue = Number($('#wait_minute').val());
-			    
-				
-				
-				//console.log(waitHourValue, waitMinuteValue);
-				
+			 
 				var postingMinutes = Number(dayAsMinute) + waitHourValue * 60 + waitMinuteValue;
 				
-				//console.log(postingMinutes);
 				var obj = {
 						"send_bt_to_com" : board_type,
 						"postingMinutes" : postingMinutes,
 						"title" : title,
 						"content" : content,
 						"myMap" : Object.fromEntries(myMap)
-						//구매 상품 정보도 넣어야 함
 				}
 				$.ajax({
 					url : '${path}/common/writeOrderFree.do',
@@ -250,7 +211,6 @@
 					data: JSON.stringify(obj),
 					contentType: "application/json",
 					success : function(responseData) {
-						//$("#edit").html(responseData);
 						$("#here").html(responseData);
 					}
 				});

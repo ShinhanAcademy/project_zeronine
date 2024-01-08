@@ -29,7 +29,6 @@
 	</body>
 	<script>
 		$(".orderlist-btn").click(function(){
-			//location.href = "${path}/myPage/participatedBoard.do";
 			location.href = "${path}/board/"
 		});
 		

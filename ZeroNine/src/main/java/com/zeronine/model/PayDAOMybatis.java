@@ -18,12 +18,10 @@ public class PayDAOMybatis {
 
 	public int payFreeDeliverySubscription(String customerId) {
 		logger.info(customerId);
-		// TODO Auto-generated method stub
 		return sqlSession.insert(NAMESPACE + "insertFreeDelivery", customerId);
 	}
 
 	public int pay5Ecocare(String customerId) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert(NAMESPACE + "insert5Ecocare", customerId);
 	}
 

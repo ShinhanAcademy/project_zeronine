@@ -123,12 +123,10 @@ var cartcheck = "${cartcheckpid}";
 	cartcheckArray = cartcheck.split(',').map(function(item) {
       return item.trim();
   });
-	console.log(cartcheckArray);
 function handlegoCartButtonClick(index, productId) {
 	 function isproductinCart(productId){
   	  return cartcheckArray.some(item => item === productId);
     }
-	 console.log(isproductinCart(productId));
 	if(isproductinCart(productId)==false){
 			$.ajax({
 				url : path +"/product/goProductCart.do",

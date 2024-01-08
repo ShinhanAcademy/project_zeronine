@@ -8,7 +8,6 @@
 
 <title>FreeDeliveryBoard</title>
 <link rel="stylesheet" href="${path}/css/board/boardList.css" />
-<%-- <script src="${path}/js/chart.js"></script> --%>
 <script src="../js/like.js"></script> 
 <script src="../js/detailView.js"></script>
 <script src="../js/board/loadMore.js"></script>
@@ -56,7 +55,6 @@
 					<span> <img class="edit_img"
 						src="${path}/images/board/edit.png">
 					</span> <span class="edit_btn"> <a style="font-size: 25px; cursor: pointer;"
-						<%-- href="${path}/board/boardedit.do?boardType=fastBoard" --%>
 						data-value="freeBoard" onclick="writeBoard()">글쓰기</a>
 					</span>
 				</div>
@@ -110,14 +108,12 @@ $(isCheck);
 function isCheck(){
 	var checkbox = document.querySelector(".checkbox");
 	checked = checkbox.checked;
-	console.log(checked);
 	
 	if(checked){
 		data_json = info_valid;
 	} else{
 		data_json = info_json;
 	}
-	console.log(data_json);
 	ratio_arr=[];
 	initNum = 0;
 	endNum = 0;
@@ -136,7 +132,6 @@ function isCheck(){
         var failId = fail_info_array[i].boardId;
         failId_array.push(failId);
     }
-    console.log(failId_array);
     //성공 정보 배열 생성
      var success_info = '${success}';
     var success_info_array = JSON.parse(success_info);
@@ -146,20 +141,15 @@ function isCheck(){
         var successId = success_info_array[i].boardId;
         successId_array.push(successId);
     }
-    console.log(failId_array);
     
     var ratio_arr = [];
     
 function showHtml(jsondata) {
-	console.log(jsondata);
-	//ratio_arr = [];
     $.each(jsondata, function (index, item) {
     	
     	//%구하기
     	var ratio = Math.round(((item.sum)/50000)*100);
-    	console.log(item.sum);
     	ratio_arr.push(ratio);
-    	console.log(ratio_arr);
     	
     	//남은 액수
     	var last = 50000-(item.sum);
@@ -229,23 +219,13 @@ function showHtml(jsondata) {
 	 
     });
 
-
-
-
-    // 결과를 HTML에 삽입
-    //console.log(output);
-    
     $("#allList").html(output);
     drawChart();
 }
-// 찜하기 기능 구현 시작
 var str = "${likeBlist}";
 var likeBlistArr = [] ; 
-//str.split(/!|@|~|,| |Z/);
 likeBlistArr = str.split(/,|\[|\]| /);
-console.log(likeBlistArr);
 function handleLikeButtonClick(index, boardId) {
-console.log(boardId);
 var currentImagePath = $("#btn"+index).find("img.board_like").attr("src");
 var newImagePath = currentImagePath === path+"/images/board/heart.png" ?
    path+"/images/board/red_heart.png" :
@@ -254,10 +234,8 @@ $("#btn"+index).find("img.board_like").attr("src", newImagePath);
        var likeButtonId = "like" + index;
       
    
-   	//클래스가 heart liked => AJAX DELTE 호출
        var isRedHeart = likeBlistArr.indexOf(boardId);
    	
-       console.log(isRedHeart);
        if (isRedHeart >= 0) {
            $.ajax({
                url: "/board/deletelikedboard.do",
@@ -285,7 +263,6 @@ $("#btn"+index).find("img.board_like").attr("src", newImagePath);
 }   
 // 찜하기 기능 구현 끝
 function filterType() {
-    // 필터링 타입 설정
     type_of_filter = document.querySelector(".filter").value;
    	isCheck();
 }
@@ -327,7 +304,6 @@ function each() {
 
 function O_btn(boardId) {
     // 상세 정보 가져오기
-    console.log(boardId)
     $.ajax({
         type: "post",
         url: "/board/freeboardDetail.do",
@@ -348,7 +324,6 @@ var keyword ;
 
 function searchBoard() {
     var search = document.querySelector("#search");
-    console.log("여기는 search: "+search);
     ratio_arr=[];
     search.addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
@@ -364,7 +339,6 @@ function check() {
     filterKeyword(data_json, keyword);
 }
 
-// 키워드로 필터링
 function filterKeyword(data_json, keyword) {
 	initNum = 0;
     keyword = $("#search").val();
@@ -372,15 +346,12 @@ function filterKeyword(data_json, keyword) {
     $.each(data_json, function (index, item) {
         var title = item.title;
         var left = 50000 - item.sum;
-        console.log(left);
         if (title.includes(keyword) || left == keyword) {
             result.push(item);
         }
     });
 
-    // 결과 표시
     loadMore();
-    console.log(result);
 }
 
 

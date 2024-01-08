@@ -160,7 +160,6 @@
 		$(window).scroll(function() {
 			let position = $(this).scrollTop();
 			let priceOffset = $(".detail_bottom").offset().top;
-			console.log("position", position);
 			if (position >= (priceOffset - 50)) {
 				$("#sidebox").addClass("scroll_on");
 			} else {

@@ -75,23 +75,7 @@
 							<c:if test="${check_row == 0}">
 								<td class="order_status"
 									rowspan="<c:out value='${cancellist.partcnt}' />">
-									<%-- <c:choose>
-										<c:when test="${cancellist.deliveryStatus eq 'ready'}"> 
-											배송준비중
-										</c:when>
-										<c:when test="${cancellist.deliveryStatus eq 'process'}"> 
-											배송중
-										</c:when>
-										<c:when test="${cancellist.deliveryStatus eq 'complete'}"> 
-											배송완료
-										<div>
-											<button class="btn_blue btn_delivery_check">배송조회</button>
-										</div>
-										</c:when>
-										<c:otherwise>
-										    저는 모두 해당이 안됩니다.
-										</c:otherwise>
-									</c:choose> --%>
+
 									취소 처리중
 									<div class="refund_tip">카드 취소 최대 2영업일 소요</div>
 								</td>
@@ -114,7 +98,7 @@
 <!-- tbl_wrap -->
 <!-- pagination -->
 <c:if test="${count != 0}">
-						              	<%-- <c:if test="${booklist.size() != 0}"> --%>
+						              
 		<div class=pagination>
 			<div class="pageLeft">
 				<c:choose>

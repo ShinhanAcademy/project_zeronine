@@ -24,7 +24,6 @@ public class ProductDAOMybatis {
 	
 	public List<Map<String,Object>> searchAll(Map<String, Object> paginateParam) {
 		List<Map<String,Object>> productList = sqlSession.selectList(namespace + "searchAll", paginateParam);
-		//logger.info("searchAll:{}��", productList.size());
 		return productList;
 	}
 

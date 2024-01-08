@@ -6,8 +6,6 @@
 //최종 그리기
 function drawChart(){
 	
-	console.log("이것은 drawChart가 찍는 ratio_arr의 길이"+ratio_arr.length);
-	console.log(ratio_arr);
 	
 	$.each(ratio_arr, function(index, item){
 		var each_ratio = ratio_arr[index];

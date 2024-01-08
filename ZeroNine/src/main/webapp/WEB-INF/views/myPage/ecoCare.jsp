@@ -132,7 +132,6 @@ var path = "${path}";
 //currentMonth로 월만 추출 후 map저장
 var ecodashinfo_arr = [];
 var dash_arr = JSON.parse('${ecodashinfo}');
-console.log(dash_arr);
 for(var i=0 ; i<dash_arr.length; i++){
 	var map = dash_arr[i];
 	var str = dash_arr[i].pickUpRequestTime;
@@ -155,7 +154,6 @@ if(current_month == 1){
 	month_1 = 12;
 	month_2 = 1;
 }
-console.log(month_1, month_2, month_3);
 
 var ctn_month = [0,0,0];
 
@@ -171,9 +169,7 @@ for(var i=0; i<ecodashinfo_arr.length; i++){
 		}
 	}
 }
-console.log(ctn_month);
 var month_2ctn = ctn_month[2];
-console.log(month_2ctn);
 
 //화면 구성
 document.querySelector(".num").innerText = month_2ctn+"회";
@@ -198,7 +194,6 @@ for(var i =0; i<ecodashinfo_arr.length; i++){
 		}
 	}
 } 
-console.log(waste_arr);
 
 //바 차트
 	var now = new Date();
@@ -317,7 +312,6 @@ var output = "";
 var c_month = now.getMonth()+1;
 var str = now.getFullYear()+"년 "+c_month+"월 "+(now.getDate()+1)+"일 "+now.getHours()+"시";
 $.each(couponInfo_arr, function(index, item){
-	console.log("이거 확인" +item.isSubscription);
 	if(item.isSubscription=='true'){
 		output+=`
 		<tr>
@@ -430,7 +424,6 @@ function pickUpDetail(pickUpId){
 	
 	var event_btn = $(event.target).closest("tr");
 	var result = event_btn.find(".status_info").text();
-	console.log(result);
 		 if(result.includes("complete", "refuse")){
 			showDetail = true; 
 		 } else{

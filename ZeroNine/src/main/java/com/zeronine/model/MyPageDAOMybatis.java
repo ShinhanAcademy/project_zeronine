@@ -142,8 +142,7 @@ public class MyPageDAOMybatis {
 	}
 	
 	public int insertPickupRequest(String customerId, String subscriptionId) {
-		System.out.println(subscriptionId);
-		System.out.println(customerId);
+	
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("customerId", customerId);
 		map.put("isFoodWaste", Math.random() < 0.5);
@@ -153,8 +152,7 @@ public class MyPageDAOMybatis {
 	}
 	
 	public List<PickupVO> PickUpList(int page ,String customerId){
-		System.out.println("pageStartNum"+page);
-		System.out.println("customerId"+customerId);
+		
 		Map<String, Object> paginateParam = new HashMap<>();
 		paginateParam.put("customerId", customerId);
 		paginateParam.put("page", page);

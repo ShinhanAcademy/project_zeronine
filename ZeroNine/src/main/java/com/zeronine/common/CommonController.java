@@ -64,7 +64,6 @@ public class CommonController {
 	@PostMapping("/common/orderFast.do")
 	public void orderFast(HttpServletRequest request, Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
-		//String customerId = "490ef92a-d77f-432f-8bfb-2828eee6db77";
 		String productId = request.getParameter("productId");
 		int count = Integer.parseInt(request.getParameter("count"));
 		String boardId = (String)session.getAttribute("boardId");
@@ -144,21 +143,6 @@ public class CommonController {
 		}
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("참여 실패"); 
-		 
-		/*
-		int isFreeProduct = boardService.orderFreeProduct(customerId, boardId, productList);
-		String message;
-		if(isFreeProduct==0 || isFreeProduct==1) {
-			message = "占쏙옙占쏙옙占싹뤄옙"; //participate complete
-			for(Entry<String,Object> row:entrys) {
-				boardService.deleteCart(customerId, row.getKey());
-			}
-		}else {
-			message = "占싱뱄옙 占쏙옙占쏙옙占쏙옙 占쌉시깍옙占쌉니댐옙."; //already
-		}
-		return message;
-		*/
-		
 	}	
 	
 	
@@ -208,7 +192,6 @@ public class CommonController {
 	
 	@PostMapping(value="/common/writeOrderFast.do", consumes="application/json")
 	public void writeOrderFast(@RequestBody Map<String,Object> info, Model model, HttpSession session) {
-	//public String writeOrderFast(@RequestBody Map<String,Object> info, Model model, HttpSession session) {
 		String customerId = (String)session.getAttribute("customerId");
 		session.setAttribute("info", info);
 		String productId = (String)info.get("productId");

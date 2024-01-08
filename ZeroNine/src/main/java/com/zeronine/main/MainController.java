@@ -48,8 +48,6 @@ public class MainController {
 	public List<ProductVO> productDetail(@RequestParam(value = "count") Integer count,
 								Model model, HttpSession session) {
 		String customerId = (String) session.getAttribute("customerId");
-		//Integer count = 3;
-		System.out.println("????count"+ count);
 		List<ProductVO> productList = productService.selectRecommendedProducts(count);
 
 		return productList;
@@ -108,7 +106,6 @@ public class MainController {
 		result.put("freeBoardList", jsonFreeArr);
 		result.put("oneToOneBoardList", jsonOneToOneArr);
 		
-		//logger.info("????????????????>>>>{}" + jsonOneToOneArr);
 		
 		return result;
 	}

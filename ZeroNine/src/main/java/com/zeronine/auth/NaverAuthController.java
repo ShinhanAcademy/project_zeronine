@@ -30,14 +30,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
-
-
-
-
-/**
- * Handles requests for the application home page.
- */
-
 @RequestMapping("/auth")
 @Controller
 public class NaverAuthController {
@@ -54,40 +46,21 @@ public class NaverAuthController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
-//	@RequestMapping("/naverLogin.do")
-//	public void naverLogin() {
-//		System.out.println("naverLogin!");
-//	}
-	
-	//濡쒓렇�씤 泥� �솕硫� �슂泥� 硫붿냼�뱶
+
 	@RequestMapping(value = "/naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public void login(Model model, HttpSession session) {
-		System.out.println("naverLogin.do controller called");
-		/* �꽕�씠踰꾩븘�씠�뵒濡� �씤利� URL�쓣 �깮�꽦�븯湲� �쐞�븯�뿬 naverLoginBO�겢�옒�뒪�쓽 getAuthorizationUrl硫붿냼�뱶 �샇異� */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		
-		//https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-		//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		System.out.println("�꽕�씠踰�:" + naverAuthUrl);
-		
-		//�꽕�씠踰� 
 		model.addAttribute("url", naverAuthUrl);
 
-		return; //auth/naverLogin.do
-		/* �깮�꽦�븳 �씤利� URL�쓣 View濡� �쟾�떖 */
-		//return "login";
+		return; 
 	}
 
-	//�꽕�씠踰� 濡쒓렇�씤 �꽦怨듭떆 callback�샇異� 硫붿냼�뱶
 	@RequestMapping(value = "/naverCallback.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException {
-		System.out.println("�뿬湲곕뒗 callback");
 		OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
-        //濡쒓렇�씤 �궗�슜�옄 �젙蹂대�� �씫�뼱�삩�떎.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
-	    //System.out.println(apiResult);
 		model.addAttribute("result", apiResult);
 		
 		JSONParser parser = new JSONParser();
@@ -99,23 +72,18 @@ public class NaverAuthController {
 			jsonObj = (JSONObject)obj;
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		//jsonObj.get("response").get;
 		
-		//logger.info(response);
 		JSONObject response = (JSONObject)jsonObj.get("response");
 		String email = (String)response.get("email");
-		logger.info("�씠硫�---->"+email);
 		
 		CustomerVO customerVo = null; 
 		customerVo = customerService.selectByEmail(email);
 		
 		
 		if(customerVo == null) {
-			//�꽕�씠踰꾨줈 媛��엯 �븯吏� �븡�� �긽�깭
 			logger.info("customerVo is null");
 			return "/auth/login";
 		}
@@ -123,22 +91,12 @@ public class NaverAuthController {
 		
 		String customerId = customerVo.getCustomerId();
 		String customerName = customerVo.getCustomerName();
-		//logger.info("�꽕�씠踰� 濡쒓렇�씤", customerId);
 		session.setAttribute("customerId", customerId);
 		session.setAttribute("customerName", customerName);
 		session.setAttribute("email", customerVo.getEmail());
 		
 		return "/main/main";
-		//logger.info(jsonObj.get("response").getClass().toString());
-		//logger.info(naverCustomerData.get("email").toString());
-		//CustomerVO customerVo = customerService.selectByEmail(email);
-		
-		
-		
-		//logger.info(apiResult);
-		
-        /* 네이버 로그인 성공 페이지 View 호출 */
-		//return "auth/naverSuccess";
+
 	}
 }
 

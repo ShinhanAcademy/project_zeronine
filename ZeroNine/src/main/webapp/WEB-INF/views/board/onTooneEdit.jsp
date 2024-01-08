@@ -196,7 +196,6 @@
 				marker.setMap(map); 
 			},
 			error : function(e) {
-				console.log(e);
 			}
 		})
 	}
@@ -221,7 +220,6 @@
 		var i;
 		var isValidImg = false;
 
-		console.log(file);
 
 		if (file && file.name) {
 			for (i = 0; i < imgType.length; i++) {
@@ -252,6 +250,5 @@
 	document.querySelector("#time_setting").addEventListener("change",
 			function() {
 				var selectedValue = this.value;
-				console.log(selectedValue);
 			})
 </script>

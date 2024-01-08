@@ -34,9 +34,7 @@
 	        buyer_email : email
 	    }, function (rsp) { // callback
 	        if (rsp.success) {
-	            //console.log(rsp);
 	        } else {
-	            //console.log(rsp);
 	        }
 	    });
 	}

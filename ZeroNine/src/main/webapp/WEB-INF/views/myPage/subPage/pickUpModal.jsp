@@ -30,7 +30,6 @@
 
 <script>
 var time=now.getFullYear()+"년 "+c_month+"월 "+now.getDate()+"일 "+now.getHours()+"시"+now.getMinutes()+"분";
-console.log(time) 
 $(".pickuptime").append(time+" 방문"); 
 
 function close_btn(){

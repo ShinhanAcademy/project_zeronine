@@ -22,11 +22,7 @@
 		<col width="15%" />
 		<col width="18%" />
 		<col width="12%" />
-		<!-- 
-							    <col />
-							    <col span="2" class="batman" />
-							    <col span="2" class="flash" />
-							    -->
+	
 	</colgroup>
 	<thead>
 		<tr>
