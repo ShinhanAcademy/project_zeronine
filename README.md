@@ -2,8 +2,6 @@
 ![제로나인 로고](https://github.com/ShinhanAcademy/project_zeronine/blob/main/ZeroNine/src/main/webapp/static/images/common/ico_logo_footer.png)
 
 # 목차
-- [project_zeronine](#project_zeronine)
-- [목차](#목차)
 - [팀원 소개](#기여자)
 - [프로젝트 소개](#프로젝트-소개)
 - [주요 서비스](#주요-서비스)
