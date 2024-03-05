@@ -99,5 +99,7 @@
 
 
 ##  Demo Video
-서비스 이해를 돕기 위한 동영상입니다. 아래 유튜브 링크에서 감상해주세요
-[Youtube Video](https://youtu.be/pcg0NWE-zow)
+서비스 이해를 돕기 위한 동영상입니다. 
+
+[유튜브 링크](https://youtu.be/pcg0NWE-zow)에서 감상해주세요
+
